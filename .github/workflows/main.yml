@@ -28,6 +28,3 @@ jobs:
       name: Execute Tests
       env:
         CI: true
-
-    - run: yarn lint
-      name: Running Lint
