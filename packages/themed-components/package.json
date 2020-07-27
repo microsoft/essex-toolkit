@@ -1,0 +1,62 @@
+{
+	"name": "@essex-js-toolkit/themed-components",
+	"version": "1.1.2",
+	"description": "A set of visual components that include built-in thematic",
+	"main": "dist/cjs/index.js",
+	"module": "dist/esm/index.js",
+	"typings": "dist/types/index.d.ts",
+	"repository": "https://dev.azure.com/msrp-essex/Alpha/_git/alpha-developer",
+	"author": "Nathan Evans <naevans@microsoft.com>",
+	"license": "MIT",
+	"scripts": {
+		"build": "essex build",
+		"clean": "essex clean",
+		"watch": "essex watch"
+	},
+	"dependencies": {
+		"@essex-js-toolkit/hooks": "^1.1.2",
+		"@essex-js-toolkit/toolbox": "^1.1.2",
+		"@types/d3-array": "^2.0.0",
+		"@types/d3-axis": "^1.0.12",
+		"@types/d3-brush": "^1.0.10",
+		"@types/d3-scale": "^2.1.1",
+		"@types/d3-selection": "^1.4.1",
+		"d3-array": "^2.4.0",
+		"d3-axis": "^1.0.12",
+		"d3-brush": "^1.1.5",
+		"d3-scale": "^3.2.1",
+		"d3-selection": "^1.4.1"
+	},
+	"devDependencies": {
+		"@fluentui/react": "^7.114.2",
+		"@thematic/color": "0.8.0",
+		"@thematic/core": "0.8.0",
+		"@thematic/d3": "0.8.0",
+		"@thematic/fluent": "0.8.0",
+		"@thematic/react": "0.8.0",
+		"@types/d3": "^5.7.2",
+		"@types/node": "^14.0.1",
+		"@types/react": "^16.9.35",
+		"@types/react-dom": "^16.9.8",
+		"@types/react-test-renderer": "^16.9.1",
+		"@uifabric/icons": "^7.3.42",
+		"@uifabric/utilities": "^7.17.3",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1"
+	},
+	"peerDependencies": {
+		"@fluentui/react": ">= 7.114.2",
+		"@thematic/color": ">= 0.8.0",
+		"@thematic/core": ">= 0.8.0",
+		"@thematic/d3": ">= 0.8.0",
+		"@thematic/fluent": ">= 0.8.0",
+		"@thematic/react": ">= 0.8.0",
+		"@uifabric/icons": ">= 7.3.38",
+		"react": ">= 16.8.6",
+		"react-dom": ">= 16.8.6"
+	},
+	"prettier": "@essex/prettier-config",
+	"resolutions": {
+		"**/handlebars": "^4.4.3"
+	}
+}
