@@ -17,7 +17,7 @@
 		"clean": "lerna run clean --stream",
 		"build": "lerna run build --stream",
 		"build_ci": "lerna run build --stream",
-		"unit_test": "jest --coverage",
+		"unit_test": "essex test --coverage",
 		"test_packages": "lerna run test --stream",
 		"test": "run-s test_packages unit_test",
 		"lint": "essex lint --docs",
