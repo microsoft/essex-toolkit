@@ -20,13 +20,14 @@
 		"unit_test": "jest --coverage",
 		"test_packages": "lerna run test --stream",
 		"test": "run-s test_packages unit_test",
-		"ci": "run-s lint build test",
 		"lint": "essex lint --docs",
 		"lint:fix": "essex lint -f",
+		"git_is_clean": "essex git-is-clean",
 		"prettify": "essex prettify",
 		"release": "npm run build && lerna publish",
 		"scripts:upgrade": "essex install",
 		"start": "lerna run start --stream",
+		"ci": "run-s build lint test git_is_clean",
 		"build-storybook": "lerna run build-storybook --stream"
 	},
 	"devDependencies": {
