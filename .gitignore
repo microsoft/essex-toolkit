@@ -7,3 +7,11 @@ storybook-static
 coverage/
 *.log
 licenses.txt
+
+# https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*% 

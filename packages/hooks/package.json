@@ -30,8 +30,5 @@
 	},
 	"peerDependencies": {
 		"react": ">=16.8.0"
-	},
-	"resolutions": {
-		"**/handlebars": "^4.4.3"
 	}
 }

@@ -54,9 +54,5 @@
 		"@uifabric/icons": ">= 7.3.38",
 		"react": ">= 16.8.6",
 		"react-dom": ">= 16.8.6"
-	},
-	"prettier": "@essex/prettier-config",
-	"resolutions": {
-		"**/handlebars": "^4.4.3"
 	}
 }
