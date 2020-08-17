@@ -45,9 +45,6 @@
 	"workspaces": {
 		"packages": [
 			"packages/*"
-		],
-		"nohoist": [
-			"@essex/themed-components-stories/**"
 		]
 	},
 	"husky": {

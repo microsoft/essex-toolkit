@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import * as React from 'react'
 import { useThematic } from '@thematic/react'
+import * as React from 'react'
 
 /**
  * This component simply injects a style block to override a bunch of LineUp styles with Thematic config.

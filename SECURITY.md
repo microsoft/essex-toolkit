@@ -1,5 +1,5 @@
 <!-- BEGIN MICROSOFT SECURITY.MD V0.0.5 BLOCK -->
-<!-- alex disable special -->
+<!-- docs disable special -->
 
 ## Security
 
@@ -39,5 +39,5 @@ We prefer all communications to be in English.
 
 Microsoft follows the principle of [Coordinated Vulnerability Disclosure](https://www.microsoft.com/en-us/msrc/cvd).
 
-<!-- alex enable special -->
+<!-- docs enable special -->
 <!-- END MICROSOFT SECURITY.MD BLOCK -->

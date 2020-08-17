@@ -2,8 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import * as React from 'react'
-import { useState, useMemo, useEffect } from 'react'
 import {
 	IconButton,
 	ContextualMenuItemType,
@@ -13,8 +11,10 @@ import {
 	Link,
 	TextField,
 } from '@fluentui/react'
-import { HistogramSelect } from './HistogramSelect'
+import * as React from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { NumberSpinButton } from '../NumberSpinButton'
+import { HistogramSelect } from './HistogramSelect'
 
 export interface ControlledHistogramFilterProps {
 	name: string

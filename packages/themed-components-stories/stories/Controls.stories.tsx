@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React from 'react'
-import { useCallback, useState } from 'react'
 import {
 	FilterTextbox,
 	SearchBox,
 	NumberSpinButton,
 } from '@essex-js-toolkit/themed-components'
+import React, { useCallback, useState } from 'react'
+
 import { CSF } from './types'
 
 export default {
