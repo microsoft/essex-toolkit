@@ -1948,11 +1948,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@essex-js-toolkit/thematic-lineup@workspace:packages/thematic-lineup"
   dependencies:
-    "@thematic/color": 0.8.0
-    "@thematic/core": 0.8.0
-    "@thematic/d3": 0.8.0
-    "@thematic/fluent": 0.8.0
-    "@thematic/react": 0.8.0
+    "@thematic/color": ^0.8.0
+    "@thematic/core": ^0.8.0
+    "@thematic/d3": ^0.8.0
+    "@thematic/fluent": ^0.8.0
+    "@thematic/react": ^0.8.0
     "@types/node": ^14.0.1
     "@types/react": ^16.9.35
     "@types/react-dom": ^16.9.8
@@ -1961,12 +1961,12 @@ __metadata:
     react: ^16.13.1
     react-dom: ^16.13.1
   peerDependencies:
-    "@thematic/color": 0.8.0
-    "@thematic/core": 0.8.0
-    "@thematic/d3": 0.8.0
-    "@thematic/fluent": 0.8.0
-    "@thematic/react": ^0.8.0
-    lineupjs: ^3.3.0
+    "@thematic/color": ">=0.8.0"
+    "@thematic/core": ">=0.8.0"
+    "@thematic/d3": ">=0.8.0"
+    "@thematic/fluent": ">=0.8.0"
+    "@thematic/react": ">=0.8.0"
+    lineupjs: ">=3.3.0"
     react: ">=16.8.6"
     react-dom: ">=16.8.6"
   languageName: unknown
@@ -2003,11 +2003,11 @@ __metadata:
     "@essex-js-toolkit/hooks": ^1.1.2
     "@essex-js-toolkit/toolbox": ^1.1.2
     "@fluentui/react": ^7.114.2
-    "@thematic/color": 0.8.0
-    "@thematic/core": 0.8.0
-    "@thematic/d3": 0.8.0
-    "@thematic/fluent": 0.8.0
-    "@thematic/react": 0.8.0
+    "@thematic/color": ^0.8.0
+    "@thematic/core": ^0.8.0
+    "@thematic/d3": ^0.8.0
+    "@thematic/fluent": ^0.8.0
+    "@thematic/react": ^0.8.0
     "@types/d3": ^5.7.2
     "@types/d3-array": ^2.0.0
     "@types/d3-axis": ^1.0.12
@@ -4752,7 +4752,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/color@npm:0.8.0, @thematic/color@npm:^0.8.0":
+"@thematic/color@npm:^0.8.0":
   version: 0.8.0
   resolution: "@thematic/color@npm:0.8.0"
   dependencies:
@@ -4764,7 +4764,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/core@npm:0.8.0, @thematic/core@npm:^0.8.0":
+"@thematic/core@npm:^0.8.0":
   version: 0.8.0
   resolution: "@thematic/core@npm:0.8.0"
   dependencies:
@@ -4779,7 +4779,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/d3@npm:0.8.0":
+"@thematic/d3@npm:^0.8.0":
   version: 0.8.0
   resolution: "@thematic/d3@npm:0.8.0"
   dependencies:
@@ -4790,7 +4790,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/fluent@npm:0.8.0":
+"@thematic/fluent@npm:^0.8.0":
   version: 0.8.0
   resolution: "@thematic/fluent@npm:0.8.0"
   dependencies:
@@ -4805,7 +4805,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/react@npm:0.8.0, @thematic/react@npm:^0.8.0":
+"@thematic/react@npm:^0.8.0":
   version: 0.8.0
   resolution: "@thematic/react@npm:0.8.0"
   dependencies:
