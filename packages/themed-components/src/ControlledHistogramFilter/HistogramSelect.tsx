@@ -2,16 +2,16 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import * as React from 'react'
-import { useRef, useEffect, useMemo } from 'react'
-import { select, event, Selection } from 'd3-selection'
-import { scaleLinear, ScaleLinear } from 'd3-scale'
-import { brushX } from 'd3-brush'
-import { axisBottom, axisLeft } from 'd3-axis'
-import { histogram, max } from 'd3-array'
-import { useThematic } from '@thematic/react'
 import { SelectionState } from '@thematic/core'
 import { chart, axis, rect as rectRenderer } from '@thematic/d3'
+import { useThematic } from '@thematic/react'
+import { histogram, max } from 'd3-array'
+import { axisBottom, axisLeft } from 'd3-axis'
+import { brushX } from 'd3-brush'
+import { scaleLinear, ScaleLinear } from 'd3-scale'
+import { select, event, Selection } from 'd3-selection'
+import * as React from 'react'
+import { useRef, useEffect, useMemo } from 'react'
 
 const DEFAULT_MARGINS = {
 	top: 8,

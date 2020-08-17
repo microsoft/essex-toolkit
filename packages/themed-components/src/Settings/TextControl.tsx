@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { TextField, Dropdown, ChoiceGroup } from '@fluentui/react'
 import * as React from 'react'
 import { useCallback } from 'react'
-import { TextField, Dropdown, ChoiceGroup } from '@fluentui/react'
 import { ControlType, ControlProps } from './interfaces'
 
 /**

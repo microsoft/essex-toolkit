@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React from 'react'
 import { ThematicLineup } from '@essex-js-toolkit/thematic-lineup'
+import React from 'react'
 import { CSF } from './types'
 
 export default {

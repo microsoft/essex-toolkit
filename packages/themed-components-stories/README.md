@@ -68,7 +68,7 @@ interface ControlledHistogramFilterProps {
 
 <b>Output:</b>
 <br />
-!["Controlled Historgram Preview"](../../assets/Histogram-story.JPG)
+!["Controlled Histogram Preview"](../../assets/Histogram-story.JPG)
 
 ### [Settings](/packages/themed-components-stories/stories/Settings.stories.tsx)
 

@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useMemo } from 'react'
 import { debounce } from '@essex-js-toolkit/toolbox'
+import { useMemo } from 'react'
 
 /**
  * Creates a debounced callback

@@ -4,8 +4,8 @@
  */
 
 // Link.react.test.js
-import * as React from 'react'
 import { render, act } from '@testing-library/react'
+import * as React from 'react'
 import { useDestroyable } from './useDestroyable'
 
 /* eslint @typescript-eslint/no-unused-vars:0 */

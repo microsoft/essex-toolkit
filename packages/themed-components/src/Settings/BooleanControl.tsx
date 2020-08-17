@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { Toggle, Checkbox } from '@fluentui/react'
 import * as React from 'react'
 import { useCallback } from 'react'
 import { ControlType, ControlProps } from './interfaces'
-import { Toggle, Checkbox } from '@fluentui/react'
 
 /**
  * BooleanControl creates either Checkbox or Toggle Fluent component

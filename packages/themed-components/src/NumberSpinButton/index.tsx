@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import * as React from 'react'
-import { useCallback, useMemo } from 'react'
 import { SpinButton } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import { Position } from 'office-ui-fabric-react/lib/utilities/positioning'
+import { useCallback, useMemo } from 'react'
+import * as React from 'react'
 
 export interface NumberSpinButtonProps {
 	label: string
