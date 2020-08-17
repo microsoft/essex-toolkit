@@ -1,4 +1,3 @@
-  
 name: CI
 on: [push, pull_request]
 
@@ -8,23 +7,31 @@ jobs:
     strategy:
       matrix:
         node-version: [12.x, 14.x]
-        
+
     steps:
+      - uses: actions/checkout@v2
 
-    - uses: actions/checkout@v2
+      - name: Use Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Use Node ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
+      - run: yarn cache clean --all
+        name: Clean cache
+        env:
+          CI: true
 
-    - run: yarn install
-      name: Install Dependencies
+      - run: yarn install
+        name: Install Dependencies
+        env:
+          CI: true
 
-    - run: yarn build
-      name: Build libs
+      - run: yarn build
+        name: Build libs
+        env:
+          CI: true
 
-    - run: yarn ci
-      name: Execute Tests
-      env:
-        CI: true
+      - run: yarn ci
+        name: Execute Tests
+        env:
+          CI: true
