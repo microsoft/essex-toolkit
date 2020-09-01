@@ -24,21 +24,21 @@ export interface NumberSpinButtonProps {
 export const NumberSpinButton = ({
 	label,
 	value,
-	min,
-	max,
+	min = Number.MIN_SAFE_INTEGER,
+	max = Number.MAX_SAFE_INTEGER,
 	step = 1,
 	onChange,
 	labelPosition,
 }: NumberSpinButtonProps): JSX.Element => {
 	// if the user doesn't specify these optional properties, we basically want it to spin forever
-	const mn = min || value - 1
-	const mx = max || value + 1
 	const theme = useThematic()
 	const handleChange = useCallback(
 		(v: number) => {
-			onChange && onChange(Math.min(mx, Math.max(mn, v)))
+			if (onChange && v <= max && v >= min) {
+				onChange(v)
+			}
 		},
-		[onChange, mn, mx],
+		[onChange, min, max],
 	)
 	const handleIncrement = useCallback(
 		(v: string) => {
@@ -73,8 +73,8 @@ export const NumberSpinButton = ({
 			onDecrement={handleDecrement}
 			onValidate={handleValidate}
 			label={label}
-			min={mn}
-			max={mx}
+			min={min}
+			max={max}
 			step={step}
 			labelPosition={labelPosition}
 		/>
