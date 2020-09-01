@@ -3,9 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { SpinButton } from '@fluentui/react'
-import { useThematic } from '@thematic/react'
 import { Position } from 'office-ui-fabric-react/lib/utilities/positioning'
-import { useCallback, useMemo } from 'react'
+import { useCallback } from 'react'
 import * as React from 'react'
 
 export interface NumberSpinButtonProps {
@@ -31,7 +30,6 @@ export const NumberSpinButton = ({
 	labelPosition,
 }: NumberSpinButtonProps): JSX.Element => {
 	// if the user doesn't specify these optional properties, we basically want it to spin forever
-	const theme = useThematic()
 	const handleChange = useCallback(
 		(v: number) => {
 			if (onChange && v <= max && v >= min) {
@@ -58,16 +56,8 @@ export const NumberSpinButton = ({
 		},
 		[handleChange],
 	)
-	const styles = useMemo(
-		() => ({
-			input: { backgroundColor: theme.application().background().hex() },
-		}),
-		[theme],
-	)
 	return (
 		<SpinButton
-			// this is a weird kludge - the Fluent spin button does not seem to apply the background color properly
-			styles={styles}
 			value={value.toString()}
 			onIncrement={handleIncrement}
 			onDecrement={handleDecrement}
