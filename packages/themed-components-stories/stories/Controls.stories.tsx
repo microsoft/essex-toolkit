@@ -6,14 +6,18 @@ import {
 	FilterTextbox,
 	SearchBox,
 	NumberSpinButton,
+	ToggleLink,
 } from '@essex-js-toolkit/themed-components'
+import { Panel } from '@fluentui/react'
 import React, { useCallback, useState } from 'react'
 
 import { CSF } from './types'
 
-export default {
+const meta = {
 	title: 'Controls',
 }
+
+export default meta
 
 /**
  * FilterTextboxStory is a FilterTextbox based on
@@ -67,4 +71,31 @@ export const NumberSpinButtonStory: CSF = () => {
 
 NumberSpinButtonStory.story = {
 	name: 'NumberSpinButton',
+}
+
+export const ToggleLinkStory: CSF = () => {
+	const [expanded, setExpanded] = useState<boolean>(false)
+	const handleChange = useCallback(toggled => setExpanded(toggled), [])
+	return (
+		<div>
+			This is a ToggleLink:{' '}
+			<ToggleLink
+				messages={['Show more', 'Show less']}
+				onChange={handleChange}
+			/>
+			<div
+				style={{
+					width: 400,
+					height: 100,
+					display: expanded ? 'block' : 'none',
+				}}
+			>
+				More information here!
+			</div>
+		</div>
+	)
+}
+
+ToggleLinkStory.story = {
+	name: 'ToggleLink',
 }
