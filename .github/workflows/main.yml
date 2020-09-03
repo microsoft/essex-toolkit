@@ -22,8 +22,8 @@ jobs:
           version: ^1.2.0
           run_install: true
 
-      - run: pnpm build
-        name: Build libs
+      - run: pnpm install
+        name: Install Dependencies
         env:
           CI: true
 
