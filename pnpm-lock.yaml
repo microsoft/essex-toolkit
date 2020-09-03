@@ -104,6 +104,7 @@ importers:
       '@types/react-test-renderer': 16.9.3
       '@uifabric/icons': 7.5.0_d215097438f7adca954dd8008369397a
       '@uifabric/utilities': 7.31.0_d215097438f7adca954dd8008369397a
+      babel-loader: 8.1.0
       office-ui-fabric-react: 7.134.1_d215097438f7adca954dd8008369397a
       react: 16.13.1
       react-dom: 16.13.1_react@16.13.1
@@ -128,6 +129,7 @@ importers:
       '@types/react-test-renderer': ^16.9.1
       '@uifabric/icons': ^7.3.42
       '@uifabric/utilities': ^7.17.3
+      babel-loader: ^8.1.0
       d3-array: ^2.4.0
       d3-axis: ^1.0.12
       d3-brush: ^1.1.5
@@ -4553,6 +4555,7 @@ packages:
       global: 4.4.0
       prop-types: 15.7.2
       qs: 6.9.4
+      regenerator-runtime: 0.13.7
       ts-dedent: 1.1.1
     dev: true
     peerDependencies:
@@ -7353,6 +7356,21 @@ packages:
       '@babel/core': ^7.0.0
     resolution:
       integrity: sha512-sxPnQGEyHAOPF8NcUsD0g7hDCnvLL2XyblRBcgrzTWBB/mAIpWow3n1bEL+VghnnZfreLhFSBsFluRoK2tRK4g==
+  /babel-loader/8.1.0:
+    dependencies:
+      find-cache-dir: 2.1.0
+      loader-utils: 1.4.0
+      mkdirp: 0.5.5
+      pify: 4.0.1
+      schema-utils: 2.7.1
+    dev: true
+    engines:
+      node: '>= 6.9'
+    peerDependencies:
+      '@babel/core': ^7.0.0
+      webpack: '>=2'
+    resolution:
+      integrity: sha512-7q7nC1tYOrqvUrN3LQK4GwSk/TQorZSOlO9C+RZDZpODgyN4ZlCqE5q9cDsyWOliN+aU9B4JX01xK9eJXowJLw==
   /babel-loader/8.1.0_5a36cfe3630aa5e4fa0785cefae272b5:
     dependencies:
       '@babel/core': 7.11.6

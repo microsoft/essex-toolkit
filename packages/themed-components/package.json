@@ -28,6 +28,7 @@
 		"d3-selection": "^1.4.1"
 	},
 	"devDependencies": {
+		"babel-loader": "^8.1.0",
 		"@fluentui/react": "^7.114.2",
 		"@thematic/color": "^0.8.0",
 		"@thematic/core": "^0.8.0",
