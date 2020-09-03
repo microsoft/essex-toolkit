@@ -104,7 +104,6 @@ importers:
       '@types/react-test-renderer': 16.9.3
       '@uifabric/icons': 7.5.0_d215097438f7adca954dd8008369397a
       '@uifabric/utilities': 7.31.0_d215097438f7adca954dd8008369397a
-      babel-loader: 8.1.0
       office-ui-fabric-react: 7.134.1_d215097438f7adca954dd8008369397a
       react: 16.13.1
       react-dom: 16.13.1_react@16.13.1
@@ -129,7 +128,6 @@ importers:
       '@types/react-test-renderer': ^16.9.1
       '@uifabric/icons': ^7.3.42
       '@uifabric/utilities': ^7.17.3
-      babel-loader: ^8.1.0
       d3-array: ^2.4.0
       d3-axis: ^1.0.12
       d3-brush: ^1.1.5
@@ -153,10 +151,11 @@ importers:
       '@storybook/addon-actions': 5.3.21_fb3c5c69c30633d6624e00e2a1304535
       '@storybook/addon-links': 5.3.21_163e6882885f03a2ca90048b6f6b73af
       '@storybook/addons': 5.3.21_960a3fbaefe402dfa8e5b346058e1917
-      '@storybook/core': 5.3.21_9dda0080177cf6c707a911d3fb3b859b
-      '@storybook/react': 5.3.21_9dda0080177cf6c707a911d3fb3b859b
+      '@storybook/core': 5.3.21_16a382abdc3d80056502418d9976f62f
+      '@storybook/react': 5.3.21_16a382abdc3d80056502418d9976f62f
       '@types/react': 16.9.49
       '@types/react-dom': 16.9.8
+      babel-loader: 8.1.0_webpack@4.44.1
       regenerator-runtime: 0.13.7
       webpack: 4.44.1_webpack@4.44.1
     specifiers:
@@ -174,6 +173,7 @@ importers:
       '@types/form-data': ^2.5.0
       '@types/react': ^16.9.35
       '@types/react-dom': ^16.9.8
+      babel-loader: ^8.1.0
       react: ^16.13.1
       react-dom: ^16.13.1
       regenerator-runtime: ^0.13.3
@@ -4787,7 +4787,7 @@ packages:
     dev: true
     resolution:
       integrity: sha512-/Zsm1sKAh6pzQv8jQUmuhM7nuM01ZljIRKy8p2HjPNlMjDB5yaRkBfyeAUXUg+qXNI6aHVWa4jGdPEdwwY4oLA==
-  /@storybook/core/5.3.21_9dda0080177cf6c707a911d3fb3b859b:
+  /@storybook/core/5.3.21_16a382abdc3d80056502418d9976f62f:
     dependencies:
       '@babel/plugin-proposal-class-properties': 7.10.4
       '@babel/plugin-proposal-object-rest-spread': 7.11.0
@@ -4807,6 +4807,7 @@ packages:
       airbnb-js-shims: 2.2.1
       ansi-to-html: 0.6.14
       autoprefixer: 9.8.6
+      babel-loader: 8.1.0_webpack@4.44.1
       babel-plugin-add-react-displayname: 0.0.5
       babel-plugin-emotion: 10.0.33
       babel-plugin-macros: 2.8.0
@@ -4985,16 +4986,17 @@ packages:
     dev: true
     resolution:
       integrity: sha512-pF+k27DQOWfhlrz9g8t3kAn2dCo7bFRCLMftIDGfJAyMJsXQ+Nl+RAJpM+g7AXV0G9Q0z+H93EEsxV+9ZHF7xA==
-  /@storybook/react/5.3.21_9dda0080177cf6c707a911d3fb3b859b:
+  /@storybook/react/5.3.21_16a382abdc3d80056502418d9976f62f:
     dependencies:
       '@babel/plugin-transform-react-constant-elements': 7.10.4
       '@babel/preset-flow': 7.10.4
       '@babel/preset-react': 7.10.4
       '@storybook/addons': 5.3.21_960a3fbaefe402dfa8e5b346058e1917
-      '@storybook/core': 5.3.21_9dda0080177cf6c707a911d3fb3b859b
+      '@storybook/core': 5.3.21_16a382abdc3d80056502418d9976f62f
       '@storybook/node-logger': 5.3.21
       '@svgr/webpack': 4.3.3
       '@types/webpack-env': 1.15.2
+      babel-loader: 8.1.0_webpack@4.44.1
       babel-plugin-add-react-displayname: 0.0.5
       babel-plugin-named-asset-import: 0.3.6
       babel-plugin-react-docgen: 4.1.0
@@ -7356,13 +7358,15 @@ packages:
       '@babel/core': ^7.0.0
     resolution:
       integrity: sha512-sxPnQGEyHAOPF8NcUsD0g7hDCnvLL2XyblRBcgrzTWBB/mAIpWow3n1bEL+VghnnZfreLhFSBsFluRoK2tRK4g==
-  /babel-loader/8.1.0:
+  /babel-loader/8.1.0_5a36cfe3630aa5e4fa0785cefae272b5:
     dependencies:
+      '@babel/core': 7.11.6
       find-cache-dir: 2.1.0
       loader-utils: 1.4.0
       mkdirp: 0.5.5
       pify: 4.0.1
       schema-utils: 2.7.1
+      webpack: 4.44.1_webpack@4.44.1
     dev: true
     engines:
       node: '>= 6.9'
@@ -7371,9 +7375,8 @@ packages:
       webpack: '>=2'
     resolution:
       integrity: sha512-7q7nC1tYOrqvUrN3LQK4GwSk/TQorZSOlO9C+RZDZpODgyN4ZlCqE5q9cDsyWOliN+aU9B4JX01xK9eJXowJLw==
-  /babel-loader/8.1.0_5a36cfe3630aa5e4fa0785cefae272b5:
+  /babel-loader/8.1.0_webpack@4.44.1:
     dependencies:
-      '@babel/core': 7.11.6
       find-cache-dir: 2.1.0
       loader-utils: 1.4.0
       mkdirp: 0.5.5
