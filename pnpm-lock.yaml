@@ -11,6 +11,7 @@ importers:
       debug: 4.1.1
       husky: 4.2.5
       lerna: 3.22.1
+      lint-staged: 10.3.0
       npm-run-all: 4.1.5
       typescript: 3.9.7
     specifiers:
@@ -23,6 +24,7 @@ importers:
       debug: ^4.1.1
       husky: ^4.2.0
       lerna: ^3.20.2
+      lint-staged: ^10.3.0
       npm-run-all: ^4.1.5
       typescript: ^3.7.5
   packages/hooks:
@@ -4444,8 +4446,6 @@ packages:
       uuid: 3.4.0
     dev: true
     peerDependencies:
-      '@types/react': '*'
-      react-dom: '*'
       regenerator-runtime: '*'
     resolution:
       integrity: sha512-6SAF/j8UBZaAbRz/rYUlcCXda+c4LQvvNlbVJc9GHjNNNMJQQVc3/EU+M7PyFz6uDUxudAW1+AFchGk04ACJ2g==
@@ -4560,7 +4560,6 @@ packages:
     dev: true
     peerDependencies:
       react: '*'
-      react-dom: '*'
       regenerator-runtime: '*'
     resolution:
       integrity: sha512-Gjg3EUGVNSubvWawgbdiXQIKOL7QoMQOCeh1Pyl+5GPozYWDMr8O+86funTbt9LPBzGE1J+RWHarDaArUc6tSw==
@@ -4715,7 +4714,6 @@ packages:
       util-deprecate: 1.0.2
     dev: true
     peerDependencies:
-      react-dom: '*'
       regenerator-runtime: '*'
     resolution:
       integrity: sha512-vS4DfA2Avvl7JNQymO4e3RUNoTWIGVfZJ70Irnd6PTAZNojbCXTYuigDavrmyf83F3g5rQpwmSAPjuoi/X/FRA==
@@ -4728,7 +4726,7 @@ packages:
   /@storybook/components/5.3.21:
     dependencies:
       '@storybook/client-logger': 5.3.21
-      '@storybook/theming': 5.3.21_react@16.13.1
+      '@storybook/theming': 5.3.21_react-dom@16.13.1+react@16.13.1
       '@types/react-syntax-highlighter': 11.0.4
       '@types/react-textarea-autosize': 4.3.5
       core-js: 3.6.5
@@ -4749,8 +4747,6 @@ packages:
       simplebar-react: 1.2.3_react-dom@16.13.1+react@16.13.1
       ts-dedent: 1.1.1
     dev: true
-    peerDependencies:
-      '@types/react': '*'
     resolution:
       integrity: sha512-42QQk6qZl6wrtajP8yNCfmNS2t8Iod5QY+4V/l6iNnnT9O+j6cWOlnO+ZyvjNv0Xm0zIOt+VyVjdkKh8FUjQmA==
   /@storybook/components/5.3.21_@types+react@16.9.49:
@@ -4956,7 +4952,6 @@ packages:
     dev: true
     peerDependencies:
       '@babel/core': '*'
-      '@types/react': '*'
       babel-loader: ^7.0.0 || ^8.0.0
       react: '*'
       react-dom: '*'
@@ -5057,7 +5052,6 @@ packages:
     hasBin: true
     peerDependencies:
       '@babel/core': ^7.0.1
-      '@types/react': '*'
       babel-loader: ^7.0.0 || ^8.0.0
       react: '*'
       react-dom: '*'
@@ -5199,14 +5193,14 @@ packages:
   /@storybook/ui/5.3.21:
     dependencies:
       '@emotion/core': 10.0.35_react@16.13.1
-      '@storybook/addons': 5.3.21_regenerator-runtime@0.13.7
-      '@storybook/api': 5.3.21_regenerator-runtime@0.13.7
+      '@storybook/addons': 5.3.21_960a3fbaefe402dfa8e5b346058e1917
+      '@storybook/api': 5.3.21_960a3fbaefe402dfa8e5b346058e1917
       '@storybook/channels': 5.3.21
       '@storybook/client-logger': 5.3.21
       '@storybook/components': 5.3.21
       '@storybook/core-events': 5.3.21
-      '@storybook/router': 5.3.21_react@16.13.1
-      '@storybook/theming': 5.3.21_react@16.13.1
+      '@storybook/router': 5.3.21_react-dom@16.13.1+react@16.13.1
+      '@storybook/theming': 5.3.21_react-dom@16.13.1+react@16.13.1
       copy-to-clipboard: 3.3.1
       core-js: 3.6.5
       core-js-pure: 3.6.5
@@ -5225,7 +5219,7 @@ packages:
       react-draggable: 4.4.3
       react-helmet-async: 1.0.6_react-dom@16.13.1+react@16.13.1
       react-hotkeys: 2.0.0_react@16.13.1
-      react-sizeme: 2.6.12_react@16.13.1
+      react-sizeme: 2.6.12_react-dom@16.13.1+react@16.13.1
       regenerator-runtime: 0.13.7
       resolve-from: 5.0.0
       semver: 6.3.0
@@ -5233,8 +5227,6 @@ packages:
       telejson: 3.3.0
       util-deprecate: 1.0.2
     dev: true
-    peerDependencies:
-      '@types/react': '*'
     resolution:
       integrity: sha512-OUf8JYY9LN+XfzLSZE6KtboITGDL6C8Z0W9QOXM5LJwFLv4PkANK/f9qsB5vVHFm7vhoO96butFzs6SjTKhxkw==
   /@storybook/ui/5.3.21_@types+react@16.9.49:
@@ -5383,9 +5375,9 @@ packages:
   /@svgr/webpack/4.3.3:
     dependencies:
       '@babel/core': 7.11.6
-      '@babel/plugin-transform-react-constant-elements': 7.10.4
-      '@babel/preset-env': 7.11.5
-      '@babel/preset-react': 7.10.4
+      '@babel/plugin-transform-react-constant-elements': 7.10.4_@babel+core@7.11.6
+      '@babel/preset-env': 7.11.5_@babel+core@7.11.6
+      '@babel/preset-react': 7.10.4_@babel+core@7.11.6
       '@svgr/core': 4.3.3
       '@svgr/plugin-jsx': 4.3.3
       '@svgr/plugin-svgo': 4.3.1
@@ -17233,7 +17225,6 @@ packages:
       use-sidecar: 1.0.3_react@16.13.1
     dev: true
     peerDependencies:
-      '@types/react': '*'
       react: ^16.8.0
     resolution:
       integrity: sha512-c5ZP56KSpj9EAxzScTqQO7bQQNPltf/W1ZEBDqNDOV1XOIwvAyHX0O7db9ekiAtxyKgnqZjQlLppVg94fUeL9w==
