@@ -33,7 +33,8 @@
 		"scripts:upgrade": "essex install",
 		"start": "pnpm run start --stream",
 		"ci": "run-s build lint test git_is_clean",
-		"build-storybook": "pnpm run build-storybook --stream"
+		"build-storybook": "pnpm run build-storybook --stream",
+		"start-storybook": "pnpm run storybook --filter @essex-js-toolkit/theme-components-stories"
 	},
 	"devDependencies": {
 		"@essex/eslint-config": "^9.1.2",
