@@ -13,12 +13,17 @@
 	],
 	"license": "MIT",
 	"private": true,
+	"engines": {
+		"node": ">= 12.0",
+		"pnpm": ">= 5"
+	},
 	"scripts": {
-		"clean": "lerna run clean --stream",
-		"build": "lerna run build --stream",
-		"build_ci": "lerna run build --stream",
+		"preinstall": "npx only-allow pnpm",
+		"clean": "pnpm run clean --stream",
+		"build": "pnpm run build -r --stream",
+		"build_ci": "pnpm run build -r --stream",
 		"unit_test": "essex test --coverage",
-		"test_packages": "lerna run test --stream",
+		"test_packages": "pnpm run test --stream",
 		"test": "run-s test_packages unit_test",
 		"lint": "essex lint --docs",
 		"lint:fix": "essex lint -f",
@@ -26,9 +31,9 @@
 		"prettify": "essex prettify",
 		"release": "npm run build && lerna publish",
 		"scripts:upgrade": "essex install",
-		"start": "lerna run start --stream",
+		"start": "pnpm run start --stream",
 		"ci": "run-s build lint test git_is_clean",
-		"build-storybook": "lerna run build-storybook --stream"
+		"build-storybook": "pnpm run build-storybook --stream"
 	},
 	"devDependencies": {
 		"@essex/eslint-config": "^9.1.2",

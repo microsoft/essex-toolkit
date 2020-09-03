@@ -9,12 +9,17 @@
 	"scripts": {
 		"storybook": "start-storybook -p 6006",
 		"build": "build-storybook",
-		"start": "yarn storybook"
+		"start": "pnpm storybook"
 	},
 	"dependencies": {
+		"@babel/plugin-proposal-class-properties": "^7.10.4",
 		"@essex-js-toolkit/thematic-lineup": "^1.1.2",
 		"@essex-js-toolkit/themed-components": "^1.1.2",
 		"@fluentui/react": "^7.114.2",
+		"@thematic/core": "^0.8.0",
+		"@thematic/fluent": "^0.8.0",
+		"@thematic/react": "^0.8.0",
+		"@types/form-data": "^2.5.0",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1"
 	},
