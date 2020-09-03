@@ -41,6 +41,7 @@
 		"@types/react-test-renderer": "^16.9.1",
 		"@uifabric/icons": "^7.3.42",
 		"@uifabric/utilities": "^7.17.3",
+		"office-ui-fabric-react": "^7.134.1",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1"
 	},
