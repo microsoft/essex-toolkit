@@ -51,6 +51,11 @@ importers:
       react-dom: ^16.13.1
       react-test-renderer: ^16.12.0
       resize-observer-polyfill: ^1.5.1
+  packages/msal-interactor:
+    dependencies:
+      msal: 1.4.0
+    specifiers:
+      msal: ^1.4.0
   packages/thematic-lineup:
     devDependencies:
       '@thematic/color': 0.8.0
@@ -4589,7 +4594,6 @@ packages:
       util-deprecate: 1.0.2
     dev: true
     peerDependencies:
-      react-dom: '*'
       regenerator-runtime: '*'
     resolution:
       integrity: sha512-Ji/21WADTLVbTbiKcZ64BcL0Es+h1Afxx3kNmGJqPSTUYroCwIFCT9mUzCqU6G+YyWaISAmTii5UJkTwMkChwA==
@@ -4648,7 +4652,6 @@ packages:
       util-deprecate: 1.0.2
     dev: true
     peerDependencies:
-      react-dom: '*'
       regenerator-runtime: '*'
     resolution:
       integrity: sha512-K1o4an/Rx8daKRDooks6qzN6ZGyqizeacZZbair3F8CsSfTgrr2zCcf9pgKojLQa9koEmMHlcdb2KnS+GwPEgA==
@@ -4868,7 +4871,6 @@ packages:
       babel-loader: ^7.0.0 || ^8.0.0
       react: '*'
       react-dom: '*'
-      typescript: '*'
     resolution:
       integrity: sha512-plD47WIsn/JoyRJDOpmH7N7mEMo/jiA8ZlOitLW55zYvzUn8UrVpRFpMYo91OJxiCT6JFoaEh3XtNdhbgUwnPA==
   /@storybook/core/5.3.21_ca70b4d7d8b7bc92c5cdc7ee74d0623c:
@@ -5017,7 +5019,6 @@ packages:
       babel-loader: ^7.0.0 || ^8.0.0
       react: '*'
       react-dom: '*'
-      typescript: '*'
     resolution:
       integrity: sha512-A50F8dDZxyLGa/dE3q0Zxt7T5r9UbomoSclqw7oJTO9GI76QOu7GfsoWrEL2gTEDAmqXreLVQqGuTLQhBz0rlA==
   /@storybook/react/5.3.21_ca70b4d7d8b7bc92c5cdc7ee74d0623c:
@@ -15151,6 +15152,14 @@ packages:
   /ms/2.1.2:
     resolution:
       integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
+  /msal/1.4.0:
+    dependencies:
+      tslib: 1.13.0
+    dev: false
+    engines:
+      node: '>=0.8.0'
+    resolution:
+      integrity: sha512-NTxMFQh6t5g2QWMlvZTWTxL1bmcqiCv0cs2lxTHhUbWEuxWCfvaVRZfjxN8i+T0VltVVGaVIdML8QEoBnlbaSw==
   /multicast-dns-service-types/1.1.0:
     dev: true
     resolution:
@@ -16461,8 +16470,6 @@ packages:
     dev: true
     engines:
       node: '>=6'
-    peerDependencies:
-      typescript: '*'
     resolution:
       integrity: sha512-jd9olUr9D7do+RN8Wspzhpxhgp1n6Vd0NtQ4SFkmIACZoEL1nkyAdW9Ygrinjec0vgDcWjscFQQ1gDW8rsfKTg==
   /pnp-webpack-plugin/1.5.0_typescript@3.9.7:

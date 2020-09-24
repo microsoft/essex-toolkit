@@ -3,7 +3,7 @@
 	"private": true,
 	"version": "1.1.2",
 	"description": "A set of visual components that include built-in thematic",
-	"repository": "https://dev.azure.com/msrp-essex/Alpha/_git/alpha-developer",
+	"repository": "https://github.com/microsoft/essex-js-toolkit",
 	"author": "Nathan Evans <naevans@microsoft.com>",
 	"license": "MIT",
 	"scripts": {
