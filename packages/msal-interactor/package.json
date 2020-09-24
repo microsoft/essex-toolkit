@@ -1,15 +1,17 @@
 {
-	"name": "@essex-js-toolkit/toolbox",
-	"version": "1.1.2",
-	"description": "A set of general purpose utils",
+	"name": "@essex/msal-interactor",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
 	"typings": "dist/types/index.d.ts",
 	"repository": "https://github.com/microsoft/essex-js-toolkit",
-	"author": "David Tittsworth <datittsw@microsoft.com>",
+	"author": "Nathan Evans <naevans@microsoft.com>",
 	"license": "MIT",
 	"scripts": {
+		"build": "essex build",
 		"clean": "essex clean",
-		"build": "essex build"
+		"watch": "essex watch"
+	},
+	"dependencies": {
+		"msal": "^1.4.0"
 	}
 }
