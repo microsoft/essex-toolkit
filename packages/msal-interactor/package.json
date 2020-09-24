@@ -1,10 +1,11 @@
 {
 	"name": "@essex/msal-interactor",
+	"version": "1.1.2",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
 	"typings": "dist/types/index.d.ts",
 	"repository": "https://github.com/microsoft/essex-js-toolkit",
-	"author": "Nathan Evans <naevans@microsoft.com>",
+	"author": "Chris Trevino <chtrevin@microsoft.com>",
 	"license": "MIT",
 	"scripts": {
 		"build": "essex build",
