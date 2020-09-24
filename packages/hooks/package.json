@@ -5,7 +5,7 @@
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
 	"typings": "dist/types/index.d.ts",
-	"repository": "https://dev.azure.com/msrp-essex/Alpha/_git/alpha-developer",
+	"repository": "https://github.com/microsoft/essex-js-toolkit",
 	"author": "David Tittsworth <datittsw@microsoft.com>",
 	"license": "MIT",
 	"scripts": {
