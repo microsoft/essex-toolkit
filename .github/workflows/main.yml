@@ -16,17 +16,15 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - run: npm i -g pnpm
-        name: Use pnpm
-        env:
-          CI: true
+      - name: Version Check
+        run: yarn version check
 
-      - run: pnpm install
+      - run: yarn install
         name: Install Dependencies
         env:
           CI: true
 
-      - run: pnpm ci
+      - run: yarn ci
         name: Execute Tests
         env:
           CI: true
