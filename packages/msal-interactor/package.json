@@ -13,6 +13,6 @@
 		"watch": "essex watch"
 	},
 	"dependencies": {
-		"msal": "^1.4.0"
+		"msal": "^1.4.1"
 	}
 }

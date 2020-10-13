@@ -14,49 +14,43 @@
 	"license": "MIT",
 	"private": true,
 	"engines": {
-		"node": ">= 12.0",
-		"pnpm": ">= 5"
+		"node": ">= 12.0"
 	},
 	"scripts": {
-		"preinstall": "npx only-allow pnpm",
-		"clean": "pnpm run clean --stream",
-		"build": "pnpm run build -r --stream",
-		"build_ci": "pnpm run build -r --stream",
+		"preinstall": "npx only-allow yarn",
+		"clean_all": "yarn workspaces foreach -pv run clean",
+		"build_all": "yarn workspaces foreach -pvt run build",
+		"test_all": "yarn workspaces foreach -pv run test",
+		"start_all": "yarn workspaces foreach -pv run start",
 		"unit_test": "essex test --coverage",
-		"test_packages": "pnpm run test -r --stream",
-		"run_tests": "run-s test_packages unit_test",
 		"lint": "essex lint --docs",
 		"lint:fix": "essex lint -f",
 		"git_is_clean": "essex git-is-clean",
 		"prettify": "essex prettify",
 		"release": "npm run build && lerna publish",
 		"scripts:upgrade": "essex install",
-		"start": "pnpm run start --stream",
-		"ci": "run-s build lint run_tests git_is_clean",
+		"ci": "run-s build_all lint test_packages unit_test run_tests git_is_clean",
 		"build-storybook": "pnpm run build-storybook --stream",
 		"start-storybook": "pnpm run storybook --filter @essex-js-toolkit/theme-components-stories"
 	},
 	"devDependencies": {
-		"@essex/eslint-config": "^9.1.2",
-		"@essex/eslint-plugin": "^9.1.2",
-		"@essex/prettier-config": "^9.1.2",
-		"@essex/scripts": "^9.1.2",
-		"@types/node": "^14.0.1",
-		"debug": "^4.1.1",
-		"husky": "^4.2.0",
-		"lerna": "^3.20.2",
-		"lint-staged": "^10.3.0",
+		"@essex/eslint-config": "^10.0.0",
+		"@essex/eslint-plugin": "^10.0.0",
+		"@essex/prettier-config": "^10.0.0",
+		"@essex/scripts": "^10.0.0",
+		"@types/node": "^14.11.8",
+		"debug": "^4.2.0",
+		"husky": "^4.3.0",
+		"lerna": "^3.22.1",
+		"lint-staged": "^10.4.0",
 		"npm-run-all": "^4.1.5",
-		"typescript": "^3.7.5"
+		"typescript": "^4.0.3"
 	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "essex pre-commit"
-		}
-	},
-	"prettier": "@essex/prettier-config",
+	"workspaces": [
+		"packages/*"
+	],
 	"dependencies": {
-		"@typescript-eslint/eslint-plugin": "^3.4.0"
+		"@typescript-eslint/eslint-plugin": "^3.10.1"
 	},
 	"resolutions": {
 		"handlebars": "^4.4.3"
