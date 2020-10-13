@@ -7,9 +7,9 @@
 	"author": "Nathan Evans <naevans@microsoft.com>",
 	"license": "MIT",
 	"scripts": {
-		"storybook": "start-storybook -p 6006",
-		"build": "build-storybook",
-		"start": "pnpm storybook"
+		"start:storybook": "start-storybook -p 6006",
+		"build:storybook": "build-storybook",
+		"start": "yarn start:storybook"
 	},
 	"dependencies": {
 		"@essex-js-toolkit/thematic-lineup": "^1.1.2",
