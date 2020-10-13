@@ -148,7 +148,7 @@ export const ClippedGraph = ({
 			.attr('y', gradientBand)
 
 		if (horizon) {
-			const wrapCount = Math.ceil(Math.abs(yScale(fullMax)) / height)
+			const wrapCount = Math.ceil(Math.abs(yScale(fullMax) || 0) / height)
 			// create a second line for the clipped part to 'wrap'
 			// this is just a transform to slide it down so it appears wrapped
 			for (let w = 0; w <= wrapCount; w++) {
@@ -178,7 +178,7 @@ export const ClippedGraph = ({
 				.enter()
 				.append('rect')
 				.attr('class', 'gradient')
-				.attr('x', (d, i) => sScale(i) - sPer / 2)
+				.attr('x', (d, i) => (sScale(i) || 0) - sPer / 2)
 				.attr('height', gradientBand || height)
 				.attr('width', sPer)
 				.attr('fill', (d: number) => color(d).hex())
