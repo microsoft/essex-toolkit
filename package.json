@@ -29,7 +29,7 @@
 		"prettify": "essex prettify",
 		"release": "npm run build && lerna publish",
 		"scripts:upgrade": "essex install",
-		"ci": "run-s build_all lint test_packages unit_test run_tests git_is_clean",
+		"ci": "run-s build_all lint test_all unit_test git_is_clean",
 		"build-storybook": "pnpm run build-storybook --stream",
 		"start-storybook": "pnpm run storybook --filter @essex-js-toolkit/theme-components-stories"
 	},
