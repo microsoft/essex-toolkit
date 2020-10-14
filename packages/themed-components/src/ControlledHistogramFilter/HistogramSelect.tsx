@@ -5,7 +5,7 @@
 import { SelectionState } from '@thematic/core'
 import { chart, axis, rect as rectRenderer } from '@thematic/d3'
 import { useThematic } from '@thematic/react'
-import { histogram, max } from 'd3-array'
+import { bin, max } from 'd3-array'
 import { axisBottom, axisLeft } from 'd3-axis'
 import { brushX } from 'd3-brush'
 import { scaleLinear, ScaleLinear } from 'd3-scale'
@@ -220,7 +220,7 @@ export const HistogramSelect = ({
 			elements.viewPort.selectAll('.brush').remove()
 
 			// define new bins
-			const histo = histogram().domain(elements.domain).thresholds(numberOfBins)
+			const histo = bin().domain(elements.domain).thresholds(numberOfBins)
 
 			const bins = histo(data)
 
@@ -251,12 +251,15 @@ export const HistogramSelect = ({
 				.attr('width', d =>
 					Math.max(
 						0,
-						elements.xScale(d.x1 as number) -
-							elements.xScale(d.x0 as number) -
-							1,
+						elements.xScale(d.x1 as number) ||
+							0 - (elements.xScale(d.x0 as number) || 0),
+						0 - 1,
 					),
 				)
-				.attr('height', d => elements.vpHeight - elements.yScale(d.length))
+				.attr(
+					'height',
+					d => elements.vpHeight - (elements.yScale(d.length) || 0),
+				)
 				.style('fill', d => {
 					const selectionStart =
 						selectedRange[0] !== undefined ? selectedRange[0] : minDataValue
@@ -315,7 +318,7 @@ export const HistogramSelect = ({
 			elements.brushGroup = elements.viewPort
 				.append('g')
 				.attr('class', 'brush')
-				.call(brush)
+				.call(brush as any)
 
 			// adjust the new brush to the previous selection
 			if (selectedRange[0] || selectedRange[1]) {
