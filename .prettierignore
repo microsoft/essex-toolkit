@@ -1,4 +1,5 @@
 .yarn/
+.yarnrc
 node_modules/
 storybook-static/
 build/
@@ -6,4 +7,3 @@ dist/
 lib/
 coverage/
 public/
-.yarn/
