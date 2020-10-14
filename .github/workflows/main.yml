@@ -16,12 +16,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Print Remotes
-        run: git remote -v
-
-      - name: Version Check
-        run: yarn version check
-
       - run: yarn install
         name: Install Dependencies
         env:
