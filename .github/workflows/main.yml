@@ -9,7 +9,7 @@ jobs:
         node-version: [12.x, 14.x]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
       - name: Debug Action
         uses: hmarr/debug-action@v1.0.0
