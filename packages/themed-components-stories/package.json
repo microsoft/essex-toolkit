@@ -14,13 +14,13 @@
 	"dependencies": {
 		"@essex-js-toolkit/thematic-lineup": "^1.1.2",
 		"@essex-js-toolkit/themed-components": "^1.1.2",
-		"@fluentui/react": "^7.146.1",
-		"@thematic/core": "^0.8.0",
-		"@thematic/fluent": "^0.8.0",
-		"@thematic/react": "^0.8.0",
+		"@fluentui/react": "^7.146.2",
+		"@thematic/core": "^0.9.0",
+		"@thematic/fluent": "^0.9.0",
+		"@thematic/react": "^0.9.0",
 		"@types/form-data": "^2.5.0",
-		"react": "^16.13.1",
-		"react-dom": "^16.13.1"
+		"react": "^16.14.0",
+		"react-dom": "^16.14.0"
 	},
 	"devDependencies": {
 		"@storybook/addon-actions": "^6.0.26",
