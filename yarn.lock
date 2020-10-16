@@ -1911,7 +1911,9 @@ __metadata:
     "@essex/scripts": ^10.0.1
     "@types/node": ^14.11.8
     "@typescript-eslint/eslint-plugin": ^4.4.1
+    "@typescript-eslint/parser": ^4.4.1
     debug: ^4.3.0
+    eslint-import-resolver-node: ^0.3.4
     husky: ^4.3.0
     lerna: ^3.22.1
     lint-staged: ^10.4.0
@@ -1925,7 +1927,9 @@ __metadata:
   resolution: "@essex-js-toolkit/hooks@workspace:packages/hooks"
   dependencies:
     "@essex-js-toolkit/toolbox": ^1.1.2
+    "@essex/scripts": ^10.0.1
     "@testing-library/react": ^11.1.0
+    "@types/jest": ^26.0.14
     "@types/node": ^14.11.8
     "@types/react": ^16.9.52
     "@types/react-dom": ^16.9.8
@@ -1943,6 +1947,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@essex-js-toolkit/thematic-lineup@workspace:packages/thematic-lineup"
   dependencies:
+    "@essex/scripts": ^10.0.1
     "@thematic/color": ^0.9.0
     "@thematic/core": ^0.9.0
     "@thematic/d3": ^0.9.0
@@ -2000,6 +2005,7 @@ __metadata:
   dependencies:
     "@essex-js-toolkit/hooks": ^1.1.2
     "@essex-js-toolkit/toolbox": ^1.1.2
+    "@essex/scripts": ^10.0.1
     "@fluentui/react": ^7.146.2
     "@thematic/color": ^0.9.0
     "@thematic/core": ^0.9.0
@@ -2008,11 +2014,12 @@ __metadata:
     "@thematic/react": ^0.9.0
     "@types/d3": ^5.16.3
     "@types/d3-array": ^2.2.0
-    "@types/d3-axis": ^1.0.14
+    "@types/d3-axis": ^2.0.0
     "@types/d3-brush": ^1.1.4
     "@types/d3-scale": ^2.2.4
     "@types/d3-selection": ^1.4.3
     "@types/node": ^14.11.8
+    "@types/prop-types": ^15.7.3
     "@types/react": ^16.9.52
     "@types/react-dom": ^16.9.8
     "@types/react-test-renderer": ^16.9.3
@@ -2024,6 +2031,7 @@ __metadata:
     d3-scale: ^3.2.3
     d3-selection: ^1.4.2
     office-ui-fabric-react: ^7.146.2
+    prop-types: ^15.7.2
     react: ^16.14.0
     react-dom: ^16.14.0
   peerDependencies:
@@ -2042,6 +2050,8 @@ __metadata:
 "@essex-js-toolkit/toolbox@^1.1.2, @essex-js-toolkit/toolbox@workspace:packages/toolbox":
   version: 0.0.0-use.local
   resolution: "@essex-js-toolkit/toolbox@workspace:packages/toolbox"
+  dependencies:
+    "@essex/scripts": ^10.0.1
   languageName: unknown
   linkType: soft
 
@@ -2390,6 +2400,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@essex/msal-interactor@workspace:packages/msal-interactor"
   dependencies:
+    "@essex/scripts": ^10.0.1
     msal: ^1.4.1
   languageName: unknown
   linkType: soft
@@ -2728,7 +2739,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/theme@npm:^1.5.0":
+"@fluentui/theme@npm:1.5.0, @fluentui/theme@npm:^1.5.0":
   version: 1.5.0
   resolution: "@fluentui/theme@npm:1.5.0"
   dependencies:
@@ -5051,12 +5062,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/d3-axis@npm:^1, @types/d3-axis@npm:^1.0.14":
+"@types/d3-axis@npm:^1":
   version: 1.0.14
   resolution: "@types/d3-axis@npm:1.0.14"
   dependencies:
     "@types/d3-selection": ^1
   checksum: b5f51fca0599e1be058bf490829ee1aac9e0a1305c851d71b6d0b1256d40fa6f100b823135d34ce21736023f861b57bc99348948bf369da8be520a048b5c9bc3
+  languageName: node
+  linkType: hard
+
+"@types/d3-axis@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@types/d3-axis@npm:2.0.0"
+  dependencies:
+    "@types/d3-selection": "*"
+  checksum: 46b9408c13acf8faf39bf9d2ff407e57973733b8c60ef6b76cb21c49eca9e4da77c4be3aed4502703052ac57569502f9af72a61a7b3473282179e28534b14fd4
   languageName: node
   linkType: hard
 
@@ -5222,7 +5242,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/d3-selection@npm:^1, @types/d3-selection@npm:^1.4.1, @types/d3-selection@npm:^1.4.3":
+"@types/d3-selection@npm:*, @types/d3-selection@npm:^1, @types/d3-selection@npm:^1.4.1, @types/d3-selection@npm:^1.4.3":
   version: 1.4.3
   resolution: "@types/d3-selection@npm:1.4.3"
   checksum: f6c5b0bc69430eeec412d7cdcf89285967ee0b8043138a34c0a8332800761778487ec9b4dda238ba2f32f967735cf15e776493161beb2f03ebef6a6cdb48330e
@@ -5654,7 +5674,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prop-types@npm:*":
+"@types/pretty-format@npm:^24.3.0":
+  version: 24.3.0
+  resolution: "@types/pretty-format@npm:24.3.0"
+  dependencies:
+    pretty-format: "*"
+  checksum: af6b2810ffcea74bf9a50d6b95cf3378e22a57c02e66887df395df26656136e327ac7181b82f123f97bc2f3a86192967898140351deb89e94ccf901d5924202e
+  languageName: node
+  linkType: hard
+
+"@types/prop-types@npm:*, @types/prop-types@npm:^15.7.3":
   version: 15.7.3
   resolution: "@types/prop-types@npm:15.7.3"
   checksum: bd0eab69d5120ad3784d0c9985f902653d5924707a7f2b3702a330e762dfd61b6494954cb54ad0c52b918ffd6f1e7e27c9270e4442bc15250de348596f2f60cb
@@ -18753,6 +18782,18 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"pretty-format@npm:*, pretty-format@npm:26.5.2, pretty-format@npm:^26.4.2, pretty-format@npm:^26.5.2":
+  version: 26.5.2
+  resolution: "pretty-format@npm:26.5.2"
+  dependencies:
+    "@jest/types": ^26.5.2
+    ansi-regex: ^5.0.0
+    ansi-styles: ^4.0.0
+    react-is: ^16.12.0
+  checksum: 4f296de3f929c27074dfd3ef02c924ae35e31271739acf00bd577b693c303fd0de836584d63ef816f1f62d8630943d2edb098b594e4fdd74768c47f8768da944
+  languageName: node
+  linkType: hard
+
 "pretty-format@npm:^25.2.1, pretty-format@npm:^25.5.0":
   version: 25.5.0
   resolution: "pretty-format@npm:25.5.0"
@@ -18762,18 +18803,6 @@ fsevents@^1.2.7:
     ansi-styles: ^4.0.0
     react-is: ^16.12.0
   checksum: f7cc631d51e22c809d429d20facfd886ba0b212d419d153467872f68688256c2c55563bf70e943b7347ec9180b41a1d19c4235dc171850f9d5382a52959c0245
-  languageName: node
-  linkType: hard
-
-"pretty-format@npm:^26.4.2, pretty-format@npm:^26.5.2":
-  version: 26.5.2
-  resolution: "pretty-format@npm:26.5.2"
-  dependencies:
-    "@jest/types": ^26.5.2
-    ansi-regex: ^5.0.0
-    ansi-styles: ^4.0.0
-    react-is: ^16.12.0
-  checksum: 4f296de3f929c27074dfd3ef02c924ae35e31271739acf00bd577b693c303fd0de836584d63ef816f1f62d8630943d2edb098b594e4fdd74768c47f8768da944
   languageName: node
   linkType: hard
 
