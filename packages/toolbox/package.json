@@ -11,5 +11,8 @@
 	"scripts": {
 		"clean": "essex clean",
 		"build": "essex build"
+	},
+	"devDependencies": {
+		"@essex/scripts": "^10.0.1"
 	}
 }

@@ -7,3 +7,4 @@ dist/
 lib/
 coverage/
 public/
+.pnp.js
