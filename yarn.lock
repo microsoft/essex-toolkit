@@ -1912,7 +1912,7 @@ __metadata:
     "@types/node": ^14.11.8
     "@typescript-eslint/eslint-plugin": ^4.4.1
     "@typescript-eslint/parser": ^4.4.1
-    debug: ^4.3.0
+    debug: ^4.2.0
     eslint-import-resolver-node: ^0.3.4
     husky: ^4.3.0
     lerna: ^3.22.1
@@ -2007,6 +2007,7 @@ __metadata:
     "@essex-js-toolkit/toolbox": ^1.1.2
     "@essex/scripts": ^10.0.1
     "@fluentui/react": ^7.146.2
+    "@fluentui/theme": ^1.5.0
     "@thematic/color": ^0.9.0
     "@thematic/core": ^0.9.0
     "@thematic/d3": ^0.9.0
@@ -2041,6 +2042,7 @@ __metadata:
     "@thematic/d3": ">= 0.8.0"
     "@thematic/fluent": ">= 0.8.0"
     "@thematic/react": ">= 0.8.0"
+    "@types/react": ">= 16.9"
     "@uifabric/icons": ">= 7.3.38"
     react: ">= 16.8.6"
     react-dom: ">= 16.8.6"
@@ -2739,7 +2741,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/theme@npm:1.5.0, @fluentui/theme@npm:^1.5.0":
+"@fluentui/theme@npm:*, @fluentui/theme@npm:^1.5.0":
   version: 1.5.0
   resolution: "@fluentui/theme@npm:1.5.0"
   dependencies:
@@ -5062,21 +5064,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/d3-axis@npm:*, @types/d3-axis@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@types/d3-axis@npm:2.0.0"
+  dependencies:
+    "@types/d3-selection": "*"
+  checksum: 46b9408c13acf8faf39bf9d2ff407e57973733b8c60ef6b76cb21c49eca9e4da77c4be3aed4502703052ac57569502f9af72a61a7b3473282179e28534b14fd4
+  languageName: node
+  linkType: hard
+
 "@types/d3-axis@npm:^1":
   version: 1.0.14
   resolution: "@types/d3-axis@npm:1.0.14"
   dependencies:
     "@types/d3-selection": ^1
   checksum: b5f51fca0599e1be058bf490829ee1aac9e0a1305c851d71b6d0b1256d40fa6f100b823135d34ce21736023f861b57bc99348948bf369da8be520a048b5c9bc3
-  languageName: node
-  linkType: hard
-
-"@types/d3-axis@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@types/d3-axis@npm:2.0.0"
-  dependencies:
-    "@types/d3-selection": "*"
-  checksum: 46b9408c13acf8faf39bf9d2ff407e57973733b8c60ef6b76cb21c49eca9e4da77c4be3aed4502703052ac57569502f9af72a61a7b3473282179e28534b14fd4
   languageName: node
   linkType: hard
 
@@ -10036,7 +10038,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:^4.2.0, debug@npm:^4.3.0":
+"debug@npm:^4.2.0":
   version: 4.3.0
   resolution: "debug@npm:4.3.0"
   dependencies:
@@ -18936,7 +18938,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.0.0, prop-types@npm:^15.5.10, prop-types@npm:^15.5.8, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
+"prop-types@npm:*, prop-types@npm:^15.0.0, prop-types@npm:^15.5.10, prop-types@npm:^15.5.8, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.7.2
   resolution: "prop-types@npm:15.7.2"
   dependencies:
@@ -19559,7 +19561,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react@npm:^16.14.0":
+"react@npm:*, react@npm:^16.14.0":
   version: 16.14.0
   resolution: "react@npm:16.14.0"
   dependencies:
