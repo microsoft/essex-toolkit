@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { debounce } from '@essex-js-toolkit/toolbox'
 import { useState, MutableRefObject } from 'react'
 import { useEventListener } from './useEventListener'
+import { debounce } from '@essex-js-toolkit/toolbox'
 
 interface Position {
 	x: number

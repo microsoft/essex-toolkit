@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ClippedGraph } from '@essex-js-toolkit/themed-components'
 import React from 'react'
 import { CSF } from './types'
+import { ClippedGraph } from '@essex-js-toolkit/themed-components'
 
 export default {
 	title: 'ClippedGraph',
