@@ -2,9 +2,12 @@
 	"name": "@essex-js-toolkit/hooks",
 	"version": "1.1.2",
 	"description": "A set of hooks for use with react",
-	"main": "dist/cjs/index.js",
-	"module": "dist/esm/index.js",
-	"typings": "dist/types/index.d.ts",
+	"main": "src/index.ts",
+	"publishConfig": {
+		"main": "dist/cjs/index.js",
+		"module": "dist/esm/index.js",
+		"typings": "dist/types/index.d.ts"
+	},
 	"repository": "https://github.com/microsoft/essex-js-toolkit",
 	"author": "David Tittsworth <datittsw@microsoft.com>",
 	"license": "MIT",
@@ -13,22 +16,27 @@
 		"clean": "essex clean",
 		"watch": "essex watch"
 	},
-	"prettier": "@essex/prettier-config",
 	"dependencies": {
 		"@essex-js-toolkit/toolbox": "^1.1.2",
 		"resize-observer-polyfill": "^1.5.1"
 	},
 	"devDependencies": {
-		"@testing-library/react": "^11.0.4",
-		"@types/node": "^14.11.8",
-		"@types/react": "^16.9.52",
+		"@essex/scripts": "^11.0.1",
+		"@testing-library/react": "^11.1.0",
+		"@types/jest": "^26.0.14",
+		"@types/node": "^14.14.0",
+		"@types/react": "^16.9.53",
 		"@types/react-dom": "^16.9.8",
 		"@types/react-test-renderer": "^16.9.3",
-		"react": "^16.13.1",
-		"react-dom": "^16.13.1",
-		"react-test-renderer": "^16.13.1"
+		"react": "^16.14.0",
+		"react-dom": "^16.14.0",
+		"react-test-renderer": "^16.14.0"
 	},
 	"peerDependencies": {
+		"@types/node": "*",
+		"@types/react": "*",
+		"@types/react-dom": "*",
+		"core-js": "*",
 		"react": ">=16.8.0"
 	}
 }

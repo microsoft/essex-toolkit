@@ -1,0 +1,10 @@
+releases:
+  "@essex-js-toolkit/hooks": patch
+  "@essex-js-toolkit/thematic-lineup": patch
+  "@essex-js-toolkit/themed-components": patch
+  "@essex-js-toolkit/themed-components-stories": patch
+  "@essex-js-toolkit/toolbox": patch
+  "@essex/msal-interactor": patch
+
+declined:
+  - "@essex-js-toolkit/dev"

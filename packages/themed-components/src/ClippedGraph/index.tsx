@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { histogram, interpolate } from '@essex-js-toolkit/toolbox'
 import { chart, plotArea, line as lineRenderer } from '@thematic/d3'
 import { useThematic } from '@thematic/react'
 import { scaleLinear } from 'd3-scale'
 import { select } from 'd3-selection'
 import * as React from 'react'
 import { useRef, useMemo, useEffect } from 'react'
+import { histogram, interpolate } from '@essex-js-toolkit/toolbox'
 
 const BINS = 10
 
