@@ -6386,8 +6386,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@essex/scripts", "virtual:e8fbd5399b7e31554c07e5553f6e9a69e42bd9c6dd99c3eb31b0ec7da90184feb55a4290d2cf3af449e31855f2e06ef93ae212d93cc10af7368bb529bae91572#npm:11.0.1"],
             ["@thematic/color", "npm:0.9.0"],
             ["@thematic/core", "npm:0.9.0"],
-            ["@thematic/d3", "npm:0.9.0"],
-            ["@thematic/fluent", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:0.9.0"],
+            ["@thematic/d3", "virtual:d76f983a87fb3271e633101e99cbee53bf14729519fa98a053161ccb07f2bfd8c5f17231e906e133a607e96cc876b98b5e61bc3312439e658a5e44b9e4a2b6f3#npm:0.9.0"],
+            ["@thematic/fluent", "virtual:b71dc3dd9751a0a41790d8e217491550f29871fc0661ac2b48c7c1202490f36add21ef8d400d8c2487f84721ec3b5ea3f85d3a86b396dd8305eec36dd57085a8#npm:0.9.0"],
             ["@thematic/react", "virtual:d76f983a87fb3271e633101e99cbee53bf14729519fa98a053161ccb07f2bfd8c5f17231e906e133a607e96cc876b98b5e61bc3312439e658a5e44b9e4a2b6f3#npm:0.9.0"],
             ["@types/core-js", null],
             ["@types/lineupjs", null],
@@ -6434,7 +6434,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@essex/scripts", "virtual:e8fbd5399b7e31554c07e5553f6e9a69e42bd9c6dd99c3eb31b0ec7da90184feb55a4290d2cf3af449e31855f2e06ef93ae212d93cc10af7368bb529bae91572#npm:11.0.1"],
             ["@thematic/color", "npm:0.9.0"],
             ["@thematic/core", "npm:0.9.0"],
-            ["@thematic/d3", "npm:0.9.0"],
+            ["@thematic/d3", "virtual:d76f983a87fb3271e633101e99cbee53bf14729519fa98a053161ccb07f2bfd8c5f17231e906e133a607e96cc876b98b5e61bc3312439e658a5e44b9e4a2b6f3#npm:0.9.0"],
             ["@thematic/fluent", "virtual:d76f983a87fb3271e633101e99cbee53bf14729519fa98a053161ccb07f2bfd8c5f17231e906e133a607e96cc876b98b5e61bc3312439e658a5e44b9e4a2b6f3#npm:0.9.0"],
             ["@thematic/react", "virtual:d76f983a87fb3271e633101e99cbee53bf14729519fa98a053161ccb07f2bfd8c5f17231e906e133a607e96cc876b98b5e61bc3312439e658a5e44b9e4a2b6f3#npm:0.9.0"],
             ["@types/node", "npm:14.14.0"],
@@ -6456,12 +6456,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@essex-js-toolkit/hooks", "virtual:9e54899df2cb2fd64432a116bde16bcfd506a9a739f6563c3067c128cf9b04b9edc93ce9c63c6e3294892ff36c6b77dc463d07a1dbc670bed7cbca2ef1d6229c#workspace:packages/hooks"],
             ["@essex-js-toolkit/toolbox", "virtual:9e54899df2cb2fd64432a116bde16bcfd506a9a739f6563c3067c128cf9b04b9edc93ce9c63c6e3294892ff36c6b77dc463d07a1dbc670bed7cbca2ef1d6229c#workspace:packages/toolbox"],
             ["@essex/scripts", "virtual:e8fbd5399b7e31554c07e5553f6e9a69e42bd9c6dd99c3eb31b0ec7da90184feb55a4290d2cf3af449e31855f2e06ef93ae212d93cc10af7368bb529bae91572#npm:11.0.1"],
-            ["@fluentui/react", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:7.147.1"],
+            ["@fluentui/react", "virtual:b71dc3dd9751a0a41790d8e217491550f29871fc0661ac2b48c7c1202490f36add21ef8d400d8c2487f84721ec3b5ea3f85d3a86b396dd8305eec36dd57085a8#npm:7.147.1"],
             ["@fluentui/theme", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:1.5.1"],
             ["@thematic/color", "npm:0.9.0"],
             ["@thematic/core", "npm:0.9.0"],
-            ["@thematic/d3", "npm:0.9.0"],
-            ["@thematic/fluent", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:0.9.0"],
+            ["@thematic/d3", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:0.9.0"],
+            ["@thematic/fluent", "virtual:b71dc3dd9751a0a41790d8e217491550f29871fc0661ac2b48c7c1202490f36add21ef8d400d8c2487f84721ec3b5ea3f85d3a86b396dd8305eec36dd57085a8#npm:0.9.0"],
             ["@thematic/react", "virtual:d76f983a87fb3271e633101e99cbee53bf14729519fa98a053161ccb07f2bfd8c5f17231e906e133a607e96cc876b98b5e61bc3312439e658a5e44b9e4a2b6f3#npm:0.9.0"],
             ["@types/core-js", null],
             ["@types/d3", "npm:5.16.3"],
@@ -6481,6 +6481,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/thematic__d3", null],
             ["@types/thematic__fluent", null],
             ["@types/thematic__react", null],
+            ["@types/types__d3", null],
+            ["@types/types__d3-axis", null],
             ["@types/types__node", null],
             ["@types/types__react", null],
             ["@types/uifabric__icons", null],
@@ -6512,6 +6514,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@types/thematic__d3",
             "@types/thematic__fluent",
             "@types/thematic__react",
+            "@types/types__d3-axis",
+            "@types/types__d3",
             "@types/types__node",
             "@types/types__react",
             "@types/uifabric__icons",
@@ -6533,7 +6537,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@fluentui/theme", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:1.5.1"],
             ["@thematic/color", "npm:0.9.0"],
             ["@thematic/core", "npm:0.9.0"],
-            ["@thematic/d3", "npm:0.9.0"],
+            ["@thematic/d3", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:0.9.0"],
             ["@thematic/fluent", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:0.9.0"],
             ["@thematic/react", "virtual:d76f983a87fb3271e633101e99cbee53bf14729519fa98a053161ccb07f2bfd8c5f17231e906e133a607e96cc876b98b5e61bc3312439e658a5e44b9e4a2b6f3#npm:0.9.0"],
             ["@types/d3", "npm:5.16.3"],
@@ -6572,14 +6576,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@essex-js-toolkit/themed-components", "virtual:b71dc3dd9751a0a41790d8e217491550f29871fc0661ac2b48c7c1202490f36add21ef8d400d8c2487f84721ec3b5ea3f85d3a86b396dd8305eec36dd57085a8#workspace:packages/themed-components"],
             ["@essex/scripts", "virtual:b71dc3dd9751a0a41790d8e217491550f29871fc0661ac2b48c7c1202490f36add21ef8d400d8c2487f84721ec3b5ea3f85d3a86b396dd8305eec36dd57085a8#npm:11.0.1"],
             ["@essex/storybook-config", "virtual:b71dc3dd9751a0a41790d8e217491550f29871fc0661ac2b48c7c1202490f36add21ef8d400d8c2487f84721ec3b5ea3f85d3a86b396dd8305eec36dd57085a8#npm:11.0.0"],
-            ["@fluentui/react", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:7.147.1"],
+            ["@fluentui/react", "virtual:b71dc3dd9751a0a41790d8e217491550f29871fc0661ac2b48c7c1202490f36add21ef8d400d8c2487f84721ec3b5ea3f85d3a86b396dd8305eec36dd57085a8#npm:7.147.1"],
             ["@storybook/addon-actions", "virtual:b3bccfa078b1c5134cf4b1ce126669c935b9b8df0ed729e44c69fd9b0d13829fa856bea8db44b1c67f888722e196291dbb9eddf2d3cfed4e8b24bf1e9a5581f9#npm:6.0.26"],
             ["@storybook/addon-links", "virtual:b3bccfa078b1c5134cf4b1ce126669c935b9b8df0ed729e44c69fd9b0d13829fa856bea8db44b1c67f888722e196291dbb9eddf2d3cfed4e8b24bf1e9a5581f9#npm:6.0.26"],
             ["@storybook/addons", "virtual:665601359de8edfb700142d2dea1e215f77ab8918ce1e586fc249046c86970f1ddf8ac831f0144a0577f7c27444fbd111177ba9014939224a7d7e46cd84cab5f#npm:6.0.26"],
             ["@storybook/core", "virtual:b71dc3dd9751a0a41790d8e217491550f29871fc0661ac2b48c7c1202490f36add21ef8d400d8c2487f84721ec3b5ea3f85d3a86b396dd8305eec36dd57085a8#npm:6.0.26"],
             ["@storybook/react", "virtual:b71dc3dd9751a0a41790d8e217491550f29871fc0661ac2b48c7c1202490f36add21ef8d400d8c2487f84721ec3b5ea3f85d3a86b396dd8305eec36dd57085a8#npm:6.0.26"],
             ["@thematic/core", "npm:0.9.0"],
-            ["@thematic/fluent", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:0.9.0"],
+            ["@thematic/fluent", "virtual:b71dc3dd9751a0a41790d8e217491550f29871fc0661ac2b48c7c1202490f36add21ef8d400d8c2487f84721ec3b5ea3f85d3a86b396dd8305eec36dd57085a8#npm:0.9.0"],
             ["@thematic/react", "virtual:d76f983a87fb3271e633101e99cbee53bf14729519fa98a053161ccb07f2bfd8c5f17231e906e133a607e96cc876b98b5e61bc3312439e658a5e44b9e4a2b6f3#npm:0.9.0"],
             ["@types/babel__core", "npm:7.1.10"],
             ["@types/form-data", "npm:2.5.0"],
@@ -7816,21 +7820,57 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/$$virtual/@fluentui-react-virtual-5b2885eafb/0/cache/@fluentui-react-npm-7.147.1-8b9a894a8a-e94de92509.zip/node_modules/@fluentui/react/",
           "packageDependencies": [
             ["@fluentui/react", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:7.147.1"],
+            ["@types/prop-types", "npm:15.7.3"],
             ["@types/react", "npm:16.9.53"],
             ["@types/react-dom", "npm:16.9.8"],
+            ["@types/types__prop-types", null],
             ["@types/types__react", null],
             ["@types/types__react-dom", null],
             ["@uifabric/set-version", "npm:7.0.23"],
             ["office-ui-fabric-react", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:7.147.1"],
+            ["prop-types", "npm:15.7.2"],
             ["react", "npm:16.14.0"],
             ["react-dom", "virtual:e8fbd5399b7e31554c07e5553f6e9a69e42bd9c6dd99c3eb31b0ec7da90184feb55a4290d2cf3af449e31855f2e06ef93ae212d93cc10af7368bb529bae91572#npm:16.14.0"],
             ["tslib", "npm:1.14.1"]
           ],
           "packagePeers": [
+            "@types/prop-types",
             "@types/react-dom",
             "@types/react",
+            "@types/types__prop-types",
             "@types/types__react-dom",
             "@types/types__react",
+            "prop-types",
+            "react-dom",
+            "react"
+          ],
+          "linkType": "HARD",
+        }],
+        ["virtual:b71dc3dd9751a0a41790d8e217491550f29871fc0661ac2b48c7c1202490f36add21ef8d400d8c2487f84721ec3b5ea3f85d3a86b396dd8305eec36dd57085a8#npm:7.147.1", {
+          "packageLocation": "./.yarn/$$virtual/@fluentui-react-virtual-5816534d3b/0/cache/@fluentui-react-npm-7.147.1-8b9a894a8a-e94de92509.zip/node_modules/@fluentui/react/",
+          "packageDependencies": [
+            ["@fluentui/react", "virtual:b71dc3dd9751a0a41790d8e217491550f29871fc0661ac2b48c7c1202490f36add21ef8d400d8c2487f84721ec3b5ea3f85d3a86b396dd8305eec36dd57085a8#npm:7.147.1"],
+            ["@types/prop-types", null],
+            ["@types/react", "npm:16.9.53"],
+            ["@types/react-dom", "npm:16.9.8"],
+            ["@types/types__prop-types", null],
+            ["@types/types__react", null],
+            ["@types/types__react-dom", null],
+            ["@uifabric/set-version", "npm:7.0.23"],
+            ["office-ui-fabric-react", "virtual:5816534d3bf96cfe075d00cd17786c3dda4592410fb1ccdd5e5afa110fd5da659a1e635c8b1373535cf6457157ba69ae2deade6763e01a9cbc25d124359101c4#npm:7.147.1"],
+            ["prop-types", null],
+            ["react", "npm:16.14.0"],
+            ["react-dom", "virtual:e8fbd5399b7e31554c07e5553f6e9a69e42bd9c6dd99c3eb31b0ec7da90184feb55a4290d2cf3af449e31855f2e06ef93ae212d93cc10af7368bb529bae91572#npm:16.14.0"],
+            ["tslib", "npm:1.14.1"]
+          ],
+          "packagePeers": [
+            "@types/prop-types",
+            "@types/react-dom",
+            "@types/react",
+            "@types/types__prop-types",
+            "@types/types__react-dom",
+            "@types/types__react",
+            "prop-types",
             "react-dom",
             "react"
           ],
@@ -7849,7 +7889,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/types__react-dom", null],
             ["@uifabric/merge-styles", "npm:7.19.1"],
             ["@uifabric/set-version", "npm:7.0.23"],
-            ["@uifabric/styling", "npm:7.16.13"],
+            ["@uifabric/styling", "virtual:f3695106232b5b69ef6394b2c80934b45b26bbc609267b9257b1cfa787f6a2f017594c25ed5acd65b07e2aca5c839dc3903c22b8e36f0259f0e0a775fd69562b#npm:7.16.13"],
             ["@uifabric/utilities", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:7.32.4"],
             ["react", "npm:16.14.0"],
             ["react-dom", "virtual:e8fbd5399b7e31554c07e5553f6e9a69e42bd9c6dd99c3eb31b0ec7da90184feb55a4290d2cf3af449e31855f2e06ef93ae212d93cc10af7368bb529bae91572#npm:16.14.0"],
@@ -7917,17 +7957,42 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "HARD",
         }],
-        ["virtual:b2474dad9d71d346fc7f57ea1b8da5bc74bed58b882abd476dc11f566f0000fe575dd3a50bcae134f41650fd59c01513497d528d383d9cc334e9049f425dd272#npm:1.5.1", {
-          "packageLocation": "./.yarn/$$virtual/@fluentui-theme-virtual-5f5a598b05/0/cache/@fluentui-theme-npm-1.5.1-5706036d2e-b8e1432892.zip/node_modules/@fluentui/theme/",
+        ["virtual:29615b5c296ed1304d4a42c6fdc00b51202a7938b01435031d6f35fb4644900a8d5dd63befb7adf6a36b00ebe5429f72711f283b3fef7629cc39ff782dfa3850#npm:1.5.1", {
+          "packageLocation": "./.yarn/$$virtual/@fluentui-theme-virtual-d983507560/0/cache/@fluentui-theme-npm-1.5.1-5706036d2e-b8e1432892.zip/node_modules/@fluentui/theme/",
           "packageDependencies": [
-            ["@fluentui/theme", "virtual:b2474dad9d71d346fc7f57ea1b8da5bc74bed58b882abd476dc11f566f0000fe575dd3a50bcae134f41650fd59c01513497d528d383d9cc334e9049f425dd272#npm:1.5.1"],
+            ["@fluentui/theme", "virtual:29615b5c296ed1304d4a42c6fdc00b51202a7938b01435031d6f35fb4644900a8d5dd63befb7adf6a36b00ebe5429f72711f283b3fef7629cc39ff782dfa3850#npm:1.5.1"],
             ["@types/react", null],
             ["@types/react-dom", null],
             ["@types/types__react", null],
             ["@types/types__react-dom", null],
             ["@uifabric/merge-styles", "npm:7.19.1"],
             ["@uifabric/set-version", "npm:7.0.23"],
-            ["@uifabric/utilities", "virtual:b2474dad9d71d346fc7f57ea1b8da5bc74bed58b882abd476dc11f566f0000fe575dd3a50bcae134f41650fd59c01513497d528d383d9cc334e9049f425dd272#npm:7.32.4"],
+            ["@uifabric/utilities", "virtual:29615b5c296ed1304d4a42c6fdc00b51202a7938b01435031d6f35fb4644900a8d5dd63befb7adf6a36b00ebe5429f72711f283b3fef7629cc39ff782dfa3850#npm:7.32.4"],
+            ["react", null],
+            ["react-dom", null],
+            ["tslib", "npm:1.14.1"]
+          ],
+          "packagePeers": [
+            "@types/react-dom",
+            "@types/react",
+            "@types/types__react-dom",
+            "@types/types__react",
+            "react-dom",
+            "react"
+          ],
+          "linkType": "HARD",
+        }],
+        ["virtual:843d0d8421899264a21e9eb76a702ea58611df308678ed34072f9c6766408ae415c9ed52c66c13ee54ec79da84383f4de93c19898ec09549fde78ece8ec19f68#npm:1.5.1", {
+          "packageLocation": "./.yarn/$$virtual/@fluentui-theme-virtual-4f157a5708/0/cache/@fluentui-theme-npm-1.5.1-5706036d2e-b8e1432892.zip/node_modules/@fluentui/theme/",
+          "packageDependencies": [
+            ["@fluentui/theme", "virtual:843d0d8421899264a21e9eb76a702ea58611df308678ed34072f9c6766408ae415c9ed52c66c13ee54ec79da84383f4de93c19898ec09549fde78ece8ec19f68#npm:1.5.1"],
+            ["@types/react", "npm:16.9.53"],
+            ["@types/react-dom", null],
+            ["@types/types__react", null],
+            ["@types/types__react-dom", null],
+            ["@uifabric/merge-styles", "npm:7.19.1"],
+            ["@uifabric/set-version", "npm:7.0.23"],
+            ["@uifabric/utilities", "virtual:843d0d8421899264a21e9eb76a702ea58611df308678ed34072f9c6766408ae415c9ed52c66c13ee54ec79da84383f4de93c19898ec09549fde78ece8ec19f68#npm:7.32.4"],
             ["react", null],
             ["react-dom", null],
             ["tslib", "npm:1.14.1"]
@@ -11031,13 +11096,35 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@thematic/d3", [
-        ["npm:0.9.0", {
-          "packageLocation": "./.yarn/cache/@thematic-d3-npm-0.9.0-efe94f8ed1-97ed52699c.zip/node_modules/@thematic/d3/",
+        ["virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:0.9.0", {
+          "packageLocation": "./.yarn/$$virtual/@thematic-d3-virtual-3a4fc12803/0/cache/@thematic-d3-npm-0.9.0-efe94f8ed1-97ed52699c.zip/node_modules/@thematic/d3/",
           "packageDependencies": [
-            ["@thematic/d3", "npm:0.9.0"],
+            ["@thematic/d3", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:0.9.0"],
             ["@thematic/core", "npm:0.9.0"],
+            ["@types/d3-axis", "npm:2.0.0"],
             ["@types/d3-selection", "npm:1.4.3"],
+            ["@types/types__d3-axis", null],
             ["d3-selection", "npm:1.4.2"]
+          ],
+          "packagePeers": [
+            "@types/d3-axis",
+            "@types/types__d3-axis"
+          ],
+          "linkType": "HARD",
+        }],
+        ["virtual:d76f983a87fb3271e633101e99cbee53bf14729519fa98a053161ccb07f2bfd8c5f17231e906e133a607e96cc876b98b5e61bc3312439e658a5e44b9e4a2b6f3#npm:0.9.0", {
+          "packageLocation": "./.yarn/$$virtual/@thematic-d3-virtual-8d584cf6ea/0/cache/@thematic-d3-npm-0.9.0-efe94f8ed1-97ed52699c.zip/node_modules/@thematic/d3/",
+          "packageDependencies": [
+            ["@thematic/d3", "virtual:d76f983a87fb3271e633101e99cbee53bf14729519fa98a053161ccb07f2bfd8c5f17231e906e133a607e96cc876b98b5e61bc3312439e658a5e44b9e4a2b6f3#npm:0.9.0"],
+            ["@thematic/core", "npm:0.9.0"],
+            ["@types/d3-axis", null],
+            ["@types/d3-selection", "npm:1.4.3"],
+            ["@types/types__d3-axis", null],
+            ["d3-selection", "npm:1.4.2"]
+          ],
+          "packagePeers": [
+            "@types/d3-axis",
+            "@types/types__d3-axis"
           ],
           "linkType": "HARD",
         }]
@@ -11048,6 +11135,30 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@thematic/fluent", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:0.9.0"],
             ["@fluentui/react", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:7.147.1"],
+            ["@thematic/color", "npm:0.9.0"],
+            ["@thematic/core", "npm:0.9.0"],
+            ["@thematic/react", "virtual:d76f983a87fb3271e633101e99cbee53bf14729519fa98a053161ccb07f2bfd8c5f17231e906e133a607e96cc876b98b5e61bc3312439e658a5e44b9e4a2b6f3#npm:0.9.0"],
+            ["@types/fluentui__react", null],
+            ["@types/react", "npm:16.9.53"],
+            ["@types/uifabric__icons", null],
+            ["@uifabric/icons", "npm:7.5.12"],
+            ["react", "npm:16.14.0"]
+          ],
+          "packagePeers": [
+            "@fluentui/react",
+            "@types/fluentui__react",
+            "@types/react",
+            "@types/uifabric__icons",
+            "@uifabric/icons",
+            "react"
+          ],
+          "linkType": "HARD",
+        }],
+        ["virtual:b71dc3dd9751a0a41790d8e217491550f29871fc0661ac2b48c7c1202490f36add21ef8d400d8c2487f84721ec3b5ea3f85d3a86b396dd8305eec36dd57085a8#npm:0.9.0", {
+          "packageLocation": "./.yarn/$$virtual/@thematic-fluent-virtual-f4156cebc9/0/cache/@thematic-fluent-npm-0.9.0-f616c34671-434fc33b8c.zip/node_modules/@thematic/fluent/",
+          "packageDependencies": [
+            ["@thematic/fluent", "virtual:b71dc3dd9751a0a41790d8e217491550f29871fc0661ac2b48c7c1202490f36add21ef8d400d8c2487f84721ec3b5ea3f85d3a86b396dd8305eec36dd57085a8#npm:0.9.0"],
+            ["@fluentui/react", "virtual:b71dc3dd9751a0a41790d8e217491550f29871fc0661ac2b48c7c1202490f36add21ef8d400d8c2487f84721ec3b5ea3f85d3a86b396dd8305eec36dd57085a8#npm:7.147.1"],
             ["@thematic/color", "npm:0.9.0"],
             ["@thematic/core", "npm:0.9.0"],
             ["@thematic/react", "virtual:d76f983a87fb3271e633101e99cbee53bf14729519fa98a053161ccb07f2bfd8c5f17231e906e133a607e96cc876b98b5e61bc3312439e658a5e44b9e4a2b6f3#npm:0.9.0"],
@@ -12523,7 +12634,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/types__react-dom", null],
             ["@uifabric/merge-styles", "npm:7.19.1"],
             ["@uifabric/set-version", "npm:7.0.23"],
-            ["@uifabric/styling", "npm:7.16.13"],
+            ["@uifabric/styling", "virtual:f3695106232b5b69ef6394b2c80934b45b26bbc609267b9257b1cfa787f6a2f017594c25ed5acd65b07e2aca5c839dc3903c22b8e36f0259f0e0a775fd69562b#npm:7.16.13"],
             ["@uifabric/utilities", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:7.32.4"],
             ["react", "npm:16.14.0"],
             ["react-dom", "virtual:e8fbd5399b7e31554c07e5553f6e9a69e42bd9c6dd99c3eb31b0ec7da90184feb55a4290d2cf3af449e31855f2e06ef93ae212d93cc10af7368bb529bae91572#npm:16.14.0"],
@@ -12546,7 +12657,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@uifabric/icons", "npm:7.5.12"],
             ["@uifabric/set-version", "npm:7.0.23"],
-            ["@uifabric/styling", "npm:7.16.13"],
+            ["@uifabric/styling", "virtual:06f3c3cd82d3a9c9ecec787a1ae02aa61adaf62ce4359e31fa9752e6569d73859514d397ba2ce866b1cf436684aa32bc4617af238a53013994c13300293eb7b8#npm:7.16.13"],
             ["tslib", "npm:1.14.1"]
           ],
           "linkType": "HARD",
@@ -12601,16 +12712,41 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@uifabric/styling", [
-        ["npm:7.16.13", {
-          "packageLocation": "./.yarn/cache/@uifabric-styling-npm-7.16.13-b2474dad9d-f55db22f73.zip/node_modules/@uifabric/styling/",
+        ["virtual:06f3c3cd82d3a9c9ecec787a1ae02aa61adaf62ce4359e31fa9752e6569d73859514d397ba2ce866b1cf436684aa32bc4617af238a53013994c13300293eb7b8#npm:7.16.13", {
+          "packageLocation": "./.yarn/$$virtual/@uifabric-styling-virtual-29615b5c29/0/cache/@uifabric-styling-npm-7.16.13-b2474dad9d-f55db22f73.zip/node_modules/@uifabric/styling/",
           "packageDependencies": [
-            ["@uifabric/styling", "npm:7.16.13"],
-            ["@fluentui/theme", "virtual:b2474dad9d71d346fc7f57ea1b8da5bc74bed58b882abd476dc11f566f0000fe575dd3a50bcae134f41650fd59c01513497d528d383d9cc334e9049f425dd272#npm:1.5.1"],
+            ["@uifabric/styling", "virtual:06f3c3cd82d3a9c9ecec787a1ae02aa61adaf62ce4359e31fa9752e6569d73859514d397ba2ce866b1cf436684aa32bc4617af238a53013994c13300293eb7b8#npm:7.16.13"],
+            ["@fluentui/theme", "virtual:29615b5c296ed1304d4a42c6fdc00b51202a7938b01435031d6f35fb4644900a8d5dd63befb7adf6a36b00ebe5429f72711f283b3fef7629cc39ff782dfa3850#npm:1.5.1"],
             ["@microsoft/load-themed-styles", "npm:1.10.111"],
+            ["@types/react", null],
+            ["@types/types__react", null],
             ["@uifabric/merge-styles", "npm:7.19.1"],
             ["@uifabric/set-version", "npm:7.0.23"],
-            ["@uifabric/utilities", "virtual:b2474dad9d71d346fc7f57ea1b8da5bc74bed58b882abd476dc11f566f0000fe575dd3a50bcae134f41650fd59c01513497d528d383d9cc334e9049f425dd272#npm:7.32.4"],
+            ["@uifabric/utilities", "virtual:29615b5c296ed1304d4a42c6fdc00b51202a7938b01435031d6f35fb4644900a8d5dd63befb7adf6a36b00ebe5429f72711f283b3fef7629cc39ff782dfa3850#npm:7.32.4"],
             ["tslib", "npm:1.14.1"]
+          ],
+          "packagePeers": [
+            "@types/react",
+            "@types/types__react"
+          ],
+          "linkType": "HARD",
+        }],
+        ["virtual:f3695106232b5b69ef6394b2c80934b45b26bbc609267b9257b1cfa787f6a2f017594c25ed5acd65b07e2aca5c839dc3903c22b8e36f0259f0e0a775fd69562b#npm:7.16.13", {
+          "packageLocation": "./.yarn/$$virtual/@uifabric-styling-virtual-843d0d8421/0/cache/@uifabric-styling-npm-7.16.13-b2474dad9d-f55db22f73.zip/node_modules/@uifabric/styling/",
+          "packageDependencies": [
+            ["@uifabric/styling", "virtual:f3695106232b5b69ef6394b2c80934b45b26bbc609267b9257b1cfa787f6a2f017594c25ed5acd65b07e2aca5c839dc3903c22b8e36f0259f0e0a775fd69562b#npm:7.16.13"],
+            ["@fluentui/theme", "virtual:843d0d8421899264a21e9eb76a702ea58611df308678ed34072f9c6766408ae415c9ed52c66c13ee54ec79da84383f4de93c19898ec09549fde78ece8ec19f68#npm:1.5.1"],
+            ["@microsoft/load-themed-styles", "npm:1.10.111"],
+            ["@types/react", "npm:16.9.53"],
+            ["@types/types__react", null],
+            ["@uifabric/merge-styles", "npm:7.19.1"],
+            ["@uifabric/set-version", "npm:7.0.23"],
+            ["@uifabric/utilities", "virtual:843d0d8421899264a21e9eb76a702ea58611df308678ed34072f9c6766408ae415c9ed52c66c13ee54ec79da84383f4de93c19898ec09549fde78ece8ec19f68#npm:7.32.4"],
+            ["tslib", "npm:1.14.1"]
+          ],
+          "packagePeers": [
+            "@types/react",
+            "@types/types__react"
           ],
           "linkType": "HARD",
         }]
@@ -12642,12 +12778,38 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "HARD",
         }],
-        ["virtual:b2474dad9d71d346fc7f57ea1b8da5bc74bed58b882abd476dc11f566f0000fe575dd3a50bcae134f41650fd59c01513497d528d383d9cc334e9049f425dd272#npm:7.32.4", {
-          "packageLocation": "./.yarn/$$virtual/@uifabric-utilities-virtual-2e7b422e0a/0/cache/@uifabric-utilities-npm-7.32.4-0b1380d647-f268d251b0.zip/node_modules/@uifabric/utilities/",
+        ["virtual:29615b5c296ed1304d4a42c6fdc00b51202a7938b01435031d6f35fb4644900a8d5dd63befb7adf6a36b00ebe5429f72711f283b3fef7629cc39ff782dfa3850#npm:7.32.4", {
+          "packageLocation": "./.yarn/$$virtual/@uifabric-utilities-virtual-1252804815/0/cache/@uifabric-utilities-npm-7.32.4-0b1380d647-f268d251b0.zip/node_modules/@uifabric/utilities/",
           "packageDependencies": [
-            ["@uifabric/utilities", "virtual:b2474dad9d71d346fc7f57ea1b8da5bc74bed58b882abd476dc11f566f0000fe575dd3a50bcae134f41650fd59c01513497d528d383d9cc334e9049f425dd272#npm:7.32.4"],
+            ["@uifabric/utilities", "virtual:29615b5c296ed1304d4a42c6fdc00b51202a7938b01435031d6f35fb4644900a8d5dd63befb7adf6a36b00ebe5429f72711f283b3fef7629cc39ff782dfa3850#npm:7.32.4"],
             ["@fluentui/dom-utilities", "npm:1.1.1"],
             ["@types/react", null],
+            ["@types/react-dom", null],
+            ["@types/types__react", null],
+            ["@types/types__react-dom", null],
+            ["@uifabric/merge-styles", "npm:7.19.1"],
+            ["@uifabric/set-version", "npm:7.0.23"],
+            ["prop-types", "npm:15.7.2"],
+            ["react", null],
+            ["react-dom", null],
+            ["tslib", "npm:1.14.1"]
+          ],
+          "packagePeers": [
+            "@types/react-dom",
+            "@types/react",
+            "@types/types__react-dom",
+            "@types/types__react",
+            "react-dom",
+            "react"
+          ],
+          "linkType": "HARD",
+        }],
+        ["virtual:843d0d8421899264a21e9eb76a702ea58611df308678ed34072f9c6766408ae415c9ed52c66c13ee54ec79da84383f4de93c19898ec09549fde78ece8ec19f68#npm:7.32.4", {
+          "packageLocation": "./.yarn/$$virtual/@uifabric-utilities-virtual-6779a31675/0/cache/@uifabric-utilities-npm-7.32.4-0b1380d647-f268d251b0.zip/node_modules/@uifabric/utilities/",
+          "packageDependencies": [
+            ["@uifabric/utilities", "virtual:843d0d8421899264a21e9eb76a702ea58611df308678ed34072f9c6766408ae415c9ed52c66c13ee54ec79da84383f4de93c19898ec09549fde78ece8ec19f68#npm:7.32.4"],
+            ["@fluentui/dom-utilities", "npm:1.1.1"],
+            ["@types/react", "npm:16.9.53"],
             ["@types/react-dom", null],
             ["@types/types__react", null],
             ["@types/types__react-dom", null],
@@ -24833,8 +24995,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@fluentui/react-focus", "virtual:f3695106232b5b69ef6394b2c80934b45b26bbc609267b9257b1cfa787f6a2f017594c25ed5acd65b07e2aca5c839dc3903c22b8e36f0259f0e0a775fd69562b#npm:7.16.13"],
             ["@fluentui/react-window-provider", "virtual:f3695106232b5b69ef6394b2c80934b45b26bbc609267b9257b1cfa787f6a2f017594c25ed5acd65b07e2aca5c839dc3903c22b8e36f0259f0e0a775fd69562b#npm:0.3.3"],
             ["@microsoft/load-themed-styles", "npm:1.10.111"],
+            ["@types/prop-types", "npm:15.7.3"],
             ["@types/react", "npm:16.9.53"],
             ["@types/react-dom", "npm:16.9.8"],
+            ["@types/types__prop-types", null],
             ["@types/types__react", null],
             ["@types/types__react-dom", null],
             ["@uifabric/foundation", "virtual:f3695106232b5b69ef6394b2c80934b45b26bbc609267b9257b1cfa787f6a2f017594c25ed5acd65b07e2aca5c839dc3903c22b8e36f0259f0e0a775fd69562b#npm:7.9.14"],
@@ -24842,7 +25006,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@uifabric/merge-styles", "npm:7.19.1"],
             ["@uifabric/react-hooks", "virtual:f3695106232b5b69ef6394b2c80934b45b26bbc609267b9257b1cfa787f6a2f017594c25ed5acd65b07e2aca5c839dc3903c22b8e36f0259f0e0a775fd69562b#npm:7.13.6"],
             ["@uifabric/set-version", "npm:7.0.23"],
-            ["@uifabric/styling", "npm:7.16.13"],
+            ["@uifabric/styling", "virtual:f3695106232b5b69ef6394b2c80934b45b26bbc609267b9257b1cfa787f6a2f017594c25ed5acd65b07e2aca5c839dc3903c22b8e36f0259f0e0a775fd69562b#npm:7.16.13"],
             ["@uifabric/utilities", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:7.32.4"],
             ["prop-types", "npm:15.7.2"],
             ["react", "npm:16.14.0"],
@@ -24850,10 +25014,52 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["tslib", "npm:1.14.1"]
           ],
           "packagePeers": [
+            "@types/prop-types",
             "@types/react-dom",
             "@types/react",
+            "@types/types__prop-types",
             "@types/types__react-dom",
             "@types/types__react",
+            "prop-types",
+            "react-dom",
+            "react"
+          ],
+          "linkType": "HARD",
+        }],
+        ["virtual:5816534d3bf96cfe075d00cd17786c3dda4592410fb1ccdd5e5afa110fd5da659a1e635c8b1373535cf6457157ba69ae2deade6763e01a9cbc25d124359101c4#npm:7.147.1", {
+          "packageLocation": "./.yarn/$$virtual/office-ui-fabric-react-virtual-181b65b5c0/0/cache/office-ui-fabric-react-npm-7.147.1-ab88908e40-8a326fa0cb.zip/node_modules/office-ui-fabric-react/",
+          "packageDependencies": [
+            ["office-ui-fabric-react", "virtual:5816534d3bf96cfe075d00cd17786c3dda4592410fb1ccdd5e5afa110fd5da659a1e635c8b1373535cf6457157ba69ae2deade6763e01a9cbc25d124359101c4#npm:7.147.1"],
+            ["@fluentui/date-time-utilities", "npm:7.9.0"],
+            ["@fluentui/react-focus", "virtual:f3695106232b5b69ef6394b2c80934b45b26bbc609267b9257b1cfa787f6a2f017594c25ed5acd65b07e2aca5c839dc3903c22b8e36f0259f0e0a775fd69562b#npm:7.16.13"],
+            ["@fluentui/react-window-provider", "virtual:f3695106232b5b69ef6394b2c80934b45b26bbc609267b9257b1cfa787f6a2f017594c25ed5acd65b07e2aca5c839dc3903c22b8e36f0259f0e0a775fd69562b#npm:0.3.3"],
+            ["@microsoft/load-themed-styles", "npm:1.10.111"],
+            ["@types/prop-types", null],
+            ["@types/react", "npm:16.9.53"],
+            ["@types/react-dom", "npm:16.9.8"],
+            ["@types/types__prop-types", null],
+            ["@types/types__react", null],
+            ["@types/types__react-dom", null],
+            ["@uifabric/foundation", "virtual:f3695106232b5b69ef6394b2c80934b45b26bbc609267b9257b1cfa787f6a2f017594c25ed5acd65b07e2aca5c839dc3903c22b8e36f0259f0e0a775fd69562b#npm:7.9.14"],
+            ["@uifabric/icons", "npm:7.5.12"],
+            ["@uifabric/merge-styles", "npm:7.19.1"],
+            ["@uifabric/react-hooks", "virtual:f3695106232b5b69ef6394b2c80934b45b26bbc609267b9257b1cfa787f6a2f017594c25ed5acd65b07e2aca5c839dc3903c22b8e36f0259f0e0a775fd69562b#npm:7.13.6"],
+            ["@uifabric/set-version", "npm:7.0.23"],
+            ["@uifabric/styling", "virtual:f3695106232b5b69ef6394b2c80934b45b26bbc609267b9257b1cfa787f6a2f017594c25ed5acd65b07e2aca5c839dc3903c22b8e36f0259f0e0a775fd69562b#npm:7.16.13"],
+            ["@uifabric/utilities", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:7.32.4"],
+            ["prop-types", null],
+            ["react", "npm:16.14.0"],
+            ["react-dom", "virtual:e8fbd5399b7e31554c07e5553f6e9a69e42bd9c6dd99c3eb31b0ec7da90184feb55a4290d2cf3af449e31855f2e06ef93ae212d93cc10af7368bb529bae91572#npm:16.14.0"],
+            ["tslib", "npm:1.14.1"]
+          ],
+          "packagePeers": [
+            "@types/prop-types",
+            "@types/react-dom",
+            "@types/react",
+            "@types/types__prop-types",
+            "@types/types__react-dom",
+            "@types/types__react",
+            "prop-types",
             "react-dom",
             "react"
           ],
