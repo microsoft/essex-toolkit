@@ -13,9 +13,9 @@
 		"watch": "essex watch"
 	},
 	"dependencies": {
-		"msal": "^1.4.1"
+		"msal": "^1.4.2"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^10.0.1"
+		"@essex/scripts": "^11.0.1"
 	}
 }

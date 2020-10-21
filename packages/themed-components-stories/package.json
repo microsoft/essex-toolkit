@@ -14,7 +14,7 @@
 	"dependencies": {
 		"@essex-js-toolkit/thematic-lineup": "^1.1.2",
 		"@essex-js-toolkit/themed-components": "^1.1.2",
-		"@fluentui/react": "^7.146.2",
+		"@fluentui/react": "^7.147.1",
 		"@thematic/core": "^0.9.0",
 		"@thematic/fluent": "^0.9.0",
 		"@thematic/react": "^0.9.0",
@@ -28,7 +28,7 @@
 		"@storybook/addons": "^6.0.26",
 		"@storybook/core": "^6.0.26",
 		"@storybook/react": "^6.0.26",
-		"@types/react": "^16.9.52",
+		"@types/react": "^16.9.53",
 		"@types/react-dom": "^16.9.8",
 		"awesome-typescript-loader": "^5.2.1",
 		"babel-loader": "^8.1.0",
