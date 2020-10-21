@@ -50,10 +50,9 @@
 	"workspaces": [
 		"packages/*"
 	],
-	"dependencies": {
-		"@typescript-eslint/eslint-plugin": "^4.5.0"
-	},
 	"resolutions": {
-		"handlebars": "^4.4.3"
+		"handlebars": "4.4.3",
+		"@types/react": "16.9.53",
+		"@types/react-dom": "16.9.8"
 	}
 }
