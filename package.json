@@ -21,7 +21,7 @@
 		"clean_all": "yarn workspaces foreach -pv run clean",
 		"build_all": "yarn workspaces foreach -pvt run build",
 		"test_all": "yarn workspaces foreach -pv run test",
-		"start_all": "yarn workspaces foreach -pv run start",
+		"start_all": "yarn workspaces foreach -piv run start",
 		"publish_all": "yarn workspaces foreach --exclude '@essex-js-toolkit/dev' -pv npm publish --tolerate-republish --access public",
 		"unit_test": "essex test --coverage",
 		"lint": "essex lint --docs",
