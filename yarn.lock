@@ -2802,6 +2802,8 @@ __metadata:
     "@thematic/d3": ">= 0.8.0"
     "@thematic/fluent": ">= 0.8.0"
     "@thematic/react": ">= 0.8.0"
+    "@types/d3": "*"
+    "@types/d3-axis": ^2.0.0
     "@types/node": "*"
     "@types/react": ">= 16.9"
     "@uifabric/icons": ">= 7.3.38"
