@@ -1,12 +1,17 @@
+# Node Artifacts
 node_modules
-src/**/*.js
-lib
-dist
-storybook-static
-.DS_Store
+packages/*/src/**/*.js
+packages/*/lib/
+packages/*/dist/
+packages/*/storybook-static
+
+# Test Output
 coverage/
-*.log
 licenses.txt
+
+# Random
+.DS_Store
+*.log*
 
 # https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
 .yarn/*
