@@ -2,9 +2,12 @@
 	"name": "@essex-js-toolkit/hooks",
 	"version": "1.1.2",
 	"description": "A set of hooks for use with react",
-	"main": "dist/cjs/index.js",
-	"module": "dist/esm/index.js",
-	"typings": "dist/types/index.d.ts",
+	"main": "src/index.ts",
+	"publishConfig": {
+		"main": "dist/cjs/index.js",
+		"module": "dist/esm/index.js",
+		"typings": "dist/types/index.d.ts"
+	},
 	"repository": "https://github.com/microsoft/essex-js-toolkit",
 	"author": "David Tittsworth <datittsw@microsoft.com>",
 	"license": "MIT",
@@ -30,6 +33,10 @@
 		"react-test-renderer": "^16.14.0"
 	},
 	"peerDependencies": {
+		"@types/node": "*",
+		"@types/react": "*",
+		"@types/react-dom": "*",
+		"core-js": "*",
 		"react": ">=16.8.0"
 	}
 }

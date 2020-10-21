@@ -185,7 +185,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.12.1":
+"@babel/core@npm:^7.12.1, @babel/core@npm:^7.12.3":
   version: 7.12.3
   resolution: "@babel/core@npm:7.12.3"
   dependencies:
@@ -2686,6 +2686,10 @@ __metadata:
     react-test-renderer: ^16.14.0
     resize-observer-polyfill: ^1.5.1
   peerDependencies:
+    "@types/node": "*"
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    core-js: "*"
     react: ">=16.8.0"
   languageName: unknown
   linkType: soft
@@ -2713,6 +2717,8 @@ __metadata:
     "@thematic/d3": ">=0.8.0"
     "@thematic/fluent": ">=0.8.0"
     "@thematic/react": ">=0.8.0"
+    "@types/node": "*"
+    core-js: "*"
     lineupjs: ">=3.3.0"
     react: ">=16.8.6"
     react-dom: ">=16.8.6"
@@ -2723,8 +2729,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@essex-js-toolkit/themed-components-stories@workspace:packages/themed-components-stories"
   dependencies:
+    "@babel/core": ^7.12.3
     "@essex-js-toolkit/thematic-lineup": ^1.1.2
     "@essex-js-toolkit/themed-components": ^1.1.2
+    "@essex/scripts": ^11.0.1
+    "@essex/storybook-config": ^11.0.0
     "@fluentui/react": ^7.147.1
     "@storybook/addon-actions": ^6.0.26
     "@storybook/addon-links": ^6.0.26
@@ -2734,11 +2743,15 @@ __metadata:
     "@thematic/core": ^0.9.0
     "@thematic/fluent": ^0.9.0
     "@thematic/react": ^0.9.0
+    "@types/babel__core": ^7
     "@types/form-data": ^2.5.0
+    "@types/node": ^14.14.0
     "@types/react": ^16.9.53
     "@types/react-dom": ^16.9.8
+    "@uifabric/icons": ^7.5.12
     awesome-typescript-loader: ^5.2.1
     babel-loader: ^8.1.0
+    core-js: ^3.6.5
     react: ^16.14.0
     react-dom: ^16.14.0
     regenerator-runtime: ^0.13.7
@@ -2789,8 +2802,10 @@ __metadata:
     "@thematic/d3": ">= 0.8.0"
     "@thematic/fluent": ">= 0.8.0"
     "@thematic/react": ">= 0.8.0"
+    "@types/node": "*"
     "@types/react": ">= 16.9"
     "@uifabric/icons": ">= 7.3.38"
+    core-js: "*"
     react: ">= 16.8.6"
     react-dom: ">= 16.8.6"
   languageName: unknown
@@ -2801,6 +2816,8 @@ __metadata:
   resolution: "@essex-js-toolkit/toolbox@workspace:packages/toolbox"
   dependencies:
     "@essex/scripts": ^11.0.1
+  peerDependencies:
+    core-js: "*"
   languageName: unknown
   linkType: soft
 
@@ -3124,6 +3141,8 @@ __metadata:
   dependencies:
     "@essex/scripts": ^11.0.1
     msal: ^1.4.2
+  peerDependencies:
+    core-js: "*"
   languageName: unknown
   linkType: soft
 
@@ -3227,7 +3246,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/storybook-config@npm:11.0.0":
+"@essex/storybook-config@npm:11.0.0, @essex/storybook-config@npm:^11.0.0":
   version: 11.0.0
   resolution: "@essex/storybook-config@npm:11.0.0"
   dependencies:
@@ -4945,7 +4964,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/babel__core@npm:^7.0.0, @types/babel__core@npm:^7.1.7":
+"@types/babel__core@npm:^7, @types/babel__core@npm:^7.0.0, @types/babel__core@npm:^7.1.7":
   version: 7.1.10
   resolution: "@types/babel__core@npm:7.1.10"
   dependencies:

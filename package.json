@@ -29,7 +29,6 @@
 		"git_is_clean": "essex git-is-clean",
 		"prettify": "essex prettify",
 		"release": "run-s build_all publish_all",
-		"scripts:upgrade": "essex install",
 		"ci": "run-s build_all lint test_all unit_test git_is_clean"
 	},
 	"devDependencies": {
