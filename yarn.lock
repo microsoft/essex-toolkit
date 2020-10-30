@@ -2696,11 +2696,13 @@ __metadata:
     "@thematic/react": ^0.8.0
     "@types/d3-array": ^2.2.0
     "@types/d3-selection": ^2.0.0
+    "@types/prop-types": ^15.7.3
     "@types/react": ^16.9.52
     "@types/react-infinite-scroller": ^1.2.1
     "@types/styled-components": ^5.1.4
     d3-array: ^2.8.0
     d3-selection: ^2.0.0
+    prop-types: ^15.7.2
     react: ^16.13.1
     react-infinite-scroller: ^1.2.4
     styled-components: ^5.2.0
