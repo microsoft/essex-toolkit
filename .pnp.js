@@ -4827,7 +4827,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/$$virtual/@babel-plugin-transform-runtime-virtual-86096df89f/0/cache/@babel-plugin-transform-runtime-npm-7.12.1-f4d6cced94-94d88c1349.zip/node_modules/@babel/plugin-transform-runtime/",
           "packageDependencies": [
             ["@babel/plugin-transform-runtime", "virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#npm:7.12.1"],
-            ["@babel/core", null],
+            ["@babel/core", "npm:7.12.3"],
             ["@babel/helper-module-imports", "npm:7.12.1"],
             ["@babel/helper-plugin-utils", "npm:7.10.4"],
             ["@types/babel__core", null],
@@ -6320,6 +6320,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/hierarchy-browser/",
           "packageDependencies": [
             ["@essex-js-toolkit/hierarchy-browser", "workspace:packages/hierarchy-browser"],
+            ["@babel/core", "npm:7.12.3"],
             ["@babel/plugin-transform-runtime", "virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#npm:7.12.1"],
             ["@essex/scripts", "virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#npm:11.0.1"],
             ["@fluentui/react", "virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#npm:7.149.1"],
