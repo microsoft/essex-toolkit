@@ -1,10 +1,10 @@
 # @essex-js-toolkit/hierarchy-browser
 
-A React component to view hierarchical data realting to graph communities.
+A React component to view hierarchical data relating to graph communities.
 
 ## Example implementations:
 
-Async Loading:
+Asynchronous Loading:
 
 ```jsx
 const communities = [{communityId: "123", size: 20, neighborSize: 30 },{communityId: "457", size: 10, neighborSize: 5 }]
@@ -84,7 +84,7 @@ INeighborCommunityDetail[] // optional neighbor (static) prop for HierarchyBrows
 ```
 
 ```jsx
-ILoadNeighborCommunitiesAsync // optional neighbors (async) prop for HierarchyBrowser
+ILoadNeighborCommunitiesAsync // optional neighbors (asynchronous) prop for HierarchyBrowser
 ```
 
 ```jsx
@@ -113,7 +113,7 @@ interface IEntityDetail {
 ```
 
 ```jsx
-ILoadEntitiesAsync // optional entities (async) prop for HierarchyBrowser
+ILoadEntitiesAsync // optional entities (asynchronous) prop for HierarchyBrowser
 ```
 
 ```jsx
@@ -127,7 +127,7 @@ interface IHierarchyDataResponse {
 }
 ```
 
-#### Async Params
+#### Asynchronous Parameters
 
 ```jsx
 interface ILoadParams {
