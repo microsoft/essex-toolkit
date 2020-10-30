@@ -1,5 +1,5 @@
 releases:
   "@essex-js-toolkit/dev": minor
 
-undecided:
+declined:
   - "@essex-js-toolkit/hierarchy-browser"
