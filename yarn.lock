@@ -231,7 +231,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-annotate-as-pure@npm:^7.10.4":
+"@babel/helper-annotate-as-pure@npm:^7.0.0, @babel/helper-annotate-as-pure@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/helper-annotate-as-pure@npm:7.10.4"
   dependencies:
@@ -1981,6 +1981,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/plugin-transform-runtime@npm:^7.11.5":
+  version: 7.12.1
+  resolution: "@babel/plugin-transform-runtime@npm:7.12.1"
+  dependencies:
+    "@babel/helper-module-imports": ^7.12.1
+    "@babel/helper-plugin-utils": ^7.10.4
+    resolve: ^1.8.1
+    semver: ^5.5.1
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 94d88c1349e1fe66b07a08346e0312788d33f2a266074d1591e32879964c2a3db113c166e698ec77396d616a7787e4501b34be541fa0debd4714718d0dc254a8
+  languageName: node
+  linkType: hard
+
 "@babel/plugin-transform-shorthand-properties@npm:^7.10.4, @babel/plugin-transform-shorthand-properties@npm:^7.8.3":
   version: 7.10.4
   resolution: "@babel/plugin-transform-shorthand-properties@npm:7.10.4"
@@ -2427,7 +2441,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/traverse@npm:^7.12.1":
+"@babel/traverse@npm:^7.12.1, @babel/traverse@npm:^7.4.5":
   version: 7.12.1
   resolution: "@babel/traverse@npm:7.12.1"
   dependencies:
@@ -2538,7 +2552,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/is-prop-valid@npm:0.8.8, @emotion/is-prop-valid@npm:^0.8.6":
+"@emotion/is-prop-valid@npm:0.8.8, @emotion/is-prop-valid@npm:^0.8.6, @emotion/is-prop-valid@npm:^0.8.8":
   version: 0.8.8
   resolution: "@emotion/is-prop-valid@npm:0.8.8"
   dependencies:
@@ -2602,14 +2616,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/stylis@npm:0.8.5":
+"@emotion/stylis@npm:0.8.5, @emotion/stylis@npm:^0.8.4":
   version: 0.8.5
   resolution: "@emotion/stylis@npm:0.8.5"
   checksum: bb43a77f784cce86f7a625519544aab56b8f341117957f7dd15315398780289784bd2ec0ba1bc1b19ac639bdb304a4ed08b1f8e3e4c13e8063b9824e551b3994
   languageName: node
   linkType: hard
 
-"@emotion/unitless@npm:0.7.5":
+"@emotion/unitless@npm:0.7.5, @emotion/unitless@npm:^0.7.4":
   version: 0.7.5
   resolution: "@emotion/unitless@npm:0.7.5"
   checksum: 0be366ef09860037ef08aed0450cb5510f4be25886005e2f120f8e8b7385de6b41ac47df5b9bd55781e5153853e9ed5f49aa517dcbad34cc23bd8afb0201932a
@@ -2668,6 +2682,36 @@ __metadata:
     npm-run-all: ^4.1.5
     ts-jest: ^26.4.1
     typescript: ^4.0.3
+  languageName: unknown
+  linkType: soft
+
+"@essex-js-toolkit/hierarchy-browser@workspace:packages/hierarchy-browser":
+  version: 0.0.0-use.local
+  resolution: "@essex-js-toolkit/hierarchy-browser@workspace:packages/hierarchy-browser"
+  dependencies:
+    "@babel/core": ^7.12.3
+    "@babel/plugin-transform-runtime": ^7.11.5
+    "@essex/scripts": ^11.0.1
+    "@fluentui/react": ^7.146.1
+    "@thematic/core": ^0.8.0
+    "@thematic/fluent": ^0.8.0
+    "@thematic/react": ^0.8.0
+    "@types/d3-array": ^2.2.0
+    "@types/d3-selection": ^2.0.0
+    "@types/prop-types": ^15.7.3
+    "@types/react": ^16.9.52
+    "@types/react-infinite-scroller": ^1.2.1
+    "@types/styled-components": ^5.1.4
+    d3-array: ^2.8.0
+    d3-selection: ^2.0.0
+    prop-types: ^15.7.2
+    react: ^16.13.1
+    react-infinite-scroller: ^1.2.4
+    styled-components: ^5.2.0
+  peerDependencies:
+    "@fluentui/react": ">= 7.146.1"
+    "@types/react": ">= 16.9"
+    react: ">= 16.13"
   languageName: unknown
   linkType: soft
 
@@ -3367,6 +3411,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fluentui/react-focus@npm:^7.16.16":
+  version: 7.16.16
+  resolution: "@fluentui/react-focus@npm:7.16.16"
+  dependencies:
+    "@fluentui/keyboard-key": ^0.2.12
+    "@uifabric/merge-styles": ^7.19.1
+    "@uifabric/set-version": ^7.0.23
+    "@uifabric/styling": ^7.16.16
+    "@uifabric/utilities": ^7.33.2
+    tslib: ^1.10.0
+  peerDependencies:
+    "@types/react": ">=16.8.0 <17.0.0"
+    "@types/react-dom": ">=16.8.0 <17.0.0"
+    react: ">=16.8.0 <17.0.0"
+    react-dom: ">=16.8.0 <17.0.0"
+  checksum: f175879bc8e9ca52d9c98d3aa0cbb29f8bee0198304c801ec4b3593cfae1294dc9b67c180d732a6d04082d93e9854b2c4836615968152909d5da7ffd58984d30
+  languageName: node
+  linkType: hard
+
 "@fluentui/react-window-provider@npm:^0.3.3":
   version: 0.3.3
   resolution: "@fluentui/react-window-provider@npm:0.3.3"
@@ -3379,6 +3442,37 @@ __metadata:
     react: ">=16.8.0 <17.0.0"
     react-dom: ">=16.8.0 <17.0.0"
   checksum: 03f261a66beb0c0b05a1559c8324e7c4817e7945d0d453af2fb6b0fc0f99d04d3be4c871b08537afd1511e47dbc82f8913e7f8096411c03196eaca103b2342bd
+  languageName: node
+  linkType: hard
+
+"@fluentui/react-window-provider@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@fluentui/react-window-provider@npm:1.0.1"
+  dependencies:
+    "@uifabric/set-version": ^7.0.23
+    tslib: ^1.10.0
+  peerDependencies:
+    "@types/react": ">=16.8.0 <17.0.0"
+    "@types/react-dom": ">=16.8.0 <17.0.0"
+    react: ">=16.8.0 <17.0.0"
+    react-dom: ">=16.8.0 <17.0.0"
+  checksum: 0337e700b68b6314b48bc41b5d3f30ebece4e36e4acdb997280776657640f6d468aa7a60f3c561168e08189bfa8a58beb3b485834d241a32bc62ff18d4364e78
+  languageName: node
+  linkType: hard
+
+"@fluentui/react@npm:^7.146.1":
+  version: 7.149.1
+  resolution: "@fluentui/react@npm:7.149.1"
+  dependencies:
+    "@uifabric/set-version": ^7.0.23
+    office-ui-fabric-react: ^7.149.1
+    tslib: ^1.10.0
+  peerDependencies:
+    "@types/react": ">=16.8.0 <17.0.0"
+    "@types/react-dom": ">=16.8.0 <17.0.0"
+    react: ">=16.8.0 <17.0.0"
+    react-dom: ">=16.8.0 <17.0.0"
+  checksum: eff56ba1edc89b3a791d6b25a69e1c5ff29c97c4906430cbf593251b3eb3d004c97131f4e69adc7a95b31fca8b50e264260440a945ff15ab864368f215b8324c
   languageName: node
   linkType: hard
 
@@ -3412,6 +3506,23 @@ __metadata:
     react: ">=16.8.0 <17.0.0"
     react-dom: ">=16.8.0 <17.0.0"
   checksum: b8e143289206079a325bd127c1740a282b71b658e841016a30edb02a78bbfe80397f4d96c1d5989a9cf6fa428816e1844218fa6c6dc0c7b015676966c7fd39dd
+  languageName: node
+  linkType: hard
+
+"@fluentui/theme@npm:^1.5.4":
+  version: 1.5.4
+  resolution: "@fluentui/theme@npm:1.5.4"
+  dependencies:
+    "@uifabric/merge-styles": ^7.19.1
+    "@uifabric/set-version": ^7.0.23
+    "@uifabric/utilities": ^7.33.2
+    tslib: ^1.10.0
+  peerDependencies:
+    "@types/react": ">=16.8.0 <17.0.0"
+    "@types/react-dom": ">=16.8.0 <17.0.0"
+    react: ">=16.8.0 <17.0.0"
+    react-dom: ">=16.8.0 <17.0.0"
+  checksum: 07a7238b275766453573702afce6e674469fa59ea156064525ed4b858d38b592ed9ed814fb0a29c156436f7b5521c50bf024951959597f019a48b6136bcdee47
   languageName: node
   linkType: hard
 
@@ -4888,6 +4999,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@thematic/color@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "@thematic/color@npm:0.8.0"
+  dependencies:
+    "@types/node": ^14.0.13
+    chroma-js: ^2.0.3
+    color-blind: ^0.1.1
+    hsluv: ^0.1.0
+  checksum: 2bea042ae1f1356338a9e3e5d9018e46434ca4ca3a219e60d258c828ec23d2b38a0b3cb170bf7b0cb34958d3b0e62e4326523451f950e625414a19d666466801
+  languageName: node
+  linkType: hard
+
 "@thematic/color@npm:^0.9.0":
   version: 0.9.0
   resolution: "@thematic/color@npm:0.9.0"
@@ -4897,6 +5020,21 @@ __metadata:
     color-blind: ^0.1.1
     hsluv: ^0.1.0
   checksum: ac007606bad9f08cce9930bfc437763f9e914c758739e0093ee7296ff91358a765c349f19bc92bc4afccd7f48cac84bc2b690346921e0c0fa132c3484e44cf12
+  languageName: node
+  linkType: hard
+
+"@thematic/core@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "@thematic/core@npm:0.8.0"
+  dependencies:
+    "@thematic/color": ^0.8.0
+    "@types/d3-scale": ^2.2.0
+    "@types/lodash": ^4.14.156
+    "@types/murmurhash-js": ^1.0.3
+    d3-scale: ^3.0.0
+    lodash: ^4.17.11
+    murmurhash-js: ^1.0.0
+  checksum: 6b191333106c32b1527e2dab75b08fbabc5e22b503695f37ee783987391852a8dfc6a189f42f0bd5e0b9aeab6f34e33bf2da2b9d1cb3f9e1a9fc541960ebbae2
   languageName: node
   linkType: hard
 
@@ -4926,6 +5064,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@thematic/fluent@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "@thematic/fluent@npm:0.8.0"
+  dependencies:
+    "@thematic/color": ^0.8.0
+    "@thematic/core": ^0.8.0
+    "@thematic/react": ^0.8.0
+    "@types/react": ^16.9.38
+  peerDependencies:
+    "@fluentui/react": ">= 7.121.2"
+    react: ">= 16.8.0"
+  checksum: bcee04fff550a7b3330b2233d4017911b075db55142bd1ca6b980b22023f336f27564cdf362fbb2456b871ed97ba16c8de101d43d8fb1b276831e5a3b0248825
+  languageName: node
+  linkType: hard
+
 "@thematic/fluent@npm:^0.9.0":
   version: 0.9.0
   resolution: "@thematic/fluent@npm:0.9.0"
@@ -4938,6 +5091,19 @@ __metadata:
     "@fluentui/react": ">= 7.121.2"
     react: ">= 16.8.0"
   checksum: 434fc33b8c387ba6189edc24bf60c71e57cadc4be8ccf01d5721a1d4a8645d727ab01504c27ba0085ab8a379af504b5a719ea7c9d2e4a3960d341e5e07521986
+  languageName: node
+  linkType: hard
+
+"@thematic/react@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "@thematic/react@npm:0.8.0"
+  dependencies:
+    "@thematic/color": ^0.8.0
+    "@thematic/core": ^0.8.0
+    "@types/react": ^16.9.38
+  peerDependencies:
+    react: ">= 16.13.1"
+  checksum: 62677dccee55415c41064283e65d1d55eeba6baedba5f0f4ab2de6f56cbe5a798a8a5fe8e97d30eff71d43fdcf184f400c26749085e1ca0e827e1470a4094ee4
   languageName: node
   linkType: hard
 
@@ -5246,6 +5412,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/d3-selection@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@types/d3-selection@npm:2.0.0"
+  checksum: b4165592bd9563d81e1ddbbf988a6196addf43065c9f90c1d6384aad9555fdd575477c402a1973d610a8feda7b5218223e452a113f1a8c65670613e2929dcde0
+  languageName: node
+  linkType: hard
+
 "@types/d3-shape@npm:^1":
   version: 1.3.4
   resolution: "@types/d3-shape@npm:1.3.4"
@@ -5454,6 +5627,16 @@ __metadata:
   version: 4.7.8
   resolution: "@types/history@npm:4.7.8"
   checksum: 54020371a412e949d0a329cc325253f16daf5b33e2e485135d39d3b30d3f9a8e323b00ce1162da82387c8ecf0397a8da49ad36ab309f06284326c064092879c7
+  languageName: node
+  linkType: hard
+
+"@types/hoist-non-react-statics@npm:*":
+  version: 3.3.1
+  resolution: "@types/hoist-non-react-statics@npm:3.3.1"
+  dependencies:
+    "@types/react": "*"
+    hoist-non-react-statics: ^3.3.0
+  checksum: 16ab4c45d4920fa378c8be76554b10061247fc04d2c8af11bdb7d520b3967e9c06d7ad5efd9b0f1657fbc4d095f62c6e1325f03b9141eb1ef2c8095b96fd42f8
   languageName: node
   linkType: hard
 
@@ -5754,6 +5937,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-infinite-scroller@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@types/react-infinite-scroller@npm:1.2.1"
+  dependencies:
+    "@types/react": "*"
+  checksum: 2f8d9060eb3336be68608de6a4fe970d1e07790c92180309ff0298a27cc87463d6cc24ad1ea62d5253c7ceb677e33cdfe7b0cfa5dc500642cfcd1064bdbbf858
+  languageName: node
+  linkType: hard
+
+"@types/react-native@npm:*":
+  version: 0.63.30
+  resolution: "@types/react-native@npm:0.63.30"
+  dependencies:
+    "@types/react": "*"
+  checksum: 1725f428db355a5e8c3dae2c4ff8ef8745e336e0bec2f203d21f50423d6baa0d44936548501f53ce43bc85f34776cc8f90fae2b9cef7f0abad707c1bdee35996
+  languageName: node
+  linkType: hard
+
 "@types/react-syntax-highlighter@npm:11.0.4":
   version: 11.0.4
   resolution: "@types/react-syntax-highlighter@npm:11.0.4"
@@ -5812,6 +6013,18 @@ __metadata:
   version: 2.0.0
   resolution: "@types/stack-utils@npm:2.0.0"
   checksum: 662312302e07685c99a1c45c6753eb997b31d2af66e646c5937f62d593a63a111289503d0b06a8d1e6f3922b67fc2ed94889d84653a08861a7fee67b81ce5b92
+  languageName: node
+  linkType: hard
+
+"@types/styled-components@npm:^5.1.4":
+  version: 5.1.4
+  resolution: "@types/styled-components@npm:5.1.4"
+  dependencies:
+    "@types/hoist-non-react-statics": "*"
+    "@types/react": "*"
+    "@types/react-native": "*"
+    csstype: ^3.0.2
+  checksum: 0f458fa8989ccf921200f590680580ab1d69dc198a6db27765974d0d707713ef38f6b2d1facbd8f9a411373cc2200f74def6d2f5b46dd037bc7687654152b2b0
   languageName: node
   linkType: hard
 
@@ -6173,6 +6386,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@uifabric/foundation@npm:^7.9.17":
+  version: 7.9.17
+  resolution: "@uifabric/foundation@npm:7.9.17"
+  dependencies:
+    "@uifabric/merge-styles": ^7.19.1
+    "@uifabric/set-version": ^7.0.23
+    "@uifabric/styling": ^7.16.16
+    "@uifabric/utilities": ^7.33.2
+    tslib: ^1.10.0
+  peerDependencies:
+    "@types/react": ">=16.8.0 <17.0.0"
+    "@types/react-dom": ">=16.8.0 <17.0.0"
+    react: ">=16.8.0 <17.0.0"
+    react-dom: ">=16.8.0 <17.0.0"
+  checksum: 6fbf88e17c957d177b4b0012e4b3ee7a72720b021921e30b97b91eadd12ddd81fa713513b3895f242c741d27482fa81b8a2b87a571acdbc0a344e71f27a26143
+  languageName: node
+  linkType: hard
+
 "@uifabric/icons@npm:^7.5.12":
   version: 7.5.12
   resolution: "@uifabric/icons@npm:7.5.12"
@@ -6181,6 +6412,17 @@ __metadata:
     "@uifabric/styling": ^7.16.13
     tslib: ^1.10.0
   checksum: 67f81be459c4acbb91801e465107ca213a3002c2c579b29c7f8b6c27524624ff7750d30d37ce931620324a9f7a7270a77e919423ea532b697e4cf40af1739542
+  languageName: node
+  linkType: hard
+
+"@uifabric/icons@npm:^7.5.15":
+  version: 7.5.15
+  resolution: "@uifabric/icons@npm:7.5.15"
+  dependencies:
+    "@uifabric/set-version": ^7.0.23
+    "@uifabric/styling": ^7.16.16
+    tslib: ^1.10.0
+  checksum: 52039ce5283f8257c072253cc3136d7c4a4949e72f3d076598df734b32cbcb7c787c0529340fb58af8e01c8e2462167f6d8485fc51d379d287af96d458e1dbb5
   languageName: node
   linkType: hard
 
@@ -6211,6 +6453,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@uifabric/react-hooks@npm:^7.13.9":
+  version: 7.13.9
+  resolution: "@uifabric/react-hooks@npm:7.13.9"
+  dependencies:
+    "@fluentui/react-window-provider": ^1.0.1
+    "@uifabric/set-version": ^7.0.23
+    "@uifabric/utilities": ^7.33.2
+    tslib: ^1.10.0
+  peerDependencies:
+    "@types/react": ">=16.8.0 <17.0.0"
+    "@types/react-dom": ">=16.8.0 <17.0.0"
+    react: ">=16.8.0 <17.0.0"
+    react-dom: ">=16.8.0 <17.0.0"
+  checksum: dafe57372cd9fdcd05410a6e521dcc929d6a08c729c5facc0d9b47cf6e478ef4862fe825a50eecf63edee466500de3f4e40270439729163ca3bf2ade364a3439
+  languageName: node
+  linkType: hard
+
 "@uifabric/set-version@npm:^7.0.23":
   version: 7.0.23
   resolution: "@uifabric/set-version@npm:7.0.23"
@@ -6234,6 +6493,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@uifabric/styling@npm:^7.16.16":
+  version: 7.16.16
+  resolution: "@uifabric/styling@npm:7.16.16"
+  dependencies:
+    "@fluentui/theme": ^1.5.4
+    "@microsoft/load-themed-styles": ^1.10.26
+    "@uifabric/merge-styles": ^7.19.1
+    "@uifabric/set-version": ^7.0.23
+    "@uifabric/utilities": ^7.33.2
+    tslib: ^1.10.0
+  checksum: 80f597ccfb4eb0e230bc2ff4162b67634c678cd75afdfc6816a28e8d2cbaded56a8b0d21bb4ae2ad7c3fad8933886cd83f31f8eee9c68c33803b13b2ff6d7b54
+  languageName: node
+  linkType: hard
+
 "@uifabric/utilities@npm:^7.32.4":
   version: 7.32.4
   resolution: "@uifabric/utilities@npm:7.32.4"
@@ -6249,6 +6522,24 @@ __metadata:
     react: ">=16.8.0 <17.0.0"
     react-dom: ">=16.8.0 <17.0.0"
   checksum: f268d251b097001a3be8f2cf5e1aa55d563258a8af49b01c8b5ffa987e37f99193da1a3531db528d95b24a14acd934c440b436817296f9e1eca8703bbc9a6bd4
+  languageName: node
+  linkType: hard
+
+"@uifabric/utilities@npm:^7.33.2":
+  version: 7.33.2
+  resolution: "@uifabric/utilities@npm:7.33.2"
+  dependencies:
+    "@fluentui/dom-utilities": ^1.1.1
+    "@uifabric/merge-styles": ^7.19.1
+    "@uifabric/set-version": ^7.0.23
+    prop-types: ^15.7.2
+    tslib: ^1.10.0
+  peerDependencies:
+    "@types/react": ">=16.8.0 <17.0.0"
+    "@types/react-dom": ">=16.8.0 <17.0.0"
+    react: ">=16.8.0 <17.0.0"
+    react-dom: ">=16.8.0 <17.0.0"
+  checksum: ef89e85bb030feb05ce2f3d40a8f9bfac7299d65b6287c65280ec27474468c0fdcaa3659016316e55a5318c62cafce2e76533f067d92bdaf54e7ec148f7a70c4
   languageName: node
   linkType: hard
 
@@ -7672,6 +7963,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"babel-plugin-styled-components@npm:>= 1":
+  version: 1.11.1
+  resolution: "babel-plugin-styled-components@npm:1.11.1"
+  dependencies:
+    "@babel/helper-annotate-as-pure": ^7.0.0
+    "@babel/helper-module-imports": ^7.0.0
+    babel-plugin-syntax-jsx: ^6.18.0
+    lodash: ^4.17.11
+  peerDependencies:
+    styled-components: ">= 2"
+  checksum: 4b545bed54127b236a90e746bf0237c98352960ac3c9da75a3186b04f4b75794db9916b6161ae96e4239d25c3bf3d50dd0f6b711a6fbde93e4c9f7d5de39f018
+  languageName: node
+  linkType: hard
+
 "babel-plugin-syntax-jsx@npm:^6.18.0":
   version: 6.18.0
   resolution: "babel-plugin-syntax-jsx@npm:6.18.0"
@@ -8435,6 +8740,13 @@ __metadata:
   version: 6.1.0
   resolution: "camelcase@npm:6.1.0"
   checksum: 3e968d5efba3c08410437c097b6706aa2a3f1ff34c3ee11940cca932397d99e44693a314545e2d00cb36c1c05d8463ca6f3dabb005e9ce2b615edb7ef274b6c3
+  languageName: node
+  linkType: hard
+
+"camelize@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "camelize@npm:1.0.0"
+  checksum: 6891ec64c7f4cf6a6182040d592915dc36770ec9f3e96e4dd03925f93f72aa92fc90b59b314ad3ebce406426955b1b8aded52bbb26e5d96242a724f324c95871
   languageName: node
   linkType: hard
 
@@ -9404,6 +9716,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"css-color-keywords@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "css-color-keywords@npm:1.0.0"
+  checksum: a820d3a6ebb826571e541c4127197ab92bbac652b6d8a875a14faff4e3a2e81b35b61083da60a471c059c1f94bb09f26cd3553aefffa3e571257ac3cd8758ce2
+  languageName: node
+  linkType: hard
+
 "css-loader@npm:^3.5.3":
   version: 3.6.0
   resolution: "css-loader@npm:3.6.0"
@@ -9477,6 +9796,17 @@ __metadata:
     domutils: ^1.7.0
     nth-check: ^1.0.2
   checksum: b534aad04abbd433849d55b93e234b81c1ade4422c638a916fd7163db5a3b07186e92ce43c292d954417c8ce020eb31b8990ed2fb30c9c145c7f2549621e8095
+  languageName: node
+  linkType: hard
+
+"css-to-react-native@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "css-to-react-native@npm:3.0.0"
+  dependencies:
+    camelize: ^1.0.0
+    css-color-keywords: ^1.0.0
+    postcss-value-parser: ^4.0.2
+  checksum: d035e1a126cdec0cc52eba94c2294fae2474fdc9b8c971aa64e883f429791cc121726f7a9f390f9b593432691dd21c615c1a85c248ba5085b576e718fc6f739d
   languageName: node
   linkType: hard
 
@@ -9690,6 +10020,13 @@ __metadata:
   version: 1.4.2
   resolution: "d3-selection@npm:1.4.2"
   checksum: 5b0df1824a0aab04eb9a31ee48f64ce88a6fcf3052c103da4cd7da3171e6464573017c1c7ac20eaf2c2fe7caedf4ad280d61f32e5edcd6a22b6c5a241eeb5b77
+  languageName: node
+  linkType: hard
+
+"d3-selection@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "d3-selection@npm:2.0.0"
+  checksum: 9e6ef7ebf84f1c42bf0ff69c157f3f6f7991be7adc1fe1f56e71c4678a9a0c0143376265fca78edcaf2c69b15fa3dbd034be658ea5f0a81f86e7cd5837fcd05e
   languageName: node
   linkType: hard
 
@@ -12712,7 +13049,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"hoist-non-react-statics@npm:^3.3.0":
+"hoist-non-react-statics@npm:^3.0.0, hoist-non-react-statics@npm:^3.3.0":
   version: 3.3.2
   resolution: "hoist-non-react-statics@npm:3.3.2"
   dependencies:
@@ -16960,6 +17297,32 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"office-ui-fabric-react@npm:^7.149.1":
+  version: 7.149.1
+  resolution: "office-ui-fabric-react@npm:7.149.1"
+  dependencies:
+    "@fluentui/date-time-utilities": ^7.9.0
+    "@fluentui/react-focus": ^7.16.16
+    "@fluentui/react-window-provider": ^1.0.1
+    "@microsoft/load-themed-styles": ^1.10.26
+    "@uifabric/foundation": ^7.9.17
+    "@uifabric/icons": ^7.5.15
+    "@uifabric/merge-styles": ^7.19.1
+    "@uifabric/react-hooks": ^7.13.9
+    "@uifabric/set-version": ^7.0.23
+    "@uifabric/styling": ^7.16.16
+    "@uifabric/utilities": ^7.33.2
+    prop-types: ^15.7.2
+    tslib: ^1.10.0
+  peerDependencies:
+    "@types/react": ">=16.8.0 <17.0.0"
+    "@types/react-dom": ">=16.8.0 <17.0.0"
+    react: ">=16.8.0 <17.0.0"
+    react-dom: ">=16.8.0 <17.0.0"
+  checksum: 43be484049103cba23e25c5ca1006fcba9ee50aec2ad9880a4a319ba2773c300045fab9dc18d778fb37a5e4e7be04ab4608b333a2088dfb4c4f13d410b0dd0cc
+  languageName: node
+  linkType: hard
+
 "on-finished@npm:~2.3.0":
   version: 2.3.0
   resolution: "on-finished@npm:2.3.0"
@@ -17904,7 +18267,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"postcss-value-parser@npm:^4.1.0":
+"postcss-value-parser@npm:^4.0.2, postcss-value-parser@npm:^4.1.0":
   version: 4.1.0
   resolution: "postcss-value-parser@npm:4.1.0"
   checksum: 70831403886859289f650550a38889857022c5bbe264fd5d39cfad5207b3e1d33422edc031c1a922f3ae29d0dff98837a8bf126c840374d2b0079e7d57cf7d71
@@ -18557,6 +18920,17 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-infinite-scroller@npm:^1.2.4":
+  version: 1.2.4
+  resolution: "react-infinite-scroller@npm:1.2.4"
+  dependencies:
+    prop-types: ^15.5.8
+  peerDependencies:
+    react: ^0.14.9 || ^15.3.0 || ^16.0.0
+  checksum: 1bbf35611fd93ae69bbe432279bd3b4c2fbdc69416c0629266a4eb2c817897f11443ac3baaa8d5dc5ac0513fc4d253b7822bcc74b3034a14c2ffb48e5bc853b5
+  languageName: node
+  linkType: hard
+
 "react-input-autosize@npm:^2.2.2":
   version: 2.2.2
   resolution: "react-input-autosize@npm:2.2.2"
@@ -18716,7 +19090,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react@npm:^16.14.0":
+"react@npm:^16.13.1, react@npm:^16.14.0":
   version: 16.14.0
   resolution: "react@npm:16.14.0"
   dependencies:
@@ -19387,7 +19761,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-resolve@^1.18.1:
+"resolve@^1.18.1, resolve@^1.8.1":
   version: 1.18.1
   resolution: "resolve@npm:1.18.1"
   dependencies:
@@ -19406,7 +19780,7 @@ resolve@^1.18.1:
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@^1.18.1#builtin<compat/resolve>":
+"resolve@patch:resolve@^1.18.1#builtin<compat/resolve>, resolve@patch:resolve@^1.8.1#builtin<compat/resolve>":
   version: 1.18.1
   resolution: "resolve@patch:resolve@npm%3A1.18.1#builtin<compat/resolve>::version=1.18.1&hash=3388aa"
   dependencies:
@@ -19779,7 +20153,7 @@ resolve@^1.18.1:
   languageName: node
   linkType: hard
 
-"semver@npm:2 || 3 || 4 || 5, semver@npm:^5.4.1, semver@npm:^5.5.0, semver@npm:^5.6.0":
+"semver@npm:2 || 3 || 4 || 5, semver@npm:^5.4.1, semver@npm:^5.5.0, semver@npm:^5.5.1, semver@npm:^5.6.0":
   version: 5.7.1
   resolution: "semver@npm:5.7.1"
   bin:
@@ -20724,6 +21098,28 @@ resolve@^1.18.1:
   languageName: node
   linkType: hard
 
+"styled-components@npm:^5.2.0":
+  version: 5.2.1
+  resolution: "styled-components@npm:5.2.1"
+  dependencies:
+    "@babel/helper-module-imports": ^7.0.0
+    "@babel/traverse": ^7.4.5
+    "@emotion/is-prop-valid": ^0.8.8
+    "@emotion/stylis": ^0.8.4
+    "@emotion/unitless": ^0.7.4
+    babel-plugin-styled-components: ">= 1"
+    css-to-react-native: ^3.0.0
+    hoist-non-react-statics: ^3.0.0
+    shallowequal: ^1.1.0
+    supports-color: ^5.5.0
+  peerDependencies:
+    react: ">= 16.8.0"
+    react-dom: ">= 16.8.0"
+    react-is: ">= 16.8.0"
+  checksum: c27911be08f2c6212d1f381d154cab5204c63b34d1b9ba56388b19654497a523ff466884fbf8914637c046ae8862387b0fc63f9ead67e1a8ab3a8af70b0d8089
+  languageName: node
+  linkType: hard
+
 "supports-color@npm:^2.0.0":
   version: 2.0.0
   resolution: "supports-color@npm:2.0.0"
@@ -20731,7 +21127,7 @@ resolve@^1.18.1:
   languageName: node
   linkType: hard
 
-"supports-color@npm:^5.3.0":
+"supports-color@npm:^5.3.0, supports-color@npm:^5.5.0":
   version: 5.5.0
   resolution: "supports-color@npm:5.5.0"
   dependencies:
