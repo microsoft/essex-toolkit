@@ -73,4 +73,4 @@ const idClaims = await msalInstance.getIdTokenClaims()
 
 **getAccessToken and getIdTokenClaims**
 
-Both `.getAccessToken` and `.getIdTokenClaims` methods will prompt a user to login if necessary. Before prompting to login, both methods will attempt to load a valid token from cache before attempting to refresh the corresponding token with a refresh token, also loaded from cache. If `MsalInteractor` is unable to load a token from cache or refresh an existing token then it will prompt the user to login. Since both token getters prompt the use to login if necessary, the flow of manually logging in with `.login` is optional.
+Both `.getAccessToken` and `.getIdTokenClaims` methods will prompt a user to login if necessary. Before prompting to login, both methods will attempt to load a valid token from cache before attempting to refresh the corresponding token with a refresh token, also loaded from cache. If `MsalInteractor` is unable to load a token from cache or refresh an existing token then it will prompt the user to login. Since both token getters prompt the user to login if necessary, the flow of manually logging in with `.login` is optional.
