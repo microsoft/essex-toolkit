@@ -11,8 +11,12 @@ export interface IEmptyEnityList {
 	entities: IEntityDetail[]
 	isLoading: boolean
 }
-const EmptyEntityList: React.FC<IEmptyEnityList> = memo(
-	({ filterProps, entities, isLoading }) => {
+export const EmptyEntityList: React.FC<IEmptyEnityList> = memo(
+	function EmptyEntityList({
+		filterProps,
+		entities,
+		isLoading,
+	}: IEmptyEnityList) {
 		return (
 			<div>
 				{filterProps.state && entities.length === 0 && !isLoading ? (
@@ -25,6 +29,3 @@ const EmptyEntityList: React.FC<IEmptyEnityList> = memo(
 		)
 	},
 )
-
-EmptyEntityList.displayName = 'EmptyEntityList'
-export default EmptyEntityList

@@ -16,7 +16,11 @@ export interface ICommunityTableProps {
 }
 
 export const CommunityTable: React.FC<ICommunityTableProps> = memo(
-	({ entities, minimize, communityId }) => {
+	function CommunityTable({
+		entities,
+		minimize,
+		communityId,
+	}: ICommunityTableProps) {
 		const attrKeys: string[] = useMemo(() => {
 			if (minimize || !entities[0].attrs) {
 				return []

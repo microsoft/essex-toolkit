@@ -26,7 +26,7 @@ const loadNeighborCommunitiesAsync = useCallback(async (params)=>{
 />
 ```
 
-Static Loading:
+Synchronous Loading:
 
 ```jsx
 const communities = [{communityId: "123", size: 20, entityIds: ["1", "2"], neighborSize: 1 },{communityId: "457", size: 10, entityIds: ["1", "4", "9"], neighborSize: 2 }]
@@ -64,7 +64,7 @@ type EntityId = string
 type CommunityId = string
 interface ICommunityDetail {
 	communityId: CommunityId
-	entityIds?: EntityId[] // only needed if static
+	entityIds?: EntityId[] // only needed if synchronous
 	size: number // total number of entities
 	neighborSize?: number // total number of neigbor communities
 }
@@ -73,7 +73,7 @@ interface ICommunityDetail {
 #### Neighbors
 
 ```jsx
-INeighborCommunityDetail[] // optional neighbor (static) prop for HierarchyBrowser
+INeighborCommunityDetail[] // optional neighbor (synchronous) prop for HierarchyBrowser
 ```
 
 ```jsx
@@ -101,7 +101,7 @@ interface IHierarchyNeighborResponse {
 #### Entities
 
 ```jsx
-IEntityDetail[] // optional entities (static) prop for HierarchyBrowser
+IEntityDetail[] // optional entities (synchronous) prop for HierarchyBrowser
 ```
 
 ```jsx

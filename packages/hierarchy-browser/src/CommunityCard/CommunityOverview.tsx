@@ -32,7 +32,7 @@ export interface ICommunityOverviewProps {
 const DEFAULT_MAGBAR_WIDTH = 120
 const SPINNER_STYLE = { marginLeft: 17 }
 export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
-	({
+	function CommunityOverview({
 		community,
 		sizePercent,
 		incrementLevel,
@@ -40,7 +40,7 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 		filterProps,
 		getEntityCallback,
 		level,
-	}) => {
+	}: ICommunityOverviewProps) {
 		const levelLabel = useCommunityLevelText(level, incrementLevel)
 		const communityText = useCommunityText(community)
 		const style = useThemesStyle()
@@ -63,7 +63,7 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 		return (
 			<FlexyContainer onClick={onToggleOpen} style={style}>
 				<Grid>
-					<div style={{ marginLeft: paddingLeft, gridRow: 1, gridColumn: 1 }}>
+					<GridItem1>
 						<div>
 							<Text variant={headerLabel}>
 								<b>{communityText}</b>
@@ -72,20 +72,20 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 						<div>
 							<Text variant={subHeaderLabel}>{levelLabel}</Text>
 						</div>
-					</div>
+					</GridItem1>
 					{community.neighborSize && community.neighborSize > 0 ? (
-						<div style={{ gridRow: 1, gridColumn: 2, justifySelf: 'center' }}>
+						<GridItem2>
 							<TooltipHost content="Number of neighboring (connected) communities.  Members of neighboring communities may be related, but are less tightly connected that those within the community.">
 								<div>
 									<Text
 										variant={subHeaderLabel}
 									>{`Neighbors: ${community.neighborSize}`}</Text>
 								</div>
-								<div style={{ visibility: 'hidden', height: 10 }}></div>
+								<HeightSpacer />
 							</TooltipHost>
-						</div>
+						</GridItem2>
 					) : null}
-					<div style={{ gridRow: 1, gridColumn: 3, justifySelf: 'end' }}>
+					<GridItem3>
 						<FlexySubContainer>
 							{community.size ? (
 								<div>
@@ -113,9 +113,7 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 							</TooltipHost>
 							<TooltipHost content="Download community as .csv file.">
 								{downloadInProgress ? (
-									<div>
-										<Spinner label="" style={SPINNER_STYLE} />
-									</div>
+									<Spinner label="" style={SPINNER_STYLE} />
 								) : (
 									<IconButton
 										style={buttonStyle}
@@ -125,13 +123,12 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 								)}
 							</TooltipHost>
 						</FlexySubContainer>
-					</div>
+					</GridItem3>
 				</Grid>
 			</FlexyContainer>
 		)
 	},
 )
-CommunityOverview.displayName = 'CommunityOverview'
 
 const FlexySubContainer = styled.div`
 	display: flex;
@@ -151,4 +148,24 @@ const Grid = styled.div`
 	grid-column-gap: 5;
 	grid-row-gap: 1;
 	width: 100%;
+`
+
+const GridItem1 = styled.div`
+	margin-left: ${paddingLeft};
+	grid-row: 1;
+	grid-column: 1;
+`
+const GridItem2 = styled.div`
+	grid-row: 1;
+	grid-column: 2;
+	justify-self: center;
+`
+const HeightSpacer = styled.div`
+	visibility: hidden;
+	height: 10px;
+`
+const GridItem3 = styled.div`
+	grid-row: 1;
+	grid-column: 3;
+	justify-self: end;
 `

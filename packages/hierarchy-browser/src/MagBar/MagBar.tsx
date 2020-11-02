@@ -25,7 +25,7 @@ export const MagBar: React.FC<IMagBarProps> = memo(function MagBar({
 	percent,
 	width = 100,
 	height = 10,
-}) {
+}: IMagBarProps) {
 	const theme = useThematic()
 	const ref = useRef(null)
 

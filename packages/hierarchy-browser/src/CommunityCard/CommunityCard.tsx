@@ -6,7 +6,7 @@ import { Spinner } from '@fluentui/react'
 import React, { memo, useLayoutEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { ICommunityDetail } from '..'
-import EmptyEntityList from '../EntityItem/EmptyEntityList'
+import { EmptyEntityList } from '../EntityItem/EmptyEntityList'
 import CommunityEdgeList from '../NeighborList/CommunityEdgeList'
 import { ScrollArea } from '../ScollArea'
 import { CommunityDataProvider } from '../common/dataProviders'
@@ -31,8 +31,8 @@ export interface ICommunityCardProps {
 
 const ENTITY_LOADER_MSG = 'Fetching entity data...'
 
-const CommunityCard: React.FC<ICommunityCardProps> = memo(
-	({
+export const CommunityCard: React.FC<ICommunityCardProps> = memo(
+	function CommunityCard({
 		isOpen: isOpenProp,
 		community,
 		maxSize,
@@ -40,7 +40,7 @@ const CommunityCard: React.FC<ICommunityCardProps> = memo(
 		level,
 		incrementLevel,
 		hierachyDataProvider,
-	}) => {
+	}: ICommunityCardProps) {
 		const [dataProvider] = useState<CommunityDataProvider | undefined>(
 			() => new CommunityDataProvider(community, hierachyDataProvider, level),
 		)
@@ -153,9 +153,6 @@ const CommunityCard: React.FC<ICommunityCardProps> = memo(
 		)
 	},
 )
-CommunityCard.displayName = 'CommunityCard'
-
-export default CommunityCard
 
 const Flex = styled.div`
 	display: flex;

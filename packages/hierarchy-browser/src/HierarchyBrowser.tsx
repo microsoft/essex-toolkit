@@ -4,7 +4,7 @@
  */
 import React, { memo, useMemo, useState } from 'react'
 import styled from 'styled-components'
-import CommunityCard from './CommunityCard/CommunityCard'
+import { CommunityCard } from './CommunityCard/CommunityCard'
 import { HierarchyDataProvider } from './common/dataProviders/HierachyDataProvider'
 import {
 	useCommunityLevelCalculator,
@@ -24,40 +24,41 @@ export interface IHierarchyBrowserProps {
 	neighbors?: INeighborCommunityDetail[] | ILoadNeighborCommunitiesAsync
 }
 
-export const HierarchyBrowser: React.FC<IHierarchyBrowserProps> = memo(
-	({ communities, entities, neighbors }) => {
-		const [hierachyDataProvider] = useState<HierarchyDataProvider | undefined>(
-			() => new HierarchyDataProvider(communities, entities, neighbors),
-		)
-		const [minLevel, maxLevel] = useCommunityLevelCalculator(communities)
-		const maxSize = useCommunitySizeCalculator(communities)
+export const HierarchyBrowser = memo(function HierarchyBrowser({
+	communities,
+	entities,
+	neighbors,
+}: IHierarchyBrowserProps) {
+	const [hierachyDataProvider] = useState<HierarchyDataProvider | undefined>(
+		() => new HierarchyDataProvider(communities, entities, neighbors),
+	)
+	const [minLevel, maxLevel] = useCommunityLevelCalculator(communities)
+	const maxSize = useCommunitySizeCalculator(communities)
 
-		const children = useMemo(
-			() =>
-				hierachyDataProvider &&
-				communities.map((c, index) => (
-					<CommunityCard
-						community={c}
-						key={`_card_${index}_${c.communityId}`}
-						incrementLevel={minLevel === 0}
-						isOpen={index === 0}
-						maxSize={maxSize}
-						maxLevel={maxLevel}
-						hierachyDataProvider={hierachyDataProvider}
-						level={maxLevel - index}
-					/>
-				)),
-			[communities, maxLevel, maxSize, minLevel, hierachyDataProvider],
-		)
+	const children = useMemo(
+		() =>
+			hierachyDataProvider &&
+			communities.map((c, index) => (
+				<CommunityCard
+					community={c}
+					key={`_card_${index}_${c.communityId}`}
+					incrementLevel={minLevel === 0}
+					isOpen={index === 0}
+					maxSize={maxSize}
+					maxLevel={maxLevel}
+					hierachyDataProvider={hierachyDataProvider}
+					level={maxLevel - index}
+				/>
+			)),
+		[communities, maxLevel, maxSize, minLevel, hierachyDataProvider],
+	)
 
-		return (
-			<div>
-				<CardContainer>{children}</CardContainer>
-			</div>
-		)
-	},
-)
-HierarchyBrowser.displayName = 'HierarchyBrowser'
+	return (
+		<div>
+			<CardContainer>{children}</CardContainer>
+		</div>
+	)
+})
 
 const CardContainer = styled.div`
 	margin: 10px 10px 10px 10px;
