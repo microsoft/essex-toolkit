@@ -24,22 +24,24 @@ export interface MsalInteractorLoginOptions {
 }
 
 export class MsalInteractor {
-	private static _instance: MsalInteractor | null
-	private static _options: MsalInteractorOptions | null
-	private _msalConfig: Configuration
-	private _oidcScopes: string[]
-	private _msalInstance: IPublicClientApplication
+	private static _instance: MsalInteractor | null = null
+	private static _options: MsalInteractorOptions | null = null
 	private _accountInfo: AccountInfo | null = null
+	private _msalInstance: IPublicClientApplication
 	public isAuthenticated: () => Promise<boolean>
 
 	/**
 	 * Singleton. Use MsalInteractor.configure(options)
 	 * and MsalInteractor.getInstance()
 	 */
-	private constructor({ msalConfig, oidcScopes }: MsalInteractorOptions) {
-		this._msalConfig = msalConfig
-		this._oidcScopes = oidcScopes
-		this._msalInstance = new PublicClientApplication(this._msalConfig)
+	private constructor() {
+		if (!MsalInteractor._options) {
+			throw new TypeError(
+				`Cannot instantiate MsalInteractor without configuration options. Call configure() before getInstance()`,
+			)
+		}
+		const { msalConfig } = MsalInteractor._options
+		this._msalInstance = new PublicClientApplication(msalConfig)
 
 		// On page load/instantiation, check if responding to redirect auth flow
 		const pageLoadHandler = this._msalInstance
@@ -58,13 +60,7 @@ export class MsalInteractor {
 			return MsalInteractor._instance
 		}
 
-		if (!MsalInteractor._options) {
-			throw new TypeError(
-				`Cannot instantiate MsalInteractor without configuration options. Call configure() before getInstance()`,
-			)
-		}
-
-		MsalInteractor._instance = new MsalInteractor(MsalInteractor._options)
+		MsalInteractor._instance = new MsalInteractor()
 		return MsalInteractor._instance
 	}
 
@@ -90,7 +86,7 @@ export class MsalInteractor {
 		if (usePopup) {
 			const authResult = this._msalInstance
 				.loginPopup({
-					scopes: this._oidcScopes,
+					scopes: MsalInteractor._options!.oidcScopes,
 				})
 				.then(this._handleAuthResponse)
 
@@ -98,7 +94,7 @@ export class MsalInteractor {
 			return authResult
 		} else {
 			return this._msalInstance
-				.loginRedirect({ scopes: this._oidcScopes })
+				.loginRedirect({ scopes: MsalInteractor._options!.oidcScopes })
 				.then(r => null)
 		}
 	}
@@ -218,7 +214,7 @@ export class MsalInteractor {
 		if (this._accountInfo) {
 			try {
 				const authResult = await this._msalInstance.ssoSilent({
-					scopes: this._oidcScopes,
+					scopes: MsalInteractor._options!.oidcScopes,
 					loginHint: this._accountInfo.username,
 				})
 				return authResult
