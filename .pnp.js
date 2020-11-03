@@ -203,6 +203,26 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["@azure/msal-browser", [
+        ["npm:2.5.1", {
+          "packageLocation": "./.yarn/cache/@azure-msal-browser-npm-2.5.1-630404e299-04583f2fa3.zip/node_modules/@azure/msal-browser/",
+          "packageDependencies": [
+            ["@azure/msal-browser", "npm:2.5.1"],
+            ["@azure/msal-common", "npm:1.6.3"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@azure/msal-common", [
+        ["npm:1.6.3", {
+          "packageLocation": "./.yarn/cache/@azure-msal-common-npm-1.6.3-287661a726-32cab47e45.zip/node_modules/@azure/msal-common/",
+          "packageDependencies": [
+            ["@azure/msal-common", "npm:1.6.3"],
+            ["debug", "virtual:55a84facd72074e953826b351ed20515903931a8f9c0395fcae97bf432227038269c316d17b1fb33558ff269580e9b378d5f6b5e41a2f9b2c38d9b1dab1e71e8#npm:4.2.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["@azure/storage-blob", [
         ["npm:12.2.1", {
           "packageLocation": "./.yarn/cache/@azure-storage-blob-npm-12.2.1-f3bcceb4aa-4a75fe365f.zip/node_modules/@azure/storage-blob/",
@@ -7266,8 +7286,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/msal-interactor/",
           "packageDependencies": [
             ["@essex/msal-interactor", "workspace:packages/msal-interactor"],
-            ["@essex/scripts", "virtual:d4672f202e90fedf196bed51e0c92e5b48305b79ca20a5d41f9040d047f907cbb97324c209f609eeeec220544eaed9873486bedb589c931db7cea2bdeedc2b0f#npm:11.0.1"],
-            ["msal", "npm:1.4.2"]
+            ["@azure/msal-browser", "npm:2.5.1"],
+            ["@essex/scripts", "virtual:d4672f202e90fedf196bed51e0c92e5b48305b79ca20a5d41f9040d047f907cbb97324c209f609eeeec220544eaed9873486bedb589c931db7cea2bdeedc2b0f#npm:11.0.1"]
           ],
           "linkType": "SOFT",
         }]
@@ -25532,16 +25552,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/ms-npm-2.1.2-ec0c1512ff-9b65fb709b.zip/node_modules/ms/",
           "packageDependencies": [
             ["ms", "npm:2.1.2"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["msal", [
-        ["npm:1.4.2", {
-          "packageLocation": "./.yarn/cache/msal-npm-1.4.2-05b2e34206-5986bb97d3.zip/node_modules/msal/",
-          "packageDependencies": [
-            ["msal", "npm:1.4.2"],
-            ["tslib", "npm:1.14.1"]
           ],
           "linkType": "HARD",
         }]
