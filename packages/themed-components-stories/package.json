@@ -1,7 +1,7 @@
 {
 	"name": "@essex-js-toolkit/themed-components-stories",
 	"private": true,
-	"version": "1.1.2",
+	"version": "1.1.3",
 	"description": "A set of visual components that include built-in thematic",
 	"repository": "https://github.com/microsoft/essex-js-toolkit",
 	"author": "Nathan Evans <naevans@microsoft.com>",
@@ -14,8 +14,8 @@
 		"build": "yarn build:storybook"
 	},
 	"dependencies": {
-		"@essex-js-toolkit/thematic-lineup": "^1.1.2",
-		"@essex-js-toolkit/themed-components": "^1.1.2",
+		"@essex-js-toolkit/thematic-lineup": "^1.1.3",
+		"@essex-js-toolkit/themed-components": "^1.1.3",
 		"@fluentui/react": "^7.147.1",
 		"@thematic/core": "^0.9.0",
 		"@thematic/fluent": "^0.9.0",

@@ -2733,11 +2733,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex-js-toolkit/hooks@^1.1.2, @essex-js-toolkit/hooks@workspace:packages/hooks":
+"@essex-js-toolkit/hooks@^1.1.3, @essex-js-toolkit/hooks@workspace:packages/hooks":
   version: 0.0.0-use.local
   resolution: "@essex-js-toolkit/hooks@workspace:packages/hooks"
   dependencies:
-    "@essex-js-toolkit/toolbox": ^1.1.2
+    "@essex-js-toolkit/toolbox": ^1.1.3
     "@essex/scripts": ^11.0.1
     "@testing-library/react": ^11.1.0
     "@types/jest": ^26.0.14
@@ -2758,7 +2758,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex-js-toolkit/thematic-lineup@^1.1.2, @essex-js-toolkit/thematic-lineup@workspace:packages/thematic-lineup":
+"@essex-js-toolkit/thematic-lineup@^1.1.3, @essex-js-toolkit/thematic-lineup@workspace:packages/thematic-lineup":
   version: 0.0.0-use.local
   resolution: "@essex-js-toolkit/thematic-lineup@workspace:packages/thematic-lineup"
   dependencies:
@@ -2794,8 +2794,8 @@ __metadata:
   resolution: "@essex-js-toolkit/themed-components-stories@workspace:packages/themed-components-stories"
   dependencies:
     "@babel/core": ^7.12.3
-    "@essex-js-toolkit/thematic-lineup": ^1.1.2
-    "@essex-js-toolkit/themed-components": ^1.1.2
+    "@essex-js-toolkit/thematic-lineup": ^1.1.3
+    "@essex-js-toolkit/themed-components": ^1.1.3
     "@essex/scripts": ^11.0.1
     "@essex/storybook-config": ^11.0.0
     "@fluentui/react": ^7.147.1
@@ -2823,12 +2823,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex-js-toolkit/themed-components@^1.1.2, @essex-js-toolkit/themed-components@workspace:packages/themed-components":
+"@essex-js-toolkit/themed-components@^1.1.3, @essex-js-toolkit/themed-components@workspace:packages/themed-components":
   version: 0.0.0-use.local
   resolution: "@essex-js-toolkit/themed-components@workspace:packages/themed-components"
   dependencies:
-    "@essex-js-toolkit/hooks": ^1.1.2
-    "@essex-js-toolkit/toolbox": ^1.1.2
+    "@essex-js-toolkit/hooks": ^1.1.3
+    "@essex-js-toolkit/toolbox": ^1.1.3
     "@essex/scripts": ^11.0.1
     "@fluentui/react": ^7.147.1
     "@fluentui/theme": ^1.5.1
@@ -2877,7 +2877,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex-js-toolkit/toolbox@^1.1.2, @essex-js-toolkit/toolbox@workspace:packages/toolbox":
+"@essex-js-toolkit/toolbox@^1.1.3, @essex-js-toolkit/toolbox@workspace:packages/toolbox":
   version: 0.0.0-use.local
   resolution: "@essex-js-toolkit/toolbox@workspace:packages/toolbox"
   dependencies:
