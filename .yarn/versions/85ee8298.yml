@@ -1,5 +1,0 @@
-releases:
-  "@essex/msal-interactor": major
-
-declined:
-  - "@essex-js-toolkit/dev"
