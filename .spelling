@@ -62,3 +62,6 @@ Lex
 destroyable
 .webpack.config.js
 VIS2019.
+msal-interactor
+msal-browser
+OpenID

@@ -108,6 +108,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@azure/msal-browser@npm:^2.5.1":
+  version: 2.5.1
+  resolution: "@azure/msal-browser@npm:2.5.1"
+  dependencies:
+    "@azure/msal-common": ^1.6.3
+  checksum: 04583f2fa35e325b54b3e7febf70023274da5305901193c782cb2e5c35522c3c041f18c00aaed8e6bf894b19ba054baa868fc20446cdf08bff7136dfa84792d0
+  languageName: node
+  linkType: hard
+
+"@azure/msal-common@npm:^1.6.3":
+  version: 1.6.3
+  resolution: "@azure/msal-common@npm:1.6.3"
+  dependencies:
+    debug: ^4.1.1
+  checksum: 32cab47e451277ec84b2d97b22d271aae5cc9ca30eeef9c53f3d69953d293f2a398275bb42e30d4bfc940812d632d70b80709dff9d4b4e39579caae06073705b
+  languageName: node
+  linkType: hard
+
 "@azure/storage-blob@npm:^12.2.1":
   version: 12.2.1
   resolution: "@azure/storage-blob@npm:12.2.1"
@@ -3187,10 +3205,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@essex/msal-interactor@workspace:packages/msal-interactor"
   dependencies:
+    "@azure/msal-browser": ^2.5.1
     "@essex/scripts": ^11.0.1
-    msal: ^1.4.2
-  peerDependencies:
-    core-js: "*"
   languageName: unknown
   linkType: soft
 
@@ -16651,15 +16667,6 @@ fsevents@^1.2.7:
   version: 2.1.2
   resolution: "ms@npm:2.1.2"
   checksum: 9b65fb709bc30c0c07289dcbdb61ca032acbb9ea5698b55fa62e2cebb04c5953f1876a1f3f7f4bc2e91d4bf4d86003f3e207c3bc6ee2f716f99827e62389cd0e
-  languageName: node
-  linkType: hard
-
-"msal@npm:^1.4.2":
-  version: 1.4.2
-  resolution: "msal@npm:1.4.2"
-  dependencies:
-    tslib: ^1.9.3
-  checksum: 5986bb97d3e991fcad90df0f1917361bcb6f033579a04864e94f62b73269dd2141622787fae5b7b6606b6576b007e8391a8df10526df0acee0a7e72ea6e2c270
   languageName: node
   linkType: hard
 
