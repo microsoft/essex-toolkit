@@ -5,8 +5,8 @@ A wrapper around [@azure/msal-browser](https://www.npmjs.com/package/@azure/msal
 ## Usage
 
 ```js
-// 1. Configure once
-MsalInteractor.configure({
+// 1. Instantiate once per application
+const msalInteractorInstance = new MsalInteractor({
   msalConfig: auth: {
     clientId: 'AAD_CLIENT_ID',
     authority: 'https://login.microsoftonline.com/<TENANT_ID>',
@@ -28,34 +28,31 @@ MsalInteractor.configure({
   ],
 })
 
-// 2. Get singleton instance anywhere with getInstance
-const msalInstance = MsalInteractor.getInstance()
-
-// 3.a Manually authenticate using redirect flow.
-const isAuthenticated = await msalInstance.isAuthenticated()
+// 2.a Manually authenticate using redirect flow.
+const isAuthenticated = await msalInteractorInstance.isAuthenticated()
 if (!isAuthenticated) {
   // redirect to login page/
   // upon returning, isAuthenticated === true
-  await msalInstance.login()
+  await msalInteractorInstance.login()
 }
 
-// 3.b Or manually authenticate using a popup
-const isAuthenticated = await msalInstance.isAuthenticated()
+// 2.b Or manually authenticate using a popup
+const isAuthenticated = await msalInteractorInstance.isAuthenticated()
 if(!isAuthenticated) {
   // authResult is instance of msal.AuthenticationResult
   // https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#response
-  const authResult = await msalInstance.login({usePopup: true})
+  const authResult = await msalInteractorInstance.login({usePopup: true})
 }
 
-// 4. Request access token.
+// 3. Request access token.
 // Scopes should be a subset of scopes listed/granted in the
 // API Permissions section of the AAD App Registration.
 // Scopes must all belong to a single domain/API. Cannot request
 // an access token that spans APIs. Must request an access token per
 // API
-const accessToken = await msalInstance.getAccessToken(["SCOPES"])
+const accessToken = await msalInteractorInstance.getAccessToken(["SCOPES"])
 
-// 5. Use accessToken
+// 4. Use accessToken
 const results = await fetch('<API>/endpoint', {
   headers: {
     Authorization: `Bearer ${accessToken}`
@@ -63,7 +60,7 @@ const results = await fetch('<API>/endpoint', {
 }).then(results => results.json())
 
 // User claims
-const idClaims = await msalInstance.getIdTokenClaims()
+const idClaims = await msalInteractorInstance.getIdTokenClaims()
 ```
 
 **configure**:
@@ -73,4 +70,4 @@ const idClaims = await msalInstance.getIdTokenClaims()
 
 **getAccessToken and getIdTokenClaims**
 
-Both `.getAccessToken` and `.getIdTokenClaims` methods will prompt a user to login if necessary. Before prompting to login, both methods will attempt to load a valid token from cache before attempting to refresh the corresponding token with a refresh token, also loaded from cache. If `MsalInteractor` is unable to load a token from cache or refresh an existing token then it will prompt the user to login. Since both token getters prompt the user to login if necessary, the flow of manually logging in with `.login` is optional.
+Both `.getAccessToken` and `.getIdTokenClaims` methods will prompt the user to login if necessary. Before prompting to login, both methods will attempt to load a valid token from cache before attempting to refresh the corresponding token with a refresh token, also loaded from cache. If `MsalInteractor` is unable to load a token from cache or refresh an existing token then it will prompt the user to login. Since both access and id token getters prompt the user to login if necessary, the flow of manually logging in with `.login` is optional.
