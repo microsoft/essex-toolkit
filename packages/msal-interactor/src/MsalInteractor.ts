@@ -23,6 +23,9 @@ export interface MsalInteractorLoginOptions {
 	usePopup?: boolean
 }
 
+/**
+ * Instantiate once per application
+ */
 export class MsalInteractor {
 	private _msalConfig: Configuration
 	private _oidcScopes: string[]
@@ -116,7 +119,7 @@ export class MsalInteractor {
 	 *
 	 * Attempt to silently retrieve access token by
 	 * checking token cache first. Fallback to
-	 * interaction if silent call fails.
+	 * popup interaction if silent call fails.
 	 */
 	public getAccessToken = async (scopes: string[]): Promise<string> => {
 		// Silently load auth session or prompt for login.
@@ -175,7 +178,7 @@ export class MsalInteractor {
 	 * On page load, try to load an active logged in account.
 	 * If there is more than 1 logged in account than
 	 * the user will need to go through an auth flow to
-	 * manually select which account to use.
+	 * manually select the account to use.
 	 */
 	private _selectAccount = () => {
 		const currentAccounts = this._msalInstance.getAllAccounts()

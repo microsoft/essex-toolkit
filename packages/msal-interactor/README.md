@@ -68,6 +68,6 @@ const idClaims = await msalInteractorInstance.getIdTokenClaims()
 - **msalConfig**: Valid [msal-browser configuration object](https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/configuration.md).
 - **oidcScopes**: [OpenID Scopes](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent?WT.mc_id=Portal-Microsoft_AAD_RegisteredApps#openid-connect-scopes) to ask the user to consent to upfront.
 
-**getAccessToken and getIdTokenClaims**
+**`getAccessToken` and `getIdTokenClaims`**
 
-Both `.getAccessToken` and `.getIdTokenClaims` methods will prompt the user to login if necessary. Before prompting to login, both methods will attempt to load a valid token from cache before attempting to refresh the corresponding token with a refresh token, also loaded from cache. If `MsalInteractor` is unable to load a token from cache or refresh an existing token then it will prompt the user to login. Since both access and id token getters prompt the user to login if necessary, the flow of manually logging in with `.login` is optional.
+Both `.getAccessToken` and `.getIdTokenClaims` methods will prompt the user to login if necessary. Before prompting to login, both methods will attempt to load a valid token from cache before attempting to refresh the corresponding token with a refresh token, also loaded from cache. If `MsalInteractor` is unable to load a token from cache or refresh an existing token then it will prompt the user to login. Since both access and id token methods prompt the user to login if necessary, the flow of manually logging in with `.login` is optional.
