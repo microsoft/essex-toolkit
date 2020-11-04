@@ -19,6 +19,11 @@
 		"clean": "essex clean",
 		"watch": "essex watch"
 	},
+	"browserslist": [
+		"last 2 versions",
+		"not IE 11",
+		"not dead"
+	],
 	"devDependencies": {
 		"@essex/scripts": "^11.0.1"
 	},
