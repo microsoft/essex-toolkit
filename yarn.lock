@@ -3207,6 +3207,10 @@ __metadata:
   dependencies:
     "@azure/msal-browser": ^2.5.1
     "@essex/scripts": ^11.0.1
+    "@types/debug": ^4
+    debug: ^4.2.0
+  peerDependencies:
+    "@azure/msal-browser": "> 2"
   languageName: unknown
   linkType: soft
 
@@ -5530,7 +5534,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/debug@npm:^4.1.5":
+"@types/debug@npm:^4, @types/debug@npm:^4.1.5":
   version: 4.1.5
   resolution: "@types/debug@npm:4.1.5"
   checksum: 416ad24bc589be0fb8c78bea972aa7d4ffdf6b136239701b1792674463b2dbf8c6707f6055ec484f79ec1f2b528ffef90c87e55df7e4a0f458184cad5bf0cfc8
