@@ -7287,7 +7287,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@essex/msal-interactor", "workspace:packages/msal-interactor"],
             ["@azure/msal-browser", "npm:2.5.1"],
-            ["@essex/scripts", "virtual:d4672f202e90fedf196bed51e0c92e5b48305b79ca20a5d41f9040d047f907cbb97324c209f609eeeec220544eaed9873486bedb589c931db7cea2bdeedc2b0f#npm:11.0.1"]
+            ["@essex/scripts", "virtual:d4672f202e90fedf196bed51e0c92e5b48305b79ca20a5d41f9040d047f907cbb97324c209f609eeeec220544eaed9873486bedb589c931db7cea2bdeedc2b0f#npm:11.0.1"],
+            ["@types/debug", "npm:4.1.5"],
+            ["debug", "virtual:d3f21813ce4c0f7c9141f6873ea20c73d3f48c377d7c93908068a3fce712c7fd18eeeb900c898acc9c9434cce2d254d5494604e8181fa9e69a225bd7c32a4c02#npm:4.3.0"]
           ],
           "linkType": "SOFT",
         }]
