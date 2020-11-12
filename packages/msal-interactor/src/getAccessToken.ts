@@ -3,6 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { IPublicClientApplication, AccountInfo } from '@azure/msal-browser'
+import debug from 'debug'
+
+const log = debug('essex:msal-interactor')
 
 /**
  * Retrieves an access token for the currently logged in user
@@ -21,12 +24,12 @@ export function getAccessToken(
 		})
 		.then(res => res.accessToken)
 		.catch(err => {
-			console.error('error fetching api token', err)
+			log('error in acquireTokenSilent', err)
 			return instance
 				.acquireTokenPopup({ scopes })
 				.then(res => res.accessToken)
 				.catch(err => {
-					console.error('error fetching token', err)
+					log('error in acquireTokenPopup', err)
 					throw err
 				})
 		})
