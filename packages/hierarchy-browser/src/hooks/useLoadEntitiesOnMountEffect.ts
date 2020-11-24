@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useLayoutEffect } from 'react'
+import { useEffect } from 'react'
 import { ILoadParams } from '..'
 
 export function useLoadEntitiesOnMountEffect(
@@ -13,10 +13,28 @@ export function useLoadEntitiesOnMountEffect(
 	) => void,
 	isOpen: boolean,
 	entitiesLoaded: boolean,
+	size?: number,
 ): void {
-	useLayoutEffect(() => {
-		if (isOpen && !entitiesLoaded) {
+	useEffect(() => {
+		if (isOpen && !entitiesLoaded && size && size > 0) {
 			loadInitialEntities()
 		}
-	}, [entitiesLoaded, isOpen, loadInitialEntities])
+	}, [entitiesLoaded, isOpen, loadInitialEntities, size])
+}
+
+export function useLoadCommunitiesOnMountEffect(
+	loadInitialEntities: (
+		page?: number,
+		params?: ILoadParams,
+		init?: boolean,
+	) => void,
+	isOpen: boolean,
+	entitiesLoaded: boolean,
+	neighborsLoaded: boolean,
+): void {
+	useEffect(() => {
+		if (isOpen && !entitiesLoaded && neighborsLoaded) {
+			loadInitialEntities()
+		}
+	}, [entitiesLoaded, isOpen, loadInitialEntities, neighborsLoaded])
 }

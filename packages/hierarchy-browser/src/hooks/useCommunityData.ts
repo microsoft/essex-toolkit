@@ -17,6 +17,7 @@ import {
 export function useCommunityData(
 	isOpenProp: boolean | undefined,
 	maxLevel: number,
+	size: number,
 	dataProvider?: CommunityDataProvider,
 ): [
 	// entities
@@ -69,7 +70,12 @@ export function useCommunityData(
 		dataProvider,
 	)
 
-	useLoadEntitiesOnMountEffect(loadInitialEntities, isOpen, entitiesLoaded)
+	useLoadEntitiesOnMountEffect(
+		loadInitialEntities,
+		isOpen,
+		entitiesLoaded,
+		size,
+	)
 
 	const toggleOpen = useCallback(() => {
 		setIsOpen(!isOpen)

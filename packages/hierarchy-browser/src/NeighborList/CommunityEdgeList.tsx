@@ -4,7 +4,7 @@
  */
 import { Text } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
-import React, { useCallback, memo } from 'react'
+import React, { useCallback, memo, useRef, useMemo } from 'react'
 import styled from 'styled-components'
 import { INeighborCommunityDetail } from '..'
 import {
@@ -13,9 +13,11 @@ import {
 	tableItems,
 	textStyle,
 } from '../common/styles'
-import { hexToRgb } from '../utils/utils'
 import { useRowElements } from './hooks/useRowsElements'
 import { useSortedNeighbors } from './hooks/useSortedNeighbors'
+import { useDimensions } from '@essex-js-toolkit/hooks'
+import { Bar } from './Bar'
+
 const SUBHEADERS = ['community', 'connections', 'members']
 
 export interface ICommunityEdgeListProps {
@@ -49,13 +51,18 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 			[onEdgeClick, selectedEdge, clearCurrentSelection],
 		)
 		const sortedEdges = useSortedNeighbors(edges)
+		const ref = useRef(null)
+		const dimensions = useDimensions(ref)
+		const [getBackgroundStyle, barColor, connScale, sizeScale] = useRowElements(
+			theme,
+			selectedEdge,
+			edges,
+			dimensions,
+		)
 
-		const [
-			getBackgroundColor,
-			getMeasurements,
-			getBackgroundStyle,
-		] = useRowElements(theme, selectedEdge, edges)
-		const nominalColorScale = theme.scales().nominal(10).toArray()
+		const width = useMemo(() => (dimensions ? dimensions.width : 10), [
+			dimensions,
+		])
 
 		return sortedEdges ? (
 			<Table>
@@ -79,11 +86,13 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 						))}
 					</tr>
 					{sortedEdges.map((edge, i) => {
-						const measurements = getMeasurements(edge)
 						return (
 							<tr key={i}>
 								<TableCell
-									style={{ ...getBackgroundStyle(edge, 0) }}
+									style={{
+										...getBackgroundStyle(edge, 0, i),
+										textAlign: 'center',
+									}}
 									onClick={() => handleEdgeClick(edge)}
 								>
 									<Text variant={tableItems} styles={textStyle}>
@@ -93,33 +102,53 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 
 								<TableCell
 									style={{
-										...getBackgroundStyle(edge, 1),
-										backgroundImage: getBackgroundColor(
-											hexToRgb(nominalColorScale[0]),
-											measurements.connections,
-										),
+										...getBackgroundStyle(edge, 1, i),
 									}}
 									key={`neighbor-community-${0}`}
 									onClick={() => handleEdgeClick(edge)}
+									ref={ref}
 								>
-									<Text variant={tableItems} styles={textStyle}>
-										{edge.connections}
-									</Text>
+									<div>
+										<AbsoluteDiv>
+											<TextContainer>
+												<Text variant={tableItems} styles={textStyle}>
+													{edge.connections}
+												</Text>
+											</TextContainer>
+											<Bar
+												value={edge.connections}
+												width={width}
+												height={25}
+												color={barColor}
+												scale={connScale}
+											/>
+										</AbsoluteDiv>
+									</div>
 								</TableCell>
 								<TableCell
 									style={{
-										...getBackgroundStyle(edge, 2),
-										backgroundImage: getBackgroundColor(
-											hexToRgb(nominalColorScale[1]),
-											measurements.size,
-										),
+										...getBackgroundStyle(edge, 2, i),
 									}}
 									key={`neighbor-community-${1}`}
 									onClick={() => handleEdgeClick(edge)}
 								>
-									<Text variant={tableItems} styles={textStyle}>
-										{edge.size}
-									</Text>
+									<div>
+										<AbsoluteDiv>
+											<TextContainer>
+												<Text variant={tableItems} styles={textStyle}>
+													{edge.size}
+												</Text>
+											</TextContainer>
+
+											<Bar
+												value={edge.size}
+												width={width}
+												height={25}
+												color={barColor}
+												scale={sizeScale}
+											/>
+										</AbsoluteDiv>
+									</div>
 								</TableCell>
 							</tr>
 						)
@@ -148,4 +177,16 @@ const TableCell = styled.td`
 	width: 1px;
 	border-style: solid;
 	cursor: pointer;
+	text-align: end;
+	position: relative;
+`
+const TextContainer = styled.div`
+	z-index: 2;
+	left: -10;
+	width: 100%;
+	position: absolute;
+`
+const AbsoluteDiv = styled.div`
+	position: absolute;
+	top: 0;
 `

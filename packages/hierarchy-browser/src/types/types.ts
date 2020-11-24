@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
+import { ITextProps } from '@fluentui/react'
 export type CommunityId = string
 export type EntityId = string
 
@@ -51,4 +51,39 @@ export interface ILoadEntitiesAsync {
 
 export interface ILoadNeighborCommunitiesAsync {
 	(params: ILoadParams): Promise<IHierarchyNeighborResponse>
+}
+
+export interface ILoadNeighborCommunities {
+	(params: ILoadParams, communityId: CommunityId): Promise<
+		IHierarchyNeighborResponse
+	>
+}
+export interface ICardOverviewSettings {
+	header?: ITextProps['variant']
+	subheader?: ITextProps['variant']
+}
+
+export interface ITableSettings {
+	header?: ITextProps['variant']
+	subheader?: ITextProps['variant']
+	tableItems?: ITextProps['variant']
+}
+export interface IStyles {
+	cardOverview: ICardOverviewSettings
+	table: ITableSettings
+}
+
+export interface IControls {
+	showLevel?: boolean
+	showMembership?: boolean
+	showFilter?: boolean
+	showExport?: boolean
+}
+
+export interface ISettings {
+	visibleColumns?: string[]
+	styles?: IStyles
+	isOpen?: boolean
+	minimizeColumns?: boolean
+	controls?: IControls
 }

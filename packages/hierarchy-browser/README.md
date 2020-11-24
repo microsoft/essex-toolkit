@@ -22,7 +22,8 @@ const loadNeighborCommunitiesAsync = useCallback(async (params)=>{
 <HierarchyBrowser
     communities={communities}
     entities={loadEntitiesAsync}
-    neighbors={loadNeighborCommunitiesAsync}
+	neighbors={loadNeighborCommunitiesAsync}
+	settings={{visibleColumns: ["score"], isOpen: false}}
 />
 ```
 
@@ -47,7 +48,8 @@ const neighbors = [
 <HierarchyBrowser
     communities={communities}
     entities={entities}
-    neighbors={neighbors}
+	neighbors={neighbors}
+	settings={{visibleColumns: ["score"], isOpen: false}}
 />
 ```
 
@@ -139,6 +141,50 @@ interface ILoadParams {
 }
 // if filter flag is on, expects return value to be from filtered array
 
+```
+
+#### Settings
+
+Optional property that allows customization of table view.
+
+```jsx
+interface ISettings {
+	visibleColumns?: string[]
+	styles?: IStyles
+	isOpen?: boolean
+	minimizeColumns?: boolean
+	controls?: IControls
+}
+```
+
+<b>visibleColumns:</b> keys to display in tables
+<b>styles:</b> fluent font sizes for card components
+<b>isOpen:</b> default state for table visibility
+<b>minimizeColumns:</b> show only `id` key in table
+<b>controls:</b> display controls of card header
+
+```jsx
+interface ICardOverviewSettings {
+	header?: ITextProps['variant']
+	subheader?: ITextProps['variant']
+}
+
+interface ITableSettings {
+	header?: ITextProps['variant']
+	subheader?: ITextProps['variant']
+	tableItems?: ITextProps['variant']
+}
+interface IStyles {
+	cardOverview: ICardOverviewSettings
+	table: ITableSettings
+}
+
+interface IControls {
+	showLevel?: boolean
+	showMembership?: boolean
+	showFilter?: boolean
+	showExport?: boolean
+}
 ```
 
 ### License

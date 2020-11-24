@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Spinner } from '@fluentui/react'
-import React, { memo, useLayoutEffect, useMemo, useState } from 'react'
+import React, { memo, useMemo, useState } from 'react'
 import styled from 'styled-components'
-import { ICommunityDetail } from '..'
+import { ICommunityDetail, ILoadNeighborCommunities } from '..'
 import { EmptyEntityList } from '../EntityItem/EmptyEntityList'
 import CommunityEdgeList from '../NeighborList/CommunityEdgeList'
 import { ScrollArea } from '../ScollArea'
@@ -16,6 +16,8 @@ import { useAdjacentCommunityData } from '../hooks/useAdjacentCommunityData'
 import { useCommunityData } from '../hooks/useCommunityData'
 import { useCommunitySizePercent } from '../hooks/useCommunitySizePercent'
 import { useEdgeSelection } from '../hooks/useEdgeSelection'
+import { ISettingState } from '../hooks/useSettings'
+import { useUpdatedCommunityProvider } from '../hooks/useUpdatedCommunityProvider'
 import { CommunityOverview } from './CommunityOverview'
 import { CommunityTable } from './CommunityTable'
 
@@ -26,35 +28,45 @@ export interface ICommunityCardProps {
 	level: number
 	hierachyDataProvider: HierarchyDataProvider
 	incrementLevel?: boolean // adjust from 0 to 1 based indexing on levels if needed
-	isOpen?: boolean
+	neighborsLoaded: boolean
+	neighborCallback?: ILoadNeighborCommunities
+	settings: ISettingState
 }
 
 const ENTITY_LOADER_MSG = 'Fetching entity data...'
 
 export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 	function CommunityCard({
-		isOpen: isOpenProp,
 		community,
 		maxSize,
 		maxLevel,
 		level,
 		incrementLevel,
+		neighborsLoaded,
 		hierachyDataProvider,
+		neighborCallback,
+		settings,
 	}: ICommunityCardProps) {
 		const [dataProvider] = useState<CommunityDataProvider | undefined>(
 			() => new CommunityDataProvider(community, hierachyDataProvider, level),
 		)
+		const {
+			isOpen: isOpenProp,
+			minimizeColumns,
+			visibleColumns,
+			fontStyles,
+			controls,
+		} = settings
 
-		const neigborCommunities = useMemo(
-			() => hierachyDataProvider.getNeighborsAtLevel(community.communityId),
-			[hierachyDataProvider, community],
+		useUpdatedCommunityProvider(
+			hierachyDataProvider,
+			community,
+			level,
+			neighborCallback,
+			dataProvider,
 		)
+		const size = useMemo(() => community.size, [community])
 
-		useLayoutEffect(() => {
-			if (dataProvider) {
-				dataProvider.neighborCommunities = neigborCommunities
-			}
-		}, [dataProvider, neigborCommunities])
 		const [
 			entities,
 			isLoading,
@@ -63,12 +75,12 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 			isOpen,
 			toggleOpen,
 			filterProps,
-		] = useCommunityData(isOpenProp, maxLevel, dataProvider)
+		] = useCommunityData(isOpenProp, maxLevel, size, dataProvider)
 
 		const [
 			adjacentCommunities,
 			isAdjacentEntitiesLoading,
-		] = useAdjacentCommunityData(isOpen, dataProvider)
+		] = useAdjacentCommunityData(isOpen, neighborsLoaded, dataProvider)
 
 		const [
 			setEdgeSelection,
@@ -98,6 +110,8 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 					filterProps={filterProps}
 					getEntityCallback={loadMore}
 					level={level}
+					fontStyles={fontStyles}
+					controls={controls}
 				/>
 				<Flex>
 					<Content style={contentStyle}>
@@ -105,8 +119,10 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 							<ScrollArea loadMore={loadMore} hasMore={hasMore}>
 								<CommunityTable
 									entities={entities}
-									minimize={false}
 									communityId={community.communityId}
+									visibleColumns={visibleColumns}
+									fontStyles={fontStyles}
+									minimize={minimizeColumns}
 								/>
 							</ScrollArea>
 						) : null}
@@ -138,8 +154,10 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 								>
 									<CommunityTable
 										entities={edgeEntities}
-										minimize={false}
 										communityId={selectedCommunityEdge?.communityId}
+										visibleColumns={visibleColumns}
+										fontStyles={fontStyles}
+										minimize={minimizeColumns}
 									/>
 								</ScrollArea>
 							) : null}
