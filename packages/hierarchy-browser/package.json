@@ -46,5 +46,9 @@
 		"@types/react": "^16.9.52",
 		"prop-types": "^15.7.2",
 		"react": "^16.13.1"
+	},
+	"peerDependencies": {
+		"@fluent/react": ">=7.146.1",
+		"react": ">=16.13.1"
 	}
 }
