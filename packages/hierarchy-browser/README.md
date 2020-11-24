@@ -157,11 +157,11 @@ interface ISettings {
 }
 ```
 
-<b>visibleColumns:</b> keys to display in tables
-<b>styles:</b> fluent font sizes for card components
-<b>isOpen:</b> default state for table visibility
-<b>minimizeColumns:</b> show only `id` key in table
-<b>controls:</b> display controls of card header
+`visibleColumns`: keys to display in tables
+`styles`: fluent font sizes for card components
+`isOpen`: default state for table visibility
+`minimizeColumns`: show only `id` key in table
+`controls`: display controls of card header
 
 ```jsx
 interface ICardOverviewSettings {

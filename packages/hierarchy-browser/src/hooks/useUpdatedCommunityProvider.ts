@@ -1,3 +1,7 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { useMemo, useEffect } from 'react'
 import { CommunityDataProvider } from '../common/dataProviders'
 import { HierarchyDataProvider } from '../common/dataProviders/HierachyDataProvider'

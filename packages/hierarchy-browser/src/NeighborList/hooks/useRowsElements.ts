@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { SelectionState, Theme } from '@thematic/core'
+import { scaleLinear, ScaleLinear } from 'd3-scale'
 import { useCallback, useMemo } from 'react'
 import { INeighborCommunityDetail } from '../..'
 import { useMaxEdges } from './useMaxEdges'
 import { Dimensions } from '@essex-js-toolkit/hooks'
-import { scaleLinear, ScaleLinear } from 'd3-scale'
 
 export interface IMeasurements {
 	size: number

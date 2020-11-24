@@ -19,8 +19,8 @@ import {
 	useCommunityText,
 } from '../hooks/useCommunityDetails'
 import { useCommunityDownload } from '../hooks/useCommunityDownload'
-import { IEntityLoadParams } from '../hooks/useLoadMoreEntitiesHandler'
 import { useControls } from '../hooks/useControls'
+import { IEntityLoadParams } from '../hooks/useLoadMoreEntitiesHandler'
 
 export interface ICommunityOverviewProps {
 	community: ICommunityDetail

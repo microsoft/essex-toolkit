@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { ITextProps } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import React, { useMemo } from 'react'
 import {
@@ -11,7 +12,6 @@ import {
 	tableItems,
 } from '../common/styles'
 import { ISettings } from '../types'
-import { ITextProps } from '@fluentui/react'
 
 export function useContainerStyle(
 	isOpen: boolean,

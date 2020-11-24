@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Text } from '@fluentui/react'
+import { ITextProps } from '@fluentui/react'
 import React, { memo } from 'react'
 import { IEntityDetail } from '..'
 import { textStyle } from '../common/styles'
 import { useRowStyle } from './hooks/useRowStyle'
-import { ITextProps } from '@fluentui/react'
 
 export interface IEntityItemProps {
 	item: IEntityDetail

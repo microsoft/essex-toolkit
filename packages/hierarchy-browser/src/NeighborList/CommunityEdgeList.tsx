@@ -13,10 +13,10 @@ import {
 	tableItems,
 	textStyle,
 } from '../common/styles'
+import { Bar } from './Bar'
 import { useRowElements } from './hooks/useRowsElements'
 import { useSortedNeighbors } from './hooks/useSortedNeighbors'
 import { useDimensions } from '@essex-js-toolkit/hooks'
-import { Bar } from './Bar'
 
 const SUBHEADERS = ['community', 'connections', 'members']
 

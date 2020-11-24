@@ -10,6 +10,8 @@ import {
 	useCommunityLevelCalculator,
 	useCommunitySizeCalculator,
 } from './hooks/useCommunityDetails'
+import { useSettings } from './hooks/useSettings'
+import { useUpdatedHierarchyProvider } from './hooks/useUpdatedHierarchyProvider'
 import {
 	ICommunityDetail,
 	IEntityDetail,
@@ -18,8 +20,6 @@ import {
 	INeighborCommunityDetail,
 	ISettings,
 } from './types'
-import { useUpdatedHierarchyProvider } from './hooks/useUpdatedHierarchyProvider'
-import { useSettings } from './hooks/useSettings'
 
 export interface IHierarchyBrowserProps {
 	communities: ICommunityDetail[]

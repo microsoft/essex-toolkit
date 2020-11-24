@@ -60,9 +60,6 @@ export class CommunityDataProvider {
 		}
 	}
 
-	public set level(level: number) {
-		this._level = level
-	}
 	public get loadNeighborsCallback(): ILoadNeighborCommunities | undefined {
 		return this._loadNeighborsCallback
 	}
@@ -117,7 +114,9 @@ export class CommunityDataProvider {
 	public clearNeighborEdges(): void {
 		this._neighborEntitiesProvider.clear()
 	}
-
+	public set level(level: number) {
+		this._level = level
+	}
 	public get level(): number {
 		return this._level
 	}
