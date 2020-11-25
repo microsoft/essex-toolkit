@@ -28,17 +28,15 @@ export function useUpdatedHierarchyProvider(
 ] {
 	const [isNeighborsLoaded, setIsNeighborsLoaded] = useState<boolean>(false)
 	useEffect(() => {
-		hierachyDataProvider?.updateCommunities(communities)
+		hierachyDataProvider.updateCommunities(communities)
 	}, [communities, hierachyDataProvider])
 	useMemo(() => {
-		hierachyDataProvider?.updateEntities(entities)
+		hierachyDataProvider.updateEntities(entities)
 	}, [entities, hierachyDataProvider])
 
 	useEffect(() => {
-		if (hierachyDataProvider) {
-			const isLoaded = hierachyDataProvider.updateNeighbors(neighbors)
-			setIsNeighborsLoaded(isLoaded) // trigger neighbor refresh
-		}
+		const isLoaded = hierachyDataProvider.updateNeighbors(neighbors)
+		setIsNeighborsLoaded(isLoaded) // trigger neighbor refresh
 	}, [neighbors, hierachyDataProvider])
 
 	const neighborCallback = useCallback(
@@ -46,13 +44,7 @@ export function useUpdatedHierarchyProvider(
 			params: ILoadParams,
 			communityId: CommunityId,
 		): Promise<IHierarchyNeighborResponse> => {
-			if (hierachyDataProvider) {
-				return await hierachyDataProvider.getNeighborsAtLevel(
-					params,
-					communityId,
-				)
-			}
-			return { data: [], error: new Error('data provider not loaded') }
+			return await hierachyDataProvider.getNeighborsAtLevel(params, communityId)
 		},
 		[hierachyDataProvider],
 	)

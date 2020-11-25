@@ -15,21 +15,15 @@ export function useUpdatedCommunityProvider(
 	neighborCallback?: ILoadNeighborCommunities,
 ): void {
 	useEffect(() => {
-		if (dataProvider) {
-			dataProvider.updateCommunityData(community)
-			dataProvider.updateHierarchyDataProvider(hierachyDataProvider)
-		}
+		dataProvider.updateCommunityData(community)
+		dataProvider.updateHierarchyDataProvider(hierachyDataProvider)
 	}, [community, hierachyDataProvider, dataProvider])
 
 	useEffect(() => {
-		if (dataProvider) {
-			dataProvider.loadNeighborsCallback = neighborCallback
-		}
+		dataProvider.loadNeighborsCallback = neighborCallback
 	}, [neighborCallback, dataProvider])
 
 	useMemo(() => {
-		if (dataProvider) {
-			dataProvider.level = level
-		}
+		dataProvider.level = level
 	}, [level, dataProvider])
 }
