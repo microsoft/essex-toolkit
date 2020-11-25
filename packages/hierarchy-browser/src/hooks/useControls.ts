@@ -12,7 +12,7 @@ interface IControlSettings {
 }
 export function useControls(controls?: IControls): IControlSettings {
 	return useMemo(() => {
-		let showLevel: boolean = true
+		let showLevel = true
 		let showMembership = true
 		let showExport = true
 		let showFilter = true

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Spinner } from '@fluentui/react'
-import React, { memo, useMemo, useState } from 'react'
+import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { ICommunityDetail, ILoadNeighborCommunities } from '..'
 import { EmptyEntityList } from '../EntityItem/EmptyEntityList'
@@ -50,7 +50,7 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 		const dataProvider = useMemo<CommunityDataProvider>(
 			() => new CommunityDataProvider(community, hierachyDataProvider, level),
 			[],
-		)
+		) // deps intentionally left empty
 
 		const {
 			isOpen: isOpenProp,

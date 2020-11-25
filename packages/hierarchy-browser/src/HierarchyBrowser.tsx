@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { memo, useMemo, useState } from 'react'
+import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { CommunityCard } from './CommunityCard/CommunityCard'
 import { HierarchyDataProvider } from './common/dataProviders/HierachyDataProvider'
@@ -37,7 +37,7 @@ export const HierarchyBrowser = memo(function HierarchyBrowser({
 	const hierachyDataProvider = useMemo<HierarchyDataProvider>(
 		() => new HierarchyDataProvider(communities, entities, neighbors),
 		[],
-	)
+	) // deps intentionally left empty
 	const [isNeighborsLoaded, neighborCallback] = useUpdatedHierarchyProvider(
 		communities,
 		hierachyDataProvider,
