@@ -47,11 +47,14 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 		neighborCallback,
 		settings,
 	}: ICommunityCardProps) {
+		/*eslint-disable react-hooks/exhaustive-deps*/
 		const dataProvider = useMemo<CommunityDataProvider>(
 			() => new CommunityDataProvider(community, hierachyDataProvider, level),
-			[],
-		) // deps intentionally left empty
-
+			[
+				/* no deps intentionally */
+			],
+		)
+		/*eslint-enable react-hooks/exhaustive-deps*/
 		const {
 			isOpen: isOpenProp,
 			minimizeColumns,

@@ -34,10 +34,14 @@ export const HierarchyBrowser = memo(function HierarchyBrowser({
 	neighbors,
 	settings,
 }: IHierarchyBrowserProps) {
+	/*eslint-disable react-hooks/exhaustive-deps*/
 	const hierachyDataProvider = useMemo<HierarchyDataProvider>(
 		() => new HierarchyDataProvider(communities, entities, neighbors),
-		[],
-	) // deps intentionally left empty
+		[
+			/* no deps intentionally */
+		],
+	)
+	/*eslint-enable react-hooks/exhaustive-deps*/
 	const [isNeighborsLoaded, neighborCallback] = useUpdatedHierarchyProvider(
 		communities,
 		hierachyDataProvider,
