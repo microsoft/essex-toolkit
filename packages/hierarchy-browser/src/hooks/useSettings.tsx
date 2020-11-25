@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { useMemo, useCallback } from 'react'
+import { useMemo, useCallback } from 'react'
 import { IControls, ISettings } from '../types'
 import { ICardFontStyles, useSettingStyles } from './theme'
 
@@ -33,11 +33,11 @@ export function useSettings(
 	const fontStyles = useSettingStyles(settings)
 
 	const getSettings = useCallback(
-		(index: number) => {
+		(index: number): ISettingState => {
 			const isOpen = getOpenState(index)
 			return { isOpen, minimizeColumns, visibleColumns, fontStyles, controls }
 		},
-		[getOpenState, minimizeColumns, visibleColumns, fontStyles],
+		[getOpenState, minimizeColumns, visibleColumns, fontStyles, controls],
 	)
 
 	return getSettings

@@ -2,8 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Text } from '@fluentui/react'
-import { ITextProps } from '@fluentui/react'
+import { Text, ITextProps } from '@fluentui/react'
 import React, { memo } from 'react'
 import { IEntityDetail } from '..'
 import { textStyle } from '../common/styles'

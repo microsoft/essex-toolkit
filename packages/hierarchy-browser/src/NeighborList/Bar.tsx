@@ -20,7 +20,6 @@ export const Bar: React.FC<ICellComponentProps> = memo(function Bar({
 	height,
 	width,
 }: ICellComponentProps) {
-	const textFill = '#fdfeff' // white text since apply dark background
 	const size = scale(value)
 	return (
 		<>

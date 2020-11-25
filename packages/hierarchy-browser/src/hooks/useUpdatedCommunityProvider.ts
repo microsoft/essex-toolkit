@@ -9,23 +9,23 @@ import { ICommunityDetail, ILoadNeighborCommunities } from '../types'
 
 export function useUpdatedCommunityProvider(
 	hierachyDataProvider: HierarchyDataProvider,
+	dataProvider: CommunityDataProvider,
 	community: ICommunityDetail,
 	level: number,
 	neighborCallback?: ILoadNeighborCommunities,
-	dataProvider?: CommunityDataProvider,
-) {
+): void {
 	useEffect(() => {
 		if (dataProvider) {
 			dataProvider.updateCommunityData(community)
 			dataProvider.updateHierarchyDataProvider(hierachyDataProvider)
 		}
-	}, [community, hierachyDataProvider])
+	}, [community, hierachyDataProvider, dataProvider])
 
 	useEffect(() => {
 		if (dataProvider) {
 			dataProvider.loadNeighborsCallback = neighborCallback
 		}
-	}, [neighborCallback])
+	}, [neighborCallback, dataProvider])
 
 	useMemo(() => {
 		if (dataProvider) {

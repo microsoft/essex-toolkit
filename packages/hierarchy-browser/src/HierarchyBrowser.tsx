@@ -34,7 +34,7 @@ export const HierarchyBrowser = memo(function HierarchyBrowser({
 	neighbors,
 	settings,
 }: IHierarchyBrowserProps) {
-	const [hierachyDataProvider] = useState<HierarchyDataProvider | undefined>(
+	const [hierachyDataProvider] = useState<HierarchyDataProvider>(
 		() => new HierarchyDataProvider(communities, entities, neighbors),
 	)
 	const [isNeighborsLoaded, neighborCallback] = useUpdatedHierarchyProvider(
@@ -49,7 +49,6 @@ export const HierarchyBrowser = memo(function HierarchyBrowser({
 	const getSettings = useSettings(settings)
 	const children = useMemo(
 		() =>
-			hierachyDataProvider &&
 			communities.map((c, index) => {
 				const cardSettings = getSettings(index)
 				return (

@@ -51,7 +51,7 @@ export class CommunityDataProvider {
 		this.setFilterEntities(false)
 	}
 
-	public updateCommunityData(communityData: ICommunityDetail) {
+	public updateCommunityData(communityData: ICommunityDetail): void {
 		this._community = communityData.communityId
 		if (communityData.entityIds) {
 			this._size = communityData.entityIds.length
@@ -68,7 +68,7 @@ export class CommunityDataProvider {
 	}
 	public updateHierarchyDataProvider(
 		hierachyDataProvider: HierarchyDataProvider,
-	) {
+	): void {
 		const callback = this.useHierarchyDataProvider(hierachyDataProvider)
 		this._loadNeighborsCallback = hierachyDataProvider.getNeighborsAtLevel
 		this._entityProvider = new EntityDataProvider(

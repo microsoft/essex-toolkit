@@ -34,11 +34,11 @@ export class HierarchyDataProvider {
 		this.updateNeighbors(neighbors)
 	}
 
-	public updateCommunities(communities: ICommunityDetail[]) {
+	public updateCommunities(communities: ICommunityDetail[]): void {
 		this._communities = this.addLevelLabels(communities)
 	}
 
-	public updateEntities(entities?: IEntityDetail[] | ILoadEntitiesAsync) {
+	public updateEntities(entities?: IEntityDetail[] | ILoadEntitiesAsync): void {
 		if (entities) {
 			this.initEntitiesByLoadType(entities)
 		}

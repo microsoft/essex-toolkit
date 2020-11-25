@@ -11,9 +11,9 @@ import { useLoadMoreCommunitiesHandler } from './useLoadMoreCommunitiesHandler'
 import { useNeighborsLoadedHandler } from './useNeighborsLoadedHandler'
 
 export function useAdjacentCommunityData(
+	dataProvider: CommunityDataProvider,
 	isOpen: boolean,
 	neighborsLoaded: boolean,
-	dataProvider?: CommunityDataProvider,
 ): [
 	// neighbor communities
 	INeighborCommunityDetail[],

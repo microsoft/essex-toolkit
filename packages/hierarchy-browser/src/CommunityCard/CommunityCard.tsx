@@ -47,7 +47,7 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 		neighborCallback,
 		settings,
 	}: ICommunityCardProps) {
-		const [dataProvider] = useState<CommunityDataProvider | undefined>(
+		const [dataProvider] = useState<CommunityDataProvider>(
 			() => new CommunityDataProvider(community, hierachyDataProvider, level),
 		)
 		const {
@@ -60,10 +60,10 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 
 		useUpdatedCommunityProvider(
 			hierachyDataProvider,
+			dataProvider,
 			community,
 			level,
 			neighborCallback,
-			dataProvider,
 		)
 		const size = useMemo(() => community.size, [community])
 
@@ -75,12 +75,12 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 			isOpen,
 			toggleOpen,
 			filterProps,
-		] = useCommunityData(isOpenProp, maxLevel, size, dataProvider)
+		] = useCommunityData(dataProvider, isOpenProp, maxLevel, size)
 
 		const [
 			adjacentCommunities,
 			isAdjacentEntitiesLoading,
-		] = useAdjacentCommunityData(isOpen, neighborsLoaded, dataProvider)
+		] = useAdjacentCommunityData(dataProvider, isOpen, neighborsLoaded)
 
 		const [
 			setEdgeSelection,
@@ -115,7 +115,7 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 				/>
 				<Flex>
 					<Content style={contentStyle}>
-						{entities && entities.length > 0 ? (
+						{entities?.length > 0 ? (
 							<ScrollArea loadMore={loadMore} hasMore={hasMore}>
 								<CommunityTable
 									entities={entities}
@@ -144,10 +144,9 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 							/>
 						</Content>
 					) : null}
-					{isAdjacentEntitiesLoading ||
-					(edgeEntities && edgeEntities.length > 0) ? (
+					{isAdjacentEntitiesLoading || edgeEntities?.length > 0 ? (
 						<Content style={contentStyle}>
-							{edgeEntities && edgeEntities.length > 0 ? (
+							{edgeEntities?.length > 0 ? (
 								<ScrollArea
 									loadMore={loadMoreEntities}
 									hasMore={moreEntitiesToLoad}

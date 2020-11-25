@@ -16,7 +16,7 @@ import {
 } from '../types'
 export function useUpdatedHierarchyProvider(
 	communities: ICommunityDetail[],
-	hierachyDataProvider?: HierarchyDataProvider,
+	hierachyDataProvider: HierarchyDataProvider,
 	entities?: IEntityDetail[] | ILoadEntitiesAsync,
 	neighbors?: INeighborCommunityDetail[] | ILoadNeighborCommunitiesAsync,
 ): [
@@ -28,10 +28,10 @@ export function useUpdatedHierarchyProvider(
 ] {
 	const [isNeighborsLoaded, setIsNeighborsLoaded] = useState<boolean>(false)
 	useEffect(() => {
-		hierachyDataProvider && hierachyDataProvider.updateCommunities(communities)
-	}, [communities])
+		hierachyDataProvider?.updateCommunities(communities)
+	}, [communities, hierachyDataProvider])
 	useMemo(() => {
-		hierachyDataProvider && hierachyDataProvider.updateEntities(entities)
+		hierachyDataProvider?.updateEntities(entities)
 	}, [entities, hierachyDataProvider])
 
 	useEffect(() => {
@@ -39,7 +39,7 @@ export function useUpdatedHierarchyProvider(
 			const isLoaded = hierachyDataProvider.updateNeighbors(neighbors)
 			setIsNeighborsLoaded(isLoaded) // trigger neighbor refresh
 		}
-	}, [neighbors])
+	}, [neighbors, hierachyDataProvider])
 
 	const neighborCallback = useCallback(
 		async (
