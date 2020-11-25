@@ -53,7 +53,7 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 		const levelLabel = useCommunityLevelText(level, incrementLevel)
 		const style = useThemesStyle()
 		const buttonStyle = useFilterButtonStyle()
-		const [showLevel, showMembership, showFilter, showExport] = useControls(
+		const { showLevel, showMembership, showFilter, showExport } = useControls(
 			controls,
 		)
 		const communityText = useCommunityText(community)

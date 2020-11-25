@@ -30,14 +30,18 @@ export class CommunityDataProvider {
 	private _entityProvider: EntityDataProvider
 
 	constructor(
-		communityData: ICommunityDetail,
-		hierachyDataProvider: HierarchyDataProvider,
-		level: number,
+		communityData?: ICommunityDetail,
+		hierachyDataProvider?: HierarchyDataProvider,
+		level?: number,
 	) {
-		this.updateCommunityData(communityData)
-		this._level = level
-		const callback = this.useHierarchyDataProvider(hierachyDataProvider)
-		this._loadNeighborsCallback = hierachyDataProvider.getNeighborsAtLevel
+		if (communityData) {
+			this.updateCommunityData(communityData)
+		}
+		this._level = level || -1
+		const callback =
+			hierachyDataProvider &&
+			this.useHierarchyDataProvider(hierachyDataProvider)
+		this._loadNeighborsCallback = hierachyDataProvider?.getNeighborsAtLevel
 		this._entityProvider = new EntityDataProvider(
 			ENTITY_TYPE.ENTITY,
 			this._size,

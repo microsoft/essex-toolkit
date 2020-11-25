@@ -25,11 +25,11 @@ export class HierarchyDataProvider {
 	private _communities: ICommunity[] = []
 
 	constructor(
-		communities: ICommunityDetail[],
+		communities?: ICommunityDetail[],
 		entities?: IEntityDetail[] | ILoadEntitiesAsync,
 		neighbors?: INeighborCommunityDetail[] | ILoadNeighborCommunitiesAsync,
 	) {
-		this.updateCommunities(communities)
+		this.updateCommunities(communities || [])
 		this.updateEntities(entities)
 		this.updateNeighbors(neighbors)
 	}

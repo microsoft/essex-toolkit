@@ -13,10 +13,10 @@ export function useLoadEntitiesOnMountEffect(
 	) => void,
 	isOpen: boolean,
 	entitiesLoaded: boolean,
-	size?: number,
+	size = 0,
 ): void {
 	useEffect(() => {
-		if (isOpen && !entitiesLoaded && size && size > 0) {
+		if (isOpen && !entitiesLoaded && size > 0) {
 			loadInitialEntities()
 		}
 	}, [entitiesLoaded, isOpen, loadInitialEntities, size])

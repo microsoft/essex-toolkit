@@ -4,26 +4,29 @@
  */
 import { useMemo } from 'react'
 import { IControls } from '../types'
-
-export function useControls(
-	controls?: IControls,
-): [boolean, boolean, boolean, boolean] {
+interface IControlSettings {
+	showLevel: boolean
+	showMembership: boolean
+	showFilter: boolean
+	showExport: boolean
+}
+export function useControls(controls?: IControls): IControlSettings {
 	return useMemo(() => {
-		let level = true
-		let membership = true
-		let exportData = true
-		let filterData = true
+		let showLevel: boolean = true
+		let showMembership = true
+		let showExport = true
+		let showFilter = true
 		if (controls) {
-			level = controls.showLevel !== undefined ? controls.showLevel : level
-			membership =
-				controls.showMembership !== undefined
+			showLevel = controls.showLevel != null ? controls.showLevel : showLevel
+			showMembership =
+				controls.showMembership != null
 					? controls.showMembership
-					: membership
-			filterData =
-				controls.showFilter !== undefined ? controls.showFilter : filterData
-			exportData =
-				controls.showExport !== undefined ? controls.showExport : exportData
+					: showMembership
+			showFilter =
+				controls.showFilter != null ? controls.showFilter : showFilter
+			showExport =
+				controls.showExport != null ? controls.showExport : showExport
 		}
-		return [level, membership, exportData, filterData]
+		return { showLevel, showMembership, showExport, showFilter }
 	}, [controls])
 }

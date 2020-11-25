@@ -34,8 +34,9 @@ export const HierarchyBrowser = memo(function HierarchyBrowser({
 	neighbors,
 	settings,
 }: IHierarchyBrowserProps) {
-	const [hierachyDataProvider] = useState<HierarchyDataProvider>(
+	const hierachyDataProvider = useMemo<HierarchyDataProvider>(
 		() => new HierarchyDataProvider(communities, entities, neighbors),
+		[],
 	)
 	const [isNeighborsLoaded, neighborCallback] = useUpdatedHierarchyProvider(
 		communities,

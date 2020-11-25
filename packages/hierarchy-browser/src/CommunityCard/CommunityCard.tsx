@@ -47,9 +47,11 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 		neighborCallback,
 		settings,
 	}: ICommunityCardProps) {
-		const [dataProvider] = useState<CommunityDataProvider>(
+		const dataProvider = useMemo<CommunityDataProvider>(
 			() => new CommunityDataProvider(community, hierachyDataProvider, level),
+			[],
 		)
+
 		const {
 			isOpen: isOpenProp,
 			minimizeColumns,
