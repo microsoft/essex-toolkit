@@ -8,15 +8,22 @@ import { IControls } from '../types'
 export function useControls(
 	controls?: IControls,
 ): [boolean, boolean, boolean, boolean] {
-	const [showLevel, showMembership, showFilter, showExport] = useMemo(() => {
+	return useMemo(() => {
+		let level = true
+		let membership = true
+		let exportData = true
+		let filterData = true
 		if (controls) {
-			const level = controls.showLevel || true
-			const membership = controls.showMembership || true
-			const filterData = controls.showFilter || true
-			const exportData = controls.showExport || true
-			return [level, membership, filterData, exportData]
+			level = controls.showLevel !== undefined ? controls.showLevel : level
+			membership =
+				controls.showMembership !== undefined
+					? controls.showMembership
+					: membership
+			filterData =
+				controls.showFilter !== undefined ? controls.showFilter : filterData
+			exportData =
+				controls.showExport !== undefined ? controls.showExport : exportData
 		}
-		return [true, true, true, true]
+		return [level, membership, exportData, filterData]
 	}, [controls])
-	return [showLevel, showMembership, showFilter, showExport]
 }
