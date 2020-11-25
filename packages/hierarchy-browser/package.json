@@ -48,8 +48,8 @@
 		"react": "^16.13.1"
 	},
 	"peerDependencies": {
-		"@types/react": "^16.9.52",
 		"@fluent/react": ">=7.146.1",
+		"@types/react": "^16.9.52",
 		"react": ">=16.13.1"
 	}
 }

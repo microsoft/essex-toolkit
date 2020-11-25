@@ -2731,6 +2731,7 @@ __metadata:
     styled-components: ^5.2.0
   peerDependencies:
     "@fluent/react": ">=7.146.1"
+    "@types/react": ^16.9.52
     react: ">=16.13.1"
   languageName: unknown
   linkType: soft
