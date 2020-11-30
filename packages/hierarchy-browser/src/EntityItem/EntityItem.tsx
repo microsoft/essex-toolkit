@@ -2,25 +2,26 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Text } from '@fluentui/react'
+import { Text, ITextProps } from '@fluentui/react'
 import React, { memo } from 'react'
 import { IEntityDetail } from '..'
-import { textStyle, tableItems } from '../common/styles'
+import { textStyle } from '../common/styles'
 import { useRowStyle } from './hooks/useRowStyle'
 
 export interface IEntityItemProps {
 	item: IEntityDetail
 	attrs: string[]
 	index: number
+	fontStyle: ITextProps['variant']
 }
 export const EntityItem: React.FC<IEntityItemProps> = memo(
-	({ item, attrs, index }) => {
+	({ item, attrs, index, fontStyle }) => {
 		const rowStyle = useRowStyle(index)
 
 		return (
 			<tr key={`e${index}`} style={rowStyle}>
 				<td>
-					<Text variant={tableItems} styles={textStyle}>
+					<Text variant={fontStyle} styles={textStyle}>
 						{item.id}
 					</Text>
 				</td>
@@ -28,7 +29,7 @@ export const EntityItem: React.FC<IEntityItemProps> = memo(
 					? attrs.map((attr, i) => (
 							<td key={`attr${i}`}>
 								{item.attrs && item.attrs[attr] ? (
-									<Text variant={tableItems} styles={textStyle}>
+									<Text variant={fontStyle} styles={textStyle}>
 										{item.attrs[attr].toLocaleString()}
 									</Text>
 								) : (

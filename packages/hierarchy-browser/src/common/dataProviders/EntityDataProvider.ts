@@ -18,7 +18,7 @@ export class EntityDataProvider {
 	private _filteredIds: Set<EntityId> = new Set([])
 	private _entityType: ENTITY_TYPE
 	private _size?: number
-	private _loadEntitiesFromProvider: (
+	private _loadEntitiesFromProvider?: (
 		params: ILoadParams,
 		entity: ENTITY_TYPE,
 	) => Promise<IHierarchyDataResponse | undefined>
@@ -26,7 +26,7 @@ export class EntityDataProvider {
 	constructor(
 		entityType: ENTITY_TYPE,
 		size: number,
-		handleLoading: (
+		handleLoading?: (
 			params: ILoadParams,
 			entity: ENTITY_TYPE,
 		) => Promise<IHierarchyDataResponse | undefined>,
@@ -91,18 +91,20 @@ export class EntityDataProvider {
 	private async loadItemsAsync(
 		params: ILoadParams,
 	): Promise<IEntityDetail[] | undefined> {
-		const nextNodes = await this._loadEntitiesFromProvider(
-			params,
-			this._entityType,
-		)
-		if (nextNodes) {
-			if (!nextNodes.error && nextNodes.data) {
-				const data = nextNodes.data.filter(d => d)
-				return data
-			} else {
+		if (this._loadEntitiesFromProvider) {
+			const nextNodes = await this._loadEntitiesFromProvider(
+				params,
+				this._entityType,
+			)
+			if (nextNodes) {
+				if (!nextNodes.error && nextNodes.data) {
+					const data = nextNodes.data.filter(d => d)
+					return data
+				}
 				throw nextNodes.error
 			}
 		}
+		throw new Error('missing load entities callback')
 	}
 
 	private async loadAndSaveItems(

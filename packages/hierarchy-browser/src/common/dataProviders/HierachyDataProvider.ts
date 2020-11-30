@@ -12,14 +12,12 @@ import {
 	ILoadParams,
 	IHierarchyNeighborResponse,
 	IHierarchyDataResponse,
-	CommunityId,
 } from '../..'
 import { getStaticEntities, getStaticNeighborEntities } from '../../utils/utils'
 import { ENTITY_TYPE, ICommunity, IEntityMap } from '../types/types'
 
 export class HierarchyDataProvider {
 	private _loadEntitiesAsync = false
-	private _loadNeighborsAsync = false
 	private _entities: IEntityMap | undefined
 	private _asyncEntityLoader: ILoadEntitiesAsync | undefined
 	private _asyncNeighborLoader: ILoadNeighborCommunitiesAsync | undefined
@@ -27,31 +25,51 @@ export class HierarchyDataProvider {
 	private _communities: ICommunity[] = []
 
 	constructor(
-		communities: ICommunityDetail[],
+		communities?: ICommunityDetail[],
 		entities?: IEntityDetail[] | ILoadEntitiesAsync,
 		neighbors?: INeighborCommunityDetail[] | ILoadNeighborCommunitiesAsync,
 	) {
+		this.updateCommunities(communities || [])
+		this.updateEntities(entities)
+		this.updateNeighbors(neighbors)
+	}
+
+	public updateCommunities(communities: ICommunityDetail[]): void {
 		this._communities = this.addLevelLabels(communities)
+	}
+
+	public updateEntities(entities?: IEntityDetail[] | ILoadEntitiesAsync): void {
 		if (entities) {
 			this.initEntitiesByLoadType(entities)
 		}
+	}
+
+	public updateNeighbors(
+		neighbors?: INeighborCommunityDetail[] | ILoadNeighborCommunitiesAsync,
+	): boolean {
 		if (neighbors) {
-			this.initNeighborsByLoadType(neighbors)
+			return this.initNeighborsByLoadType(neighbors)
 		}
+		return false
 	}
 
 	private initNeighborsByLoadType(
 		communities: INeighborCommunityDetail[] | ILoadNeighborCommunitiesAsync,
-	): void {
+	): boolean {
 		const shouldLoadEntitiesAsync = this.isEntitiesAsync(communities)
 		if (!shouldLoadEntitiesAsync) {
 			this._neighbors = communities as INeighborCommunityDetail[]
+			if (communities.length > 0) {
+				return true
+			}
 		} else {
 			// store callback
 			this._asyncNeighborLoader = communities as ILoadNeighborCommunitiesAsync
+			return true
 		}
-		this._loadNeighborsAsync = shouldLoadEntitiesAsync
+		return false
 	}
+
 	private initEntitiesByLoadType(
 		entities: IEntityDetail[] | ILoadEntitiesAsync,
 	): void {
@@ -106,8 +124,8 @@ export class HierarchyDataProvider {
 	public get loadEntitiesAsync(): boolean {
 		return this._loadEntitiesAsync
 	}
-	public get loadNeighborsAsync(): boolean {
-		return this._loadNeighborsAsync
+	public get communities(): ICommunity[] {
+		return this._communities
 	}
 
 	public set entities(entities: IEntityMap | undefined) {
@@ -118,13 +136,20 @@ export class HierarchyDataProvider {
 		this._neighbors = neighbors
 	}
 
-	public getNeighborsAtLevel(
-		communityId: CommunityId,
-	): INeighborCommunityDetail[] {
-		if (this._neighbors) {
-			return this._neighbors.filter(d => d.edgeCommunityId === communityId)
+	public async getNeighborsAtLevel(
+		params: ILoadParams,
+		communityId: string,
+	): Promise<IHierarchyNeighborResponse> {
+		if (this._asyncNeighborLoader) {
+			return await this._asyncNeighborLoader(params)
 		}
-		return []
+		if (this._neighbors) {
+			const data = this._neighbors.filter(
+				d => d.edgeCommunityId === communityId,
+			)
+			return { data, error: undefined }
+		}
+		return { data: [], error: new Error('neighbor communities not loaded') }
 	}
 
 	public getEntities(

@@ -15,9 +15,10 @@ import {
 } from './useLoadMoreEntitiesHandler'
 
 export function useCommunityData(
+	dataProvider: CommunityDataProvider,
 	isOpenProp: boolean | undefined,
 	maxLevel: number,
-	dataProvider?: CommunityDataProvider,
+	size: number,
 ): [
 	// entities
 	IEntityDetail[],
@@ -69,7 +70,12 @@ export function useCommunityData(
 		dataProvider,
 	)
 
-	useLoadEntitiesOnMountEffect(loadInitialEntities, isOpen, entitiesLoaded)
+	useLoadEntitiesOnMountEffect(
+		loadInitialEntities,
+		isOpen,
+		entitiesLoaded,
+		size,
+	)
 
 	const toggleOpen = useCallback(() => {
 		setIsOpen(!isOpen)
@@ -79,7 +85,7 @@ export function useCommunityData(
 		setMoreToLoad(true)
 		setFilterEntities(!filterEntities)
 		setLoading(false)
-		dataProvider && dataProvider.setFilterEntities(!filterEntities)
+		dataProvider.setFilterEntities(!filterEntities)
 	}, [
 		filterEntities,
 		setFilterEntities,
@@ -89,7 +95,7 @@ export function useCommunityData(
 	])
 
 	const filterProps: IFilterProps = useMemo(() => {
-		const disabled = (dataProvider && maxLevel === dataProvider.level) || false
+		const disabled = maxLevel === dataProvider.level || false
 		return { disabled, state: filterEntities, toggleFilter }
 	}, [maxLevel, toggleFilter, filterEntities, dataProvider])
 

@@ -14,12 +14,9 @@ export function useLoadInitialCommunities(
 		communities: INeighborCommunityDetail[],
 		error?: Error | undefined | string,
 	) => void,
-	dataProvider?: CommunityDataProvider,
+	dataProvider: CommunityDataProvider,
 ): () => void {
 	return useCallback(() => {
-		if (dataProvider === undefined) {
-			return
-		}
 		dataProvider
 			.getAdjacentCommunities(0, DEFAULT_LOAD_COUNT)
 			.then(data => handleCommunitiesLoaded(data || [], undefined))
