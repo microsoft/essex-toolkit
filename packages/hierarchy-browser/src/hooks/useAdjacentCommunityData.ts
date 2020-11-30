@@ -5,14 +5,15 @@
 import { useState } from 'react'
 import { INeighborCommunityDetail } from '..'
 import { CommunityDataProvider } from '../common/dataProviders'
-import { useLoadEntitiesOnMountEffect } from './useLoadEntitiesOnMountEffect'
+import { useLoadCommunitiesOnMountEffect } from './useLoadEntitiesOnMountEffect'
 import { useLoadInitialCommunities } from './useLoadInitialCommunities'
 import { useLoadMoreCommunitiesHandler } from './useLoadMoreCommunitiesHandler'
 import { useNeighborsLoadedHandler } from './useNeighborsLoadedHandler'
 
 export function useAdjacentCommunityData(
+	dataProvider: CommunityDataProvider,
 	isOpen: boolean,
-	dataProvider?: CommunityDataProvider,
+	neighborsLoaded: boolean,
 ): [
 	// neighbor communities
 	INeighborCommunityDetail[],
@@ -28,16 +29,17 @@ export function useAdjacentCommunityData(
 		isLoading,
 		communitiesLoaded,
 		handleCommunitiesLoaded,
-	] = useNeighborsLoadedHandler(true)
+	] = useNeighborsLoadedHandler(neighborsLoaded)
 	const loadInitialCommunities = useLoadInitialCommunities(
 		handleCommunitiesLoaded,
 		dataProvider,
 	)
 
-	useLoadEntitiesOnMountEffect(
+	useLoadCommunitiesOnMountEffect(
 		loadInitialCommunities,
 		isOpen,
 		communitiesLoaded,
+		neighborsLoaded,
 	)
 
 	const loadMore = useLoadMoreCommunitiesHandler(

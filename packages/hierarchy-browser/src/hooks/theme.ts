@@ -2,8 +2,16 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { ITextProps } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
+import {
+	headerLabel,
+	rowHeader,
+	subHeaderLabel,
+	tableItems,
+} from '../common/styles'
+import { ISettings } from '../types'
 
 export function useContainerStyle(
 	isOpen: boolean,
@@ -50,4 +58,40 @@ export function useFilterButtonStyle(): React.CSSProperties {
 		}),
 		[],
 	)
+}
+export interface ICardFontStyles {
+	cardOverviewHeader: ITextProps['variant']
+	cardOverviewSubheader: ITextProps['variant']
+	tableHeader: ITextProps['variant']
+	tableSubheader: ITextProps['variant']
+	tableItem: ITextProps['variant']
+}
+export function useSettingStyles(settings?: ISettings): ICardFontStyles {
+	return useMemo(() => {
+		let cardOverviewHeader = headerLabel
+		let cardOverviewSubheader = subHeaderLabel
+		let tableHeader = rowHeader
+		let tableSubheader = subHeaderLabel
+		let tableItem = tableItems
+		if (settings && settings.styles) {
+			if (settings.styles.cardOverview) {
+				cardOverviewHeader =
+					settings.styles.cardOverview.header || cardOverviewHeader
+				cardOverviewSubheader =
+					settings.styles.cardOverview.subheader || cardOverviewSubheader
+			}
+			if (settings.styles.table) {
+				tableHeader = settings.styles.table.header || tableHeader
+				tableSubheader = settings.styles.table.subheader || tableSubheader
+				tableItem = settings.styles.table.tableItems || tableItem
+			}
+		}
+		return {
+			cardOverviewHeader,
+			cardOverviewSubheader,
+			tableHeader,
+			tableSubheader,
+			tableItem,
+		}
+	}, [settings])
 }

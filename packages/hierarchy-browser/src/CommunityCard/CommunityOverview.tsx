@@ -5,16 +5,21 @@
 import { IconButton, Spinner, TooltipHost, Text } from '@fluentui/react'
 import React, { memo, useCallback } from 'react'
 import styled from 'styled-components'
-import { ICommunityDetail, IEntityDetail } from '..'
+import { ICommunityDetail, IControls, IEntityDetail } from '..'
 import { MagBar } from '../MagBar'
-import { headerLabel, subHeaderLabel, paddingLeft } from '../common/styles'
+import { paddingLeft } from '../common/styles'
 import { IFilterProps } from '../hooks/interfaces'
-import { useFilterButtonStyle, useThemesStyle } from '../hooks/theme'
+import {
+	ICardFontStyles,
+	useFilterButtonStyle,
+	useThemesStyle,
+} from '../hooks/theme'
 import {
 	useCommunityLevelText,
 	useCommunityText,
 } from '../hooks/useCommunityDetails'
 import { useCommunityDownload } from '../hooks/useCommunityDownload'
+import { useControls } from '../hooks/useControls'
 import { IEntityLoadParams } from '../hooks/useLoadMoreEntitiesHandler'
 
 export interface ICommunityOverviewProps {
@@ -28,6 +33,8 @@ export interface ICommunityOverviewProps {
 		params?: IEntityLoadParams,
 	) => Promise<IEntityDetail[]> | undefined
 	level: number
+	fontStyles: ICardFontStyles
+	controls?: IControls
 }
 const DEFAULT_MAGBAR_WIDTH = 120
 const SPINNER_STYLE = { marginLeft: 17 }
@@ -40,11 +47,16 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 		filterProps,
 		getEntityCallback,
 		level,
+		fontStyles,
+		controls,
 	}: ICommunityOverviewProps) {
 		const levelLabel = useCommunityLevelText(level, incrementLevel)
-		const communityText = useCommunityText(community)
 		const style = useThemesStyle()
 		const buttonStyle = useFilterButtonStyle()
+		const { showLevel, showMembership, showFilter, showExport } = useControls(
+			controls,
+		)
+		const communityText = useCommunityText(community)
 
 		const handleFilterChange = useCallback(
 			(event: React.MouseEvent<HTMLButtonElement>) => {
@@ -65,20 +77,24 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 				<Grid>
 					<GridItem1>
 						<div>
-							<Text variant={headerLabel}>
+							<Text variant={fontStyles.cardOverviewHeader}>
 								<b>{communityText}</b>
 							</Text>
 						</div>
-						<div>
-							<Text variant={subHeaderLabel}>{levelLabel}</Text>
-						</div>
+						{showLevel ? (
+							<div>
+								<Text variant={fontStyles.cardOverviewSubheader}>
+									{levelLabel}
+								</Text>
+							</div>
+						) : null}
 					</GridItem1>
 					{community.neighborSize && community.neighborSize > 0 ? (
 						<GridItem2>
 							<TooltipHost content="Number of neighboring (connected) communities.  Members of neighboring communities may be related, but are less tightly connected that those within the community.">
 								<div>
 									<Text
-										variant={subHeaderLabel}
+										variant={fontStyles.cardOverviewSubheader}
 									>{`Neighbors: ${community.neighborSize}`}</Text>
 								</div>
 								<HeightSpacer />
@@ -87,41 +103,45 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 					) : null}
 					<GridItem3>
 						<FlexySubContainer>
-							{community.size ? (
+							{community.size && showMembership ? (
 								<div>
 									<div>
-										<Text variant={subHeaderLabel}>
+										<Text variant={fontStyles.cardOverviewSubheader}>
 											Members: {community.size.toLocaleString()}
 										</Text>
 									</div>
 									<MagBar percent={sizePercent} width={DEFAULT_MAGBAR_WIDTH} />
 								</div>
 							) : null}
-							<TooltipHost
-								content={`Show only unique entities between level ${level} and ${
-									level + 1
-								}.`}
-							>
-								<IconButton
-									style={buttonStyle}
-									iconProps={{
-										iconName: filterProps.state ? 'Filter' : 'ClearFilter',
-									}}
-									onClick={handleFilterChange}
-									disabled={filterProps.disabled}
-								/>
-							</TooltipHost>
-							<TooltipHost content="Download community as .csv file.">
-								{downloadInProgress ? (
-									<Spinner label="" style={SPINNER_STYLE} />
-								) : (
+							{showFilter ? (
+								<TooltipHost
+									content={`Show only unique entities between level ${level} and ${
+										level + 1
+									}.`}
+								>
 									<IconButton
 										style={buttonStyle}
-										iconProps={{ iconName: 'DownloadDocument' }}
-										onClick={handleDownload}
+										iconProps={{
+											iconName: filterProps.state ? 'Filter' : 'ClearFilter',
+										}}
+										onClick={handleFilterChange}
+										disabled={filterProps.disabled}
 									/>
-								)}
-							</TooltipHost>
+								</TooltipHost>
+							) : null}
+							{showExport ? (
+								<TooltipHost content="Download community as .csv file.">
+									{downloadInProgress ? (
+										<Spinner label="" style={SPINNER_STYLE} />
+									) : (
+										<IconButton
+											style={buttonStyle}
+											iconProps={{ iconName: 'DownloadDocument' }}
+											onClick={handleDownload}
+										/>
+									)}
+								</TooltipHost>
+							) : null}
 						</FlexySubContainer>
 					</GridItem3>
 				</Grid>

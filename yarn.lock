@@ -2709,27 +2709,36 @@ __metadata:
   dependencies:
     "@babel/core": ^7.12.3
     "@babel/plugin-transform-runtime": ^7.11.5
+    "@essex-js-toolkit/hooks": "workspace:packages/hooks"
     "@essex/scripts": ^11.0.1
     "@fluentui/react": ^7.146.1
     "@thematic/core": ^0.8.0
     "@thematic/fluent": ^0.8.0
     "@thematic/react": ^0.8.0
     "@types/d3-array": ^2.2.0
+    "@types/d3-scale": ^2.2.4
     "@types/d3-selection": ^2.0.0
     "@types/prop-types": ^15.7.3
     "@types/react": ^16.9.52
     "@types/react-infinite-scroller": ^1.2.1
     "@types/styled-components": ^5.1.4
     d3-array: ^2.8.0
+    d3-scale: ^3.2.3
     d3-selection: ^2.0.0
     prop-types: ^15.7.2
     react: ^16.13.1
     react-infinite-scroller: ^1.2.4
     styled-components: ^5.2.0
   peerDependencies:
-    "@fluentui/react": ">= 7.146.1"
-    "@types/react": ">= 16.9"
-    react: ">= 16.13"
+    "@fluent/react": ">=7.146.1"
+    "@types/d3-array": ^2.2.0
+    "@types/d3-scale": ^2.2.4
+    "@types/d3-selection": ^2.0.0
+    "@types/prop-types": ^15.7.3
+    "@types/react": ^16.9.52
+    "@types/react-infinite-scroller": ^1.2.1
+    "@types/styled-components": ^5.1.4
+    react: ">=16.13.1"
   languageName: unknown
   linkType: soft
 

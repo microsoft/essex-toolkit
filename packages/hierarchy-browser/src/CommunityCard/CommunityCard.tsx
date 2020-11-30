@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Spinner } from '@fluentui/react'
-import React, { memo, useLayoutEffect, useMemo, useState } from 'react'
+import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { ICommunityDetail } from '..'
+import { ICommunityDetail, ILoadNeighborCommunities } from '..'
 import { EmptyEntityList } from '../EntityItem/EmptyEntityList'
 import CommunityEdgeList from '../NeighborList/CommunityEdgeList'
 import { ScrollArea } from '../ScollArea'
@@ -16,6 +16,8 @@ import { useAdjacentCommunityData } from '../hooks/useAdjacentCommunityData'
 import { useCommunityData } from '../hooks/useCommunityData'
 import { useCommunitySizePercent } from '../hooks/useCommunitySizePercent'
 import { useEdgeSelection } from '../hooks/useEdgeSelection'
+import { ISettingState } from '../hooks/useSettings'
+import { useUpdatedCommunityProvider } from '../hooks/useUpdatedCommunityProvider'
 import { CommunityOverview } from './CommunityOverview'
 import { CommunityTable } from './CommunityTable'
 
@@ -26,35 +28,50 @@ export interface ICommunityCardProps {
 	level: number
 	hierachyDataProvider: HierarchyDataProvider
 	incrementLevel?: boolean // adjust from 0 to 1 based indexing on levels if needed
-	isOpen?: boolean
+	neighborsLoaded: boolean
+	neighborCallback?: ILoadNeighborCommunities
+	settings: ISettingState
 }
 
 const ENTITY_LOADER_MSG = 'Fetching entity data...'
 
 export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 	function CommunityCard({
-		isOpen: isOpenProp,
 		community,
 		maxSize,
 		maxLevel,
 		level,
 		incrementLevel,
+		neighborsLoaded,
 		hierachyDataProvider,
+		neighborCallback,
+		settings,
 	}: ICommunityCardProps) {
-		const [dataProvider] = useState<CommunityDataProvider | undefined>(
+		/*eslint-disable react-hooks/exhaustive-deps*/
+		const dataProvider = useMemo<CommunityDataProvider>(
 			() => new CommunityDataProvider(community, hierachyDataProvider, level),
+			[
+				/* no deps intentionally */
+			],
 		)
+		/*eslint-enable react-hooks/exhaustive-deps*/
+		const {
+			isOpen: isOpenProp,
+			minimizeColumns,
+			visibleColumns,
+			fontStyles,
+			controls,
+		} = settings
 
-		const neigborCommunities = useMemo(
-			() => hierachyDataProvider.getNeighborsAtLevel(community.communityId),
-			[hierachyDataProvider, community],
+		useUpdatedCommunityProvider(
+			hierachyDataProvider,
+			dataProvider,
+			community,
+			level,
+			neighborCallback,
 		)
+		const size = useMemo(() => community.size, [community])
 
-		useLayoutEffect(() => {
-			if (dataProvider) {
-				dataProvider.neighborCommunities = neigborCommunities
-			}
-		}, [dataProvider, neigborCommunities])
 		const [
 			entities,
 			isLoading,
@@ -63,12 +80,12 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 			isOpen,
 			toggleOpen,
 			filterProps,
-		] = useCommunityData(isOpenProp, maxLevel, dataProvider)
+		] = useCommunityData(dataProvider, isOpenProp, maxLevel, size)
 
 		const [
 			adjacentCommunities,
 			isAdjacentEntitiesLoading,
-		] = useAdjacentCommunityData(isOpen, dataProvider)
+		] = useAdjacentCommunityData(dataProvider, isOpen, neighborsLoaded)
 
 		const [
 			setEdgeSelection,
@@ -98,15 +115,19 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 					filterProps={filterProps}
 					getEntityCallback={loadMore}
 					level={level}
+					fontStyles={fontStyles}
+					controls={controls}
 				/>
 				<Flex>
 					<Content style={contentStyle}>
-						{entities && entities.length > 0 ? (
+						{entities?.length > 0 ? (
 							<ScrollArea loadMore={loadMore} hasMore={hasMore}>
 								<CommunityTable
 									entities={entities}
-									minimize={false}
 									communityId={community.communityId}
+									visibleColumns={visibleColumns}
+									fontStyles={fontStyles}
+									minimize={minimizeColumns}
 								/>
 							</ScrollArea>
 						) : null}
@@ -128,18 +149,19 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 							/>
 						</Content>
 					) : null}
-					{isAdjacentEntitiesLoading ||
-					(edgeEntities && edgeEntities.length > 0) ? (
+					{isAdjacentEntitiesLoading || edgeEntities?.length > 0 ? (
 						<Content style={contentStyle}>
-							{edgeEntities && edgeEntities.length > 0 ? (
+							{edgeEntities?.length > 0 ? (
 								<ScrollArea
 									loadMore={loadMoreEntities}
 									hasMore={moreEntitiesToLoad}
 								>
 									<CommunityTable
 										entities={edgeEntities}
-										minimize={false}
 										communityId={selectedCommunityEdge?.communityId}
+										visibleColumns={visibleColumns}
+										fontStyles={fontStyles}
+										minimize={minimizeColumns}
 									/>
 								</ScrollArea>
 							) : null}

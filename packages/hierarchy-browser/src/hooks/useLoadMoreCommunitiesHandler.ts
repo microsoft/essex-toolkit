@@ -16,11 +16,11 @@ export function useLoadMoreCommunitiesHandler(
 		communities: INeighborCommunityDetail[],
 		error?: Error | string | undefined,
 	) => void,
-	dataProvider?: CommunityDataProvider,
+	dataProvider: CommunityDataProvider,
 ): () => void {
 	return useCallback(() => {
 		const offset = communities.length
-		if (!moreToLoad || !dataProvider) {
+		if (!moreToLoad) {
 			return
 		}
 		dataProvider

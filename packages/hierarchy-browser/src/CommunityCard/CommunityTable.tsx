@@ -7,26 +7,34 @@ import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { CommunityId, IEntityDetail } from '..'
 import { EntityItem } from '../EntityItem/EntityItem'
-import { rowHeader, rowSubHeader, textStyle } from '../common/styles'
+import { textStyle } from '../common/styles'
+import { ICardFontStyles } from '../hooks/theme'
 
 export interface ICommunityTableProps {
 	entities: IEntityDetail[]
-	minimize: boolean
+	fontStyles: ICardFontStyles
 	communityId?: CommunityId
+	visibleColumns?: string[]
+	minimize?: boolean
 }
 
 export const CommunityTable: React.FC<ICommunityTableProps> = memo(
 	function CommunityTable({
 		entities,
 		minimize,
+		fontStyles,
 		communityId,
+		visibleColumns,
 	}: ICommunityTableProps) {
 		const attrKeys: string[] = useMemo(() => {
+			if (visibleColumns) {
+				return visibleColumns
+			}
 			if (minimize || !entities[0].attrs) {
 				return []
 			}
 			return Object.keys(entities[0].attrs)
-		}, [entities, minimize])
+		}, [entities, minimize, visibleColumns])
 		const headerLabel = communityId
 			? `${communityId} Community Membership`
 			: 'Community Membership'
@@ -35,7 +43,7 @@ export const CommunityTable: React.FC<ICommunityTableProps> = memo(
 				<thead>
 					<tr>
 						<TableHeader colSpan={attrKeys.length + 1}>
-							<Text variant={rowHeader}>
+							<Text variant={fontStyles.tableHeader}>
 								<b>{headerLabel}</b>
 							</Text>
 						</TableHeader>
@@ -45,7 +53,7 @@ export const CommunityTable: React.FC<ICommunityTableProps> = memo(
 					<tr>
 						{['id', ...attrKeys].map((key, i) => (
 							<HeaderCell key={`table-header-${i}`}>
-								<Text variant={rowSubHeader} styles={textStyle}>
+								<Text variant={fontStyles.tableSubheader} styles={textStyle}>
 									<b>{key}</b>
 								</Text>
 							</HeaderCell>
@@ -59,6 +67,7 @@ export const CommunityTable: React.FC<ICommunityTableProps> = memo(
 							item={entity}
 							attrs={attrKeys}
 							index={i}
+							fontStyle={fontStyles.tableItem}
 						/>
 					))}
 				</tbody>
