@@ -170,9 +170,10 @@ export class CommunityDataProvider {
 			filtered: this._filterEntitiesFlag,
 		}
 		try {
-			const nextNeghbors = this.loadNeighborsAsync(params)
-			return nextNeghbors || []
+			const nextNeighbors = this.loadNeighborsAsync(params)
+			return nextNeighbors || []
 		} catch (err) {
+			console.log(err)
 			throw Error(
 				`Error: There is an issue loading neighbors for level ${this._level}, community ${this._community}`,
 			)
