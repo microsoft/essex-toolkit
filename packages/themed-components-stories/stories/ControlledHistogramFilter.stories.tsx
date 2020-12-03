@@ -7,9 +7,10 @@ import React, { useState } from 'react'
 import { CSF } from './types'
 import { ControlledHistogramFilter } from '@essex-js-toolkit/themed-components'
 
-export default {
+const story = {
 	title: 'ControlledHistogramFilter',
 }
+export default story
 
 const data = [
 	1,

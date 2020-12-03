@@ -7,9 +7,11 @@ import React, { useCallback, useState } from 'react'
 
 import { CSF } from './types'
 import { Settings } from '@essex-js-toolkit/themed-components'
-export default {
+
+const story = {
 	title: 'Settings Pane',
 }
+export default story
 
 // cover the three basic data types
 const basicSettings = {

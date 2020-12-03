@@ -6,7 +6,7 @@
 // Link.react.test.js
 import { render, act } from '@testing-library/react'
 import * as React from 'react'
-import { useDestroyable } from './useDestroyable'
+import { useDestroyable } from '../useDestroyable'
 
 /* eslint @typescript-eslint/no-unused-vars:0 */
 const DestroyableTest = ({ destroyable }: any) => {
@@ -26,7 +26,7 @@ test.skip('Setting an undefined destroyable does not cause a crash', async () =>
 })
 /* eslint-disable jest/no-disabled-tests */
 test.skip('Setting a destroyable to undefined causes the original destroyable to be destroyed', async () => {
-	return new Promise((resolve, reject) => {
+	return new Promise<void>((resolve, reject) => {
 		act(() => {
 			const destroyable = {
 				destroy() {
@@ -46,7 +46,7 @@ test.skip('Setting a destroyable to undefined causes the original destroyable to
 })
 /* eslint-disable jest/no-disabled-tests */
 test.skip('Setting a destroyable to a different destroyable causes the original destroyable to be destroyed', async () => {
-	return new Promise((resolve, reject) => {
+	return new Promise<void>((resolve, reject) => {
 		act(() => {
 			const destroyable1 = {
 				destroy() {
