@@ -15,14 +15,7 @@
 	},
 	"dependencies": {
 		"@essex-js-toolkit/thematic-lineup": "^1.1.3",
-		"@essex-js-toolkit/themed-components": "^1.1.3",
-		"@fluentui/react": "^7.147.1",
-		"@thematic/core": "^0.9.0",
-		"@thematic/fluent": "^0.9.0",
-		"@thematic/react": "^0.9.0",
-		"@types/form-data": "^2.5.0",
-		"react": "^16.14.0",
-		"react-dom": "^16.14.0"
+		"@essex-js-toolkit/themed-components": "^1.1.3"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.12.3",
@@ -33,7 +26,12 @@
 		"@storybook/addons": "^6.0.26",
 		"@storybook/core": "^6.0.26",
 		"@storybook/react": "^6.0.26",
+		"@fluentui/react": "^7.147.1",
+		"@thematic/core": "^0.9.0",
+		"@thematic/fluent": "^0.9.0",
+		"@thematic/react": "^0.9.0",
 		"@types/babel__core": "^7",
+		"@types/form-data": "^2.5.0",
 		"@types/node": "^14.14.0",
 		"@types/react": "^16.9.53",
 		"@types/react-dom": "^16.9.8",
@@ -41,7 +39,18 @@
 		"awesome-typescript-loader": "^5.2.1",
 		"babel-loader": "^8.1.0",
 		"core-js": "^3.6.5",
+		"react": "^16.14.0",
+		"react-dom": "^16.14.0",
 		"regenerator-runtime": "^0.13.7",
 		"webpack": "^4.44.2"
+	},
+	"peerDependencies": {
+		"@fluentui/react": "^7.147.1",
+		"@thematic/core": "^0.9.0",
+		"@thematic/fluent": "^0.9.0",
+		"@thematic/react": "^0.9.0",
+		"@types/form-data": "^2.5.0",
+		"react": "^16.14.0",
+		"react-dom": "^16.14.0"
 	}
 }
