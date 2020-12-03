@@ -6,9 +6,10 @@ import React from 'react'
 import { CSF } from './types'
 import { ClippedGraph } from '@essex-js-toolkit/themed-components'
 
-export default {
+const story = {
 	title: 'ClippedGraph',
 }
+export default story
 const data = [
 	1,
 	2,

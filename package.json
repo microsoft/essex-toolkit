@@ -30,7 +30,7 @@
 		"git_is_clean": "essex git-is-clean",
 		"prettify": "essex prettify",
 		"release": "run-s build_all publish_all",
-		"ci": "npm-run-all -p build_all lint test_all unit_test -s git_is_clean"
+		"ci": "run-s build_all lint test_all unit_test git_is_clean"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.12.9",

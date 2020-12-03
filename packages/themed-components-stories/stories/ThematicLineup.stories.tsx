@@ -6,9 +6,10 @@ import React from 'react'
 import { CSF } from './types'
 import { ThematicLineup } from '@essex-js-toolkit/thematic-lineup'
 
-export default {
+const story = {
 	title: 'ThematicLineup',
 }
+export default story
 
 const data = [
 	{
