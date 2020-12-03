@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import { useThematic } from '@thematic/react'
 import * as React from 'react'
 import { useState, useMemo, useRef, useEffect } from 'react'
 import 'lineupjs/build/LineUpJS.css'
-import { useThematic } from '@thematic/react'
 import { ThematicLineupStyles } from './ThematicLineupStyles'
 import { Filter, applyFilters } from './filters'
 

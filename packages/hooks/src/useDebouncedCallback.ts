@@ -17,7 +17,8 @@ export function useDebouncedCallback(
 	delay = 100,
 ): (this: any, ...args: any[]) => void {
 	const cb = useMemo(() => debounce(callback, delay), [
-		dependencies,
+		// eslint-disable-next-line
+		...dependencies,
 		callback,
 		delay,
 	])
