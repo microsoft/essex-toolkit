@@ -168,7 +168,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:7.12.9, @babel/core@npm:^7.1.0, @babel/core@npm:^7.12.1, @babel/core@npm:^7.12.3, @babel/core@npm:^7.7.5":
+"@babel/core@npm:7.12.9, @babel/core@npm:^7.1.0, @babel/core@npm:^7.12.1, @babel/core@npm:^7.12.3, @babel/core@npm:^7.12.9, @babel/core@npm:^7.7.5":
   version: 7.12.9
   resolution: "@babel/core@npm:7.12.9"
   dependencies:
@@ -1372,7 +1372,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-env@npm:^7.12.1":
+"@babel/preset-env@npm:^7.12.1, @babel/preset-env@npm:^7.12.7":
   version: 7.12.7
   resolution: "@babel/preset-env@npm:7.12.7"
   dependencies:
@@ -1475,7 +1475,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-react@npm:^7.12.1, @babel/preset-react@npm:^7.12.5":
+"@babel/preset-react@npm:^7.12.1, @babel/preset-react@npm:^7.12.5, @babel/preset-react@npm:^7.12.7":
   version: 7.12.7
   resolution: "@babel/preset-react@npm:7.12.7"
   dependencies:
@@ -1492,7 +1492,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-typescript@npm:^7.12.1":
+"@babel/preset-typescript@npm:^7.12.1, @babel/preset-typescript@npm:^7.12.7":
   version: 7.12.7
   resolution: "@babel/preset-typescript@npm:7.12.7"
   dependencies:
@@ -1764,10 +1764,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@essex-js-toolkit/dev@workspace:."
   dependencies:
+    "@babel/core": ^7.12.9
+    "@babel/preset-env": ^7.12.7
+    "@babel/preset-react": ^7.12.7
+    "@babel/preset-typescript": ^7.12.7
     "@essex/eslint-config": ^10.0.1
     "@essex/eslint-plugin": ^10.0.1
+    "@essex/jest-config": ^11.0.1
     "@essex/prettier-config": ^10.0.0
     "@essex/scripts": ^11.0.1
+    "@types/babel__core": ^7
+    "@types/babel__preset-env": ^7
     "@types/jest": ^26.0.15
     "@types/node": ^14.14.0
     "@types/prettier": ^2.1.5
@@ -1778,7 +1785,6 @@ __metadata:
     husky: ^4.3.0
     lint-staged: ^10.4.2
     npm-run-all: ^4.1.5
-    ts-jest: ^26.4.1
     typescript: ^4.0.3
   languageName: unknown
   linkType: soft
@@ -2361,6 +2367,21 @@ __metadata:
     ts-jest:
       optional: true
   checksum: a235cf04f14fb5344c8efe2b110c1884be37d7c8ae6869a236a0a2b13a536691f4509bb380f2a623c40e3efe948d150e162d557a42616873056dff24af1b7fd4
+  languageName: node
+  linkType: hard
+
+"@essex/jest-config@npm:^11.0.1":
+  version: 11.0.1
+  resolution: "@essex/jest-config@npm:11.0.1"
+  dependencies:
+    "@types/jest": ^26.0.15
+    identity-obj-proxy: ^3.0.0
+  peerDependencies:
+    jest: ">= 26.4"
+  peerDependenciesMeta:
+    jest:
+      optional: true
+  checksum: 960ce6c793870ebd6d9538e646cdbda116581e7a21f69146d8db52de45386a5e0caf157a72fdd8cd30cfc83f6ed9a8cdb65a238b524a24dcca253c0e52566724
   languageName: node
   linkType: hard
 
@@ -3991,6 +4012,13 @@ __metadata:
   dependencies:
     "@babel/types": ^7.0.0
   checksum: 58fc195a3d6dddd1b39e49d05585e7261052a4b87cf1fbb8068c9fb826465a7df33df4acd3d52bb6540dc704c5bacde19fcefa152a6b064e2bf34d0c458636c5
+  languageName: node
+  linkType: hard
+
+"@types/babel__preset-env@npm:^7":
+  version: 7.9.1
+  resolution: "@types/babel__preset-env@npm:7.9.1"
+  checksum: bb76f246000f396b1542a331bcdb62d60f49d2cf78208d44b156cbfd567f9c941614f0ed1aee8d494091455580dc3629dfddf08e73e13661339603c11822145f
   languageName: node
   linkType: hard
 
@@ -19622,7 +19650,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:^26.4.1, ts-jest@npm:~26.4.1":
+"ts-jest@npm:~26.4.1":
   version: 26.4.4
   resolution: "ts-jest@npm:26.4.4"
   dependencies:
