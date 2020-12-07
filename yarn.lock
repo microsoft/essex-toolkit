@@ -1851,7 +1851,9 @@ __metadata:
     "@types/react": ^16.9.52
     "@types/react-infinite-scroller": ^1.2.1
     "@types/styled-components": ^5.1.4
+    core-js: "*"
     react: ">=16.13.1"
+    regenerator-runtime: "*"
   languageName: unknown
   linkType: soft
 
