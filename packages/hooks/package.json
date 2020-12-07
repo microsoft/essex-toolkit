@@ -1,6 +1,6 @@
 {
 	"name": "@essex-js-toolkit/hooks",
-	"version": "1.1.3",
+	"version": "1.1.4",
 	"description": "A set of hooks for use with react",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -17,7 +17,7 @@
 		"watch": "essex watch"
 	},
 	"dependencies": {
-		"@essex-js-toolkit/toolbox": "^1.1.3",
+		"@essex-js-toolkit/toolbox": "^1.1.4",
 		"resize-observer-polyfill": "^1.5.1"
 	},
 	"devDependencies": {
