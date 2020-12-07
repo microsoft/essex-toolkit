@@ -1,0 +1,5 @@
+releases:
+  "@essex-js-toolkit/hierarchy-browser": patch
+
+declined:
+  - "@essex-js-toolkit/dev"
