@@ -7,10 +7,15 @@ import { CommunityDataProvider } from '../common/dataProviders'
 import { HierarchyDataProvider } from '../common/dataProviders/HierachyDataProvider'
 import { ICardOrder, IDataProvidersCache } from '../common/types/types'
 import { ICommunityDetail } from '../types/types'
+export { IDataProvidersCache, ICardOrder } from '../common/types/types'
+
+interface SetCache {
+	(state: IDataProvidersCache): IDataProvidersCache
+}
 
 interface ICommunityProviderHook {
 	communities: ICommunityDetail[]
-	setProviderCache: (cache: IDataProvidersCache) => void
+	setProviderCache: (state: SetCache) => void
 	hierachyDataProvider: HierarchyDataProvider
 	setCardOrder: (sorted: ICardOrder) => void
 }
@@ -31,23 +36,26 @@ export const useCommunityProvider = ({
 			const intersection = cacheIds.filter(value =>
 				communityIds.includes(value),
 			)
-			return reverseList.reduce((acc, community, index) => {
-				if (!cache[community.communityId]) {
-					const provider = new CommunityDataProvider(
-						community,
-						hierachyDataProvider,
-						index,
-					)
-					acc[community.communityId] = provider
-					// check if its removed
-				} else if (intersection.includes(community.communityId)) {
-					const provider = cache[community.communityId]
-					provider.updateCommunityData(community)
-					provider.updateHierarchyDataProvider(hierachyDataProvider)
-					acc[community.communityId] = provider
-				}
-				return acc
-			}, {} as IDataProvidersCache)
+			return reverseList.reduce(
+				(acc, community, index): IDataProvidersCache => {
+					if (!cache[community.communityId]) {
+						const provider = new CommunityDataProvider(
+							community,
+							hierachyDataProvider,
+							index,
+						)
+						acc[community.communityId] = provider
+						// check if its removed
+					} else if (intersection.includes(community.communityId)) {
+						const provider = cache[community.communityId]
+						provider.updateCommunityData(community)
+						provider.updateHierarchyDataProvider(hierachyDataProvider)
+						acc[community.communityId] = provider
+					}
+					return acc
+				},
+				{} as IDataProvidersCache,
+			)
 		})
 		const sortOrder = communities.reduce((acc, c, index) => {
 			const id = c.communityId
