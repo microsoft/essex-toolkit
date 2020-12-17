@@ -8,6 +8,10 @@ import {
 	IEntityDetail,
 	CommunityId,
 	INeighborCommunityDetail,
+	IHierarchyDataResponse,
+	IHierarchyNeighborResponse,
+	ILoadParams,
+	ICommunityDetail,
 } from '..'
 import { ICommunity, IEntityMap } from '../common/types/types'
 
@@ -139,6 +143,38 @@ export function getStaticNeighborEntities(
 		}
 		return acc
 	}, [] as IEntityDetail[])
+}
+
+export function createEntityMap(
+	entities?: IEntityDetail[],
+): IEntityMap | undefined {
+	if (entities) {
+		return entities.reduce((acc, entity) => {
+			const id = entity.id
+			acc[id] = entity
+			return acc
+		}, {} as IEntityMap)
+	}
+}
+
+/**
+ * Determines if entities have an async callback (neighbors or community).
+ * @param entities - Entity callback or array (nieghbors  or entities) given by exposed API
+ * @returns {boolean} boolean value determining if async.
+ */
+export function isEntitiesAsync(
+	entities?:
+		| (IEntityDetail[] | INeighborCommunityDetail[])
+		| ((
+				params: ILoadParams,
+		  ) => Promise<IHierarchyNeighborResponse | IHierarchyDataResponse>),
+): boolean {
+	return !Array.isArray(entities) || entities instanceof Promise
+}
+
+export function addLevelLabels(communities: ICommunityDetail[]): ICommunity[] {
+	const max = communities.length - 1
+	return communities.map((comm, index) => ({ ...comm, level: max - index }))
 }
 
 export interface IColorRGB {

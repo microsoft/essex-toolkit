@@ -18,7 +18,6 @@ export function useCommunityData(
 	dataProvider: CommunityDataProvider,
 	isOpenProp: boolean | undefined,
 	maxLevel: number,
-	size: number,
 ): [
 	// entities
 	IEntityDetail[],
@@ -74,7 +73,7 @@ export function useCommunityData(
 		loadInitialEntities,
 		isOpen,
 		entitiesLoaded,
-		size,
+		dataProvider.size,
 	)
 
 	const toggleOpen = useCallback(() => {

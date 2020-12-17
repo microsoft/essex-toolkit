@@ -9,7 +9,6 @@ import {
 	ILoadParams,
 	IHierarchyDataResponse,
 } from '../..'
-import { dedup } from '../../utils/utils'
 import { ENTITY_TYPE } from '../types/types'
 
 export class EntityDataProvider {
@@ -50,24 +49,22 @@ export class EntityDataProvider {
 		this.clearEntities()
 	}
 
+	// #region Getters/Setters
+	public set size(s: number | undefined) {
+		this._size = s === undefined || s === -1 ? undefined : s
+	}
+	public get size(): number | undefined {
+		return this._size
+	}
+
 	private clearEntities(): void {
 		this._entities = []
 	}
 	public get entities(): IEntityDetail[] {
 		return this._entities
 	}
-	private addToEntitiesArray(
-		entities: IEntityDetail[],
-		checkDups: boolean,
-	): void {
-		const all = this._entities.concat(entities)
-		// debug if dups are present
-		// by default is false to reduce compute
-		if (checkDups) {
-			this._entities = dedup(all)
-		} else {
-			this._entities = all
-		}
+	private addToEntitiesArray(entities: IEntityDetail[]): void {
+		this._entities = this._entities.concat(entities)
 	}
 	public get displayEntities(): IEntityDetail[] {
 		return this._displayEntities
@@ -76,6 +73,16 @@ export class EntityDataProvider {
 	public set displayEntities(display: IEntityDetail[]) {
 		this._displayEntities = display
 	}
+
+	public set loadEntitiesFromProvider(
+		handleLoading: (
+			params: ILoadParams,
+			entity: ENTITY_TYPE,
+		) => Promise<IHierarchyDataResponse | undefined>,
+	) {
+		this._loadEntitiesFromProvider = handleLoading
+	}
+	// #endregion
 
 	private getFilterEntitiesFromCache(): IEntityDetail[] {
 		// get cached filtered IDS from Set
@@ -118,7 +125,7 @@ export class EntityDataProvider {
 				//store ids in map
 				this._filteredIds = new Set(data.map(d => d.id))
 			} else {
-				this.addToEntitiesArray(data, false)
+				this.addToEntitiesArray(data)
 			}
 		}
 		return data
@@ -146,6 +153,7 @@ export class EntityDataProvider {
 				}
 			}
 		} else {
+			// do we need to get more?
 			if (this._entities.length < totalLength) {
 				if (size && this._entities.length < size) {
 					await this.loadAndSaveItems(params)

@@ -5,12 +5,11 @@
 import { Spinner } from '@fluentui/react'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { ICommunityDetail, ILoadNeighborCommunities } from '..'
+import { ILoadNeighborCommunities } from '..'
 import { EmptyEntityList } from '../EntityItem/EmptyEntityList'
 import CommunityEdgeList from '../NeighborList/CommunityEdgeList'
 import { ScrollArea } from '../ScollArea'
 import { CommunityDataProvider } from '../common/dataProviders'
-import { HierarchyDataProvider } from '../common/dataProviders/HierachyDataProvider'
 import { useContainerStyle, useThemesAccentStyle } from '../hooks/theme'
 import { useAdjacentCommunityData } from '../hooks/useAdjacentCommunityData'
 import { useCommunityData } from '../hooks/useCommunityData'
@@ -22,39 +21,29 @@ import { CommunityOverview } from './CommunityOverview'
 import { CommunityTable } from './CommunityTable'
 
 export interface ICommunityCardProps {
-	community: ICommunityDetail
 	maxSize: number
 	maxLevel: number
 	level: number
-	hierachyDataProvider: HierarchyDataProvider
 	incrementLevel?: boolean // adjust from 0 to 1 based indexing on levels if needed
 	neighborsLoaded: boolean
 	neighborCallback?: ILoadNeighborCommunities
 	settings: ISettingState
+	dataProvider: CommunityDataProvider
 }
 
 const ENTITY_LOADER_MSG = 'Fetching entity data...'
 
 export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 	function CommunityCard({
-		community,
 		maxSize,
 		maxLevel,
 		level,
 		incrementLevel,
 		neighborsLoaded,
-		hierachyDataProvider,
 		neighborCallback,
 		settings,
+		dataProvider,
 	}: ICommunityCardProps) {
-		/*eslint-disable react-hooks/exhaustive-deps*/
-		const dataProvider = useMemo<CommunityDataProvider>(
-			() => new CommunityDataProvider(community, hierachyDataProvider, level),
-			[
-				/* no deps intentionally */
-			],
-		)
-		/*eslint-enable react-hooks/exhaustive-deps*/
 		const {
 			isOpen: isOpenProp,
 			minimizeColumns,
@@ -63,14 +52,7 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 			controls,
 		} = settings
 
-		useUpdatedCommunityProvider(
-			hierachyDataProvider,
-			dataProvider,
-			community,
-			level,
-			neighborCallback,
-		)
-		const size = useMemo(() => community.size, [community])
+		useUpdatedCommunityProvider(dataProvider, level, neighborCallback)
 
 		const [
 			entities,
@@ -80,7 +62,7 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 			isOpen,
 			toggleOpen,
 			filterProps,
-		] = useCommunityData(dataProvider, isOpenProp, maxLevel, size)
+		] = useCommunityData(dataProvider, isOpenProp, maxLevel)
 
 		const [
 			adjacentCommunities,
@@ -95,7 +77,7 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 			selectedCommunityEdge,
 			clearCurrentSelection,
 		] = useEdgeSelection(dataProvider)
-		const sizePercent = useCommunitySizePercent(community, maxSize)
+		const sizePercent = useCommunitySizePercent(dataProvider.size, maxSize)
 		const contentStyle = useContainerStyle(isOpen, entities.length > 0)
 
 		const loadingElement = useMemo(
@@ -108,7 +90,7 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 		return (
 			<div>
 				<CommunityOverview
-					community={community}
+					communityId={dataProvider.communityId}
 					onToggleOpen={toggleOpen}
 					incrementLevel={incrementLevel}
 					sizePercent={sizePercent}
@@ -117,6 +99,8 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 					level={level}
 					fontStyles={fontStyles}
 					controls={controls}
+					neighborSize={dataProvider.neighborSize}
+					size={dataProvider.size}
 				/>
 				<Flex>
 					<Content style={contentStyle}>
@@ -124,7 +108,7 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 							<ScrollArea loadMore={loadMore} hasMore={hasMore}>
 								<CommunityTable
 									entities={entities}
-									communityId={community.communityId}
+									communityId={dataProvider.communityId}
 									visibleColumns={visibleColumns}
 									fontStyles={fontStyles}
 									minimize={minimizeColumns}

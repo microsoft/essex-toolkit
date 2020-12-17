@@ -3,11 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useMemo } from 'react'
-import { ICommunityDetail } from '..'
 
-export function useCommunitySizePercent(
-	community: ICommunityDetail,
-	maxSize: number,
-): number {
-	return useMemo(() => community.size / maxSize, [community, maxSize])
+export function useCommunitySizePercent(size: number, maxSize: number): number {
+	return useMemo(() => size / maxSize, [size, maxSize])
 }
