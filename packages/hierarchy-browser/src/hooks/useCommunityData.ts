@@ -18,7 +18,6 @@ export function useCommunityData(
 	dataProvider: CommunityDataProvider,
 	isOpenProp: boolean | undefined,
 	maxLevel: number,
-	size: number,
 ): [
 	// entities
 	IEntityDetail[],
@@ -69,6 +68,8 @@ export function useCommunityData(
 		isLoading,
 		dataProvider,
 	)
+
+	const size = useMemo(() => dataProvider.size, [dataProvider.size])
 
 	useLoadEntitiesOnMountEffect(
 		loadInitialEntities,

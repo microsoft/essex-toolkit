@@ -5,7 +5,7 @@
 import { IconButton, Spinner, TooltipHost, Text } from '@fluentui/react'
 import React, { memo, useCallback } from 'react'
 import styled from 'styled-components'
-import { ICommunityDetail, IControls, IEntityDetail } from '..'
+import { CommunityId, IControls, IEntityDetail } from '..'
 import { MagBar } from '../MagBar'
 import { paddingLeft } from '../common/styles'
 import { IFilterProps } from '../hooks/interfaces'
@@ -23,7 +23,8 @@ import { useControls } from '../hooks/useControls'
 import { IEntityLoadParams } from '../hooks/useLoadMoreEntitiesHandler'
 
 export interface ICommunityOverviewProps {
-	community: ICommunityDetail
+	communityId: CommunityId
+	size: number
 	sizePercent: number
 	incrementLevel?: boolean // adjust from 0 to 1 based indexing on levels if needed
 	onToggleOpen: () => void
@@ -35,12 +36,14 @@ export interface ICommunityOverviewProps {
 	level: number
 	fontStyles: ICardFontStyles
 	controls?: IControls
+	neighborSize?: number
 }
 const DEFAULT_MAGBAR_WIDTH = 120
 const SPINNER_STYLE = { marginLeft: 17 }
 export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 	function CommunityOverview({
-		community,
+		communityId,
+		size,
 		sizePercent,
 		incrementLevel,
 		onToggleOpen,
@@ -49,6 +52,7 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 		level,
 		fontStyles,
 		controls,
+		neighborSize,
 	}: ICommunityOverviewProps) {
 		const levelLabel = useCommunityLevelText(level, incrementLevel)
 		const style = useThemesStyle()
@@ -56,7 +60,7 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 		const { showLevel, showMembership, showFilter, showExport } = useControls(
 			controls,
 		)
-		const communityText = useCommunityText(community)
+		const communityText = useCommunityText(communityId)
 
 		const handleFilterChange = useCallback(
 			(event: React.MouseEvent<HTMLButtonElement>) => {
@@ -67,7 +71,8 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 		)
 
 		const [handleDownload, downloadInProgress] = useCommunityDownload(
-			community,
+			communityId,
+			size,
 			getEntityCallback,
 			level,
 		)
@@ -89,13 +94,13 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 							</div>
 						) : null}
 					</GridItem1>
-					{community.neighborSize && community.neighborSize > 0 ? (
+					{neighborSize && neighborSize > 0 ? (
 						<GridItem2>
 							<TooltipHost content="Number of neighboring (connected) communities.  Members of neighboring communities may be related, but are less tightly connected that those within the community.">
 								<div>
 									<Text
 										variant={fontStyles.cardOverviewSubheader}
-									>{`Neighbors: ${community.neighborSize}`}</Text>
+									>{`Neighbors: ${neighborSize}`}</Text>
 								</div>
 								<HeightSpacer />
 							</TooltipHost>
@@ -103,11 +108,11 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 					) : null}
 					<GridItem3>
 						<FlexySubContainer>
-							{community.size && showMembership ? (
+							{size && showMembership ? (
 								<div>
 									<div>
 										<Text variant={fontStyles.cardOverviewSubheader}>
-											Members: {community.size.toLocaleString()}
+											Members: {size.toLocaleString()}
 										</Text>
 									</div>
 									<MagBar percent={sizePercent} width={DEFAULT_MAGBAR_WIDTH} />

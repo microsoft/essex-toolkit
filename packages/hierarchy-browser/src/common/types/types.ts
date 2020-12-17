@@ -8,6 +8,7 @@ import {
 	INeighborCommunityDetail,
 	IEntityDetail,
 } from '../..'
+import { CommunityDataProvider } from '../dataProviders'
 
 export interface ICommunity extends ICommunityDetail {
 	level: number
@@ -23,4 +24,12 @@ export interface IEntityMap {
 export enum ENTITY_TYPE {
 	ENTITY = 'entity',
 	NEIGHBOR = 'neighbor',
+}
+
+export interface IDataProvidersCache {
+	[id: string]: CommunityDataProvider
+}
+
+export interface ICardOrder {
+	[id: string]: number
 }
