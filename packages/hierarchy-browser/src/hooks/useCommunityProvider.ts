@@ -10,7 +10,7 @@ import { ICommunityDetail } from '../types/types'
 
 interface ICommunityProviderHook {
 	communities: ICommunityDetail[]
-	setProviderCache: (cache: any) => void
+	setProviderCache: (cache: IDataProvidersCache) => void
 	hierachyDataProvider: HierarchyDataProvider
 	setCardOrder: (sorted: ICardOrder) => void
 }
@@ -25,7 +25,7 @@ export const useCommunityProvider = ({
 }: ICommunityProviderHook): void => {
 	useMemo(() => {
 		const reverseList = [...communities].reverse()
-		setProviderCache(cache => {
+		setProviderCache((cache: IDataProvidersCache) => {
 			const communityIds = reverseList.map(c => c.communityId)
 			const cacheIds = Object.keys(cache)
 			const intersection = cacheIds.filter(value =>
