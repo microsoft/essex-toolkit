@@ -3,13 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { BaseButton, Button } from '@fluentui/react'
-import { useState, useCallback } from 'react'
-import { ICommunityDetail, IEntityDetail } from '..'
+import React, { useState, useCallback } from 'react'
+
+import { IEntityDetail } from '..'
+import { CommunityId } from '../types'
 import { exportCSVFile } from '../utils/utils'
 import { IEntityLoadParams } from './useLoadMoreEntitiesHandler'
 
 export const downloadCommunityMemebers = async (
-	community: ICommunityDetail,
+	communityId: CommunityId,
+	size: number,
 	getEntityCallback: (
 		pageNumber?: number,
 		params?: IEntityLoadParams,
@@ -17,10 +20,10 @@ export const downloadCommunityMemebers = async (
 	level: number,
 ): Promise<void> => {
 	const response = await getEntityCallback(undefined, {
-		loadCount: community.size,
-		communityId: community.communityId,
+		loadCount: size,
+		communityId: communityId,
 	})
-	const filename = `c${community.communityId}_level${level}`
+	const filename = `c${communityId}_level${level}`
 	if (response) {
 		exportCSVFile(response, filename)
 	} else {
@@ -29,7 +32,8 @@ export const downloadCommunityMemebers = async (
 }
 
 export function useCommunityDownload(
-	community: ICommunityDetail,
+	communityId: CommunityId,
+	size: number,
 	getEntityCallback: (
 		pageNumber?: number,
 		params?: IEntityLoadParams,
@@ -67,7 +71,8 @@ export function useCommunityDownload(
 			setIsLoading(true)
 			console.log(`initiated download of level: ${level} community: ${level}`)
 			const promise = downloadCommunityMemebers(
-				community,
+				communityId,
+				size,
 				getEntityCallback,
 				level,
 			)
@@ -76,7 +81,7 @@ export function useCommunityDownload(
 			})
 			promise.finally(() => setIsLoading(false))
 		},
-		[community, setIsLoading, getEntityCallback, level],
+		[communityId, setIsLoading, getEntityCallback, level, size],
 	)
 
 	return [handleDownloadClick, isLoading]

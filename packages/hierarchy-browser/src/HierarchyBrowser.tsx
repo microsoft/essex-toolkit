@@ -2,14 +2,16 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { memo, useMemo } from 'react'
+import React, { memo, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { CommunityCard } from './CommunityCard/CommunityCard'
 import { HierarchyDataProvider } from './common/dataProviders/HierachyDataProvider'
+import { IDataProvidersCache, ICardOrder } from './common/types/types'
 import {
 	useCommunityLevelCalculator,
 	useCommunitySizeCalculator,
 } from './hooks/useCommunityDetails'
+import { useCommunityProvider } from './hooks/useCommunityProvider'
 import { useSettings } from './hooks/useSettings'
 import { useUpdatedHierarchyProvider } from './hooks/useUpdatedHierarchyProvider'
 import {
@@ -36,12 +38,15 @@ export const HierarchyBrowser = memo(function HierarchyBrowser({
 }: IHierarchyBrowserProps) {
 	/*eslint-disable react-hooks/exhaustive-deps*/
 	const hierachyDataProvider = useMemo<HierarchyDataProvider>(
-		() => new HierarchyDataProvider(communities, entities, neighbors),
+		() => new HierarchyDataProvider(),
 		[
 			/* no deps intentionally */
 		],
 	)
 	/*eslint-enable react-hooks/exhaustive-deps*/
+	const [providerCache, setProviderCache] = useState<IDataProvidersCache>({})
+	const [cardOrder, setCardOrder] = useState<ICardOrder>({})
+
 	const [isNeighborsLoaded, neighborCallback] = useUpdatedHierarchyProvider(
 		communities,
 		hierachyDataProvider,
@@ -50,42 +55,38 @@ export const HierarchyBrowser = memo(function HierarchyBrowser({
 	)
 	const [minLevel, maxLevel] = useCommunityLevelCalculator(communities)
 	const maxSize = useCommunitySizeCalculator(communities)
+	useCommunityProvider({
+		communities,
+		setProviderCache,
+		hierachyDataProvider,
+		setCardOrder,
+	})
 
 	const getSettings = useSettings(settings)
-	const children = useMemo(
-		() =>
-			communities.map((c, index) => {
-				const cardSettings = getSettings(index)
-				return (
-					<CommunityCard
-						community={c}
-						key={`_card_${index}_${c.communityId}`}
-						incrementLevel={minLevel === 0}
-						maxSize={maxSize}
-						maxLevel={maxLevel}
-						hierachyDataProvider={hierachyDataProvider}
-						level={maxLevel - index}
-						neighborsLoaded={isNeighborsLoaded}
-						neighborCallback={neighborCallback}
-						settings={cardSettings}
-					/>
-				)
-			}),
-		[
-			communities,
-			maxLevel,
-			maxSize,
-			minLevel,
-			hierachyDataProvider,
-			isNeighborsLoaded,
-			neighborCallback,
-			getSettings,
-		],
-	)
 
 	return (
 		<div>
-			<CardContainer>{children}</CardContainer>
+			<CardContainer>
+				{Object.keys(providerCache)
+					.sort((a, b) => cardOrder[a] - cardOrder[b])
+					.map((communityId, index) => {
+						const provider = providerCache[communityId]
+						const cardSettings = getSettings(index)
+						return (
+							<CommunityCard
+								key={`_card_${index}_${communityId}`}
+								incrementLevel={minLevel === 0}
+								maxSize={maxSize}
+								maxLevel={maxLevel}
+								level={maxLevel - index}
+								dataProvider={provider}
+								neighborsLoaded={isNeighborsLoaded}
+								neighborCallback={neighborCallback}
+								settings={cardSettings}
+							/>
+						)
+					})}
+			</CardContainer>
 		</div>
 	)
 })

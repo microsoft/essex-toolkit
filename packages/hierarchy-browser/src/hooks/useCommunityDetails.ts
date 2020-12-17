@@ -4,7 +4,7 @@
  */
 import { max } from 'd3-array'
 import { useMemo } from 'react'
-import { ICommunityDetail } from '..'
+import { CommunityId, ICommunityDetail } from '..'
 
 export function useCommunityLevelText(
 	level: number,
@@ -34,6 +34,6 @@ export function useCommunitySizeCalculator(data: ICommunityDetail[]): number {
 	}, [data])
 }
 
-export function useCommunityText(community: ICommunityDetail): string {
-	return useMemo(() => `Community: ${community.communityId}`, [community])
+export function useCommunityText(communityId: CommunityId): string {
+	return useMemo(() => `Community: ${communityId}`, [communityId])
 }
