@@ -69,13 +69,11 @@ export function useCommunityData(
 		dataProvider,
 	)
 
-	const size = useMemo(() => dataProvider.size, [dataProvider.size])
-
 	useLoadEntitiesOnMountEffect(
 		loadInitialEntities,
 		isOpen,
 		entitiesLoaded,
-		size,
+		dataProvider.size,
 	)
 
 	const toggleOpen = useCallback(() => {

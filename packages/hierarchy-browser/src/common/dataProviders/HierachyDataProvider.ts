@@ -30,13 +30,18 @@ export class HierarchyDataProvider {
 	private _neighbors: INeighborCommunityDetail[] | undefined
 	private _communities: ICommunity[] = []
 
-	// <---- update communities properties ---->
+	/**
+	 * update communities properties and saved reference in data manager
+	 * @param {ICommunityDetail[]} entities - communities parameter from API
+	 */
 	public updateCommunities(communities: ICommunityDetail[]): void {
 		this._communities = addLevelLabels(communities)
 	}
 
-	// <---- update Entities properties ---->
-	// check if async loader, data array or undefined
+	/**
+	 * check if async loader, data array or undefined
+	 * @param {IEntityDetail[] | ILoadEntitiesAsync | undefined} entities - entities parameter from API
+	 */
 	public updateEntities(entities?: IEntityDetail[] | ILoadEntitiesAsync): void {
 		if (entities) {
 			this.initEntitiesByLoadType(entities)
@@ -56,10 +61,12 @@ export class HierarchyDataProvider {
 			this._asyncEntityLoader = entities as ILoadEntitiesAsync
 		}
 	}
-	// <---- update Entities properties ---->
 
-	// <---- update Neighbors properties ---->
-	// check if async loader, data array or undefined
+	/**
+	 * check if neighbors is an async loader, data array or undefined.
+	 * @param { INeighborCommunityDetail[] | ILoadNeighborCommunitiesAsync | undefined} neighbors - neighbor parameter from API
+	 * @returns {boolean} boolean value is neighbors is loaded
+	 */
 	public updateNeighbors(
 		neighbors?: INeighborCommunityDetail[] | ILoadNeighborCommunitiesAsync,
 	): boolean {
@@ -82,9 +89,8 @@ export class HierarchyDataProvider {
 		this._asyncNeighborLoader = communities as ILoadNeighborCommunitiesAsync
 		return true
 	}
-	// <---- update Neighbors properties ---->}
 
-	// <--- Getters/Setters --->
+	// #region Getters/Setters
 	public get asyncEntityLoader(): ILoadEntitiesAsync | undefined {
 		return this._asyncEntityLoader
 	}
@@ -106,9 +112,13 @@ export class HierarchyDataProvider {
 	public set neighbors(neighbors: INeighborCommunityDetail[] | undefined) {
 		this._neighbors = neighbors
 	}
-	// <--- Getters/Setters --->
+	// #endregion
 
-	// <-- Callback to retrieve neighbor community data either async or static -->
+	/**
+	 * Callback to retrieve neighbor community data either async or static
+	 * @param {ILoadParams} params - parameters to fetch (communityId, window size, filtered, level)
+	 * @returns {Promise} Promise<IHierarchyNeighborResponse> containing neighbor communities
+	 */
 	public async getNeighborsAtLevel(
 		params: ILoadParams,
 		communityId: string,
@@ -125,7 +135,12 @@ export class HierarchyDataProvider {
 		return { data: [], error: new Error('neighbor communities not loaded') }
 	}
 
-	// <-- Retrieve static entities (either neighbor or community entities) -->
+	/**
+	 * Retrieve static entities (either neighbor or community entities)
+	 * @param {ILoadParams} params - parameters to fetch (communityId, window size, filtered, level)
+	 * @param {ENTITY_TYPE} type - type of entity (neighbor or entity)
+	 * @returns {IHierarchyDataResponse} object containing data of entities and error (if applicable)
+	 */
 	public getEntities(
 		loadParams: ILoadParams,
 		type?: ENTITY_TYPE,

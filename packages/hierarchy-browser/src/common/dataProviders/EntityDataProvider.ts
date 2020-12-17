@@ -49,7 +49,7 @@ export class EntityDataProvider {
 		this.clearEntities()
 	}
 
-	// <--- Getters/Setters --->
+	// #region Getters/Setters
 	public set size(s: number | undefined) {
 		this._size = s === undefined || s === -1 ? undefined : s
 	}
@@ -82,7 +82,7 @@ export class EntityDataProvider {
 	) {
 		this._loadEntitiesFromProvider = handleLoading
 	}
-	// <--- Getters/Setters --->
+	// #endregion
 
 	private getFilterEntitiesFromCache(): IEntityDetail[] {
 		// get cached filtered IDS from Set

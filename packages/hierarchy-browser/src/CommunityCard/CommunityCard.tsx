@@ -69,10 +69,6 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 			isAdjacentEntitiesLoading,
 		] = useAdjacentCommunityData(dataProvider, isOpen, neighborsLoaded)
 
-		const size = useMemo(() => dataProvider.size, [dataProvider.size])
-		const neighborSize = useMemo(() => dataProvider.neighborSize, [
-			dataProvider.neighborSize,
-		])
 		const [
 			setEdgeSelection,
 			loadMoreEntities,
@@ -81,7 +77,7 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 			selectedCommunityEdge,
 			clearCurrentSelection,
 		] = useEdgeSelection(dataProvider)
-		const sizePercent = useCommunitySizePercent(size, maxSize)
+		const sizePercent = useCommunitySizePercent(dataProvider.size, maxSize)
 		const contentStyle = useContainerStyle(isOpen, entities.length > 0)
 
 		const loadingElement = useMemo(
@@ -103,8 +99,8 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 					level={level}
 					fontStyles={fontStyles}
 					controls={controls}
-					neighborSize={neighborSize}
-					size={size}
+					neighborSize={dataProvider.neighborSize}
+					size={dataProvider.size}
 				/>
 				<Flex>
 					<Content style={contentStyle}>

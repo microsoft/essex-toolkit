@@ -12,7 +12,6 @@ import {
 	ILoadNeighborCommunities,
 	IHierarchyDataResponse,
 } from '../..'
-// import {  useHierarchyDataProvider } from '../../utils/utils'
 import { ENTITY_TYPE } from '../types/types'
 import { EntityDataProvider } from './EntityDataProvider'
 import { HierarchyDataProvider } from './HierachyDataProvider'
@@ -99,7 +98,7 @@ export class CommunityDataProvider {
 		this._neighborEntitiesProvider.clear()
 	}
 
-	// <--- Getters/Setters --->
+	// #region Getters/Setters
 	public get loadNeighborsCallback(): ILoadNeighborCommunities | undefined {
 		return this._loadNeighborsCallback
 	}
@@ -127,7 +126,7 @@ export class CommunityDataProvider {
 	public get communityId(): CommunityId {
 		return this._community
 	}
-	// <--- Getters/Setters --->
+	// #endregion
 	private addToNeighborCommunitiesArray(
 		communities: INeighborCommunityDetail[],
 	): void {
@@ -155,8 +154,13 @@ export class CommunityDataProvider {
 			}
 		}
 	}
-
-	// <--- Load Neighbor Community Data --->
+	// #region Load Neighbor Communities
+	/**
+	 * Fetches neighbor communities (either synchronously or async) in a given window.
+	 * @param {number} offset - offset to start array slice
+	 * @param {number} pageSize - optional number of communities to fetch, defaulted to 100.
+	 * @returns {Promise} Promise<INeighborCommunityDetail[] | undefined> returns communities if available
+	 */
 	public async getAdjacentCommunities(
 		offset: number,
 		pageSize?: number,
@@ -180,9 +184,18 @@ export class CommunityDataProvider {
 			)
 		}
 	}
-	// <--- Load Neighbor Community Data --->
-
-	// <--- Load entities from community or neighbors --->
+	// #endregion
+	// #region Load Neighbor Communities
+	/**
+	 * Fetches entites (either neighbors or community) communities (either synchronously or async) in a given window from EntityProvider.
+	 * @param {number} offset - offset to start array slice
+	 * @param {number} pageSize - optional number of communities to fetch, defaulted to 100.
+	 * @param {CommunityId} community - id of the community
+	 * @param {boolean} filtered - should result be filtered
+	 * @param {ENTITY_TYPE} entityType - type of entity (neighbor or entity), default to entity
+	 * @param {number} max - set size for neighbors on selection
+	 * @returns {Promise} Promise<IEntityDetail[]> returns entities
+	 */
 	public async getCommunityMembers(
 		offset: number,
 		pageSize?: number,
@@ -208,5 +221,5 @@ export class CommunityDataProvider {
 		}
 		return await provider.getCommunityMembers(params, max || this._size)
 	}
-	// <--- Load entities from community or neighbors --->
+	// #endregion
 }

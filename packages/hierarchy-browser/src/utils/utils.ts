@@ -157,6 +157,11 @@ export function createEntityMap(
 	}
 }
 
+/**
+ * Determines if entities have an async callback (neighbors or community).
+ * @param entities - Entity callback or array (nieghbors  or entities) given by exposed API
+ * @returns {boolean} boolean value determining if async.
+ */
 export function isEntitiesAsync(
 	entities?:
 		| (IEntityDetail[] | INeighborCommunityDetail[])
@@ -169,9 +174,7 @@ export function isEntitiesAsync(
 
 export function addLevelLabels(communities: ICommunityDetail[]): ICommunity[] {
 	const max = communities.length - 1
-	return communities.map((comm, index) =>
-		Object.assign({}, { ...comm, level: max - index }),
-	)
+	return communities.map((comm, index) => ({ ...comm, level: max - index }))
 }
 
 export interface IColorRGB {
