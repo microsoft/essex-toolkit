@@ -22,7 +22,10 @@ export function useContainerStyle(
 		() =>
 			({
 				height: isOpen ? (entitiesAvailable ? 250 : 75) : 0,
+				width: isOpen ? '100%' : '0px',
 				border: `1px solid ${theme.application().faint().hex()}`,
+				flex: isOpen ? 1 : 'revert',
+				WebkitFlex: isOpen ? 1 : 'revert',
 			} as React.CSSProperties),
 		[isOpen, theme, entitiesAvailable],
 	)
@@ -46,6 +49,7 @@ export function useThemesAccentStyle(isOpen: boolean): React.CSSProperties {
 			background: theme.application().faint().hex(),
 			borderColor: theme.application().lowContrast().hex(),
 			visible: isOpen ? 'visible' : 'hidden',
+			width: isOpen ? '15px' : 0,
 		}),
 		[theme, isOpen],
 	)

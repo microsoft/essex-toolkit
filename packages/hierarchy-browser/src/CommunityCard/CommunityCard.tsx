@@ -15,10 +15,12 @@ import { useAdjacentCommunityData } from '../hooks/useAdjacentCommunityData'
 import { useCommunityData } from '../hooks/useCommunityData'
 import { useCommunitySizePercent } from '../hooks/useCommunitySizePercent'
 import { useEdgeSelection } from '../hooks/useEdgeSelection'
+import { useExpandedPanel } from '../hooks/useExpandedPanel'
 import { ISettingState } from '../hooks/useSettings'
 import { useUpdatedCommunityProvider } from '../hooks/useUpdatedCommunityProvider'
 import { CommunityOverview } from './CommunityOverview'
 import { CommunityTable } from './CommunityTable'
+import { TableExpander } from './TableExpander'
 
 export interface ICommunityCardProps {
 	maxSize: number
@@ -87,6 +89,15 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 
 		const colorStyle = useThemesAccentStyle(isOpen)
 
+		const {
+			edgeContentStyle,
+			edgeEntitiesContentStyle,
+			edgeEntitiesExpanderClick,
+			edgeExpanderClick,
+			edgeListOpen,
+			edgeEntitiesOpen,
+		} = useExpandedPanel({ isOpen, entities })
+
 		return (
 			<div>
 				<CommunityOverview
@@ -122,37 +133,58 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 							isLoading={isLoading}
 						/>
 					</Content>
-					<Spacer style={colorStyle}></Spacer>
+
 					{adjacentCommunities && adjacentCommunities.length > 0 ? (
-						<Content style={contentStyle}>
-							<CommunityEdgeList
-								edges={adjacentCommunities}
-								selectedEdge={selectedCommunityEdge}
-								onEdgeClick={setEdgeSelection}
-								clearCurrentSelection={clearCurrentSelection}
-							/>
-						</Content>
+						<>
+							<Spacer style={colorStyle}>
+								{isOpen ? (
+									<TableExpander
+										isOpen={edgeListOpen}
+										handleButtonClick={edgeExpanderClick}
+									/>
+								) : null}
+							</Spacer>
+							<Content style={edgeContentStyle}>
+								<CommunityEdgeList
+									edges={adjacentCommunities}
+									selectedEdge={selectedCommunityEdge}
+									onEdgeClick={setEdgeSelection}
+									clearCurrentSelection={clearCurrentSelection}
+									isOpen={edgeListOpen}
+								/>
+							</Content>
+						</>
 					) : null}
 					{isAdjacentEntitiesLoading || edgeEntities?.length > 0 ? (
-						<Content style={contentStyle}>
-							{edgeEntities?.length > 0 ? (
-								<ScrollArea
-									loadMore={loadMoreEntities}
-									hasMore={moreEntitiesToLoad}
-								>
-									<CommunityTable
-										entities={edgeEntities}
-										communityId={selectedCommunityEdge?.communityId}
-										visibleColumns={visibleColumns}
-										fontStyles={fontStyles}
-										minimize={minimizeColumns}
+						<>
+							<Spacer style={colorStyle}>
+								{isOpen ? (
+									<TableExpander
+										isOpen={edgeEntitiesOpen}
+										handleButtonClick={edgeEntitiesExpanderClick}
 									/>
-								</ScrollArea>
-							) : null}
-							{isAdjacentEntitiesLoading ? (
-								<Spinner label={ENTITY_LOADER_MSG} />
-							) : null}
-						</Content>
+								) : null}
+							</Spacer>
+							<Content style={edgeEntitiesContentStyle}>
+								{edgeEntities?.length > 0 && edgeEntitiesOpen ? (
+									<ScrollArea
+										loadMore={loadMoreEntities}
+										hasMore={moreEntitiesToLoad}
+									>
+										<CommunityTable
+											entities={edgeEntities}
+											communityId={selectedCommunityEdge?.communityId}
+											visibleColumns={visibleColumns}
+											fontStyles={fontStyles}
+											minimize={minimizeColumns}
+										/>
+									</ScrollArea>
+								) : null}
+								{isAdjacentEntitiesLoading ? (
+									<Spinner label={ENTITY_LOADER_MSG} />
+								) : null}
+							</Content>
+						</>
 					) : null}
 				</Flex>
 			</div>
@@ -167,10 +199,9 @@ const Flex = styled.div`
 const Content = styled.div`
 	overflow-y: auto;
 	transition: height 0.2s;
-	flex: 1;
 `
 const Spacer = styled.div`
-	width: 10px;
 	border-style: solid;
 	border-width: 0px 0.5px 0px 0.5px;
+	align-self: center;
 `
