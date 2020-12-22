@@ -4,7 +4,7 @@
  */
 import { Text } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
-import React, { useCallback, memo, useRef, useMemo } from 'react'
+import React, { useCallback, memo, useRef } from 'react'
 import styled from 'styled-components'
 import { INeighborCommunityDetail } from '..'
 import {
@@ -25,6 +25,7 @@ export interface ICommunityEdgeListProps {
 	onEdgeClick: (edge?: INeighborCommunityDetail) => Promise<void>
 	clearCurrentSelection: () => Promise<void>
 	selectedEdge?: INeighborCommunityDetail
+	isOpen: boolean
 }
 const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 	function CommunityEdgeList({
@@ -52,17 +53,15 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 		)
 		const sortedEdges = useSortedNeighbors(edges)
 		const ref = useRef(null)
-		const dimensions = useDimensions(ref)
+		const connRef = useRef(null)
+		const memberDimensions = useDimensions(ref)
+		const connectionDimensions = useDimensions(connRef)
 		const [getBackgroundStyle, barColor, connScale, sizeScale] = useRowElements(
 			theme,
 			selectedEdge,
 			edges,
-			dimensions,
+			memberDimensions,
 		)
-
-		const width = useMemo(() => (dimensions ? dimensions.width : 10), [
-			dimensions,
-		])
 
 		return sortedEdges ? (
 			<Table>
@@ -106,7 +105,7 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 									}}
 									key={`neighbor-community-${0}`}
 									onClick={() => handleEdgeClick(edge)}
-									ref={ref}
+									ref={connRef}
 								>
 									<div>
 										<AbsoluteDiv>
@@ -115,13 +114,15 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 													{edge.connections}
 												</Text>
 											</TextContainer>
-											<Bar
-												value={edge.connections}
-												width={width}
-												height={25}
-												color={barColor}
-												scale={connScale}
-											/>
+											{connectionDimensions?.width ? (
+												<Bar
+													value={edge.connections}
+													width={connectionDimensions.width}
+													height={connectionDimensions?.height || 25}
+													color={barColor}
+													scale={connScale}
+												/>
+											) : null}
 										</AbsoluteDiv>
 									</div>
 								</TableCell>
@@ -131,24 +132,25 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 									}}
 									key={`neighbor-community-${1}`}
 									onClick={() => handleEdgeClick(edge)}
+									ref={ref}
 								>
-									<div>
-										<AbsoluteDiv>
-											<TextContainer>
-												<Text variant={tableItems} styles={textStyle}>
-													{edge.size}
-												</Text>
-											</TextContainer>
+									<AbsoluteDiv>
+										<TextContainer>
+											<Text variant={tableItems} styles={textStyle}>
+												{edge.size}
+											</Text>
+										</TextContainer>
 
+										{memberDimensions?.width ? (
 											<Bar
 												value={edge.size}
-												width={width}
-												height={25}
+												width={memberDimensions.width}
+												height={memberDimensions?.height || 25}
 												color={barColor}
 												scale={sizeScale}
 											/>
-										</AbsoluteDiv>
-									</div>
+										) : null}
+									</AbsoluteDiv>
 								</TableCell>
 							</tr>
 						)
@@ -182,11 +184,11 @@ const TableCell = styled.td`
 `
 const TextContainer = styled.div`
 	z-index: 2;
-	left: -10;
-	width: 100%;
+	top: 0px;
+	right: 5px;
+	/* left: -10; */
 	position: absolute;
 `
 const AbsoluteDiv = styled.div`
-	position: absolute;
 	top: 0;
 `

@@ -7,7 +7,6 @@ import { CommunityDataProvider } from '../common/dataProviders'
 import { HierarchyDataProvider } from '../common/dataProviders/HierachyDataProvider'
 import { ICardOrder, IDataProvidersCache } from '../common/types/types'
 import { ICommunityDetail } from '../types/types'
-export { IDataProvidersCache, ICardOrder } from '../common/types/types'
 
 interface SetCache {
 	(state: IDataProvidersCache): IDataProvidersCache
