@@ -40,27 +40,27 @@ export const CommunityTable: React.FC<ICommunityTableProps> = memo(
 			: 'Community Membership'
 		return (
 			<Table>
-				<thead>
-					<tr>
-						<TableHeader colSpan={attrKeys.length + 1}>
+				<TableHeader>
+					<TableRow>
+						<TableHeaderRow colSpan={attrKeys.length + 1}>
 							<Text variant={fontStyles.tableHeader}>
-								<b>{headerLabel}</b>
+								<Bold>{headerLabel}</Bold>
 							</Text>
-						</TableHeader>
-					</tr>
-				</thead>
+						</TableHeaderRow>
+					</TableRow>
+				</TableHeader>
 				<THeader>
-					<tr>
+					<TableRow>
 						{['id', ...attrKeys].map((key, i) => (
 							<HeaderCell key={`table-header-${i}`}>
 								<Text variant={fontStyles.tableSubheader} styles={textStyle}>
-									<b>{key}</b>
+									<Bold>{key}</Bold>
 								</Text>
 							</HeaderCell>
 						))}
-					</tr>
+					</TableRow>
 				</THeader>
-				<tbody>
+				<TableBody>
 					{entities.map((entity, i) => (
 						<EntityItem
 							key={`entity_${i}`}
@@ -70,7 +70,7 @@ export const CommunityTable: React.FC<ICommunityTableProps> = memo(
 							fontStyle={fontStyles.tableItem}
 						/>
 					))}
-				</tbody>
+				</TableBody>
 			</Table>
 		)
 	},
@@ -81,6 +81,16 @@ CommunityTable.displayName = 'CommunityTableProps'
 const THeader = styled.thead`
 	font-weight: bold;
 `
+
+const TableRow = styled.tr``
+
+const TableHeader = styled.thead``
+
+const TableBody = styled.tbody``
+const Bold = styled.div`
+	font-weight: bold;
+`
+
 const Table = styled.table`
 	width: 100%;
 `
@@ -89,7 +99,7 @@ const HeaderCell = styled.th`
 	width: 1px;
 	white-space: nowrap;
 `
-const TableHeader = styled.th`
+const TableHeaderRow = styled.th`
 	font-weight: bold;
 	width: 1px;
 	white-space: nowrap;

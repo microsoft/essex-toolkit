@@ -81,27 +81,27 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 			<FlexyContainer onClick={onToggleOpen} style={style}>
 				<Grid>
 					<GridItem1>
-						<div>
+						<Divider>
 							<Text variant={fontStyles.cardOverviewHeader}>
-								<b>{communityText}</b>
+								<Bold>{communityText}</Bold>
 							</Text>
-						</div>
+						</Divider>
 						{showLevel ? (
-							<div>
+							<Divider>
 								<Text variant={fontStyles.cardOverviewSubheader}>
 									{levelLabel}
 								</Text>
-							</div>
+							</Divider>
 						) : null}
 					</GridItem1>
 					{neighborSize && neighborSize > 0 ? (
 						<GridItem2>
 							<TooltipHost content="Number of neighboring (connected) communities.  Members of neighboring communities may be related, but are less tightly connected that those within the community.">
-								<div>
+								<Divider>
 									<Text
 										variant={fontStyles.cardOverviewSubheader}
 									>{`Neighbors: ${neighborSize}`}</Text>
-								</div>
+								</Divider>
 								<HeightSpacer />
 							</TooltipHost>
 						</GridItem2>
@@ -109,14 +109,14 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 					<GridItem3>
 						<FlexySubContainer>
 							{size && showMembership ? (
-								<div>
-									<div>
+								<Divider>
+									<Divider>
 										<Text variant={fontStyles.cardOverviewSubheader}>
 											Members: {size.toLocaleString()}
 										</Text>
-									</div>
+									</Divider>
 									<MagBar percent={sizePercent} width={DEFAULT_MAGBAR_WIDTH} />
-								</div>
+								</Divider>
 							) : null}
 							{showFilter ? (
 								<TooltipHost
@@ -154,6 +154,11 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 		)
 	},
 )
+const Divider = styled.div``
+
+const Bold = styled.div`
+	font-weight: bold;
+`
 
 const FlexySubContainer = styled.div`
 	display: flex;

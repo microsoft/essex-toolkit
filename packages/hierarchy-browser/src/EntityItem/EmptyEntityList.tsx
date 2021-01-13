@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import React, { memo } from 'react'
+import styled from 'styled-components'
 import { IEntityDetail } from '..'
 import { IFilterProps } from '../hooks/interfaces'
 
@@ -18,14 +19,15 @@ export const EmptyEntityList: React.FC<IEmptyEnityList> = memo(
 		isLoading,
 	}: IEmptyEnityList) {
 		return (
-			<div>
+			<Container>
 				{filterProps.state && entities.length === 0 && !isLoading ? (
 					<>
 						No unique items to show at this level. Toggle filter to view all
 						items in this community.
 					</>
 				) : null}
-			</div>
+			</Container>
 		)
 	},
 )
+const Container = styled.div``

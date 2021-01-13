@@ -4,6 +4,7 @@
  */
 import { Text, ITextProps } from '@fluentui/react'
 import React, { memo } from 'react'
+import styled from 'styled-components'
 import { IEntityDetail } from '..'
 import { textStyle } from '../common/styles'
 import { useRowStyle } from './hooks/useRowStyle'
@@ -15,19 +16,19 @@ export interface IEntityItemProps {
 	fontStyle: ITextProps['variant']
 }
 export const EntityItem: React.FC<IEntityItemProps> = memo(
-	({ item, attrs, index, fontStyle }) => {
+	({ item, attrs, index, fontStyle }: IEntityItemProps) => {
 		const rowStyle = useRowStyle(index)
 
 		return (
-			<tr key={`e${index}`} style={rowStyle}>
-				<td>
+			<TableRow key={`e${index}`} style={rowStyle}>
+				<TableItem>
 					<Text variant={fontStyle} styles={textStyle}>
 						{item.id}
 					</Text>
-				</td>
+				</TableItem>
 				{attrs
 					? attrs.map((attr, i) => (
-							<td key={`attr${i}`}>
+							<TableItem key={`attr${i}`}>
 								{item.attrs && item.attrs[attr] ? (
 									<Text variant={fontStyle} styles={textStyle}>
 										{item.attrs[attr].toLocaleString()}
@@ -35,11 +36,15 @@ export const EntityItem: React.FC<IEntityItemProps> = memo(
 								) : (
 									''
 								)}{' '}
-							</td>
+							</TableItem>
 					  ))
 					: null}
-			</tr>
+			</TableRow>
 		)
 	},
 )
 EntityItem.displayName = 'EntityItem'
+
+const TableRow = styled.tr``
+
+const TableItem = styled.td``

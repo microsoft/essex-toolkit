@@ -4,6 +4,7 @@
  */
 import { ScaleLinear } from 'd3-scale'
 import React, { memo } from 'react'
+import styled from 'styled-components'
 
 interface ICellComponentProps {
 	value: number
@@ -12,7 +13,6 @@ interface ICellComponentProps {
 	height: number | string
 	width: number
 }
-
 export const Bar: React.FC<ICellComponentProps> = memo(function Bar({
 	value,
 	scale,
@@ -23,11 +23,7 @@ export const Bar: React.FC<ICellComponentProps> = memo(function Bar({
 	const size = scale(value)
 	return (
 		<>
-			<svg
-				width={width}
-				height={height}
-				style={{ position: 'absolute', top: 0, left: 0 }}
-			>
+			<SvgElement width={width} height={height} style={svgStyle}>
 				<rect
 					width={size || 10}
 					height={height}
@@ -36,7 +32,15 @@ export const Bar: React.FC<ICellComponentProps> = memo(function Bar({
 					rx={3}
 					opacity={0.5}
 				/>
-			</svg>
+			</SvgElement>
 		</>
 	)
 })
+
+const SvgElement = styled.svg<{ width: number; height: number | string }>`
+	width: ${({ width }) => width};
+	height: ${({ height }) => height};
+	position: absolute;
+	top: 0;
+	left: 0;
+`
