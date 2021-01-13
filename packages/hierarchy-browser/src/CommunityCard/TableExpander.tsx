@@ -10,8 +10,10 @@ interface ITableExpander {
 	isOpen: boolean
 	handleButtonClick: (state: boolean) => void
 }
+const iconButtonStyles = { root: { maxHeight: '15px', maxWidth: '15px' } }
+
 export const TableExpander: React.FC<ITableExpander> = memo(
-	function TableExpander({ isOpen, handleButtonClick }) {
+	function TableExpander({ isOpen, handleButtonClick }: ITableExpander) {
 		const iconName = useMemo(
 			() => (isOpen ? 'DoubleChevronRight12' : 'DoubleChevronLeft12'),
 			[isOpen],
@@ -24,7 +26,7 @@ export const TableExpander: React.FC<ITableExpander> = memo(
 			<>
 				<Header>
 					<IconButton
-						styles={{ root: { maxHeight: '15px', maxWidth: '15px' } }}
+						styles={iconButtonStyles}
 						iconProps={{
 							iconName,
 						}}
