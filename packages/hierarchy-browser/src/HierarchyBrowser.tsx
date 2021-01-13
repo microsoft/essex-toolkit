@@ -30,42 +30,49 @@ export interface IHierarchyBrowserProps {
 	settings?: ISettings
 }
 
-export const HierarchyBrowser = memo(function HierarchyBrowser({
-	communities,
-	entities,
-	neighbors,
-	settings,
-}: IHierarchyBrowserProps) {
-	/*eslint-disable react-hooks/exhaustive-deps*/
-	const hierachyDataProvider = useMemo<HierarchyDataProvider>(
-		() => new HierarchyDataProvider(),
-		[
-			/* no deps intentionally */
-		],
-	)
-	/*eslint-enable react-hooks/exhaustive-deps*/
-	const [providerCache, setProviderCache] = useState<IDataProvidersCache>({})
-	const [cardOrder, setCardOrder] = useState<ICardOrder>({})
-
-	const [isNeighborsLoaded, neighborCallback] = useUpdatedHierarchyProvider(
+/**
+ * Component creates tables to view connected data while also applying default thematic styles and data colors.
+ * @param communities required ICommunityDetail[]
+ * @param entities (optional) IEntityDetail[] | ILoadEntitiesAsync
+ * @param neighbors (optional) INeighborCommunityDetail[] | ILoadNeighborCommunitiesAsync
+ * @param settings (optional) ISettings
+ */
+export const HierarchyBrowser: React.FC<IHierarchyBrowserProps> = memo(
+	function HierarchyBrowser({
 		communities,
-		hierachyDataProvider,
 		entities,
 		neighbors,
-	)
-	const [minLevel, maxLevel] = useCommunityLevelCalculator(communities)
-	const maxSize = useCommunitySizeCalculator(communities)
-	useCommunityProvider({
-		communities,
-		setProviderCache,
-		hierachyDataProvider,
-		setCardOrder,
-	})
+		settings,
+	}: IHierarchyBrowserProps) {
+		/*eslint-disable react-hooks/exhaustive-deps*/
+		const hierachyDataProvider = useMemo<HierarchyDataProvider>(
+			() => new HierarchyDataProvider(),
+			[
+				/* no deps intentionally */
+			],
+		)
+		/*eslint-enable react-hooks/exhaustive-deps*/
+		const [providerCache, setProviderCache] = useState<IDataProvidersCache>({})
+		const [cardOrder, setCardOrder] = useState<ICardOrder>({})
 
-	const getSettings = useSettings(settings)
+		const [isNeighborsLoaded, neighborCallback] = useUpdatedHierarchyProvider(
+			communities,
+			hierachyDataProvider,
+			entities,
+			neighbors,
+		)
+		const [minLevel, maxLevel] = useCommunityLevelCalculator(communities)
+		const maxSize = useCommunitySizeCalculator(communities)
+		useCommunityProvider({
+			communities,
+			setProviderCache,
+			hierachyDataProvider,
+			setCardOrder,
+		})
 
-	return (
-		<div>
+		const getSettings = useSettings(settings)
+
+		return (
 			<CardContainer>
 				{Object.keys(providerCache)
 					.sort((a, b) => cardOrder[a] - cardOrder[b])
@@ -87,9 +94,9 @@ export const HierarchyBrowser = memo(function HierarchyBrowser({
 						)
 					})}
 			</CardContainer>
-		</div>
-	)
-})
+		)
+	},
+)
 
 const CardContainer = styled.div`
 	margin: 10px 10px 10px 10px;

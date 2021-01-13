@@ -65,28 +65,28 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 
 		return sortedEdges ? (
 			<Table>
-				<thead>
-					<tr>
+				<TableHead>
+					<TableRow>
 						<TableHeader colSpan={3}>
 							<Text variant={rowHeader}>
-								<b>Neighboring Communities</b>
+								<Bold>Neighboring Communities</Bold>
 							</Text>
 						</TableHeader>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
+					</TableRow>
+				</TableHead>
+				<TableBody>
+					<TableRow>
 						{SUBHEADERS.map((header, index) => (
 							<TableHeader key={`subheader-${index}`}>
 								<Text variant={rowSubHeader} styles={textStyle}>
-									<b>{header}</b>
+									<Bold>{header}</Bold>
 								</Text>
 							</TableHeader>
 						))}
-					</tr>
+					</TableRow>
 					{sortedEdges.map((edge, i) => {
 						return (
-							<tr key={i}>
+							<TableRow key={i}>
 								<TableCell
 									style={{
 										...getBackgroundStyle(edge, 0, i),
@@ -107,7 +107,7 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 									onClick={() => handleEdgeClick(edge)}
 									ref={connRef}
 								>
-									<div>
+									<Separator>
 										<AbsoluteDiv>
 											<TextContainer>
 												<Text variant={tableItems} styles={textStyle}>
@@ -124,7 +124,7 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 												/>
 											) : null}
 										</AbsoluteDiv>
-									</div>
+									</Separator>
 								</TableCell>
 								<TableCell
 									style={{
@@ -152,10 +152,10 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 										) : null}
 									</AbsoluteDiv>
 								</TableCell>
-							</tr>
+							</TableRow>
 						)
 					})}
-				</tbody>
+				</TableBody>
 			</Table>
 		) : null
 	},
@@ -166,6 +166,15 @@ export default CommunityEdgeList
 
 const Table = styled.table`
 	width: 100%;
+`
+const TableHead = styled.thead``
+
+const TableRow = styled.tr``
+const TableBody = styled.tbody``
+
+const Separator = styled.div``
+const Bold = styled.div`
+	font-weight: bold;
 `
 
 const TableHeader = styled.td`
@@ -186,7 +195,6 @@ const TextContainer = styled.div`
 	z-index: 2;
 	top: 0px;
 	right: 5px;
-	/* left: -10; */
 	position: absolute;
 `
 const AbsoluteDiv = styled.div`

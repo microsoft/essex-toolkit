@@ -24,6 +24,34 @@ This allows arbitrary column configurations via jsx, and a set of global filters
 
 !["Themed-Lineup Dark Preview"](../../assets/ThematicLineup-dark-story.JPG)
 
+### Extending webpack config example
+
+You may need to extend webpack config to get lineup component to work. If you are using the [@essex/scripts](https://www.npmjs.com/package/@essex/scripts) build system, an example of this is:
+
+```jsx
+const { configure } = require('@essex/webpack-config')
+const base = configure({ pnp: true }) // if using pnp
+
+const lineupRules = [
+	{
+		test: /\.svg(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+		loader: 'url-loader',
+		options: {
+			limit: 10000, //inline <= 10kb
+			mimetype: 'image/svg+xml',
+		},
+	},
+	{
+		test: /\.(ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+		loader: 'file-loader',
+	},
+]
+
+base.module.rules = [...base.module.rules, ...lineupRules]
+
+module.exports = base
+```
+
 ### License
 
 Licensed under the [MIT License](../../LICENSE).

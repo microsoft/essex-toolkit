@@ -5,6 +5,7 @@
 import { useThematic } from '@thematic/react'
 import { select } from 'd3-selection'
 import React, { useRef, useLayoutEffect, memo } from 'react'
+import styled from 'styled-components'
 
 interface IMagBarProps {
 	percent: number
@@ -65,5 +66,7 @@ export const MagBar: React.FC<IMagBarProps> = memo(function MagBar({
 			.attr('x', (d: IDataItem) => d.x)
 	}, [theme, percent, width, height])
 
-	return <div ref={ref} />
+	return <Container ref={ref} />
 })
+
+const Container = styled.div``

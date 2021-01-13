@@ -99,7 +99,7 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 		} = useExpandedPanel({ isOpen, entities })
 
 		return (
-			<div>
+			<Container>
 				<CommunityOverview
 					communityId={dataProvider.communityId}
 					onToggleOpen={toggleOpen}
@@ -187,10 +187,12 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 						</>
 					) : null}
 				</Flex>
-			</div>
+			</Container>
 		)
 	},
 )
+
+const Container = styled.div``
 
 const Flex = styled.div`
 	display: flex;
