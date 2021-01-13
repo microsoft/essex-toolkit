@@ -23,7 +23,7 @@ export const Bar: React.FC<ICellComponentProps> = memo(function Bar({
 	const size = scale(value)
 	return (
 		<>
-			<SvgElement width={width} height={height} style={svgStyle}>
+			<SvgElement width={width} height={height}>
 				<rect
 					width={size || 10}
 					height={height}
