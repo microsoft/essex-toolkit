@@ -26,7 +26,6 @@ export class HierarchyDataProvider {
 	private _loadEntitiesAsync = false
 	private _entities: IEntityMap | undefined
 	private _asyncEntityLoader: ILoadEntitiesAsync | undefined
-	private _asyncNeighborLoader: ILoadNeighborCommunitiesAsync | undefined
 	private _neighbors: INeighborCommunityDetail[] | undefined
 	private _communities: ICommunity[] = []
 
@@ -62,40 +61,9 @@ export class HierarchyDataProvider {
 		}
 	}
 
-	/**
-	 * check if neighbors is an async loader, data array or undefined.
-	 * @param { INeighborCommunityDetail[] | ILoadNeighborCommunitiesAsync | undefined} neighbors - neighbor parameter from API
-	 * @returns {boolean} boolean value is neighbors is loaded
-	 */
-	public updateNeighbors(
-		neighbors?: INeighborCommunityDetail[] | ILoadNeighborCommunitiesAsync,
-	): boolean {
-		return neighbors ? this.initNeighborsByLoadType(neighbors) : false
-	}
-
-	private initNeighborsByLoadType(
-		communities: INeighborCommunityDetail[] | ILoadNeighborCommunitiesAsync,
-	): boolean {
-		const shouldLoadEntitiesAsync = isEntitiesAsync(communities)
-		if (!shouldLoadEntitiesAsync) {
-			this._neighbors = communities as INeighborCommunityDetail[]
-			if (communities.length === 0) {
-				// entities not loaded
-				return false
-			}
-			return true
-		}
-		// store callback
-		this._asyncNeighborLoader = communities as ILoadNeighborCommunitiesAsync
-		return true
-	}
-
 	// #region Getters/Setters
 	public get asyncEntityLoader(): ILoadEntitiesAsync | undefined {
 		return this._asyncEntityLoader
-	}
-	public get asyncNeighborLoader(): ILoadNeighborCommunitiesAsync | undefined {
-		return this._asyncNeighborLoader
 	}
 
 	public get loadEntitiesAsync(): boolean {
@@ -122,14 +90,19 @@ export class HierarchyDataProvider {
 	public async getNeighborsAtLevel(
 		params: ILoadParams,
 		communityId: string,
+		neighborLoader:
+			| ILoadNeighborCommunitiesAsync
+			| INeighborCommunityDetail[]
+			| undefined,
 	): Promise<IHierarchyNeighborResponse> {
-		if (this._asyncNeighborLoader) {
-			return await this._asyncNeighborLoader(params)
-		}
-		if (this._neighbors) {
-			const data = this._neighbors.filter(
-				d => d.edgeCommunityId === communityId,
-			)
+		if (neighborLoader) {
+			const isAsync = isEntitiesAsync(neighborLoader)
+			if (isAsync) {
+				const loader = neighborLoader as ILoadNeighborCommunitiesAsync
+				return await loader(params)
+			}
+			const neighbors = neighborLoader as INeighborCommunityDetail[]
+			const data = neighbors.filter(d => d.edgeCommunityId === communityId)
 			return { data, error: undefined }
 		}
 		return { data: [], error: new Error('neighbor communities not loaded') }

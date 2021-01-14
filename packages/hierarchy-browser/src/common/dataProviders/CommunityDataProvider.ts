@@ -37,7 +37,6 @@ export class CommunityDataProvider {
 		this.updateCommunityData(communityData)
 		this._level = level
 		const callback = this.useHierarchyDataProvider(hierachyDataProvider)
-		this._loadNeighborsCallback = hierachyDataProvider.getNeighborsAtLevel
 		this._entityProvider = new EntityDataProvider(
 			ENTITY_TYPE.ENTITY,
 			this._size,
@@ -83,7 +82,7 @@ export class CommunityDataProvider {
 		hierachyDataProvider: HierarchyDataProvider,
 	): void {
 		const callback = this.useHierarchyDataProvider(hierachyDataProvider)
-		this._loadNeighborsCallback = hierachyDataProvider.getNeighborsAtLevel
+		// this._loadNeighborsCallback = hierachyDataProvider.getNeighborsAtLevel
 		this._entityProvider.size = this._size
 		this._entityProvider.loadEntitiesFromProvider = callback
 		this._neighborEntitiesProvider.loadEntitiesFromProvider = callback
