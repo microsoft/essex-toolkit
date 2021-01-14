@@ -14,6 +14,7 @@ import {
 	ILoadParams,
 	INeighborCommunityDetail,
 } from '../types'
+import { isEntitiesAsync } from '../utils/utils'
 export function useUpdatedHierarchyProvider(
 	communities: ICommunityDetail[],
 	hierachyDataProvider: HierarchyDataProvider,
@@ -35,7 +36,12 @@ export function useUpdatedHierarchyProvider(
 	}, [entities, hierachyDataProvider])
 
 	useEffect(() => {
-		const isLoaded = hierachyDataProvider.updateNeighbors(neighbors)
+		let isLoaded = false
+		if (neighbors) {
+			const isAsync = isEntitiesAsync(neighbors)
+			isLoaded = isAsync || neighbors.length > 0
+		}
+		hierachyDataProvider.neighbors = neighbors as INeighborCommunityDetail[]
 		setIsNeighborsLoaded(isLoaded) // trigger neighbor refresh
 	}, [neighbors, hierachyDataProvider])
 
@@ -44,9 +50,13 @@ export function useUpdatedHierarchyProvider(
 			params: ILoadParams,
 			communityId: CommunityId,
 		): Promise<IHierarchyNeighborResponse> => {
-			return await hierachyDataProvider.getNeighborsAtLevel(params, communityId)
+			return await hierachyDataProvider.getNeighborsAtLevel(
+				params,
+				communityId,
+				neighbors,
+			)
 		},
-		[hierachyDataProvider],
+		[hierachyDataProvider, neighbors],
 	)
 	return [isNeighborsLoaded, neighborCallback]
 }
