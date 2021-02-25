@@ -2,15 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { useCallback, useMemo } from 'react'
+import { IChoiceGroupOption } from '@fluentui/react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { CSF } from './types'
+import { Selections } from './utils/components'
 import { LocalEntity, NeighborLocalEntity } from './utils/types'
 import { useData } from './utils/useData'
+import { options, selectedClusterID } from './utils/utils'
 import {
 	HierarchyBrowser,
 	ILoadParams,
 	INeighborCommunityDetail,
-	IEntityDetail,
 	CommunityId,
 } from '@essex-js-toolkit/hierarchy-browser'
 
@@ -19,8 +21,17 @@ const story = {
 }
 
 export default story
+
 export const HierarchyBrowserStory: CSF = () => {
-	const [communities, nodes, edges] = useData()
+	const [selectedOption, setSelectedOption] = useState<string>(
+		`${selectedClusterID}`,
+	)
+	const onChange = useCallback(
+		(option: IChoiceGroupOption) => setSelectedOption(option.key),
+		[setSelectedOption],
+	)
+
+	const [communities, nodes, edges] = useData(selectedOption)
 
 	const allEntities = useMemo(() => [...nodes, ...edges], [nodes, edges])
 
@@ -75,6 +86,12 @@ export const HierarchyBrowserStory: CSF = () => {
 
 	return (
 		<>
+			<Selections
+				options={options}
+				defaultSelectedKey={`${selectedClusterID}`}
+				label={'selected community'}
+				onChange={onChange}
+			/>
 			{communities && (
 				<HierarchyBrowser
 					communities={communities}

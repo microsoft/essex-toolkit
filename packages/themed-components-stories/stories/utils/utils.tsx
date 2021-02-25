@@ -1,4 +1,18 @@
 import { JoinData } from './types'
+import { IChoiceGroupOption } from '@fluentui/react'
+
+export const selectedClusterID = 204
+
+export const clusterSampleID1 = 205
+export const clusterSampleID2 = 128
+export const clusterSampleID3 = 130
+
+export const options: IChoiceGroupOption[] = [
+	{ key: `${selectedClusterID}`, text: `${selectedClusterID}` },
+	{ key: `${clusterSampleID1}`, text: `${clusterSampleID1}` },
+	{ key: `${clusterSampleID2}`, text: `${clusterSampleID2}` },
+	{ key: `${clusterSampleID3}`, text: `${clusterSampleID3}` },
+]
 
 export function search(
 	p: string[],

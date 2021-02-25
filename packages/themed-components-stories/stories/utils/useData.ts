@@ -7,15 +7,12 @@ import {
 	NeighborLocalEntity,
 	NodeData,
 } from './types'
-import { CSVToArray, search } from './utils'
+import { CSVToArray, search, selectedClusterID } from './utils'
 import { ICommunityDetail } from '@essex-js-toolkit/hierarchy-browser'
 
-const selectedClusterID = 204
-export function useData(): [
-	ICommunityDetail[],
-	LocalEntity[],
-	NeighborLocalEntity[],
-] {
+export function useData(
+	selectedOption: string,
+): [ICommunityDetail[], LocalEntity[], NeighborLocalEntity[]] {
 	const [nodes, setNodes] = useState<NodeData[] | undefined>()
 	const [edges, setEdges] = useState<EdgeData[] | undefined>()
 	const [join, setJoin] = useState<JoinData[] | undefined>()
@@ -53,9 +50,9 @@ export function useData(): [
 
 	const selectedJoin = useMemo((): JoinData[][] | undefined => {
 		if (clusterIdMap) {
-			return search([`${selectedClusterID}`], clusterIdMap)
+			return search([selectedOption], clusterIdMap)
 		}
-	}, [clusterIdMap])
+	}, [clusterIdMap, selectedOption])
 
 	const communityMap = useMemo((): { [x: string]: JoinData } | undefined => {
 		if (join) {
