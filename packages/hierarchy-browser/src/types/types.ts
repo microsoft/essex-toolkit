@@ -13,12 +13,6 @@ export interface ICommunityDetail {
 	neighborSize?: number
 }
 
-export interface ICommunityStaticDetail {
-	communityId: CommunityId
-	entityIds: EntityId[] // only needed if static
-	neighborSize?: number
-}
-
 export interface INeighborCommunityDetail extends ICommunityDetail {
 	connections: number
 	edgeCommunityId: CommunityId
@@ -93,4 +87,8 @@ export interface ISettings {
 	isOpen?: boolean
 	minimizeColumns?: boolean
 	controls?: IControls
+}
+
+export interface IForceUpdate {
+	forceUpdate: () => void
 }

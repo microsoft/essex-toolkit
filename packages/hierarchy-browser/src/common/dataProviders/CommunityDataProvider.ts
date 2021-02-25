@@ -14,7 +14,6 @@ import {
 } from '../..'
 import { ENTITY_TYPE, ICommunitiesAsyncHook } from '../types/types'
 import { EntityDataProvider } from './EntityDataProvider'
-import { HierarchyDataProvider } from './HierachyDataProvider'
 
 export const DEFAULT_LOAD_COUNT = 100
 
@@ -36,7 +35,7 @@ export class CommunityDataProvider {
 	) {
 		this.updateCommunityData(communityData)
 		this._level = level
-		const callback = this.useHierarchyDataProvider(loadEntitiesCallback)
+		const callback = this.useEntityHandler(loadEntitiesCallback)
 		this._entityProvider = new EntityDataProvider(
 			ENTITY_TYPE.ENTITY,
 			this._size,
@@ -49,14 +48,14 @@ export class CommunityDataProvider {
 		)
 		this.setFilterEntities(false)
 	}
-	private useHierarchyDataProvider(
+	private useEntityHandler(
 		loadEntitiesCallback: ICommunitiesAsyncHook,
 	): (
 		params: ILoadParams,
 		type?: ENTITY_TYPE,
 	) => Promise<IHierarchyDataResponse | undefined> {
 		const getEntitiesfromProvider = (params: ILoadParams, type?: ENTITY_TYPE) =>
-			loadEntitiesCallback(params, type)
+			loadEntitiesCallback(params, this._neighborCommunities, type)
 		return getEntitiesfromProvider
 	}
 
@@ -67,7 +66,7 @@ export class CommunityDataProvider {
 	}
 
 	public updateEntityLoader(loadEntitiesCallback: ICommunitiesAsyncHook): void {
-		const callback = this.useHierarchyDataProvider(loadEntitiesCallback)
+		const callback = this.useEntityHandler(loadEntitiesCallback)
 		// this._loadNeighborsCallback = hierachyDataProvider.getNeighborsAtLevel
 		this._entityProvider.size = this._size
 		this._entityProvider.loadEntitiesFromProvider = callback
@@ -131,9 +130,9 @@ export class CommunityDataProvider {
 				this._community,
 			)
 			if (!nextNeighbors.error && nextNeighbors.data) {
-				const data = nextNeighbors.data.filter(d => d)
-				this.addToNeighborCommunitiesArray(data)
-				return data
+				// const data = nextNeighbors.data.filter(d => d)
+				this.addToNeighborCommunitiesArray(nextNeighbors.data)
+				return nextNeighbors.data
 			} else {
 				throw nextNeighbors.error
 			}

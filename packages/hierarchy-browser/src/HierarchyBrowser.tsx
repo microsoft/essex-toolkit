@@ -48,7 +48,6 @@ export const HierarchyBrowser: React.FC<IHierarchyBrowserProps> = memo(
 		settings,
 	}: IHierarchyBrowserProps) {
 		const [providerCache, setProviderCache] = useState<IDataProvidersCache>({})
-		const [cardOrder, setCardOrder] = useState<ICardOrder>({})
 
 		const neighborCallback: ILoadNeighborCommunities = useCallback(
 			async (
@@ -81,7 +80,6 @@ export const HierarchyBrowser: React.FC<IHierarchyBrowserProps> = memo(
 
 		const loadEntitiesByCommunity = useEntityProvider(
 			communityWithLevels,
-			neighbors,
 			entities,
 		)
 
@@ -91,13 +89,12 @@ export const HierarchyBrowser: React.FC<IHierarchyBrowserProps> = memo(
 			loadEntitiesByCommunity,
 		})
 
-		useMemo(() => {
-			const sortOrder = communities.reduce((acc, c, index) => {
+		const cardOrder: ICardOrder = useMemo(() => {
+			return communities.reduce((acc, c, index) => {
 				const id = c.communityId
 				acc[id] = index
 				return acc
 			}, {} as ICardOrder)
-			setCardOrder(sortOrder)
 		}, [communities])
 
 		const getSettings = useSettings(settings)

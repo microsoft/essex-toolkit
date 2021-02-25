@@ -24,7 +24,6 @@ import {
 
 export const useEntityProvider = (
 	communities: ICommunity[],
-	neighbors?: INeighborCommunityDetail[] | ILoadNeighborCommunitiesAsync,
 	entities?: IEntityDetail[] | ILoadEntitiesAsync,
 ): ICommunitiesAsyncHook => {
 	const isAsync = useMemo(() => isEntitiesAsync(entities), [entities])
@@ -69,17 +68,23 @@ export const useEntityProvider = (
 		[],
 	)
 
-	// const getStaticNeighbor = useCallback((communityId: string)=>{
-	//     if (entityMap && neighbors) {
-	//         const data: IEntityDetail[] = getStaticNeighborEntities(
-	//             neighbors,
-	//             entityMap,
-	//             communityId,
-	//         )
-	//         return { data, error: undefined }
-	//     }
-	// 	return { data: [], error: new Error('No static neighbor entities loaded') }
-	// },[neighbors, entityMap])
+	const getStaticNeighbor = useCallback(
+		(communityId: string, neighborCommunities: INeighborCommunityDetail[]) => {
+			if (entityMap && neighborCommunities.length > 0) {
+				const data: IEntityDetail[] = getStaticNeighborEntities(
+					neighborCommunities,
+					entityMap,
+					communityId,
+				)
+				return { data, error: undefined }
+			}
+			return {
+				data: [],
+				error: new Error('No static neighbor entities loaded'),
+			}
+		},
+		[entityMap],
+	)
 
 	const getCommunityEntities = useCallback(
 		(filtered: boolean, level: number, communityId: string) => {
@@ -105,22 +110,34 @@ export const useEntityProvider = (
 	 * @returns {IHierarchyDataResponse} object containing data of entities and error (if applicable)
 	 */
 	const getStaticEntitiesByType = useCallback(
-		(loadParams: ILoadParams, type?: ENTITY_TYPE): IHierarchyDataResponse => {
+		(
+			loadParams: ILoadParams,
+			neighborCommunities: INeighborCommunityDetail[],
+			type?: ENTITY_TYPE,
+		): IHierarchyDataResponse => {
 			const { filtered, level, communityId } = loadParams
 			if (type === ENTITY_TYPE.NEIGHBOR) {
-				// return getStaticNeighbor(communityId)
+				return getStaticNeighbor(communityId, neighborCommunities)
 			}
 			return getCommunityEntities(filtered, level, communityId)
 		},
-		[getCommunityEntities],
+		[getStaticNeighbor, getCommunityEntities],
 	)
 
 	const loadEntitiesByCommunity: ICommunitiesAsyncHook = useCallback(
-		async (loadParams: ILoadParams, type?: ENTITY_TYPE) => {
+		async (
+			loadParams: ILoadParams,
+			neighborCommunities: INeighborCommunityDetail[],
+			type?: ENTITY_TYPE,
+		) => {
 			if (isAsync) {
 				return await getEntitiesAsync(loadParams)
 			}
-			return await getStaticEntitiesByType(loadParams, type)
+			return await getStaticEntitiesByType(
+				loadParams,
+				neighborCommunities,
+				type,
+			)
 		},
 		[getStaticEntitiesByType, isAsync, getEntitiesAsync],
 	)
