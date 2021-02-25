@@ -3,7 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import React, { useCallback, useMemo } from 'react'
-
+import { CSF } from './types'
+import { LocalEntity, NeighborLocalEntity } from './utils/types'
+import { useData } from './utils/useData'
 import {
 	HierarchyBrowser,
 	ILoadParams,
@@ -11,15 +13,9 @@ import {
 	IEntityDetail,
 	CommunityId,
 } from '@essex-js-toolkit/hierarchy-browser'
-import { CSF } from './types'
-import { useData } from './utils/useData'
 
 const story = {
 	title: 'HierarchyBrowserStory',
-}
-
-interface LocalEntity extends IEntityDetail {
-	cid: string
 }
 
 export default story
@@ -27,6 +23,8 @@ export const HierarchyBrowserStory: CSF = () => {
 	const [communities, nodes, edges] = useData()
 
 	const allEntities = useMemo(() => [...nodes, ...edges], [nodes, edges])
+
+	// Callback for HB to fetch entities in community based communityId
 	const getEntities = useCallback(
 		async (params: ILoadParams) => {
 			if (allEntities) {
@@ -42,16 +40,17 @@ export const HierarchyBrowserStory: CSF = () => {
 		[allEntities],
 	)
 
+	// Callback for HB to fetch neighbor communities based communityId
 	const getNeighbors = useCallback(
 		async (params: ILoadParams) => {
 			if (edges && allEntities) {
 				const selected = edges.filter(
 					d => `${d.neighbor}` === params.communityId,
 				)
-				const parents = selected.reduce((acc, e: any) => {
-					acc[`${e.cid}`] = acc[`${e.cid}`] ? +1 : 1
+				const parents = selected.reduce((acc, e: NeighborLocalEntity) => {
+					acc[e.cid] = acc[e.cid] ? +1 : 1
 					return acc
-				}, {})
+				}, {} as { [key: string]: number })
 				const data = Object.keys(parents).map((key: string) => {
 					const connections = parents[key]
 					const edgeCommunityId = params.communityId

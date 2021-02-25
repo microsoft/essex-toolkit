@@ -1,17 +1,21 @@
 import { useState, useEffect, useMemo } from 'react'
-import { EdgeData, JoinData, NodeData } from './types'
+import {
+	CommunityData,
+	EdgeData,
+	JoinData,
+	LocalEntity,
+	NeighborLocalEntity,
+	NodeData,
+} from './types'
 import { CSVToArray, search } from './utils'
-
-export interface CommunityData {
-	communityId: string
-	size: number
-	nodes: any[]
-	edges: any[]
-	neighborSize: number
-}
+import { ICommunityDetail } from '@essex-js-toolkit/hierarchy-browser'
 
 const selectedClusterID = 204
-export function useData(): [any[], any[], any[], any] {
+export function useData(): [
+	ICommunityDetail[],
+	LocalEntity[],
+	NeighborLocalEntity[],
+] {
 	const [nodes, setNodes] = useState<NodeData[] | undefined>()
 	const [edges, setEdges] = useState<EdgeData[] | undefined>()
 	const [join, setJoin] = useState<JoinData[] | undefined>()
@@ -34,7 +38,7 @@ export function useData(): [any[], any[], any[], any] {
 		setFunc(mappedValues)
 	}
 
-	const clusterIdMap = useMemo(() => {
+	const clusterIdMap = useMemo((): { [x: string]: JoinData[] } | undefined => {
 		if (join) {
 			return join.reduce((acc: { [x: string]: JoinData[] }, d: JoinData) => {
 				if (acc[`${d.clusterId}`]) {
@@ -42,7 +46,6 @@ export function useData(): [any[], any[], any[], any] {
 				} else {
 					acc[`${d.clusterId}`] = [d]
 				}
-
 				return acc
 			}, {})
 		}
@@ -68,7 +71,7 @@ export function useData(): [any[], any[], any[], any] {
 		}
 	}, [join])
 
-	const nodeMap = useMemo(() => {
+	const nodeMap = useMemo((): { [x: string]: NodeData } | undefined => {
 		if (nodes) {
 			return nodes.reduce((acc: { [x: string]: NodeData }, d: NodeData) => {
 				const id = d.id
@@ -78,7 +81,7 @@ export function useData(): [any[], any[], any[], any] {
 		}
 	}, [nodes])
 
-	const edgeMap = useMemo(() => {
+	const edgeMap = useMemo((): { [x: string]: string } | undefined => {
 		if (edges) {
 			return edges.reduce((acc: { [x: string]: string }, d: EdgeData) => {
 				const id = d.source
@@ -101,9 +104,13 @@ export function useData(): [any[], any[], any[], any] {
 		}
 	}, [setNodes, setEdges, setJoin, loadRemoteData])
 
-	return useMemo((): [any[], any[], any[], any] => {
+	return useMemo((): [
+		ICommunityDetail[],
+		LocalEntity[],
+		NeighborLocalEntity[],
+	] => {
 		if (nodeMap && selectedJoin && edgeMap && communityMap) {
-			const data = selectedJoin.map((arr: JoinData[]) => {
+			const data: CommunityData[] = selectedJoin.map((arr: JoinData[]) => {
 				const clusterId = arr[0].clusterId
 				const selectedNodes = arr.map((d: JoinData) => {
 					const node = nodeMap[d.nodeId]
@@ -118,19 +125,16 @@ export function useData(): [any[], any[], any[], any] {
 						const targetId = edgeMap[d.nodeId]
 						const targetNode: NodeData = nodeMap[targetId]
 						if (targetNode) {
-							const clusterId = communityMap[targetId].clusterId
-							return Object.assign(
-								{},
-								{
-									id: targetNode.id,
-									attrs: { ...targetNode },
-									cid: clusterId,
-									neighbor: d.clusterId,
-								},
-							)
+							const clusterId = `${communityMap[targetId].clusterId}`
+							return Object.assign({}, {
+								id: targetNode.id,
+								attrs: { ...targetNode },
+								cid: clusterId,
+								neighbor: `${d.clusterId}`,
+							} as NeighborLocalEntity)
 						}
 					})
-					.filter(d => d)
+					.filter(d => d) as NeighborLocalEntity[]
 				return {
 					communityId: `${clusterId}`,
 					size: arr.length,
@@ -139,29 +143,29 @@ export function useData(): [any[], any[], any[], any] {
 					neighborSize: selectedEdges.length,
 				}
 			})
-
-			const [communities, nodes, edges] = data.reduce(
-				(acc: any[][][], o: CommunityData) => {
-					const comm = Object.assign(
-						{},
-						{
-							communityId: o.communityId,
-							size: o.size,
-							neighborSize: o.neighborSize,
-						},
-					)
-					const nodes = o.nodes
-					const edges = o.edges
-					acc[0].push(comm as any)
-					acc[1] = [...acc[1], ...nodes]
-					acc[2] = [...acc[2], ...edges]
-					return acc
-				},
-				[[], [], []] as [any[], any[], any[]],
-			)
-
-			return [communities, nodes, edges, clusterIdMap]
+			const container = [[], [], []]
+			const arrays = data.reduce((acc: any[][], o: CommunityData) => {
+				const comm = Object.assign(
+					{},
+					{
+						communityId: o.communityId,
+						size: o.size,
+						neighborSize: o.neighborSize,
+					},
+				)
+				const nodes = o.nodes
+				const edges = o.edges
+				acc[0].push(comm as ICommunityDetail)
+				acc[1] = [...acc[1], ...nodes] as LocalEntity[]
+				acc[2] = [...acc[2], ...edges] as NeighborLocalEntity[]
+				return acc
+			}, container)
+			return arrays as [
+				ICommunityDetail[],
+				LocalEntity[],
+				NeighborLocalEntity[],
+			]
 		}
-		return [[], [], [], clusterIdMap]
-	}, [selectedJoin, nodeMap, edgeMap, communityMap, clusterIdMap])
+		return [[], [], []]
+	}, [selectedJoin, nodeMap, edgeMap, communityMap])
 }
