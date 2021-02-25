@@ -5,28 +5,26 @@
 import React, { memo, useMemo, useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { CommunityCard } from './CommunityCard/CommunityCard'
-import { HierarchyDataProvider } from './common/dataProviders/HierachyDataProvider'
-import {
-	IDataProvidersCache,
-	ICardOrder,
-	ICommunity,
-} from './common/types/types'
+import { useEntityProvider } from './common/dataProviders/hooks/useEntityProvider'
+import { IDataProvidersCache, ICardOrder } from './common/types/types'
 import {
 	useCommunityLevelCalculator,
 	useCommunitySizeCalculator,
 } from './hooks/useCommunityDetails'
 import { useCommunityProvider } from './hooks/useCommunityProvider'
 import { useSettings } from './hooks/useSettings'
-import { useUpdatedHierarchyProvider } from './hooks/useUpdatedHierarchyProvider'
 import {
 	ICommunityDetail,
 	IEntityDetail,
+	IHierarchyNeighborResponse,
 	ILoadEntitiesAsync,
+	ILoadNeighborCommunities,
 	ILoadNeighborCommunitiesAsync,
+	ILoadParams,
 	INeighborCommunityDetail,
 	ISettings,
 } from './types'
-import { useEntityProvider } from './common/dataProviders/hooks/useEntityProvider'
+import { isEntitiesAsync } from './utils/utils'
 
 export interface IHierarchyBrowserProps {
 	communities: ICommunityDetail[]
@@ -49,33 +47,37 @@ export const HierarchyBrowser: React.FC<IHierarchyBrowserProps> = memo(
 		neighbors,
 		settings,
 	}: IHierarchyBrowserProps) {
-		/*eslint-disable react-hooks/exhaustive-deps*/
-		const hierachyDataProvider = useMemo<HierarchyDataProvider>(
-			() => new HierarchyDataProvider(),
-			[
-				/* no deps intentionally */
-			],
-		)
-		/*eslint-enable react-hooks/exhaustive-deps*/
 		const [providerCache, setProviderCache] = useState<IDataProvidersCache>({})
 		const [cardOrder, setCardOrder] = useState<ICardOrder>({})
 
-		const neighborCallback = useUpdatedHierarchyProvider(
-			communities,
-			hierachyDataProvider,
-			entities,
-			neighbors,
+		const neighborCallback: ILoadNeighborCommunities = useCallback(
+			async (
+				params: ILoadParams,
+				communityId: string,
+			): Promise<IHierarchyNeighborResponse> => {
+				if (neighbors) {
+					const isAsync = isEntitiesAsync(neighbors)
+					if (isAsync) {
+						const loader = neighbors as ILoadNeighborCommunitiesAsync
+						return await loader(params)
+					}
+					const neighborsList = neighbors as INeighborCommunityDetail[]
+					const data = neighborsList.filter(
+						d => d.edgeCommunityId === communityId,
+					)
+					return { data, error: undefined }
+				}
+				return { data: [], error: new Error('neighbor communities not loaded') }
+			},
+			[neighbors],
 		)
-		const [minLevel, maxLevel] = useCommunityLevelCalculator(communities)
-		const maxSize = useCommunitySizeCalculator(communities)
 
-		const communityWithLevels = useMemo(() => {
-			const reverseList = [...communities].reverse()
-			return reverseList.map(
-				(comm, index) =>
-					Object.assign({}, { ...comm, level: index }) as ICommunity,
-			)
-		}, [communities])
+		const [
+			minLevel,
+			maxLevel,
+			communityWithLevels,
+		] = useCommunityLevelCalculator(communities)
+		const maxSize = useCommunitySizeCalculator(communities)
 
 		const loadEntitiesByCommunity = useEntityProvider(
 			communityWithLevels,
