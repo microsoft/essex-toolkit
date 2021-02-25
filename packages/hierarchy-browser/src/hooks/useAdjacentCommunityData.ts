@@ -13,7 +13,6 @@ import { useNeighborsLoadedHandler } from './useNeighborsLoadedHandler'
 export function useAdjacentCommunityData(
 	dataProvider: CommunityDataProvider,
 	isOpen: boolean,
-	neighborsLoaded: boolean,
 ): [
 	// neighbor communities
 	INeighborCommunityDetail[],
@@ -29,7 +28,7 @@ export function useAdjacentCommunityData(
 		isLoading,
 		communitiesLoaded,
 		handleCommunitiesLoaded,
-	] = useNeighborsLoadedHandler(neighborsLoaded)
+	] = useNeighborsLoadedHandler()
 	const loadInitialCommunities = useLoadInitialCommunities(
 		handleCommunitiesLoaded,
 		dataProvider,
@@ -39,7 +38,6 @@ export function useAdjacentCommunityData(
 		loadInitialCommunities,
 		isOpen,
 		communitiesLoaded,
-		neighborsLoaded,
 	)
 
 	const loadMore = useLoadMoreCommunitiesHandler(

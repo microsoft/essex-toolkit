@@ -13,17 +13,13 @@ import {
 	ILoadParams,
 	ICommunityDetail,
 } from '..'
-import { ICommunity, IEntityMap } from '../common/types/types'
+import { ICommunity, IEntityCounter, IEntityMap } from '../common/types/types'
 
 interface IFlattenedEntities {
 	id: EntityId
 	[key: string]: EntityId
 }
 
-interface IEntityCounter {
-	current: EntityId[]
-	next?: EntityId[]
-}
 export function flattenJSONObjects(
 	entities: IEntityDetail[],
 ): IFlattenedEntities[] {
@@ -175,33 +171,4 @@ export function isEntitiesAsync(
 export function addLevelLabels(communities: ICommunityDetail[]): ICommunity[] {
 	const max = communities.length - 1
 	return communities.map((comm, index) => ({ ...comm, level: max - index }))
-}
-
-export interface IColorRGB {
-	r: number
-	g: number
-	b: number
-}
-
-export function hexToRgb(hex: string): IColorRGB | null {
-	const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-	return result
-		? {
-				r: parseInt(result[1], 16),
-				g: parseInt(result[2], 16),
-				b: parseInt(result[3], 16),
-		  }
-		: null
-}
-
-export function dedup(entities: IEntityDetail[]): IEntityDetail[] {
-	const seen: Set<EntityId> = new Set([])
-	const deduped = entities.reduce((acc, d) => {
-		if (!seen.has(d.id)) {
-			seen.add(d.id)
-			acc.push(d)
-		}
-		return acc
-	}, [] as IEntityDetail[])
-	return deduped
 }

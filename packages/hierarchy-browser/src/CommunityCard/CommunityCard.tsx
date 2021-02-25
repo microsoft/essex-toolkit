@@ -27,7 +27,6 @@ export interface ICommunityCardProps {
 	maxLevel: number
 	level: number
 	incrementLevel?: boolean // adjust from 0 to 1 based indexing on levels if needed
-	neighborsLoaded: boolean
 	neighborCallback?: ILoadNeighborCommunities
 	settings: ISettingState
 	dataProvider: CommunityDataProvider
@@ -41,7 +40,6 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 		maxLevel,
 		level,
 		incrementLevel,
-		neighborsLoaded,
 		neighborCallback,
 		settings,
 		dataProvider,
@@ -69,7 +67,7 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 		const [
 			adjacentCommunities,
 			isAdjacentEntitiesLoading,
-		] = useAdjacentCommunityData(dataProvider, isOpen, neighborsLoaded)
+		] = useAdjacentCommunityData(dataProvider, isOpen)
 
 		const [
 			setEdgeSelection,

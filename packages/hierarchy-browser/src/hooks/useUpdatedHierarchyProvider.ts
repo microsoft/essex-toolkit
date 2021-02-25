@@ -14,36 +14,21 @@ import {
 	ILoadParams,
 	INeighborCommunityDetail,
 } from '../types'
-import { isEntitiesAsync } from '../utils/utils'
 export function useUpdatedHierarchyProvider(
 	communities: ICommunityDetail[],
 	hierachyDataProvider: HierarchyDataProvider,
 	entities?: IEntityDetail[] | ILoadEntitiesAsync,
 	neighbors?: INeighborCommunityDetail[] | ILoadNeighborCommunitiesAsync,
-): [
-	boolean,
-	(
-		params: ILoadParams,
-		communityId: CommunityId,
-	) => Promise<IHierarchyNeighborResponse>,
-] {
-	const [isNeighborsLoaded, setIsNeighborsLoaded] = useState<boolean>(false)
-	useEffect(() => {
+): (
+	params: ILoadParams,
+	communityId: CommunityId,
+) => Promise<IHierarchyNeighborResponse> {
+	useMemo(() => {
 		hierachyDataProvider.updateCommunities(communities)
 	}, [communities, hierachyDataProvider])
 	useMemo(() => {
 		hierachyDataProvider.updateEntities(entities)
 	}, [entities, hierachyDataProvider])
-
-	useEffect(() => {
-		let isLoaded = false
-		if (neighbors) {
-			const isAsync = isEntitiesAsync(neighbors)
-			isLoaded = isAsync || neighbors.length > 0
-		}
-		hierachyDataProvider.neighbors = neighbors as INeighborCommunityDetail[]
-		setIsNeighborsLoaded(isLoaded) // trigger neighbor refresh
-	}, [neighbors, hierachyDataProvider])
 
 	const neighborCallback = useCallback(
 		async (
@@ -58,5 +43,5 @@ export function useUpdatedHierarchyProvider(
 		},
 		[hierachyDataProvider, neighbors],
 	)
-	return [isNeighborsLoaded, neighborCallback]
+	return neighborCallback
 }

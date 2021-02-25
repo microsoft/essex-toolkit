@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IChoiceGroupOption } from '@fluentui/react'
+import { IChoiceGroupOption, Toggle } from '@fluentui/react'
 import React, { useCallback, useMemo, useState } from 'react'
 import { CSF } from './types'
 import { Selections } from './utils/components'
@@ -26,9 +26,18 @@ export const HierarchyBrowserStory: CSF = () => {
 	const [selectedOption, setSelectedOption] = useState<string>(
 		`${selectedClusterID}`,
 	)
+
+	const [loadState, setLoadState] = useState<boolean | undefined>(false)
+
 	const onChange = useCallback(
 		(option: IChoiceGroupOption) => setSelectedOption(option.key),
 		[setSelectedOption],
+	)
+
+	const handleNeighborsLoaded = useCallback(
+		(ev: React.MouseEvent<HTMLElement, MouseEvent>, checked?: boolean) =>
+			setLoadState(checked),
+		[setLoadState],
 	)
 
 	const [communities, nodes, edges] = useData(selectedOption)
@@ -54,7 +63,7 @@ export const HierarchyBrowserStory: CSF = () => {
 	// Callback for HB to fetch neighbor communities based communityId
 	const getNeighbors = useCallback(
 		async (params: ILoadParams) => {
-			if (edges && allEntities) {
+			if (edges && allEntities && loadState) {
 				const selected = edges.filter(
 					d => `${d.neighbor}` === params.communityId,
 				)
@@ -81,7 +90,7 @@ export const HierarchyBrowserStory: CSF = () => {
 			}
 			return { error: new Error('edges not loaded in story'), data: undefined }
 		},
-		[edges, allEntities],
+		[edges, allEntities, loadState],
 	)
 
 	return (
@@ -91,6 +100,11 @@ export const HierarchyBrowserStory: CSF = () => {
 				defaultSelectedKey={`${selectedClusterID}`}
 				label={'selected community'}
 				onChange={onChange}
+			/>
+			<Toggle
+				label="Neighbors Loaded"
+				checked={loadState}
+				onChange={handleNeighborsLoaded}
 			/>
 			{communities && (
 				<HierarchyBrowser

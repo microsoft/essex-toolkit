@@ -30,11 +30,10 @@ export function useLoadCommunitiesOnMountEffect(
 	) => void,
 	isOpen: boolean,
 	entitiesLoaded: boolean,
-	neighborsLoaded: boolean,
 ): void {
 	useEffect(() => {
-		if (isOpen && !entitiesLoaded && neighborsLoaded) {
+		if (isOpen && !entitiesLoaded) {
 			loadInitialEntities()
 		}
-	}, [entitiesLoaded, isOpen, loadInitialEntities, neighborsLoaded])
+	}, [entitiesLoaded, isOpen, loadInitialEntities])
 }
