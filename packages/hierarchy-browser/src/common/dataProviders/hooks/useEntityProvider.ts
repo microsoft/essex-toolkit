@@ -1,3 +1,7 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { useCallback, useMemo } from 'react'
 import {
 	ILoadParams,
@@ -79,7 +83,7 @@ export const useEntityProvider = (
 				error: new Error('No static neighbor entities loaded'),
 			}
 		},
-		[entityMap],
+		[entityMap, getStaticNeighborEntities],
 	)
 
 	const getCommunityEntities = useCallback(
@@ -96,7 +100,7 @@ export const useEntityProvider = (
 			}
 			return { error: new Error('No static entities loaded') }
 		},
-		[communities],
+		[communities, entityMap],
 	)
 
 	/**

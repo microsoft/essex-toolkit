@@ -1,3 +1,7 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { IEntityDetail } from '@essex-js-toolkit/hierarchy-browser'
 export interface NodeData {
 	id: string

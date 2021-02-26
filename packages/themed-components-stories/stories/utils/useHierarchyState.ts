@@ -1,7 +1,11 @@
-import React, { useMemo, useState, useCallback } from 'react'
-import { selectedClusterID, customStyle } from './utils'
-import { visibleColumns } from './utils'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { IChoiceGroupOption } from '@fluentui/react'
+import React, { useMemo, useState, useCallback } from 'react'
+import { selectedClusterID, customStyle, visibleColumns } from './utils'
+
 import { ISettings } from '@essex-js-toolkit/hierarchy-browser'
 
 export function useHierarchyState(): [

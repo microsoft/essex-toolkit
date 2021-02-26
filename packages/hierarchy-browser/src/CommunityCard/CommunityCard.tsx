@@ -13,9 +13,9 @@ import { useContainerStyle } from '../hooks/theme'
 import { useCommunityData } from '../hooks/useCommunityData'
 import { useCommunitySizePercent } from '../hooks/useCommunitySizePercent'
 import { useUpdatedCommunityProvider } from '../hooks/useUpdatedCommunityProvider'
+import { AdjacentCommunities } from './AdjacentCommunities'
 import { CommunityOverview } from './CommunityOverview'
 import { CommunityTable } from './CommunityTable'
-import { AdjacentCommunities } from './AdjacentCommunities'
 
 export interface ICommunityCardProps {
 	maxSize: number

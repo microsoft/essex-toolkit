@@ -7,7 +7,7 @@ import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { CommunityId, IControls, IEntityDetail } from '..'
 import { MagBar } from '../MagBar'
-import { paddingLeft } from '../common/styles'
+import { paddingLeft, headerLabel, subHeaderLabel } from '../common/styles'
 import { IFilterProps } from '../hooks/interfaces'
 import { useThemesStyle } from '../hooks/theme'
 import {
@@ -18,7 +18,7 @@ import { useCommunityDownload } from '../hooks/useCommunityDownload'
 import { useControls } from '../hooks/useControls'
 import { IEntityLoadParams } from '../hooks/useLoadMoreEntitiesHandler'
 import { ICardOverviewSettings } from '../types'
-import { headerLabel, subHeaderLabel } from '../common/styles'
+
 export interface ICommunityOverviewProps {
 	communityId: CommunityId
 	size: number

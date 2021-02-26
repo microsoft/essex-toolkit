@@ -1,13 +1,17 @@
-import React, { memo, useCallback } from 'react'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import {
 	ChoiceGroup,
 	IChoiceGroupOption,
 	Toggle,
 	IButtonStyles,
 } from '@fluentui/react'
+import React, { memo, useCallback } from 'react'
 
 import './Style.css'
-interface Selections {
+interface ISelections {
 	options: IChoiceGroupOption[]
 	defaultSelectedKey: string
 	onChange: (option: IChoiceGroupOption) => void
@@ -16,12 +20,12 @@ interface Selections {
 
 const styles = { flexContainer: { display: 'inline-flex' } }
 
-export const Selections: React.FC<Selections> = memo(function Selections({
+export const Selections: React.FC<ISelections> = memo(function Selections({
 	options,
 	defaultSelectedKey,
 	onChange,
 	label,
-}: Selections) {
+}: ISelections) {
 	const _onChange = useCallback(
 		(
 			ev: React.FormEvent<HTMLInputElement | HTMLElement> | undefined,
@@ -50,7 +54,7 @@ const ToggleAugmentStyle = {
 	container: { margin: '10px' },
 	root: { marginLeft: '20px' },
 } as IButtonStyles
-interface ControlGroup {
+interface IControlGroup {
 	options: IChoiceGroupOption[]
 	defaultSelectedKey: number
 	onChange: (option: IChoiceGroupOption) => void
@@ -65,35 +69,37 @@ interface ControlGroup {
 		checked?: boolean,
 	) => void
 }
-export const ControlGroup: React.FC<ControlGroup> = memo(function ControlGroup({
-	loadState,
-	defaultSelectedKey,
-	onChange,
-	options,
-	handleNeighborsLoaded,
-	showCustomStyles,
-	onStyleChange,
-}: ControlGroup) {
-	return (
-		<div style={style}>
-			<Selections
-				options={options}
-				defaultSelectedKey={`${defaultSelectedKey}`}
-				label={'selected community'}
-				onChange={onChange}
-			/>
-			<Toggle
-				label="neighbors loaded"
-				checked={loadState}
-				onChange={handleNeighborsLoaded}
-				styles={ToggleBaseStyle}
-			/>
-			<Toggle
-				label="custom styles"
-				checked={showCustomStyles}
-				onChange={onStyleChange}
-				styles={ToggleAugmentStyle}
-			/>
-		</div>
-	)
-})
+export const ControlGroup: React.FC<IControlGroup> = memo(
+	function ControlGroup({
+		loadState,
+		defaultSelectedKey,
+		onChange,
+		options,
+		handleNeighborsLoaded,
+		showCustomStyles,
+		onStyleChange,
+	}: IControlGroup) {
+		return (
+			<div style={style}>
+				<Selections
+					options={options}
+					defaultSelectedKey={`${defaultSelectedKey}`}
+					label={'selected community'}
+					onChange={onChange}
+				/>
+				<Toggle
+					label="neighbors loaded"
+					checked={loadState}
+					onChange={handleNeighborsLoaded}
+					styles={ToggleBaseStyle}
+				/>
+				<Toggle
+					label="custom styles"
+					checked={showCustomStyles}
+					onChange={onStyleChange}
+					styles={ToggleAugmentStyle}
+				/>
+			</div>
+		)
+	},
+)

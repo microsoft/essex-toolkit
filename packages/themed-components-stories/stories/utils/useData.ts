@@ -1,3 +1,7 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import {
 	CommunityData,
@@ -7,7 +11,7 @@ import {
 	NeighborLocalEntity,
 	NodeData,
 } from './types'
-import { CSVToArray, search } from './utils'
+import { loadRemoteData, search } from './utils'
 import { ICommunityDetail } from '@essex-js-toolkit/hierarchy-browser'
 
 export function useData(
@@ -21,24 +25,6 @@ export function useData(
 	const [nodes, setNodes] = useState<NodeData[] | undefined>()
 	const [edges, setEdges] = useState<EdgeData[] | undefined>()
 	const [join, setJoin] = useState<JoinData[] | undefined>()
-
-	const loadRemoteData = async (url: string, setFunc: (d: any[]) => void) => {
-		const resp = await fetch(url)
-		const data = await resp.text()
-		const parsedData = CSVToArray(data, ',')
-		const header = parsedData[0]
-		const sliced = parsedData.slice(1)
-		const mappedValues: any[] = sliced.map(arr => {
-			const obj = header.reduce((accum, colName, index) => {
-				let value: string | number = arr[index]
-				value = isNaN(+value) ? value : +value
-				accum = Object.assign({}, { ...accum, [colName]: value })
-				return accum
-			}, {} as any)
-			return obj
-		})
-		setFunc(mappedValues)
-	}
 
 	const clusterIdMap = useMemo((): { [x: string]: JoinData[] } | undefined => {
 		if (join) {
@@ -112,7 +98,7 @@ export function useData(
 		if (!join) {
 			loadRemoteData('./data/static/join.csv', setJoin)
 		}
-	}, [setNodes, setEdges, setJoin, loadRemoteData])
+	}, [setNodes, setEdges, setJoin, nodes, edges, join])
 
 	const [comm, entities, neighborComm] = useMemo((): [
 		ICommunityDetail[],
@@ -130,21 +116,24 @@ export function useData(
 					)
 				})
 
-				const selectedEdges = arr
-					.map((d: JoinData) => {
-						const targetId = edgeMap[d.nodeId]
-						const targetNode: NodeData = nodeMap[targetId]
-						if (targetNode) {
-							const clusterId = `${communityMap[targetId].clusterId}`
-							return Object.assign({}, {
+				const selectedEdges = arr.reduce((acc, d: JoinData) => {
+					const targetId = edgeMap[d.nodeId]
+					const targetNode: NodeData = nodeMap[targetId]
+					if (targetNode) {
+						const clusterId = `${communityMap[targetId].clusterId}`
+						const o = Object.assign(
+							{},
+							{
 								id: targetNode.id,
 								attrs: { ...targetNode },
 								cid: clusterId,
 								neighbor: `${d.clusterId}`,
-							} as NeighborLocalEntity)
-						}
-					})
-					.filter(d => d) as NeighborLocalEntity[]
+							},
+						)
+						acc.push(o)
+					}
+					return acc
+				}, [] as NeighborLocalEntity[])
 				return {
 					communityId: `${clusterId}`,
 					size: arr.length,

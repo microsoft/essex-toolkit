@@ -27,13 +27,13 @@ export function useThemesStyle(
 	styles?: ICardOverviewSettings,
 ): React.CSSProperties {
 	const theme = useThematic()
-	const style = styles?.root || {}
+	const style = useMemo(() => styles?.root || {}, [styles])
 	return useMemo(
 		() => ({
 			background: theme.application().lowContrast().hex(),
 			...style,
 		}),
-		[theme],
+		[theme, style],
 	)
 }
 

@@ -1,5 +1,9 @@
-import { JoinData } from './types'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { IChoiceGroupOption } from '@fluentui/react'
+import { JoinData } from './types'
 import { IStyles } from '@essex-js-toolkit/hierarchy-browser'
 
 export const selectedClusterID = 204
@@ -39,10 +43,10 @@ export const customStyle = { cardOverview, table } as IStyles
 
 export function search(
 	p: string[],
-	clusterIDMap: any,
+	clusterIDMap: { [x: string]: JoinData[] },
 ): JoinData[][] | undefined {
 	// Find all parents for selected node
-	const container: any[] = []
+	const container: JoinData[][] = []
 	if (p.length > 0) {
 		const all = innerSearch(p, clusterIDMap, container)
 		return all
@@ -50,21 +54,18 @@ export function search(
 }
 export function innerSearch(
 	parents: string[],
-	clusterIDMap: any,
-	container: any[],
-) {
+	clusterIDMap: { [x: string]: JoinData[] },
+	container: JoinData[][],
+): JoinData[][] {
 	if (parents.length > 0) {
 		parents.forEach(d => {
 			const values = clusterIDMap[`${d}`]
-			const p = values.reduce(
-				(acc: { add: (arg0: number) => void }, d: JoinData) => {
-					if (d.parentCluster) {
-						acc.add(d.parentCluster)
-					}
-					return acc
-				},
-				new Set([]),
-			)
+			const p = values.reduce((acc, d: JoinData) => {
+				if (d.parentCluster) {
+					acc.add(`${d.parentCluster}`)
+				}
+				return acc
+			}, new Set([]) as Set<string>)
 			container.push(values)
 			innerSearch(Array.from(p), clusterIDMap, container)
 		})
@@ -72,9 +73,30 @@ export function innerSearch(
 	return container
 }
 
-export function CSVToArray(strData: string, strDelimiter: string) {
+export const loadRemoteData = async (
+	url: string,
+	setFunc: (d: any[]) => void,
+): Promise<void> => {
+	const resp = await fetch(url)
+	const data = await resp.text()
+	const parsedData = CSVToArray(data, ',')
+	const header = parsedData[0]
+	const sliced = parsedData.slice(1)
+	const mappedValues: any[] = sliced.map(arr => {
+		const obj = header.reduce((accum, colName, index) => {
+			let value: string | number = arr[index]
+			value = isNaN(+value) ? value : +value
+			accum = Object.assign({}, { ...accum, [colName]: value })
+			return accum
+		}, {} as any)
+		return obj
+	})
+	setFunc(mappedValues)
+}
+
+export function CSVToArray(strData: string, strDelimiter: string): string[][] {
 	strDelimiter = strDelimiter || ','
-	let objPattern = new RegExp(
+	const objPattern = new RegExp(
 		// Delimiters.
 		'(\\' +
 			strDelimiter +
@@ -88,17 +110,17 @@ export function CSVToArray(strData: string, strDelimiter: string) {
 		'gi',
 	)
 
-	let arrData: string[][] = [[]]
+	const arrData: string[][] = [[]]
 	let arrMatches: any = null
 
 	while ((arrMatches = objPattern.exec(strData))) {
-		let strMatchedDelimiter = arrMatches[1]
+		const strMatchedDelimiter = arrMatches[1]
 
 		if (strMatchedDelimiter.length && strMatchedDelimiter !== strDelimiter) {
 			arrData.push([])
 		}
 
-		let strMatchedValue: string = ''
+		let strMatchedValue = ''
 		if (arrMatches[2]) {
 			strMatchedValue = arrMatches[2].replace(new RegExp('""', 'g'), '"')
 		} else {

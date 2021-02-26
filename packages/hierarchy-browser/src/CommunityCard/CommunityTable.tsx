@@ -7,8 +7,8 @@ import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { CommunityId, IEntityDetail } from '..'
 import { EntityItem } from '../EntityItem/EntityItem'
-import { textStyle } from '../common/styles'
-import { headerLabel, subHeaderLabel } from '../common/styles'
+import { textStyle, headerLabel, subHeaderLabel } from '../common/styles'
+
 import { ITableSettings } from '../types'
 
 export interface ICommunityTableProps {

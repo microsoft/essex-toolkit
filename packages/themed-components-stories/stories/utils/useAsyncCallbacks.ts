@@ -1,9 +1,15 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { useMemo, useCallback } from 'react'
 import { LocalEntity, NeighborLocalEntity, JoinData } from './types'
 import {
 	ILoadParams,
 	INeighborCommunityDetail,
 	CommunityId,
+	ILoadEntitiesAsync,
+	ILoadNeighborCommunitiesAsync,
 } from '@essex-js-toolkit/hierarchy-browser'
 
 interface AsyncProps {
@@ -17,7 +23,7 @@ export function useAsyncCallbacks({
 	edges,
 	loadState,
 	searchForChildren,
-}: AsyncProps) {
+}: AsyncProps): [ILoadEntitiesAsync, ILoadNeighborCommunitiesAsync] {
 	const allEntities = useMemo(() => [...nodes, ...edges], [nodes, edges])
 
 	// Callback for HB to fetch entities in community based communityId
