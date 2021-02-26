@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useState, useCallback } from 'react'
-import { INeighborCommunityDetail } from '..'
+import { INeighborCommunityDetail } from '../../..'
 
 export function useNeighborsLoadedHandler(): [
 	INeighborCommunityDetail[],

@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useState } from 'react'
-import { INeighborCommunityDetail } from '..'
-import { CommunityDataProvider } from '../common/dataProviders'
-import { useLoadCommunitiesOnMountEffect } from './useLoadEntitiesOnMountEffect'
-import { useLoadInitialCommunities } from './useLoadInitialCommunities'
-import { useLoadMoreCommunitiesHandler } from './useLoadMoreCommunitiesHandler'
+import { INeighborCommunityDetail } from '../../..'
+import { CommunityDataProvider } from '../../../common/dataProviders'
+import { useLoadCommunitiesOnMountEffect } from '../../../hooks/useLoadEntitiesOnMountEffect'
+import { useLoadInitialCommunities } from '../../../hooks/useLoadInitialCommunities'
+import { useLoadMoreCommunitiesHandler } from '../../../hooks/useLoadMoreCommunitiesHandler'
 import { useNeighborsLoadedHandler } from './useNeighborsLoadedHandler'
 
 export function useAdjacentCommunityData(

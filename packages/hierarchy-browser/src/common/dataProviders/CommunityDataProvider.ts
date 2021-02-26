@@ -67,7 +67,6 @@ export class CommunityDataProvider {
 
 	public updateEntityLoader(loadEntitiesCallback: ICommunitiesAsyncHook): void {
 		const callback = this.useEntityHandler(loadEntitiesCallback)
-		// this._loadNeighborsCallback = hierachyDataProvider.getNeighborsAtLevel
 		this._entityProvider.size = this._size
 		this._entityProvider.loadEntitiesFromProvider = callback
 		this._neighborEntitiesProvider.loadEntitiesFromProvider = callback

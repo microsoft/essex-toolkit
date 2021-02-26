@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useState, useCallback } from 'react'
-import { IEntityDetail } from '..'
-import { useContainerStyle } from './theme'
+import React, { useState, useCallback } from 'react'
+import { IEntityDetail } from '../../..'
+import { useContainerStyle } from '../../../hooks/theme'
 
 interface IEdgePanelHook {
 	isOpen: boolean
