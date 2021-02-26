@@ -3,24 +3,24 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Spinner } from '@fluentui/react'
-import React, { memo } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import CommunityEdgeList from '../../NeighborList/CommunityEdgeList'
 import { ScrollArea } from '../../ScollArea'
 import { CommunityDataProvider } from '../../common/dataProviders'
-import { ICardFontStyles, useThemesAccentStyle } from '../../hooks/theme'
+import { useThemesAccentStyle } from '../../hooks/theme'
+import { ITableSettings } from '../../types'
 import { CommunityTable } from '../CommunityTable'
 import { TableExpander } from '../TableExpander'
 import { useAdjacentCommunityData } from './hooks/useAdjacentCommunityData'
 import { useEdgeSelection } from './hooks/useEdgeSelection'
 import { useExpandedPanel } from './hooks/useExpandedPanel'
-
 const ENTITY_LOADER_MSG = 'Fetching entity data...'
 
 interface IAdajacentCommunities {
 	dataProvider: CommunityDataProvider
 	isOpen: boolean
-	fontStyles: ICardFontStyles
+	styles?: ITableSettings
 	visibleColumns: string[] | undefined
 	minimizeColumns: boolean | undefined
 	refresh: boolean
@@ -29,7 +29,7 @@ interface IAdajacentCommunities {
 export const AdjacentCommunities: React.FC<IAdajacentCommunities> = function AdjacentCommunities({
 	dataProvider,
 	isOpen,
-	fontStyles,
+	styles,
 	visibleColumns,
 	minimizeColumns,
 	refresh,
@@ -62,11 +62,12 @@ export const AdjacentCommunities: React.FC<IAdajacentCommunities> = function Adj
 		<>
 			{adjacentCommunities && adjacentCommunities.length > 0 ? (
 				<>
-					<Spacer style={colorStyle}>
+					<Spacer style={colorStyle} className={'neighbor-expander-button'}>
 						{isOpen ? (
 							<TableExpander
 								isOpen={edgeListOpen}
 								handleButtonClick={edgeExpanderClick}
+								styles={styles?.neighborExpandButton}
 							/>
 						) : null}
 					</Spacer>
@@ -77,17 +78,19 @@ export const AdjacentCommunities: React.FC<IAdajacentCommunities> = function Adj
 							onEdgeClick={setEdgeSelection}
 							clearCurrentSelection={clearCurrentSelection}
 							isOpen={edgeListOpen}
+							styles={styles}
 						/>
 					</Content>
 				</>
 			) : null}
 			{isAdjacentEntitiesLoading || edgeEntities?.length > 0 ? (
 				<>
-					<Spacer style={colorStyle}>
+					<Spacer style={colorStyle} className={'neighbor-expander-button'}>
 						{isOpen ? (
 							<TableExpander
 								isOpen={edgeEntitiesOpen}
 								handleButtonClick={edgeEntitiesExpanderClick}
+								styles={styles?.neighborExpandButton}
 							/>
 						) : null}
 					</Spacer>
@@ -101,7 +104,7 @@ export const AdjacentCommunities: React.FC<IAdajacentCommunities> = function Adj
 									entities={edgeEntities}
 									communityId={selectedCommunityEdge?.communityId}
 									visibleColumns={visibleColumns}
-									fontStyles={fontStyles}
+									styles={styles}
 									minimize={minimizeColumns}
 								/>
 							</ScrollArea>
@@ -123,4 +126,5 @@ const Spacer = styled.div`
 	border-style: solid;
 	border-width: 0px 0.5px 0px 0.5px;
 	align-self: center;
+	overflow: hidden;
 `

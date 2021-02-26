@@ -103,7 +103,7 @@ export class EntityDataProvider {
 				params,
 				this._entityType,
 			)
-			if (nextNodes) {
+			if (nextNodes?.error || nextNodes?.data) {
 				if (!nextNodes.error && nextNodes.data) {
 					const data = nextNodes.data.filter(d => d)
 					return data
@@ -136,7 +136,6 @@ export class EntityDataProvider {
 		maxSize?: number,
 	): Promise<IEntityDetail[]> {
 		const { count, filtered, offset } = params
-		console.log('loadItems', params)
 		const totalLength = count + offset
 		const size = this._size || maxSize
 		if (filtered) {
@@ -166,7 +165,6 @@ export class EntityDataProvider {
 			params.offset,
 			params.count + params.offset,
 		)
-		console.log('slice', slice)
 		return slice
 	}
 

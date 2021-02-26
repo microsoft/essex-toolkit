@@ -3,17 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { IconButton, Spinner, TooltipHost, Text } from '@fluentui/react'
-import React, { memo, useCallback } from 'react'
+import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { CommunityId, IControls, IEntityDetail } from '..'
 import { MagBar } from '../MagBar'
 import { paddingLeft } from '../common/styles'
 import { IFilterProps } from '../hooks/interfaces'
-import {
-	ICardFontStyles,
-	useFilterButtonStyle,
-	useThemesStyle,
-} from '../hooks/theme'
+import { useThemesStyle } from '../hooks/theme'
 import {
 	useCommunityLevelText,
 	useCommunityText,
@@ -21,7 +17,8 @@ import {
 import { useCommunityDownload } from '../hooks/useCommunityDownload'
 import { useControls } from '../hooks/useControls'
 import { IEntityLoadParams } from '../hooks/useLoadMoreEntitiesHandler'
-
+import { ICardOverviewSettings } from '../types'
+import { headerLabel, subHeaderLabel } from '../common/styles'
 export interface ICommunityOverviewProps {
 	communityId: CommunityId
 	size: number
@@ -34,7 +31,7 @@ export interface ICommunityOverviewProps {
 		params?: IEntityLoadParams,
 	) => Promise<IEntityDetail[]> | undefined
 	level: number
-	fontStyles: ICardFontStyles
+	styles?: ICardOverviewSettings
 	controls?: IControls
 	neighborSize?: number
 }
@@ -50,13 +47,32 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 		filterProps,
 		getEntityCallback,
 		level,
-		fontStyles,
+		styles,
 		controls,
 		neighborSize,
 	}: ICommunityOverviewProps) {
 		const levelLabel = useCommunityLevelText(level, incrementLevel)
-		const style = useThemesStyle()
-		const buttonStyle = useFilterButtonStyle()
+
+		const style = useThemesStyle(styles)
+		const buttonStyle = useMemo(() => styles?.iconButton || {}, [styles])
+
+		const headerStyle = useMemo(
+			(): React.CSSProperties => styles?.header || {},
+			[styles],
+		)
+		const subheaderStyle = useMemo(
+			(): React.CSSProperties => styles?.subheader || {},
+			[styles],
+		)
+
+		const headerVariant = useMemo(() => styles?.headerText || headerLabel, [
+			styles,
+		])
+		const subheaderVariant = useMemo(
+			() => styles?.subHeaderText || subHeaderLabel,
+			[styles],
+		)
+
 		const { showLevel, showMembership, showFilter, showExport } = useControls(
 			controls,
 		)
@@ -78,28 +94,36 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 		)
 
 		return (
-			<FlexyContainer onClick={onToggleOpen} style={style}>
+			<FlexyContainer
+				onClick={onToggleOpen}
+				style={style}
+				className={'cardoverview-root'}
+			>
 				<Grid>
 					<GridItem1>
-						<Divider>
-							<Text variant={fontStyles.cardOverviewHeader}>
+						<Divider className={'cardoverview-header'} style={headerStyle}>
+							<Text variant={headerVariant}>
 								<Bold>{communityText}</Bold>
 							</Text>
 						</Divider>
 						{showLevel ? (
-							<Divider>
-								<Text variant={fontStyles.cardOverviewSubheader}>
-									{levelLabel}
-								</Text>
+							<Divider
+								className={'cardoverview-subheader'}
+								style={subheaderStyle}
+							>
+								<Text variant={subheaderVariant}>{levelLabel}</Text>
 							</Divider>
 						) : null}
 					</GridItem1>
 					{neighborSize && neighborSize > 0 ? (
 						<GridItem2>
 							<TooltipHost content="Number of neighboring (connected) communities.  Members of neighboring communities may be related, but are less tightly connected that those within the community.">
-								<Divider>
+								<Divider
+									className={'cardoverview-subheader'}
+									style={subheaderStyle}
+								>
 									<Text
-										variant={fontStyles.cardOverviewSubheader}
+										variant={subheaderVariant}
 									>{`Neighbors: ${neighborSize}`}</Text>
 								</Divider>
 								<HeightSpacer />
@@ -110,8 +134,11 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 						<FlexySubContainer>
 							{size && showMembership ? (
 								<Divider>
-									<Divider>
-										<Text variant={fontStyles.cardOverviewSubheader}>
+									<Divider
+										className={'cardoverview-subheader'}
+										style={subheaderStyle}
+									>
+										<Text variant={subheaderVariant}>
 											Members: {size.toLocaleString()}
 										</Text>
 									</Divider>
@@ -125,7 +152,7 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 									}.`}
 								>
 									<IconButton
-										style={buttonStyle}
+										styles={buttonStyle}
 										iconProps={{
 											iconName: filterProps.state ? 'Filter' : 'ClearFilter',
 										}}
@@ -140,7 +167,7 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 										<Spinner label="" style={SPINNER_STYLE} />
 									) : (
 										<IconButton
-											style={buttonStyle}
+											styles={buttonStyle}
 											iconProps={{ iconName: 'DownloadDocument' }}
 											onClick={handleDownload}
 										/>

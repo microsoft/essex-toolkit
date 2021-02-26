@@ -73,10 +73,9 @@ export const useEntityProvider = (
 					entityMap,
 					communityId,
 				)
-				return { data, error: undefined }
+				return { data }
 			}
 			return {
-				data: [],
 				error: new Error('No static neighbor entities loaded'),
 			}
 		},
@@ -93,9 +92,9 @@ export const useEntityProvider = (
 					filtered,
 					communityId,
 				)
-				return { data, error: undefined }
+				return { data }
 			}
-			return { data: [], error: new Error('No static entities loaded') }
+			return { error: new Error('No static entities loaded') }
 		},
 		[communities],
 	)

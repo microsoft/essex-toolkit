@@ -1,1 +1,1 @@
-export { Selections } from './Selections'
+export { Selections, ControlGroup } from './Selections'

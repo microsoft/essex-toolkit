@@ -5,13 +5,7 @@
 import { ITextProps } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import React, { useMemo } from 'react'
-import {
-	headerLabel,
-	rowHeader,
-	subHeaderLabel,
-	tableItems,
-} from '../common/styles'
-import { ISettings } from '../types'
+import { ICardOverviewSettings } from '../types'
 
 export function useContainerStyle(isOpen: boolean): React.CSSProperties {
 	const theme = useThematic()
@@ -29,11 +23,15 @@ export function useContainerStyle(isOpen: boolean): React.CSSProperties {
 	return getTheme
 }
 
-export function useThemesStyle(): React.CSSProperties {
+export function useThemesStyle(
+	styles?: ICardOverviewSettings,
+): React.CSSProperties {
 	const theme = useThematic()
+	const style = styles?.root || {}
 	return useMemo(
 		() => ({
 			background: theme.application().lowContrast().hex(),
+			...style,
 		}),
 		[theme],
 	)
@@ -52,14 +50,6 @@ export function useThemesAccentStyle(isOpen: boolean): React.CSSProperties {
 	)
 }
 
-export function useFilterButtonStyle(): React.CSSProperties {
-	return useMemo(
-		() => ({
-			marginLeft: 5,
-		}),
-		[],
-	)
-}
 export interface ICardFontStyles {
 	cardOverviewHeader: ITextProps['variant']
 	cardOverviewSubheader: ITextProps['variant']
@@ -67,32 +57,32 @@ export interface ICardFontStyles {
 	tableSubheader: ITextProps['variant']
 	tableItem: ITextProps['variant']
 }
-export function useSettingStyles(settings?: ISettings): ICardFontStyles {
-	return useMemo(() => {
-		let cardOverviewHeader = headerLabel
-		let cardOverviewSubheader = subHeaderLabel
-		let tableHeader = rowHeader
-		let tableSubheader = subHeaderLabel
-		let tableItem = tableItems
-		if (settings && settings.styles) {
-			if (settings.styles.cardOverview) {
-				cardOverviewHeader =
-					settings.styles.cardOverview.header || cardOverviewHeader
-				cardOverviewSubheader =
-					settings.styles.cardOverview.subheader || cardOverviewSubheader
-			}
-			if (settings.styles.table) {
-				tableHeader = settings.styles.table.header || tableHeader
-				tableSubheader = settings.styles.table.subheader || tableSubheader
-				tableItem = settings.styles.table.tableItems || tableItem
-			}
-		}
-		return {
-			cardOverviewHeader,
-			cardOverviewSubheader,
-			tableHeader,
-			tableSubheader,
-			tableItem,
-		}
-	}, [settings])
-}
+// export function useSettingStyles(settings?: ISettings): ICardFontStyles {
+// 	return useMemo(() => {
+// 		let cardOverviewHeader = headerLabel
+// 		let cardOverviewSubheader = subHeaderLabel
+// 		let tableHeader = rowHeader
+// 		let tableSubheader = subHeaderLabel
+// 		let tableItem = tableItems
+// 		if (settings && settings.styles) {
+// 			if (settings.styles.cardOverview) {
+// 				cardOverviewHeader =
+// 					settings.styles.cardOverview.header || cardOverviewHeader
+// 				cardOverviewSubheader =
+// 					settings.styles.cardOverview.subheader || cardOverviewSubheader
+// 			}
+// 			if (settings.styles.table) {
+// 				tableHeader = settings.styles.table.header || tableHeader
+// 				tableSubheader = settings.styles.table.subheader || tableSubheader
+// 				tableItem = settings.styles.table.tableItems || tableItem
+// 			}
+// 		}
+// 		return {
+// 			cardOverviewHeader,
+// 			cardOverviewSubheader,
+// 			tableHeader,
+// 			tableSubheader,
+// 			tableItem,
+// 		}
+// 	}, [settings])
+// }

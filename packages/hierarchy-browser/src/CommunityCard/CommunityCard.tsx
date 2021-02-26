@@ -5,14 +5,13 @@
 import { Spinner } from '@fluentui/react'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { ILoadNeighborCommunities } from '..'
+import { ILoadNeighborCommunities, ISettings } from '..'
 import { EmptyEntityList } from '../EntityItem/EmptyEntityList'
 import { ScrollArea } from '../ScollArea'
 import { CommunityDataProvider } from '../common/dataProviders'
 import { useContainerStyle } from '../hooks/theme'
 import { useCommunityData } from '../hooks/useCommunityData'
 import { useCommunitySizePercent } from '../hooks/useCommunitySizePercent'
-import { ISettingState } from '../hooks/useSettings'
 import { useUpdatedCommunityProvider } from '../hooks/useUpdatedCommunityProvider'
 import { CommunityOverview } from './CommunityOverview'
 import { CommunityTable } from './CommunityTable'
@@ -24,7 +23,7 @@ export interface ICommunityCardProps {
 	level: number
 	incrementLevel?: boolean // adjust from 0 to 1 based indexing on levels if needed
 	neighborCallback?: ILoadNeighborCommunities
-	settings: ISettingState
+	settings: ISettings
 	dataProvider: CommunityDataProvider
 	toggleUpdate: boolean
 }
@@ -46,7 +45,7 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 			isOpen: isOpenProp,
 			minimizeColumns,
 			visibleColumns,
-			fontStyles,
+			styles,
 			controls,
 		} = settings
 
@@ -80,7 +79,7 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 					filterProps={filterProps}
 					getEntityCallback={loadMore}
 					level={level}
-					fontStyles={fontStyles}
+					styles={styles?.cardOverview}
 					controls={controls}
 					neighborSize={dataProvider.neighborSize}
 					size={dataProvider.size}
@@ -93,7 +92,7 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 									entities={entities}
 									communityId={dataProvider.communityId}
 									visibleColumns={visibleColumns}
-									fontStyles={fontStyles}
+									styles={styles?.table}
 									minimize={minimizeColumns}
 								/>
 							</ScrollArea>
@@ -108,7 +107,7 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 					<AdjacentCommunities
 						dataProvider={dataProvider}
 						isOpen={isOpen}
-						fontStyles={fontStyles}
+						styles={styles?.table}
 						visibleColumns={visibleColumns}
 						minimizeColumns={minimizeColumns}
 						refresh={toggleUpdate}

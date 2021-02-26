@@ -2,38 +2,26 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useMemo, useCallback } from 'react'
-import { IControls, ISettings } from '../types'
-import { ICardFontStyles, useSettingStyles } from './theme'
+import { useCallback } from 'react'
+import { ISettings } from '../types'
 
-export interface ISettingState {
-	isOpen: boolean
-	fontStyles: ICardFontStyles
-	minimizeColumns?: boolean
-	visibleColumns?: string[]
-	controls?: IControls
-}
 export function useSettings(
 	settings?: ISettings,
-): (index: number) => ISettingState {
+): (index: number) => ISettings {
 	const getOpenState = useCallback(
 		(index: number): boolean =>
 			settings?.isOpen !== undefined ? settings.isOpen : index === 0,
 		[settings],
 	)
-	const visibleColumns = useMemo(() => settings?.visibleColumns, [settings])
-	const minimizeColumns = useMemo(() => settings?.minimizeColumns, [settings])
 
-	const controls = useMemo(() => settings?.controls, [settings])
-
-	const fontStyles = useSettingStyles(settings)
+	// const fontStyles = useSettingStyles(settings)
 
 	const getSettings = useCallback(
-		(index: number): ISettingState => {
+		(index: number): ISettings => {
 			const isOpen = getOpenState(index)
-			return { isOpen, minimizeColumns, visibleColumns, fontStyles, controls }
+			return { isOpen, ...settings }
 		},
-		[getOpenState, minimizeColumns, visibleColumns, fontStyles, controls],
+		[getOpenState, settings],
 	)
 
 	return getSettings

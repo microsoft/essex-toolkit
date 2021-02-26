@@ -2,23 +2,28 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IconButton } from '@fluentui/react'
+import { IconButton, IButtonStyles } from '@fluentui/react'
 import React, { memo, useMemo, useCallback } from 'react'
 import styled from 'styled-components'
 
 interface ITableExpander {
 	isOpen: boolean
 	handleButtonClick: (state: boolean) => void
+	styles?: IButtonStyles
 }
 const iconButtonStyles = { root: { maxHeight: '15px', maxWidth: '15px' } }
 
 export const TableExpander: React.FC<ITableExpander> = memo(
-	function TableExpander({ isOpen, handleButtonClick }: ITableExpander) {
+	function TableExpander({
+		isOpen,
+		handleButtonClick,
+		styles,
+	}: ITableExpander) {
 		const iconName = useMemo(
 			() => (isOpen ? 'DoubleChevronRight12' : 'DoubleChevronLeft12'),
 			[isOpen],
 		)
-
+		const buttonStyle = useMemo(() => styles || iconButtonStyles, [styles])
 		const handleClick = useCallback(() => {
 			handleButtonClick(!isOpen)
 		}, [handleButtonClick, isOpen])
@@ -26,7 +31,7 @@ export const TableExpander: React.FC<ITableExpander> = memo(
 			<>
 				<Header>
 					<IconButton
-						styles={iconButtonStyles}
+						styles={buttonStyle}
 						iconProps={{
 							iconName,
 						}}

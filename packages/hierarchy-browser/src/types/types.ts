@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ITextProps } from '@fluentui/react'
+import { IButtonStyles, ITextProps } from '@fluentui/react'
+import React from 'react'
 export type CommunityId = string
 export type EntityId = string
 
@@ -28,13 +29,13 @@ export interface IHierarchyDataProvider {
 }
 
 export interface IHierarchyDataResponse {
-	data: IEntityDetail[]
-	error: Error | null | undefined
+	data?: IEntityDetail[]
+	error?: Error | null
 }
 
 export interface IHierarchyNeighborResponse {
-	data: INeighborCommunityDetail[]
-	error: Error | null | undefined
+	data?: INeighborCommunityDetail[]
+	error?: Error | null
 }
 
 export interface ILoadParams {
@@ -59,19 +60,32 @@ export interface ILoadNeighborCommunities {
 		communityId: CommunityId,
 	): Promise<IHierarchyNeighborResponse>
 }
-export interface ICardOverviewSettings {
-	header?: ITextProps['variant']
-	subheader?: ITextProps['variant']
-}
 
+// === CUSTOM STYLES
+export interface ICardOverviewSettings {
+	header?: React.CSSProperties
+	headerText?: ITextProps['variant']
+	subheader?: React.CSSProperties
+	subHeaderText?: ITextProps['variant']
+	root?: React.CSSProperties
+	iconButton?: IButtonStyles
+}
 export interface ITableSettings {
-	header?: ITextProps['variant']
-	subheader?: ITextProps['variant']
-	tableItems?: ITextProps['variant']
+	header?: React.CSSProperties
+	headerText?: ITextProps['variant']
+
+	subheader?: React.CSSProperties
+	subHeaderText?: ITextProps['variant']
+
+	tableItems?: React.CSSProperties
+	tableItemsText?: ITextProps['variant']
+
+	root?: React.CSSProperties
+	neighborExpandButton?: IButtonStyles
 }
 export interface IStyles {
-	cardOverview: ICardOverviewSettings
-	table: ITableSettings
+	cardOverview?: ICardOverviewSettings
+	table?: ITableSettings
 }
 
 export interface IControls {
