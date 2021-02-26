@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { memo, useMemo, useState, useCallback } from 'react'
+import React, { memo, useMemo, useState, useCallback, useEffect } from 'react'
 import styled from 'styled-components'
 import { CommunityCard } from './CommunityCard/CommunityCard'
 import { useEntityProvider } from './common/dataProviders/hooks/useEntityProvider'
@@ -48,6 +48,14 @@ export const HierarchyBrowser: React.FC<IHierarchyBrowserProps> = memo(
 		settings,
 	}: IHierarchyBrowserProps) {
 		const [providerCache, setProviderCache] = useState<IDataProvidersCache>({})
+
+		const [forceUpdateNeighbors, setForceNeighborUpdate] = useState<boolean>(
+			false,
+		)
+
+		useEffect(() => {
+			setForceNeighborUpdate((state: boolean) => !state)
+		}, [communities, neighbors])
 
 		const neighborCallback: ILoadNeighborCommunities = useCallback(
 			async (
@@ -125,7 +133,8 @@ export const HierarchyBrowser: React.FC<IHierarchyBrowserProps> = memo(
 							dataProvider={provider}
 							neighborCallback={neighborCallback}
 							settings={cardSettings}
-						/>
+							toggleUpdate={forceUpdateNeighbors}
+						></CommunityCard>
 					)
 				})}
 			</CardContainer>

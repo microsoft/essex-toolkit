@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { ILoadParams } from '..'
 
 export function useLoadEntitiesOnMountEffect(
@@ -30,10 +30,11 @@ export function useLoadCommunitiesOnMountEffect(
 	) => void,
 	isOpen: boolean,
 	entitiesLoaded: boolean,
+	refresh: boolean,
 ): void {
 	useEffect(() => {
 		if (isOpen && !entitiesLoaded) {
 			loadInitialEntities()
 		}
-	}, [entitiesLoaded, isOpen, loadInitialEntities])
+	}, [refresh, isOpen, entitiesLoaded])
 }

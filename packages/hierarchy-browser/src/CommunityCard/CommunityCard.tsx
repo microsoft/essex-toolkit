@@ -26,6 +26,7 @@ export interface ICommunityCardProps {
 	neighborCallback?: ILoadNeighborCommunities
 	settings: ISettingState
 	dataProvider: CommunityDataProvider
+	toggleUpdate: boolean
 }
 
 const ENTITY_LOADER_MSG = 'Fetching entity data...'
@@ -39,6 +40,7 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 		neighborCallback,
 		settings,
 		dataProvider,
+		toggleUpdate,
 	}: ICommunityCardProps) {
 		const {
 			isOpen: isOpenProp,
@@ -61,7 +63,7 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 		] = useCommunityData(dataProvider, isOpenProp, maxLevel)
 
 		const sizePercent = useCommunitySizePercent(dataProvider.size, maxSize)
-		const contentStyle = useContainerStyle(isOpen, entities.length > 0)
+		const contentStyle = useContainerStyle(isOpen)
 
 		const loadingElement = useMemo(
 			() => (isLoading ? <Spinner label={ENTITY_LOADER_MSG} /> : null),
@@ -106,10 +108,10 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 					<AdjacentCommunities
 						dataProvider={dataProvider}
 						isOpen={isOpen}
-						entities={entities}
 						fontStyles={fontStyles}
 						visibleColumns={visibleColumns}
 						minimizeColumns={minimizeColumns}
+						refresh={toggleUpdate}
 					/>
 				</Flex>
 			</Container>

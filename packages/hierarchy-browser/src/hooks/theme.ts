@@ -13,21 +13,18 @@ import {
 } from '../common/styles'
 import { ISettings } from '../types'
 
-export function useContainerStyle(
-	isOpen: boolean,
-	entitiesAvailable: boolean,
-): React.CSSProperties {
+export function useContainerStyle(isOpen: boolean): React.CSSProperties {
 	const theme = useThematic()
 	const getTheme = useMemo(
 		() =>
 			({
-				height: isOpen ? (entitiesAvailable ? 250 : 75) : 0,
+				height: isOpen ? 250 : 0,
 				width: isOpen ? '100%' : '0px',
 				border: `1px solid ${theme.application().faint().hex()}`,
 				flex: isOpen ? 1 : 'revert',
 				WebkitFlex: isOpen ? 1 : 'revert',
 			} as React.CSSProperties),
-		[isOpen, theme, entitiesAvailable],
+		[isOpen, theme],
 	)
 	return getTheme
 }

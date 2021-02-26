@@ -5,7 +5,6 @@
 import { Spinner } from '@fluentui/react'
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { IEntityDetail } from '../..'
 import CommunityEdgeList from '../../NeighborList/CommunityEdgeList'
 import { ScrollArea } from '../../ScollArea'
 import { CommunityDataProvider } from '../../common/dataProviders'
@@ -21,103 +20,101 @@ const ENTITY_LOADER_MSG = 'Fetching entity data...'
 interface IAdajacentCommunities {
 	dataProvider: CommunityDataProvider
 	isOpen: boolean
-	entities: IEntityDetail[]
 	fontStyles: ICardFontStyles
 	visibleColumns: string[] | undefined
 	minimizeColumns: boolean | undefined
+	refresh: boolean
 }
 
-export const AdjacentCommunities: React.FC<IAdajacentCommunities> = memo(
-	function AdjacentCommunities({
-		dataProvider,
-		isOpen,
-		entities,
-		fontStyles,
-		visibleColumns,
-		minimizeColumns,
-	}: IAdajacentCommunities) {
-		const colorStyle = useThemesAccentStyle(isOpen)
+export const AdjacentCommunities: React.FC<IAdajacentCommunities> = function AdjacentCommunities({
+	dataProvider,
+	isOpen,
+	fontStyles,
+	visibleColumns,
+	minimizeColumns,
+	refresh,
+}: IAdajacentCommunities) {
+	const colorStyle = useThemesAccentStyle(isOpen)
 
-		const {
-			edgeContentStyle,
-			edgeEntitiesContentStyle,
-			edgeEntitiesExpanderClick,
-			edgeExpanderClick,
-			edgeListOpen,
-			edgeEntitiesOpen,
-		} = useExpandedPanel({ isOpen, entities })
+	const {
+		edgeContentStyle,
+		edgeEntitiesContentStyle,
+		edgeEntitiesExpanderClick,
+		edgeExpanderClick,
+		edgeListOpen,
+		edgeEntitiesOpen,
+	} = useExpandedPanel({ isOpen })
 
-		const [
-			setEdgeSelection,
-			loadMoreEntities,
-			moreEntitiesToLoad,
-			edgeEntities,
-			selectedCommunityEdge,
-			clearCurrentSelection,
-		] = useEdgeSelection(dataProvider)
-		const [
-			adjacentCommunities,
-			isAdjacentEntitiesLoading,
-		] = useAdjacentCommunityData(dataProvider, isOpen)
+	const [
+		setEdgeSelection,
+		loadMoreEntities,
+		moreEntitiesToLoad,
+		edgeEntities,
+		selectedCommunityEdge,
+		clearCurrentSelection,
+	] = useEdgeSelection(dataProvider)
+	const [
+		adjacentCommunities,
+		isAdjacentEntitiesLoading,
+	] = useAdjacentCommunityData(dataProvider, isOpen, refresh)
 
-		return (
-			<>
-				{adjacentCommunities && adjacentCommunities.length > 0 ? (
-					<>
-						<Spacer style={colorStyle}>
-							{isOpen ? (
-								<TableExpander
-									isOpen={edgeListOpen}
-									handleButtonClick={edgeExpanderClick}
-								/>
-							) : null}
-						</Spacer>
-						<Content style={edgeContentStyle}>
-							<CommunityEdgeList
-								edges={adjacentCommunities}
-								selectedEdge={selectedCommunityEdge}
-								onEdgeClick={setEdgeSelection}
-								clearCurrentSelection={clearCurrentSelection}
+	return (
+		<>
+			{adjacentCommunities && adjacentCommunities.length > 0 ? (
+				<>
+					<Spacer style={colorStyle}>
+						{isOpen ? (
+							<TableExpander
 								isOpen={edgeListOpen}
+								handleButtonClick={edgeExpanderClick}
 							/>
-						</Content>
-					</>
-				) : null}
-				{isAdjacentEntitiesLoading || edgeEntities?.length > 0 ? (
-					<>
-						<Spacer style={colorStyle}>
-							{isOpen ? (
-								<TableExpander
-									isOpen={edgeEntitiesOpen}
-									handleButtonClick={edgeEntitiesExpanderClick}
+						) : null}
+					</Spacer>
+					<Content style={edgeContentStyle}>
+						<CommunityEdgeList
+							edges={adjacentCommunities}
+							selectedEdge={selectedCommunityEdge}
+							onEdgeClick={setEdgeSelection}
+							clearCurrentSelection={clearCurrentSelection}
+							isOpen={edgeListOpen}
+						/>
+					</Content>
+				</>
+			) : null}
+			{isAdjacentEntitiesLoading || edgeEntities?.length > 0 ? (
+				<>
+					<Spacer style={colorStyle}>
+						{isOpen ? (
+							<TableExpander
+								isOpen={edgeEntitiesOpen}
+								handleButtonClick={edgeEntitiesExpanderClick}
+							/>
+						) : null}
+					</Spacer>
+					<Content style={edgeEntitiesContentStyle}>
+						{edgeEntities?.length > 0 && edgeEntitiesOpen ? (
+							<ScrollArea
+								loadMore={loadMoreEntities}
+								hasMore={moreEntitiesToLoad}
+							>
+								<CommunityTable
+									entities={edgeEntities}
+									communityId={selectedCommunityEdge?.communityId}
+									visibleColumns={visibleColumns}
+									fontStyles={fontStyles}
+									minimize={minimizeColumns}
 								/>
-							) : null}
-						</Spacer>
-						<Content style={edgeEntitiesContentStyle}>
-							{edgeEntities?.length > 0 && edgeEntitiesOpen ? (
-								<ScrollArea
-									loadMore={loadMoreEntities}
-									hasMore={moreEntitiesToLoad}
-								>
-									<CommunityTable
-										entities={edgeEntities}
-										communityId={selectedCommunityEdge?.communityId}
-										visibleColumns={visibleColumns}
-										fontStyles={fontStyles}
-										minimize={minimizeColumns}
-									/>
-								</ScrollArea>
-							) : null}
-							{isAdjacentEntitiesLoading ? (
-								<Spinner label={ENTITY_LOADER_MSG} />
-							) : null}
-						</Content>
-					</>
-				) : null}
-			</>
-		)
-	},
-)
+							</ScrollArea>
+						) : null}
+						{isAdjacentEntitiesLoading ? (
+							<Spinner label={ENTITY_LOADER_MSG} />
+						) : null}
+					</Content>
+				</>
+			) : null}
+		</>
+	)
+}
 const Content = styled.div`
 	overflow-y: auto;
 	transition: height 0.2s;

@@ -88,7 +88,3 @@ export interface ISettings {
 	minimizeColumns?: boolean
 	controls?: IControls
 }
-
-export interface IForceUpdate {
-	forceUpdate: () => void
-}
