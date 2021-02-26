@@ -7,20 +7,16 @@ import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { ILoadNeighborCommunities } from '..'
 import { EmptyEntityList } from '../EntityItem/EmptyEntityList'
-import CommunityEdgeList from '../NeighborList/CommunityEdgeList'
 import { ScrollArea } from '../ScollArea'
 import { CommunityDataProvider } from '../common/dataProviders'
-import { useContainerStyle, useThemesAccentStyle } from '../hooks/theme'
-import { useAdjacentCommunityData } from '../hooks/useAdjacentCommunityData'
+import { useContainerStyle } from '../hooks/theme'
 import { useCommunityData } from '../hooks/useCommunityData'
 import { useCommunitySizePercent } from '../hooks/useCommunitySizePercent'
-import { useEdgeSelection } from '../hooks/useEdgeSelection'
-import { useExpandedPanel } from '../hooks/useExpandedPanel'
 import { ISettingState } from '../hooks/useSettings'
 import { useUpdatedCommunityProvider } from '../hooks/useUpdatedCommunityProvider'
 import { CommunityOverview } from './CommunityOverview'
 import { CommunityTable } from './CommunityTable'
-import { TableExpander } from './TableExpander'
+import { AdjacentCommunities } from './AdjacentCommunities'
 
 export interface ICommunityCardProps {
 	maxSize: number
@@ -64,19 +60,6 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 			filterProps,
 		] = useCommunityData(dataProvider, isOpenProp, maxLevel)
 
-		const [
-			adjacentCommunities,
-			isAdjacentEntitiesLoading,
-		] = useAdjacentCommunityData(dataProvider, isOpen)
-
-		const [
-			setEdgeSelection,
-			loadMoreEntities,
-			moreEntitiesToLoad,
-			edgeEntities,
-			selectedCommunityEdge,
-			clearCurrentSelection,
-		] = useEdgeSelection(dataProvider)
 		const sizePercent = useCommunitySizePercent(dataProvider.size, maxSize)
 		const contentStyle = useContainerStyle(isOpen, entities.length > 0)
 
@@ -84,17 +67,6 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 			() => (isLoading ? <Spinner label={ENTITY_LOADER_MSG} /> : null),
 			[isLoading],
 		)
-
-		const colorStyle = useThemesAccentStyle(isOpen)
-
-		const {
-			edgeContentStyle,
-			edgeEntitiesContentStyle,
-			edgeEntitiesExpanderClick,
-			edgeExpanderClick,
-			edgeListOpen,
-			edgeEntitiesOpen,
-		} = useExpandedPanel({ isOpen, entities })
 
 		return (
 			<Container>
@@ -131,59 +103,14 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 							isLoading={isLoading}
 						/>
 					</Content>
-
-					{adjacentCommunities && adjacentCommunities.length > 0 ? (
-						<>
-							<Spacer style={colorStyle}>
-								{isOpen ? (
-									<TableExpander
-										isOpen={edgeListOpen}
-										handleButtonClick={edgeExpanderClick}
-									/>
-								) : null}
-							</Spacer>
-							<Content style={edgeContentStyle}>
-								<CommunityEdgeList
-									edges={adjacentCommunities}
-									selectedEdge={selectedCommunityEdge}
-									onEdgeClick={setEdgeSelection}
-									clearCurrentSelection={clearCurrentSelection}
-									isOpen={edgeListOpen}
-								/>
-							</Content>
-						</>
-					) : null}
-					{isAdjacentEntitiesLoading || edgeEntities?.length > 0 ? (
-						<>
-							<Spacer style={colorStyle}>
-								{isOpen ? (
-									<TableExpander
-										isOpen={edgeEntitiesOpen}
-										handleButtonClick={edgeEntitiesExpanderClick}
-									/>
-								) : null}
-							</Spacer>
-							<Content style={edgeEntitiesContentStyle}>
-								{edgeEntities?.length > 0 && edgeEntitiesOpen ? (
-									<ScrollArea
-										loadMore={loadMoreEntities}
-										hasMore={moreEntitiesToLoad}
-									>
-										<CommunityTable
-											entities={edgeEntities}
-											communityId={selectedCommunityEdge?.communityId}
-											visibleColumns={visibleColumns}
-											fontStyles={fontStyles}
-											minimize={minimizeColumns}
-										/>
-									</ScrollArea>
-								) : null}
-								{isAdjacentEntitiesLoading ? (
-									<Spinner label={ENTITY_LOADER_MSG} />
-								) : null}
-							</Content>
-						</>
-					) : null}
+					<AdjacentCommunities
+						dataProvider={dataProvider}
+						isOpen={isOpen}
+						entities={entities}
+						fontStyles={fontStyles}
+						visibleColumns={visibleColumns}
+						minimizeColumns={minimizeColumns}
+					/>
 				</Flex>
 			</Container>
 		)
@@ -199,9 +126,4 @@ const Flex = styled.div`
 const Content = styled.div`
 	overflow-y: auto;
 	transition: height 0.2s;
-`
-const Spacer = styled.div`
-	border-style: solid;
-	border-width: 0px 0.5px 0px 0.5px;
-	align-self: center;
 `

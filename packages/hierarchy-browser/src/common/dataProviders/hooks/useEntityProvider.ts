@@ -5,10 +5,7 @@ import {
 	IEntityDetail,
 	ILoadEntitiesAsync,
 } from '../../..'
-import {
-	ILoadNeighborCommunitiesAsync,
-	INeighborCommunityDetail,
-} from '../../../types'
+import { INeighborCommunityDetail } from '../../../types'
 import {
 	createEntityMap,
 	getStaticEntities,

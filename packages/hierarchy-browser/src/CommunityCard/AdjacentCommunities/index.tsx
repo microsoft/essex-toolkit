@@ -1,0 +1,1 @@
+export { AdjacentCommunities } from './AdjacentCommunities'
