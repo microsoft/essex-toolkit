@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import {
 	CommunityData,
 	EdgeData,
@@ -7,12 +7,17 @@ import {
 	NeighborLocalEntity,
 	NodeData,
 } from './types'
-import { CSVToArray, search, selectedClusterID } from './utils'
+import { CSVToArray, search } from './utils'
 import { ICommunityDetail } from '@essex-js-toolkit/hierarchy-browser'
 
 export function useData(
 	selectedOption: string,
-): [ICommunityDetail[], LocalEntity[], NeighborLocalEntity[]] {
+): [
+	ICommunityDetail[],
+	LocalEntity[],
+	NeighborLocalEntity[],
+	(selection: string) => JoinData[][] | undefined,
+] {
 	const [nodes, setNodes] = useState<NodeData[] | undefined>()
 	const [edges, setEdges] = useState<EdgeData[] | undefined>()
 	const [join, setJoin] = useState<JoinData[] | undefined>()
@@ -48,11 +53,19 @@ export function useData(
 		}
 	}, [join])
 
-	const selectedJoin = useMemo((): JoinData[][] | undefined => {
-		if (clusterIdMap) {
-			return search([selectedOption], clusterIdMap)
-		}
-	}, [clusterIdMap, selectedOption])
+	const searchForChildren = useCallback(
+		(selection: string): JoinData[][] | undefined => {
+			if (clusterIdMap) {
+				return search([selection], clusterIdMap)
+			}
+		},
+		[clusterIdMap],
+	)
+
+	const selectedJoin = useMemo(
+		(): JoinData[][] | undefined => searchForChildren(selectedOption),
+		[searchForChildren, selectedOption],
+	)
 
 	const communityMap = useMemo((): { [x: string]: JoinData } | undefined => {
 		if (join) {
@@ -101,7 +114,7 @@ export function useData(
 		}
 	}, [setNodes, setEdges, setJoin, loadRemoteData])
 
-	return useMemo((): [
+	const [comm, entities, neighborComm] = useMemo((): [
 		ICommunityDetail[],
 		LocalEntity[],
 		NeighborLocalEntity[],
@@ -142,10 +155,12 @@ export function useData(
 			})
 			const container = [[], [], []]
 			const arrays = data.reduce((acc: any[][], o: CommunityData) => {
+				const entityIds = o.nodes.map((d: any) => d.id)
 				const comm = Object.assign(
 					{},
 					{
 						communityId: o.communityId,
+						entityIds,
 						size: o.size,
 						neighborSize: o.neighborSize,
 					},
@@ -165,4 +180,6 @@ export function useData(
 		}
 		return [[], [], []]
 	}, [selectedJoin, nodeMap, edgeMap, communityMap])
+
+	return [comm, entities, neighborComm, searchForChildren]
 }

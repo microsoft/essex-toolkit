@@ -6,7 +6,7 @@ export const selectedClusterID = 204
 export const clusterSampleID1 = 205
 export const clusterSampleID2 = 128
 export const clusterSampleID3 = 130
-
+export const visibleColumns = ['x', 'y', 'd']
 export const options: IChoiceGroupOption[] = [
 	{ key: `${selectedClusterID}`, text: `${selectedClusterID}` },
 	{ key: `${clusterSampleID1}`, text: `${clusterSampleID1}` },

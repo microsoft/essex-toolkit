@@ -28,8 +28,6 @@ export class CommunityDataProvider {
 	private _neighborEntitiesProvider: EntityDataProvider
 	private _entityProvider: EntityDataProvider
 
-	private _forceUpdateNeighbors: boolean = false
-
 	constructor(
 		communityData: ICommunityDetail,
 		loadEntitiesCallback: ICommunitiesAsyncHook,
@@ -90,14 +88,6 @@ export class CommunityDataProvider {
 	public set loadNeighborsCallback(cb: ILoadNeighborCommunities | undefined) {
 		this._loadNeighborsCallback = cb
 	}
-
-	public set forceUpdateNeighbors(state: boolean) {
-		this._forceUpdateNeighbors = state
-	}
-	public get forceUpdateNeighbors(): boolean {
-		return this._forceUpdateNeighbors
-	}
-
 	public set level(level: number) {
 		this._level = level
 	}
