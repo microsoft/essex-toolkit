@@ -16,9 +16,7 @@
 	"dependencies": {
 		"@essex-js-toolkit/hierarchy-browser": "workspace:packages/hierarchy-browser",
 		"@essex-js-toolkit/thematic-lineup": "^1.1.4",
-		"@essex-js-toolkit/themed-components": "^1.1.4",
-		"file-loader": "^6.2.0",
-		"url-loader": "^4.1.1"
+		"@essex-js-toolkit/themed-components": "^1.1.4"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.12.9",
@@ -44,10 +42,12 @@
 		"awesome-typescript-loader": "^5.2.1",
 		"babel-loader": "^8.2.2",
 		"core-js": "^3.8.0",
+		"file-loader": "^6.2.0",
 		"react": "^16.14.0",
 		"react-dom": "^16.14.0",
 		"react-is": "^17.0.1",
 		"regenerator-runtime": "^0.13.7",
+		"url-loader": "^4.1.1",
 		"webpack": "^4.44.2"
 	},
 	"peerDependencies": {
@@ -56,7 +56,9 @@
 		"@thematic/fluent": "^0.9.0",
 		"@thematic/react": "^0.9.0",
 		"@types/form-data": "^2.5.0",
+		"file-loader": "*",
 		"react": "^16.14.0",
-		"react-dom": "^16.14.0"
+		"react-dom": "^16.14.0",
+		"url-loader": "*"
 	}
 }
