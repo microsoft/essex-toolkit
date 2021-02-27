@@ -1,0 +1,10 @@
+releases:
+  "@essex-js-toolkit/hierarchy-browser": major
+  "@essex-js-toolkit/hooks": minor
+  "@essex-js-toolkit/themed-components": major
+
+declined:
+  - "@essex-js-toolkit/dev"
+
+undecided:
+  - "@essex-js-toolkit/themed-components-stories"
