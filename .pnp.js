@@ -28830,7 +28830,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["hoist-non-react-statics", "npm:3.3.2"],
             ["react", "npm:16.14.0"],
             ["react-dom", null],
-            ["react-is", "npm:16.13.1"],
+            ["react-is", null],
             ["shallowequal", "npm:1.1.0"],
             ["supports-color", "npm:5.5.0"]
           ],
@@ -28839,6 +28839,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@types/react-is",
             "@types/react",
             "react-dom",
+            "react-is",
             "react"
           ],
           "linkType": "HARD",

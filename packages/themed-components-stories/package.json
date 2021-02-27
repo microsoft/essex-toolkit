@@ -16,8 +16,7 @@
 	"dependencies": {
 		"@essex-js-toolkit/hierarchy-browser": "workspace:packages/hierarchy-browser",
 		"@essex-js-toolkit/thematic-lineup": "^1.1.4",
-		"@essex-js-toolkit/themed-components": "^1.1.4",
-		"react-is": "^17.0.1"
+		"@essex-js-toolkit/themed-components": "^1.1.4"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.12.9",
@@ -46,6 +45,7 @@
 		"file-loader": "^6.2.0",
 		"react": "^16.14.0",
 		"react-dom": "^16.14.0",
+		"react-is": "^17.0.1",
 		"regenerator-runtime": "^0.13.7",
 		"url-loader": "^4.1.1",
 		"webpack": "^4.44.2"
