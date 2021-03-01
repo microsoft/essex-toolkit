@@ -110,10 +110,7 @@ export function useData(
 				const clusterId = arr[0].clusterId
 				const selectedNodes = arr.map((d: JoinData) => {
 					const node = nodeMap[d.nodeId]
-					return Object.assign(
-						{},
-						{ id: node.id, attrs: { ...node }, cid: `${d.clusterId}` },
-					)
+					return { id: node.id, attrs: { ...node }, cid: `${d.clusterId}` }
 				})
 
 				const selectedEdges = arr.reduce((acc, d: JoinData) => {
@@ -121,15 +118,12 @@ export function useData(
 					const targetNode: NodeData = nodeMap[targetId]
 					if (targetNode) {
 						const clusterId = `${communityMap[targetId].clusterId}`
-						const o = Object.assign(
-							{},
-							{
-								id: targetNode.id,
-								attrs: { ...targetNode },
-								cid: clusterId,
-								neighbor: `${d.clusterId}`,
-							},
-						)
+						const o = {
+							id: targetNode.id,
+							attrs: { ...targetNode },
+							cid: clusterId,
+							neighbor: `${d.clusterId}`,
+						}
 						acc.push(o)
 					}
 					return acc
@@ -145,15 +139,12 @@ export function useData(
 			const container = [[], [], []]
 			const arrays = data.reduce((acc: any[][], o: CommunityData) => {
 				const entityIds = o.nodes.map((d: any) => d.id)
-				const comm = Object.assign(
-					{},
-					{
-						communityId: o.communityId,
-						entityIds,
-						size: o.size,
-						neighborSize: o.neighborSize,
-					},
-				)
+				const comm = {
+					communityId: o.communityId,
+					entityIds,
+					size: o.size,
+					neighborSize: o.neighborSize,
+				}
 				const nodes = o.nodes
 				const edges = o.edges
 				acc[0].push(comm as ICommunityDetail)

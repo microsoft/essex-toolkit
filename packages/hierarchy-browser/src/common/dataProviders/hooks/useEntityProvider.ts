@@ -49,10 +49,8 @@ export const useEntityProvider = (
 		): IEntityDetail[] => {
 			const levelIds = communities.reduce(
 				(acc, d) => {
-					if (d.entityIds) {
-						if (d.communityId === community) {
-							acc.current = acc.current.concat(d.entityIds)
-						}
+					if (d.entityIds && d.communityId === community) {
+						acc.current = acc.current.concat(d.entityIds)
 					}
 					return acc
 				},

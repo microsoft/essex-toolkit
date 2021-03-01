@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { IconButton, Spinner, TooltipHost, Text } from '@fluentui/react'
-import React, { memo, useCallback, useMemo } from 'react'
+import React, { memo, useCallback } from 'react'
 import styled from 'styled-components'
 import { CommunityId, IControls, IEntityDetail } from '..'
 import { MagBar } from '../MagBar'
@@ -17,6 +17,7 @@ import {
 import { useCommunityDownload } from '../hooks/useCommunityDownload'
 import { useControls } from '../hooks/useControls'
 import { IEntityLoadParams } from '../hooks/useLoadMoreEntitiesHandler'
+import { useOverviewStyles } from '../hooks/useStyles'
 import { ICardOverviewSettings } from '../types'
 
 export interface ICommunityOverviewProps {
@@ -35,6 +36,7 @@ export interface ICommunityOverviewProps {
 	controls?: IControls
 	neighborSize?: number
 }
+
 const DEFAULT_MAGBAR_WIDTH = 120
 const SPINNER_STYLE = { marginLeft: 17 }
 export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
@@ -54,24 +56,13 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 		const levelLabel = useCommunityLevelText(level, incrementLevel)
 
 		const style = useThemesStyle(styles)
-		const buttonStyle = useMemo(() => styles?.iconButton || {}, [styles])
-
-		const headerStyle = useMemo(
-			(): React.CSSProperties => styles?.header || {},
-			[styles],
-		)
-		const subheaderStyle = useMemo(
-			(): React.CSSProperties => styles?.subheader || {},
-			[styles],
-		)
-
-		const headerVariant = useMemo(() => styles?.headerText || headerLabel, [
-			styles,
-		])
-		const subheaderVariant = useMemo(
-			() => styles?.subHeaderText || subHeaderLabel,
-			[styles],
-		)
+		const [
+			headerVariant,
+			subheaderVariant,
+			headerStyle,
+			subheaderStyle,
+			buttonStyle,
+		] = useOverviewStyles(styles)
 
 		const { showLevel, showMembership, showFilter, showExport } = useControls(
 			controls,

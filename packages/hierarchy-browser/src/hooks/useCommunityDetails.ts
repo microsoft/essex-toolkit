@@ -27,8 +27,7 @@ export function useCommunityLevelCalculator(
 	const communityWithLevels = useMemo(() => {
 		const reverseList = [...data].reverse()
 		return reverseList.map(
-			(comm, index) =>
-				Object.assign({}, { ...comm, level: index }) as ICommunity,
+			(comm, index) => ({ ...comm, level: index } as ICommunity),
 		)
 	}, [data])
 	return [min, max, communityWithLevels]

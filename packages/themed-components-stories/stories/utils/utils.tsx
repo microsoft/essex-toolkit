@@ -86,7 +86,7 @@ export const loadRemoteData = async (
 		const obj = header.reduce((accum, colName, index) => {
 			let value: string | number = arr[index]
 			value = isNaN(+value) ? value : +value
-			accum = Object.assign({}, { ...accum, [colName]: value })
+			accum = { ...accum, [colName]: value }
 			return accum
 		}, {} as any)
 		return obj

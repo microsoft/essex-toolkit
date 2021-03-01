@@ -23,7 +23,7 @@ export const TableExpander: React.FC<ITableExpander> = memo(
 			() => (isOpen ? 'DoubleChevronRight12' : 'DoubleChevronLeft12'),
 			[isOpen],
 		)
-		const buttonStyle = useMemo(() => styles || iconButtonStyles, [styles])
+		const buttonStyle = styles ?? iconButtonStyles
 		const handleClick = useCallback(() => {
 			handleButtonClick(!isOpen)
 		}, [handleButtonClick, isOpen])

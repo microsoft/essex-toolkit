@@ -7,9 +7,10 @@ import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { CommunityId, IEntityDetail } from '..'
 import { EntityItem } from '../EntityItem/EntityItem'
-import { textStyle, headerLabel, subHeaderLabel } from '../common/styles'
+import { textStyle } from '../common/styles'
 
 import { ITableSettings } from '../types'
+import { useTableStyles } from '../hooks/useStyles'
 
 export interface ICommunityTableProps {
 	entities: IEntityDetail[]
@@ -36,26 +37,13 @@ export const CommunityTable: React.FC<ICommunityTableProps> = memo(
 			}
 			return Object.keys(entities[0].attrs)
 		}, [entities, minimize, visibleColumns])
-		const headerStyle = useMemo(
-			(): React.CSSProperties => styles?.header || {},
-			[styles],
-		)
-		const subheaderStyle = useMemo(
-			(): React.CSSProperties => styles?.subheader || {},
-			[styles],
-		)
-		const rootStyle = useMemo((): React.CSSProperties => styles?.root || {}, [
-			styles,
-		])
-
-		const headerVariant = useMemo(() => styles?.headerText || headerLabel, [
-			styles,
-		])
-		const subheaderVariant = useMemo(
-			() => styles?.subHeaderText || subHeaderLabel,
-			[styles],
-		)
-
+		const [
+			headerVariant,
+			subheaderVariant,
+			headerStyle,
+			subheaderStyle,
+			rootStyle,
+		] = useTableStyles(styles)
 		const headerText = communityId
 			? `${communityId} Community Membership`
 			: 'Community Membership'
