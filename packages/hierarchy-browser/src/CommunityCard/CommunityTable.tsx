@@ -8,11 +8,13 @@ import styled from 'styled-components'
 import { CommunityId, IEntityDetail } from '..'
 import { EntityItem } from '../EntityItem/EntityItem'
 import { textStyle } from '../common/styles'
-import { ICardFontStyles } from '../hooks/theme'
+
+import { useTableStyles } from '../hooks/useStyles'
+import { ITableSettings } from '../types'
 
 export interface ICommunityTableProps {
 	entities: IEntityDetail[]
-	fontStyles: ICardFontStyles
+	styles?: ITableSettings
 	communityId?: CommunityId
 	visibleColumns?: string[]
 	minimize?: boolean
@@ -22,7 +24,7 @@ export const CommunityTable: React.FC<ICommunityTableProps> = memo(
 	function CommunityTable({
 		entities,
 		minimize,
-		fontStyles,
+		styles,
 		communityId,
 		visibleColumns,
 	}: ICommunityTableProps) {
@@ -35,16 +37,27 @@ export const CommunityTable: React.FC<ICommunityTableProps> = memo(
 			}
 			return Object.keys(entities[0].attrs)
 		}, [entities, minimize, visibleColumns])
-		const headerLabel = communityId
+		const [
+			headerVariant,
+			subheaderVariant,
+			headerStyle,
+			subheaderStyle,
+			rootStyle,
+		] = useTableStyles(styles)
+		const headerText = communityId
 			? `${communityId} Community Membership`
 			: 'Community Membership'
 		return (
-			<Table>
+			<Table className={'tableItems-root'} style={rootStyle}>
 				<TableHeader>
 					<TableRow>
-						<TableHeaderRow colSpan={attrKeys.length + 1}>
-							<Text variant={fontStyles.tableHeader}>
-								<Bold>{headerLabel}</Bold>
+						<TableHeaderRow
+							colSpan={attrKeys.length + 1}
+							className={'tableItems-header'}
+							style={headerStyle}
+						>
+							<Text variant={headerVariant}>
+								<Bold>{headerText}</Bold>
 							</Text>
 						</TableHeaderRow>
 					</TableRow>
@@ -52,8 +65,12 @@ export const CommunityTable: React.FC<ICommunityTableProps> = memo(
 				<THeader>
 					<TableRow>
 						{['id', ...attrKeys].map((key, i) => (
-							<HeaderCell key={`table-header-${i}`}>
-								<Text variant={fontStyles.tableSubheader} styles={textStyle}>
+							<HeaderCell
+								key={`table-header-${i}`}
+								className={'tableItems-subheader'}
+								style={subheaderStyle}
+							>
+								<Text variant={subheaderVariant} styles={textStyle}>
 									<Bold>{key}</Bold>
 								</Text>
 							</HeaderCell>
@@ -67,7 +84,7 @@ export const CommunityTable: React.FC<ICommunityTableProps> = memo(
 							item={entity}
 							attrs={attrKeys}
 							index={i}
-							fontStyle={fontStyles.tableItem}
+							styles={styles}
 						/>
 					))}
 				</TableBody>

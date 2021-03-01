@@ -3,15 +3,15 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useCallback, useState } from 'react'
-import { INeighborCommunityDetail, IEntityDetail } from '..'
-import { CommunityDataProvider } from '../common/dataProviders'
-import { ENTITY_TYPE } from '../common/types/types'
-import { useEntitiesLoadedHandler } from './useEntitiesLoadedHandler'
-import { useLoadInitialEntitiesHandler } from './useLoadInitialEntitiesHandler'
+import { INeighborCommunityDetail, IEntityDetail } from '../../..'
+import { CommunityDataProvider } from '../../../common/dataProviders'
+import { ENTITY_TYPE } from '../../../common/types'
+import { useEntitiesLoadedHandler } from '../../../hooks/useEntitiesLoadedHandler'
+import { useLoadInitialEntitiesHandler } from '../../../hooks/useLoadInitialEntitiesHandler'
 import {
 	IEntityLoadParams,
 	useLoadMoreEntitiesHandler,
-} from './useLoadMoreEntitiesHandler'
+} from '../../../hooks/useLoadMoreEntitiesHandler'
 
 export function useEdgeSelection(
 	dataProvider?: CommunityDataProvider,

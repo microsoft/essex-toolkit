@@ -4,9 +4,9 @@
  */
 import { Text } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
-import React, { useCallback, memo, useRef } from 'react'
+import React, { useCallback, memo, useRef, useMemo } from 'react'
 import styled from 'styled-components'
-import { INeighborCommunityDetail } from '..'
+import { INeighborCommunityDetail, ITableSettings } from '..'
 import {
 	rowSubHeader,
 	rowHeader,
@@ -26,6 +26,7 @@ export interface ICommunityEdgeListProps {
 	clearCurrentSelection: () => Promise<void>
 	selectedEdge?: INeighborCommunityDetail
 	isOpen: boolean
+	styles?: ITableSettings
 }
 const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 	function CommunityEdgeList({
@@ -33,7 +34,34 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 		selectedEdge,
 		onEdgeClick,
 		clearCurrentSelection,
+		styles,
 	}: ICommunityEdgeListProps) {
+		const headerStyle = useMemo(
+			(): React.CSSProperties => styles?.header || {},
+			[styles],
+		)
+		const subheaderStyle = useMemo(
+			(): React.CSSProperties => styles?.subheader || {},
+			[styles],
+		)
+		const rootStyle = useMemo((): React.CSSProperties => styles?.root || {}, [
+			styles,
+		])
+		const itemStyle = useMemo(
+			(): React.CSSProperties => styles?.tableItems || {},
+			[styles],
+		)
+		const headerVariant = useMemo(() => styles?.headerText || rowHeader, [
+			styles,
+		])
+		const subheaderVariant = useMemo(
+			() => styles?.subHeaderText || rowSubHeader,
+			[styles],
+		)
+		const itemVariant = useMemo(() => styles?.tableItemsText || tableItems, [
+			styles,
+		])
+
 		const theme = useThematic()
 		const handleEdgeClick = useCallback(
 			(edge?: INeighborCommunityDetail) => {
@@ -64,11 +92,15 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 		)
 
 		return sortedEdges ? (
-			<Table>
+			<Table className={'tableItems-root'} style={rootStyle}>
 				<TableHead>
 					<TableRow>
-						<TableHeader colSpan={3}>
-							<Text variant={rowHeader}>
+						<TableHeader
+							colSpan={3}
+							className={'tableItems-header'}
+							style={headerStyle}
+						>
+							<Text variant={headerVariant}>
 								<Bold>Neighboring Communities</Bold>
 							</Text>
 						</TableHeader>
@@ -77,8 +109,12 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 				<TableBody>
 					<TableRow>
 						{SUBHEADERS.map((header, index) => (
-							<TableHeader key={`subheader-${index}`}>
-								<Text variant={rowSubHeader} styles={textStyle}>
+							<TableHeader
+								key={`subheader-${index}`}
+								className={'tableItems-subheader'}
+								style={subheaderStyle}
+							>
+								<Text variant={subheaderVariant} styles={textStyle}>
 									<Bold>{header}</Bold>
 								</Text>
 							</TableHeader>
@@ -91,16 +127,18 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 									style={{
 										...getBackgroundStyle(edge, 0, i),
 										textAlign: 'center',
+										...itemStyle,
 									}}
 									onClick={() => handleEdgeClick(edge)}
 								>
-									<Text variant={tableItems} styles={textStyle}>
+									<Text variant={itemVariant} styles={textStyle}>
 										{edge.communityId}
 									</Text>
 								</TableCell>
 
 								<TableCell
 									style={{
+										...itemStyle,
 										...getBackgroundStyle(edge, 1, i),
 									}}
 									key={`neighbor-community-${0}`}
@@ -110,7 +148,7 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 									<Separator>
 										<AbsoluteDiv>
 											<TextContainer>
-												<Text variant={tableItems} styles={textStyle}>
+												<Text variant={itemVariant} styles={textStyle}>
 													{edge.connections}
 												</Text>
 											</TextContainer>
@@ -128,6 +166,7 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 								</TableCell>
 								<TableCell
 									style={{
+										...itemStyle,
 										...getBackgroundStyle(edge, 2, i),
 									}}
 									key={`neighbor-community-${1}`}
@@ -136,7 +175,7 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 								>
 									<AbsoluteDiv>
 										<TextContainer>
-											<Text variant={tableItems} styles={textStyle}>
+											<Text variant={itemVariant} styles={textStyle}>
 												{edge.size}
 											</Text>
 										</TextContainer>

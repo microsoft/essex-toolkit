@@ -103,7 +103,7 @@ export class EntityDataProvider {
 				params,
 				this._entityType,
 			)
-			if (nextNodes) {
+			if (nextNodes?.error || nextNodes?.data) {
 				if (!nextNodes.error && nextNodes.data) {
 					const data = nextNodes.data.filter(d => d)
 					return data
