@@ -3233,32 +3233,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["@babel/plugin-transform-runtime", [
-        ["npm:7.12.1", {
-          "packageLocation": "./.yarn/cache/@babel-plugin-transform-runtime-npm-7.12.1-f4d6cced94-94d88c1349.zip/node_modules/@babel/plugin-transform-runtime/",
-          "packageDependencies": [
-            ["@babel/plugin-transform-runtime", "npm:7.12.1"]
-          ],
-          "linkType": "SOFT",
-        }],
-        ["virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#npm:7.12.1", {
-          "packageLocation": "./.yarn/$$virtual/@babel-plugin-transform-runtime-virtual-86096df89f/0/cache/@babel-plugin-transform-runtime-npm-7.12.1-f4d6cced94-94d88c1349.zip/node_modules/@babel/plugin-transform-runtime/",
-          "packageDependencies": [
-            ["@babel/plugin-transform-runtime", "virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#npm:7.12.1"],
-            ["@babel/core", "npm:7.12.9"],
-            ["@babel/helper-module-imports", "npm:7.12.5"],
-            ["@babel/helper-plugin-utils", "npm:7.10.4"],
-            ["@types/babel__core", null],
-            ["resolve", "patch:resolve@npm%3A1.19.0#builtin<compat/resolve>::version=1.19.0&hash=3388aa"],
-            ["semver", "npm:5.7.1"]
-          ],
-          "packagePeers": [
-            "@babel/core",
-            "@types/babel__core"
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["@babel/plugin-transform-shorthand-properties", [
         ["npm:7.12.1", {
           "packageLocation": "./.yarn/cache/@babel-plugin-transform-shorthand-properties-npm-7.12.1-e012360208-36cd37c9dd.zip/node_modules/@babel/plugin-transform-shorthand-properties/",
@@ -4362,7 +4336,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@essex-js-toolkit/hierarchy-browser", "virtual:b71dc3dd9751a0a41790d8e217491550f29871fc0661ac2b48c7c1202490f36add21ef8d400d8c2487f84721ec3b5ea3f85d3a86b396dd8305eec36dd57085a8#workspace:packages/hierarchy-browser"],
             ["@babel/core", "npm:7.12.9"],
-            ["@babel/plugin-transform-runtime", "virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#npm:7.12.1"],
             ["@essex-js-toolkit/hooks", "virtual:c3e69d64e2e09cec12f8ce95d195277dfe76a1eddab614e97aeea65a9462e5f98b42ac92f663aeececbd533e98da3f2354cd37b95719755ff6b755d9b7e6407d#workspace:packages/hooks"],
             ["@essex/scripts", "virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#npm:12.0.1"],
             ["@fluent/react", null],
@@ -4430,7 +4403,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@essex-js-toolkit/hierarchy-browser", "workspace:packages/hierarchy-browser"],
             ["@babel/core", "npm:7.12.9"],
-            ["@babel/plugin-transform-runtime", "virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#npm:7.12.1"],
             ["@essex-js-toolkit/hooks", "virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#workspace:packages/hooks"],
             ["@essex/scripts", "virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#npm:12.0.1"],
             ["@fluentui/react", "virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#npm:7.153.4"],
@@ -4567,11 +4539,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/thematic__d3", null],
             ["@types/thematic__fluent", null],
             ["@types/thematic__react", null],
+            ["@types/tslib", null],
             ["@types/types__node", null],
             ["core-js", "npm:3.8.0"],
             ["lineupjs", "npm:3.3.1"],
             ["react", "npm:16.14.0"],
-            ["react-dom", "virtual:71adb0e115873887f438342152e2f9d5ef089b9bdaa35efde4fea8bb6704ac80c48bf5ba2be4ad7af924a7cb8b2162bc4014790500a2be99805a86a67cc9f973#npm:16.14.0"]
+            ["react-dom", "virtual:71adb0e115873887f438342152e2f9d5ef089b9bdaa35efde4fea8bb6704ac80c48bf5ba2be4ad7af924a7cb8b2162bc4014790500a2be99805a86a67cc9f973#npm:16.14.0"],
+            ["tslib", null]
           ],
           "packagePeers": [
             "@thematic/core",
@@ -4587,10 +4561,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@types/thematic__d3",
             "@types/thematic__fluent",
             "@types/thematic__react",
+            "@types/tslib",
             "@types/types__node",
             "core-js",
             "react-dom",
-            "react"
+            "react",
+            "tslib"
           ],
           "linkType": "SOFT",
         }],
@@ -4639,6 +4615,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/d3-selection", "npm:1.4.3"],
             ["@types/fluentui__react", null],
             ["@types/node", "npm:14.14.10"],
+            ["@types/office-ui-fabric-react", null],
             ["@types/prop-types", "npm:15.7.3"],
             ["@types/react", "npm:16.9.53"],
             ["@types/react-dom", "npm:16.9.8"],
@@ -4674,6 +4651,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@types/core-js",
             "@types/fluentui__react",
             "@types/node",
+            "@types/office-ui-fabric-react",
             "@types/react-dom",
             "@types/react",
             "@types/thematic__color",
