@@ -1,5 +1,9 @@
-import React from 'react'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { ITextProps, IButtonStyles } from '@fluentui/react'
+import React from 'react'
 import { ICardOverviewSettings } from '..'
 import { headerLabel, subHeaderLabel } from '../common/styles'
 import { ITableSettings } from '../types'

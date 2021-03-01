@@ -7,7 +7,7 @@ import React, { memo, useCallback } from 'react'
 import styled from 'styled-components'
 import { CommunityId, IControls, IEntityDetail } from '..'
 import { MagBar } from '../MagBar'
-import { paddingLeft, headerLabel, subHeaderLabel } from '../common/styles'
+import { paddingLeft } from '../common/styles'
 import { IFilterProps } from '../hooks/interfaces'
 import { useThemesStyle } from '../hooks/theme'
 import {

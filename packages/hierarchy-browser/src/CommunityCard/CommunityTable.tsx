@@ -9,8 +9,8 @@ import { CommunityId, IEntityDetail } from '..'
 import { EntityItem } from '../EntityItem/EntityItem'
 import { textStyle } from '../common/styles'
 
-import { ITableSettings } from '../types'
 import { useTableStyles } from '../hooks/useStyles'
+import { ITableSettings } from '../types'
 
 export interface ICommunityTableProps {
 	entities: IEntityDetail[]
