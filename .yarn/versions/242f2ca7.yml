@@ -1,8 +1,8 @@
 releases:
   "@essex-js-toolkit/hierarchy-browser": major
-  "@essex-js-toolkit/hooks": minor
-  "@essex-js-toolkit/thematic-lineup": minor
-  "@essex-js-toolkit/themed-components": minor
+  "@essex-js-toolkit/hooks": patch
+  "@essex-js-toolkit/thematic-lineup": patch
+  "@essex-js-toolkit/themed-components": patch
   "@essex-js-toolkit/themed-components-stories": major
 
 declined:
