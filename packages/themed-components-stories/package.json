@@ -1,7 +1,7 @@
 {
 	"name": "@essex-js-toolkit/themed-components-stories",
 	"private": true,
-	"version": "1.1.4",
+	"version": "2.0.0",
 	"description": "A set of visual components that include built-in thematic",
 	"repository": "https://github.com/microsoft/essex-js-toolkit",
 	"author": "Nathan Evans <naevans@microsoft.com>",
@@ -15,8 +15,8 @@
 	},
 	"dependencies": {
 		"@essex-js-toolkit/hierarchy-browser": "workspace:packages/hierarchy-browser",
-		"@essex-js-toolkit/thematic-lineup": "^1.1.4",
-		"@essex-js-toolkit/themed-components": "^1.1.4"
+		"@essex-js-toolkit/thematic-lineup": "^1.1.5",
+		"@essex-js-toolkit/themed-components": "^1.1.5"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.12.9",
