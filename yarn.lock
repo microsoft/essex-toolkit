@@ -1945,7 +1945,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex-js-toolkit/hooks@^1.1.4, @essex-js-toolkit/hooks@workspace:packages/hooks":
+"@essex-js-toolkit/hooks@^1.1.5, @essex-js-toolkit/hooks@workspace:packages/hooks":
   version: 0.0.0-use.local
   resolution: "@essex-js-toolkit/hooks@workspace:packages/hooks"
   dependencies:
@@ -1971,7 +1971,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex-js-toolkit/thematic-lineup@^1.1.4, @essex-js-toolkit/thematic-lineup@workspace:packages/thematic-lineup":
+"@essex-js-toolkit/thematic-lineup@^1.1.5, @essex-js-toolkit/thematic-lineup@workspace:packages/thematic-lineup":
   version: 0.0.0-use.local
   resolution: "@essex-js-toolkit/thematic-lineup@workspace:packages/thematic-lineup"
   dependencies:
@@ -2009,8 +2009,8 @@ __metadata:
   dependencies:
     "@babel/core": ^7.12.9
     "@essex-js-toolkit/hierarchy-browser": "workspace:packages/hierarchy-browser"
-    "@essex-js-toolkit/thematic-lineup": ^1.1.4
-    "@essex-js-toolkit/themed-components": ^1.1.4
+    "@essex-js-toolkit/thematic-lineup": ^1.1.5
+    "@essex-js-toolkit/themed-components": ^1.1.5
     "@essex/scripts": ^12.0.1
     "@essex/storybook-config": ^11.0.2
     "@essex/webpack-config": ^10.0.5
@@ -2053,11 +2053,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex-js-toolkit/themed-components@^1.1.4, @essex-js-toolkit/themed-components@workspace:packages/themed-components":
+"@essex-js-toolkit/themed-components@^1.1.5, @essex-js-toolkit/themed-components@workspace:packages/themed-components":
   version: 0.0.0-use.local
   resolution: "@essex-js-toolkit/themed-components@workspace:packages/themed-components"
   dependencies:
-    "@essex-js-toolkit/hooks": ^1.1.4
+    "@essex-js-toolkit/hooks": ^1.1.5
     "@essex-js-toolkit/toolbox": ^1.1.4
     "@essex/scripts": ^12.0.1
     "@fluentui/react": ^7.153.4
