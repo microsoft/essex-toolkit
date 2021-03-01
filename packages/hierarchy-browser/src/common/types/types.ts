@@ -7,6 +7,9 @@ import {
 	ICommunityDetail,
 	INeighborCommunityDetail,
 	IEntityDetail,
+	ILoadParams,
+	IHierarchyDataResponse,
+	EntityId,
 } from '../..'
 import { CommunityDataProvider } from '../dataProviders'
 
@@ -32,4 +35,17 @@ export interface IDataProvidersCache {
 
 export interface ICardOrder {
 	[id: string]: number
+}
+
+export interface ICommunitiesAsyncHook {
+	(
+		params: ILoadParams,
+		neighbors: INeighborCommunityDetail[],
+		type?: ENTITY_TYPE,
+	): Promise<IHierarchyDataResponse>
+}
+
+export interface IEntityCounter {
+	current: EntityId[]
+	next?: EntityId[]
 }

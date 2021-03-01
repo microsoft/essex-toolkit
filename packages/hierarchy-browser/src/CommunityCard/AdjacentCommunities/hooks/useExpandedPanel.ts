@@ -2,13 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useState, useCallback } from 'react'
-import { IEntityDetail } from '..'
-import { useContainerStyle } from './theme'
+import React, { useState, useCallback } from 'react'
+import { useContainerStyle } from '../../../hooks/theme'
 
 interface IEdgePanelHook {
 	isOpen: boolean
-	entities: IEntityDetail[]
 }
 
 interface IEdgeState {
@@ -21,16 +19,10 @@ interface IEdgeState {
 }
 
 // Controls panel expansion state for neighbor communities and selected neighbor entities
-export function useExpandedPanel({
-	isOpen,
-	entities,
-}: IEdgePanelHook): IEdgeState {
+export function useExpandedPanel({ isOpen }: IEdgePanelHook): IEdgeState {
 	const [edgeListOpen, setEdgeListOpen] = useState<boolean>(true)
 	const [edgeEntitiesOpen, setEdgeEntitiesOpen] = useState<boolean>(true)
-	const edgeContentStyle = useContainerStyle(
-		isOpen && edgeListOpen,
-		entities.length > 0,
-	)
+	const edgeContentStyle = useContainerStyle(isOpen && edgeListOpen)
 	const edgeEntitiesExpanderClick = useCallback(
 		(newState: boolean) => {
 			setEdgeEntitiesOpen(newState)
@@ -45,10 +37,7 @@ export function useExpandedPanel({
 		[setEdgeListOpen],
 	)
 
-	const edgeEntitiesContentStyle = useContainerStyle(
-		isOpen && edgeEntitiesOpen,
-		entities.length > 0,
-	)
+	const edgeEntitiesContentStyle = useContainerStyle(isOpen && edgeEntitiesOpen)
 	return {
 		edgeContentStyle,
 		edgeEntitiesContentStyle,

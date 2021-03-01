@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { memo, useMemo, useState } from 'react'
+import React, { memo, useMemo, useState, useCallback, useEffect } from 'react'
 import styled from 'styled-components'
 import { CommunityCard } from './CommunityCard/CommunityCard'
-import { HierarchyDataProvider } from './common/dataProviders/HierachyDataProvider'
+import { useEntityProvider } from './common/dataProviders/hooks/useEntityProvider'
 import { IDataProvidersCache, ICardOrder } from './common/types/types'
 import {
 	useCommunityLevelCalculator,
@@ -13,15 +13,18 @@ import {
 } from './hooks/useCommunityDetails'
 import { useCommunityProvider } from './hooks/useCommunityProvider'
 import { useSettings } from './hooks/useSettings'
-import { useUpdatedHierarchyProvider } from './hooks/useUpdatedHierarchyProvider'
 import {
 	ICommunityDetail,
 	IEntityDetail,
+	IHierarchyNeighborResponse,
 	ILoadEntitiesAsync,
+	ILoadNeighborCommunities,
 	ILoadNeighborCommunitiesAsync,
+	ILoadParams,
 	INeighborCommunityDetail,
 	ISettings,
 } from './types'
+import { isEntitiesAsync } from './utils/utils'
 
 export interface IHierarchyBrowserProps {
 	communities: ICommunityDetail[]
@@ -44,55 +47,96 @@ export const HierarchyBrowser: React.FC<IHierarchyBrowserProps> = memo(
 		neighbors,
 		settings,
 	}: IHierarchyBrowserProps) {
-		/*eslint-disable react-hooks/exhaustive-deps*/
-		const hierachyDataProvider = useMemo<HierarchyDataProvider>(
-			() => new HierarchyDataProvider(),
-			[
-				/* no deps intentionally */
-			],
-		)
-		/*eslint-enable react-hooks/exhaustive-deps*/
 		const [providerCache, setProviderCache] = useState<IDataProvidersCache>({})
-		const [cardOrder, setCardOrder] = useState<ICardOrder>({})
 
-		const [isNeighborsLoaded, neighborCallback] = useUpdatedHierarchyProvider(
-			communities,
-			hierachyDataProvider,
-			entities,
-			neighbors,
+		const [forceUpdateNeighbors, setForceNeighborUpdate] = useState<boolean>(
+			false,
 		)
-		const [minLevel, maxLevel] = useCommunityLevelCalculator(communities)
+
+		useEffect(() => {
+			setForceNeighborUpdate((state: boolean) => !state)
+		}, [communities, neighbors])
+
+		const neighborCallback: ILoadNeighborCommunities = useCallback(
+			async (
+				params: ILoadParams,
+				communityId: string,
+			): Promise<IHierarchyNeighborResponse> => {
+				if (neighbors) {
+					const isAsync = isEntitiesAsync(neighbors)
+					if (isAsync) {
+						const loader = neighbors as ILoadNeighborCommunitiesAsync
+						return await loader(params)
+					}
+					const neighborsList = neighbors as INeighborCommunityDetail[]
+					const data = neighborsList.filter(
+						d => d.edgeCommunityId === communityId,
+					)
+					return { data, error: undefined }
+				}
+				return { data: [], error: new Error('neighbor communities not loaded') }
+			},
+			[neighbors],
+		)
+
+		const [
+			minLevel,
+			maxLevel,
+			communityWithLevels,
+		] = useCommunityLevelCalculator(communities)
 		const maxSize = useCommunitySizeCalculator(communities)
+
+		const loadEntitiesByCommunity = useEntityProvider(
+			communityWithLevels,
+			entities,
+		)
+
 		useCommunityProvider({
-			communities,
+			communities: communityWithLevels,
 			setProviderCache,
-			hierachyDataProvider,
-			setCardOrder,
+			loadEntitiesByCommunity,
 		})
+
+		const cardOrder: ICardOrder = useMemo(() => {
+			return communities.reduce((acc, c, index) => {
+				const id = c.communityId
+				acc[id] = index
+				return acc
+			}, {} as ICardOrder)
+		}, [communities])
 
 		const getSettings = useSettings(settings)
 
+		const sortedKeys = useMemo(
+			() =>
+				Object.keys(providerCache).sort((a, b) => cardOrder[a] - cardOrder[b]),
+			[providerCache, cardOrder],
+		)
+
+		const getCommunityProvider = useCallback(
+			(communityId: string) => providerCache[communityId],
+			[providerCache],
+		)
+
 		return (
 			<CardContainer>
-				{Object.keys(providerCache)
-					.sort((a, b) => cardOrder[a] - cardOrder[b])
-					.map((communityId, index) => {
-						const provider = providerCache[communityId]
-						const cardSettings = getSettings(index)
-						return (
-							<CommunityCard
-								key={`_card_${index}_${communityId}`}
-								incrementLevel={minLevel === 0}
-								maxSize={maxSize}
-								maxLevel={maxLevel}
-								level={maxLevel - index}
-								dataProvider={provider}
-								neighborsLoaded={isNeighborsLoaded}
-								neighborCallback={neighborCallback}
-								settings={cardSettings}
-							/>
-						)
-					})}
+				{sortedKeys.map((communityId: string, index: number) => {
+					const provider = getCommunityProvider(communityId)
+					const cardSettings = getSettings(index)
+					return (
+						<CommunityCard
+							key={`_card_${index}_${communityId}`}
+							incrementLevel={minLevel === 0}
+							maxSize={maxSize}
+							maxLevel={maxLevel}
+							level={maxLevel - index}
+							dataProvider={provider}
+							neighborCallback={neighborCallback}
+							settings={cardSettings}
+							toggleUpdate={forceUpdateNeighbors}
+						></CommunityCard>
+					)
+				})}
 			</CardContainer>
 		)
 	},

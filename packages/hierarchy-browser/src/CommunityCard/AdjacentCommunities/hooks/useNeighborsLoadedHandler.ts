@@ -3,11 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useState, useCallback } from 'react'
-import { INeighborCommunityDetail } from '..'
+import { INeighborCommunityDetail } from '../../..'
 
-export function useNeighborsLoadedHandler(
-	initialLoadingState: boolean,
-): [
+export function useNeighborsLoadedHandler(): [
 	INeighborCommunityDetail[],
 	boolean,
 	boolean,
@@ -17,7 +15,7 @@ export function useNeighborsLoadedHandler(
 	) => void,
 	(loading: boolean) => void,
 ] {
-	const [isLoading, setLoading] = useState(initialLoadingState)
+	const [isLoading, setLoading] = useState(false)
 	const [communities, setCommunities] = useState<INeighborCommunityDetail[]>([])
 	const [communitiesLoaded, setcommunitiesLoaded] = useState(false)
 
@@ -39,9 +37,11 @@ export function useNeighborsLoadedHandler(
 			if (error) {
 				console.error(error)
 			}
-			setCommunities(communities)
-			setLoading(false)
-			setcommunitiesLoaded(true)
+			if (communities && communities.length > 0) {
+				setCommunities(communities)
+				setLoading(false)
+				setcommunitiesLoaded(true)
+			}
 		},
 		[setCommunities, setLoading, setcommunitiesLoaded],
 	)

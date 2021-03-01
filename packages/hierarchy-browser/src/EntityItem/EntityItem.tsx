@@ -2,35 +2,46 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Text, ITextProps } from '@fluentui/react'
-import React, { memo } from 'react'
+import { Text } from '@fluentui/react'
+import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { IEntityDetail } from '..'
-import { textStyle } from '../common/styles'
+import { IEntityDetail, ITableSettings } from '..'
+import { textStyle, tableItems } from '../common/styles'
 import { useRowStyle } from './hooks/useRowStyle'
 
 export interface IEntityItemProps {
 	item: IEntityDetail
 	attrs: string[]
 	index: number
-	fontStyle: ITextProps['variant']
+	styles?: ITableSettings
 }
 export const EntityItem: React.FC<IEntityItemProps> = memo(
-	({ item, attrs, index, fontStyle }: IEntityItemProps) => {
+	({ item, attrs, index, styles }: IEntityItemProps) => {
 		const rowStyle = useRowStyle(index)
+		const itemStyle = useMemo(
+			(): React.CSSProperties => styles?.tableItems || {},
+			[styles],
+		)
+		const itemVariant = useMemo(() => styles?.tableItemsText || tableItems, [
+			styles,
+		])
 
 		return (
 			<TableRow key={`e${index}`} style={rowStyle}>
-				<TableItem>
-					<Text variant={fontStyle} styles={textStyle}>
+				<TableItem className={'tableItem'} style={itemStyle}>
+					<Text variant={itemVariant} styles={textStyle}>
 						{item.id}
 					</Text>
 				</TableItem>
 				{attrs
 					? attrs.map((attr, i) => (
-							<TableItem key={`attr${i}`}>
+							<TableItem
+								key={`attr${i}`}
+								className={'tableItem'}
+								style={itemStyle}
+							>
 								{item.attrs && item.attrs[attr] ? (
-									<Text variant={fontStyle} styles={textStyle}>
+									<Text variant={tableItems} styles={textStyle}>
 										{item.attrs[attr].toLocaleString()}
 									</Text>
 								) : (

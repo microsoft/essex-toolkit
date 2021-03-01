@@ -12,9 +12,8 @@ import {
 	ILoadNeighborCommunities,
 	IHierarchyDataResponse,
 } from '../..'
-import { ENTITY_TYPE } from '../types/types'
+import { ENTITY_TYPE, ICommunitiesAsyncHook } from '../types/types'
 import { EntityDataProvider } from './EntityDataProvider'
-import { HierarchyDataProvider } from './HierachyDataProvider'
 
 export const DEFAULT_LOAD_COUNT = 100
 
@@ -31,12 +30,12 @@ export class CommunityDataProvider {
 
 	constructor(
 		communityData: ICommunityDetail,
-		hierachyDataProvider: HierarchyDataProvider,
+		loadEntitiesCallback: ICommunitiesAsyncHook,
 		level: number,
 	) {
 		this.updateCommunityData(communityData)
 		this._level = level
-		const callback = this.useHierarchyDataProvider(hierachyDataProvider)
+		const callback = this.useEntityHandler(loadEntitiesCallback)
 		this._entityProvider = new EntityDataProvider(
 			ENTITY_TYPE.ENTITY,
 			this._size,
@@ -49,27 +48,15 @@ export class CommunityDataProvider {
 		)
 		this.setFilterEntities(false)
 	}
-	private useHierarchyDataProvider(
-		hierachyDataProvider: HierarchyDataProvider,
+	private useEntityHandler(
+		loadEntitiesCallback: ICommunitiesAsyncHook,
 	): (
 		params: ILoadParams,
 		type?: ENTITY_TYPE,
 	) => Promise<IHierarchyDataResponse | undefined> {
 		const getEntitiesfromProvider = (params: ILoadParams, type?: ENTITY_TYPE) =>
-			this.getEntities(hierachyDataProvider, params, type)
+			loadEntitiesCallback(params, this._neighborCommunities, type)
 		return getEntitiesfromProvider
-	}
-
-	private async getEntities(
-		hierarchyProvider: HierarchyDataProvider,
-		params: ILoadParams,
-		type?: ENTITY_TYPE,
-	): Promise<IHierarchyDataResponse | undefined> {
-		if (hierarchyProvider.asyncEntityLoader) {
-			return await hierarchyProvider.asyncEntityLoader(params)
-		} else {
-			return hierarchyProvider.getEntities(params, type)
-		}
 	}
 
 	public updateCommunityData(communityData: ICommunityDetail): void {
@@ -78,11 +65,8 @@ export class CommunityDataProvider {
 		this._neighborSize = communityData.neighborSize || -1
 	}
 
-	public updateHierarchyDataProvider(
-		hierachyDataProvider: HierarchyDataProvider,
-	): void {
-		const callback = this.useHierarchyDataProvider(hierachyDataProvider)
-		// this._loadNeighborsCallback = hierachyDataProvider.getNeighborsAtLevel
+	public updateEntityLoader(loadEntitiesCallback: ICommunitiesAsyncHook): void {
+		const callback = this.useEntityHandler(loadEntitiesCallback)
 		this._entityProvider.size = this._size
 		this._entityProvider.loadEntitiesFromProvider = callback
 		this._neighborEntitiesProvider.loadEntitiesFromProvider = callback
@@ -104,7 +88,6 @@ export class CommunityDataProvider {
 	public set loadNeighborsCallback(cb: ILoadNeighborCommunities | undefined) {
 		this._loadNeighborsCallback = cb
 	}
-
 	public set level(level: number) {
 		this._level = level
 	}
@@ -145,9 +128,9 @@ export class CommunityDataProvider {
 				this._community,
 			)
 			if (!nextNeighbors.error && nextNeighbors.data) {
-				const data = nextNeighbors.data.filter(d => d)
-				this.addToNeighborCommunitiesArray(data)
-				return data
+				// const data = nextNeighbors.data.filter(d => d)
+				this.addToNeighborCommunitiesArray(nextNeighbors.data)
+				return nextNeighbors.data
 			} else {
 				throw nextNeighbors.error
 			}

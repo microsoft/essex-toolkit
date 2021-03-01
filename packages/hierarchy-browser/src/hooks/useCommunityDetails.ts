@@ -5,6 +5,7 @@
 import { max } from 'd3-array'
 import { useMemo } from 'react'
 import { CommunityId, ICommunityDetail } from '..'
+import { ICommunity } from '../common/types'
 
 export function useCommunityLevelText(
 	level: number,
@@ -18,10 +19,18 @@ export function useCommunityLevelText(
 
 export function useCommunityLevelCalculator(
 	data: ICommunityDetail[],
-): [number, number] {
-	return useMemo(() => {
+): [number, number, ICommunity[]] {
+	const [min, max] = useMemo(() => {
 		return [0, data.length - 1]
 	}, [data])
+
+	const communityWithLevels = useMemo(() => {
+		const reverseList = [...data].reverse()
+		return reverseList.map(
+			(comm, index) => ({ ...comm, level: index } as ICommunity),
+		)
+	}, [data])
+	return [min, max, communityWithLevels]
 }
 
 export function useCommunitySizeCalculator(data: ICommunityDetail[]): number {
