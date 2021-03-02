@@ -31,11 +31,11 @@ const cardOverview = {
 
 const table = {
 	header: { color: '#f683ba', height: '10px' },
-	headerText: 'medium',
+	headerText: 'small',
 	subHeaderText: 'tiny',
 	subheader: { fontStyle: 'italic' },
 	tableItems: { fontStyle: 'italic', textAlign: 'center' },
-	tableItemsText: 'medium',
+	tableItemsText: 'large',
 	neighborExpandButton: { root: { color: 'black' } },
 	root: { background: '#ced4e4' },
 }

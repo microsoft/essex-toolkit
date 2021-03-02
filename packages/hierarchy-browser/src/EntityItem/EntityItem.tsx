@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import { IEntityDetail, ITableSettings } from '..'
 import { textStyle, tableItems } from '../common/styles'
 import { useRowStyle } from './hooks/useRowStyle'
+const NO_STYLE: React.CSSProperties = Object.freeze({})
 
 export interface IEntityItemProps {
 	item: IEntityDetail
@@ -18,13 +19,8 @@ export interface IEntityItemProps {
 export const EntityItem: React.FC<IEntityItemProps> = memo(
 	({ item, attrs, index, styles }: IEntityItemProps) => {
 		const rowStyle = useRowStyle(index)
-		const itemStyle = useMemo(
-			(): React.CSSProperties => styles?.tableItems || {},
-			[styles],
-		)
-		const itemVariant = useMemo(() => styles?.tableItemsText || tableItems, [
-			styles,
-		])
+		const itemStyle = styles?.tableItems ?? NO_STYLE
+		const itemVariant = styles?.tableItemsText ?? tableItems
 
 		return (
 			<TableRow key={`e${index}`} style={rowStyle}>
@@ -41,7 +37,7 @@ export const EntityItem: React.FC<IEntityItemProps> = memo(
 								style={itemStyle}
 							>
 								{item.attrs && item.attrs[attr] ? (
-									<Text variant={tableItems} styles={textStyle}>
+									<Text variant={itemVariant} styles={textStyle}>
 										{item.attrs[attr].toLocaleString()}
 									</Text>
 								) : (
