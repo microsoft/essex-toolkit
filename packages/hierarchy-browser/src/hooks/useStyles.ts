@@ -5,7 +5,7 @@
 import { ITextProps, IButtonStyles } from '@fluentui/react'
 import React from 'react'
 import { ICardOverviewSettings } from '..'
-import { headerLabel, subHeaderLabel } from '../common/styles'
+import { headerLabel, subHeaderLabel, tableItems } from '../common/styles'
 import { ITableSettings } from '../types'
 
 const NO_STYLE: React.CSSProperties = Object.freeze({})
@@ -56,6 +56,10 @@ export function useTableStyles(
 	React.CSSProperties,
 	//rootStyle
 	React.CSSProperties,
+	//itemStyle
+	React.CSSProperties,
+	//tableITemsText
+	ITextProps['variant'],
 ] {
 	const headerStyle = styles?.header ?? NO_STYLE
 
@@ -65,6 +69,8 @@ export function useTableStyles(
 
 	const headerVariant = styles?.headerText ?? headerLabel
 	const subheaderVariant = styles?.subHeaderText ?? subHeaderLabel
+	const itemVariant = styles?.tableItemsText ?? tableItems
+	const itemStyle = styles?.tableItems ?? {}
 
 	return [
 		headerVariant,
@@ -72,5 +78,7 @@ export function useTableStyles(
 		headerStyle,
 		subheaderStyle,
 		rootStyle,
+		itemStyle,
+		itemVariant,
 	]
 }
