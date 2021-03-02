@@ -4,15 +4,11 @@
  */
 import { Text } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
-import React, { useCallback, memo, useRef, useMemo } from 'react'
+import React, { useCallback, memo, useRef } from 'react'
 import styled from 'styled-components'
 import { INeighborCommunityDetail, ITableSettings } from '..'
-import {
-	rowSubHeader,
-	rowHeader,
-	tableItems,
-	textStyle,
-} from '../common/styles'
+import { textStyle } from '../common/styles'
+import { useTableStyles } from '../hooks/useStyles'
 import { Bar } from './Bar'
 import { useRowElements } from './hooks/useRowsElements'
 import { useSortedNeighbors } from './hooks/useSortedNeighbors'
@@ -36,31 +32,15 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 		clearCurrentSelection,
 		styles,
 	}: ICommunityEdgeListProps) {
-		const headerStyle = useMemo(
-			(): React.CSSProperties => styles?.header || {},
-			[styles],
-		)
-		const subheaderStyle = useMemo(
-			(): React.CSSProperties => styles?.subheader || {},
-			[styles],
-		)
-		const rootStyle = useMemo((): React.CSSProperties => styles?.root || {}, [
-			styles,
-		])
-		const itemStyle = useMemo(
-			(): React.CSSProperties => styles?.tableItems || {},
-			[styles],
-		)
-		const headerVariant = useMemo(() => styles?.headerText || rowHeader, [
-			styles,
-		])
-		const subheaderVariant = useMemo(
-			() => styles?.subHeaderText || rowSubHeader,
-			[styles],
-		)
-		const itemVariant = useMemo(() => styles?.tableItemsText || tableItems, [
-			styles,
-		])
+		const [
+			headerVariant,
+			subheaderVariant,
+			headerStyle,
+			subheaderStyle,
+			rootStyle,
+			itemStyle,
+			itemVariant,
+		] = useTableStyles(styles)
 
 		const theme = useThematic()
 		const handleEdgeClick = useCallback(
