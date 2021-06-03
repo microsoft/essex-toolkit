@@ -4764,7 +4764,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/boolean-expression-component/",
           "packageDependencies": [
             ["@essex/boolean-expression-component", "workspace:packages/boolean-expression-component"],
-            ["@essex/scripts", "virtual:6904d8e0466a42f77d594ebe84fc0a4dcf09289c3930cb6c2369689d3023a8289edaa13a0ff5b1bbacfa42d14a48e2a91854ed2ca3792465f50e4fc8de41e7b3#npm:12.0.1"]
+            ["@essex/scripts", "virtual:6904d8e0466a42f77d594ebe84fc0a4dcf09289c3930cb6c2369689d3023a8289edaa13a0ff5b1bbacfa42d14a48e2a91854ed2ca3792465f50e4fc8de41e7b3#npm:12.0.1"],
+            ["core-js", "npm:3.13.1"]
           ],
           "linkType": "SOFT",
         }]
