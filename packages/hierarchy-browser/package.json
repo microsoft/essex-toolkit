@@ -23,6 +23,7 @@
 	],
 	"dependencies": {
 		"@essex-js-toolkit/hooks": "workspace:packages/hooks",
+		"core-js": "^3.13.1",
 		"d3-array": "^2.8.0",
 		"d3-scale": "^3.2.3",
 		"d3-selection": "^2.0.0",
@@ -58,7 +59,6 @@
 		"@types/react": "^16.9.52",
 		"@types/react-infinite-scroller": "^1.2.1",
 		"@types/styled-components": "^5",
-		"core-js": "*",
 		"react": ">=16.13.1",
 		"regenerator-runtime": "*",
 		"styled-components": "*"

@@ -1919,6 +1919,7 @@ __metadata:
     "@types/react": ^16.14.2
     "@types/react-infinite-scroller": ^1.2.1
     "@types/styled-components": ^5
+    core-js: ^3.13.1
     d3-array: ^2.8.0
     d3-scale: ^3.2.3
     d3-selection: ^2.0.0
@@ -1938,7 +1939,6 @@ __metadata:
     "@types/react": ^16.9.52
     "@types/react-infinite-scroller": ^1.2.1
     "@types/styled-components": ^5
-    core-js: "*"
     react: ">=16.13.1"
     regenerator-runtime: "*"
     styled-components: "*"
@@ -1957,6 +1957,7 @@ __metadata:
     "@types/react": ^16.14.2
     "@types/react-dom": ^16.9.10
     "@types/react-test-renderer": ^16.9.4
+    core-js: ^3.13.1
     react: ^16.14.0
     react-dom: ^16.14.0
     react-test-renderer: ^16.14.0
@@ -1966,7 +1967,6 @@ __metadata:
     "@types/node": "*"
     "@types/react": "*"
     "@types/react-dom": "*"
-    core-js: "*"
     react: ">=16.8.0"
   languageName: unknown
   linkType: soft
@@ -1985,6 +1985,7 @@ __metadata:
     "@types/react": ^16.14.2
     "@types/react-dom": ^16.9.10
     "@types/react-test-renderer": ^16.9.4
+    core-js: ^3.13.1
     lineupjs: ^3.3.1
     react: ^16.14.0
     react-dom: ^16.14.0
@@ -1995,7 +1996,6 @@ __metadata:
     "@thematic/fluent": ">=0.8.0"
     "@thematic/react": ">=0.8.0"
     "@types/node": "*"
-    core-js: "*"
     lineupjs: ">=3.3.0"
     react: ">=16.8.6"
     react-dom: ">=16.8.6"
@@ -2032,7 +2032,7 @@ __metadata:
     "@uifabric/icons": ^7.5.17
     awesome-typescript-loader: ^5.2.1
     babel-loader: ^8.2.2
-    core-js: ^3.8.0
+    core-js: ^3.13.1
     file-loader: ^6.2.0
     react: ^16.14.0
     react-dom: ^16.14.0
@@ -2080,6 +2080,7 @@ __metadata:
     "@types/react-test-renderer": ^16.9.4
     "@uifabric/icons": ^7.5.17
     "@uifabric/utilities": ^7.33.2
+    core-js: ^3.13.1
     d3-array: ^2.8.0
     d3-axis: ^1.0.12
     d3-brush: ^1.1.6
@@ -2101,7 +2102,6 @@ __metadata:
     "@types/node": "*"
     "@types/react": ">= 16.9"
     "@uifabric/icons": ">= 7.3.38"
-    core-js: "*"
     office-ui-fabric-react: "*"
     react: ">= 16.8.6"
     react-dom: ">= 16.8.6"
@@ -2113,8 +2113,7 @@ __metadata:
   resolution: "@essex-js-toolkit/toolbox@workspace:packages/toolbox"
   dependencies:
     "@essex/scripts": ^12.0.1
-  peerDependencies:
-    core-js: "*"
+    core-js: ^3.13.1
   languageName: unknown
   linkType: soft
 
@@ -2149,6 +2148,14 @@ __metadata:
   checksum: e6db0919ab42962960215476c0a551c0aacadf644c3fe9952321c4725d80aa39db417b260ffb635bf5651085328c0c2f430aaf847d5c7be83faf01a757495c95
   languageName: node
   linkType: hard
+
+"@essex/boolean-expression-component@workspace:packages/boolean-expression-component":
+  version: 0.0.0-use.local
+  resolution: "@essex/boolean-expression-component@workspace:packages/boolean-expression-component"
+  dependencies:
+    "@essex/scripts": ^12.0.1
+  languageName: unknown
+  linkType: soft
 
 "@essex/build-step-azure@npm:10.0.4":
   version: 10.0.4
@@ -8197,10 +8204,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.0.1, core-js@npm:^3.0.4, core-js@npm:^3.6.5, core-js@npm:^3.8.0":
+"core-js@npm:^3.0.1, core-js@npm:^3.0.4, core-js@npm:^3.6.5":
   version: 3.8.0
   resolution: "core-js@npm:3.8.0"
   checksum: d2356e6e0d8067ba42eeb26b67cea7f4d33eff3a69183b75975cb4e7d4ac550a628160428ddcab3ef81497e3e5e02152466ede28633ad94d5da9942ff2fe17f1
+  languageName: node
+  linkType: hard
+
+"core-js@npm:^3.13.1":
+  version: 3.13.1
+  resolution: "core-js@npm:3.13.1"
+  checksum: 9138463ed7e6489a0b7f7e8a13cb345fde22866ab23d35f0e0e0ddc13e0374dfc7542d7316762a7dc2a5074efe22f8ff692e26ccc22860d8179de5eedf922e98
   languageName: node
   linkType: hard
 

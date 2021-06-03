@@ -16,7 +16,8 @@
 	"dependencies": {
 		"@essex-js-toolkit/hierarchy-browser": "workspace:packages/hierarchy-browser",
 		"@essex-js-toolkit/thematic-lineup": "^1.1.5",
-		"@essex-js-toolkit/themed-components": "^1.1.5"
+		"@essex-js-toolkit/themed-components": "^1.1.5",
+		"core-js": "^3.13.1"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.12.9",
@@ -41,7 +42,6 @@
 		"@uifabric/icons": "^7.5.17",
 		"awesome-typescript-loader": "^5.2.1",
 		"babel-loader": "^8.2.2",
-		"core-js": "^3.8.0",
 		"file-loader": "^6.2.0",
 		"react": "^16.14.0",
 		"react-dom": "^16.14.0",
