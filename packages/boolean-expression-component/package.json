@@ -13,6 +13,9 @@
 		"module": "dist/esm/index.js",
 		"typings": "dist/types/index.d.ts"
 	},
+	"dependencies": {
+		"core-js": "^3.13.1"
+	},
 	"devDependencies": {
 		"@essex/scripts": "^12.0.1"
 	}

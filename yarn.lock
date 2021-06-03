@@ -2154,6 +2154,7 @@ __metadata:
   resolution: "@essex/boolean-expression-component@workspace:packages/boolean-expression-component"
   dependencies:
     "@essex/scripts": ^12.0.1
+    core-js: ^3.13.1
   languageName: unknown
   linkType: soft
 
