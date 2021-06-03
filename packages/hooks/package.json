@@ -18,6 +18,7 @@
 	},
 	"dependencies": {
 		"@essex-js-toolkit/toolbox": "^1.1.4",
+		"core-js": "^3.13.1",
 		"resize-observer-polyfill": "^1.5.1"
 	},
 	"devDependencies": {
@@ -37,7 +38,6 @@
 		"@types/node": "*",
 		"@types/react": "*",
 		"@types/react-dom": "*",
-		"core-js": "*",
 		"react": ">=16.8.0"
 	}
 }

@@ -16,6 +16,9 @@
 		"clean": "essex clean",
 		"watch": "essex watch"
 	},
+	"dependencies": {
+		"core-js": "^3.13.1"
+	},
 	"devDependencies": {
 		"@essex/scripts": "^12.0.1",
 		"@thematic/color": "^0.9.0",
@@ -38,7 +41,6 @@
 		"@thematic/fluent": ">=0.8.0",
 		"@thematic/react": ">=0.8.0",
 		"@types/node": "*",
-		"core-js": "*",
 		"lineupjs": ">=3.3.0",
 		"react": ">=16.8.6",
 		"react-dom": ">=16.8.6",
