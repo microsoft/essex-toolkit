@@ -4,18 +4,24 @@
  */
 import React, { memo, useMemo, useCallback } from 'react'
 import styled from 'styled-components'
-import { BooleanOperation } from '../types'
-import { toggleOperation, booleanOperationColors } from '../utils'
+import {
+	BooleanOperation,
+	FilterClauseGroup,
+	FilterClause,
+	Palette,
+} from '../types'
+import { toggleOperation } from '../utils'
 import { BooleanOperationToggle } from './BooleanOperationToggle'
 import { FilterChip } from './FilterChip'
-import { FilterGroup, Filter } from './types'
 
 export const ChipGroup: React.FC<{
-	group: FilterGroup
+	group: FilterClauseGroup
 	onChangeOperation: (id: string, operation: BooleanOperation) => void
-	onDismiss: (filter: Filter) => void
+	onDismiss: (filter: FilterClause) => void
+	palette: Palette
 }> = memo(function ChipGroup({
 	group: { id, filters, name, locked, operation },
+	palette,
 	onDismiss,
 	onChangeOperation,
 }) {
@@ -35,15 +41,16 @@ export const ChipGroup: React.FC<{
 
 	return (
 		<Container>
-			<OperationText color={booleanOperationColors[operation]}>
+			<OperationText color={palette.operations[operation]}>
 				{name}
 			</OperationText>
-			<Border operation={operation}>
+			<Border borderColor={palette.operations[operation]}>
 				{filters.length > 1 ? (
 					<Toggle
 						operation={operation}
 						disabled={locked}
 						onToggle={handleToggle}
+						palette={palette}
 					/>
 				) : null}
 				{chips}
@@ -53,13 +60,9 @@ export const ChipGroup: React.FC<{
 })
 
 const Border: React.FC<{
-	operation: BooleanOperation
-}> = memo(function Border({ operation, children }) {
-	return (
-		<BorderContainer color={booleanOperationColors[operation]}>
-			{children}
-		</BorderContainer>
-	)
+	borderColor: string
+}> = memo(function Border({ borderColor, children }) {
+	return <BorderContainer color={borderColor}>{children}</BorderContainer>
 })
 
 const Container = styled.div`

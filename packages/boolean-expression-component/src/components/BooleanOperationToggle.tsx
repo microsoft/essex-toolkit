@@ -4,8 +4,7 @@
  */
 import React, { CSSProperties, memo } from 'react'
 import styled from 'styled-components'
-import { BooleanOperation } from '../types'
-import { booleanOperationColors } from '../utils'
+import { BooleanOperation, Palette } from '../types'
 
 export const BooleanOperationToggle: React.FC<{
 	className?: string
@@ -13,14 +12,16 @@ export const BooleanOperationToggle: React.FC<{
 	operation: BooleanOperation
 	disabled?: boolean
 	onToggle?: () => void
+	palette: Palette
 }> = memo(function BooleanOperationToggle({
 	className,
 	style,
 	operation,
 	disabled,
+	palette,
 	onToggle = NO_OP,
 }) {
-	const color = disabled ? 'grey' : booleanOperationColors[operation]
+	const color = disabled ? 'grey' : palette.operations[operation]
 	const label = labels[operation]
 	return (
 		<Button

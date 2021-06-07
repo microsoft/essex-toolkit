@@ -4,21 +4,34 @@
  */
 import React, { memo, useCallback, useRef } from 'react'
 import styled from 'styled-components'
-import { BooleanOperation } from '../types'
+import {
+	BooleanOperation,
+	FilterClauseGroup,
+	FilterClause,
+	Palette,
+} from '../types'
 import { toggleOperation } from '../utils'
 import { BooleanOperationToggle } from './BooleanOperationToggle'
 import { ChipGroup } from './ChipGroup'
-import { FilterGroup, Filter } from './types'
+
+const DEFAULT_PALETTE: Palette = {
+	operations: {
+		[BooleanOperation.AND]: '#80acf7',
+		[BooleanOperation.OR]: '#4D7BBA',
+	},
+}
 
 export const FilterExpressionView: React.FC<{
-	filters: FilterGroup[]
+	filters: FilterClauseGroup[]
 	operation: BooleanOperation
+	palette?: Palette
 	onGlobalOperationChanged: (data: BooleanOperation) => void
-	onChipDismissed: (filter: Filter) => void
+	onChipDismissed: (filter: FilterClause) => void
 	onOperationChanged: (id: string, operation: BooleanOperation) => void
 }> = memo(function FilterChipSet({
 	operation,
 	filters,
+	palette = DEFAULT_PALETTE,
 	onChipDismissed,
 	onOperationChanged,
 	onGlobalOperationChanged,
@@ -33,7 +46,11 @@ export const FilterExpressionView: React.FC<{
 		<ChipContainer ref={chipContainerRef}>
 			{/* Global Boolean Operation */}
 			{filters.length <= 1 ? null : (
-				<Toggle operation={operation} onToggle={handleToggleGlobalOperation} />
+				<Toggle
+					operation={operation}
+					onToggle={handleToggleGlobalOperation}
+					palette={palette}
+				/>
 			)}
 			{/* Attribute Filters */}
 			{filters.map(group => (
@@ -42,6 +59,7 @@ export const FilterExpressionView: React.FC<{
 					group={group}
 					onChangeOperation={onOperationChanged}
 					onDismiss={onChipDismissed}
+					palette={palette}
 				/>
 			))}
 		</ChipContainer>
