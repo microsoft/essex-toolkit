@@ -32,7 +32,7 @@
 	"devDependencies": {
 		"@babel/core": "^7.14.3",
 		"@essex/scripts": "^17.0.0",
-		"@fluentui/react": "^7.170.2",
+		"@fluentui/react": "^8.17.1",
 		"@thematic/core": "^1.2.0",
 		"@thematic/fluent": "^1.2.0",
 		"@thematic/react": "^1.2.0",
