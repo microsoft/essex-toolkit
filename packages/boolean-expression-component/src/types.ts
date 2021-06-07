@@ -21,15 +21,13 @@ export interface Palette {
 
 export interface FilterClause {
 	id: string
-	attribute: number
-	value: string
+	label: string
 }
 
 export interface FilterClauseGroup {
 	id: string
-	attributeId: number
-	name: string
+	label: string
 	filters: FilterClause[]
 	operation: BooleanOperation
-	locked: boolean
+	locked?: boolean
 }
