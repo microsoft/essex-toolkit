@@ -18,21 +18,21 @@
 	},
 	"dependencies": {
 		"@essex-js-toolkit/toolbox": "^1.1.4",
-		"core-js": "^3.13.1",
+		"core-js": "^3.14.0",
 		"resize-observer-polyfill": "^1.5.1"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^12.0.1",
-		"@testing-library/react": "^11.2.2",
-		"@types/jest": "^26.0.16",
-		"@types/node": "^14.14.10",
-		"@types/react": "^16.14.2",
-		"@types/react-dom": "^16.9.10",
-		"@types/react-test-renderer": "^16.9.4",
-		"react": "^16.14.0",
-		"react-dom": "^16.14.0",
-		"react-test-renderer": "^16.14.0",
-		"regenerator-runtime": "^0.13.7"
+		"@essex/scripts": "^17.0.0",
+		"@testing-library/react": "^11.2.7",
+		"@types/jest": "^26.0.23",
+		"@types/node": "^14.17.2",
+		"@types/react": "^17.0.9",
+		"@types/react-dom": "^17.0.6",
+		"@types/react-test-renderer": "^17.0.1",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-test-renderer": "^17.0.2",
+		"regenerator-runtime": "^0.13.8"
 	},
 	"peerDependencies": {
 		"@types/node": "*",
