@@ -9,8 +9,3 @@ export function toggleOperation(op: BooleanOperation): BooleanOperation {
 		? BooleanOperation.OR
 		: BooleanOperation.AND
 }
-
-export const booleanOperationColors: Record<BooleanOperation, string> = {
-	[BooleanOperation.AND]: '#80acf7',
-	[BooleanOperation.OR]: '#4D7BBA',
-}
