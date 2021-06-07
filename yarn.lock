@@ -3163,7 +3163,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@essex-js-toolkit/hooks@workspace:packages/hooks"
   dependencies:
-    "@essex-js-toolkit/toolbox": ^1.1.4
+    "@essex-js-toolkit/toolbox": "workspace:packages/toolbox"
     "@essex/scripts": ^17.0.0
     "@testing-library/react": ^11.2.7
     "@types/jest": ^26.0.23
@@ -3272,8 +3272,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@essex-js-toolkit/themed-components@workspace:packages/themed-components"
   dependencies:
-    "@essex-js-toolkit/hooks": ^1.1.5
-    "@essex-js-toolkit/toolbox": ^1.1.4
+    "@essex-js-toolkit/hooks": "workspace:packages/hooks"
+    "@essex-js-toolkit/toolbox": "workspace:packages/toolbox"
     "@essex/scripts": ^17.0.0
     "@fluentui/react": ^7.170.2
     "@fluentui/theme": ^1.7.4
@@ -3323,7 +3323,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex-js-toolkit/toolbox@^1.1.4, @essex-js-toolkit/toolbox@workspace:packages/toolbox":
+"@essex-js-toolkit/toolbox@workspace:packages/toolbox":
   version: 0.0.0-use.local
   resolution: "@essex-js-toolkit/toolbox@workspace:packages/toolbox"
   dependencies:
