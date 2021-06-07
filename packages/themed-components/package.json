@@ -17,8 +17,8 @@
 		"watch": "essex watch"
 	},
 	"dependencies": {
-		"@essex-js-toolkit/hooks": "^1.1.5",
-		"@essex-js-toolkit/toolbox": "^1.1.4",
+		"@essex-js-toolkit/hooks": "workspace:packages/hooks",
+		"@essex-js-toolkit/toolbox": "workspace:packages/toolbox",
 		"@types/d3-array": "^2.2.0",
 		"@types/d3-axis": "^1.0.14",
 		"@types/d3-brush": "^1.1.4",

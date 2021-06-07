@@ -17,7 +17,7 @@
 		"watch": "essex watch"
 	},
 	"dependencies": {
-		"@essex-js-toolkit/toolbox": "^1.1.4",
+		"@essex-js-toolkit/toolbox": "workspace:packages/toolbox",
 		"core-js": "^3.14.0",
 		"resize-observer-polyfill": "^1.5.1"
 	},
