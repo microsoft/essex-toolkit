@@ -21,20 +21,23 @@ const DEFAULT_PALETTE: Palette = {
 	},
 }
 
+const NO_OP = () => {
+	/* nothing */
+}
 export const FilterExpressionView: React.FC<{
 	filters: FilterClauseGroup[]
 	operation: BooleanOperation
 	palette?: Palette
-	onGlobalOperationChanged: (data: BooleanOperation) => void
-	onChipDismissed: (filter: FilterClause) => void
-	onOperationChanged: (id: string, operation: BooleanOperation) => void
+	onGlobalOperationChanged?: (data: BooleanOperation) => void
+	onChipDismissed?: (filter: FilterClause) => void
+	onOperationChanged?: (id: string, operation: BooleanOperation) => void
 }> = memo(function FilterChipSet({
 	operation,
 	filters,
 	palette = DEFAULT_PALETTE,
-	onChipDismissed,
-	onOperationChanged,
-	onGlobalOperationChanged,
+	onChipDismissed = NO_OP,
+	onOperationChanged = NO_OP,
+	onGlobalOperationChanged = NO_OP,
 }) {
 	const chipContainerRef = useRef<HTMLDivElement>(null)
 	const handleToggleGlobalOperation = useCallback(

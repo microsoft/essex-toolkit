@@ -20,7 +20,7 @@ export const ChipGroup: React.FC<{
 	onDismiss: (filter: FilterClause) => void
 	palette: Palette
 }> = memo(function ChipGroup({
-	group: { id, filters, name, locked, operation },
+	group: { id, filters, label, locked, operation },
 	palette,
 	onDismiss,
 	onChangeOperation,
@@ -28,7 +28,7 @@ export const ChipGroup: React.FC<{
 	const chips = useMemo(
 		() =>
 			filters.map(f => (
-				<Chip key={f.id} value={f.value} onClose={() => onDismiss(f)} />
+				<Chip key={f.id} value={f.label} onClose={() => onDismiss(f)} />
 			)),
 		[filters, onDismiss],
 	)
@@ -42,7 +42,7 @@ export const ChipGroup: React.FC<{
 	return (
 		<Container>
 			<OperationText color={palette.operations[operation]}>
-				{name}
+				{label}
 			</OperationText>
 			<Border borderColor={palette.operations[operation]}>
 				{filters.length > 1 ? (
