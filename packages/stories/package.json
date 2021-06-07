@@ -1,5 +1,5 @@
 {
-	"name": "@essex-js-toolkit/themed-components-stories",
+	"name": "@essex-js-toolkit/stories",
 	"private": true,
 	"version": "2.0.0",
 	"description": "A set of visual components that include built-in thematic",
@@ -18,15 +18,19 @@
 		"@essex-js-toolkit/hierarchy-browser": "workspace:packages/hierarchy-browser",
 		"@essex-js-toolkit/thematic-lineup": "workspace:packages/thematic-lineup",
 		"@essex-js-toolkit/themed-components": "workspace:packages/themed-components",
-		"core-js": "^3.14.0"
+		"core-js": "^3.14.0",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.14.3",
 		"@essex/scripts": "^17.0.0",
-		"@essex/storybook-config": "^11.0.3",
-		"@essex/webpack-config": "^17.0.0",
-		"@fluentui/react": "^7.170.2",
+		"@fluentui/font-icons-mdl2": "^8.1.2",
+		"@fluentui/react": "^8.17.1",
+		"@storybook/addon-a11y": "^6.2.9",
 		"@storybook/addon-actions": "^6.2.9",
+		"@storybook/addon-docs": "^6.2.9",
+		"@storybook/addon-knobs": "^6.2.9",
 		"@storybook/addon-links": "^6.2.9",
 		"@storybook/addons": "^6.2.9",
 		"@storybook/core": "^6.2.9",
@@ -41,25 +45,7 @@
 		"@types/react-dom": "^17.0.6",
 		"@types/react-is": "^17.0.0",
 		"@uifabric/icons": "^7.5.23",
-		"awesome-typescript-loader": "^5.2.1",
-		"babel-loader": "^8.2.2",
-		"file-loader": "^6.2.0",
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2",
 		"react-is": "^17.0.2",
-		"regenerator-runtime": "^0.13.8",
-		"url-loader": "^4.1.1",
-		"webpack": "^5.38.1"
-	},
-	"peerDependencies": {
-		"@fluentui/react": "^7.147.1",
-		"@thematic/core": "^0.9.0",
-		"@thematic/fluent": "^0.9.0",
-		"@thematic/react": "^0.9.0",
-		"@types/form-data": "^2.5.0",
-		"file-loader": "*",
-		"react": "^16.14.0",
-		"react-dom": "^16.14.0",
-		"url-loader": "*"
+		"regenerator-runtime": "^0.13.8"
 	}
 }
