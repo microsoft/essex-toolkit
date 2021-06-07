@@ -25,7 +25,7 @@
 		"start:all": "yarn workspaces foreach -piv run start",
 		"publish:all": "yarn workspaces foreach --exclude '@essex-js-toolkit/dev' -pv npm publish --tolerate-republish --access public",
 		"unit:test": "essex test --coverage",
-		"lint": "essex lint --docs",
+		"lint": "essex lint",
 		"lint:fix": "essex lint -f",
 		"git_is_clean": "essex git-is-clean",
 		"prettify": "essex prettify",
