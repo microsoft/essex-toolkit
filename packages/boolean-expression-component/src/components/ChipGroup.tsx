@@ -84,6 +84,7 @@ const OperationText = styled.div`
 	font-size: 10px;
 	font-weight: bold;
 	z-index: 2;
+	// TODO: use theme background
 	background-color: black;
 	padding: 0 4px 0 4px;
 `
