@@ -14,9 +14,10 @@
 		"build": "yarn build:storybook"
 	},
 	"dependencies": {
+		"@essex-js-toolkit/boolean-expression-component": "workspace:packages/boolean-expression-component",
 		"@essex-js-toolkit/hierarchy-browser": "workspace:packages/hierarchy-browser",
-		"@essex-js-toolkit/thematic-lineup": "^1.1.5",
-		"@essex-js-toolkit/themed-components": "^1.1.5",
+		"@essex-js-toolkit/thematic-lineup": "workspace:packages/thematic-lineup",
+		"@essex-js-toolkit/themed-components": "workspace:packages/themed-components",
 		"core-js": "^3.14.0"
 	},
 	"devDependencies": {
