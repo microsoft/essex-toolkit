@@ -19,18 +19,18 @@
 	},
 	"scripts": {
 		"preinstall": "npx only-allow yarn",
-		"clean_all": "yarn workspaces foreach -pv run clean",
-		"build_all": "yarn workspaces foreach -pvt run build",
-		"test_all": "yarn workspaces foreach -pv run test",
-		"start_all": "yarn workspaces foreach -piv run start",
-		"publish_all": "yarn workspaces foreach --exclude '@essex-js-toolkit/dev' -pv npm publish --tolerate-republish --access public",
-		"unit_test": "essex test --coverage",
+		"clean:all": "yarn workspaces foreach -pv run clean",
+		"build:all": "yarn workspaces foreach -pvt run build",
+		"test:all": "yarn workspaces foreach -pv run test",
+		"start:all": "yarn workspaces foreach -piv run start",
+		"publish:all": "yarn workspaces foreach --exclude '@essex-js-toolkit/dev' -pv npm publish --tolerate-republish --access public",
+		"unit:test": "essex test --coverage",
 		"lint": "essex lint --docs",
 		"lint:fix": "essex lint -f",
 		"git_is_clean": "essex git-is-clean",
 		"prettify": "essex prettify",
-		"release": "run-s build_all publish_all",
-		"ci": "run-s build_all lint test_all unit_test git_is_clean"
+		"release": "run-s build:all publish:all",
+		"ci": "run-s build:all lint test:all unit:test git_is_clean"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.14.3",
@@ -61,7 +61,7 @@
 	],
 	"resolutions": {
 		"handlebars": "4.4.3",
-		"@types/react": "16.9.53",
-		"@types/react-dom": "16.9.8"
+		"@types/react": "17.0.9",
+		"@types/react-dom": "17.0.6"
 	}
 }
