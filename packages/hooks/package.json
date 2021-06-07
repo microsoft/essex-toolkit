@@ -18,8 +18,7 @@
 	},
 	"dependencies": {
 		"@essex-js-toolkit/toolbox": "workspace:packages/toolbox",
-		"core-js": "^3.14.0",
-		"resize-observer-polyfill": "^1.5.1"
+		"core-js": "^3.14.0"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^17.0.0",
