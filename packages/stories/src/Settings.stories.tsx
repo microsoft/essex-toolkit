@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { Settings } from '@essex-js-toolkit/themed-components'
 import { MessageBar, DefaultButton } from '@fluentui/react'
 import React, { useCallback, useState } from 'react'
 
 import { CSF } from './types'
-import { Settings } from '@essex-js-toolkit/themed-components'
 
 const story = {
 	title: 'Settings Pane',

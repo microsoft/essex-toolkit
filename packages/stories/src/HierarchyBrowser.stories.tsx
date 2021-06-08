@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { HierarchyBrowser } from '@essex-js-toolkit/hierarchy-browser'
 import { IChoiceGroupOption } from '@fluentui/react'
 import React, { useCallback, useState } from 'react'
 import { CSF } from './types'
@@ -11,7 +12,6 @@ import { useData } from './utils/useData'
 import { useHierarchyState } from './utils/useHierarchyState'
 import { useStaticEntities } from './utils/useStaticEntities'
 import { options, selectedClusterID, visibleColumns } from './utils/utils'
-import { HierarchyBrowser } from '@essex-js-toolkit/hierarchy-browser'
 
 const story = {
 	title: 'HierarchyBrowser',

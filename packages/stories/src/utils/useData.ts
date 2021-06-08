@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { ICommunityDetail } from '@essex-js-toolkit/hierarchy-browser'
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import {
 	CommunityData,
@@ -12,7 +13,6 @@ import {
 	NodeData,
 } from './types'
 import { loadRemoteData, search } from './utils'
-import { ICommunityDetail } from '@essex-js-toolkit/hierarchy-browser'
 
 export function useData(
 	selectedOption: string,

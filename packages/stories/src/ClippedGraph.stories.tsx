@@ -2,67 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { ClippedGraph } from '@essex-js-toolkit/themed-components'
 import React from 'react'
 import { CSF } from './types'
-import { ClippedGraph } from '@essex-js-toolkit/themed-components'
 
 const story = {
 	title: 'ClippedGraph',
 }
 export default story
 const data = [
-	1,
-	2,
-	3,
-	4,
-	3,
-	2,
-	3,
-	4,
-	3,
-	2,
-	3,
-	4,
-	5,
-	4,
-	5,
-	6,
-	5,
-	6,
-	5,
-	4,
-	3,
-	4,
-	3,
-	2,
-	25,
-	89,
-	30,
-	12,
-	3,
-	2,
-	3,
-	4,
-	3,
-	6,
-	7,
-	8,
-	7,
-	8,
-	7,
-	8,
-	7,
-	8,
-	9,
-	8,
-	9,
-	8,
-	7,
-	6,
-	7,
-	6,
-	5,
-	6,
+	1, 2, 3, 4, 3, 2, 3, 4, 3, 2, 3, 4, 5, 4, 5, 6, 5, 6, 5, 4, 3, 4, 3, 2, 25,
+	89, 30, 12, 3, 2, 3, 4, 3, 6, 7, 8, 7, 8, 7, 8, 7, 8, 9, 8, 9, 8, 7, 6, 7, 6,
+	5, 6,
 ]
 
 /**

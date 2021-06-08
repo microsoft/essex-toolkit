@@ -1,8 +1,12 @@
-import React from 'react'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import {
 	BooleanOperation,
 	FilterExpressionView,
 } from '@essex-js-toolkit/boolean-expression-component'
+import React from 'react'
 import { CSF } from './types'
 
 const story = {

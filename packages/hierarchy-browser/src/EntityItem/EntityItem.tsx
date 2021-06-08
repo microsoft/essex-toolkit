@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Text } from '@fluentui/react'
-import React, { memo, useMemo } from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import { IEntityDetail, ITableSettings } from '..'
 import { textStyle, tableItems } from '../common/styles'
