@@ -1949,7 +1949,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex-js-toolkit/hooks@^1.1.5, @essex-js-toolkit/hooks@workspace:packages/hooks":
+"@essex-js-toolkit/hooks@npm:^1.1.5":
+  version: 1.1.5
+  resolution: "@essex-js-toolkit/hooks@npm:1.1.5"
+  dependencies:
+    "@essex-js-toolkit/toolbox": ^1.1.4
+    resize-observer-polyfill: ^1.5.1
+  peerDependencies:
+    "@types/node": "*"
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    core-js: "*"
+    react: ">=16.8.0"
+  checksum: 4bfa97fd320691e185a8654f2409e2167fe2e5e72016202e6a21833bcddcd7583596e476d035a66e7437f5e5b0d8caeef57b128064417e707daa928dc0f5bda1
+  languageName: node
+  linkType: hard
+
+"@essex-js-toolkit/hooks@workspace:packages/hooks":
   version: 0.0.0-use.local
   resolution: "@essex-js-toolkit/hooks@workspace:packages/hooks"
   dependencies:
@@ -2099,7 +2115,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex-js-toolkit/toolbox@workspace:packages/toolbox":
+"@essex-js-toolkit/toolbox@^1.1.4, @essex-js-toolkit/toolbox@workspace:packages/toolbox":
   version: 0.0.0-use.local
   resolution: "@essex-js-toolkit/toolbox@workspace:packages/toolbox"
   dependencies:
@@ -18645,6 +18661,13 @@ fsevents@^1.2.7:
   version: 1.0.0
   resolution: "requires-port@npm:1.0.0"
   checksum: 0db25fb2ac9b4f2345a350846b7ba99d1f25a6686b1728246d14f05450c8f2fc066bdfae4561b4be2627c184a030a27e17268cfefdf46836e271db13734bc49e
+  languageName: node
+  linkType: hard
+
+"resize-observer-polyfill@npm:^1.5.1":
+  version: 1.5.1
+  resolution: "resize-observer-polyfill@npm:1.5.1"
+  checksum: ba14bfaf584eda299eafd6a06233a65c76586bc2bab3cdfdd1edd25fc6479f4270788ddd082e65390049b3ed542558f02bdf1f123bd912624de5b11d48857ac8
   languageName: node
   linkType: hard
 

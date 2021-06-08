@@ -61,7 +61,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ["@essex-js-toolkit/boolean-expression-component", ["virtual:5b86412f30e41c21952fc24c46d700186b685dc5d6677ba7a9875dd3c9800cfccf5021a4bddced5c5dac22f11ffc59b63a1041c41316dc21a1fbd4a4aa48d4b5#workspace:packages/boolean-expression-component", "workspace:packages/boolean-expression-component"]],
       ["@essex-js-toolkit/dev", ["workspace:."]],
       ["@essex-js-toolkit/hierarchy-browser", ["virtual:5b86412f30e41c21952fc24c46d700186b685dc5d6677ba7a9875dd3c9800cfccf5021a4bddced5c5dac22f11ffc59b63a1041c41316dc21a1fbd4a4aa48d4b5#workspace:packages/hierarchy-browser", "workspace:packages/hierarchy-browser"]],
-      ["@essex-js-toolkit/hooks", ["virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#workspace:packages/hooks", "virtual:c09c3bc1921b46dc33509b7d9a9a9a3ae58bdd7d0fb6436521887a40cf79a7534b052893aa26ff9dad313e4fb8604b2ff7062a28e79fe4d9683179d7536fee7c#workspace:packages/hooks", "workspace:packages/hooks"]],
+      ["@essex-js-toolkit/hooks", ["virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#workspace:packages/hooks", "workspace:packages/hooks"]],
       ["@essex-js-toolkit/stories", ["workspace:packages/stories"]],
       ["@essex-js-toolkit/thematic-lineup", ["virtual:5b86412f30e41c21952fc24c46d700186b685dc5d6677ba7a9875dd3c9800cfccf5021a4bddced5c5dac22f11ffc59b63a1041c41316dc21a1fbd4a4aa48d4b5#workspace:packages/thematic-lineup", "workspace:packages/thematic-lineup"]],
       ["@essex-js-toolkit/themed-components", ["virtual:5b86412f30e41c21952fc24c46d700186b685dc5d6677ba7a9875dd3c9800cfccf5021a4bddced5c5dac22f11ffc59b63a1041c41316dc21a1fbd4a4aa48d4b5#workspace:packages/themed-components", "workspace:packages/themed-components"]],
@@ -4593,6 +4593,42 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@essex-js-toolkit/hooks", [
+        ["npm:1.1.5", {
+          "packageLocation": "./.yarn/cache/@essex-js-toolkit-hooks-npm-1.1.5-81e3e0df00-4bfa97fd32.zip/node_modules/@essex-js-toolkit/hooks/",
+          "packageDependencies": [
+            ["@essex-js-toolkit/hooks", "npm:1.1.5"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:716adba4cbc47e9d61da9c05b4da54c8e89fd2d878ad1065d19fd35c2525bf24d903c7b0683583a4e2a5fd9d9cdfcec0b9f68c46003454acfe1b6c3437f2281f#npm:1.1.5", {
+          "packageLocation": "./.yarn/$$virtual/@essex-js-toolkit-hooks-virtual-57664409c2/0/cache/@essex-js-toolkit-hooks-npm-1.1.5-81e3e0df00-4bfa97fd32.zip/node_modules/@essex-js-toolkit/hooks/",
+          "packageDependencies": [
+            ["@essex-js-toolkit/hooks", "virtual:716adba4cbc47e9d61da9c05b4da54c8e89fd2d878ad1065d19fd35c2525bf24d903c7b0683583a4e2a5fd9d9cdfcec0b9f68c46003454acfe1b6c3437f2281f#npm:1.1.5"],
+            ["@essex-js-toolkit/toolbox", "workspace:packages/toolbox"],
+            ["@types/core-js", null],
+            ["@types/node", "npm:14.17.2"],
+            ["@types/react", "npm:17.0.9"],
+            ["@types/react-dom", null],
+            ["@types/types__node", null],
+            ["@types/types__react", null],
+            ["@types/types__react-dom", null],
+            ["core-js", "npm:3.14.0"],
+            ["react", "npm:17.0.2"],
+            ["resize-observer-polyfill", "npm:1.5.1"]
+          ],
+          "packagePeers": [
+            "@types/core-js",
+            "@types/node",
+            "@types/react-dom",
+            "@types/react",
+            "@types/types__node",
+            "@types/types__react-dom",
+            "@types/types__react",
+            "core-js",
+            "react"
+          ],
+          "linkType": "HARD",
+        }],
         ["virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#workspace:packages/hooks", {
           "packageLocation": "./.yarn/$$virtual/@essex-js-toolkit-hooks-virtual-71adb0e115/1/packages/hooks/",
           "packageDependencies": [
@@ -4623,36 +4659,34 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:c09c3bc1921b46dc33509b7d9a9a9a3ae58bdd7d0fb6436521887a40cf79a7534b052893aa26ff9dad313e4fb8604b2ff7062a28e79fe4d9683179d7536fee7c#workspace:packages/hooks", {
-          "packageLocation": "./.yarn/$$virtual/@essex-js-toolkit-hooks-virtual-a5a61fd361/1/packages/hooks/",
+        ["virtual:c09c3bc1921b46dc33509b7d9a9a9a3ae58bdd7d0fb6436521887a40cf79a7534b052893aa26ff9dad313e4fb8604b2ff7062a28e79fe4d9683179d7536fee7c#npm:1.1.5", {
+          "packageLocation": "./.yarn/$$virtual/@essex-js-toolkit-hooks-virtual-b19a19e5ab/0/cache/@essex-js-toolkit-hooks-npm-1.1.5-81e3e0df00-4bfa97fd32.zip/node_modules/@essex-js-toolkit/hooks/",
           "packageDependencies": [
-            ["@essex-js-toolkit/hooks", "virtual:c09c3bc1921b46dc33509b7d9a9a9a3ae58bdd7d0fb6436521887a40cf79a7534b052893aa26ff9dad313e4fb8604b2ff7062a28e79fe4d9683179d7536fee7c#workspace:packages/hooks"],
+            ["@essex-js-toolkit/hooks", "virtual:c09c3bc1921b46dc33509b7d9a9a9a3ae58bdd7d0fb6436521887a40cf79a7534b052893aa26ff9dad313e4fb8604b2ff7062a28e79fe4d9683179d7536fee7c#npm:1.1.5"],
             ["@essex-js-toolkit/toolbox", "workspace:packages/toolbox"],
-            ["@essex/scripts", "virtual:71adb0e115873887f438342152e2f9d5ef089b9bdaa35efde4fea8bb6704ac80c48bf5ba2be4ad7af924a7cb8b2162bc4014790500a2be99805a86a67cc9f973#npm:17.0.0"],
-            ["@testing-library/react", "virtual:71adb0e115873887f438342152e2f9d5ef089b9bdaa35efde4fea8bb6704ac80c48bf5ba2be4ad7af924a7cb8b2162bc4014790500a2be99805a86a67cc9f973#npm:11.2.7"],
-            ["@types/jest", "npm:26.0.23"],
+            ["@types/core-js", null],
             ["@types/node", null],
             ["@types/react", "npm:17.0.9"],
-            ["@types/react-dom", "npm:17.0.6"],
-            ["@types/react-test-renderer", "npm:17.0.1"],
+            ["@types/react-dom", null],
             ["@types/types__node", null],
             ["@types/types__react", null],
             ["@types/types__react-dom", null],
             ["core-js", "npm:3.14.0"],
             ["react", "npm:17.0.2"],
-            ["react-dom", "virtual:71adb0e115873887f438342152e2f9d5ef089b9bdaa35efde4fea8bb6704ac80c48bf5ba2be4ad7af924a7cb8b2162bc4014790500a2be99805a86a67cc9f973#npm:17.0.2"],
-            ["react-test-renderer", "virtual:71adb0e115873887f438342152e2f9d5ef089b9bdaa35efde4fea8bb6704ac80c48bf5ba2be4ad7af924a7cb8b2162bc4014790500a2be99805a86a67cc9f973#npm:17.0.2"],
-            ["regenerator-runtime", "npm:0.13.8"]
+            ["resize-observer-polyfill", "npm:1.5.1"]
           ],
           "packagePeers": [
+            "@types/core-js",
             "@types/node",
+            "@types/react-dom",
             "@types/react",
             "@types/types__node",
             "@types/types__react-dom",
             "@types/types__react",
+            "core-js",
             "react"
           ],
-          "linkType": "SOFT",
+          "linkType": "HARD",
         }],
         ["workspace:packages/hooks", {
           "packageLocation": "./packages/hooks/",
@@ -9269,7 +9303,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/$$virtual/@thematic-fluent-virtual-980a376aa0/0/cache/@thematic-fluent-npm-1.2.0-5c488ef993-e211c4a401.zip/node_modules/@thematic/fluent/",
           "packageDependencies": [
             ["@thematic/fluent", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:1.2.0"],
-            ["@essex-js-toolkit/hooks", "virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#workspace:packages/hooks"],
+            ["@essex-js-toolkit/hooks", "virtual:716adba4cbc47e9d61da9c05b4da54c8e89fd2d878ad1065d19fd35c2525bf24d903c7b0683583a4e2a5fd9d9cdfcec0b9f68c46003454acfe1b6c3437f2281f#npm:1.1.5"],
             ["@fluentui/font-icons-mdl2", null],
             ["@fluentui/react", "virtual:00f598608865c0ba673508a0fc9db2edf4dfe5ba7382b812acf97cff7020f790eab7ea058a54e5c76ab9382847f952417ea37fe3b2703332cdf0a384ca3155aa#npm:8.17.1"],
             ["@fluentuit/font-icons-mdl2", null],
@@ -9310,7 +9344,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/$$virtual/@thematic-fluent-virtual-716adba4cb/0/cache/@thematic-fluent-npm-1.2.0-5c488ef993-e211c4a401.zip/node_modules/@thematic/fluent/",
           "packageDependencies": [
             ["@thematic/fluent", "virtual:5b86412f30e41c21952fc24c46d700186b685dc5d6677ba7a9875dd3c9800cfccf5021a4bddced5c5dac22f11ffc59b63a1041c41316dc21a1fbd4a4aa48d4b5#npm:1.2.0"],
-            ["@essex-js-toolkit/hooks", "virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#workspace:packages/hooks"],
+            ["@essex-js-toolkit/hooks", "virtual:716adba4cbc47e9d61da9c05b4da54c8e89fd2d878ad1065d19fd35c2525bf24d903c7b0683583a4e2a5fd9d9cdfcec0b9f68c46003454acfe1b6c3437f2281f#npm:1.1.5"],
             ["@fluentui/font-icons-mdl2", "npm:8.1.2"],
             ["@fluentui/react", "virtual:5b86412f30e41c21952fc24c46d700186b685dc5d6677ba7a9875dd3c9800cfccf5021a4bddced5c5dac22f11ffc59b63a1041c41316dc21a1fbd4a4aa48d4b5#npm:8.17.1"],
             ["@fluentuit/font-icons-mdl2", null],
@@ -9351,7 +9385,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/$$virtual/@thematic-fluent-virtual-c09c3bc192/0/cache/@thematic-fluent-npm-1.2.0-5c488ef993-e211c4a401.zip/node_modules/@thematic/fluent/",
           "packageDependencies": [
             ["@thematic/fluent", "virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#npm:1.2.0"],
-            ["@essex-js-toolkit/hooks", "virtual:c09c3bc1921b46dc33509b7d9a9a9a3ae58bdd7d0fb6436521887a40cf79a7534b052893aa26ff9dad313e4fb8604b2ff7062a28e79fe4d9683179d7536fee7c#workspace:packages/hooks"],
+            ["@essex-js-toolkit/hooks", "virtual:c09c3bc1921b46dc33509b7d9a9a9a3ae58bdd7d0fb6436521887a40cf79a7534b052893aa26ff9dad313e4fb8604b2ff7062a28e79fe4d9683179d7536fee7c#npm:1.1.5"],
             ["@fluentui/font-icons-mdl2", null],
             ["@fluentui/react", "virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#npm:8.17.1"],
             ["@fluentuit/font-icons-mdl2", null],
@@ -9392,7 +9426,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/$$virtual/@thematic-fluent-virtual-b5f6b5741e/0/cache/@thematic-fluent-npm-1.2.0-5c488ef993-e211c4a401.zip/node_modules/@thematic/fluent/",
           "packageDependencies": [
             ["@thematic/fluent", "virtual:d76f983a87fb3271e633101e99cbee53bf14729519fa98a053161ccb07f2bfd8c5f17231e906e133a607e96cc876b98b5e61bc3312439e658a5e44b9e4a2b6f3#npm:1.2.0"],
-            ["@essex-js-toolkit/hooks", "virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#workspace:packages/hooks"],
+            ["@essex-js-toolkit/hooks", "virtual:716adba4cbc47e9d61da9c05b4da54c8e89fd2d878ad1065d19fd35c2525bf24d903c7b0683583a4e2a5fd9d9cdfcec0b9f68c46003454acfe1b6c3437f2281f#npm:1.1.5"],
             ["@fluentui/font-icons-mdl2", null],
             ["@fluentui/react", null],
             ["@fluentuit/font-icons-mdl2", null],
@@ -26238,6 +26272,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/requires-port-npm-1.0.0-fd036b488a-0db25fb2ac.zip/node_modules/requires-port/",
           "packageDependencies": [
             ["requires-port", "npm:1.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["resize-observer-polyfill", [
+        ["npm:1.5.1", {
+          "packageLocation": "./.yarn/cache/resize-observer-polyfill-npm-1.5.1-603120e8a0-ba14bfaf58.zip/node_modules/resize-observer-polyfill/",
+          "packageDependencies": [
+            ["resize-observer-polyfill", "npm:1.5.1"]
           ],
           "linkType": "HARD",
         }]
