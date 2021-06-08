@@ -2,8 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useMemo, useCallback } from 'react'
-import { LocalEntity, NeighborLocalEntity, JoinData } from './types'
 import {
 	ILoadParams,
 	INeighborCommunityDetail,
@@ -11,6 +9,8 @@ import {
 	ILoadEntitiesAsync,
 	ILoadNeighborCommunitiesAsync,
 } from '@essex-js-toolkit/hierarchy-browser'
+import { useMemo, useCallback } from 'react'
+import { LocalEntity, NeighborLocalEntity, JoinData } from './types'
 
 interface AsyncProps {
 	nodes: LocalEntity[]

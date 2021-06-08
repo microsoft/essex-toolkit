@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useMemo } from 'react'
 import { debounce } from '@essex-js-toolkit/toolbox'
+import { useMemo } from 'react'
 
 /**
  * Creates a debounced callback
@@ -16,11 +16,14 @@ export function useDebouncedCallback(
 	dependencies: any[],
 	delay = 100,
 ): (this: any, ...args: any[]) => void {
-	const cb = useMemo(() => debounce(callback, delay), [
-		// eslint-disable-next-line
-		...dependencies,
-		callback,
-		delay,
-	])
+	const cb = useMemo(
+		() => debounce(callback, delay),
+		[
+			// eslint-disable-next-line
+			...dependencies,
+			callback,
+			delay,
+		],
+	)
 	return cb
 }

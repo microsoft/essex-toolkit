@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { delay } from '@essex-js-toolkit/toolbox'
 import { useState, useLayoutEffect, useMemo } from 'react'
 import { DynamicData } from './interfaces'
-import { delay } from '@essex-js-toolkit/toolbox'
 
 /**
  * A interface for dynamic data
@@ -28,9 +28,7 @@ export function useDynamicData<InputType, OutputType = InputType>(
 		if (values) {
 			if (typeof (values as any)[Symbol.asyncIterator] === 'function') {
 				setTimeout(async () => {
-					for await (const value of (values as any) as AsyncIterable<
-						InputType
-					>) {
+					for await (const value of values as any as AsyncIterable<InputType>) {
 						if (!done) {
 							setState(value as any)
 							await delay(50)
@@ -40,7 +38,7 @@ export function useDynamicData<InputType, OutputType = InputType>(
 					}
 				}, 0)
 			} else {
-				setState((values as any) as OutputType)
+				setState(values as any as OutputType)
 			}
 		} else {
 			setState(undefined)

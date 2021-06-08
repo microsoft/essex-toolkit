@@ -33,7 +33,7 @@ describe('deferred', () => {
 			const instance = deferred()
 			const expectedArgs = [1, 2]
 
-			return new Promise(resolve => {
+			return new Promise<void>(resolve => {
 				instance.promise.then(args => {
 					expect(args).toEqual(expectedArgs)
 					resolve()
@@ -55,13 +55,14 @@ describe('deferred', () => {
 		it('should pass the correct args to the .then callback', async () => {
 			const instance = deferred()
 			const expectedArgs = [1, 2]
-			return new Promise((resolve, reject) => {
+			return new Promise<void>((resolve, reject) => {
 				instance.promise
 					.then(
 						args => {
 							reject('This promise should not have been resolved')
 						},
 						args => {
+							/* eslint-disable-next-line jest/no-conditional-expect */
 							expect(args).toEqual(expectedArgs)
 							resolve()
 						},
@@ -77,7 +78,7 @@ describe('deferred', () => {
 		it('should return a promise when called', async () => {
 			const instance = deferred()
 			const expectedArgs = [1, 2]
-			return new Promise((resolve, reject) => {
+			return new Promise<void>((resolve, reject) => {
 				instance.reject(expectedArgs).then(
 					args => {
 						reject('This promise should not have been resolved')
