@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { ControlledHistogramFilter } from '@essex-js-toolkit/themed-components'
 import React, { useState } from 'react'
 
 import { CSF } from './types'
-import { ControlledHistogramFilter } from '@essex-js-toolkit/themed-components'
 
 const story = {
 	title: 'ControlledHistogramFilter',
@@ -13,54 +13,8 @@ const story = {
 export default story
 
 const data = [
-	1,
-	2,
-	3,
-	4,
-	3,
-	2,
-	3,
-	4,
-	3,
-	2,
-	3,
-	4,
-	5,
-	4,
-	5,
-	6,
-	5,
-	6,
-	5,
-	4,
-	3,
-	4,
-	3,
-	2,
-	3,
-	2,
-	3,
-	4,
-	3,
-	6,
-	7,
-	8,
-	7,
-	8,
-	7,
-	8,
-	7,
-	8,
-	9,
-	8,
-	9,
-	8,
-	7,
-	6,
-	7,
-	6,
-	5,
-	6,
+	1, 2, 3, 4, 3, 2, 3, 4, 3, 2, 3, 4, 5, 4, 5, 6, 5, 6, 5, 4, 3, 4, 3, 2, 3, 2,
+	3, 4, 3, 6, 7, 8, 7, 8, 7, 8, 7, 8, 9, 8, 9, 8, 7, 6, 7, 6, 5, 6,
 ]
 
 /**

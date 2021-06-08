@@ -5,5 +5,5 @@
 		"declaration": true,
 		"allowSyntheticDefaultImports": true
 	},
-	"include": ["stories"]
+	"include": ["src"]
 }

@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { IStyles } from '@essex-js-toolkit/hierarchy-browser'
 import { IChoiceGroupOption } from '@fluentui/react'
 import { JoinData } from './types'
-import { IStyles } from '@essex-js-toolkit/hierarchy-browser'
 
 export const selectedClusterID = 204
 
