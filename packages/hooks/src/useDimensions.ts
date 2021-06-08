@@ -3,12 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useState, MutableRefObject, useEffect } from 'react'
-import ResizeObserver from 'resize-observer-polyfill'
 import { Dimensions } from './interfaces'
 
 /**
- * A hook for getting the dimensions of the given element
- * This hook also updates when the given element resizes
+ * A hook for getting the dimensions of the given element. This hook also updates when the given element resizes.
+ * NOTE: ResizeObserver must be defined in the target runtime. BYO polyfill if it is not provided by default
  * @param ref A ref to the element to measure
  * @returns The dimensions for the element.
  */

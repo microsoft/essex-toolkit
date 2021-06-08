@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { useDimensions } from '@essex-js-toolkit/hooks'
 import { Text } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import React, { useCallback, memo, useRef } from 'react'
@@ -12,7 +13,6 @@ import { useTableStyles } from '../hooks/useStyles'
 import { Bar } from './Bar'
 import { useRowElements } from './hooks/useRowsElements'
 import { useSortedNeighbors } from './hooks/useSortedNeighbors'
-import { useDimensions } from '@essex-js-toolkit/hooks'
 
 const SUBHEADERS = ['community', 'connections', 'members']
 

@@ -15,10 +15,10 @@
 		"clean": "essex clean",
 		"build": "essex build"
 	},
-	"devDependencies": {
-		"@essex/scripts": "^12.0.1"
+	"dependencies": {
+		"core-js": "^3.14.0"
 	},
-	"peerDependencies": {
-		"core-js": "*"
+	"devDependencies": {
+		"@essex/scripts": "^17.0.0"
 	}
 }
