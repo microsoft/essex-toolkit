@@ -41,7 +41,10 @@ export const ChipGroup: React.FC<{
 
 	return (
 		<Container>
-			<OperationText color={palette.operations[operation]}>
+			<OperationText
+				color={palette.operations[operation]}
+				backgroundColor={palette.backgroundColor}
+			>
 				{label}
 			</OperationText>
 			<Border borderColor={palette.operations[operation]}>
@@ -73,23 +76,19 @@ const Container = styled.div`
 	display: flex;
 	flex-shrink: 0;
 `
-interface ColorProps {
-	color: string
-}
-const OperationText = styled.div`
+const OperationText = styled.div<{ backgroundColor: string; color: string }>`
 	position: absolute;
-	color: ${({ color }: ColorProps) => color};
+	color: ${({ color }) => color};
 	left: 14px;
 	top: -4px;
 	font-size: 10px;
 	font-weight: bold;
 	z-index: 2;
-	// TODO: use theme background
-	background-color: black;
+	background-color: ${({ backgroundColor }) => backgroundColor};
 	padding: 0 4px 0 4px;
 `
-const BorderContainer = styled.div`
-	border: 2px solid ${({ color }: ColorProps) => color};
+const BorderContainer = styled.div<{ color: string }>`
+	border: 2px solid ${({ color }) => color};
 	border-radius: 10px;
 	display: flex;
 	flex-direction: row;
