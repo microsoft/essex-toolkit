@@ -1,3 +1,7 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { BooleanOperation, Palette } from '../types'
 
 export const DEFAULT_PALETTE: Palette = {
@@ -8,6 +12,6 @@ export const DEFAULT_PALETTE: Palette = {
 	},
 }
 
-export const NO_OP = () => {
+export const NO_OP = (): void => {
 	/* nothing */
 }
