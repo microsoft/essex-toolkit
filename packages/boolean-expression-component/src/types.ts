@@ -13,6 +13,7 @@ export interface BooleanOperationMap {
 }
 
 export interface Palette {
+	backgroundColor: string
 	operations: {
 		[BooleanOperation.AND]: string
 		[BooleanOperation.OR]: string

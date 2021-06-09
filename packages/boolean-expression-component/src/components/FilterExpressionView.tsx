@@ -13,17 +13,8 @@ import {
 import { toggleOperation } from '../utils'
 import { BooleanOperationToggle } from './BooleanOperationToggle'
 import { ChipGroup } from './ChipGroup'
+import { DEFAULT_PALETTE, NO_OP } from './constants'
 
-const DEFAULT_PALETTE: Palette = {
-	operations: {
-		[BooleanOperation.AND]: '#80acf7',
-		[BooleanOperation.OR]: '#4D7BBA',
-	},
-}
-
-const NO_OP = () => {
-	/* nothing */
-}
 export const FilterExpressionView: React.FC<{
 	filters: FilterClauseGroup[]
 	operation: BooleanOperation
