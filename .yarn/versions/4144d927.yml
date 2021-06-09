@@ -1,0 +1,5 @@
+releases:
+  "@essex-js-toolkit/boolean-expression-component": patch
+
+declined:
+  - "@essex-js-toolkit/stories"
