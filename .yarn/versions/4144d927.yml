@@ -2,4 +2,5 @@ releases:
   "@essex-js-toolkit/boolean-expression-component": patch
 
 declined:
+  - "@essex-js-toolkit/dev"
   - "@essex-js-toolkit/stories"
