@@ -5,6 +5,7 @@
 import React, { CSSProperties, memo } from 'react'
 import styled from 'styled-components'
 import { BooleanOperation, Palette } from '../types'
+import { DEFAULT_PALETTE, NO_OP } from './constants'
 
 export const BooleanOperationToggle: React.FC<{
 	className?: string
@@ -12,13 +13,13 @@ export const BooleanOperationToggle: React.FC<{
 	operation: BooleanOperation
 	disabled?: boolean
 	onToggle?: () => void
-	palette: Palette
+	palette?: Palette
 }> = memo(function BooleanOperationToggle({
 	className,
 	style,
 	operation,
 	disabled,
-	palette,
+	palette = DEFAULT_PALETTE,
 	onToggle = NO_OP,
 }) {
 	const color = disabled ? 'grey' : palette.operations[operation]
@@ -35,9 +36,6 @@ export const BooleanOperationToggle: React.FC<{
 	)
 })
 
-const NO_OP = () => {
-	/* do nothing */
-}
 const labels: Record<BooleanOperation, string> = {
 	[BooleanOperation.AND]: 'AND',
 	[BooleanOperation.OR]: 'OR',
