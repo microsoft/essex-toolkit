@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { HierarchyBrowser } from '@essex-js-toolkit/hierarchy-browser'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { EntityId, HierarchyBrowser } from '@essex-js-toolkit/hierarchy-browser'
 import { IChoiceGroupOption } from '@fluentui/react'
-import React, { useCallback, useState } from 'react'
 import { CSF } from './types'
 import { ControlGroup, Selections } from './utils/components'
 import { useAsyncCallbacks } from './utils/useAsyncCallbacks'
@@ -18,6 +18,7 @@ const story = {
 }
 
 export default story
+const DEFAULT_SELECTIONS = ['4_100']
 
 export const HierarchyBrowserAsync: CSF = () => {
 	const [
@@ -31,13 +32,44 @@ export const HierarchyBrowserAsync: CSF = () => {
 	] = useHierarchyState()
 
 	const [communities, nodes, edges, searchForChildren] = useData(selectedOption)
+	const [selectionState, setSelectionState] =
+		useState<EntityId[]>(DEFAULT_SELECTIONS)
 
+	const handleSelectionChange = useCallback(
+		(newState: EntityId[]) => {
+			setSelectionState(newState)
+		},
+		[setSelectionState],
+	)
 	const [getEntities, getNeighbors] = useAsyncCallbacks({
 		nodes,
 		edges,
 		loadState,
 		searchForChildren,
 	})
+
+	const HB = useMemo(() => {
+		if (communities) {
+			return (
+				<HierarchyBrowser
+					communities={communities}
+					entities={getEntities as any}
+					neighbors={getNeighbors as any}
+					settings={settings}
+					selections={selectionState}
+					onSelectionChange={setSelectionState}
+				/>
+			)
+		}
+		return null
+	}, [
+		communities,
+		getEntities,
+		getNeighbors,
+		settings,
+		selectionState,
+		handleSelectionChange,
+	])
 	return (
 		<>
 			<ControlGroup
@@ -49,14 +81,7 @@ export const HierarchyBrowserAsync: CSF = () => {
 				showCustomStyles={showCustomStyles}
 				onStyleChange={handleStyleChange}
 			/>
-			{communities && (
-				<HierarchyBrowser
-					communities={communities}
-					entities={getEntities as any}
-					neighbors={getNeighbors as any}
-					settings={settings}
-				/>
-			)}
+			{HB}
 		</>
 	)
 }

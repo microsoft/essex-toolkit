@@ -5,12 +5,17 @@
 import { Text } from '@fluentui/react'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { CommunityId, IEntityDetail } from '..'
 import { EntityItem } from '../EntityItem/EntityItem'
 import { textStyle } from '../common/styles'
-
 import { useTableStyles } from '../hooks/useStyles'
-import { ITableSettings } from '../types'
+import {
+	CommunityId,
+	ITableSettings,
+	EntityId,
+	IEntityDetail,
+	IOnSelectionChange,
+} from '../types'
+import { useCallback } from 'react'
 
 export interface ICommunityTableProps {
 	entities: IEntityDetail[]
@@ -18,6 +23,8 @@ export interface ICommunityTableProps {
 	communityId?: CommunityId
 	visibleColumns?: string[]
 	minimize?: boolean
+	selections?: EntityId[]
+	onSelectionChange: (id: EntityId) => void
 }
 
 export const CommunityTable: React.FC<ICommunityTableProps> = memo(
@@ -27,7 +34,14 @@ export const CommunityTable: React.FC<ICommunityTableProps> = memo(
 		styles,
 		communityId,
 		visibleColumns,
+		selections,
+		onSelectionChange,
 	}: ICommunityTableProps) {
+		const isSelected = useCallback(
+			(entity: IEntityDetail): boolean | undefined =>
+				selections && selections.includes(entity.id),
+			[selections],
+		)
 		const attrKeys: string[] = useMemo(() => {
 			if (visibleColumns) {
 				return visibleColumns
@@ -37,6 +51,7 @@ export const CommunityTable: React.FC<ICommunityTableProps> = memo(
 			}
 			return Object.keys(entities[0].attrs)
 		}, [entities, minimize, visibleColumns])
+
 		const [
 			headerVariant,
 			subheaderVariant,
@@ -85,6 +100,8 @@ export const CommunityTable: React.FC<ICommunityTableProps> = memo(
 							attrs={attrKeys}
 							index={i}
 							styles={styles}
+							selected={isSelected(entity)}
+							onEntityClick={onSelectionChange}
 						/>
 					))}
 				</TableBody>
@@ -110,6 +127,7 @@ const Bold = styled.div`
 
 const Table = styled.table`
 	width: 100%;
+	border-collapse: collapse;
 `
 const HeaderCell = styled.th`
 	width: 16%;

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Dimensions } from '@essex-js-toolkit/hooks'
-import { SelectionState, Theme } from '@thematic/core'
+import { SelectionState, Theme, ThemeVariant } from '@thematic/core'
 import { scaleLinear, ScaleLinear } from 'd3-scale'
 import { useCallback, useMemo } from 'react'
 import { INeighborCommunityDetail } from '../..'
@@ -19,11 +19,7 @@ export function useRowElements(
 	edges?: INeighborCommunityDetail[],
 	dimensions?: Dimensions,
 ): [
-	(
-		edge: INeighborCommunityDetail,
-		index: number,
-		rowIndex: number,
-	) => React.CSSProperties,
+	(edge: INeighborCommunityDetail, rowIndex: number) => React.CSSProperties,
 	// barColor
 	string,
 	//connScale
@@ -49,48 +45,24 @@ export function useRowElements(
 		return [connectionScale, childScale]
 	}, [maxSize, maxConnections, dimensions])
 
-	function getBorderWidth(index: number): string {
-		switch (index) {
-			case 0:
-				return '1px 0px 1px 1px'
-			case 1:
-				return '1px 0px 1px 0px'
-			case 2:
-				return '1px 0px 1px 1px'
-			default:
-				return '1px 0px 1px 0px'
-		}
-	}
-
 	const getBackgroundStyle = useCallback(
-		(
-			edge: INeighborCommunityDetail,
-			index: number,
-			rowIndex: number,
-		): React.CSSProperties => {
-			const backgroundColor =
+		(edge: INeighborCommunityDetail, rowIndex: number): React.CSSProperties => {
+			let backgroundColor =
 				rowIndex % 2 === 0 ? theme.application().faint().hex() : 'transparent'
 			const selected =
 				selectedEdge && edge.communityId === selectedEdge.communityId
 			if (selected) {
-				const borderColor = theme
+				const alpha = theme.config.variant === ThemeVariant.Dark ? 0.4 : 0.2
+
+				const [r, g, b, a] = theme
 					.rect({ selectionState: SelectionState.Selected })
 					.fill()
-					.hex()
-				const borderWidth = getBorderWidth(index)
+					.rgbav(alpha)
+				backgroundColor = `rgba(${r * 255}, ${g * 255}, ${b * 255}, ${a})`
+			}
 
-				return {
-					borderColor,
-					borderWidth,
-					backgroundColor,
-				} as React.CSSProperties
-			} else {
-				const borderColor = theme.application().faint().hex()
-				return {
-					borderColor,
-					borderWidth: '0px 0px 1px 0px',
-					backgroundColor,
-				}
+			return {
+				backgroundColor,
 			}
 		},
 		[theme, selectedEdge],

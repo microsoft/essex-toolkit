@@ -3,9 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Spinner } from '@fluentui/react'
-import React, { memo, useMemo } from 'react'
+import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { ILoadNeighborCommunities, ISettings } from '..'
+import {
+	EntityId,
+	ILoadNeighborCommunities,
+	IOnSelectionChange,
+	ISettings,
+} from '..'
 import { EmptyEntityList } from '../EntityItem/EmptyEntityList'
 import { ScrollArea } from '../ScollArea'
 import { CommunityDataProvider } from '../common/dataProviders'
@@ -26,6 +31,8 @@ export interface ICommunityCardProps {
 	settings: ISettings
 	dataProvider: CommunityDataProvider
 	toggleUpdate: boolean
+	selections?: EntityId[]
+	onSelectionChange?: IOnSelectionChange
 }
 
 const ENTITY_LOADER_MSG = 'Fetching entity data...'
@@ -40,6 +47,8 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 		settings,
 		dataProvider,
 		toggleUpdate,
+		selections,
+		onSelectionChange,
 	}: ICommunityCardProps) {
 		const {
 			isOpen: isOpenProp,
@@ -69,6 +78,23 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 			[isLoading],
 		)
 
+		const handleEntityClick = useCallback(
+			(entiyId: EntityId) => {
+				if (onSelectionChange) {
+					let currentSelection = selections || []
+					const deduped = new Set(currentSelection)
+					if (deduped.has(entiyId)) {
+						deduped.delete(entiyId)
+						onSelectionChange(Array.from(deduped))
+					} else {
+						deduped.add(entiyId)
+						onSelectionChange(Array.from(deduped))
+					}
+				}
+			},
+			[onSelectionChange, selections],
+		)
+
 		return (
 			<Container>
 				<CommunityOverview
@@ -94,6 +120,8 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 									visibleColumns={visibleColumns}
 									styles={styles?.table}
 									minimize={minimizeColumns}
+									selections={selections}
+									onSelectionChange={handleEntityClick}
 								/>
 							</ScrollArea>
 						) : null}
@@ -111,6 +139,8 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 						visibleColumns={visibleColumns}
 						minimizeColumns={minimizeColumns}
 						refresh={toggleUpdate}
+						selections={selections}
+						onSelectionChange={handleEntityClick}
 					/>
 				</Flex>
 			</Container>
