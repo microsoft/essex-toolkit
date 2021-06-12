@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Text } from '@fluentui/react'
-import React, { memo, useMemo } from 'react'
+import React, { memo, useMemo , useCallback } from 'react'
 import styled from 'styled-components'
 import { EntityItem } from '../EntityItem/EntityItem'
 import { textStyle } from '../common/styles'
@@ -15,7 +15,7 @@ import {
 	IEntityDetail,
 	IOnSelectionChange,
 } from '../types'
-import { useCallback } from 'react'
+
 
 export interface ICommunityTableProps {
 	entities: IEntityDetail[]

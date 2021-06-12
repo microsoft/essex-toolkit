@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import React, { memo, useMemo, useState, useCallback, useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import styled from 'styled-components'
 import { CommunityCard } from './CommunityCard/CommunityCard'
 import { useEntityProvider } from './common/dataProviders/hooks/useEntityProvider'
@@ -27,7 +28,6 @@ import {
 	ISettings,
 } from './types'
 import { isEntitiesAsync } from './utils/utils'
-import { useLayoutEffect } from 'react'
 
 export interface IHierarchyBrowserProps {
 	communities: ICommunityDetail[]

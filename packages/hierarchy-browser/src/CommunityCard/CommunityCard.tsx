@@ -81,7 +81,7 @@ export const CommunityCard: React.FC<ICommunityCardProps> = memo(
 		const handleEntityClick = useCallback(
 			(entiyId: EntityId) => {
 				if (onSelectionChange) {
-					let currentSelection = selections || []
+					const currentSelection = selections || []
 					const deduped = new Set(currentSelection)
 					if (deduped.has(entiyId)) {
 						deduped.delete(entiyId)

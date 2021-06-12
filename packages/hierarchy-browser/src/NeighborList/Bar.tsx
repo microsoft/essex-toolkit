@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ScaleLinear } from 'd3-scale'
-import React, { memo } from 'react'
-import { useMemo } from 'react'
+import React, { memo , useMemo } from 'react'
+
 import styled from 'styled-components'
 
 interface ICellComponentProps {

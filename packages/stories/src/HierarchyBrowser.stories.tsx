@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { EntityId, HierarchyBrowser } from '@essex-js-toolkit/hierarchy-browser'
 import { IChoiceGroupOption } from '@fluentui/react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { CSF } from './types'
 import { ControlGroup, Selections } from './utils/components'
 import { useAsyncCallbacks } from './utils/useAsyncCallbacks'
