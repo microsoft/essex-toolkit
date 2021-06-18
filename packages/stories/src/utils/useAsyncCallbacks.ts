@@ -31,11 +31,18 @@ export function useAsyncCallbacks({
 		async (params: ILoadParams) => {
 			if (allEntities) {
 				const communityId = params.communityId
-				const selection = allEntities.filter(
-					(d: LocalEntity) => `${d.cid}` === communityId,
+				const selection = allEntities.reduce(
+					(acc, d) => {
+						if (`${d.cid}` === communityId && !acc[0].has(d.id)) {
+							acc[0].add(d.id)
+							acc[1].push(d)
+						}
+						return acc
+					},
+					[new Set<string>([]), []] as [Set<string>, LocalEntity[]],
 				)
 
-				return { data: selection, error: undefined }
+				return { data: selection[1], error: undefined }
 			}
 			return { error: new Error('nodes not loaded in story'), data: undefined }
 		},
@@ -45,7 +52,7 @@ export function useAsyncCallbacks({
 	// Callback for HB to fetch neighbor communities based communityId
 	const getNeighbors = useCallback(
 		async (params: ILoadParams) => {
-			if (edges && allEntities && loadState) {
+			if (edges && loadState) {
 				const selected = edges.filter(
 					d => `${d.neighbor}` === params.communityId,
 				)
@@ -76,7 +83,7 @@ export function useAsyncCallbacks({
 			}
 			return { error: new Error('edges not loaded in story') }
 		},
-		[edges, allEntities, loadState, searchForChildren],
+		[edges, loadState, searchForChildren],
 	)
 	return [getEntities, getNeighbors]
 }

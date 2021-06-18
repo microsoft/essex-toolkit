@@ -35,7 +35,7 @@ export interface IHierarchyDataResponse {
 
 export interface IHierarchyNeighborResponse {
 	data?: INeighborCommunityDetail[]
-	error?: Error | null
+	error?: Error | null | undefined
 }
 
 export interface ILoadParams {
@@ -59,6 +59,10 @@ export interface ILoadNeighborCommunities {
 		params: ILoadParams,
 		communityId: CommunityId,
 	): Promise<IHierarchyNeighborResponse>
+}
+
+export interface IOnSelectionChange {
+	(communityIds: CommunityId[]): void
 }
 
 // === CUSTOM STYLES

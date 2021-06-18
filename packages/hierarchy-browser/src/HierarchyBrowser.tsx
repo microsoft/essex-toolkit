@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import React, { memo, useMemo, useState, useCallback, useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import styled from 'styled-components'
 import { CommunityCard } from './CommunityCard/CommunityCard'
 import { useEntityProvider } from './common/dataProviders/hooks/useEntityProvider'
@@ -14,6 +15,7 @@ import {
 import { useCommunityProvider } from './hooks/useCommunityProvider'
 import { useSettings } from './hooks/useSettings'
 import {
+	EntityId,
 	ICommunityDetail,
 	IEntityDetail,
 	IHierarchyNeighborResponse,
@@ -22,6 +24,7 @@ import {
 	ILoadNeighborCommunitiesAsync,
 	ILoadParams,
 	INeighborCommunityDetail,
+	IOnSelectionChange,
 	ISettings,
 } from './types'
 import { isEntitiesAsync } from './utils/utils'
@@ -31,6 +34,8 @@ export interface IHierarchyBrowserProps {
 	entities?: IEntityDetail[] | ILoadEntitiesAsync
 	neighbors?: INeighborCommunityDetail[] | ILoadNeighborCommunitiesAsync
 	settings?: ISettings
+	selections?: EntityId[]
+	onSelectionChange?: IOnSelectionChange
 }
 
 /**
@@ -39,23 +44,32 @@ export interface IHierarchyBrowserProps {
  * @param entities (optional) IEntityDetail[] | ILoadEntitiesAsync
  * @param neighbors (optional) INeighborCommunityDetail[] | ILoadNeighborCommunitiesAsync
  * @param settings (optional) ISettings
+ * @param selections (optional)  EntityId[]
+ * @param onSelectionChange (optional) IOnSelectionChange
  */
-export const HierarchyBrowser: React.FC<IHierarchyBrowserProps> = memo(
+export const HierarchyBrowser: React.FC<IHierarchyBrowserProps> =
 	function HierarchyBrowser({
 		communities,
 		entities,
 		neighbors,
 		settings,
+		selections,
+		onSelectionChange,
 	}: IHierarchyBrowserProps) {
 		const [providerCache, setProviderCache] = useState<IDataProvidersCache>({})
 
-		const [forceUpdateNeighbors, setForceNeighborUpdate] = useState<boolean>(
-			false,
-		)
+		const [selectedIds, setSelectedIds] = useState<EntityId[] | undefined>()
+
+		const [forceUpdateNeighbors, setForceNeighborUpdate] =
+			useState<boolean>(false)
 
 		useEffect(() => {
 			setForceNeighborUpdate((state: boolean) => !state)
 		}, [communities, neighbors])
+
+		useLayoutEffect(() => {
+			setSelectedIds(selections)
+		}, [selections])
 
 		const neighborCallback: ILoadNeighborCommunities = useCallback(
 			async (
@@ -79,11 +93,8 @@ export const HierarchyBrowser: React.FC<IHierarchyBrowserProps> = memo(
 			[neighbors],
 		)
 
-		const [
-			minLevel,
-			maxLevel,
-			communityWithLevels,
-		] = useCommunityLevelCalculator(communities)
+		const [minLevel, maxLevel, communityWithLevels] =
+			useCommunityLevelCalculator(communities)
 		const maxSize = useCommunitySizeCalculator(communities)
 
 		const loadEntitiesByCommunity = useEntityProvider(
@@ -134,13 +145,14 @@ export const HierarchyBrowser: React.FC<IHierarchyBrowserProps> = memo(
 							neighborCallback={neighborCallback}
 							settings={cardSettings}
 							toggleUpdate={forceUpdateNeighbors}
+							selections={selectedIds}
+							onSelectionChange={onSelectionChange}
 						></CommunityCard>
 					)
 				})}
 			</CardContainer>
 		)
-	},
-)
+	}
 
 const CardContainer = styled.div`
 	margin: 10px 10px 10px 10px;
