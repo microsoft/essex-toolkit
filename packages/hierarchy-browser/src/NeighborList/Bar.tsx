@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ScaleLinear } from 'd3-scale'
-import React, { memo } from 'react'
+import React, { memo , useMemo } from 'react'
+
 import styled from 'styled-components'
 
 interface ICellComponentProps {
@@ -20,7 +21,7 @@ export const Bar: React.FC<ICellComponentProps> = memo(function Bar({
 	height,
 	width,
 }: ICellComponentProps) {
-	const size = scale(value)
+	const size = useMemo(() => scale(value), [scale, value])
 	return (
 		<>
 			<SvgElement width={width} height={height}>
@@ -29,7 +30,7 @@ export const Bar: React.FC<ICellComponentProps> = memo(function Bar({
 					height={height}
 					x={width - (size || 0)}
 					fill={color}
-					rx={3}
+					rx={1}
 					opacity={0.5}
 				/>
 			</SvgElement>

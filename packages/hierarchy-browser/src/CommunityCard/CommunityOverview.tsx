@@ -64,9 +64,8 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 			buttonStyle,
 		] = useOverviewStyles(styles)
 
-		const { showLevel, showMembership, showFilter, showExport } = useControls(
-			controls,
-		)
+		const { showLevel, showMembership, showFilter, showExport } =
+			useControls(controls)
 		const communityText = useCommunityText(communityId)
 
 		const handleFilterChange = useCallback(
@@ -193,7 +192,7 @@ const FlexyContainer = styled.div`
 const Grid = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 5;
+	grid-column-gap: 8;
 	grid-row-gap: 1;
 	width: 100%;
 `

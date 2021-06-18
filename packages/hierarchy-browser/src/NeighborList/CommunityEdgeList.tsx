@@ -101,31 +101,34 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 						))}
 					</TableRow>
 					{sortedEdges.map((edge, i) => {
+						const onEdgeClick = () => handleEdgeClick(edge)
 						return (
 							<TableRow key={i}>
 								<TableCell
 									style={{
-										...getBackgroundStyle(edge, 0, i),
+										...getBackgroundStyle(edge, i),
 										textAlign: 'center',
 										...itemStyle,
 									}}
-									onClick={() => handleEdgeClick(edge)}
+									onClick={onEdgeClick}
 								>
-									<Text variant={itemVariant} styles={textStyle}>
-										{edge.communityId}
-									</Text>
+									<TableMaxHeight>
+										<Text variant={itemVariant} styles={textStyle}>
+											{edge.communityId}
+										</Text>
+									</TableMaxHeight>
 								</TableCell>
 
 								<TableCell
 									style={{
 										...itemStyle,
-										...getBackgroundStyle(edge, 1, i),
+										...getBackgroundStyle(edge, i),
 									}}
 									key={`neighbor-community-${0}`}
-									onClick={() => handleEdgeClick(edge)}
+									onClick={onEdgeClick}
 									ref={connRef}
 								>
-									<Separator>
+									<TableMaxHeight>
 										<AbsoluteDiv>
 											<TextContainer>
 												<Text variant={itemVariant} styles={textStyle}>
@@ -136,40 +139,42 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 												<Bar
 													value={edge.connections}
 													width={connectionDimensions.width}
-													height={connectionDimensions?.height || 25}
+													height={connectionDimensions?.height || 15}
 													color={barColor}
 													scale={connScale}
 												/>
 											) : null}
 										</AbsoluteDiv>
-									</Separator>
+									</TableMaxHeight>
 								</TableCell>
 								<TableCell
 									style={{
 										...itemStyle,
-										...getBackgroundStyle(edge, 2, i),
+										...getBackgroundStyle(edge, i),
 									}}
 									key={`neighbor-community-${1}`}
-									onClick={() => handleEdgeClick(edge)}
+									onClick={onEdgeClick}
 									ref={ref}
 								>
-									<AbsoluteDiv>
-										<TextContainer>
-											<Text variant={itemVariant} styles={textStyle}>
-												{edge.size}
-											</Text>
-										</TextContainer>
+									<TableMaxHeight>
+										<AbsoluteDiv>
+											<TextContainer>
+												<Text variant={itemVariant} styles={textStyle}>
+													{edge.size}
+												</Text>
+											</TextContainer>
 
-										{memberDimensions?.width ? (
-											<Bar
-												value={edge.size}
-												width={memberDimensions.width}
-												height={memberDimensions?.height || 25}
-												color={barColor}
-												scale={sizeScale}
-											/>
-										) : null}
-									</AbsoluteDiv>
+											{memberDimensions?.width ? (
+												<Bar
+													value={edge.size}
+													width={memberDimensions.width}
+													height={memberDimensions?.height || 15}
+													color={barColor}
+													scale={sizeScale}
+												/>
+											) : null}
+										</AbsoluteDiv>
+									</TableMaxHeight>
 								</TableCell>
 							</TableRow>
 						)
@@ -185,13 +190,16 @@ export default CommunityEdgeList
 
 const Table = styled.table`
 	width: 100%;
+	border-collapse: collapse;
 `
 const TableHead = styled.thead``
 
 const TableRow = styled.tr``
 const TableBody = styled.tbody``
 
-const Separator = styled.div``
+const TableMaxHeight = styled.div`
+	height: 15px;
+`
 const Bold = styled.div`
 	font-weight: bold;
 `
@@ -205,10 +213,10 @@ const TableHeader = styled.td`
 const TableCell = styled.td`
 	white-space: nowrap;
 	width: 1px;
-	border-style: solid;
 	cursor: pointer;
 	text-align: end;
 	position: relative;
+	min-height: 10px;
 `
 const TextContainer = styled.div`
 	z-index: 2;

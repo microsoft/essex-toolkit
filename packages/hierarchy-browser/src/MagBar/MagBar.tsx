@@ -22,7 +22,7 @@ interface IDataItem {
  * It is monotone, using a foreground color for the percent,
  * and a lighter variant for the background.
  */
-export const MagBar: React.FC<IMagBarProps> = memo(function MagBar({
+export const MagBar: React.FC<IMagBarProps> = function MagBar({
 	percent,
 	width = 100,
 	height = 10,
@@ -51,7 +51,6 @@ export const MagBar: React.FC<IMagBarProps> = memo(function MagBar({
 			.append('svg')
 			.attr('width', width)
 			.attr('height', height)
-			.style('border', `0.5px solid ${border}`)
 			.append('g')
 
 		g.selectAll('rect')
@@ -64,9 +63,10 @@ export const MagBar: React.FC<IMagBarProps> = memo(function MagBar({
 			.attr('width', (d: IDataItem) => d.width)
 			.attr('height', height)
 			.attr('x', (d: IDataItem) => d.x)
+			.attr('rx', 1)
 	}, [theme, percent, width, height])
 
 	return <Container ref={ref} />
-})
+}
 
 const Container = styled.div``

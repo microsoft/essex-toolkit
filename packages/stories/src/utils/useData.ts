@@ -152,6 +152,7 @@ export function useData(
 				acc[2] = [...acc[2], ...edges] as NeighborLocalEntity[]
 				return acc
 			}, container)
+
 			return arrays as [
 				ICommunityDetail[],
 				LocalEntity[],
