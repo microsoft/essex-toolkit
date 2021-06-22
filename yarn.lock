@@ -2105,7 +2105,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex-js-toolkit/toolbox@^1.1.4, @essex-js-toolkit/toolbox@workspace:packages/toolbox":
+"@essex-js-toolkit/toolbox@npm:^1.1.4":
+  version: 1.1.5
+  resolution: "@essex-js-toolkit/toolbox@npm:1.1.5"
+  dependencies:
+    core-js: ^3.14.0
+  checksum: 3d02fa5f1a925f54fab62f4c3f9837e76d12fac31968fcf55de5f8aae206ea217d4d2e99ecf460f6b7e9af2dda146c18a264015c15019af1399c51dd84d11a8d
+  languageName: node
+  linkType: hard
+
+"@essex-js-toolkit/toolbox@workspace:packages/toolbox":
   version: 0.0.0-use.local
   resolution: "@essex-js-toolkit/toolbox@workspace:packages/toolbox"
   dependencies:
