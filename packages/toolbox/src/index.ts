@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export * from './debounce'
 export * from './delay'
 export * from './binarySearch'
 export * from './flatMap'

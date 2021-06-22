@@ -7,7 +7,6 @@ Provides a set of useful react hooks for common applications
 - **useDimensions:** getting the dimensions of the given element
 - **useSelectionHandler:** provides basic selection handling
 - **useLongRunning:** invokes a long running task, and provides a loading flag
-- **useDebouncedCallback:** creates a debounced callback
 - **useDynamicData:** allows for the use of a dynamic data source
 - **useEventListener:** adds various listeners to the given element and cleans them up when done
 - **useMousePosition:** gets the current mouse position on the given element

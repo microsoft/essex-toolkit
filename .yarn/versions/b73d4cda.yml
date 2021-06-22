@@ -1,0 +1,7 @@
+releases:
+  "@essex-js-toolkit/hooks": major
+  "@essex-js-toolkit/themed-components": minor
+  "@essex-js-toolkit/toolbox": major
+
+undecided:
+  - "@essex-js-toolkit/dev"

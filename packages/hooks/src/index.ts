@@ -5,7 +5,6 @@
 export * from './useDimensions'
 export * from './useSelectionHandler'
 export * from './useLongRunning'
-export * from './useDebouncedCallback'
 export * from './useDynamicData'
 export * from './useEventListener'
 export * from './useMousePosition'
