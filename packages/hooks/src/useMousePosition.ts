@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { debounce } from '@essex-js-toolkit/toolbox'
+import { debounce } from 'lodash'
 import { useState, MutableRefObject } from 'react'
 import { useEventListener } from './useEventListener'
 
