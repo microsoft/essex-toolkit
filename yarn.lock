@@ -1987,7 +1987,6 @@ __metadata:
     "@babel/core": ^7.14.3
     "@essex-js-toolkit/boolean-expression-component": "workspace:packages/boolean-expression-component"
     "@essex-js-toolkit/hierarchy-browser": "workspace:packages/hierarchy-browser"
-    "@essex-js-toolkit/hooks": "workspace:packages/hooks"
     "@essex-js-toolkit/thematic-lineup": "workspace:packages/thematic-lineup"
     "@essex-js-toolkit/themed-components": "workspace:packages/themed-components"
     "@essex/scripts": ^17.0.0
