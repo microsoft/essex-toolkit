@@ -15,6 +15,8 @@ export interface NumberSpinButtonProps {
 	step?: number
 	onChange?: (n: number) => any
 	labelPosition?: Position
+	incrementButtonAriaLabel?: string
+	decrementButtonAriaLabel?: string
 }
 
 /**
@@ -28,6 +30,8 @@ export const NumberSpinButton = ({
 	step = 1,
 	onChange,
 	labelPosition,
+	incrementButtonAriaLabel,
+	decrementButtonAriaLabel,
 }: NumberSpinButtonProps): JSX.Element => {
 	// if the user doesn't specify these optional properties, we basically want it to spin forever
 	const handleChange = useCallback(
@@ -67,6 +71,8 @@ export const NumberSpinButton = ({
 			max={max}
 			step={step}
 			labelPosition={labelPosition}
+			incrementButtonAriaLabel={incrementButtonAriaLabel}
+			decrementButtonAriaLabel={decrementButtonAriaLabel}
 		/>
 	)
 }

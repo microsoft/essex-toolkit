@@ -18,12 +18,14 @@
 	},
 	"dependencies": {
 		"@essex-js-toolkit/toolbox": "workspace:packages/toolbox",
-		"core-js": "^3.14.0"
+		"core-js": "^3.14.0",
+		"lodash": "^4.17.21"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^17.0.0",
 		"@testing-library/react": "^11.2.7",
 		"@types/jest": "^26.0.23",
+		"@types/lodash": "^4",
 		"@types/node": "^14.17.2",
 		"@types/react": "^17.0.9",
 		"@types/react-dom": "^17.0.6",

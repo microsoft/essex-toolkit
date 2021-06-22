@@ -33,6 +33,8 @@ export const NumberControl = ({
 					label={label || ''}
 					value={value}
 					labelPosition={Position.top}
+					incrementButtonAriaLabel={`increment ${label}`}
+					decrementButtonAriaLabel={`decrement ${label}`}
 					{...params}
 					onChange={handleChange}
 				/>
