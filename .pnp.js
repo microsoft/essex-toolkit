@@ -4710,7 +4710,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/core", "npm:7.14.3"],
             ["@essex-js-toolkit/boolean-expression-component", "virtual:5b86412f30e41c21952fc24c46d700186b685dc5d6677ba7a9875dd3c9800cfccf5021a4bddced5c5dac22f11ffc59b63a1041c41316dc21a1fbd4a4aa48d4b5#workspace:packages/boolean-expression-component"],
             ["@essex-js-toolkit/hierarchy-browser", "virtual:5b86412f30e41c21952fc24c46d700186b685dc5d6677ba7a9875dd3c9800cfccf5021a4bddced5c5dac22f11ffc59b63a1041c41316dc21a1fbd4a4aa48d4b5#workspace:packages/hierarchy-browser"],
-            ["@essex-js-toolkit/hooks", "virtual:a499d4a2f44c56cb74ccec04d8f9cc97b75a4a96aeaabbeeb5ad7bf2fcda6b0bcb9afffab8fd2f1dfd283606c3ad733abecc989fe0a49558bf2f39b7daa75301#workspace:packages/hooks"],
             ["@essex-js-toolkit/thematic-lineup", "virtual:5b86412f30e41c21952fc24c46d700186b685dc5d6677ba7a9875dd3c9800cfccf5021a4bddced5c5dac22f11ffc59b63a1041c41316dc21a1fbd4a4aa48d4b5#workspace:packages/thematic-lineup"],
             ["@essex-js-toolkit/themed-components", "virtual:5b86412f30e41c21952fc24c46d700186b685dc5d6677ba7a9875dd3c9800cfccf5021a4bddced5c5dac22f11ffc59b63a1041c41316dc21a1fbd4a4aa48d4b5#workspace:packages/themed-components"],
             ["@essex/scripts", "virtual:71adb0e115873887f438342152e2f9d5ef089b9bdaa35efde4fea8bb6704ac80c48bf5ba2be4ad7af924a7cb8b2162bc4014790500a2be99805a86a67cc9f973#npm:17.0.0"],
