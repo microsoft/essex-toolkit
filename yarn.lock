@@ -1961,11 +1961,13 @@ __metadata:
     "@essex/scripts": ^17.0.0
     "@testing-library/react": ^11.2.7
     "@types/jest": ^26.0.23
+    "@types/lodash": ^4
     "@types/node": ^14.17.2
     "@types/react": ^17.0.9
     "@types/react-dom": ^17.0.6
     "@types/react-test-renderer": ^17.0.1
     core-js: ^3.14.0
+    lodash: ^4.17.21
     react: ^17.0.2
     react-dom: ^17.0.2
     react-test-renderer: ^17.0.2
@@ -1985,6 +1987,7 @@ __metadata:
     "@babel/core": ^7.14.3
     "@essex-js-toolkit/boolean-expression-component": "workspace:packages/boolean-expression-component"
     "@essex-js-toolkit/hierarchy-browser": "workspace:packages/hierarchy-browser"
+    "@essex-js-toolkit/hooks": "workspace:packages/hooks"
     "@essex-js-toolkit/thematic-lineup": "workspace:packages/thematic-lineup"
     "@essex-js-toolkit/themed-components": "workspace:packages/themed-components"
     "@essex/scripts": ^17.0.0
@@ -5388,7 +5391,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.14.168":
+"@types/lodash@npm:^4, @types/lodash@npm:^4.14.168":
   version: 4.14.170
   resolution: "@types/lodash@npm:4.14.170"
   checksum: 5ecc968649e764e3204435ba5125a3645e5e83963069a26b9307791698bf47ed9c2bd0f97488d9537eb4753d4bae596e5fa6187437a5b04bf47aba78fa553d50
