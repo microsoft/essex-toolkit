@@ -4593,7 +4593,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/$$virtual/@essex-js-toolkit-hooks-virtual-57664409c2/0/cache/@essex-js-toolkit-hooks-npm-1.1.5-81e3e0df00-4bfa97fd32.zip/node_modules/@essex-js-toolkit/hooks/",
           "packageDependencies": [
             ["@essex-js-toolkit/hooks", "virtual:716adba4cbc47e9d61da9c05b4da54c8e89fd2d878ad1065d19fd35c2525bf24d903c7b0683583a4e2a5fd9d9cdfcec0b9f68c46003454acfe1b6c3437f2281f#npm:1.1.5"],
-            ["@essex-js-toolkit/toolbox", "workspace:packages/toolbox"],
+            ["@essex-js-toolkit/toolbox", "npm:1.1.5"],
             ["@types/core-js", null],
             ["@types/node", "npm:14.17.3"],
             ["@types/react", "npm:17.0.9"],
@@ -4654,7 +4654,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/$$virtual/@essex-js-toolkit-hooks-virtual-b19a19e5ab/0/cache/@essex-js-toolkit-hooks-npm-1.1.5-81e3e0df00-4bfa97fd32.zip/node_modules/@essex-js-toolkit/hooks/",
           "packageDependencies": [
             ["@essex-js-toolkit/hooks", "virtual:c09c3bc1921b46dc33509b7d9a9a9a3ae58bdd7d0fb6436521887a40cf79a7534b052893aa26ff9dad313e4fb8604b2ff7062a28e79fe4d9683179d7536fee7c#npm:1.1.5"],
-            ["@essex-js-toolkit/toolbox", "workspace:packages/toolbox"],
+            ["@essex-js-toolkit/toolbox", "npm:1.1.5"],
             ["@types/core-js", null],
             ["@types/node", null],
             ["@types/react", "npm:17.0.9"],
@@ -4933,6 +4933,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@essex-js-toolkit/toolbox", [
+        ["npm:1.1.5", {
+          "packageLocation": "./.yarn/cache/@essex-js-toolkit-toolbox-npm-1.1.5-de4e5eb29d-3d02fa5f1a.zip/node_modules/@essex-js-toolkit/toolbox/",
+          "packageDependencies": [
+            ["@essex-js-toolkit/toolbox", "npm:1.1.5"],
+            ["core-js", "npm:3.14.0"]
+          ],
+          "linkType": "HARD",
+        }],
         ["workspace:packages/toolbox", {
           "packageLocation": "./packages/toolbox/",
           "packageDependencies": [
