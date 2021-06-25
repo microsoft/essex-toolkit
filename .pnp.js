@@ -4842,6 +4842,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:17.0.9"],
             ["@types/react-dom", "npm:17.0.6"],
             ["@types/react-test-renderer", "npm:17.0.1"],
+            ["@types/styled-components", "npm:5.1.10"],
             ["@types/thematic__color", null],
             ["@types/thematic__core", null],
             ["@types/thematic__d3", null],
@@ -4863,7 +4864,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["office-ui-fabric-react", "virtual:2587605deb65d211e33b7085a7cd257473bcfb497913072935730a04137a21f1cb4ab36b39c3c082489c4b0933b36c97e28d663ff263e0a7e48d120a2ff6d256#npm:7.170.3"],
             ["prop-types", "npm:15.7.2"],
             ["react", "npm:17.0.2"],
-            ["react-dom", "virtual:71adb0e115873887f438342152e2f9d5ef089b9bdaa35efde4fea8bb6704ac80c48bf5ba2be4ad7af924a7cb8b2162bc4014790500a2be99805a86a67cc9f973#npm:17.0.2"]
+            ["react-animate-height", "virtual:2587605deb65d211e33b7085a7cd257473bcfb497913072935730a04137a21f1cb4ab36b39c3c082489c4b0933b36c97e28d663ff263e0a7e48d120a2ff6d256#npm:2.0.23"],
+            ["react-dom", "virtual:71adb0e115873887f438342152e2f9d5ef089b9bdaa35efde4fea8bb6704ac80c48bf5ba2be4ad7af924a7cb8b2162bc4014790500a2be99805a86a67cc9f973#npm:17.0.2"],
+            ["styled-components", "virtual:2587605deb65d211e33b7085a7cd257473bcfb497913072935730a04137a21f1cb4ab36b39c3c082489c4b0933b36c97e28d663ff263e0a7e48d120a2ff6d256#npm:5.3.0"]
           ],
           "packagePeers": [
             "@fluentui/react",
@@ -4916,6 +4919,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:17.0.9"],
             ["@types/react-dom", "npm:17.0.6"],
             ["@types/react-test-renderer", "npm:17.0.1"],
+            ["@types/styled-components", "npm:5.1.10"],
             ["@uifabric/icons", "virtual:149ec18ccd033dfbfa1477a5ae855c9e6da2f837b70f37e3e9dac8b8d5056f4581c78755a7e37f5c481609617e3b0440fae7cc15d47749206bee0b51bdd6e7c0#npm:7.5.23"],
             ["@uifabric/utilities", "virtual:2587605deb65d211e33b7085a7cd257473bcfb497913072935730a04137a21f1cb4ab36b39c3c082489c4b0933b36c97e28d663ff263e0a7e48d120a2ff6d256#npm:7.33.5"],
             ["core-js", "npm:3.14.0"],
@@ -4927,7 +4931,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["office-ui-fabric-react", "virtual:2587605deb65d211e33b7085a7cd257473bcfb497913072935730a04137a21f1cb4ab36b39c3c082489c4b0933b36c97e28d663ff263e0a7e48d120a2ff6d256#npm:7.170.3"],
             ["prop-types", "npm:15.7.2"],
             ["react", "npm:17.0.2"],
-            ["react-dom", "virtual:71adb0e115873887f438342152e2f9d5ef089b9bdaa35efde4fea8bb6704ac80c48bf5ba2be4ad7af924a7cb8b2162bc4014790500a2be99805a86a67cc9f973#npm:17.0.2"]
+            ["react-animate-height", "virtual:2587605deb65d211e33b7085a7cd257473bcfb497913072935730a04137a21f1cb4ab36b39c3c082489c4b0933b36c97e28d663ff263e0a7e48d120a2ff6d256#npm:2.0.23"],
+            ["react-dom", "virtual:71adb0e115873887f438342152e2f9d5ef089b9bdaa35efde4fea8bb6704ac80c48bf5ba2be4ad7af924a7cb8b2162bc4014790500a2be99805a86a67cc9f973#npm:17.0.2"],
+            ["styled-components", "virtual:2587605deb65d211e33b7085a7cd257473bcfb497913072935730a04137a21f1cb4ab36b39c3c082489c4b0933b36c97e28d663ff263e0a7e48d120a2ff6d256#npm:5.3.0"]
           ],
           "linkType": "SOFT",
         }]
@@ -13024,6 +13030,23 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["babel-plugin-styled-components", "npm:1.12.0"]
           ],
           "linkType": "SOFT",
+        }],
+        ["virtual:a094f219d3d301f77aab93d703db7bae17525365360c0556bb03ef2aa0a19afb8fd84b1c75419872dc481a42095bb3327ebf9e86be314e7a55cad4a5e17de511#npm:1.12.0", {
+          "packageLocation": "./.yarn/$$virtual/babel-plugin-styled-components-virtual-805c3da72b/0/cache/babel-plugin-styled-components-npm-1.12.0-9429650896-6490bd07b4.zip/node_modules/babel-plugin-styled-components/",
+          "packageDependencies": [
+            ["babel-plugin-styled-components", "virtual:a094f219d3d301f77aab93d703db7bae17525365360c0556bb03ef2aa0a19afb8fd84b1c75419872dc481a42095bb3327ebf9e86be314e7a55cad4a5e17de511#npm:1.12.0"],
+            ["@babel/helper-annotate-as-pure", "npm:7.12.13"],
+            ["@babel/helper-module-imports", "npm:7.13.12"],
+            ["@types/styled-components", null],
+            ["babel-plugin-syntax-jsx", "npm:6.18.0"],
+            ["lodash", "npm:4.17.21"],
+            ["styled-components", "virtual:2587605deb65d211e33b7085a7cd257473bcfb497913072935730a04137a21f1cb4ab36b39c3c082489c4b0933b36c97e28d663ff263e0a7e48d120a2ff6d256#npm:5.3.0"]
+          ],
+          "packagePeers": [
+            "@types/styled-components",
+            "styled-components"
+          ],
+          "linkType": "HARD",
         }],
         ["virtual:d4add5027c39e6602c380e5f3305a8fc177aa32edc6c339863ff533e3582830c13a20bf425ca5964a8f94bc0c20f8dc4969aed567283e4532509199b49db57fb#npm:1.12.0", {
           "packageLocation": "./.yarn/$$virtual/babel-plugin-styled-components-virtual-9aad54e087/0/cache/babel-plugin-styled-components-npm-1.12.0-9429650896-6490bd07b4.zip/node_modules/babel-plugin-styled-components/",
@@ -25145,6 +25168,34 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["react-animate-height", [
+        ["npm:2.0.23", {
+          "packageLocation": "./.yarn/cache/react-animate-height-npm-2.0.23-821206c434-2f9741dc27.zip/node_modules/react-animate-height/",
+          "packageDependencies": [
+            ["react-animate-height", "npm:2.0.23"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:2587605deb65d211e33b7085a7cd257473bcfb497913072935730a04137a21f1cb4ab36b39c3c082489c4b0933b36c97e28d663ff263e0a7e48d120a2ff6d256#npm:2.0.23", {
+          "packageLocation": "./.yarn/$$virtual/react-animate-height-virtual-b7b01d91c4/0/cache/react-animate-height-npm-2.0.23-821206c434-2f9741dc27.zip/node_modules/react-animate-height/",
+          "packageDependencies": [
+            ["react-animate-height", "virtual:2587605deb65d211e33b7085a7cd257473bcfb497913072935730a04137a21f1cb4ab36b39c3c082489c4b0933b36c97e28d663ff263e0a7e48d120a2ff6d256#npm:2.0.23"],
+            ["@types/react", "npm:17.0.9"],
+            ["@types/react-dom", "npm:17.0.6"],
+            ["classnames", "npm:2.3.1"],
+            ["prop-types", "npm:15.7.2"],
+            ["react", "npm:17.0.2"],
+            ["react-dom", "virtual:71adb0e115873887f438342152e2f9d5ef089b9bdaa35efde4fea8bb6704ac80c48bf5ba2be4ad7af924a7cb8b2162bc4014790500a2be99805a86a67cc9f973#npm:17.0.2"]
+          ],
+          "packagePeers": [
+            "@types/react-dom",
+            "@types/react",
+            "react-dom",
+            "react"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["react-colorful", [
         ["npm:5.2.2", {
           "packageLocation": "./.yarn/cache/react-colorful-npm-5.2.2-970f2783ed-5e02f92eda.zip/node_modules/react-colorful/",
@@ -27791,6 +27842,36 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["styled-components", "npm:5.3.0"]
           ],
           "linkType": "SOFT",
+        }],
+        ["virtual:2587605deb65d211e33b7085a7cd257473bcfb497913072935730a04137a21f1cb4ab36b39c3c082489c4b0933b36c97e28d663ff263e0a7e48d120a2ff6d256#npm:5.3.0", {
+          "packageLocation": "./.yarn/$$virtual/styled-components-virtual-a094f219d3/0/cache/styled-components-npm-5.3.0-965f77d02b-1f94f92b5d.zip/node_modules/styled-components/",
+          "packageDependencies": [
+            ["styled-components", "virtual:2587605deb65d211e33b7085a7cd257473bcfb497913072935730a04137a21f1cb4ab36b39c3c082489c4b0933b36c97e28d663ff263e0a7e48d120a2ff6d256#npm:5.3.0"],
+            ["@babel/helper-module-imports", "npm:7.13.12"],
+            ["@babel/traverse", "npm:7.14.2"],
+            ["@emotion/is-prop-valid", "npm:0.8.8"],
+            ["@emotion/stylis", "npm:0.8.5"],
+            ["@emotion/unitless", "npm:0.7.5"],
+            ["@types/react", "npm:17.0.9"],
+            ["@types/react-dom", "npm:17.0.6"],
+            ["@types/react-is", null],
+            ["babel-plugin-styled-components", "virtual:a094f219d3d301f77aab93d703db7bae17525365360c0556bb03ef2aa0a19afb8fd84b1c75419872dc481a42095bb3327ebf9e86be314e7a55cad4a5e17de511#npm:1.12.0"],
+            ["css-to-react-native", "npm:3.0.0"],
+            ["hoist-non-react-statics", "npm:3.3.2"],
+            ["react", "npm:17.0.2"],
+            ["react-dom", "virtual:71adb0e115873887f438342152e2f9d5ef089b9bdaa35efde4fea8bb6704ac80c48bf5ba2be4ad7af924a7cb8b2162bc4014790500a2be99805a86a67cc9f973#npm:17.0.2"],
+            ["react-is", "npm:17.0.2"],
+            ["shallowequal", "npm:1.1.0"],
+            ["supports-color", "npm:5.5.0"]
+          ],
+          "packagePeers": [
+            "@types/react-dom",
+            "@types/react-is",
+            "@types/react",
+            "react-dom",
+            "react"
+          ],
+          "linkType": "HARD",
         }],
         ["virtual:fca287bbb97932bac141c2f004bcbbf4b1dfe886299102e430781092a777c842e860b1040563f2e2b2ad55ffc8a017b8f12ffe0dd0a7ca221d1e51e7f21f01b0#npm:5.3.0", {
           "packageLocation": "./.yarn/$$virtual/styled-components-virtual-d4add5027c/0/cache/styled-components-npm-5.3.0-965f77d02b-1f94f92b5d.zip/node_modules/styled-components/",
