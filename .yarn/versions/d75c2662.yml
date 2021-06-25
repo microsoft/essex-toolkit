@@ -1,5 +1,5 @@
 releases:
-  "@essex-js-toolkit/themed-components": patch
+  "@essex-js-toolkit/themed-components": minor
 
 declined:
   - "@essex-js-toolkit/dev"
