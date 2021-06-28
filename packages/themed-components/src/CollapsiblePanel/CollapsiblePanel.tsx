@@ -9,6 +9,11 @@ import { default as AnimateHeight } from 'react-animate-height'
 import styled from 'styled-components'
 import { CollapsiblePanelProps } from './interfaces'
 
+/**
+ * CollapsiblePanel displays a Header and it's child
+ * that collapse and expands with keyboard arrows, space, enter or onclick
+ * showing the 'hidden' rendering
+ */
 export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 	title,
 	defaultExpanded = false,

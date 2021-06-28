@@ -7,6 +7,10 @@ import * as React from 'react'
 
 import { CollapsiblePanelContainerProps } from './interfaces'
 
+/**
+ * Receives an array of CollapsiblePanel as children to render it
+ * with first and last props calculating it automatically
+ */
 export const CollapsiblePanelContainer: React.FC<CollapsiblePanelContainerProps> =
 	({ children }) => {
 		const countChildren = React.Children.count(children)
