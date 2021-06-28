@@ -2075,6 +2075,7 @@ __metadata:
     "@types/react": ^17.0.9
     "@types/react-dom": ^17.0.6
     "@types/react-test-renderer": ^17.0.1
+    "@types/styled-components": ^5.1.9
     "@uifabric/icons": ^7.5.23
     "@uifabric/utilities": ^7.33.5
     core-js: ^3.14.0
@@ -2086,7 +2087,9 @@ __metadata:
     office-ui-fabric-react: ^7.170.2
     prop-types: ^15.7.2
     react: ^17.0.2
+    react-animate-height: ^2.0.23
     react-dom: ^17.0.2
+    styled-components: ^5.3.0
   peerDependencies:
     "@fluentui/react": ">= 7.114.2"
     "@thematic/color": ">= 0.8.0"
@@ -17834,6 +17837,19 @@ fsevents@^1.2.7:
   peerDependencies:
     webpack: ^4.0.0 || ^5.0.0
   checksum: 1a08968df5bf185923102de589dc28da6c9953f87059c80de3cbfdfb47bc15907f23f5e21048f03af2842df01d0dde2630826697c783c4c9683ea71f04f4538d
+  languageName: node
+  linkType: hard
+
+"react-animate-height@npm:^2.0.23":
+  version: 2.0.23
+  resolution: "react-animate-height@npm:2.0.23"
+  dependencies:
+    classnames: ^2.2.5
+    prop-types: ^15.6.1
+  peerDependencies:
+    react: ">=15.6.2"
+    react-dom: ">=15.6.2"
+  checksum: 2f9741dc27f508e40ea59e3e15231b2fd8db183d42110f01564b67a81bc571caf89f25b5fa755e3deeb0e918dcbe6055840488bef7117ae54bdb77d1d61fedb7
   languageName: node
   linkType: hard
 
