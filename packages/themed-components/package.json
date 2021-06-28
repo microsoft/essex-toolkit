@@ -29,7 +29,9 @@
 		"d3-axis": "^1.0.12",
 		"d3-brush": "^1.1.6",
 		"d3-scale": "^3.2.3",
-		"d3-selection": "^1.4.2"
+		"d3-selection": "^1.4.2",
+		"react-animate-height": "^2.0.23",
+		"styled-components": "^5.3.0"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^17.0.0",
@@ -47,6 +49,7 @@
 		"@types/react": "^17.0.9",
 		"@types/react-dom": "^17.0.6",
 		"@types/react-test-renderer": "^17.0.1",
+		"@types/styled-components": "^5.1.9",
 		"@uifabric/icons": "^7.5.23",
 		"@uifabric/utilities": "^7.33.5",
 		"office-ui-fabric-react": "^7.170.2",

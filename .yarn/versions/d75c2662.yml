@@ -1,0 +1,6 @@
+releases:
+  "@essex-js-toolkit/themed-components": minor
+
+declined:
+  - "@essex-js-toolkit/dev"
+  - "@essex-js-toolkit/stories"
