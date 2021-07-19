@@ -1,6 +1,6 @@
 {
 	"name": "@essex-js-toolkit/dev",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "A set of packages for developers",
 	"repository": "git@ssh.dev.azure.com:v3/msrp-essex/Alpha/alpha-developer",
 	"author": "David Tittsworth <datittsw@microsoft.com>",
