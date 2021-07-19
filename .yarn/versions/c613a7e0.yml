@@ -1,0 +1,4 @@
+releases:
+  "@essex-js-toolkit/dev": minor
+  "@essex-js-toolkit/stories": minor
+  "@essex-js-toolkit/themed-components": minor
