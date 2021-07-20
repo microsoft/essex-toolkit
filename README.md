@@ -38,6 +38,10 @@ Storybook of themed-components package to test and view example components
 
 Provides is a collection of helper functions
 
+## [@essex-js-toolkit/boolean-expression-component](packages/boolean-expression-component/README.md)
+
+An expression component to view and toggle filters
+
 ### Tests
 
 Limited tests are provided within the packages and most components/functions are experimental

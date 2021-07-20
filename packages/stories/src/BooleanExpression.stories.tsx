@@ -89,29 +89,29 @@ export const TwoAttributes: CSF = () => {
 }
 TwoAttributes.story = { name: 'Two Attributes' }
 
-export const GroupDismiss: CSF = () => {
-	const chipGroupDismissed = useCallback(group => {
-		alert(`Chip group with id ${group.id} dismiss function`)
-	}, [])
+// export const GroupDismiss: CSF = () => {
+// 	const chipGroupDismissed = useCallback(group => {
+// 		alert(`Chip group with id ${group.id} dismiss function`)
+// 	}, [])
 
-	return (
-		<div>
-			<FilterExpressionView
-				onChipGroupDismissed={chipGroupDismissed}
-				operation={BooleanOperation.AND}
-				filters={[
-					{
-						id: 'age',
-						label: 'Age',
-						operation: BooleanOperation.AND,
-						filters: [
-							{ id: 'age.20+', label: '20-29' },
-							{ id: 'age.30+', label: '30-39' },
-						],
-					},
-				]}
-			/>
-		</div>
-	)
-}
-GroupDismiss.story = { name: 'Group Dismiss' }
+// 	return (
+// 		<div>
+// 			<FilterExpressionView
+// 				onChipGroupDismissed={chipGroupDismissed}
+// 				operation={BooleanOperation.AND}
+// 				filters={[
+// 					{
+// 						id: 'age',
+// 						label: 'Age',
+// 						operation: BooleanOperation.AND,
+// 						filters: [
+// 							{ id: 'age.20+', label: '20-29' },
+// 							{ id: 'age.30+', label: '30-39' },
+// 						],
+// 					},
+// 				]}
+// 			/>
+// 		</div>
+// 	)
+// }
+// GroupDismiss.story = { name: 'Group Dismiss' }
