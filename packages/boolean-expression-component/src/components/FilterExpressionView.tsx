@@ -22,6 +22,7 @@ export const FilterExpressionView: React.FC<{
 	onGlobalOperationChanged?: (data: BooleanOperation) => void
 	onChipDismissed?: (filter: FilterClause) => void
 	onOperationChanged?: (id: string, operation: BooleanOperation) => void
+	onChipGroupDismissed?: (filterGroup: FilterClauseGroup) => void
 }> = memo(function FilterChipSet({
 	operation,
 	filters,
@@ -29,6 +30,7 @@ export const FilterExpressionView: React.FC<{
 	onChipDismissed = NO_OP,
 	onOperationChanged = NO_OP,
 	onGlobalOperationChanged = NO_OP,
+	onChipGroupDismissed,
 }) {
 	const chipContainerRef = useRef<HTMLDivElement>(null)
 	const handleToggleGlobalOperation = useCallback(
@@ -53,6 +55,7 @@ export const FilterExpressionView: React.FC<{
 					group={group}
 					onChangeOperation={onOperationChanged}
 					onDismiss={onChipDismissed}
+					onChipGroupDismissed={onChipGroupDismissed}
 					palette={palette}
 				/>
 			))}
