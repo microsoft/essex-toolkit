@@ -6,7 +6,7 @@ import {
 	BooleanOperation,
 	FilterExpressionView,
 } from '@essex-js-toolkit/boolean-expression-component'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { CSF } from './types'
 
 const story = {
@@ -88,3 +88,30 @@ export const TwoAttributes: CSF = () => {
 	)
 }
 TwoAttributes.story = { name: 'Two Attributes' }
+
+// export const GroupDismiss: CSF = () => {
+// 	const chipGroupDismissed = useCallback(group => {
+// 		alert(`Chip group with id ${group.id} dismiss function`)
+// 	}, [])
+
+// 	return (
+// 		<div>
+// 			<FilterExpressionView
+// 				onChipGroupDismissed={chipGroupDismissed}
+// 				operation={BooleanOperation.AND}
+// 				filters={[
+// 					{
+// 						id: 'age',
+// 						label: 'Age',
+// 						operation: BooleanOperation.AND,
+// 						filters: [
+// 							{ id: 'age.20+', label: '20-29' },
+// 							{ id: 'age.30+', label: '30-39' },
+// 						],
+// 					},
+// 				]}
+// 			/>
+// 		</div>
+// 	)
+// }
+// GroupDismiss.story = { name: 'Group Dismiss' }

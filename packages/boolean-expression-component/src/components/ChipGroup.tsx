@@ -12,23 +12,31 @@ import {
 } from '../types'
 import { toggleOperation } from '../utils'
 import { BooleanOperationToggle } from './BooleanOperationToggle'
+import { CloseButton } from './CloseButton'
 import { FilterChip } from './FilterChip'
 
 export const ChipGroup: React.FC<{
 	group: FilterClauseGroup
 	onChangeOperation: (id: string, operation: BooleanOperation) => void
 	onDismiss: (filter: FilterClause) => void
+	onChipGroupDismissed?: (filterGroup: FilterClauseGroup) => void
 	palette: Palette
 }> = memo(function ChipGroup({
 	group: { id, filters, label, locked, operation },
 	palette,
 	onDismiss,
 	onChangeOperation,
+	onChipGroupDismissed,
 }) {
 	const chips = useMemo(
 		() =>
 			filters.map(f => (
-				<Chip key={f.id} value={f.label} onClose={() => onDismiss(f)} />
+				<Chip
+					key={f.id}
+					value={f.label}
+					onClose={() => onDismiss(f)}
+					hasCloseButton={!onChipGroupDismissed}
+				/>
 			)),
 		[filters, onDismiss],
 	)
@@ -57,6 +65,14 @@ export const ChipGroup: React.FC<{
 					/>
 				) : null}
 				{chips}
+				{onChipGroupDismissed ? (
+					<CloseButton
+						color="grey"
+						onClick={() =>
+							onChipGroupDismissed({ id, filters, label, locked, operation })
+						}
+					/>
+				) : null}
 			</Border>
 		</Container>
 	)
