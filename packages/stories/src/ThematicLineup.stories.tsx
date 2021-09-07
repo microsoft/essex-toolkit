@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ThematicLineup } from '@essex-js-toolkit/thematic-lineup'
-import React from 'react'
 import { CSF } from './types'
 
 const story = {
