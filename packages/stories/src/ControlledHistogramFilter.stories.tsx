@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ControlledHistogramFilter } from '@essex-js-toolkit/themed-components'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { CSF } from './types'
 

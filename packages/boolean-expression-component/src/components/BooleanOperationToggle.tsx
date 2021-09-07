@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { CSSProperties, memo } from 'react'
+import { CSSProperties, memo } from 'react'
 import styled from 'styled-components'
 import { BooleanOperation, Palette } from '../types'
 import { DEFAULT_PALETTE, NO_OP } from './constants'

@@ -21,7 +21,7 @@ export const CollapsiblePanelContainer: React.FC<CollapsiblePanelContainerProps>
 					last: countChildren === index - 1,
 				}),
 			)
-		}, [children])
+		}, [children, countChildren])
 
 		return <div>{rendered}</div>
 	}

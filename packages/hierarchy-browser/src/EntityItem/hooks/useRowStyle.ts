@@ -4,7 +4,7 @@
  */
 import { SelectionState, ThemeVariant } from '@thematic/core'
 import { useThematic } from '@thematic/react'
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 
 export function useRowStyle(
 	index: number,

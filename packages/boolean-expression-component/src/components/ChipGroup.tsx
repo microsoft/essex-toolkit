@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { memo, useMemo, useCallback } from 'react'
+import { memo, useMemo, useCallback } from 'react'
 import styled from 'styled-components'
 import {
 	BooleanOperation,
@@ -38,7 +38,7 @@ export const ChipGroup: React.FC<{
 					hasCloseButton={!onChipGroupDismissed}
 				/>
 			)),
-		[filters, onDismiss],
+		[filters, onDismiss, onChipGroupDismissed],
 	)
 
 	const handleToggle = useCallback(() => {

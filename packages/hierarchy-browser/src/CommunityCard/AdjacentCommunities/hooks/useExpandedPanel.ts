@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { useState, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { useContainerStyle } from '../../../hooks/theme'
 
 interface IEdgePanelHook {
