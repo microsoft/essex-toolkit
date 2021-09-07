@@ -5,7 +5,6 @@
 import { useState, useCallback, useMemo } from 'react'
 import { IEntityDetail } from '..'
 import { CommunityDataProvider } from '../common/dataProviders'
-import { CommunityId } from '../types'
 import { IFilterProps } from './interfaces'
 import { useEntitiesLoadedHandler } from './useEntitiesLoadedHandler'
 import { useLoadEntitiesOnMountEffect } from './useLoadEntitiesOnMountEffect'

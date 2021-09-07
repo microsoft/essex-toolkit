@@ -9,7 +9,7 @@
 	"scripts": {
 		"clean": "essex clean",
 		"start:storybook": "start-storybook -s ./public",
-		"build:storybook": "build-storybook",
+		"build:storybook": "build-storybook --quiet",
 		"start": "yarn start:storybook",
 		"build": "yarn build:storybook"
 	},
@@ -18,13 +18,13 @@
 		"@essex-js-toolkit/hierarchy-browser": "workspace:packages/hierarchy-browser",
 		"@essex-js-toolkit/thematic-lineup": "workspace:packages/thematic-lineup",
 		"@essex-js-toolkit/themed-components": "workspace:packages/themed-components",
-		"core-js": "^3.14.0",
+		"core-js": "^3.17.2",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.14.3",
-		"@essex/scripts": "^17.0.0",
+		"@essex/scripts": "^18.2.0",
 		"@fluentui/font-icons-mdl2": "^8.1.2",
 		"@fluentui/react": "^8.17.1",
 		"@storybook/addon-a11y": "^6.2.9",
@@ -41,9 +41,9 @@
 		"@types/babel__core": "^7.1.14",
 		"@types/form-data": "^2.5.0",
 		"@types/node": "^14.17.2",
-		"@types/react": "^17.0.9",
-		"@types/react-dom": "^17.0.6",
-		"@types/react-is": "^17.0.0",
+		"@types/react": "^17.0.20",
+		"@types/react-dom": "^17.0.9",
+		"@types/react-is": "^17.0.2",
 		"@uifabric/icons": "^7.5.23",
 		"react-is": "^17.0.2",
 		"regenerator-runtime": "^0.13.8"
