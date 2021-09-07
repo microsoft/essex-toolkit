@@ -1,6 +1,6 @@
 {
 	"name": "@essex-js-toolkit/dev",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"description": "A set of packages for developers",
 	"repository": "git@ssh.dev.azure.com:v3/msrp-essex/Alpha/alpha-developer",
 	"author": "David Tittsworth <datittsw@microsoft.com>",
@@ -20,18 +20,18 @@
 	},
 	"scripts": {
 		"preinstall": "npx only-allow yarn",
-		"clean:all": "yarn workspaces foreach -pv run clean",
-		"build:all": "yarn workspaces foreach -pvt run build",
-		"test:all": "yarn workspaces foreach -pv run test",
-		"start:all": "yarn workspaces foreach -piv run start",
-		"publish:all": "yarn workspaces foreach --exclude '@essex-js-toolkit/dev' -pv npm publish --tolerate-republish --access public",
+		"clean:": "yarn workspaces foreach -pv run clean",
+		"build:": "yarn workspaces foreach -pvt run build",
+		"test:": "yarn workspaces foreach -pv run test",
+		"start:": "yarn workspaces foreach -piv run start",
+		"publish:": "yarn workspaces foreach --exclude '@essex-js-toolkit/dev' -pivt npm publish --tolerate-republish --access public",
 		"unit:test": "essex test --coverage",
 		"lint": "essex lint",
 		"lint:fix": "essex lint -f",
 		"git_is_clean": "essex git-is-clean",
 		"prettify": "essex prettify",
-		"release": "run-s build:all publish:all",
-		"ci": "run-s build:all lint test:all unit:test git_is_clean"
+		"release": "run-s build: publish:",
+		"ci": "run-s clean: build: lint test: unit:test git_is_clean"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.14.3",
