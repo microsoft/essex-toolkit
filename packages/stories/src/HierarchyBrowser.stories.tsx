@@ -62,14 +62,7 @@ export const HierarchyBrowserAsync: CSF = () => {
 			)
 		}
 		return null
-	}, [
-		communities,
-		getEntities,
-		getNeighbors,
-		settings,
-		selectionState,
-		handleSelectionChange,
-	])
+	}, [communities, getEntities, getNeighbors, settings, selectionState])
 	return (
 		<>
 			<ControlGroup
