@@ -24,7 +24,7 @@
 		"@types/d3-brush": "^1.1.4",
 		"@types/d3-scale": "^2.2.4",
 		"@types/d3-selection": "^1.4.3",
-		"core-js": "^3.14.0",
+		"core-js": "^3.17.2",
 		"d3-array": "^2.12.1",
 		"d3-axis": "^1.0.12",
 		"d3-brush": "^1.1.6",
@@ -33,7 +33,7 @@
 		"react-animate-height": "^2.0.23"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^17.0.0",
+		"@essex/scripts": "^18.2.0",
 		"@fluentui/react": "^8.17.1",
 		"@fluentui/theme": "^2.1.2",
 		"@thematic/color": "^1.2.0",
@@ -45,8 +45,8 @@
 		"@types/d3-axis": "^2.0.0",
 		"@types/node": "^14.17.2",
 		"@types/prop-types": "^15.7.3",
-		"@types/react": "^17.0.9",
-		"@types/react-dom": "^17.0.6",
+		"@types/react": "^17.0.20",
+		"@types/react-dom": "^17.0.9",
 		"@types/react-test-renderer": "^17.0.1",
 		"@types/styled-components": "^5.1.9",
 		"@uifabric/icons": "^7.5.23",
