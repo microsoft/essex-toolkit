@@ -9,7 +9,7 @@
 	"scripts": {
 		"clean": "essex clean",
 		"start:storybook": "start-storybook -s ./public",
-		"build:storybook": "build-storybook",
+		"build:storybook": "build-storybook --quiet",
 		"start": "yarn start:storybook",
 		"build": "yarn build:storybook"
 	},
