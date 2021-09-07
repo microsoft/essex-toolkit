@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ITextProps, IButtonStyles } from '@fluentui/react'
-import React from 'react'
 import { ICardOverviewSettings } from '..'
 import { headerLabel, subHeaderLabel, tableItems } from '../common/styles'
 import { ITableSettings } from '../types'
@@ -11,9 +10,7 @@ import { ITableSettings } from '../types'
 const NO_STYLE: React.CSSProperties = Object.freeze({})
 const NO_ICON_STYLE: IButtonStyles = Object.freeze({})
 
-export function useOverviewStyles(
-	styles?: ICardOverviewSettings,
-): [
+export function useOverviewStyles(styles?: ICardOverviewSettings): [
 	//headerVariant
 	ITextProps['variant'],
 	//subheaderVariant
@@ -43,9 +40,7 @@ export function useOverviewStyles(
 	]
 }
 
-export function useTableStyles(
-	styles?: ITableSettings,
-): [
+export function useTableStyles(styles?: ITableSettings): [
 	//headerVariant
 	ITextProps['variant'],
 	//subheaderVariant
