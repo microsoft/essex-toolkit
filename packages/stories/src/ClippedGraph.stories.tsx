@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ClippedGraph } from '@essex-js-toolkit/themed-components'
-import React from 'react'
 import { CSF } from './types'
 
 const story = {

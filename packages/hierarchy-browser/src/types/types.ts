@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { IButtonStyles, ITextProps } from '@fluentui/react'
-import React from 'react'
 export type CommunityId = string
 export type EntityId = string
 

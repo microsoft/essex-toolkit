@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Spinner } from '@fluentui/react'
-import React from 'react'
 import styled from 'styled-components'
 import CommunityEdgeList from '../../NeighborList/CommunityEdgeList'
 import { ScrollArea } from '../../ScollArea'
