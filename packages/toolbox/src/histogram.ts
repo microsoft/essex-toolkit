@@ -7,7 +7,7 @@
  * The Bin holds an array of values that match the bounding criteria,
  * along with an additional pair of properties indicating that bounding.
  */
-interface Bin extends Array<number> {
+export interface Bin extends Array<number> {
 	/**
 	 * Minimum _computed_ value for the bin
 	 */
@@ -23,13 +23,13 @@ interface Bin extends Array<number> {
  * This follows the d3 format, so these outputs can be used as drop-ins to
  * any code that expects a d3-style histogram.
  */
-type Histogram = Array<Bin>
+export type Histogram = Array<Bin>
 
 const extent = (values: number[]) =>
-	values.reduce((acc, cur) => [Math.min(acc[0], cur), Math.max(acc[1], cur)], [
-		Number.MAX_VALUE,
-		Number.MIN_VALUE,
-	])
+	values.reduce(
+		(acc, cur) => [Math.min(acc[0], cur), Math.max(acc[1], cur)],
+		[Number.MAX_VALUE, Number.MIN_VALUE],
+	)
 
 const standardHistogram = (
 	data: any[],
