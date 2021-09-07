@@ -35,12 +35,6 @@ export const HierarchyBrowserAsync: CSF = () => {
 	const [selectionState, setSelectionState] =
 		useState<EntityId[]>(DEFAULT_SELECTIONS)
 
-	const handleSelectionChange = useCallback(
-		(newState: EntityId[]) => {
-			setSelectionState(newState)
-		},
-		[setSelectionState],
-	)
 	const [getEntities, getNeighbors] = useAsyncCallbacks({
 		nodes,
 		edges,
