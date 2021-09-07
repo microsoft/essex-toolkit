@@ -6,7 +6,6 @@ import {
 	BooleanOperation,
 	FilterExpressionView,
 } from '@essex-js-toolkit/boolean-expression-component'
-import React, { useCallback } from 'react'
 import { CSF } from './types'
 
 const story = {

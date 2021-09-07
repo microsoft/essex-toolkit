@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { memo, useCallback, useRef } from 'react'
+import { memo, useCallback, useRef } from 'react'
 import styled from 'styled-components'
 import {
 	BooleanOperation,

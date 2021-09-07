@@ -8,7 +8,7 @@ import {
 	Toggle,
 	IButtonStyles,
 } from '@fluentui/react'
-import React, { memo, useCallback } from 'react'
+import { memo, useCallback } from 'react'
 
 import './Style.css'
 interface ISelections {

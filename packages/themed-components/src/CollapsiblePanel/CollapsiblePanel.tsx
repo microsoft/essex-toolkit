@@ -45,7 +45,7 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 				return handleClick()
 			}
 		},
-		[handleClick],
+		[handleClick, expanded],
 	)
 
 	useEffect(() => {
