@@ -4,7 +4,7 @@
  */
 import { EntityId, HierarchyBrowser } from '@essex-js-toolkit/hierarchy-browser'
 import { IChoiceGroupOption } from '@fluentui/react'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { CSF } from './types'
 import { ControlGroup, Selections } from './utils/components'
 import { useAsyncCallbacks } from './utils/useAsyncCallbacks'
@@ -35,12 +35,6 @@ export const HierarchyBrowserAsync: CSF = () => {
 	const [selectionState, setSelectionState] =
 		useState<EntityId[]>(DEFAULT_SELECTIONS)
 
-	const handleSelectionChange = useCallback(
-		(newState: EntityId[]) => {
-			setSelectionState(newState)
-		},
-		[setSelectionState],
-	)
 	const [getEntities, getNeighbors] = useAsyncCallbacks({
 		nodes,
 		edges,
@@ -62,14 +56,7 @@ export const HierarchyBrowserAsync: CSF = () => {
 			)
 		}
 		return null
-	}, [
-		communities,
-		getEntities,
-		getNeighbors,
-		settings,
-		selectionState,
-		handleSelectionChange,
-	])
+	}, [communities, getEntities, getNeighbors, settings, selectionState])
 	return (
 		<>
 			<ControlGroup

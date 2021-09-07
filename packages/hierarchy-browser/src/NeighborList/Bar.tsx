@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ScaleLinear } from 'd3-scale'
-import React, { memo , useMemo } from 'react'
+import { memo, useMemo } from 'react'
 
 import styled from 'styled-components'
 

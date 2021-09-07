@@ -5,7 +5,7 @@
 import { useDimensions } from '@essex-js-toolkit/hooks'
 import { Text } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
-import React, { useCallback, memo, useRef } from 'react'
+import { useCallback, memo, useRef } from 'react'
 import styled from 'styled-components'
 import { INeighborCommunityDetail, ITableSettings } from '..'
 import { textStyle } from '../common/styles'

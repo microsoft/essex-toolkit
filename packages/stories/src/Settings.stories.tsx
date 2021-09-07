@@ -4,7 +4,7 @@
  */
 import { Settings } from '@essex-js-toolkit/themed-components'
 import { MessageBar, DefaultButton } from '@fluentui/react'
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { CSF } from './types'
 

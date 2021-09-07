@@ -4,7 +4,7 @@
  */
 import { useThematic } from '@thematic/react'
 import { select } from 'd3-selection'
-import React, { useRef, useLayoutEffect, memo } from 'react'
+import { useRef, useLayoutEffect } from 'react'
 import styled from 'styled-components'
 
 interface IMagBarProps {
@@ -33,7 +33,6 @@ export const MagBar: React.FC<IMagBarProps> = function MagBar({
 	useLayoutEffect(() => {
 		const foreground = theme.rect().fill().hex()
 		const background = theme.application().faint().hex()
-		const border = theme.application().midContrast().hex()
 		const data: IDataItem[] = [
 			{
 				x: 0,
