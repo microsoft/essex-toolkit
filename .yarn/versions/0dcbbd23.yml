@@ -1,4 +1,5 @@
 releases:
+  "@essex-js-toolkit/dev": patch
   "@essex-js-toolkit/hierarchy-browser": patch
   "@essex-js-toolkit/hooks": patch
   "@essex-js-toolkit/stories": patch
