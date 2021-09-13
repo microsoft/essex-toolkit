@@ -20,6 +20,7 @@
 	},
 	"scripts": {
 		"preinstall": "npx only-allow yarn",
+		"postinstall": "husky install",
 		"clean:": "yarn workspaces foreach -pv run clean",
 		"build:": "yarn workspaces foreach -pvt run build",
 		"test:": "yarn workspaces foreach -pv run test",
