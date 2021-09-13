@@ -8,7 +8,7 @@ import {
 	NumberSpinButton,
 	ToggleLink,
 } from '@essex-js-toolkit/themed-components'
-import { useCallback, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 import { CSF } from './types'
 
