@@ -4,7 +4,7 @@ import { Toggle } from '@fluentui/react'
 import { ThemeVariant, loadById } from '@thematic/core'
 import { ApplicationStyles } from '@thematic/react'
 import { ThematicFluentProvider } from '@thematic/fluent'
-import { StoryFnReactReturnType } from '@storybook/react/dist/client/preview/types'
+import { StoryFnReactReturnType } from '@storybook/react/dist/ts3.9/client/preview/types'
 
 /**
  * ThematicFluentDecorator configures both Thematic and the Fluent wrapper
