@@ -10,7 +10,7 @@ export interface IAuthenticator<Credentials, Identity> {
 	 * Log into the system with some credentials
 	 * @param credentials The credentials to provide
 	 */
-	login(credentials: Credentials): Promise<Identity>
+	login(credentials: Credentials): Promise<Identity | null>
 
 	/**
 	 * Log iinto the system with a JWT token
