@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { AppBuilder, PreRunCb, IBaseAppContext } from '@crisishub/api-commons'
 import { GraphQLSchema } from 'graphql'
 import { Logger } from 'pino'
 import { inject, singleton } from 'tsyringe'
 import { IBaseConfiguration } from '../configuration'
 import { BaseInjectorNames } from '../injectors'
-import { AppBuilder, PreRunCb, IBaseAppContext } from '@crisishub/api-commons'
 
 @singleton()
 export class Server<
