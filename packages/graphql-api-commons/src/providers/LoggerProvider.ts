@@ -27,9 +27,6 @@ export class LoggerProvider<TConfiguration extends IBaseConfiguration>
 						levelFirst: true,
 				  }
 				: undefined,
-			prettifier: this._config.loggingPretty
-				? require('pino-pretty')
-				: undefined,
 		})
 	}
 
