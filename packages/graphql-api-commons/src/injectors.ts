@@ -4,7 +4,9 @@
  */
 export enum BaseInjectorNames {
 	AppContext = 'AppContext',
+	AppBuilder = 'AppBuilder',
 	Logger = 'Logger',
 	Schema = 'Schema',
 	Configuration = 'Configuration',
+	RequestContextProviders = 'RequestContextProviders',
 }

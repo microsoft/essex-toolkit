@@ -2,34 +2,50 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ApolloServerPluginLandingPageDisabled } from 'apollo-server-core'
+import {
+	ApolloServerPluginLandingPageDisabled,
+	Config,
+} from 'apollo-server-core'
 import { ApolloServer } from 'apollo-server-fastify'
 import fastify, { FastifyInstance, FastifyRequest } from 'fastify'
 import { GraphQLSchema } from 'graphql'
 import { Logger } from 'pino'
 import { inject, singleton } from 'tsyringe'
-import { IAuthenticator } from '..'
 import { IBaseConfiguration } from '../configuration'
 import { BaseInjectorNames } from '../injectors'
-import { IRequestAppContext } from './BaseAppContext'
+import { IBuiltAppContext, IRequestAppContext } from '.'
 
 export type PreRunCb = (app: FastifyInstance) => Promise<void>
+
+export interface RequestContextProvider<
+	Configuration extends IBaseConfiguration,
+	Components,
+	RequestContext,
+> {
+	apply(
+		ctx: IRequestAppContext<Configuration, Components, RequestContext>,
+		request: FastifyRequest,
+	): Promise<Partial<RequestContext>>
+}
 
 @singleton()
 export class AppBuilder<
 	Configuration extends IBaseConfiguration,
-	Context extends IRequestAppContext<
-		Configuration,
-		IAuthenticator<unknown, unknown>,
-		unknown
-	>,
+	Components,
+	Context extends IBuiltAppContext<Configuration, Components>,
+	RequestContext,
 > {
 	private _apolloServer: ApolloServer
 
 	public constructor(
-		@inject(BaseInjectorNames.AppContext) private _appContext: Context,
+		@inject(BaseInjectorNames.AppContext)
+		private _appContext: Context,
 		@inject(BaseInjectorNames.Logger) private _logger: Logger,
 		@inject(BaseInjectorNames.Schema) private _schema: GraphQLSchema,
+		@inject(BaseInjectorNames.RequestContextProviders)
+		private _requestContextProviders: Array<
+			RequestContextProvider<Configuration, Components, RequestContext>
+		>,
 	) {
 		this._apolloServer = this.createApolloServer()
 	}
@@ -46,18 +62,13 @@ export class AppBuilder<
 				: [ApolloServerPluginLandingPageDisabled],
 			logger: this._logger,
 			introspection: this.config.serverIntrospection,
-			context: async ({ request }: { request?: FastifyRequest }) => {
-				const { authenticator } = this._appContext.components
-				const identity = await authenticator.verifyToken(
-					request?.headers?.authorization,
-				)
-
-				return {
-					...this._appContext,
-					request: {
-						identity,
-					},
-				} as Context
+			context: async ({ request }: { request: FastifyRequest }) => {
+				const ctx = { ...this._appContext, request: {} as RequestContext }
+				this._requestContextProviders.forEach(rcp => {
+					const result = rcp.apply(ctx, request)
+					ctx.request = { ...ctx.request, ...result }
+				})
+				return ctx
 			},
 			debug: false,
 		})
