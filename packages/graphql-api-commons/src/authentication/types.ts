@@ -16,7 +16,7 @@ export interface IAuthenticator<Credentials, Identity> {
 	 * Log iinto the system with a JWT token
 	 * @param token The token to use
 	 */
-	verifyToken(token: string | null | undefined): Promise<Identity>
+	verifyToken(token: string | null): Promise<Identity | null>
 
 	/**
 	 * Log out of the system

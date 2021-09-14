@@ -2,8 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { AppBuilder, PreRunCb, IBaseAppContext } from '@crisishub/api-commons'
-import { GraphQLSchema } from 'graphql'
+import { AppBuilder, PreRunCb, IBuiltAppContext } from '..'
 import { Logger } from 'pino'
 import { inject, singleton } from 'tsyringe'
 import { IBaseConfiguration } from '../configuration'
@@ -11,30 +10,28 @@ import { BaseInjectorNames } from '../injectors'
 
 @singleton()
 export class Server<
-	TConfiguration extends IBaseConfiguration,
-	TContext extends IBaseAppContext<TConfiguration>,
+	Configuration extends IBaseConfiguration,
+	Components,
+	Context extends IBuiltAppContext<Configuration, Components>,
+	RequestContext,
 > {
 	constructor(
 		@inject(BaseInjectorNames.Configuration)
-		private _configuration: TConfiguration,
-		@inject(BaseInjectorNames.Schema) private _schema: GraphQLSchema,
-		@inject(BaseInjectorNames.AppContext) private _appContext: TContext,
+		private _configuration: Configuration,
+		@inject(BaseInjectorNames.AppBuilder)
+		private _appBuilder: AppBuilder<
+			Configuration,
+			Components,
+			Context,
+			RequestContext
+		>,
 		@inject(BaseInjectorNames.Logger) private _logger: Logger,
 	) {}
 
 	public async start(preRun?: PreRunCb): Promise<void> {
 		try {
-			this._logger.info('intializing server...')
-
-			const appBuilder = new AppBuilder(
-				this._appContext,
-				this._logger,
-				this._schema,
-			)
-
 			this._logger.info('starting server...')
-
-			await appBuilder.start(preRun)
+			await this._appBuilder.start(preRun)
 
 			this._logger.info(
 				`server listening on port ${this._configuration.serverPort}`,
