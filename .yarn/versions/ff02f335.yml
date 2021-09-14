@@ -1,2 +1,5 @@
 releases:
   "@essex-js-toolkit/graphql-api-commons": patch
+
+declined:
+  - "@essex-js-toolkit/dev"
