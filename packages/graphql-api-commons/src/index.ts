@@ -5,7 +5,6 @@
 export * from './app'
 export * from './authentication'
 export * from './configuration'
-export * from './plugins'
 export * from './providers'
 export * from './schema'
 export * from './server'
