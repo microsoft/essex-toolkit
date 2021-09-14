@@ -4,3 +4,4 @@
  */
 export * from './graphql'
 export * from './IdentityRequestContextProvider'
+export * from './injectCommon'
