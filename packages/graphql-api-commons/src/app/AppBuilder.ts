@@ -2,10 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	ApolloServerPluginLandingPageDisabled,
-	Config,
-} from 'apollo-server-core'
+import { ApolloServerPluginLandingPageDisabled } from 'apollo-server-core'
 import { ApolloServer } from 'apollo-server-fastify'
 import fastify, { FastifyInstance, FastifyRequest } from 'fastify'
 import { GraphQLSchema } from 'graphql'
@@ -82,7 +79,7 @@ export class AppBuilder<
 			if (error.validation) {
 				reply
 					.code(400)
-					.send({ messsage: error.message, validation: error.validation })
+					.send({ message: error.message, validation: error.validation })
 			} else {
 				reply.code(error.statusCode || 500).send({ messsage: error.message })
 			}

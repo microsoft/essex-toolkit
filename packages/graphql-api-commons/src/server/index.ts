@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { AppBuilder, PreRunCb, IBuiltAppContext } from '..'
 import { Logger } from 'pino'
 import { inject, singleton } from 'tsyringe'
+import { AppBuilder, PreRunCb, IBuiltAppContext } from '../app'
 import { IBaseConfiguration } from '../configuration'
 import { BaseInjectorNames } from '../injectors'
 
