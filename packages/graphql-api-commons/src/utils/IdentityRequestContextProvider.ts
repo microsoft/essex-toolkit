@@ -10,10 +10,14 @@ import {
 	RequestContextProvider,
 } from '..'
 
+export interface IdentityRequestContext<Identity> {
+	identity: Identity | null
+}
+
 export class IdentityRequestContextProvider<
 	Configuration extends IBaseConfiguration,
 	Components extends { authenticator: IAuthenticator<unknown, Identity> },
-	RequestContext extends { identity: Identity | null },
+	RequestContext extends IdentityRequestContext<Identity>,
 	Identity,
 > implements RequestContextProvider<Configuration, Components, RequestContext>
 {
