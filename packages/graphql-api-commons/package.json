@@ -35,10 +35,10 @@
 		"tsyringe": ">= 4.6.0"
 	},
 	"peerDependenciesMeta": {
-		"@graphql": {
+		"@graphql-tools/utils": {
 			"optional": false
 		},
-		"@graphql-tools/utils": {
+		"graphql": {
 			"optional": false
 		},
 		"tsyringe": {

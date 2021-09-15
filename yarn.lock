@@ -3294,9 +3294,9 @@ __metadata:
     graphql: ">= 15.5.3"
     tsyringe: ">= 4.6.0"
   peerDependenciesMeta:
-    "@graphql":
-      optional: false
     "@graphql-tools/utils":
+      optional: false
+    graphql:
       optional: false
     tsyringe:
       optional: false
