@@ -26,7 +26,7 @@ export class IdentityRequestContextProvider<
 		request: FastifyRequest,
 	): Promise<Partial<RequestContext>> {
 		const { authenticator } = ctx.components
-		const identity = await authenticator.verifyToken(
+		const identity = await authenticator.verifyAuthorization(
 			request.headers.authorization ?? null,
 		)
 		return { identity } as Partial<RequestContext>

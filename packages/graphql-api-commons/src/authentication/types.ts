@@ -13,10 +13,12 @@ export interface IAuthenticator<Credentials, Identity> {
 	login(credentials: Credentials): Promise<Identity | null>
 
 	/**
-	 * Log iinto the system with a JWT token
+	 * Log into the system with an Authorization header
 	 * @param token The token to use
 	 */
-	verifyToken(token: string | null): Promise<Identity | null>
+	verifyAuthorization(
+		header: string | null | undefined,
+	): Promise<Identity | null>
 
 	/**
 	 * Log out of the system

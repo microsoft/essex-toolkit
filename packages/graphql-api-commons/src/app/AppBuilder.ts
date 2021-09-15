@@ -61,10 +61,10 @@ export class AppBuilder<
 			introspection: this.config.serverIntrospection,
 			context: async ({ request }: { request: FastifyRequest }) => {
 				const ctx = { ...this._appContext, request: {} as RequestContext }
-				this._requestContextProviders.forEach(rcp => {
-					const result = rcp.apply(ctx, request)
+				for (const rcp of this._requestContextProviders) {
+					const result = await rcp.apply(ctx, request)
 					ctx.request = { ...ctx.request, ...result }
-				})
+				}
 				return ctx
 			},
 			debug: false,
