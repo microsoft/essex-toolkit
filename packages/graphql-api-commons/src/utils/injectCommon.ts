@@ -31,7 +31,7 @@ export function registerSchema(
 export function registerRequestContextProviders(
 	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 	providers: RequestContextProvider<any, unknown, unknown>[],
-	ctx: DependencyContainer,
+	ctx: DependencyContainer = container,
 ): void {
 	ctx.register(BaseInjectorNames.RequestContextProviders, {
 		useValue: providers,
