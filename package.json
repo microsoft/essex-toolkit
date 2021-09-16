@@ -31,7 +31,7 @@
 		"lint:fix": "yarn lint --fix",
 		"git_is_clean": "essex git-is-clean",
 		"prettify": "essex prettify",
-		"release": "run-s build: publish:",
+		"release": "run-s clean: build: publish:",
 		"ci": "run-s clean: build: lint: test: unit:test git_is_clean"
 	},
 	"devDependencies": {
