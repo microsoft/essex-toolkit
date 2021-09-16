@@ -16,7 +16,9 @@ export function registerAppBuilder(ctx: DependencyContainer = container): void {
 }
 
 export function registerLogger(ctx: DependencyContainer = container): void {
-	ctx.register(BaseInjectorNames.Logger, { useClass: LoggerProvider })
+	ctx.register(BaseInjectorNames.Logger, {
+		useValue: ctx.resolve(LoggerProvider).get(),
+	})
 }
 
 export function registerSchema(
