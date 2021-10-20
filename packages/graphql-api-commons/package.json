@@ -9,6 +9,11 @@
 	"files": [
 		"dist/"
 	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/microsoft/essex-js-toolkit.git",
+		"directory": "packages/graphql-api-commons"
+	},
 	"scripts": {
 		"clean": "essex clean dist lib",
 		"build": "essex build"
