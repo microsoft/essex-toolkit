@@ -86,7 +86,10 @@ export function useMicrosoftConsentBanner({
 			WcpConsent.init(
 				navigator.language,
 				element,
-				function initializeConsentManagement(err, consentUtil) {
+				function initializeConsentManagement(
+					err: Error,
+					consentUtil: ConsentUtil,
+				) {
 					if (err) {
 						console.error('error initalizing WcpConsent', err)
 					} else {
@@ -103,7 +106,7 @@ export function useMicrosoftConsentBanner({
 		} catch (err) {
 			console.error('error initalizing consent', err)
 		}
-	}, [setConsentUtil])
+	}, [setConsentUtil, elementId, onChange, theme])
 
 	const manageConsent = useCallback(
 		() => consentUtil.manageConsent(),
