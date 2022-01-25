@@ -2,5 +2,6 @@ releases:
   "@essex-js-toolkit/hooks": minor
 
 declined:
+  - "@essex-js-toolkit/dev"
   - "@essex-js-toolkit/hierarchy-browser"
   - "@essex-js-toolkit/themed-components"
