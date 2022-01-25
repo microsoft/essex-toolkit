@@ -65,7 +65,23 @@ export function useMicrosoftConsentBanner({
 		try {
 			const element = document.getElementById(elementId)
 			if (!element) {
-				throw new Error(`Could not find element with id ${elementId}`)
+				throw new Error(
+					`Could not find element with id ${elementId}. You should include an element in your HTML for the cookie-banner to render into, e.g. 
+						
+					<body>
+						...
+						<div id="${elementId}" />
+					</body>`,
+				)
+			}
+			if (!WcpConsent) {
+				throw new Error(`WcpConsent banner not initialized. You should include the WCP Consent script in your HTML header. e.g.
+
+				<head>
+					...
+					<script src="https://wcpstatic.microsoft.com/mscc/lib/v2/wcp-consent.js"></script>
+				</head>
+				`)
 			}
 			WcpConsent.init(
 				navigator.language,
