@@ -9,6 +9,11 @@
 		"module": "dist/esm/index.js",
 		"typings": "dist/types/index.d.ts"
 	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/microsoft/essex-js-toolkit.git",
+		"directory": "packages/boolean-expression-component"
+	},
 	"scripts": {
 		"build": "essex build",
 		"clean": "essex clean",
