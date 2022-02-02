@@ -22,7 +22,7 @@ export const RenameCalloutStory: CSF = () => {
 	const [title, setTitle] = useState('Title')
 	const [isEditing, setEditing] = useState(false)
 
-	const onSend = useCallback(
+	const onSave = useCallback(
 		(name?: string) => {
 			if (name) {
 				setTitle(name)
@@ -36,6 +36,10 @@ export const RenameCalloutStory: CSF = () => {
 		setEditing(true)
 	}, [setEditing])
 
+	const onDismiss = useCallback(() => {
+		setEditing(false)
+	}, [setEditing])
+
 	return (
 		<div>
 			<span id="title">{title}</span>
@@ -44,7 +48,13 @@ export const RenameCalloutStory: CSF = () => {
 			</PrimaryButton>
 
 			{isEditing && (
-				<RenameCallout targetId="title" name={title} onSend={onSend} />
+				<RenameCallout
+					targetId="title"
+					name={title}
+					onDismiss={onDismiss}
+					onSave={onSave}
+					label="Type the new title"
+				/>
 			)}
 		</div>
 	)
