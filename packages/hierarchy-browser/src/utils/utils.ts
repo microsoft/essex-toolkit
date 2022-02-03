@@ -63,9 +63,9 @@ export function exportCSVFile(items: IEntityDetail[], fileTitle: string): void {
 	const csv = headerstring + datastring
 	const exportedFilename = fileTitle + '.csv'
 	const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
-	if (navigator.msSaveBlob) {
+	if ((navigator as any).msSaveBlob) {
 		// IE 10+
-		navigator.msSaveBlob(blob, exportedFilename)
+		(navigator as any).msSaveBlob(blob, exportedFilename)
 	} else {
 		const link = document.createElement('a')
 		if (link.download !== undefined) {
