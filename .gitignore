@@ -15,9 +15,9 @@ licenses.txt
 
 # https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
 .yarn/*
-!.yarn/cache
+!.yarn/patches
 !.yarn/releases
 !.yarn/plugins
 !.yarn/sdks
 !.yarn/versions
-
+.pnp.*
