@@ -4,7 +4,6 @@
  */
 
 import { useThematic } from '@thematic/react'
-import * as React from 'react'
 import { useState, useMemo, useRef, useEffect } from 'react'
 import 'lineupjs/build/LineUpJS.css'
 import { ThematicLineupStyles } from './ThematicLineupStyles'

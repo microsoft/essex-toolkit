@@ -5,7 +5,6 @@
 import { SpinButton } from '@fluentui/react'
 import { Position } from 'office-ui-fabric-react/lib/utilities/positioning'
 import { useCallback } from 'react'
-import * as React from 'react'
 
 export interface NumberSpinButtonProps {
 	label: string

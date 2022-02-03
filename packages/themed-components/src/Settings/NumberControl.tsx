@@ -4,7 +4,6 @@
  */
 import { Slider } from '@fluentui/react'
 import { Position } from 'office-ui-fabric-react/lib/utilities/positioning'
-import * as React from 'react'
 import { useCallback } from 'react'
 import { NumberSpinButton } from '../NumberSpinButton'
 import { ControlType, ControlProps } from './interfaces'
