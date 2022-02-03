@@ -30,12 +30,11 @@
 		"react-infinite-scroller": "^1.2.4"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.15.5",
-		"@essex/scripts": "^18.2.0",
-		"@fluentui/react": "^8.34.0",
-		"@thematic/core": "^1.2.2",
-		"@thematic/fluent": "^1.2.2",
-		"@thematic/react": "^1.2.2",
+		"@essex/scripts": "^19.0.6",
+		"@fluentui/react": "^8.52.2",
+		"@thematic/core": "^1.3.2",
+		"@thematic/fluent": "^1.3.0",
+		"@thematic/react": "^1.3.2",
 		"@types/d3-array": "^2.12.3",
 		"@types/d3-scale": "^2.2.6",
 		"@types/d3-selection": "^2.0.1",
@@ -43,7 +42,7 @@
 		"@types/react": "^17.0.20",
 		"@types/react-infinite-scroller": "^1.2.2",
 		"@types/styled-components": "^5.1.14",
-		"prop-types": "^15.7.2",
+		"prop-types": "^15.8.1",
 		"react": "^17.0.2",
 		"styled-components": "^5.3.1"
 	},
