@@ -7,7 +7,6 @@ import { chart, plotArea, line as lineRenderer } from '@thematic/d3'
 import { useThematic } from '@thematic/react'
 import { scaleLinear } from 'd3-scale'
 import { select } from 'd3-selection'
-import * as React from 'react'
 import { useRef, useMemo, useEffect } from 'react'
 
 const BINS = 10

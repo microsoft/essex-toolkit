@@ -4,7 +4,6 @@
  */
 
 import { useThematic } from '@thematic/react'
-import * as React from 'react'
 
 /**
  * This component simply injects a style block to override a bunch of LineUp styles with Thematic config.

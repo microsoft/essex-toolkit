@@ -25,12 +25,12 @@
 		"not dead"
 	],
 	"devDependencies": {
-		"@azure/msal-browser": "^2.17.0",
-		"@essex/scripts": "^18.2.0",
+		"@azure/msal-browser": "^2.21.0",
+		"@essex/scripts": "^19.0.6",
 		"@types/debug": "^4.1.7"
 	},
 	"dependencies": {
-		"debug": "^4.3.2"
+		"debug": "^4.3.3"
 	},
 	"peerDependencies": {
 		"@azure/msal-browser": "> 2"

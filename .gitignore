@@ -4,6 +4,7 @@ packages/*/src/**/*.js
 packages/*/lib/
 packages/*/dist/
 packages/*/storybook-static
+.swc/
 
 # Test Output
 coverage/
@@ -15,9 +16,9 @@ licenses.txt
 
 # https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
 .yarn/*
-!.yarn/cache
+!.yarn/patches
 !.yarn/releases
 !.yarn/plugins
 !.yarn/sdks
 !.yarn/versions
-
+.pnp.*

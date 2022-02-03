@@ -5,7 +5,6 @@
 
 // Link.react.test.js
 import { render, act } from '@testing-library/react'
-import * as React from 'react'
 import { useDestroyable } from '../useDestroyable'
 
 /* eslint @typescript-eslint/no-unused-vars:0 */
@@ -17,7 +16,7 @@ const DestroyableTest = ({ destroyable }: any) => {
 	return null
 }
 
-/* eslint-disable jest/no-disabled-tests */
+/* eslint-disable jest/no-disabled-tests, jest/expect-expect */
 
 test.skip('Setting an undefined destroyable does not cause a crash', async () => {
 	act(() => {

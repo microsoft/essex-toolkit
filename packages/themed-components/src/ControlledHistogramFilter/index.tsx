@@ -11,7 +11,6 @@ import {
 	Link,
 	TextField,
 } from '@fluentui/react'
-import * as React from 'react'
 import { useState, useMemo, useEffect } from 'react'
 import { NumberSpinButton } from '../NumberSpinButton'
 import { HistogramSelect } from './HistogramSelect'
