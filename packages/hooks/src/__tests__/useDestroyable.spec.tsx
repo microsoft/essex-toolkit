@@ -17,7 +17,7 @@ const DestroyableTest = ({ destroyable }: any) => {
 	return null
 }
 
-/* eslint-disable jest/no-disabled-tests */
+/* eslint-disable jest/no-disabled-tests, jest/expect-expect */
 
 test.skip('Setting an undefined destroyable does not cause a crash', async () => {
 	act(() => {
