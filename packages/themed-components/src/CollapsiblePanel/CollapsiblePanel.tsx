@@ -4,7 +4,6 @@
  */
 import { IconButton } from '@fluentui/react'
 import { useCallback, useMemo, useState, useEffect } from 'react'
-import * as React from 'react'
 import { default as AnimateHeight } from 'react-animate-height'
 import styled from 'styled-components'
 import { CollapsiblePanelProps } from './interfaces'

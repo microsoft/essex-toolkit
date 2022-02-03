@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { PrimaryButton, TextField } from '@fluentui/react'
-import * as React from 'react'
 import { useState, useCallback } from 'react'
 
 const static_style = { display: 'flex', alignItems: 'flex-end' }
@@ -58,10 +57,10 @@ export const SearchBox = ({
 		[onSearch, queryText],
 	)
 
-	const handleSearch = useCallback(() => onSearch(queryText), [
-		onSearch,
-		queryText,
-	])
+	const handleSearch = useCallback(
+		() => onSearch(queryText),
+		[onSearch, queryText],
+	)
 
 	return (
 		<div style={static_style}>

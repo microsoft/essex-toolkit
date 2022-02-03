@@ -10,7 +10,6 @@ import { axisBottom, axisLeft } from 'd3-axis'
 import { brushX } from 'd3-brush'
 import { scaleLinear, ScaleLinear } from 'd3-scale'
 import { select, event, Selection } from 'd3-selection'
-import * as React from 'react'
 import { useRef, useEffect, useMemo } from 'react'
 
 const DEFAULT_MARGINS = {
@@ -156,15 +155,8 @@ export const HistogramSelect = ({
 	useEffect(() => {
 		const elements = chartElements.current
 		if (elements) {
-			const {
-				svg,
-				viewPort,
-				plotArea,
-				xScale,
-				reverseXScale,
-				xAxis,
-				yScale,
-			} = elements
+			const { svg, viewPort, plotArea, xScale, reverseXScale, xAxis, yScale } =
+				elements
 
 			const domain: [number, number] = [Math.min(...data), Math.max(...data)]
 			elements.domain = domain

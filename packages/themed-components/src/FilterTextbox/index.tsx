@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { IconButton, TextField, Label } from '@fluentui/react'
-import * as React from 'react'
 import { useState } from 'react'
 
 export interface TextFilterProps {
