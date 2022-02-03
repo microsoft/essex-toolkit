@@ -3437,7 +3437,7 @@ __metadata:
     apollo-server-core: ^3.6.2
     apollo-server-fastify: ^3.6.2
     fastify: ^3.27.1
-    graphql: ^15.8.0
+    graphql: ^16.3.0
     pino: ^7.6.5
     pino-pretty: ^7.5.1
     tsyringe: ^4.6.0
@@ -12808,10 +12808,10 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"graphql@npm:^15.8.0":
-  version: 15.8.0
-  resolution: "graphql@npm:15.8.0"
-  checksum: 423325271db8858428641b9aca01699283d1fe5b40ef6d4ac622569ecca927019fce8196208b91dd1d8eb8114f00263fe661d241d0eb40c10e5bfd650f86ec5e
+"graphql@npm:^16.3.0":
+  version: 16.3.0
+  resolution: "graphql@npm:16.3.0"
+  checksum: ba540641e9cd2a8de5b989ff1433b015f232fa73aaef478d6709c1339cd43113347917acb965a5799c004667687852fc8ff0cfaa935eb26374c91c1fd7fdaeb1
   languageName: node
   linkType: hard
 
