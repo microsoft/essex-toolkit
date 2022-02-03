@@ -17,7 +17,7 @@
 		"watch": "essex watch"
 	},
 	"dependencies": {
-		"core-js": "^3.17.3"
+		"core-js": "^3.21.0"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^19.0.6",

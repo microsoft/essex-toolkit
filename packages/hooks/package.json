@@ -18,7 +18,7 @@
 	},
 	"dependencies": {
 		"@essex-js-toolkit/toolbox": "workspace:packages/toolbox",
-		"core-js": "^3.17.3",
+		"core-js": "^3.21.0",
 		"lodash": "^4.17.21"
 	},
 	"devDependencies": {

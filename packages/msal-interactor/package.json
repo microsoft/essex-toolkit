@@ -30,7 +30,7 @@
 		"@types/debug": "^4.1.7"
 	},
 	"dependencies": {
-		"debug": "^4.3.2"
+		"debug": "^4.3.3"
 	},
 	"peerDependencies": {
 		"@azure/msal-browser": "> 2"

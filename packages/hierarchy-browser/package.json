@@ -23,7 +23,7 @@
 	],
 	"dependencies": {
 		"@essex-js-toolkit/hooks": "workspace:packages/hooks",
-		"core-js": "^3.17.3",
+		"core-js": "^3.21.0",
 		"d3-array": "^2.12.1",
 		"d3-scale": "^3.3.0",
 		"d3-selection": "^2.0.0",
@@ -44,7 +44,7 @@
 		"@types/styled-components": "^5.1.14",
 		"prop-types": "^15.8.1",
 		"react": "^17.0.2",
-		"styled-components": "^5.3.1"
+		"styled-components": "^5.3.3"
 	},
 	"peerDependencies": {
 		"@fluent/react": ">=7.146.1",
