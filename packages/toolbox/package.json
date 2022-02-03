@@ -19,6 +19,6 @@
 		"core-js": "^3.17.3"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^18.2.0"
+		"@essex/scripts": "^19.0.6"
 	}
 }
