@@ -69,5 +69,6 @@
 		"handlebars": "4.4.3",
 		"@types/react": "17.0.9",
 		"@types/react-dom": "17.0.6"
-	}
+	},
+	"packageManager": "yarn@3.1.1"
 }
