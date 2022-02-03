@@ -4,6 +4,7 @@ packages/*/src/**/*.js
 packages/*/lib/
 packages/*/dist/
 packages/*/storybook-static
+.swc/
 
 # Test Output
 coverage/
