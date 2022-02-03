@@ -20,9 +20,9 @@
 		"watch": "essex watch"
 	},
 	"dependencies": {
-		"core-js": "^3.17.3",
+		"core-js": "^3.21.0",
 		"office-ui-fabric-react": "^7.181.1",
-		"styled-components": "^5.3.1"
+		"styled-components": "^5.3.3"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^19.0.6",

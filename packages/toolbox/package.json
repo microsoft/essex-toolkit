@@ -16,9 +16,10 @@
 		"build": "essex build"
 	},
 	"dependencies": {
-		"core-js": "^3.17.3"
+		"core-js": "^3.21.0"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^19.0.6"
+		"@essex/scripts": "^19.0.6",
+		"regenerator-runtime": "^0.13.9"
 	}
 }
