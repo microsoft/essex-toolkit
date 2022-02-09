@@ -63,21 +63,15 @@ export function exportCSVFile(items: IEntityDetail[], fileTitle: string): void {
 	const csv = headerstring + datastring
 	const exportedFilename = fileTitle + '.csv'
 	const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
-	if ((navigator as any).msSaveBlob) {
-		// IE 10+
-		(navigator as any).msSaveBlob(blob, exportedFilename)
-	} else {
-		const link = document.createElement('a')
-		if (link.download !== undefined) {
-			// Browsers that support HTML5 download attribute
-			const url = URL.createObjectURL(blob)
-			link.setAttribute('href', url)
-			link.setAttribute('download', exportedFilename)
-			link.style.visibility = 'hidden'
-			document.body.appendChild(link)
-			link.click()
-			;(link.parentNode as HTMLElement).removeChild(link)
-		}
+	const link = document.createElement('a')
+	if (link.download !== undefined) {
+		const url = URL.createObjectURL(blob)
+		link.setAttribute('href', url)
+		link.setAttribute('download', exportedFilename)
+		link.style.visibility = 'hidden'
+		document.body.appendChild(link)
+		link.click()
+		;(link.parentNode as HTMLElement).removeChild(link)
 	}
 }
 

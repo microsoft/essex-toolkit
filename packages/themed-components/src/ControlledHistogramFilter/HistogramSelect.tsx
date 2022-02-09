@@ -9,7 +9,7 @@ import { bin, max } from 'd3-array'
 import { axisBottom, axisLeft } from 'd3-axis'
 import { brushX } from 'd3-brush'
 import { scaleLinear, ScaleLinear } from 'd3-scale'
-import { select, event, Selection } from 'd3-selection'
+import { select, Selection } from 'd3-selection'
 import { useRef, useEffect, useMemo } from 'react'
 
 const DEFAULT_MARGINS = {
@@ -51,7 +51,7 @@ interface ChartElements {
 	domain: [number, number]
 	vpWidth: number
 	vpHeight: number
-	onBrushEnd?: () => void
+	onBrushEnd?: (event: any) => void
 	updateNumberOfBins?: (n: number) => void
 }
 /**
@@ -111,7 +111,7 @@ export const HistogramSelect = ({
 	useEffect(() => {
 		const outerElements = chartElements.current
 		if (outerElements) {
-			outerElements.onBrushEnd = () => {
+			outerElements.onBrushEnd = event => {
 				const elements = chartElements.current
 				if (elements) {
 					const brushSelection = elements.brushSelection

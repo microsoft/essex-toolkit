@@ -3646,7 +3646,7 @@ __metadata:
     "@types/d3-axis": ^3.0.1
     "@types/d3-brush": ^3.0.1
     "@types/d3-scale": ^4.0.2
-    "@types/d3-selection": ^1
+    "@types/d3-selection": ^3.0.2
     "@types/node": ^17.0.14
     "@types/prop-types": ^15.7.4
     "@types/react": ^17.0.39
@@ -3660,7 +3660,7 @@ __metadata:
     d3-axis: ^3.0.0
     d3-brush: ^3.0.0
     d3-scale: ^4.0.2
-    d3-selection: ^1
+    d3-selection: ^3.0.0
     office-ui-fabric-react: ^7.181.1
     prop-types: ^15.8.1
     react: ^17.0.2
@@ -6608,13 +6608,6 @@ __metadata:
   version: 3.0.2
   resolution: "@types/d3-selection@npm:3.0.2"
   checksum: 0b9e258d3a3f31639b4191051ad29f4e18441a069b99ca88d8a7b3d390fe6c87716a526e933d4cec95eb4c42a7b7688e6548cbf054359a436f4ff3dae5e29e10
-  languageName: node
-  linkType: hard
-
-"@types/d3-selection@npm:^1":
-  version: 1.4.3
-  resolution: "@types/d3-selection@npm:1.4.3"
-  checksum: 6ab11ac517d5878dca18021c698576f6678fb8374dcf1c519021969ba90d6c84fb8368f8f555bddce78b278b95d40f438398e1b082a96c257b7103ec543ad28b
   languageName: node
   linkType: hard
 
@@ -10577,7 +10570,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"d3-selection@npm:^1, d3-selection@npm:^1.4.2":
+"d3-selection@npm:^1.4.2":
   version: 1.4.2
   resolution: "d3-selection@npm:1.4.2"
   checksum: 2484b392259b087a98f546f2610e6a11c90f38dae6b6b20a3fc85171038fcab4c72e702788b1960a4fece88bed2e36f268096358b5b48d3c7f0d35cfbe305da6
