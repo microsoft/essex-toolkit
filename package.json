@@ -21,18 +21,17 @@
 	"scripts": {
 		"preinstall": "npx only-allow yarn",
 		"postinstall": "husky install",
-		"clean:": "yarn workspaces foreach -pv run clean",
-		"build:": "yarn workspaces foreach -pvt run build",
-		"test:": "yarn workspaces foreach -pv run test",
+		"clean": "yarn workspaces foreach -pv run clean",
+		"build": "yarn workspaces foreach -pvt run build",
+		"test": "yarn workspaces foreach -pv run test",
 		"start:": "yarn workspaces foreach -piv run start",
-		"publish:": "yarn workspaces foreach --exclude '@essex-js-toolkit/dev' -pivt npm publish --tolerate-republish --access public",
-		"unit:test": "jest --coverage",
-		"lint:": "essex lint --strict",
-		"lint:fix": "yarn lint --fix",
+		"release": "yarn workspaces foreach --exclude '@essex-js-toolkit/dev' -pivt npm publish --tolerate-republish --access public",
+		"jest_coverage": "jest --coverage",
+		"lint": "essex lint --strict",
+		"lint_fix": "yarn lint --fix",
 		"git_is_clean": "essex git-is-clean",
-		"prettify": "essex prettify",
-		"release": "run-s clean: build: publish:",
-		"ci": "run-s clean: build: lint: test: unit:test git_is_clean"
+		"format": "essex prettify",
+		"ci": "run-s build lint_fix test jest_coverage git_is_clean"
 	},
 	"devDependencies": {
 		"@essex/eslint-config": "^19.0.2",
