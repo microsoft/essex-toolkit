@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { BooleanOperation, Palette } from '../types'
+import { BooleanOperation, Palette } from '../types.js'
 
 export const DEFAULT_PALETTE: Palette = {
 	backgroundColor: 'white',

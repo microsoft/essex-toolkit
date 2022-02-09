@@ -9,11 +9,11 @@ import {
 	FilterClauseGroup,
 	FilterClause,
 	Palette,
-} from '../types'
-import { toggleOperation } from '../utils'
-import { BooleanOperationToggle } from './BooleanOperationToggle'
-import { CloseButton } from './CloseButton'
-import { FilterChip } from './FilterChip'
+} from '../types.js'
+import { toggleOperation } from '../utils.js'
+import { BooleanOperationToggle } from './BooleanOperationToggle.js'
+import { CloseButton } from './CloseButton.js'
+import { FilterChip } from './FilterChip.js'
 
 export const ChipGroup: React.FC<{
 	group: FilterClauseGroup

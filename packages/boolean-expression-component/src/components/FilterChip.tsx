@@ -4,7 +4,7 @@
  */
 import { memo, CSSProperties } from 'react'
 import styled from 'styled-components'
-import { CloseButton } from './CloseButton'
+import { CloseButton } from './CloseButton.js'
 
 export interface FilterChipProps {
 	style?: CSSProperties

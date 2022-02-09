@@ -19,12 +19,12 @@
 		"build": "essex build"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^19.0.6",
+		"@essex/scripts": "^20.0.1",
 		"@graphql-tools/utils": "^8.6.1",
 		"@tsconfig/node14": "^1.0.1",
 		"@types/pino": "^7.0.5",
-		"apollo-server-core": "^3.6.2",
-		"apollo-server-fastify": "^3.6.2",
+		"apollo-server-core": "^3.6.3",
+		"apollo-server-fastify": "^3.6.3",
 		"fastify": "^3.27.1",
 		"graphql": "^16.3.0",
 		"tsyringe": "^4.6.0",

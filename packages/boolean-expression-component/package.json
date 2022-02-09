@@ -4,10 +4,11 @@
 	"author": "Chris Trevino <chtrevin@microsoft.com>",
 	"license": "MIT",
 	"main": "src/index.ts",
-	"publishConfig": {
-		"main": "dist/cjs/index.js",
-		"module": "dist/esm/index.js",
-		"typings": "dist/types/index.d.ts"
+	"types": "./dist/types/index.d.ts",
+	"exports": {
+		"require": "./dist/cjs/index.js",
+		"import": "./dist/esm/index.mjs",
+		"types": "./dist/types/index.d.ts"
 	},
 	"repository": {
 		"type": "git",
@@ -21,14 +22,12 @@
 	},
 	"dependencies": {
 		"core-js": "^3.21.0",
-		"office-ui-fabric-react": "^7.181.1",
-		"styled-components": "^5.3.3"
+		"office-ui-fabric-react": "^7.181.1"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^19.0.6",
-		"@fluentui/react": "^8.52.2",
+		"@essex/scripts": "^20.0.1",
+		"@fluentui/react": "^8.54.0",
 		"@types/react": "^17.0.39",
-		"@types/styled-components": "^5.1.21",
 		"react": "^17.0.2"
 	},
 	"peerDependencies": {

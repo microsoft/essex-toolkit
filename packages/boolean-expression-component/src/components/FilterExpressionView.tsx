@@ -9,11 +9,11 @@ import {
 	FilterClauseGroup,
 	FilterClause,
 	Palette,
-} from '../types'
-import { toggleOperation } from '../utils'
-import { BooleanOperationToggle } from './BooleanOperationToggle'
-import { ChipGroup } from './ChipGroup'
-import { DEFAULT_PALETTE, NO_OP } from './constants'
+} from '../types.js'
+import { toggleOperation } from '../utils.js'
+import { BooleanOperationToggle } from './BooleanOperationToggle.js'
+import { ChipGroup } from './ChipGroup.js'
+import { DEFAULT_PALETTE, NO_OP } from './constants.js'
 
 export const FilterExpressionView: React.FC<{
 	filters: FilterClauseGroup[]
