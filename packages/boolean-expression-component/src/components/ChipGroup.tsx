@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { memo, useMemo, useCallback } from 'react'
-import styled from 'styled-components'
 import {
 	BooleanOperation,
 	FilterClauseGroup,
@@ -11,7 +10,7 @@ import {
 	Palette,
 } from '../types.js'
 import { toggleOperation } from '../utils.js'
-import { BooleanOperationToggle } from './BooleanOperationToggle.js'
+import { BooleanOperationToggle as Toggle } from './BooleanOperationToggle.js'
 import { CloseButton } from './CloseButton.js'
 import { FilterChip } from './FilterChip.js'
 
@@ -31,7 +30,8 @@ export const ChipGroup: React.FC<{
 	const chips = useMemo(
 		() =>
 			filters.map(f => (
-				<Chip
+				/* TODO: restore onHover coloring */
+				<FilterChip
 					key={f.id}
 					value={f.label}
 					onClose={() => onDismiss(f)}
@@ -58,6 +58,7 @@ export const ChipGroup: React.FC<{
 			<Border borderColor={palette.operations[operation]}>
 				{filters.length > 1 ? (
 					<Toggle
+						style={ToggleStyle}
 						operation={operation}
 						disabled={locked}
 						onToggle={handleToggle}
@@ -78,46 +79,67 @@ export const ChipGroup: React.FC<{
 	)
 })
 
+const ToggleStyle: React.CSSProperties = {
+	margin: 4,
+}
+
 const Border: React.FC<{
 	borderColor: string
 }> = memo(function Border({ borderColor, children }) {
 	return <BorderContainer color={borderColor}>{children}</BorderContainer>
 })
 
-const Container = styled.div`
-	padding: 4px;
-	margin-top: 2px;
-	position: relative;
-	height: 38px;
-	display: flex;
-	flex-shrink: 0;
-`
-const OperationText = styled.div<{ backgroundColor: string; color: string }>`
-	position: absolute;
-	color: ${({ color }) => color};
-	left: 14px;
-	top: -4px;
-	font-size: 10px;
-	font-weight: bold;
-	z-index: 2;
-	background-color: ${({ backgroundColor }) => backgroundColor};
-	padding: 0 4px 0 4px;
-`
-const BorderContainer = styled.div<{ color: string }>`
-	border: 2px solid ${({ color }) => color};
-	border-radius: 10px;
-	display: flex;
-	flex-direction: row;
-	position: relative;
-	align-items: center;
-	padding: 0 4px;
-`
-const Toggle = styled(BooleanOperationToggle)`
-	margin: 4px;
-`
-const Chip = styled(FilterChip)`
-	margin: 4px;
-	&:hover {
-		background-color: crimson;
-	}
-`
+const Container: React.FC = memo(function Container({ children }) {
+	return <div style={ContainerStyle}>{children}</div>
+})
+const ContainerStyle: React.CSSProperties = {
+	padding: 4,
+	marginTop: 2,
+	position: 'relative',
+	height: 38,
+	display: 'flex',
+	flexShrink: 0,
+}
+
+const OperationText: React.FC<{ backgroundColor: string; color: string }> =
+	memo(function OperationText({ color, backgroundColor, children }) {
+		return (
+			<div style={{ ...OperationTextStyle, color, backgroundColor }}>
+				{children}
+			</div>
+		)
+	})
+
+const OperationTextStyle: React.CSSProperties = {
+	position: 'absolute',
+	left: 14,
+	top: -4,
+	fontSize: 10,
+	fontWeight: 'bold',
+	zIndex: 2,
+	padding: '0 4px 0 4px',
+}
+
+const BorderContainer: React.FC<{ color: string }> = memo(
+	function BorderContainer({ color, children }) {
+		return (
+			<div
+				style={{
+					...BorderContainerStyle,
+					border: `2px solid ${color}`,
+				}}
+			>
+				{children}
+			</div>
+		)
+	},
+)
+
+const BorderContainerStyle: React.CSSProperties = {
+	borderRadius: 10,
+	display: 'flex',
+	flexDirection: 'row',
+	position: 'relative',
+	alignItems: 'center',
+	padding: '0 4px',
+}
