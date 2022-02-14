@@ -10,7 +10,6 @@ import {
 	PrimaryButton,
 } from '@fluentui/react'
 import { memo, useMemo } from 'react'
-import styled from 'styled-components'
 
 export const DialogConfirm: React.FC<{
 	toggle: () => void
