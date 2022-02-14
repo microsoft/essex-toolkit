@@ -1,6 +1,6 @@
 {
 	"name": "@essex-js-toolkit/graphql-api-commons",
-	"version": "0.0.8",
+	"version": "0.0.9",
 	"main": "src/index.ts",
 	"publishConfig": {
 		"main": "dist/cjs/index.js",
