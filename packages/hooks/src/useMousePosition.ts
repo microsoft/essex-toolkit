@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { debounce } from 'lodash'
+import debounce from 'lodash-es/debounce.js'
 import { useState, MutableRefObject } from 'react'
 import { useEventListener } from './useEventListener'
 

@@ -3,16 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useState, useCallback, useMemo } from 'react'
-import { IEntityDetail } from '..'
-import { CommunityDataProvider } from '../common/dataProviders'
-import { IFilterProps } from './interfaces'
-import { useEntitiesLoadedHandler } from './useEntitiesLoadedHandler'
-import { useLoadEntitiesOnMountEffect } from './useLoadEntitiesOnMountEffect'
-import { useLoadInitialEntitiesHandler } from './useLoadInitialEntitiesHandler'
+import { IEntityDetail } from '../index.js'
+import { CommunityDataProvider } from '../common/dataProviders/index.js'
+import { IFilterProps } from './interfaces.js'
+import { useEntitiesLoadedHandler } from './useEntitiesLoadedHandler.js'
+import { useLoadEntitiesOnMountEffect } from './useLoadEntitiesOnMountEffect.js'
+import { useLoadInitialEntitiesHandler } from './useLoadInitialEntitiesHandler.js'
 import {
 	IEntityLoadParams,
 	useLoadMoreEntitiesHandler,
-} from './useLoadMoreEntitiesHandler'
+} from './useLoadMoreEntitiesHandler.js'
 
 export function useCommunityData(
 	dataProvider: CommunityDataProvider,

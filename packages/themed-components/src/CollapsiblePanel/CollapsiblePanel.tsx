@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { IconButton } from '@fluentui/react'
-import { useCallback, useMemo, useState, useEffect } from 'react'
+import { useThematicFluent } from '@thematic/fluent'
+import { useCallback, useMemo, useState, useEffect, memo } from 'react'
 import { default as AnimateHeight } from 'react-animate-height'
-import styled from 'styled-components'
-import { CollapsiblePanelProps } from './interfaces'
+import { CollapsiblePanelProps } from './interfaces.js'
 
 /**
  * CollapsiblePanel displays a Header and it's child
@@ -23,6 +23,7 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 	onRenderHeader,
 	onHeaderClick,
 }) => {
+	const theme = useThematicFluent()
 	const [expanded, setExpanded] = useState<boolean>(defaultExpanded)
 	const handleClick = useCallback(() => {
 		if (onHeaderClick) {
@@ -58,11 +59,19 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 		if (onRenderHeader) {
 			return onRenderHeader()
 		}
-		return <HeaderLabel>{title}</HeaderLabel>
+		return <div style={HeaderLabelStyle}>{title}</div>
 	}, [onRenderHeader, title])
+	const contentsStyle = useMemo(
+		() => ({
+			border: expanded
+				? `1px solid ${theme.application().faint().hex()}`
+				: 'none',
+		}),
+		[expanded, theme],
+	)
 
 	return (
-		<Container>
+		<div>
 			<HeaderContainer
 				first={first}
 				last={last}
@@ -70,17 +79,24 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 				onClick={handleClick}
 				onKeyDown={handleKeyDown}
 			>
-				<ButtonContainer>
-					<StyledIconButton title="collapse" iconProps={iconProps} />
-				</ButtonContainer>
+				<div style={ButtonContainerStyle}>
+					<IconButton
+						title="collapse"
+						iconProps={iconProps}
+						style={{
+							...IconButtonStyle,
+							color: theme.application().foreground().hex(),
+						}}
+					/>
+				</div>
 				{header}
 			</HeaderContainer>
-			<Contents expanded={expanded}>
+			<div style={contentsStyle}>
 				<AnimateHeight duration={500} height={expanded ? 'auto' : 0}>
 					{children}
 				</AnimateHeight>
-			</Contents>
-		</Container>
+			</div>
+		</div>
 	)
 }
 
@@ -101,49 +117,60 @@ function useIconProps(expanded?: boolean, iconSize = 10) {
 	)
 }
 
-const Container = styled.div``
+const ButtonContainerStyle: React.CSSProperties = {
+	display: 'flex',
+	alignItems: 'center',
+	height: '100%',
+}
 
-const Contents = styled.div<{ expanded: boolean }>`
-	border: ${({ theme, expanded }) => {
-		return expanded ? `1px solid ${theme.application().faint().hex()}` : 'none'
-	}};
-`
-const ButtonContainer = styled.div`
-	display: flex;
-	align-items: center;
-	height: 100%;
-`
+const HeaderLabelStyle: React.CSSProperties = {
+	marginLeft: 4,
+	fontSize: '0.8em',
+	width: '100%',
+}
 
-const HeaderContainer = styled.div<{
+const HeaderContainerStyle: React.CSSProperties = {
+	paddingTop: 2,
+	paddingBottom: 2,
+	display: 'flex',
+	alignContent: 'center',
+	cursor: 'pointer',
+	width: '100%',
+}
+const HeaderContainer: React.FC<{
 	first?: boolean
 	last?: boolean
 	expanded?: boolean
-}>`
-	padding-top: 2px;
-	padding-bottom: 2px;
-	display: flex;
-	align-content: center;
-	cursor: pointer;
-	background: ${({ theme }) => theme.application().faint().hex()};
-	border-top: ${({ theme, first }) =>
-		first ? '' : `1px solid ${theme.application().lowContrast().hex()}`};
-	border-bottom: ${({ theme, last, expanded }) =>
-		last || expanded
-			? `1px solid ${theme.application().lowContrast().hex()}`
-			: ''};
-	width: 100%;
-`
+	onClick: () => void
+	onKeyDown: (ev: React.KeyboardEvent) => void
+}> = memo(function HeaderContainer({
+	first,
+	last,
+	expanded,
+	children,
+	onClick,
+	onKeyDown,
+}) {
+	const theme = useThematicFluent()
+	const style = useMemo<React.CSSProperties>(() => {
+		const background = theme.application().faint().hex()
+		const borderTop = first
+			? ''
+			: `1px solid ${theme.application().lowContrast().hex()}`
+		const borderBottom =
+			last || expanded
+				? `1px solid ${theme.application().lowContrast().hex()}`
+				: ''
+		return { ...HeaderContainerStyle, background, borderTop, borderBottom }
+	}, [first, last, expanded])
+	return (
+		<div style={style} onClick={onClick} onKeyDown={onKeyDown}>
+			{children}
+		</div>
+	)
+})
 
-const HeaderLabel = styled.div`
-	margin-left: 4px;
-	font-size: 0.8em;
-	width: 100%;
-`
-
-// override default button accent color for a more seamless look
-const StyledIconButton = styled(IconButton)`
-	width: 18px;
-	height: 18px;
-	color: ${({ theme }) => theme.application().foreground().hex()};
-	button-border: red;
-`
+const IconButtonStyle: React.CSSProperties = {
+	width: 18,
+	height: 18,
+}

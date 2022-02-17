@@ -4,17 +4,17 @@
  */
 import { max } from 'd3-array'
 import { useMemo } from 'react'
-import { CommunityId, ICommunityDetail } from '..'
-import { ICommunity } from '../common/types'
+import { CommunityId, ICommunityDetail } from '../index.js'
+import { ICommunity } from '../common/types/index.js'
 
 export function useCommunityLevelText(
 	level: number,
 	incrementLevel?: boolean,
 ): string {
-	return useMemo(() => `Level: ${incrementLevel ? level + 1 : level}`, [
-		incrementLevel,
-		level,
-	])
+	return useMemo(
+		() => `Level: ${incrementLevel ? level + 1 : level}`,
+		[incrementLevel, level],
+	)
 }
 
 export function useCommunityLevelCalculator(

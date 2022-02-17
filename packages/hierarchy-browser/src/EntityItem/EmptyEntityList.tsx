@@ -4,8 +4,8 @@
  */
 import { memo } from 'react'
 import styled from 'styled-components'
-import { IEntityDetail } from '..'
-import { IFilterProps } from '../hooks/interfaces'
+import { IEntityDetail } from '../index.js'
+import { IFilterProps } from '../hooks/interfaces.js'
 
 export interface IEmptyEnityList {
 	filterProps: IFilterProps

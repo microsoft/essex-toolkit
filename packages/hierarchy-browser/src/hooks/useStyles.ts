@@ -3,9 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ITextProps, IButtonStyles } from '@fluentui/react'
-import { ICardOverviewSettings } from '..'
-import { headerLabel, subHeaderLabel, tableItems } from '../common/styles'
-import { ITableSettings } from '../types'
+import { ICardOverviewSettings } from '../index.js'
+import {
+	headerLabel,
+	subHeaderLabel,
+	tableItems,
+} from '../common/styles/index.js'
+import { ITableSettings } from '../types/index.js'
 
 const NO_STYLE: React.CSSProperties = Object.freeze({})
 const NO_ICON_STYLE: IButtonStyles = Object.freeze({})

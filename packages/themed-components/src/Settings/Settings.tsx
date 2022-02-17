@@ -4,16 +4,16 @@
  */
 import { Stack, Separator } from '@fluentui/react'
 import { useCallback } from 'react'
-import { BooleanControl } from './BooleanControl'
-import { NumberControl } from './NumberControl'
-import { TextControl } from './TextControl'
+import { BooleanControl } from './BooleanControl.js'
+import { NumberControl } from './NumberControl.js'
+import { TextControl } from './TextControl.js'
 import {
 	SettingConfig,
 	ParsedSettingConfig,
 	SortedSettings,
 	SortedSettingsGrouped,
-} from './interfaces'
-import { parseSettings } from './reader'
+} from './interfaces.js'
+import { parseSettings } from './reader.js'
 
 interface Group {
 	keys: string[]

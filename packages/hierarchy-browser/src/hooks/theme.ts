@@ -5,7 +5,7 @@
 import { ITextProps } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import { useMemo } from 'react'
-import { ICardOverviewSettings } from '../types'
+import { ICardOverviewSettings } from '../types/index.js'
 
 export function useContainerStyle(isOpen: boolean): React.CSSProperties {
 	const theme = useThematic()

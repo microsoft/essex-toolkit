@@ -12,8 +12,8 @@ import {
 	TextField,
 } from '@fluentui/react'
 import { useState, useMemo, useEffect } from 'react'
-import { NumberSpinButton } from '../NumberSpinButton'
-import { HistogramSelect } from './HistogramSelect'
+import { NumberSpinButton } from '../NumberSpinButton/index.js'
+import { HistogramSelect } from './HistogramSelect.js'
 
 export interface ControlledHistogramFilterProps {
 	name: string

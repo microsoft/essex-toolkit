@@ -4,16 +4,17 @@
  */
 import { Spinner } from '@fluentui/react'
 import styled from 'styled-components'
-import CommunityEdgeList from '../../NeighborList/CommunityEdgeList'
-import { ScrollArea } from '../../ScollArea'
-import { CommunityDataProvider } from '../../common/dataProviders'
-import { useThemesAccentStyle } from '../../hooks/theme'
-import { EntityId, ITableSettings } from '../../types'
-import { CommunityTable } from '../CommunityTable'
-import { TableExpander } from '../TableExpander'
-import { useAdjacentCommunityData } from './hooks/useAdjacentCommunityData'
-import { useEdgeSelection } from './hooks/useEdgeSelection'
-import { useExpandedPanel } from './hooks/useExpandedPanel'
+import CommunityEdgeList from '../../NeighborList/CommunityEdgeList.js'
+import { ScrollArea } from '../../ScollArea/index.js'
+import { CommunityDataProvider } from '../../common/dataProviders/index.js'
+import { useThemesAccentStyle } from '../../hooks/theme.js'
+import { EntityId, ITableSettings } from '../../types/index.js'
+import { CommunityTable } from '../CommunityTable.js'
+import { TableExpander } from '../TableExpander.js'
+import { useAdjacentCommunityData } from './hooks/useAdjacentCommunityData.js'
+import { useEdgeSelection } from './hooks/useEdgeSelection.js'
+import { useExpandedPanel } from './hooks/useExpandedPanel.js'
+
 const ENTITY_LOADER_MSG = 'Fetching entity data...'
 
 interface IAdajacentCommunities {

@@ -6,8 +6,8 @@ import { Dimensions } from '@essex-js-toolkit/hooks'
 import { SelectionState, Theme, ThemeVariant } from '@thematic/core'
 import { scaleLinear, ScaleLinear } from 'd3-scale'
 import { useCallback, useMemo } from 'react'
-import { INeighborCommunityDetail } from '../..'
-import { useMaxEdges } from './useMaxEdges'
+import { INeighborCommunityDetail } from '../../index.js'
+import { useMaxEdges } from './useMaxEdges.js'
 
 export interface IMeasurements {
 	size: number

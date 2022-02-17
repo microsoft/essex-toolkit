@@ -3,12 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 // import { useState } from 'react'
-import { INeighborCommunityDetail } from '../../..'
-import { CommunityDataProvider } from '../../../common/dataProviders'
-import { useLoadCommunitiesOnMountEffect } from '../../../hooks/useLoadEntitiesOnMountEffect'
-import { useLoadInitialCommunities } from '../../../hooks/useLoadInitialCommunities'
+import { INeighborCommunityDetail } from '../../../index.js'
+import { CommunityDataProvider } from '../../../common/dataProviders/index.js'
+import { useLoadCommunitiesOnMountEffect } from '../../../hooks/useLoadEntitiesOnMountEffect.js'
+import { useLoadInitialCommunities } from '../../../hooks/useLoadInitialCommunities.js'
 // import { useLoadMoreCommunitiesHandler } from '../../../hooks/useLoadMoreCommunitiesHandler'
-import { useNeighborsLoadedHandler } from './useNeighborsLoadedHandler'
+import { useNeighborsLoadedHandler } from './useNeighborsLoadedHandler.js'
 
 export function useAdjacentCommunityData(
 	dataProvider: CommunityDataProvider,
@@ -22,12 +22,8 @@ export function useAdjacentCommunityData(
 ] {
 	// const [moreToLoad, setMoreToLoad] = useState(true)
 
-	const [
-		communities,
-		isLoading,
-		communitiesLoaded,
-		handleCommunitiesLoaded,
-	] = useNeighborsLoadedHandler()
+	const [communities, isLoading, communitiesLoaded, handleCommunitiesLoaded] =
+		useNeighborsLoadedHandler()
 
 	const loadInitialCommunities = useLoadInitialCommunities(
 		handleCommunitiesLoaded,

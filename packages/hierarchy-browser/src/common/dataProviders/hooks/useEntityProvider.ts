@@ -8,20 +8,20 @@ import {
 	IHierarchyDataResponse,
 	IEntityDetail,
 	ILoadEntitiesAsync,
-} from '../../..'
-import { INeighborCommunityDetail } from '../../../types'
+} from '../../../index.js'
+import { INeighborCommunityDetail } from '../../../types/index.js'
 import {
 	createEntityMap,
 	getStaticEntities,
 	isEntitiesAsync,
-} from '../../../utils/utils'
+} from '../../../utils/utils.js'
 import {
 	ENTITY_TYPE,
 	ICommunitiesAsyncHook,
 	ICommunity,
 	IEntityCounter,
 	IEntityMap,
-} from '../../types'
+} from '../../types/index.js'
 
 export const useEntityProvider = (
 	communities: ICommunity[],

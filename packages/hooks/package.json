@@ -2,11 +2,11 @@
 	"name": "@essex-js-toolkit/hooks",
 	"version": "3.0.2",
 	"description": "A set of hooks for use with react",
+	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
-		"main": "dist/cjs/index.js",
-		"module": "dist/esm/index.js",
-		"typings": "dist/types/index.d.ts"
+		"main": "dist/index.js",
+		"types": "dist/index.d.ts"
 	},
 	"repository": "https://github.com/microsoft/essex-js-toolkit",
 	"author": "David Tittsworth <datittsw@microsoft.com>",
@@ -18,15 +18,16 @@
 	},
 	"dependencies": {
 		"@essex-js-toolkit/toolbox": "workspace:packages/toolbox",
-		"core-js": "^3.21.0",
-		"lodash": "^4.17.21"
+		"core-js": "^3.21.1",
+		"lodash-es": "^4.17.21"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.0.1",
+		"@essex/scripts": "^20.2.1",
 		"@testing-library/react": "^12.1.2",
 		"@types/jest": "^27.4.0",
 		"@types/lodash": "^4.14.178",
-		"@types/node": "^17.0.16",
+		"@types/lodash-es": "^4.17.6",
+		"@types/node": "^17.0.18",
 		"@types/react": "^17.0.39",
 		"@types/react-dom": "^17.0.11",
 		"@types/react-test-renderer": "^17.0.1",

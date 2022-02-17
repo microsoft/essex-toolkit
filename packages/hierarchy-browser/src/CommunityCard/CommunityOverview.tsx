@@ -5,20 +5,20 @@
 import { IconButton, Spinner, TooltipHost, Text } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
-import { CommunityId, IControls, IEntityDetail } from '..'
-import { MagBar } from '../MagBar'
-import { paddingLeft } from '../common/styles'
-import { IFilterProps } from '../hooks/interfaces'
-import { useThemesStyle } from '../hooks/theme'
+import { CommunityId, IControls, IEntityDetail } from '../index.js'
+import { MagBar } from '../MagBar/index.js'
+import { paddingLeft } from '../common/styles/index.js'
+import { IFilterProps } from '../hooks/interfaces.js'
+import { useThemesStyle } from '../hooks/theme.js'
 import {
 	useCommunityLevelText,
 	useCommunityText,
-} from '../hooks/useCommunityDetails'
-import { useCommunityDownload } from '../hooks/useCommunityDownload'
-import { useControls } from '../hooks/useControls'
-import { IEntityLoadParams } from '../hooks/useLoadMoreEntitiesHandler'
-import { useOverviewStyles } from '../hooks/useStyles'
-import { ICardOverviewSettings } from '../types'
+} from '../hooks/useCommunityDetails.js'
+import { useCommunityDownload } from '../hooks/useCommunityDownload.js'
+import { useControls } from '../hooks/useControls.js'
+import { IEntityLoadParams } from '../hooks/useLoadMoreEntitiesHandler.js'
+import { useOverviewStyles } from '../hooks/useStyles.js'
+import { ICardOverviewSettings } from '../types/index.js'
 
 export interface ICommunityOverviewProps {
 	communityId: CommunityId

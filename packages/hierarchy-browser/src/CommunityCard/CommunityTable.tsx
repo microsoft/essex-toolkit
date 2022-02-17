@@ -5,10 +5,15 @@
 import { Text } from '@fluentui/react'
 import { memo, useMemo, useCallback } from 'react'
 import styled from 'styled-components'
-import { EntityItem } from '../EntityItem/EntityItem'
-import { textStyle } from '../common/styles'
-import { useTableStyles } from '../hooks/useStyles'
-import { CommunityId, ITableSettings, EntityId, IEntityDetail } from '../types'
+import { EntityItem } from '../EntityItem/EntityItem.js'
+import { textStyle } from '../common/styles/index.js'
+import { useTableStyles } from '../hooks/useStyles.js'
+import {
+	CommunityId,
+	ITableSettings,
+	EntityId,
+	IEntityDetail,
+} from '../types/index.js'
 
 export interface ICommunityTableProps {
 	entities: IEntityDetail[]

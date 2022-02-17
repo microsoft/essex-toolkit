@@ -10,17 +10,17 @@ import {
 	ILoadNeighborCommunities,
 	IOnSelectionChange,
 	ISettings,
-} from '..'
-import { EmptyEntityList } from '../EntityItem/EmptyEntityList'
-import { ScrollArea } from '../ScollArea'
-import { CommunityDataProvider } from '../common/dataProviders'
-import { useContainerStyle } from '../hooks/theme'
-import { useCommunityData } from '../hooks/useCommunityData'
-import { useCommunitySizePercent } from '../hooks/useCommunitySizePercent'
-import { useUpdatedCommunityProvider } from '../hooks/useUpdatedCommunityProvider'
-import { AdjacentCommunities } from './AdjacentCommunities'
-import { CommunityOverview } from './CommunityOverview'
-import { CommunityTable } from './CommunityTable'
+} from '../index.js'
+import { EmptyEntityList } from '../EntityItem/EmptyEntityList.js'
+import { ScrollArea } from '../ScollArea/index.js'
+import { CommunityDataProvider } from '../common/dataProviders/index.js'
+import { useContainerStyle } from '../hooks/theme.js'
+import { useCommunityData } from '../hooks/useCommunityData.js'
+import { useCommunitySizePercent } from '../hooks/useCommunitySizePercent.js'
+import { useUpdatedCommunityProvider } from '../hooks/useUpdatedCommunityProvider.js'
+import { AdjacentCommunities } from './AdjacentCommunities/index.js'
+import { CommunityOverview } from './CommunityOverview.js'
+import { CommunityTable } from './CommunityTable.js'
 
 export interface ICommunityCardProps {
 	maxSize: number

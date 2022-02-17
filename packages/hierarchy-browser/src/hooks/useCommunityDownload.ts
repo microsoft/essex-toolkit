@@ -5,10 +5,10 @@
 import { BaseButton, Button } from '@fluentui/react'
 import { useState, useCallback } from 'react'
 
-import { IEntityDetail } from '..'
-import { CommunityId } from '../types'
-import { exportCSVFile } from '../utils/utils'
-import { IEntityLoadParams } from './useLoadMoreEntitiesHandler'
+import { IEntityDetail } from '../index.js'
+import { CommunityId } from '../types/index.js'
+import { exportCSVFile } from '../utils/utils.js'
+import { IEntityLoadParams } from './useLoadMoreEntitiesHandler.js'
 
 export const downloadCommunityMemebers = async (
 	communityId: CommunityId,
