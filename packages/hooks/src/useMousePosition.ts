@@ -4,7 +4,7 @@
  */
 import debounce from 'lodash-es/debounce.js'
 import { useState, MutableRefObject } from 'react'
-import { useEventListener } from './useEventListener'
+import { useEventListener } from './useEventListener.js'
 
 interface Position {
 	x: number

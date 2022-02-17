@@ -12,7 +12,7 @@
 	"author": "Nathan Evans <naevans@microsoft.com>",
 	"license": "MIT",
 	"scripts": {
-		"build": "essex build",
+		"build": "essex build --skipExportCheck",
 		"clean": "essex clean",
 		"watch": "essex watch"
 	},
