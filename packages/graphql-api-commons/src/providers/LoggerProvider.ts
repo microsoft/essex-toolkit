@@ -4,9 +4,9 @@
  */
 import pino, { Logger } from 'pino'
 import { inject, singleton } from 'tsyringe'
-import { IBaseConfiguration } from '../configuration'
-import { BaseInjectorNames } from '../injectors'
-import { Provider } from './Provider'
+import { IBaseConfiguration } from '../configuration/index.js'
+import { BaseInjectorNames } from '../injectors.js'
+import { Provider } from './Provider.js'
 
 @singleton()
 export class LoggerProvider<TConfiguration extends IBaseConfiguration>

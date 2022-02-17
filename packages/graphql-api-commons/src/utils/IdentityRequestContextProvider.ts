@@ -8,7 +8,7 @@ import {
 	IBaseConfiguration,
 	IRequestAppContext,
 	RequestContextProvider,
-} from '..'
+} from '../index.js'
 
 export interface IdentityRequestContext<Identity> {
 	identity: Identity | null
