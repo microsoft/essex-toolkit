@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { nameToLabel } from './lineup'
+import { nameToLabel } from './lineup.js'
+
 type LineUp = any
 /**
  * Type of filter to apply.
