@@ -2,16 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { SpinButton } from '@fluentui/react'
+import { SpinButton, Position } from '@fluentui/react'
 import { useCallback } from 'react'
-
-// hack: copied from 'office-ui-fabric-react/lib/utilities/positioning.js'
-declare enum Position {
-	top = 0,
-	bottom = 1,
-	start = 2,
-	end = 3,
-}
 export interface NumberSpinButtonProps {
 	label: string
 	value: number

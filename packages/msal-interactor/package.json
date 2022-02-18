@@ -7,6 +7,7 @@
 		"main": "dist/index.js",
 		"types": "dist/index.d.ts"
 	},
+	"sideEffects": false,
 	"repository": "https://github.com/microsoft/essex-js-toolkit",
 	"author": "Chris Trevino <chtrevin@microsoft.com>",
 	"contributors": [
@@ -19,16 +20,10 @@
 		"clean": "essex clean",
 		"watch": "essex watch"
 	},
-	"browserslist": [
-		"last 2 versions",
-		"not IE 11",
-		"not dead"
-	],
 	"devDependencies": {
 		"@azure/msal-browser": "^2.22.0",
-		"@essex/scripts": "^20.3.0",
-		"@types/debug": "^4.1.7",
-		"core-js": "^3.21.1"
+		"@essex/scripts": "^20.3.2",
+		"@types/debug": "^4.1.7"
 	},
 	"dependencies": {
 		"debug": "^4.3.3"

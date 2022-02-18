@@ -9,6 +9,7 @@
 		"main": "dist/index.js",
 		"types": "dist/index.d.ts"
 	},
+	"sideEffects": false,
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/microsoft/essex-js-toolkit.git",
@@ -19,15 +20,11 @@
 		"clean": "essex clean",
 		"watch": "essex watch"
 	},
-	"dependencies": {
-		"office-ui-fabric-react": "^7.183.0"
-	},
 	"devDependencies": {
-		"@essex/scripts": "^20.3.0",
+		"@essex/scripts": "^20.3.2",
 		"@fluentui/react": "^8.55.3",
 		"@types/react": "^17.0.39",
 		"@types/react-dom": "^17.0.11",
-		"core-js": "^3.21.1",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2"
 	},

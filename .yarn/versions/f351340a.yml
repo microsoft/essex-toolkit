@@ -1,0 +1,13 @@
+releases:
+  "@essex-js-toolkit/boolean-expression-component": patch
+  "@essex-js-toolkit/graphql-api-commons": patch
+  "@essex-js-toolkit/hierarchy-browser": patch
+  "@essex-js-toolkit/hooks": patch
+  "@essex-js-toolkit/stories": patch
+  "@essex-js-toolkit/thematic-lineup": patch
+  "@essex-js-toolkit/themed-components": patch
+  "@essex-js-toolkit/toolbox": patch
+  "@essex/msal-interactor": patch
+
+declined:
+  - "@essex-js-toolkit/dev"

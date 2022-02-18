@@ -8,6 +8,7 @@
 		"main": "dist/index.js",
 		"types": "dist/index.d.ts"
 	},
+	"sideEffects": false,
 	"repository": "https://github.com/microsoft/essex-js-toolkit",
 	"author": "Nathan Evans <naevans@microsoft.com>",
 	"license": "MIT",
@@ -24,7 +25,6 @@
 		"@types/d3-brush": "^3.0.1",
 		"@types/d3-scale": "^4.0.2",
 		"@types/d3-selection": "^3.0.2",
-		"core-js": "^3.21.1",
 		"d3-array": "^3.1.1",
 		"d3-axis": "^3.0.0",
 		"d3-brush": "^3.0.0",
@@ -33,15 +33,15 @@
 		"react-animate-height": "^2.0.23"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.3.0",
+		"@essex/scripts": "^20.3.2",
 		"@fluentui/font-icons-mdl2": "^8.1.24",
 		"@fluentui/react": "^8.55.3",
 		"@fluentui/theme": "^2.4.10",
-		"@thematic/color": "^2.0.1",
-		"@thematic/core": "^2.0.1",
-		"@thematic/d3": "^2.0.1",
-		"@thematic/fluent": "^3.0.1",
-		"@thematic/react": "^2.0.1",
+		"@thematic/color": "^2.0.4",
+		"@thematic/core": "^2.0.4",
+		"@thematic/d3": "^2.0.4",
+		"@thematic/fluent": "^3.0.4",
+		"@thematic/react": "^2.0.4",
 		"@types/d3": "^7.1.0",
 		"@types/d3-axis": "^3.0.1",
 		"@types/node": "^17.0.18",
@@ -51,8 +51,6 @@
 		"@types/react-test-renderer": "^17.0.1",
 		"@uifabric/icons": "^7.6.2",
 		"@uifabric/utilities": "^7.33.5",
-		"core-js": "^3.21.1",
-		"office-ui-fabric-react": "^7.183.0",
 		"prop-types": "^15.8.1",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2"
@@ -69,7 +67,6 @@
 		"@types/node": "*",
 		"@types/react": ">= 16.9",
 		"@uifabric/icons": ">= 7.3.38",
-		"office-ui-fabric-react": "*",
 		"react": ">= 16.8.6",
 		"react-dom": ">= 16.8.6"
 	}
