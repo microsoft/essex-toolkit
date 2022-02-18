@@ -19,9 +19,6 @@
 		"clean": "essex clean",
 		"watch": "essex watch"
 	},
-	"dependencies": {
-		"office-ui-fabric-react": "^7.183.1"
-	},
 	"devDependencies": {
 		"@essex/scripts": "^20.3.1",
 		"@fluentui/react": "^8.55.3",
