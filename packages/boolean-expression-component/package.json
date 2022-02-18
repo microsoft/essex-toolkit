@@ -21,7 +21,7 @@
 		"watch": "essex watch"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.3.1",
+		"@essex/scripts": "^20.3.2",
 		"@fluentui/react": "^8.55.3",
 		"@types/react": "^17.0.39",
 		"@types/react-dom": "^17.0.11",

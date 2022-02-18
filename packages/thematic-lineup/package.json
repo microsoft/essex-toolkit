@@ -18,7 +18,7 @@
 		"watch": "essex watch"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.3.1",
+		"@essex/scripts": "^20.3.2",
 		"@thematic/color": "^2.0.4",
 		"@thematic/core": "^2.0.4",
 		"@thematic/d3": "^2.0.4",
