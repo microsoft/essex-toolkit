@@ -20,10 +20,10 @@
 		"watch": "essex watch"
 	},
 	"dependencies": {
-		"office-ui-fabric-react": "^7.183.0"
+		"office-ui-fabric-react": "^7.183.1"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.3.0",
+		"@essex/scripts": "^20.3.1",
 		"@fluentui/react": "^8.55.3",
 		"@types/react": "^17.0.39",
 		"@types/react-dom": "^17.0.11",

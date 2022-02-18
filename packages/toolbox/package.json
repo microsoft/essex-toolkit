@@ -8,6 +8,7 @@
 		"main": "dist/index.js",
 		"types": "dist/index.d.ts"
 	},
+	"sideEffects": false,
 	"repository": "https://github.com/microsoft/essex-js-toolkit",
 	"author": "David Tittsworth <datittsw@microsoft.com>",
 	"license": "MIT",
@@ -19,7 +20,7 @@
 		"core-js": "^3.21.1"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.3.0",
+		"@essex/scripts": "^20.3.1",
 		"core-js": "^3.21.1",
 		"regenerator-runtime": "^0.13.9"
 	}

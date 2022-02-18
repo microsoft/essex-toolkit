@@ -20,12 +20,12 @@
 		"core-js": "^3.21.1"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.3.0",
-		"@thematic/color": "^2.0.1",
-		"@thematic/core": "^2.0.1",
-		"@thematic/d3": "^2.0.1",
-		"@thematic/fluent": "^3.0.1",
-		"@thematic/react": "^2.0.1",
+		"@essex/scripts": "^20.3.1",
+		"@thematic/color": "^2.0.4",
+		"@thematic/core": "^2.0.4",
+		"@thematic/d3": "^2.0.4",
+		"@thematic/fluent": "^3.0.4",
+		"@thematic/react": "^2.0.4",
 		"@types/node": "^17.0.18",
 		"@types/react": "^17.0.39",
 		"@types/react-dom": "^17.0.11",
