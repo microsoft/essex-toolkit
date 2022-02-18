@@ -1,0 +1,11 @@
+releases:
+  "@essex-js-toolkit/boolean-expression-component": major
+  "@essex-js-toolkit/dev": major
+  "@essex-js-toolkit/graphql-api-commons": major
+  "@essex-js-toolkit/hierarchy-browser": major
+  "@essex-js-toolkit/hooks": major
+  "@essex-js-toolkit/stories": major
+  "@essex-js-toolkit/thematic-lineup": major
+  "@essex-js-toolkit/themed-components": major
+  "@essex-js-toolkit/toolbox": major
+  "@essex/msal-interactor": major

@@ -6,9 +6,9 @@ import { Text } from '@fluentui/react'
 import { useCallback } from 'react'
 
 import styled from 'styled-components'
-import { EntityId, IEntityDetail, ITableSettings } from '..'
-import { textStyle, tableItems } from '../common/styles'
-import { useRowStyle } from './hooks/useRowStyle'
+import { textStyle, tableItems } from '../common/styles/index.js'
+import { EntityId, IEntityDetail, ITableSettings } from '../index.js'
+import { useRowStyle } from './hooks/useRowStyle.js'
 const NO_STYLE: React.CSSProperties = Object.freeze({})
 
 export interface IEntityItemProps {

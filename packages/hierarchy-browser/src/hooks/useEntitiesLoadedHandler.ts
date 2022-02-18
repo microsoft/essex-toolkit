@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useState, useCallback } from 'react'
-import { IEntityDetail } from '..'
+import { IEntityDetail } from '../index.js'
 
 export function useEntitiesLoadedHandler(
 	initialLoadingState: boolean,

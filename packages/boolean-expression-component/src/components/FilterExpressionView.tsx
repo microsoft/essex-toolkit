@@ -3,17 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { memo, useCallback, useRef } from 'react'
-import styled from 'styled-components'
 import {
 	BooleanOperation,
 	FilterClauseGroup,
 	FilterClause,
 	Palette,
-} from '../types'
-import { toggleOperation } from '../utils'
-import { BooleanOperationToggle } from './BooleanOperationToggle'
-import { ChipGroup } from './ChipGroup'
-import { DEFAULT_PALETTE, NO_OP } from './constants'
+} from '../types.js'
+import { toggleOperation } from '../utils.js'
+import { BooleanOperationToggle as Toggle } from './BooleanOperationToggle.js'
+import { ChipGroup } from './ChipGroup.js'
+import { DEFAULT_PALETTE, NO_OP } from './constants.js'
 
 export const FilterExpressionView: React.FC<{
 	filters: FilterClauseGroup[]
@@ -39,10 +38,11 @@ export const FilterExpressionView: React.FC<{
 	)
 
 	return (
-		<ChipContainer ref={chipContainerRef}>
+		<div ref={chipContainerRef} style={ChipContainerStyle}>
 			{/* Global Boolean Operation */}
 			{filters.length <= 1 ? null : (
 				<Toggle
+					style={ToggleStyle}
 					operation={operation}
 					onToggle={handleToggleGlobalOperation}
 					palette={palette}
@@ -59,36 +59,20 @@ export const FilterExpressionView: React.FC<{
 					palette={palette}
 				/>
 			))}
-		</ChipContainer>
+		</div>
 	)
 })
 
-const Toggle = styled(BooleanOperationToggle)`
-	margin: 3px 4px 0 4px;
-`
-const ChipContainer = styled.div`
-	display: flex;
-	padding: 1px;
-	flex-direction: row;
-	height: 100%;
-	flex: 1 1 auto;
-	overflow-x: auto;
-	overflow-y: hidden;
-	align-items: center;
-
-	::-webkit-scrollbar {
-		height: 3px;
-		width: 3px;
-		background: transparent;
-	}
-	::-webkit-scrollbar-thumb {
-		background: #777;
-		border-radius: 1ex;
-		box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
-		-webkit-border-radius: 1ex;
-		-webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
-	}
-	::-webkit-scrollbar-corner {
-		background: #000;
-	}
-`
+const ToggleStyle: React.CSSProperties = {
+	margin: '3px 4px 0 4px',
+}
+const ChipContainerStyle: React.CSSProperties = {
+	display: 'flex',
+	padding: 1,
+	flexDirection: 'row',
+	height: '100%',
+	flex: '1 1 auto',
+	overflowX: 'auto',
+	overflowY: 'hidden',
+	alignItems: 'center',
+}

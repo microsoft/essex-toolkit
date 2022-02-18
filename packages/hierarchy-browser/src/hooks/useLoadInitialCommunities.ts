@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useCallback } from 'react'
-import { INeighborCommunityDetail } from '..'
 import {
 	CommunityDataProvider,
 	DEFAULT_LOAD_COUNT,
-} from '../common/dataProviders'
+} from '../common/dataProviders/index.js'
+import { INeighborCommunityDetail } from '../index.js'
 
 export function useLoadInitialCommunities(
 	handleCommunitiesLoaded: (

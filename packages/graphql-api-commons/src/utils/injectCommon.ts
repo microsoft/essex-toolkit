@@ -9,7 +9,7 @@ import {
 	BaseInjectorNames,
 	LoggerProvider,
 	RequestContextProvider,
-} from '..'
+} from '../index.js'
 
 export function registerAppBuilder(ctx: DependencyContainer = container): void {
 	ctx.register(BaseInjectorNames.AppBuilder, { useClass: AppBuilder })

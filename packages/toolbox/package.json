@@ -2,11 +2,11 @@
 	"name": "@essex-js-toolkit/toolbox",
 	"version": "2.0.3",
 	"description": "A set of general purpose utils",
+	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
-		"main": "dist/cjs/index.js",
-		"module": "dist/esm/index.js",
-		"typings": "dist/types/index.d.ts"
+		"main": "dist/index.js",
+		"types": "dist/index.d.ts"
 	},
 	"repository": "https://github.com/microsoft/essex-js-toolkit",
 	"author": "David Tittsworth <datittsw@microsoft.com>",
@@ -16,10 +16,11 @@
 		"build": "essex build"
 	},
 	"dependencies": {
-		"core-js": "^3.21.0"
+		"core-js": "^3.21.1"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^19.0.6",
+		"@essex/scripts": "^20.3.0",
+		"core-js": "^3.21.1",
 		"regenerator-runtime": "^0.13.9"
 	}
 }

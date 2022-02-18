@@ -2,11 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Slider } from '@fluentui/react'
-import { Position } from 'office-ui-fabric-react/lib/utilities/positioning'
+import { Slider, Position } from '@fluentui/react'
 import { useCallback } from 'react'
-import { NumberSpinButton } from '../NumberSpinButton'
-import { ControlType, ControlProps } from './interfaces'
+import { NumberSpinButton } from '../NumberSpinButton/index.js'
+import { ControlType, ControlProps } from './interfaces.js'
 
 /**
  * NumberControl creates either a thematic styled NumberSpinButton or Slider

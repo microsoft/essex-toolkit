@@ -2,4 +2,4 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export { AdjacentCommunities } from './AdjacentCommunities'
+export { AdjacentCommunities } from './AdjacentCommunities.js'

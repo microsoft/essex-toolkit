@@ -8,9 +8,9 @@ import fastify, { FastifyInstance, FastifyRequest } from 'fastify'
 import { GraphQLSchema } from 'graphql'
 import { Logger } from 'pino'
 import { inject, singleton } from 'tsyringe'
-import { IBaseConfiguration } from '../configuration'
-import { BaseInjectorNames } from '../injectors'
-import { IBuiltAppContext, IRequestAppContext } from '.'
+import { IBaseConfiguration } from '../configuration/index.js'
+import { BaseInjectorNames } from '../injectors.js'
+import { IBuiltAppContext, IRequestAppContext } from './index.js'
 
 export type PreRunCb = (app: FastifyInstance) => Promise<void>
 

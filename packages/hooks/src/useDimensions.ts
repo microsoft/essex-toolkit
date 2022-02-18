@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useState, MutableRefObject, useEffect } from 'react'
-import { Dimensions } from './interfaces'
+import { Dimensions } from './interfaces/index.js'
 
 /**
  * A hook for getting the dimensions of the given element. This hook also updates when the given element resizes.

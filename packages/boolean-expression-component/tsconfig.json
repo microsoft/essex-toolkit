@@ -3,7 +3,8 @@
 	"compilerOptions": {
 		"allowSyntheticDefaultImports": true,
 		"resolveJsonModule": true,
-		"outDir": "lib"
+		"outDir": "lib",
+		"jsx": "react-jsx"
 	},
 	"include": ["src/index.ts"]
 }

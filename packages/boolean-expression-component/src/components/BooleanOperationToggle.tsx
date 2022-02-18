@@ -2,10 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { CSSProperties, memo } from 'react'
-import styled from 'styled-components'
-import { BooleanOperation, Palette } from '../types'
-import { DEFAULT_PALETTE, NO_OP } from './constants'
+import { CSSProperties, memo, FC } from 'react'
+import { BooleanOperation, Palette } from '../types.js'
+import { DEFAULT_PALETTE, NO_OP } from './constants.js'
 
 export const BooleanOperationToggle: React.FC<{
 	className?: string
@@ -42,24 +41,48 @@ const labels: Record<BooleanOperation, string> = {
 }
 
 interface ColorProps {
+	className?: string
+	style?: CSSProperties
 	color: string
+	onClick: () => void
 }
-const Button = styled.button`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	height: 20px;
-	background-color: transparent;
-	color: ${({ color }: ColorProps) => color};
-	border: 1px solid ${({ color }: ColorProps) => color};
-	border-radius: 5px;
-	padding: 0 3px;
-	position: relative;
-	outline: none;
-`
-const Text = styled.div`
-	vertical-align: middle;
-	font-size: 14px;
-	font-weight: 400;
-`
+
+const Button: FC<ColorProps> = memo(function Button({
+	color,
+	children,
+	style,
+	className,
+	onClick,
+}) {
+	return (
+		<button
+			className={className}
+			style={{ ...ButtonStyle, color, border: `1px solid ${color}`, ...style }}
+			onClick={onClick}
+		>
+			{children}
+		</button>
+	)
+})
+
+const ButtonStyle: CSSProperties = {
+	display: 'flex',
+	flexDirection: 'row',
+	justifyContent: 'center',
+	alignItems: 'center',
+	height: 20,
+	backgroundColor: 'transparent',
+	borderRadius: 5,
+	padding: '0 3px',
+	position: 'relative',
+	outline: 'none',
+}
+
+const Text: FC = memo(function Text({ children }) {
+	return <div style={TextStyle}>{children}</div>
+})
+const TextStyle: CSSProperties = {
+	verticalAlign: 'middle',
+	fontSize: 14,
+	fontWeight: 400,
+}

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useState, useCallback } from 'react'
-import { useContainerStyle } from '../../../hooks/theme'
+import { useContainerStyle } from '../../../hooks/theme.js'
 
 interface IEdgePanelHook {
 	isOpen: boolean

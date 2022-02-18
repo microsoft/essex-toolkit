@@ -10,15 +10,15 @@ import {
 	useLayoutEffect,
 } from 'react'
 import styled from 'styled-components'
-import { CommunityCard } from './CommunityCard/CommunityCard'
-import { useEntityProvider } from './common/dataProviders/hooks/useEntityProvider'
-import { IDataProvidersCache, ICardOrder } from './common/types/types'
+import { CommunityCard } from './CommunityCard/CommunityCard.js'
+import { useEntityProvider } from './common/dataProviders/hooks/useEntityProvider.js'
+import { IDataProvidersCache, ICardOrder } from './common/types/types.js'
 import {
 	useCommunityLevelCalculator,
 	useCommunitySizeCalculator,
-} from './hooks/useCommunityDetails'
-import { useCommunityProvider } from './hooks/useCommunityProvider'
-import { useSettings } from './hooks/useSettings'
+} from './hooks/useCommunityDetails.js'
+import { useCommunityProvider } from './hooks/useCommunityProvider.js'
+import { useSettings } from './hooks/useSettings.js'
 import {
 	EntityId,
 	ICommunityDetail,
@@ -31,8 +31,8 @@ import {
 	INeighborCommunityDetail,
 	IOnSelectionChange,
 	ISettings,
-} from './types'
-import { isEntitiesAsync } from './utils/utils'
+} from './types/index.js'
+import { isEntitiesAsync } from './utils/utils.js'
 
 export interface IHierarchyBrowserProps {
 	communities: ICommunityDetail[]

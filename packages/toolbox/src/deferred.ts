@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Deferred } from './interfaces/Deferred'
+import { Deferred } from './interfaces/Deferred.js'
 /**
  * Represents a deferred object, which can be resolved
 /*

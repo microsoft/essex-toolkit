@@ -7,7 +7,7 @@ import {
 	SettingConfig,
 	ParsedSettingConfig,
 	ControlType,
-} from './interfaces'
+} from './interfaces.js'
 
 // this follows the label convention of Fluent, which is that the first word
 // is capitalized and the rest are lowercase

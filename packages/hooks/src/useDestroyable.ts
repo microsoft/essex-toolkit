@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useState, useCallback } from 'react'
-import { Destroyable } from './interfaces'
+import { Destroyable } from './interfaces/index.js'
 
 /**
  * A hook for using a destroyable thing, so when the value changes

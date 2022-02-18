@@ -5,8 +5,8 @@
 import { Spinner } from '@fluentui/react'
 import { memo, ReactNode } from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
-import { IEntityDetail } from '..'
-import { IEntityLoadParams } from '../hooks/useLoadMoreEntitiesHandler'
+import { IEntityLoadParams } from '../hooks/useLoadMoreEntitiesHandler.js'
+import { IEntityDetail } from '../index.js'
 
 export interface IScrollAreaProps {
 	loadMore: (

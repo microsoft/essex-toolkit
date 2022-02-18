@@ -7,12 +7,12 @@ import { Text } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import { useCallback, memo, useRef } from 'react'
 import styled from 'styled-components'
-import { INeighborCommunityDetail, ITableSettings } from '..'
-import { textStyle } from '../common/styles'
-import { useTableStyles } from '../hooks/useStyles'
-import { Bar } from './Bar'
-import { useRowElements } from './hooks/useRowsElements'
-import { useSortedNeighbors } from './hooks/useSortedNeighbors'
+import { textStyle } from '../common/styles/index.js'
+import { useTableStyles } from '../hooks/useStyles.js'
+import { INeighborCommunityDetail, ITableSettings } from '../index.js'
+import { Bar } from './Bar.js'
+import { useRowElements } from './hooks/useRowsElements.js'
+import { useSortedNeighbors } from './hooks/useSortedNeighbors.js'
 
 const SUBHEADERS = ['community', 'connections', 'members']
 

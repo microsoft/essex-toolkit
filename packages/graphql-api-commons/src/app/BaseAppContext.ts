@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IBaseConfiguration } from '../configuration'
+import { IBaseConfiguration } from '../configuration/index.js'
 
 export interface IBuiltAppContext<
 	Configuration extends IBaseConfiguration,

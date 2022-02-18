@@ -1,11 +1,11 @@
 {
 	"name": "@essex/msal-interactor",
 	"version": "3.0.4",
+	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
-		"main": "dist/cjs/index.js",
-		"module": "dist/esm/index.js",
-		"typings": "dist/types/index.d.ts"
+		"main": "dist/index.js",
+		"types": "dist/index.d.ts"
 	},
 	"repository": "https://github.com/microsoft/essex-js-toolkit",
 	"author": "Chris Trevino <chtrevin@microsoft.com>",
@@ -25,9 +25,10 @@
 		"not dead"
 	],
 	"devDependencies": {
-		"@azure/msal-browser": "^2.21.0",
-		"@essex/scripts": "^19.0.6",
-		"@types/debug": "^4.1.7"
+		"@azure/msal-browser": "^2.22.0",
+		"@essex/scripts": "^20.3.0",
+		"@types/debug": "^4.1.7",
+		"core-js": "^3.21.1"
 	},
 	"dependencies": {
 		"debug": "^4.3.3"

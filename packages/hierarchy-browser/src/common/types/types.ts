@@ -10,8 +10,8 @@ import {
 	ILoadParams,
 	IHierarchyDataResponse,
 	EntityId,
-} from '../..'
-import { CommunityDataProvider } from '../dataProviders'
+} from '../../index.js'
+import { CommunityDataProvider } from '../dataProviders/index.js'
 
 export interface ICommunity extends ICommunityDetail {
 	level: number

@@ -11,9 +11,9 @@ import {
 	IEntityDetail,
 	ILoadNeighborCommunities,
 	IHierarchyDataResponse,
-} from '../..'
-import { ENTITY_TYPE, ICommunitiesAsyncHook } from '../types/types'
-import { EntityDataProvider } from './EntityDataProvider'
+} from '../../index.js'
+import { ENTITY_TYPE, ICommunitiesAsyncHook } from '../types/types.js'
+import { EntityDataProvider } from './EntityDataProvider.js'
 
 export const DEFAULT_LOAD_COUNT = 100
 

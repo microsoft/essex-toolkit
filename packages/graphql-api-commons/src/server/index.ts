@@ -4,9 +4,9 @@
  */
 import { Logger } from 'pino'
 import { inject, singleton } from 'tsyringe'
-import { AppBuilder, PreRunCb, IBuiltAppContext } from '../app'
-import { IBaseConfiguration } from '../configuration'
-import { BaseInjectorNames } from '../injectors'
+import { AppBuilder, PreRunCb, IBuiltAppContext } from '../app/index.js'
+import { IBaseConfiguration } from '../configuration/index.js'
+import { BaseInjectorNames } from '../injectors.js'
 
 @singleton()
 export class Server<

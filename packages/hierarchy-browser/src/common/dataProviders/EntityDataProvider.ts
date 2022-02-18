@@ -8,8 +8,8 @@ import {
 	EntityId,
 	ILoadParams,
 	IHierarchyDataResponse,
-} from '../..'
-import { ENTITY_TYPE } from '../types/types'
+} from '../../index.js'
+import { ENTITY_TYPE } from '../types/types.js'
 
 export class EntityDataProvider {
 	private _entities: IEntityDetail[] = [] // all entities currently loaded

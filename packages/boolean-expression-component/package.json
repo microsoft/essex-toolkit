@@ -3,11 +3,11 @@
 	"version": "0.1.2",
 	"author": "Chris Trevino <chtrevin@microsoft.com>",
 	"license": "MIT",
+	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
-		"main": "dist/cjs/index.js",
-		"module": "dist/esm/index.js",
-		"typings": "dist/types/index.d.ts"
+		"main": "dist/index.js",
+		"types": "dist/index.d.ts"
 	},
 	"repository": {
 		"type": "git",
@@ -20,20 +20,21 @@
 		"watch": "essex watch"
 	},
 	"dependencies": {
-		"core-js": "^3.21.0",
-		"office-ui-fabric-react": "^7.181.1",
-		"styled-components": "^5.3.3"
+		"office-ui-fabric-react": "^7.183.0"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^19.0.6",
-		"@fluentui/react": "^8.52.2",
+		"@essex/scripts": "^20.3.0",
+		"@fluentui/react": "^8.55.3",
 		"@types/react": "^17.0.39",
-		"@types/styled-components": "^5.1.21",
-		"react": "^17.0.2"
+		"@types/react-dom": "^17.0.11",
+		"core-js": "^3.21.1",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2"
 	},
 	"peerDependencies": {
 		"@fluentui/react": "*",
 		"@types/react": "*",
+		"@types/react-dom": "*",
 		"react": "*"
 	}
 }
