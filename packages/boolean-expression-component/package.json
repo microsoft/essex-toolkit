@@ -1,6 +1,6 @@
 {
 	"name": "@essex-js-toolkit/boolean-expression-component",
-	"version": "0.1.2",
+	"version": "1.0.0",
 	"author": "Chris Trevino <chtrevin@microsoft.com>",
 	"license": "MIT",
 	"type": "module",
