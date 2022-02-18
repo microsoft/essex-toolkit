@@ -20,11 +20,6 @@
 		"clean": "essex clean",
 		"watch": "essex watch"
 	},
-	"browserslist": [
-		"last 2 versions",
-		"not IE 11",
-		"not dead"
-	],
 	"devDependencies": {
 		"@azure/msal-browser": "^2.22.0",
 		"@essex/scripts": "^20.3.1",

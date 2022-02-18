@@ -17,11 +17,6 @@
 		"start": "essex watch",
 		"lint": "essex lint"
 	},
-	"browserslist": [
-		">0.2%",
-		"not dead",
-		"not op_mini all"
-	],
 	"dependencies": {
 		"@essex-js-toolkit/hooks": "workspace:packages/hooks",
 		"d3-array": "^3.1.1",
