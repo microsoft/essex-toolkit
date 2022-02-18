@@ -5,7 +5,6 @@
 import { IconButton, Spinner, TooltipHost, Text } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
-import { CommunityId, IControls, IEntityDetail } from '../index.js'
 import { MagBar } from '../MagBar/index.js'
 import { paddingLeft } from '../common/styles/index.js'
 import { IFilterProps } from '../hooks/interfaces.js'
@@ -18,6 +17,7 @@ import { useCommunityDownload } from '../hooks/useCommunityDownload.js'
 import { useControls } from '../hooks/useControls.js'
 import { IEntityLoadParams } from '../hooks/useLoadMoreEntitiesHandler.js'
 import { useOverviewStyles } from '../hooks/useStyles.js'
+import { CommunityId, IControls, IEntityDetail } from '../index.js'
 import { ICardOverviewSettings } from '../types/index.js'
 
 export interface ICommunityOverviewProps {

@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { IconButton } from '@fluentui/react'
 import { useThematicFluent } from '@thematic/fluent'
 import { useCallback, useMemo, useState, useEffect, memo } from 'react'
@@ -162,9 +163,9 @@ const HeaderContainer: React.FC<{
 				? `1px solid ${theme.application().lowContrast().hex()}`
 				: ''
 		return { ...HeaderContainerStyle, background, borderTop, borderBottom }
-	}, [first, last, expanded])
+	}, [first, last, expanded, theme])
 	return (
-		<div style={style} onClick={onClick} onKeyDown={onKeyDown}>
+		<div style={style} onClick={onClick} onKeyDown={onKeyDown} role="group">
 			{children}
 		</div>
 	)

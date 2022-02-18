@@ -3,12 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useCallback } from 'react'
-import { CommunityId, IEntityDetail } from '../index.js'
 import {
 	CommunityDataProvider,
 	DEFAULT_LOAD_COUNT,
 } from '../common/dataProviders/index.js'
 import { ENTITY_TYPE } from '../common/types/types.js'
+import { CommunityId, IEntityDetail } from '../index.js'
 
 export interface IEntityLoadParams {
 	communityId?: CommunityId

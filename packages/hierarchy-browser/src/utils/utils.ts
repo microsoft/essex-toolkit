@@ -4,6 +4,11 @@
  */
 
 import {
+	ICommunity,
+	IEntityCounter,
+	IEntityMap,
+} from '../common/types/types.js'
+import {
 	EntityId,
 	IEntityDetail,
 	CommunityId,
@@ -13,11 +18,6 @@ import {
 	ILoadParams,
 	ICommunityDetail,
 } from '../index.js'
-import {
-	ICommunity,
-	IEntityCounter,
-	IEntityMap,
-} from '../common/types/types.js'
 
 interface IFlattenedEntities {
 	id: EntityId

@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useState, useCallback, useMemo } from 'react'
-import { IEntityDetail } from '../index.js'
 import { CommunityDataProvider } from '../common/dataProviders/index.js'
+import { IEntityDetail } from '../index.js'
 import { IFilterProps } from './interfaces.js'
 import { useEntitiesLoadedHandler } from './useEntitiesLoadedHandler.js'
 import { useLoadEntitiesOnMountEffect } from './useLoadEntitiesOnMountEffect.js'

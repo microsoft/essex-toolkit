@@ -4,19 +4,17 @@
  */
 
 import { useThematic } from '@thematic/react'
+import { builder as lineupBuilder } from 'lineupjs'
 import { useState, useMemo, useRef, useEffect } from 'react'
 import 'lineupjs/build/LineUpJS.css'
 import { ThematicLineupStyles } from './ThematicLineupStyles.js'
 import { Filter, applyFilters } from './filters.js'
-
 import {
 	ColumnConfig,
 	createNumberColorScale,
 	selectColumnBuilder,
 	nameToLabel,
 } from './lineup.js'
-
-import { builder as lineupBuilder } from 'lineupjs'
 
 type LineUp = any
 
