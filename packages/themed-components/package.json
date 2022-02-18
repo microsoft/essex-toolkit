@@ -1,6 +1,6 @@
 {
 	"name": "@essex-js-toolkit/themed-components",
-	"version": "1.3.2",
+	"version": "1.4.0",
 	"description": "A set of visual components that include built-in thematic",
 	"type": "module",
 	"main": "src/index.ts",
