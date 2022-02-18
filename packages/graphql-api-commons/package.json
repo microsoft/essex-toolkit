@@ -30,7 +30,6 @@
 		"@types/pino": "^7.0.5",
 		"apollo-server-core": "^3.6.3",
 		"apollo-server-fastify": "^3.6.3",
-		"core-js": "^3.21.1",
 		"fastify": "^3.27.2",
 		"graphql": "^16.3.0",
 		"tsyringe": "^4.6.0",

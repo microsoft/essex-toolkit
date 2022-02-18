@@ -3466,7 +3466,6 @@ __metadata:
     "@fluentui/react": ^8.55.3
     "@types/react": ^17.0.39
     "@types/react-dom": ^17.0.11
-    core-js: ^3.21.1
     office-ui-fabric-react: ^7.183.1
     react: ^17.0.2
     react-dom: ^17.0.2
@@ -3514,7 +3513,6 @@ __metadata:
     "@types/pino": ^7.0.5
     apollo-server-core: ^3.6.3
     apollo-server-fastify: ^3.6.3
-    core-js: ^3.21.1
     fastify: ^3.27.2
     graphql: ^16.3.0
     pino: ^7.8.0
@@ -3561,7 +3559,6 @@ __metadata:
     "@types/react": ^17.0.39
     "@types/react-infinite-scroller": ^1.2.2
     "@types/styled-components": ^5.1.23
-    core-js: ^3.21.1
     d3-array: ^3.1.1
     d3-scale: ^4.0.2
     d3-selection: ^3.0.0
@@ -3600,7 +3597,6 @@ __metadata:
     "@types/react": ^17.0.39
     "@types/react-dom": ^17.0.11
     "@types/react-test-renderer": ^17.0.1
-    core-js: ^3.21.1
     lodash-es: ^4.17.21
     react: ^17.0.2
     react-dom: ^17.0.2
@@ -3649,7 +3645,6 @@ __metadata:
     "@types/react-is": ^17.0.3
     "@uifabric/icons": ^7.6.2
     babel-loader: ^8.2.3
-    core-js: ^3.21.1
     react: ^17.0.2
     react-dom: ^17.0.2
     react-is: ^17.0.2
@@ -3672,7 +3667,6 @@ __metadata:
     "@types/react": ^17.0.39
     "@types/react-dom": ^17.0.11
     "@types/react-test-renderer": ^17.0.1
-    core-js: ^3.21.1
     lineupjs: ^4.4.0
     react: ^17.0.2
     react-dom: ^17.0.2
@@ -3718,7 +3712,6 @@ __metadata:
     "@types/react-test-renderer": ^17.0.1
     "@uifabric/icons": ^7.6.2
     "@uifabric/utilities": ^7.33.5
-    core-js: ^3.21.1
     d3-array: ^3.1.1
     d3-axis: ^3.0.0
     d3-brush: ^3.0.0
@@ -3752,7 +3745,6 @@ __metadata:
   resolution: "@essex-js-toolkit/toolbox@workspace:packages/toolbox"
   dependencies:
     "@essex/scripts": ^20.3.1
-    core-js: ^3.21.1
     regenerator-runtime: ^0.13.9
   languageName: unknown
   linkType: soft
@@ -3823,7 +3815,6 @@ __metadata:
     "@azure/msal-browser": ^2.22.0
     "@essex/scripts": ^20.3.1
     "@types/debug": ^4.1.7
-    core-js: ^3.21.1
     debug: ^4.3.3
   peerDependencies:
     "@azure/msal-browser": "> 2"
@@ -10226,13 +10217,6 @@ __metadata:
   version: 3.14.0
   resolution: "core-js@npm:3.14.0"
   checksum: a450089e5796496c7f4a84b13139d853fec5233077833ed142fe401bf9ff4ec2a5bae781f3879ef76cefcfe8a274218d3d4d7d813f5f7f32911fbd36e13a6dc4
-  languageName: node
-  linkType: hard
-
-"core-js@npm:^3.21.1":
-  version: 3.21.1
-  resolution: "core-js@npm:3.21.1"
-  checksum: d68eddd831340ad5b24ac29c72fda022a43b17f194c4278b6b875a843283d316502cb4abd07f28631d6ebc4387f66aa06e2b1b3c8fd7e08096a751b5c63f6889
   languageName: node
   linkType: hard
 

@@ -20,7 +20,6 @@
 		"@essex-js-toolkit/themed-components": "workspace:packages/themed-components",
 		"@storybook/client-api": "^6.4.19",
 		"@storybook/core-events": "^6.4.19",
-		"core-js": "^3.21.1",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2"
 	},
