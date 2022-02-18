@@ -8,6 +8,7 @@
 		"main": "dist/index.js",
 		"types": "dist/index.d.ts"
 	},
+	"sideEffects": false,
 	"repository": "https://github.com/microsoft/essex-js-toolkit",
 	"author": "Nathan Evans <naevans@microsoft.com>",
 	"license": "MIT",

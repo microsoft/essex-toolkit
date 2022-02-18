@@ -10,6 +10,7 @@
 		"main": "dist/index.js",
 		"types": "dist/index.d.ts"
 	},
+	"sideEffects": false,
 	"scripts": {
 		"build": "essex build --skipExportCheck",
 		"clean": "essex clean",
