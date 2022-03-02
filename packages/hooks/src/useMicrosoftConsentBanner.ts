@@ -40,6 +40,8 @@ interface ConsentUtil {
 	getConsent: () => Consent
 }
 
+const DEFAULT_CONSENT_OPTIONS: ConsentOptions = Object.freeze({})
+
 /**
  * Uses the Microsoft cookie consent banner. The banner code should be loaded from CDN using a script tag.
  * <script src="https://wcpstatic.microsoft.com/mscc/lib/v2/wcp-consent.js"></script>
@@ -54,59 +56,65 @@ export function useMicrosoftConsentBanner({
 	theme = 'dark',
 	elementId = 'cookie-banner',
 	onChange = NOOP,
-}: ConsentOptions = {}): [Consent, () => void] {
+}: ConsentOptions = DEFAULT_CONSENT_OPTIONS): [Consent, () => void] {
 	const [consent, setConsent] = useState<Consent>(DEFAULT_CONSENT)
 	const [consentUtil, setConsentUtil] = useState<ConsentUtil>({
 		getConsent: () => DEFAULT_CONSENT,
 		manageConsent: NOOP,
 	})
 
-	useEffect(() => {
-		try {
-			const element = document.getElementById(elementId)
-			if (!element) {
-				throw new Error(
-					`Could not find element with id ${elementId}. You should include an element in your HTML for the cookie-banner to render into, e.g. 
+	useEffect(
+		() => {
+			try {
+				const element = document.getElementById(elementId)
+				if (!element) {
+					throw new Error(
+						`Could not find element with id ${elementId}. You should include an element in your HTML for the cookie-banner to render into, e.g. 
 						
 					<body>
 						...
 						<div id="${elementId}" />
 					</body>`,
-				)
-			}
-			if (!WcpConsent) {
-				throw new Error(`WcpConsent banner not initialized. You should include the WCP Consent script in your HTML header. e.g.
+					)
+				}
+				if (!WcpConsent) {
+					throw new Error(`WcpConsent banner not initialized. You should include the WCP Consent script in your HTML header. e.g.
 
 				<head>
 					...
 					<script src="https://wcpstatic.microsoft.com/mscc/lib/v2/wcp-consent.js"></script>
 				</head>
 				`)
+				}
+				WcpConsent.init(
+					navigator.language,
+					element,
+					function initializeConsentManagement(
+						err: Error,
+						consentUtil: ConsentUtil,
+					) {
+						if (err) {
+							console.error('error initalizing WcpConsent', err)
+						} else {
+							setConsentUtil(consentUtil)
+						}
+					},
+					function onConsentChanged(consent: Consent) {
+						console.log('change', consent)
+						setConsent(consent)
+						onChange(consent)
+					},
+					theme,
+				)
+			} catch (err) {
+				console.error('error initalizing consent', err)
 			}
-			WcpConsent.init(
-				navigator.language,
-				element,
-				function initializeConsentManagement(
-					err: Error,
-					consentUtil: ConsentUtil,
-				) {
-					if (err) {
-						console.error('error initalizing WcpConsent', err)
-					} else {
-						setConsentUtil(consentUtil)
-					}
-				},
-				function onConsentChanged(consent: Consent) {
-					console.log('change', consent)
-					setConsent(consent)
-					onChange(consent)
-				},
-				theme,
-			)
-		} catch (err) {
-			console.error('error initalizing consent', err)
-		}
-	}, [setConsentUtil, elementId, onChange, theme])
+		},
+		/* eslint-disable-next-line react-hooks/exhaustive-deps */
+		[
+			/* fire once */
+		],
+	)
 
 	const manageConsent = useCallback(
 		() => consentUtil.manageConsent(),
