@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { EntityId, HierarchyBrowser } from '@essex-js-toolkit/hierarchy-browser'
+import { EntityId, HierarchyBrowser } from '@essex/hierarchy-browser'
 import { IChoiceGroupOption } from '@fluentui/react'
 import { useCallback, useMemo, useState } from 'react'
 import { CSF } from './types'

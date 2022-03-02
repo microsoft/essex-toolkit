@@ -1,5 +1,5 @@
 {
-	"name": "@essex-js-toolkit/themed-components",
+	"name": "@essex/themed-components",
 	"version": "2.0.1",
 	"description": "A set of visual components that include built-in thematic",
 	"type": "module",
@@ -18,8 +18,8 @@
 		"watch": "essex watch"
 	},
 	"dependencies": {
-		"@essex-js-toolkit/hooks": "workspace:packages/hooks",
-		"@essex-js-toolkit/toolbox": "workspace:packages/toolbox",
+		"@essex/hooks": "workspace:packages/hooks",
+		"@essex/toolbox": "workspace:packages/toolbox",
 		"@types/d3-array": "^3.0.2",
 		"@types/d3-axis": "^3.0.1",
 		"@types/d3-brush": "^3.0.1",

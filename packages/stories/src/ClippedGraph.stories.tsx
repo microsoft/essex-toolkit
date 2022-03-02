@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ClippedGraph } from '@essex-js-toolkit/themed-components'
+import { ClippedGraph } from '@essex/themed-components'
 import { CSF } from './types'
 
 const story = {

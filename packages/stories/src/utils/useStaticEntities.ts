@@ -6,7 +6,7 @@ import {
 	INeighborCommunityDetail,
 	CommunityId,
 	ICommunityDetail,
-} from '@essex-js-toolkit/hierarchy-browser'
+} from '@essex/hierarchy-browser'
 import { useMemo, useCallback } from 'react'
 import { LocalEntity, NeighborLocalEntity, JoinData } from './types'
 

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Settings } from '@essex-js-toolkit/themed-components'
+import { Settings } from '@essex/themed-components'
 import { MessageBar, DefaultButton } from '@fluentui/react'
 import { useCallback, useState } from 'react'
 
