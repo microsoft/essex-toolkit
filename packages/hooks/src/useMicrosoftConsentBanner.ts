@@ -100,7 +100,6 @@ export function useMicrosoftConsentBanner({
 						}
 					},
 					function onConsentChanged(consent: Consent) {
-						console.log('change', consent)
 						setConsent(consent)
 						onChange(consent)
 					},
@@ -111,9 +110,7 @@ export function useMicrosoftConsentBanner({
 			}
 		},
 		/* eslint-disable-next-line react-hooks/exhaustive-deps */
-		[
-			/* fire once */
-		],
+		[theme],
 	)
 
 	const manageConsent = useCallback(
