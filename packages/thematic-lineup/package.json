@@ -1,5 +1,5 @@
 {
-	"name": "@essex-js-toolkit/thematic-lineup",
+	"name": "@essex/thematic-lineup",
 	"version": "2.0.1",
 	"description": "thematic-themed adaption of lineup.js",
 	"type": "module",

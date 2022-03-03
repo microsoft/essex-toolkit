@@ -3458,9 +3458,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex-js-toolkit/boolean-expression-component@workspace:packages/boolean-expression-component":
+"@essex-js-toolkit/hooks@npm:^4.0.0":
+  version: 4.0.3
+  resolution: "@essex-js-toolkit/hooks@npm:4.0.3"
+  dependencies:
+    "@essex-js-toolkit/toolbox": 3.0.1
+    lodash-es: ^4.17.21
+  peerDependencies:
+    "@types/node": "*"
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ">=16.8.0"
+  checksum: 112b417dea249809b77741d38d6f95a856c94871021604c05239fe6c7b685e98693248887ea6a6e9208391bf9c76358b531aa45d7ae09cf0f4ed40410d345148
+  languageName: node
+  linkType: hard
+
+"@essex-js-toolkit/toolbox@npm:3.0.1":
+  version: 3.0.1
+  resolution: "@essex-js-toolkit/toolbox@npm:3.0.1"
+  checksum: 24b864ce1819374b00ab6f5b8633232c3ea212993dc52467a7de4f606843cfaa19ad3239bb257fcfd0c6bf189319602005be372070bc1f4f98570288a3dfdac6
+  languageName: node
+  linkType: hard
+
+"@essex/boolean-expression-component@workspace:packages/boolean-expression-component":
   version: 0.0.0-use.local
-  resolution: "@essex-js-toolkit/boolean-expression-component@workspace:packages/boolean-expression-component"
+  resolution: "@essex/boolean-expression-component@workspace:packages/boolean-expression-component"
   dependencies:
     "@essex/scripts": ^20.3.2
     "@fluentui/react": ^8.55.3
@@ -3473,276 +3495,6 @@ __metadata:
     "@types/react": "*"
     "@types/react-dom": "*"
     react: "*"
-  languageName: unknown
-  linkType: soft
-
-"@essex-js-toolkit/dev@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "@essex-js-toolkit/dev@workspace:."
-  dependencies:
-    "@essex/eslint-config": ^20.0.0
-    "@essex/eslint-plugin": ^20.0.1
-    "@essex/jest-config": ^21.0.0
-    "@essex/prettier-config": ^18.0.2
-    "@essex/scripts": ^20.3.2
-    "@types/jest": ^27.4.0
-    "@types/node": ^17.0.18
-    "@typescript-eslint/eslint-plugin": ^5.12.0
-    "@typescript-eslint/parser": ^5.12.0
-    debug: ^4.3.3
-    eslint: ^8.9.0
-    eslint-import-resolver-node: ^0.3.6
-    husky: ^7.0.4
-    jest: ^27.5.1
-    lint-staged: ^12.3.4
-    npm-run-all: ^4.1.5
-    prettier: ^2.5.1
-    regenerator-runtime: ^0.13.9
-    typescript: ^4.5.5
-  languageName: unknown
-  linkType: soft
-
-"@essex-js-toolkit/graphql-api-commons@workspace:packages/graphql-api-commons":
-  version: 0.0.0-use.local
-  resolution: "@essex-js-toolkit/graphql-api-commons@workspace:packages/graphql-api-commons"
-  dependencies:
-    "@essex/scripts": ^20.3.2
-    "@graphql-tools/utils": ^8.6.1
-    "@tsconfig/node14": ^1.0.1
-    "@types/pino": ^7.0.5
-    apollo-server-core: ^3.6.3
-    apollo-server-fastify: ^3.6.3
-    fastify: ^3.27.2
-    graphql: ^16.3.0
-    pino: ^7.8.0
-    pino-pretty: ^7.5.1
-    tsyringe: ^4.6.0
-    typescript: ^4.5.5
-  peerDependencies:
-    "@graphql-tools/utils": ">= 8.2.2"
-    apollo-server-core: ">= 3.3.0"
-    apollo-server-fastify: ">= 3.3.0"
-    fastify: ">= 3.21.0"
-    graphql: ">= 15.5.3"
-    tsyringe: ">= 4.6.0"
-  peerDependenciesMeta:
-    "@graphql-tools/utils":
-      optional: false
-    apollo-server-core:
-      optional: false
-    apollo-server-fastify:
-      optional: false
-    fastify:
-      optional: false
-    graphql:
-      optional: false
-    tsyringe:
-      optional: false
-  languageName: unknown
-  linkType: soft
-
-"@essex-js-toolkit/hierarchy-browser@workspace:packages/hierarchy-browser":
-  version: 0.0.0-use.local
-  resolution: "@essex-js-toolkit/hierarchy-browser@workspace:packages/hierarchy-browser"
-  dependencies:
-    "@essex-js-toolkit/hooks": "workspace:packages/hooks"
-    "@essex/scripts": ^20.3.2
-    "@fluentui/react": ^8.55.3
-    "@thematic/core": ^2.0.4
-    "@thematic/fluent": ^3.0.4
-    "@thematic/react": ^2.0.4
-    "@types/d3-array": ^3.0.2
-    "@types/d3-scale": ^4.0.2
-    "@types/d3-selection": ^3.0.2
-    "@types/prop-types": ^15.7.4
-    "@types/react": ^17.0.39
-    "@types/react-infinite-scroller": ^1.2.2
-    "@types/styled-components": ^5.1.23
-    d3-array: ^3.1.1
-    d3-scale: ^4.0.2
-    d3-selection: ^3.0.0
-    prop-types: ^15.8.1
-    react: ^17.0.2
-    react-infinite-scroller: ^1.2.5
-    react-is: ^17.0.2
-    styled-components: ^5.3.3
-  peerDependencies:
-    "@fluent/react": ">=7.146.1"
-    "@thematic/core": ">= 0.9.0"
-    "@thematic/fluent": ">= 0.9.0"
-    "@thematic/react": ">= 0.9.0"
-    "@types/d3-array": ">= 2.2.0"
-    "@types/d3-scale": ">= 2.2.4"
-    "@types/d3-selection": ">= 2.0.0"
-    "@types/prop-types": ">= 15.7.3"
-    "@types/react": ">= 16.9.52"
-    "@types/react-infinite-scroller": ">= 1.2.1"
-    react: ">=17"
-    react-is: ">=  17"
-    regenerator-runtime: "*"
-  languageName: unknown
-  linkType: soft
-
-"@essex-js-toolkit/hooks@^4.0.0, @essex-js-toolkit/hooks@workspace:packages/hooks":
-  version: 0.0.0-use.local
-  resolution: "@essex-js-toolkit/hooks@workspace:packages/hooks"
-  dependencies:
-    "@essex-js-toolkit/toolbox": "workspace:packages/toolbox"
-    "@essex/scripts": ^20.3.2
-    "@testing-library/react": ^12.1.3
-    "@types/jest": ^27.4.0
-    "@types/lodash-es": ^4.17.6
-    "@types/node": ^17.0.18
-    "@types/react": ^17.0.39
-    "@types/react-dom": ^17.0.11
-    "@types/react-test-renderer": ^17.0.1
-    lodash-es: ^4.17.21
-    react: ^17.0.2
-    react-dom: ^17.0.2
-    react-test-renderer: ^17.0.2
-    regenerator-runtime: ^0.13.9
-  peerDependencies:
-    "@types/node": "*"
-    "@types/react": "*"
-    "@types/react-dom": "*"
-    react: ">=16.8.0"
-  languageName: unknown
-  linkType: soft
-
-"@essex-js-toolkit/stories@workspace:packages/stories":
-  version: 0.0.0-use.local
-  resolution: "@essex-js-toolkit/stories@workspace:packages/stories"
-  dependencies:
-    "@babel/core": ^7.17.5
-    "@babel/preset-env": ^7.16.11
-    "@babel/preset-react": ^7.16.7
-    "@babel/preset-typescript": ^7.16.7
-    "@essex-js-toolkit/boolean-expression-component": "workspace:packages/boolean-expression-component"
-    "@essex-js-toolkit/hierarchy-browser": "workspace:packages/hierarchy-browser"
-    "@essex-js-toolkit/thematic-lineup": "workspace:packages/thematic-lineup"
-    "@essex-js-toolkit/themed-components": "workspace:packages/themed-components"
-    "@essex/scripts": ^20.3.2
-    "@fluentui/font-icons-mdl2": ^8.1.24
-    "@fluentui/react": ^8.55.3
-    "@storybook/addon-a11y": ^6.4.19
-    "@storybook/addon-essentials": ^6.4.19
-    "@storybook/addon-links": ^6.4.19
-    "@storybook/addons": ^6.4.19
-    "@storybook/client-api": ^6.4.19
-    "@storybook/core": ^6.4.19
-    "@storybook/core-events": ^6.4.19
-    "@storybook/react": ^6.4.19
-    "@thematic/core": ^2.0.4
-    "@thematic/fluent": ^3.0.4
-    "@thematic/react": ^2.0.4
-    "@types/babel__core": ^7.1.18
-    "@types/babel__preset-env": ^7.9.2
-    "@types/form-data": ^2.5.0
-    "@types/node": ^17.0.18
-    "@types/react": ^17.0.39
-    "@types/react-dom": ^17.0.11
-    "@types/react-is": ^17.0.3
-    "@uifabric/icons": ^7.6.2
-    babel-loader: ^8.2.3
-    react: ^17.0.2
-    react-dom: ^17.0.2
-    react-is: ^17.0.2
-    regenerator-runtime: ^0.13.9
-    resolve-typescript-plugin: ^1.1.5
-  languageName: unknown
-  linkType: soft
-
-"@essex-js-toolkit/thematic-lineup@workspace:packages/thematic-lineup":
-  version: 0.0.0-use.local
-  resolution: "@essex-js-toolkit/thematic-lineup@workspace:packages/thematic-lineup"
-  dependencies:
-    "@essex/scripts": ^20.3.2
-    "@thematic/color": ^2.0.4
-    "@thematic/core": ^2.0.4
-    "@thematic/d3": ^2.0.4
-    "@thematic/fluent": ^3.0.4
-    "@thematic/react": ^2.0.4
-    "@types/node": ^17.0.18
-    "@types/react": ^17.0.39
-    "@types/react-dom": ^17.0.11
-    "@types/react-test-renderer": ^17.0.1
-    lineupjs: ^4.4.0
-    react: ^17.0.2
-    react-dom: ^17.0.2
-  peerDependencies:
-    "@thematic/color": ">=0.8.0"
-    "@thematic/core": ">=0.8.0"
-    "@thematic/d3": ">=0.8.0"
-    "@thematic/fluent": ">=0.8.0"
-    "@thematic/react": ">=0.8.0"
-    "@types/node": "*"
-    lineupjs: ">=3.3.0"
-    react: ">=16.8.6"
-    react-dom: ">=16.8.6"
-    tslib: "*"
-  languageName: unknown
-  linkType: soft
-
-"@essex-js-toolkit/themed-components@workspace:packages/themed-components":
-  version: 0.0.0-use.local
-  resolution: "@essex-js-toolkit/themed-components@workspace:packages/themed-components"
-  dependencies:
-    "@essex-js-toolkit/hooks": "workspace:packages/hooks"
-    "@essex-js-toolkit/toolbox": "workspace:packages/toolbox"
-    "@essex/scripts": ^20.3.2
-    "@fluentui/font-icons-mdl2": ^8.1.24
-    "@fluentui/react": ^8.55.3
-    "@fluentui/theme": ^2.4.10
-    "@thematic/color": ^2.0.4
-    "@thematic/core": ^2.0.4
-    "@thematic/d3": ^2.0.4
-    "@thematic/fluent": ^3.0.4
-    "@thematic/react": ^2.0.4
-    "@types/d3": ^7.1.0
-    "@types/d3-array": ^3.0.2
-    "@types/d3-axis": ^3.0.1
-    "@types/d3-brush": ^3.0.1
-    "@types/d3-scale": ^4.0.2
-    "@types/d3-selection": ^3.0.2
-    "@types/node": ^17.0.18
-    "@types/prop-types": ^15.7.4
-    "@types/react": ^17.0.39
-    "@types/react-dom": ^17.0.11
-    "@types/react-test-renderer": ^17.0.1
-    "@uifabric/icons": ^7.6.2
-    "@uifabric/utilities": ^7.33.5
-    d3-array: ^3.1.1
-    d3-axis: ^3.0.0
-    d3-brush: ^3.0.0
-    d3-scale: ^4.0.2
-    d3-selection: ^3.0.0
-    prop-types: ^15.8.1
-    react: ^17.0.2
-    react-animate-height: ^2.0.23
-    react-dom: ^17.0.2
-  peerDependencies:
-    "@fluentui/react": ">= 7.114.2"
-    "@thematic/color": ">= 0.8.0"
-    "@thematic/core": ">= 0.8.0"
-    "@thematic/d3": ">= 0.8.0"
-    "@thematic/fluent": ">= 0.8.0"
-    "@thematic/react": ">= 0.8.0"
-    "@types/d3": "*"
-    "@types/d3-axis": ^2.0.0
-    "@types/node": "*"
-    "@types/react": ">= 16.9"
-    "@uifabric/icons": ">= 7.3.38"
-    react: ">= 16.8.6"
-    react-dom: ">= 16.8.6"
-  languageName: unknown
-  linkType: soft
-
-"@essex-js-toolkit/toolbox@workspace:packages/toolbox":
-  version: 0.0.0-use.local
-  resolution: "@essex-js-toolkit/toolbox@workspace:packages/toolbox"
-  dependencies:
-    "@essex/scripts": ^20.3.2
-    regenerator-runtime: ^0.13.9
   languageName: unknown
   linkType: soft
 
@@ -3787,6 +3539,113 @@ __metadata:
   checksum: b74ff6d572f9731bc356520145c80088d823411dd4296ad39b8b3f56e211d44d2c281df407573a8f11ab5ac575559b6e6bc8b4f7a31588917c15616d577c0bbc
   languageName: node
   linkType: hard
+
+"@essex/graphql-api-commons@workspace:packages/graphql-api-commons":
+  version: 0.0.0-use.local
+  resolution: "@essex/graphql-api-commons@workspace:packages/graphql-api-commons"
+  dependencies:
+    "@essex/scripts": ^20.3.2
+    "@graphql-tools/utils": ^8.6.1
+    "@tsconfig/node14": ^1.0.1
+    "@types/pino": ^7.0.5
+    apollo-server-core: ^3.6.3
+    apollo-server-fastify: ^3.6.3
+    fastify: ^3.27.2
+    graphql: ^16.3.0
+    pino: ^7.8.0
+    pino-pretty: ^7.5.1
+    tsyringe: ^4.6.0
+    typescript: ^4.5.5
+  peerDependencies:
+    "@graphql-tools/utils": ">= 8.2.2"
+    apollo-server-core: ">= 3.3.0"
+    apollo-server-fastify: ">= 3.3.0"
+    fastify: ">= 3.21.0"
+    graphql: ">= 15.5.3"
+    tsyringe: ">= 4.6.0"
+  peerDependenciesMeta:
+    "@graphql-tools/utils":
+      optional: false
+    apollo-server-core:
+      optional: false
+    apollo-server-fastify:
+      optional: false
+    fastify:
+      optional: false
+    graphql:
+      optional: false
+    tsyringe:
+      optional: false
+  languageName: unknown
+  linkType: soft
+
+"@essex/hierarchy-browser@workspace:packages/hierarchy-browser":
+  version: 0.0.0-use.local
+  resolution: "@essex/hierarchy-browser@workspace:packages/hierarchy-browser"
+  dependencies:
+    "@essex/hooks": "workspace:packages/hooks"
+    "@essex/scripts": ^20.3.2
+    "@fluentui/react": ^8.55.3
+    "@thematic/core": ^2.0.4
+    "@thematic/fluent": ^3.0.4
+    "@thematic/react": ^2.0.4
+    "@types/d3-array": ^3.0.2
+    "@types/d3-scale": ^4.0.2
+    "@types/d3-selection": ^3.0.2
+    "@types/prop-types": ^15.7.4
+    "@types/react": ^17.0.39
+    "@types/react-infinite-scroller": ^1.2.2
+    "@types/styled-components": ^5.1.23
+    d3-array: ^3.1.1
+    d3-scale: ^4.0.2
+    d3-selection: ^3.0.0
+    prop-types: ^15.8.1
+    react: ^17.0.2
+    react-infinite-scroller: ^1.2.5
+    react-is: ^17.0.2
+    styled-components: ^5.3.3
+  peerDependencies:
+    "@fluent/react": ">=7.146.1"
+    "@thematic/core": ">= 0.9.0"
+    "@thematic/fluent": ">= 0.9.0"
+    "@thematic/react": ">= 0.9.0"
+    "@types/d3-array": ">= 2.2.0"
+    "@types/d3-scale": ">= 2.2.4"
+    "@types/d3-selection": ">= 2.0.0"
+    "@types/prop-types": ">= 15.7.3"
+    "@types/react": ">= 16.9.52"
+    "@types/react-infinite-scroller": ">= 1.2.1"
+    react: ">=17"
+    react-is: ">=  17"
+    regenerator-runtime: "*"
+  languageName: unknown
+  linkType: soft
+
+"@essex/hooks@workspace:packages/hooks":
+  version: 0.0.0-use.local
+  resolution: "@essex/hooks@workspace:packages/hooks"
+  dependencies:
+    "@essex/scripts": ^20.3.2
+    "@essex/toolbox": "workspace:packages/toolbox"
+    "@testing-library/react": ^12.1.3
+    "@types/jest": ^27.4.0
+    "@types/lodash-es": ^4.17.6
+    "@types/node": ^17.0.18
+    "@types/react": ^17.0.39
+    "@types/react-dom": ^17.0.11
+    "@types/react-test-renderer": ^17.0.1
+    lodash-es: ^4.17.21
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    react-test-renderer: ^17.0.2
+    regenerator-runtime: ^0.13.9
+  peerDependencies:
+    "@types/node": "*"
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ">=16.8.0"
+  languageName: unknown
+  linkType: soft
 
 "@essex/jest-config@npm:^21.0.0":
   version: 21.0.0
@@ -3916,6 +3775,100 @@ __metadata:
   checksum: 47cd0e41b845c10f742ed2d43aa60dff13e4368f71a96d20d30432f0d26c6c2b5cff51bdb2fd974c4aa191b8632cddb1fa2e390adae66f50a87304ae36d127bd
   languageName: node
   linkType: hard
+
+"@essex/thematic-lineup@workspace:packages/thematic-lineup":
+  version: 0.0.0-use.local
+  resolution: "@essex/thematic-lineup@workspace:packages/thematic-lineup"
+  dependencies:
+    "@essex/scripts": ^20.3.2
+    "@thematic/color": ^2.0.4
+    "@thematic/core": ^2.0.4
+    "@thematic/d3": ^2.0.4
+    "@thematic/fluent": ^3.0.4
+    "@thematic/react": ^2.0.4
+    "@types/node": ^17.0.18
+    "@types/react": ^17.0.39
+    "@types/react-dom": ^17.0.11
+    "@types/react-test-renderer": ^17.0.1
+    lineupjs: ^4.4.0
+    react: ^17.0.2
+    react-dom: ^17.0.2
+  peerDependencies:
+    "@thematic/color": ">=0.8.0"
+    "@thematic/core": ">=0.8.0"
+    "@thematic/d3": ">=0.8.0"
+    "@thematic/fluent": ">=0.8.0"
+    "@thematic/react": ">=0.8.0"
+    "@types/node": "*"
+    lineupjs: ">=3.3.0"
+    react: ">=16.8.6"
+    react-dom: ">=16.8.6"
+    tslib: "*"
+  languageName: unknown
+  linkType: soft
+
+"@essex/themed-components@workspace:packages/themed-components":
+  version: 0.0.0-use.local
+  resolution: "@essex/themed-components@workspace:packages/themed-components"
+  dependencies:
+    "@essex/hooks": "workspace:packages/hooks"
+    "@essex/scripts": ^20.3.2
+    "@essex/toolbox": "workspace:packages/toolbox"
+    "@fluentui/font-icons-mdl2": ^8.1.24
+    "@fluentui/react": ^8.55.3
+    "@fluentui/theme": ^2.4.10
+    "@thematic/color": ^2.0.4
+    "@thematic/core": ^2.0.4
+    "@thematic/d3": ^2.0.4
+    "@thematic/fluent": ^3.0.4
+    "@thematic/react": ^2.0.4
+    "@types/d3": ^7.1.0
+    "@types/d3-array": ^3.0.2
+    "@types/d3-axis": ^3.0.1
+    "@types/d3-brush": ^3.0.1
+    "@types/d3-scale": ^4.0.2
+    "@types/d3-selection": ^3.0.2
+    "@types/node": ^17.0.18
+    "@types/prop-types": ^15.7.4
+    "@types/react": ^17.0.39
+    "@types/react-dom": ^17.0.11
+    "@types/react-test-renderer": ^17.0.1
+    "@uifabric/icons": ^7.6.2
+    "@uifabric/utilities": ^7.33.5
+    d3-array: ^3.1.1
+    d3-axis: ^3.0.0
+    d3-brush: ^3.0.0
+    d3-scale: ^4.0.2
+    d3-selection: ^3.0.0
+    prop-types: ^15.8.1
+    react: ^17.0.2
+    react-animate-height: ^2.0.23
+    react-dom: ^17.0.2
+  peerDependencies:
+    "@fluentui/react": ">= 7.114.2"
+    "@thematic/color": ">= 0.8.0"
+    "@thematic/core": ">= 0.8.0"
+    "@thematic/d3": ">= 0.8.0"
+    "@thematic/fluent": ">= 0.8.0"
+    "@thematic/react": ">= 0.8.0"
+    "@types/d3": "*"
+    "@types/d3-axis": ^2.0.0
+    "@types/node": "*"
+    "@types/react": ">= 16.9"
+    "@uifabric/icons": ">= 7.3.38"
+    react: ">= 16.8.6"
+    react-dom: ">= 16.8.6"
+  languageName: unknown
+  linkType: soft
+
+"@essex/toolbox@workspace:packages/toolbox":
+  version: 0.0.0-use.local
+  resolution: "@essex/toolbox@workspace:packages/toolbox"
+  dependencies:
+    "@essex/scripts": ^20.3.2
+    regenerator-runtime: ^0.13.9
+  languageName: unknown
+  linkType: soft
 
 "@fastify/ajv-compiler@npm:^1.0.0":
   version: 1.1.0
@@ -11724,6 +11677,75 @@ __metadata:
   checksum: ebc17b1a33c51cef46fdc28b958994b1dc43cd2e86237515cbc3b4e5d2be6a811b2315d0a1a4d9d340b6d2308b15322f5c8291059521cc5f4802f65e7ec32837
   languageName: node
   linkType: hard
+
+"essex-js-toolkit-stories@workspace:packages/stories":
+  version: 0.0.0-use.local
+  resolution: "essex-js-toolkit-stories@workspace:packages/stories"
+  dependencies:
+    "@babel/core": ^7.17.5
+    "@babel/preset-env": ^7.16.11
+    "@babel/preset-react": ^7.16.7
+    "@babel/preset-typescript": ^7.16.7
+    "@essex/boolean-expression-component": "workspace:packages/boolean-expression-component"
+    "@essex/hierarchy-browser": "workspace:packages/hierarchy-browser"
+    "@essex/scripts": ^20.3.2
+    "@essex/thematic-lineup": "workspace:packages/thematic-lineup"
+    "@essex/themed-components": "workspace:packages/themed-components"
+    "@fluentui/font-icons-mdl2": ^8.1.24
+    "@fluentui/react": ^8.55.3
+    "@storybook/addon-a11y": ^6.4.19
+    "@storybook/addon-essentials": ^6.4.19
+    "@storybook/addon-links": ^6.4.19
+    "@storybook/addons": ^6.4.19
+    "@storybook/client-api": ^6.4.19
+    "@storybook/core": ^6.4.19
+    "@storybook/core-events": ^6.4.19
+    "@storybook/react": ^6.4.19
+    "@thematic/core": ^2.0.4
+    "@thematic/fluent": ^3.0.4
+    "@thematic/react": ^2.0.4
+    "@types/babel__core": ^7.1.18
+    "@types/babel__preset-env": ^7.9.2
+    "@types/form-data": ^2.5.0
+    "@types/node": ^17.0.18
+    "@types/react": ^17.0.39
+    "@types/react-dom": ^17.0.11
+    "@types/react-is": ^17.0.3
+    "@uifabric/icons": ^7.6.2
+    babel-loader: ^8.2.3
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    react-is: ^17.0.2
+    regenerator-runtime: ^0.13.9
+    resolve-typescript-plugin: ^1.1.5
+  languageName: unknown
+  linkType: soft
+
+"essex-js-toolkit@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "essex-js-toolkit@workspace:."
+  dependencies:
+    "@essex/eslint-config": ^20.0.0
+    "@essex/eslint-plugin": ^20.0.1
+    "@essex/jest-config": ^21.0.0
+    "@essex/prettier-config": ^18.0.2
+    "@essex/scripts": ^20.3.2
+    "@types/jest": ^27.4.0
+    "@types/node": ^17.0.18
+    "@typescript-eslint/eslint-plugin": ^5.12.0
+    "@typescript-eslint/parser": ^5.12.0
+    debug: ^4.3.3
+    eslint: ^8.9.0
+    eslint-import-resolver-node: ^0.3.6
+    husky: ^7.0.4
+    jest: ^27.5.1
+    lint-staged: ^12.3.4
+    npm-run-all: ^4.1.5
+    prettier: ^2.5.1
+    regenerator-runtime: ^0.13.9
+    typescript: ^4.5.5
+  languageName: unknown
+  linkType: soft
 
 "estraverse@npm:^4.1.1":
   version: 4.3.0

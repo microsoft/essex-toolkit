@@ -5,7 +5,7 @@
 import {
 	BooleanOperation,
 	FilterExpressionView,
-} from '@essex-js-toolkit/boolean-expression-component'
+} from '@essex/boolean-expression-component'
 import { CSF } from './types'
 
 const story = {

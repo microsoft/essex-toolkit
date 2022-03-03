@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ThematicLineup } from '@essex-js-toolkit/thematic-lineup'
+import { ThematicLineup } from '@essex/thematic-lineup'
 import { CSF } from './types'
 
 const story = {

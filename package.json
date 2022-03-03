@@ -1,5 +1,5 @@
 {
-	"name": "@essex-js-toolkit/dev",
+	"name": "essex-js-toolkit",
 	"version": "2.0.0",
 	"description": "A set of packages for developers",
 	"repository": "git@ssh.dev.azure.com:v3/msrp-essex/Alpha/alpha-developer",
@@ -25,7 +25,7 @@
 		"build": "yarn workspaces foreach -pvt run build",
 		"test": "yarn workspaces foreach -pv run test",
 		"start:": "yarn workspaces foreach -piv run start",
-		"release": "yarn workspaces foreach --exclude '@essex-js-toolkit/dev' -pivt npm publish --tolerate-republish --access public",
+		"release": "yarn workspaces foreach --exclude '@essex/dev' -pivt npm publish --tolerate-republish --access public",
 		"jest_coverage": "jest --coverage",
 		"lint": "essex lint --strict",
 		"lint_fix": "yarn lint --fix",

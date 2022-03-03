@@ -7,7 +7,7 @@ import {
 	SearchBox,
 	NumberSpinButton,
 	ToggleLink,
-} from '@essex-js-toolkit/themed-components'
+} from '@essex/themed-components'
 import React, { useCallback, useState } from 'react'
 
 import { CSF } from './types'

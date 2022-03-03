@@ -1,5 +1,5 @@
 {
-	"name": "@essex-js-toolkit/hierarchy-browser",
+	"name": "@essex/hierarchy-browser",
 	"version": "4.0.1",
 	"description": "React component to display hierarchical community data",
 	"license": "MIT",
@@ -18,7 +18,7 @@
 		"lint": "essex lint"
 	},
 	"dependencies": {
-		"@essex-js-toolkit/hooks": "workspace:packages/hooks",
+		"@essex/hooks": "workspace:packages/hooks",
 		"d3-array": "^3.1.1",
 		"d3-scale": "^4.0.2",
 		"d3-selection": "^3.0.0",

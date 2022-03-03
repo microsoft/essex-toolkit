@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { delay } from '@essex-js-toolkit/toolbox'
+import { delay } from '@essex/toolbox'
 import { useState, useLayoutEffect, useMemo } from 'react'
 import { DynamicData } from './interfaces/index.js'
 
