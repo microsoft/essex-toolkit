@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ISettings } from '@essex-js-toolkit/hierarchy-browser'
+import { ISettings } from '@essex/hierarchy-browser'
 import { IChoiceGroupOption } from '@fluentui/react'
 import { useMemo, useState, useCallback } from 'react'
 import { selectedClusterID, customStyle, visibleColumns } from './utils'

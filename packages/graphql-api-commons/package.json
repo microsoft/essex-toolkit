@@ -1,5 +1,5 @@
 {
-	"name": "@essex-js-toolkit/graphql-api-commons",
+	"name": "@essex/graphql-api-commons",
 	"version": "1.0.1",
 	"main": "src/index.ts",
 	"publishConfig": {

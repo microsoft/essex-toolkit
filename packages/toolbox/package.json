@@ -1,5 +1,5 @@
 {
-	"name": "@essex-js-toolkit/toolbox",
+	"name": "@essex/toolbox",
 	"version": "3.0.1",
 	"description": "A set of general purpose utils",
 	"type": "module",

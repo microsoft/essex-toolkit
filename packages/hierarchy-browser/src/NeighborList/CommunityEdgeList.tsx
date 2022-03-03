@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useDimensions } from '@essex-js-toolkit/hooks'
+import { useDimensions } from '@essex/hooks'
 import { Text } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import { useCallback, memo, useRef } from 'react'

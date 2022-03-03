@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ControlledHistogramFilter } from '@essex-js-toolkit/themed-components'
+import { ControlledHistogramFilter } from '@essex/themed-components'
 import { useState } from 'react'
 
 import { CSF } from './types'

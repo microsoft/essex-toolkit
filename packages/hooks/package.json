@@ -1,5 +1,5 @@
 {
-	"name": "@essex-js-toolkit/hooks",
+	"name": "@essex/hooks",
 	"version": "4.0.3",
 	"description": "A set of hooks for use with react",
 	"type": "module",
@@ -18,7 +18,7 @@
 		"watch": "essex watch"
 	},
 	"dependencies": {
-		"@essex-js-toolkit/toolbox": "workspace:packages/toolbox",
+		"@essex/toolbox": "workspace:^",
 		"lodash-es": "^4.17.21"
 	},
 	"devDependencies": {
