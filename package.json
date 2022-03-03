@@ -26,7 +26,8 @@
 		"test": "yarn workspaces foreach -pv run test",
 		"start:": "yarn workspaces foreach -piv run start",
 		"release": "yarn workspaces foreach --exclude '@essex/dev' -pivt npm publish --tolerate-republish --access public",
-		"jest_coverage": "jest --coverage",
+		"jest": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
+		"jest_coverage": "yarn jest --coverage",
 		"lint": "essex lint --strict",
 		"lint_fix": "yarn lint --fix",
 		"git_is_clean": "essex git-is-clean",
@@ -34,17 +35,17 @@
 		"ci": "run-s build lint_fix test jest_coverage git_is_clean"
 	},
 	"devDependencies": {
-		"@essex/eslint-config": "^20.0.0",
-		"@essex/eslint-plugin": "^20.0.1",
-		"@essex/jest-config": "^21.0.0",
+		"@essex/eslint-config": "^20.0.1",
+		"@essex/eslint-plugin": "^20.0.2",
+		"@essex/jest-config": "^21.0.1",
 		"@essex/prettier-config": "^18.0.2",
-		"@essex/scripts": "^20.3.2",
-		"@types/jest": "^27.4.0",
-		"@types/node": "^17.0.18",
-		"@typescript-eslint/eslint-plugin": "^5.12.0",
-		"@typescript-eslint/parser": "^5.12.0",
+		"@essex/scripts": "^20.4.1",
+		"@types/jest": "^27.4.1",
+		"@types/node": "^17.0.21",
+		"@typescript-eslint/eslint-plugin": "^5.13.0",
+		"@typescript-eslint/parser": "^5.13.0",
 		"debug": "^4.3.3",
-		"eslint": "^8.9.0",
+		"eslint": "^8.10.0",
 		"eslint-import-resolver-node": "^0.3.6",
 		"husky": "^7.0.4",
 		"jest": "^27.5.1",
@@ -52,7 +53,7 @@
 		"npm-run-all": "^4.1.5",
 		"prettier": "^2.5.1",
 		"regenerator-runtime": "^0.13.9",
-		"typescript": "^4.5.5"
+		"typescript": "^4.6.2"
 	},
 	"workspaces": [
 		"packages/*"
