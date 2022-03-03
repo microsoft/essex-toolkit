@@ -18,8 +18,8 @@
 		"watch": "essex watch"
 	},
 	"dependencies": {
-		"@essex/hooks": "workspace:packages/hooks",
-		"@essex/toolbox": "workspace:packages/toolbox",
+		"@essex/hooks": "workspace:^",
+		"@essex/toolbox": "workspace:^",
 		"@types/d3-array": "^3.0.2",
 		"@types/d3-axis": "^3.0.1",
 		"@types/d3-brush": "^3.0.1",

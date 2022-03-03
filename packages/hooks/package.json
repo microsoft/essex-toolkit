@@ -18,7 +18,7 @@
 		"watch": "essex watch"
 	},
 	"dependencies": {
-		"@essex/toolbox": "workspace:packages/toolbox",
+		"@essex/toolbox": "workspace:^",
 		"lodash-es": "^4.17.21"
 	},
 	"devDependencies": {

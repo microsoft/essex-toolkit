@@ -14,10 +14,10 @@
 		"build": "yarn build:storybook"
 	},
 	"dependencies": {
-		"@essex/boolean-expression-component": "workspace:packages/boolean-expression-component",
-		"@essex/hierarchy-browser": "workspace:packages/hierarchy-browser",
-		"@essex/thematic-lineup": "workspace:packages/thematic-lineup",
-		"@essex/themed-components": "workspace:packages/themed-components",
+		"@essex/boolean-expression-component": "workspace:^",
+		"@essex/hierarchy-browser": "workspace:^",
+		"@essex/thematic-lineup": "workspace:^",
+		"@essex/themed-components": "workspace:^",
 		"@storybook/client-api": "^6.4.19",
 		"@storybook/core-events": "^6.4.19",
 		"react": "^17.0.2",
