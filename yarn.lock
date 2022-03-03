@@ -3570,7 +3570,7 @@ __metadata:
     fastify: ^3.27.2
     graphql: ^16.3.0
     pino: ^7.8.0
-    pino-pretty: ^7.5.1
+    pino-pretty: ^7.5.3
     tsyringe: ^4.6.0
     typescript: ^4.6.2
   peerDependencies:
@@ -17285,9 +17285,9 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"pino-pretty@npm:^7.5.1":
-  version: 7.5.1
-  resolution: "pino-pretty@npm:7.5.1"
+"pino-pretty@npm:^7.5.3":
+  version: 7.5.3
+  resolution: "pino-pretty@npm:7.5.3"
   dependencies:
     args: ^5.0.1
     colorette: ^2.0.7
@@ -17303,7 +17303,7 @@ fsevents@^1.2.7:
     strip-json-comments: ^3.1.1
   bin:
     pino-pretty: bin.js
-  checksum: 41874497208de1f6ddb0891968a11fc3a446752b5f9e20bca4bea03849a9d5104de9ec6038572c5c24ecea6504c5db8f25cb93525754cd340308a1261d948165
+  checksum: bb9f0d4b35754cf5205227e7ee66abbd787760bd3150ba9eb147a0b8858f1b55460ef577606a1388098199f9000af6586f45b6dfe27770afecad1390fef0b4bc
   languageName: node
   linkType: hard
 
