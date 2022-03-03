@@ -1,0 +1,24 @@
+{
+	"name": "@essex/semantic-components",
+	"version": "0.0.1",
+	"description": "Semantic UI components for React",
+	"type": "module",
+	"main": "src/index.ts",
+	"publishConfig": {
+		"main": "dist/index.js",
+		"types": "dist/index.d.ts"
+	},
+	"sideEffects": false,
+	"author": "Chris Trevino <chtrevin@@microsoft.com>",
+	"license": "MIT",
+	"scripts": {
+		"build": "essex build",
+		"clean": "essex clean",
+		"watch": "essex watch"
+	},
+	"devDependencies": {
+		"@essex/scripts": "^20.4.1",
+		"@essex/tsconfig-base": "^1.0.2",
+		"@types/react": "^17.0.39"
+	}
+}

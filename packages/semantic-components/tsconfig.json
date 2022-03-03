@@ -1,0 +1,7 @@
+{
+	"extends": "@essex/tsconfig-base",
+	"compilerOptions": {
+		"jsx": "react-jsx"
+	},
+	"include": ["src/index.tsx"]
+}
