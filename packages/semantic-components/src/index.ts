@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { createElement } from 'react'
 import cx from 'classnames'
+import { createElement } from 'react'
 
 export interface DefaultsObject {
 	id?: string
@@ -24,7 +24,7 @@ export default function semantic<P, D extends DefaultsObject>(
 		return createElement(decorated, {
 			...defaults,
 			...props,
-			className: cx(defaults.className, props.className),
+			className: cx(defaults?.className, props.className),
 		} as any)
 	}
 	return DecoratedComponent
