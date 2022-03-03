@@ -26,8 +26,8 @@
 		"styled-components": "^5.3.3"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.3.2",
-		"@fluentui/react": "^8.55.3",
+		"@essex/scripts": "^20.4.1",
+		"@fluentui/react": "^8.57.0",
 		"@thematic/core": "^2.0.4",
 		"@thematic/fluent": "^3.0.4",
 		"@thematic/react": "^2.0.4",
@@ -37,7 +37,7 @@
 		"@types/prop-types": "^15.7.4",
 		"@types/react": "^17.0.39",
 		"@types/react-infinite-scroller": "^1.2.2",
-		"@types/styled-components": "^5.1.23",
+		"@types/styled-components": "^5.1.24",
 		"prop-types": "^15.8.1",
 		"react": "^17.0.2",
 		"react-is": "^17.0.2"
