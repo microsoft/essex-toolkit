@@ -1,12 +1,11 @@
-/*!
+/*
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  *
  * @jest-environment jsdom
  */
-import semantic from '../index.js'
-
 import { render } from '@testing-library/react'
+import semantic from '../index.js'
 
 const ComponentA: React.FC<{
 	id: string
@@ -50,12 +49,11 @@ describe('Semantic Components', () => {
 	})
 
 	it('can augment the classnames of a component', () => {
-		const rendered = render(
+		render(
 			<SemanticDiv>
 				<SemanticA id="def" className="c" />
 			</SemanticDiv>,
 		)
-		rendered.debug()
 		expect(document.querySelectorAll('.my-class')).toHaveLength(1)
 		expect(document.querySelectorAll('.c')).toHaveLength(1)
 	})
