@@ -16,7 +16,7 @@
 		"directory": "packages/boolean-expression-component"
 	},
 	"scripts": {
-		"build": "essex build",
+		"build": "essex build --skipExportCheck",
 		"clean": "essex clean",
 		"watch": "essex watch"
 	},
