@@ -24,235 +24,146 @@ export default function semantic<P, D>(
 	return DecoratedComponent
 }
 
-semantic.a = (defaults?: React.HTMLProps<HTMLAnchorElement>) =>
-	semantic('a', defaults)
-semantic.abbr = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('abbr', defaults)
-semantic.address = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('address', defaults)
-semantic.area = (defaults?: React.HTMLProps<HTMLAreaElement>) =>
-	semantic('area', defaults)
-semantic.article = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('article', defaults)
-semantic.aside = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('aside', defaults)
-semantic.audio = (defaults?: React.HTMLProps<HTMLAudioElement>) =>
-	semantic('audio', defaults)
-semantic.b = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('b', defaults)
-semantic.base = (defaults?: React.HTMLProps<HTMLBaseElement>) =>
-	semantic('base', defaults)
-semantic.bdi = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('bdi', defaults)
-semantic.bdo = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('bdo', defaults)
-semantic.big = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('big', defaults)
-semantic.blockquote = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('blockquote', defaults)
-semantic.body = (defaults?: React.HTMLProps<HTMLBodyElement>) =>
-	semantic('body', defaults)
-semantic.br = (defaults?: React.HTMLProps<HTMLBRElement>) =>
-	semantic('br', defaults)
-semantic.button = (defaults?: React.HTMLProps<HTMLButtonElement>) =>
-	semantic('button', defaults)
-semantic.canvas = (defaults?: React.HTMLProps<HTMLCanvasElement>) =>
-	semantic('canvas', defaults)
-semantic.caption = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('caption', defaults)
-semantic.cite = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('cite', defaults)
-semantic.code = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('code', defaults)
-semantic.col = (defaults?: React.HTMLProps<HTMLTableColElement>) =>
-	semantic('col', defaults)
-semantic.colgroup = (defaults?: React.HTMLProps<HTMLTableColElement>) =>
-	semantic('colgroup', defaults)
-semantic.data = (defaults?: React.HTMLProps<HTMLDataElement>) =>
-	semantic('data', defaults)
-semantic.datalist = (defaults?: React.HTMLProps<HTMLDataListElement>) =>
-	semantic('datalist', defaults)
-semantic.dd = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('dd', defaults)
-semantic.del = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('del', defaults)
-semantic.details = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('details', defaults)
-semantic.dfn = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('dfn', defaults)
-semantic.dialog = (defaults?: React.HTMLProps<HTMLDialogElement>) =>
-	semantic('dialog', defaults)
-semantic.div = (defaults?: React.HTMLProps<HTMLDivElement>) =>
-	semantic('div', defaults)
-semantic.dl = (defaults?: React.HTMLProps<HTMLDListElement>) =>
-	semantic('dl', defaults)
-semantic.dt = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('dt', defaults)
-semantic.em = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('em', defaults)
-semantic.embed = (defaults?: React.HTMLProps<HTMLEmbedElement>) =>
-	semantic('embed', defaults)
-semantic.fieldset = (defaults?: React.HTMLProps<HTMLFieldSetElement>) =>
-	semantic('fieldset', defaults)
-semantic.figcaption = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('figcaption', defaults)
-semantic.figure = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('figure', defaults)
-semantic.footer = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('footer', defaults)
-semantic.form = (defaults?: React.HTMLProps<HTMLFormElement>) =>
-	semantic('form', defaults)
-semantic.h1 = (defaults?: React.HTMLProps<HTMLHeadingElement>) =>
-	semantic('h1', defaults)
-semantic.h2 = (defaults?: React.HTMLProps<HTMLHeadingElement>) =>
-	semantic('h2', defaults)
-semantic.h3 = (defaults?: React.HTMLProps<HTMLHeadingElement>) =>
-	semantic('h3', defaults)
-semantic.h4 = (defaults?: React.HTMLProps<HTMLHeadingElement>) =>
-	semantic('h4', defaults)
-semantic.h5 = (defaults?: React.HTMLProps<HTMLHeadingElement>) =>
-	semantic('h5', defaults)
-semantic.h6 = (defaults?: React.HTMLProps<HTMLHeadingElement>) =>
-	semantic('h6', defaults)
-semantic.head = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('head', defaults)
-semantic.header = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('header', defaults)
-semantic.hgroup = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('hgroup', defaults)
-semantic.hr = (defaults?: React.HTMLProps<HTMLHRElement>) =>
-	semantic('hr', defaults)
-semantic.html = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('html', defaults)
-semantic.i = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('i', defaults)
-semantic.iframe = (defaults?: React.HTMLProps<HTMLIFrameElement>) =>
-	semantic('iframe', defaults)
-semantic.img = (defaults?: React.HTMLProps<HTMLImageElement>) =>
-	semantic('img', defaults)
-semantic.input = (defaults?: React.HTMLProps<HTMLInputElement>) =>
-	semantic('input', defaults)
-semantic.ins = (defaults?: React.HTMLProps<HTMLModElement>) =>
-	semantic('ins', defaults)
-semantic.kbd = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('kbd', defaults)
-semantic.keygen = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('keygen', defaults)
-semantic.label = (defaults?: React.HTMLProps<HTMLLabelElement>) =>
-	semantic('label', defaults)
-semantic.legend = (defaults?: React.HTMLProps<HTMLLegendElement>) =>
-	semantic('legend', defaults)
-semantic.li = (defaults?: React.HTMLProps<HTMLLIElement>) =>
-	semantic('li', defaults)
-semantic.link = (defaults?: React.HTMLProps<HTMLLinkElement>) =>
-	semantic('link', defaults)
-semantic.main = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('main', defaults)
-semantic.map = (defaults?: React.HTMLProps<HTMLMapElement>) =>
-	semantic('map', defaults)
-semantic.mark = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('mark', defaults)
-semantic.menu = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('menu', defaults)
-semantic.menuitem = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('menuitem', defaults)
-semantic.meta = (defaults?: React.HTMLProps<HTMLMetaElement>) =>
-	semantic('meta', defaults)
-semantic.meter = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('meter', defaults)
-semantic.nav = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('nav', defaults)
-semantic.noscript = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('noscript', defaults)
-semantic.object = (defaults?: React.HTMLProps<HTMLObjectElement>) =>
-	semantic('object', defaults)
-semantic.ol = (defaults?: React.HTMLProps<HTMLOListElement>) =>
-	semantic('ol', defaults)
-semantic.optgroup = (defaults?: React.HTMLProps<HTMLOptGroupElement>) =>
-	semantic('optgroup', defaults)
-semantic.option = (defaults?: React.HTMLProps<HTMLOptionElement>) =>
-	semantic('option', defaults)
-semantic.output = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('output', defaults)
-semantic.p = (defaults?: React.HTMLProps<HTMLParagraphElement>) =>
-	semantic('p', defaults)
-semantic.param = (defaults?: React.HTMLProps<HTMLParamElement>) =>
-	semantic('param', defaults)
-semantic.picture = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('picture', defaults)
-semantic.pre = (defaults?: React.HTMLProps<HTMLPreElement>) =>
-	semantic('pre', defaults)
-semantic.progress = (defaults?: React.HTMLProps<HTMLProgressElement>) =>
-	semantic('progress', defaults)
-semantic.q = (defaults?: React.HTMLProps<HTMLQuoteElement>) =>
-	semantic('q', defaults)
-semantic.rp = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('rp', defaults)
-semantic.rt = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('rt', defaults)
-semantic.ruby = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('ruby', defaults)
-semantic.s = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('s', defaults)
-semantic.samp = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('samp', defaults)
-semantic.slot = (defaults?: React.HTMLProps<HTMLSlotElement>) =>
-	semantic('slot', defaults)
-semantic.script = (defaults?: React.HTMLProps<HTMLScriptElement>) =>
-	semantic('script', defaults)
-semantic.section = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('section', defaults)
-semantic.select = (defaults?: React.HTMLProps<HTMLSelectElement>) =>
-	semantic('select', defaults)
-semantic.small = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('small', defaults)
-semantic.source = (defaults?: React.HTMLProps<HTMLSourceElement>) =>
-	semantic('source', defaults)
-semantic.span = (defaults?: React.HTMLProps<HTMLSpanElement>) =>
-	semantic('span', defaults)
-semantic.strong = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('strong', defaults)
-semantic.style = (defaults?: React.HTMLProps<HTMLStyleElement>) =>
-	semantic('style', defaults)
-semantic.sub = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('sub', defaults)
-semantic.summary = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('summary', defaults)
-semantic.sup = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('sup', defaults)
-semantic.table = (defaults?: React.HTMLProps<HTMLTableElement>) =>
-	semantic('table', defaults)
-semantic.template = (defaults?: React.HTMLProps<HTMLTemplateElement>) =>
-	semantic('template', defaults)
-semantic.tbody = (defaults?: React.HTMLProps<HTMLTableSectionElement>) =>
-	semantic('tbody', defaults)
-semantic.td = (defaults?: React.HTMLProps<HTMLTableDataCellElement>) =>
-	semantic('td', defaults)
-semantic.textarea = (defaults?: React.HTMLProps<HTMLTextAreaElement>) =>
-	semantic('textarea', defaults)
-semantic.tfoot = (defaults?: React.HTMLProps<HTMLTableSectionElement>) =>
-	semantic('tfoot', defaults)
-semantic.th = (defaults?: React.HTMLProps<HTMLTableHeaderCellElement>) =>
-	semantic('th', defaults)
-semantic.thead = (defaults?: React.HTMLProps<HTMLTableSectionElement>) =>
-	semantic('thead', defaults)
-semantic.time = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('time', defaults)
-semantic.title = (defaults?: React.HTMLProps<HTMLTitleElement>) =>
-	semantic('title', defaults)
-semantic.tr = (defaults?: React.HTMLProps<HTMLTableRowElement>) =>
-	semantic('tr', defaults)
-semantic.track = (defaults?: React.HTMLProps<HTMLTrackElement>) =>
-	semantic('track', defaults)
-semantic.u = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('u', defaults)
-semantic.ul = (defaults?: React.HTMLProps<HTMLUListElement>) =>
-	semantic('ul', defaults)
-semantic.var = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('var', defaults)
-semantic.video = (defaults?: React.HTMLProps<HTMLVideoElement>) =>
-	semantic('video', defaults)
-semantic.wbr = (defaults?: React.HTMLProps<HTMLElement>) =>
-	semantic('wbr', defaults)
-semantic.webview = (defaults?: React.HTMLProps<HTMLWebViewElement>) =>
-	semantic('webview', defaults)
+semantic.a = (d?: React.HTMLProps<HTMLAnchorElement>) => semantic('a', d)
+semantic.abbr = (d?: React.HTMLProps<HTMLElement>) => semantic('abbr', d)
+semantic.address = (d?: React.HTMLProps<HTMLElement>) => semantic('address', d)
+semantic.area = (d?: React.HTMLProps<HTMLAreaElement>) => semantic('area', d)
+semantic.article = (d?: React.HTMLProps<HTMLElement>) => semantic('article', d)
+semantic.aside = (d?: React.HTMLProps<HTMLElement>) => semantic('aside', d)
+semantic.audio = (d?: React.HTMLProps<HTMLAudioElement>) => semantic('audio', d)
+semantic.b = (d?: React.HTMLProps<HTMLElement>) => semantic('b', d)
+semantic.base = (d?: React.HTMLProps<HTMLBaseElement>) => semantic('base', d)
+semantic.bdi = (d?: React.HTMLProps<HTMLElement>) => semantic('bdi', d)
+semantic.bdo = (d?: React.HTMLProps<HTMLElement>) => semantic('bdo', d)
+semantic.big = (d?: React.HTMLProps<HTMLElement>) => semantic('big', d)
+semantic.blockquote = (d?: React.HTMLProps<HTMLElement>) =>
+	semantic('blockquote', d)
+semantic.body = (d?: React.HTMLProps<HTMLBodyElement>) => semantic('body', d)
+semantic.br = (d?: React.HTMLProps<HTMLBRElement>) => semantic('br', d)
+semantic.button = (d?: React.HTMLProps<HTMLButtonElement>) =>
+	semantic('button', d)
+semantic.canvas = (d?: React.HTMLProps<HTMLCanvasElement>) =>
+	semantic('canvas', d)
+semantic.caption = (d?: React.HTMLProps<HTMLElement>) => semantic('caption', d)
+semantic.cite = (d?: React.HTMLProps<HTMLElement>) => semantic('cite', d)
+semantic.code = (d?: React.HTMLProps<HTMLElement>) => semantic('code', d)
+semantic.col = (d?: React.HTMLProps<HTMLTableColElement>) => semantic('col', d)
+semantic.colgroup = (d?: React.HTMLProps<HTMLTableColElement>) =>
+	semantic('colgroup', d)
+semantic.data = (d?: React.HTMLProps<HTMLDataElement>) => semantic('data', d)
+semantic.datalist = (d?: React.HTMLProps<HTMLDataListElement>) =>
+	semantic('datalist', d)
+semantic.dd = (d?: React.HTMLProps<HTMLElement>) => semantic('dd', d)
+semantic.del = (d?: React.HTMLProps<HTMLElement>) => semantic('del', d)
+semantic.details = (d?: React.HTMLProps<HTMLElement>) => semantic('details', d)
+semantic.dfn = (d?: React.HTMLProps<HTMLElement>) => semantic('dfn', d)
+semantic.dialog = (d?: React.HTMLProps<HTMLDialogElement>) =>
+	semantic('dialog', d)
+semantic.div = (d?: React.HTMLProps<HTMLDivElement>) => semantic('div', d)
+semantic.dl = (d?: React.HTMLProps<HTMLDListElement>) => semantic('dl', d)
+semantic.dt = (d?: React.HTMLProps<HTMLElement>) => semantic('dt', d)
+semantic.em = (d?: React.HTMLProps<HTMLElement>) => semantic('em', d)
+semantic.embed = (d?: React.HTMLProps<HTMLEmbedElement>) => semantic('embed', d)
+semantic.fieldset = (d?: React.HTMLProps<HTMLFieldSetElement>) =>
+	semantic('fieldset', d)
+semantic.figcaption = (d?: React.HTMLProps<HTMLElement>) =>
+	semantic('figcaption', d)
+semantic.figure = (d?: React.HTMLProps<HTMLElement>) => semantic('figure', d)
+semantic.footer = (d?: React.HTMLProps<HTMLElement>) => semantic('footer', d)
+semantic.form = (d?: React.HTMLProps<HTMLFormElement>) => semantic('form', d)
+semantic.h1 = (d?: React.HTMLProps<HTMLHeadingElement>) => semantic('h1', d)
+semantic.h2 = (d?: React.HTMLProps<HTMLHeadingElement>) => semantic('h2', d)
+semantic.h3 = (d?: React.HTMLProps<HTMLHeadingElement>) => semantic('h3', d)
+semantic.h4 = (d?: React.HTMLProps<HTMLHeadingElement>) => semantic('h4', d)
+semantic.h5 = (d?: React.HTMLProps<HTMLHeadingElement>) => semantic('h5', d)
+semantic.h6 = (d?: React.HTMLProps<HTMLHeadingElement>) => semantic('h6', d)
+semantic.head = (d?: React.HTMLProps<HTMLElement>) => semantic('head', d)
+semantic.header = (d?: React.HTMLProps<HTMLElement>) => semantic('header', d)
+semantic.hgroup = (d?: React.HTMLProps<HTMLElement>) => semantic('hgroup', d)
+semantic.hr = (d?: React.HTMLProps<HTMLHRElement>) => semantic('hr', d)
+semantic.html = (d?: React.HTMLProps<HTMLElement>) => semantic('html', d)
+semantic.i = (d?: React.HTMLProps<HTMLElement>) => semantic('i', d)
+semantic.iframe = (d?: React.HTMLProps<HTMLIFrameElement>) =>
+	semantic('iframe', d)
+semantic.img = (d?: React.HTMLProps<HTMLImageElement>) => semantic('img', d)
+semantic.input = (d?: React.HTMLProps<HTMLInputElement>) => semantic('input', d)
+semantic.ins = (d?: React.HTMLProps<HTMLModElement>) => semantic('ins', d)
+semantic.kbd = (d?: React.HTMLProps<HTMLElement>) => semantic('kbd', d)
+semantic.keygen = (d?: React.HTMLProps<HTMLElement>) => semantic('keygen', d)
+semantic.label = (d?: React.HTMLProps<HTMLLabelElement>) => semantic('label', d)
+semantic.legend = (d?: React.HTMLProps<HTMLLegendElement>) =>
+	semantic('legend', d)
+semantic.li = (d?: React.HTMLProps<HTMLLIElement>) => semantic('li', d)
+semantic.link = (d?: React.HTMLProps<HTMLLinkElement>) => semantic('link', d)
+semantic.main = (d?: React.HTMLProps<HTMLElement>) => semantic('main', d)
+semantic.map = (d?: React.HTMLProps<HTMLMapElement>) => semantic('map', d)
+semantic.mark = (d?: React.HTMLProps<HTMLElement>) => semantic('mark', d)
+semantic.menu = (d?: React.HTMLProps<HTMLElement>) => semantic('menu', d)
+semantic.menuitem = (d?: React.HTMLProps<HTMLElement>) =>
+	semantic('menuitem', d)
+semantic.meta = (d?: React.HTMLProps<HTMLMetaElement>) => semantic('meta', d)
+semantic.meter = (d?: React.HTMLProps<HTMLElement>) => semantic('meter', d)
+semantic.nav = (d?: React.HTMLProps<HTMLElement>) => semantic('nav', d)
+semantic.noscript = (d?: React.HTMLProps<HTMLElement>) =>
+	semantic('noscript', d)
+semantic.object = (d?: React.HTMLProps<HTMLObjectElement>) =>
+	semantic('object', d)
+semantic.ol = (d?: React.HTMLProps<HTMLOListElement>) => semantic('ol', d)
+semantic.optgroup = (d?: React.HTMLProps<HTMLOptGroupElement>) =>
+	semantic('optgroup', d)
+semantic.option = (d?: React.HTMLProps<HTMLOptionElement>) =>
+	semantic('option', d)
+semantic.output = (d?: React.HTMLProps<HTMLElement>) => semantic('output', d)
+semantic.p = (d?: React.HTMLProps<HTMLParagraphElement>) => semantic('p', d)
+semantic.param = (d?: React.HTMLProps<HTMLParamElement>) => semantic('param', d)
+semantic.picture = (d?: React.HTMLProps<HTMLElement>) => semantic('picture', d)
+semantic.pre = (d?: React.HTMLProps<HTMLPreElement>) => semantic('pre', d)
+semantic.progress = (d?: React.HTMLProps<HTMLProgressElement>) =>
+	semantic('progress', d)
+semantic.q = (d?: React.HTMLProps<HTMLQuoteElement>) => semantic('q', d)
+semantic.rp = (d?: React.HTMLProps<HTMLElement>) => semantic('rp', d)
+semantic.rt = (d?: React.HTMLProps<HTMLElement>) => semantic('rt', d)
+semantic.ruby = (d?: React.HTMLProps<HTMLElement>) => semantic('ruby', d)
+semantic.s = (d?: React.HTMLProps<HTMLElement>) => semantic('s', d)
+semantic.samp = (d?: React.HTMLProps<HTMLElement>) => semantic('samp', d)
+semantic.slot = (d?: React.HTMLProps<HTMLSlotElement>) => semantic('slot', d)
+semantic.script = (d?: React.HTMLProps<HTMLScriptElement>) =>
+	semantic('script', d)
+semantic.section = (d?: React.HTMLProps<HTMLElement>) => semantic('section', d)
+semantic.select = (d?: React.HTMLProps<HTMLSelectElement>) =>
+	semantic('select', d)
+semantic.small = (d?: React.HTMLProps<HTMLElement>) => semantic('small', d)
+semantic.source = (d?: React.HTMLProps<HTMLSourceElement>) =>
+	semantic('source', d)
+semantic.span = (d?: React.HTMLProps<HTMLSpanElement>) => semantic('span', d)
+semantic.strong = (d?: React.HTMLProps<HTMLElement>) => semantic('strong', d)
+semantic.style = (d?: React.HTMLProps<HTMLStyleElement>) => semantic('style', d)
+semantic.sub = (d?: React.HTMLProps<HTMLElement>) => semantic('sub', d)
+semantic.summary = (d?: React.HTMLProps<HTMLElement>) => semantic('summary', d)
+semantic.sup = (d?: React.HTMLProps<HTMLElement>) => semantic('sup', d)
+semantic.table = (d?: React.HTMLProps<HTMLTableElement>) => semantic('table', d)
+semantic.template = (d?: React.HTMLProps<HTMLTemplateElement>) =>
+	semantic('template', d)
+semantic.tbody = (d?: React.HTMLProps<HTMLTableSectionElement>) =>
+	semantic('tbody', d)
+semantic.td = (d?: React.HTMLProps<HTMLTableDataCellElement>) =>
+	semantic('td', d)
+semantic.textarea = (d?: React.HTMLProps<HTMLTextAreaElement>) =>
+	semantic('textarea', d)
+semantic.tfoot = (d?: React.HTMLProps<HTMLTableSectionElement>) =>
+	semantic('tfoot', d)
+semantic.th = (d?: React.HTMLProps<HTMLTableHeaderCellElement>) =>
+	semantic('th', d)
+semantic.thead = (d?: React.HTMLProps<HTMLTableSectionElement>) =>
+	semantic('thead', d)
+semantic.time = (d?: React.HTMLProps<HTMLElement>) => semantic('time', d)
+semantic.title = (d?: React.HTMLProps<HTMLTitleElement>) => semantic('title', d)
+semantic.tr = (d?: React.HTMLProps<HTMLTableRowElement>) => semantic('tr', d)
+semantic.track = (d?: React.HTMLProps<HTMLTrackElement>) => semantic('track', d)
+semantic.u = (d?: React.HTMLProps<HTMLElement>) => semantic('u', d)
+semantic.ul = (d?: React.HTMLProps<HTMLUListElement>) => semantic('ul', d)
+semantic.var = (d?: React.HTMLProps<HTMLElement>) => semantic('var', d)
+semantic.video = (d?: React.HTMLProps<HTMLVideoElement>) => semantic('video', d)
+semantic.wbr = (d?: React.HTMLProps<HTMLElement>) => semantic('wbr', d)
+semantic.webview = (d?: React.HTMLProps<HTMLWebViewElement>) =>
+	semantic('webview', d)

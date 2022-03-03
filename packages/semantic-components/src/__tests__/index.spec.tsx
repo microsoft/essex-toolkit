@@ -1,4 +1,4 @@
-import semantic from './index.js'
+import semantic from '../index.js'
 
 const CompA: React.FC<{
 	id: string
