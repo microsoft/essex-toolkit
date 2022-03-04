@@ -2,7 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
+
+const NONE: unknown[] = []
 
 /**
  * A hook which invokes a long running task, and provides a loading flag
@@ -14,7 +17,7 @@ import { useState, useEffect } from 'react'
 export function useLongRunning<T>(
 	execute: () => T,
 	delay = 100,
-	deps?: any[],
+	deps: unknown[] = NONE,
 ): [boolean, T | undefined] {
 	const [loading, setLoading] = useState(true)
 	const [output, setOutput] = useState<T | undefined>()
@@ -25,6 +28,6 @@ export function useLongRunning<T>(
 			setOutput(newOutput)
 			setLoading(false)
 		}, delay)
-	}, [delay, execute])
+	}, [delay, execute, ...deps])
 	return [loading, output] as [boolean, T | undefined]
 }
