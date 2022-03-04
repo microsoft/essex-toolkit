@@ -1,17 +1,8 @@
 {
 	"extends": "@essex/eslint-config",
-	"parser": "@typescript-eslint/parser",
 	"rules": {
 		// Rules to re-enable eventually
 		"@typescript-eslint/explicit-function-return-type": "off",
 		"@typescript-eslint/no-explicit-any": "off"
-	},
-	"overrides": [
-		{
-			"files": ["**/*.spec.ts", "**/*.spec.tsx"],
-			"rules": {
-				"header/header": "off"
-			}
-		}
-	]
+	}
 }

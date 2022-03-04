@@ -58,7 +58,7 @@ describe('deferred', () => {
 			return new Promise<void>((resolve, reject) => {
 				instance.promise
 					.then(
-						args => {
+						() => {
 							reject('This promise should not have been resolved')
 						},
 						args => {
@@ -80,7 +80,7 @@ describe('deferred', () => {
 			const expectedArgs = [1, 2]
 			return new Promise<void>((resolve, reject) => {
 				instance.reject(expectedArgs).then(
-					args => {
+					() => {
 						reject('This promise should not have been resolved')
 					},
 					args => {
