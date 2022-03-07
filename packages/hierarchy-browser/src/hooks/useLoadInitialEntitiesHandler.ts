@@ -3,12 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useCallback } from 'react'
-import {
-	CommunityDataProvider,
-	DEFAULT_LOAD_COUNT,
-} from '../common/dataProviders/index.js'
-import { IEntityDetail } from '../index.js'
-import { IEntityLoadParams } from './useLoadMoreEntitiesHandler.js'
+import type { CommunityDataProvider } from '../common/dataProviders/index.js'
+import { DEFAULT_LOAD_COUNT } from '../common/dataProviders/index.js'
+import type { IEntityDetail } from '../index.js'
+import type { IEntityLoadParams } from './useLoadMoreEntitiesHandler.js'
 
 export function useLoadInitialEntitiesHandler(
 	handleEntitiesLoaded: (

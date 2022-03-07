@@ -7,7 +7,7 @@ import { useCallback } from 'react'
 import { BooleanControl } from './BooleanControl.js'
 import { NumberControl } from './NumberControl.js'
 import { TextControl } from './TextControl.js'
-import {
+import type {
 	SettingConfig,
 	ParsedSettingConfig,
 	SortedSettings,

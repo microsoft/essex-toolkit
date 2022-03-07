@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { FastifyRequest } from 'fastify'
-import {
+import type { FastifyRequest } from 'fastify'
+import type {
 	IAuthenticator,
 	IBaseConfiguration,
 	IRequestAppContext,

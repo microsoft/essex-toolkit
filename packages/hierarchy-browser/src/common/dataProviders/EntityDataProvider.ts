@@ -3,13 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import {
+import type {
 	IEntityDetail,
 	EntityId,
 	ILoadParams,
 	IHierarchyDataResponse,
 } from '../../index.js'
-import { ENTITY_TYPE } from '../types/types.js'
+import type { ENTITY_TYPE } from '../types/types.js'
 
 export class EntityDataProvider {
 	private _entities: IEntityDetail[] = [] // all entities currently loaded

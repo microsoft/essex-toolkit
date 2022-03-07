@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { HashMap } from './HashMap'
+import type { HashMap } from './HashMap'
 
 /**
  * An alias to HashMap

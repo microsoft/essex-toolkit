@@ -8,9 +8,10 @@ import { builder as lineupBuilder } from 'lineupjs'
 import { useState, useMemo, useRef, useEffect } from 'react'
 import 'lineupjs/build/LineUpJS.css'
 import { ThematicLineupStyles } from './ThematicLineupStyles.js'
-import { Filter, applyFilters } from './filters.js'
+import type { Filter } from './filters.js'
+import { applyFilters } from './filters.js'
+import type { ColumnConfig } from './lineup.js'
 import {
-	ColumnConfig,
 	createNumberColorScale,
 	selectColumnBuilder,
 	nameToLabel,

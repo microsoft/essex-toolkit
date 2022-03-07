@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ScaleLinear } from 'd3-scale'
+import type { ScaleLinear } from 'd3-scale'
 import { memo, useMemo } from 'react'
 
 import styled from 'styled-components'

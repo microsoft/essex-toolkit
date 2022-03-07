@@ -4,7 +4,8 @@
  */
 import { Toggle, Checkbox } from '@fluentui/react'
 import { useCallback } from 'react'
-import { ControlType, ControlProps } from './interfaces.js'
+import type { ControlProps } from './interfaces.js'
+import { ControlType } from './interfaces.js'
 
 /**
  * BooleanControl creates either Checkbox or Toggle Fluent component

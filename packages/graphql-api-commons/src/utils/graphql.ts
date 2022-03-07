@@ -4,7 +4,8 @@
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { mapSchema, MapperKind, getDirectives } from '@graphql-tools/utils'
-import { defaultFieldResolver, GraphQLSchema } from 'graphql'
+import type { GraphQLSchema } from 'graphql'
+import { defaultFieldResolver } from 'graphql'
 
 export function attachDirectiveResolvers<ResolverType>(
 	schema: GraphQLSchema,

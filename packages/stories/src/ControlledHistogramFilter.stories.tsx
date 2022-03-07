@@ -5,7 +5,7 @@
 import { ControlledHistogramFilter } from '@essex/themed-components'
 import { useState } from 'react'
 
-import { CSF } from './types'
+import type { CSF } from './types'
 
 const story = {
 	title: 'ControlledHistogramFilter',

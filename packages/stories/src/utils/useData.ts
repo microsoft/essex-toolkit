@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ICommunityDetail } from '@essex/hierarchy-browser'
+import type { ICommunityDetail } from '@essex/hierarchy-browser'
 import { useState, useEffect, useMemo, useCallback } from 'react'
-import {
+import type {
 	CommunityData,
 	EdgeData,
 	JoinData,

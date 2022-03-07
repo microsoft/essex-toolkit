@@ -4,7 +4,7 @@
  */
 import { useMemo } from 'react'
 import { CommunityDataProvider } from '../common/dataProviders/index.js'
-import {
+import type {
 	ICommunitiesAsyncHook,
 	ICommunity,
 	IDataProvidersCache,

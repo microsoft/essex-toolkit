@@ -2,12 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	ChoiceGroup,
-	IChoiceGroupOption,
-	Toggle,
-	IButtonStyles,
-} from '@fluentui/react'
+import type { IChoiceGroupOption, IButtonStyles } from '@fluentui/react'
+import { ChoiceGroup, Toggle } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
 import './Style.css'

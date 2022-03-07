@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { memo, useCallback, useRef } from 'react'
-import {
+import type {
 	BooleanOperation,
 	FilterClauseGroup,
 	FilterClause,

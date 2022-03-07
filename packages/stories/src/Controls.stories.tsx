@@ -10,7 +10,7 @@ import {
 } from '@essex/themed-components'
 import React, { useCallback, useState } from 'react'
 
-import { CSF } from './types'
+import type { CSF } from './types'
 
 const meta = {
 	title: 'Controls',

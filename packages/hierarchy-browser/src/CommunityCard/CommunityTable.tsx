@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { EntityItem } from '../EntityItem/EntityItem.js'
 import { textStyle } from '../common/styles/index.js'
 import { useTableStyles } from '../hooks/useStyles.js'
-import {
+import type {
 	CommunityId,
 	ITableSettings,
 	EntityId,

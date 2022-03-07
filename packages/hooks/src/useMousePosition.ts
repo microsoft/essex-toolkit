@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import debounce from 'lodash-es/debounce.js'
-import { useState, MutableRefObject } from 'react'
+import type { MutableRefObject } from 'react'
+import { useState } from 'react'
 import { useEventListener } from './useEventListener.js'
 
 interface Position {

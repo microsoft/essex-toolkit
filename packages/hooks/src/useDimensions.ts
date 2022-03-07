@@ -2,8 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useState, MutableRefObject, useEffect } from 'react'
-import { Dimensions } from './interfaces/index.js'
+import type { MutableRefObject } from 'react'
+import { useState, useEffect } from 'react'
+import type { Dimensions } from './interfaces/index.js'
 
 /**
  * A hook for getting the dimensions of the given element. This hook also updates when the given element resizes.

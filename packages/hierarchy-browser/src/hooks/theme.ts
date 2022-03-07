@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ITextProps } from '@fluentui/react'
+import type { ITextProps } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import { useMemo } from 'react'
-import { ICardOverviewSettings } from '../types/index.js'
+import type { ICardOverviewSettings } from '../types/index.js'
 
 export function useContainerStyle(isOpen: boolean): React.CSSProperties {
 	const theme = useThematic()

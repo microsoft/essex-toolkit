@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useMemo } from 'react'
-import { INeighborCommunityDetail } from '../../index.js'
+import type { INeighborCommunityDetail } from '../../index.js'
 
 export function useSortedNeighbors(
 	edges?: INeighborCommunityDetail[],

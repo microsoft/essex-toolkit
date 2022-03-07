@@ -5,7 +5,8 @@
 import { Slider, Position } from '@fluentui/react'
 import { useCallback } from 'react'
 import { NumberSpinButton } from '../NumberSpinButton/index.js'
-import { ControlType, ControlProps } from './interfaces.js'
+import type { ControlProps } from './interfaces.js'
+import { ControlType } from './interfaces.js'
 
 /**
  * NumberControl creates either a thematic styled NumberSpinButton or Slider

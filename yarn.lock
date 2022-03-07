@@ -3472,34 +3472,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex-js-toolkit/hooks@npm:^4.0.0":
-  version: 4.0.3
-  resolution: "@essex-js-toolkit/hooks@npm:4.0.3"
-  dependencies:
-    "@essex-js-toolkit/toolbox": 3.0.1
-    lodash-es: ^4.17.21
-  peerDependencies:
-    "@types/node": "*"
-    "@types/react": "*"
-    "@types/react-dom": "*"
-    react: ">=16.8.0"
-  checksum: 112b417dea249809b77741d38d6f95a856c94871021604c05239fe6c7b685e98693248887ea6a6e9208391bf9c76358b531aa45d7ae09cf0f4ed40410d345148
-  languageName: node
-  linkType: hard
-
-"@essex-js-toolkit/toolbox@npm:3.0.1":
-  version: 3.0.1
-  resolution: "@essex-js-toolkit/toolbox@npm:3.0.1"
-  checksum: 24b864ce1819374b00ab6f5b8633232c3ea212993dc52467a7de4f606843cfaa19ad3239bb257fcfd0c6bf189319602005be372070bc1f4f98570288a3dfdac6
-  languageName: node
-  linkType: hard
-
 "@essex/boolean-expression-component@workspace:^, @essex/boolean-expression-component@workspace:packages/boolean-expression-component":
   version: 0.0.0-use.local
   resolution: "@essex/boolean-expression-component@workspace:packages/boolean-expression-component"
   dependencies:
-    "@essex/scripts": ^20.4.4
-    "@fluentui/react": ^8.57.0
+    "@essex/scripts": ^20.4.6
+    "@fluentui/react": ^8.58.0
     "@types/react": ^17.0.39
     "@types/react-dom": ^17.0.13
     react: ^17.0.2
@@ -3512,21 +3490,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex/eslint-config@npm:^20.0.5":
-  version: 20.0.5
-  resolution: "@essex/eslint-config@npm:20.0.5"
+"@essex/eslint-config@npm:^20.0.6":
+  version: 20.0.6
+  resolution: "@essex/eslint-config@npm:20.0.6"
   peerDependencies:
-    "@essex/eslint-plugin": ">=20.0.6"
+    "@essex/eslint-plugin": ">=20.0.7"
     "@typescript-eslint/eslint-plugin": ">= 4.4.1"
     "@typescript-eslint/parser": ">= 4.4.1"
     eslint-import-resolver-node: ">= 0.3.4"
-  checksum: 78a86a2078a169becfb74248d320fcd628c01951ca9f8b55a55d61e62acf6218b58108db01bfedecd7a914bb4e716e6b3d3c172a0b193867acb17a05e6e8ec24
+  checksum: dbb36c508682a8a8946dad0c886b7674e0e4003a77a18b3c220227cbb4f6625e9464dc00b5ca7e7242f9861852e65684e42205ddb68fb98594137f86bd490b66
   languageName: node
   linkType: hard
 
-"@essex/eslint-plugin@npm:^20.0.6":
-  version: 20.0.6
-  resolution: "@essex/eslint-plugin@npm:20.0.6"
+"@essex/eslint-plugin@npm:^20.0.7":
+  version: 20.0.7
+  resolution: "@essex/eslint-plugin@npm:20.0.7"
   dependencies:
     "@babel/core": ^7.17.5
     "@babel/eslint-parser": ^7.17.0
@@ -3549,7 +3527,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ">= 4.4.1"
     "@typescript-eslint/parser": ">= 4.4.1"
     eslint-import-resolver-node: ">= 0.3.4"
-  checksum: 85887249ed7a736653c283000f249769d49654dd5a98f9fa83c6424066a7d723de900cd7cb7ac4dfab755b436fbe9d97b6d2b2d18ffc40d9801360ca05bd9ee0
+  checksum: 3d0754508d6b271e8971e3c33856e101ee665402790542db8ae889e876debede7b4b6684c6811374f48a07af983a7b0587a24afa32182c506eb377f7a089ebb7
   languageName: node
   linkType: hard
 
@@ -3557,13 +3535,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@essex/graphql-api-commons@workspace:packages/graphql-api-commons"
   dependencies:
-    "@essex/scripts": ^20.4.4
+    "@essex/scripts": ^20.4.6
     "@graphql-tools/utils": ^8.6.2
     "@tsconfig/node14": ^1.0.1
     "@types/pino": ^7.0.5
     apollo-server-core: ^3.6.3
     apollo-server-fastify: ^3.6.3
-    fastify: ^3.27.2
+    fastify: ^3.27.3
     graphql: ^16.3.0
     pino: ^7.8.0
     pino-pretty: ^7.5.3
@@ -3597,11 +3575,11 @@ __metadata:
   resolution: "@essex/hierarchy-browser@workspace:packages/hierarchy-browser"
   dependencies:
     "@essex/hooks": "workspace:^"
-    "@essex/scripts": ^20.4.4
-    "@fluentui/react": ^8.57.0
-    "@thematic/core": ^2.0.4
-    "@thematic/fluent": ^3.0.4
-    "@thematic/react": ^2.0.4
+    "@essex/scripts": ^20.4.6
+    "@fluentui/react": ^8.58.0
+    "@thematic/core": ^2.0.5
+    "@thematic/fluent": ^3.0.5
+    "@thematic/react": ^2.0.5
     "@types/d3-array": ^3.0.2
     "@types/d3-scale": ^4.0.2
     "@types/d3-selection": ^3.0.2
@@ -3634,11 +3612,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex/hooks@workspace:^, @essex/hooks@workspace:packages/hooks":
+"@essex/hooks@^4.0.4, @essex/hooks@workspace:^, @essex/hooks@workspace:packages/hooks":
   version: 0.0.0-use.local
   resolution: "@essex/hooks@workspace:packages/hooks"
   dependencies:
-    "@essex/scripts": ^20.4.4
+    "@essex/scripts": ^20.4.6
     "@essex/toolbox": "workspace:^"
     "@testing-library/react": ^12.1.3
     "@types/jest": ^27.4.1
@@ -3660,12 +3638,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex/jest-config@npm:^21.0.2":
-  version: 21.0.2
-  resolution: "@essex/jest-config@npm:21.0.2"
+"@essex/jest-config@npm:^21.0.4":
+  version: 21.0.4
+  resolution: "@essex/jest-config@npm:21.0.4"
   dependencies:
-    "@essex/swc-opts": ^20.0.4
-    "@swc/core": 1.2.147
+    "@essex/swc-opts": ^20.0.5
+    "@swc/core": 1.2.148
     "@swc/jest": ^0.2.20
     "@types/jest": ^27.4.1
     identity-obj-proxy: ^3.0.0
@@ -3675,7 +3653,7 @@ __metadata:
   peerDependenciesMeta:
     jest:
       optional: true
-  checksum: 69644e5228d24a7fb1e6982968c35bde1b131c8b0c06ed9d6044baafc68bcf4eb22b680e6b8f8a31b19ef667599e94f1dbaa6359465621f3438b7f09b38d042d
+  checksum: d2d7099d970e064bf8dc0873daa35e234239f2dc5eb2521db68862b5e2e188c883544f372f24680b73c24102516a7a7d61adb0f560b56c766070e80ea2e92a1a
   languageName: node
   linkType: hard
 
@@ -3684,7 +3662,7 @@ __metadata:
   resolution: "@essex/msal-interactor@workspace:packages/msal-interactor"
   dependencies:
     "@azure/msal-browser": ^2.22.0
-    "@essex/scripts": ^20.4.4
+    "@essex/scripts": ^20.4.6
     "@types/debug": ^4.1.7
     debug: ^4.3.3
   peerDependencies:
@@ -3699,16 +3677,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/scripts@npm:^20.4.4":
-  version: 20.4.4
-  resolution: "@essex/scripts@npm:20.4.4"
+"@essex/scripts@npm:^20.4.6":
+  version: 20.4.6
+  resolution: "@essex/scripts@npm:20.4.6"
   dependencies:
     "@azure/storage-blob": ^12.8.0
-    "@essex/eslint-config": ^20.0.5
-    "@essex/eslint-plugin": ^20.0.6
+    "@essex/eslint-config": ^20.0.6
+    "@essex/eslint-plugin": ^20.0.7
     "@essex/shellrunner": ^20.0.4
-    "@essex/swc-opts": ^20.0.4
-    "@swc/core": 1.2.147
+    "@essex/swc-opts": ^20.0.5
+    "@swc/core": 1.2.148
     "@typescript-eslint/eslint-plugin": ^5.13.0
     "@typescript-eslint/parser": ^5.13.0
     archiver: ^5.3.0
@@ -3730,8 +3708,8 @@ __metadata:
     typedoc: ^0.22.12
     typescript: ^4.6.2
   peerDependencies:
-    "@essex/eslint-config": ">=20.0.5"
-    "@essex/jest-config": ">=21.0.2"
+    "@essex/eslint-config": ">=20.0.6"
+    "@essex/jest-config": ">=21.0.4"
     "@essex/prettier-config": ">=18.0.2"
     "@typescript-eslint/eslint-plugin": ">= 4.4.1"
     "@typescript-eslint/parser": ">= 4.4.1"
@@ -3761,7 +3739,7 @@ __metadata:
   bin:
     essex: ./lib/index.mjs
     essex-scripts: ./lib/index.mjs
-  checksum: 26e354873bee5636e463aeecae6c1d21f4b8b445d5235fa1453085cc25d0b822763314e1de5be2051dfb22bd071fe6c9eb9b34a9b790c88cfca91f34311dd81b
+  checksum: f3908b3ecc25b577430d84d42ebe1a9f9a859b381c2571fb10591fd41980e5b68fdbd3fd77f0b2a02ff216359011c2425e6abd97c8d3aea624b3f3891f08ed62
   languageName: node
   linkType: hard
 
@@ -3769,7 +3747,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@essex/semantic-components@workspace:packages/semantic-components"
   dependencies:
-    "@essex/scripts": ^20.4.4
+    "@essex/scripts": ^20.4.6
     "@essex/tsconfig-base": ^1.0.2
     "@testing-library/react": ^12.1.3
     "@types/jest": ^27.4.1
@@ -3793,14 +3771,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/swc-opts@npm:^20.0.4":
-  version: 20.0.4
-  resolution: "@essex/swc-opts@npm:20.0.4"
+"@essex/swc-opts@npm:^20.0.5":
+  version: 20.0.5
+  resolution: "@essex/swc-opts@npm:20.0.5"
   dependencies:
-    "@swc/core": 1.2.147
+    "@swc/core": 1.2.148
     lodash: ^4.17.21
     tslib: ^2.3.1
-  checksum: 2e3c6762500ce01bda9dfc4a3cf53c56c1a29ab65f603b9468c25a36b811f146b25acc1d8de9b0474f40529ef66fe444fd67d7884c1262364b45fa157503c3f5
+  checksum: b43eec4e9560db80ae2b255ec2d5af0b51a8c3b64efcdd884131003fb3db6d3e678dd0aa1e41c7f5833d7f2b5b5831ed39cadfd07f047ae8153065bf1c8816f8
   languageName: node
   linkType: hard
 
@@ -3808,17 +3786,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@essex/thematic-lineup@workspace:packages/thematic-lineup"
   dependencies:
-    "@essex/scripts": ^20.4.4
-    "@thematic/color": ^2.0.4
-    "@thematic/core": ^2.0.4
-    "@thematic/d3": ^2.0.4
-    "@thematic/fluent": ^3.0.4
-    "@thematic/react": ^2.0.4
+    "@essex/scripts": ^20.4.6
+    "@thematic/color": ^2.0.5
+    "@thematic/core": ^2.0.5
+    "@thematic/d3": ^2.0.5
+    "@thematic/fluent": ^3.0.5
+    "@thematic/react": ^2.0.5
     "@types/node": ^17.0.21
     "@types/react": ^17.0.39
     "@types/react-dom": ^17.0.13
     "@types/react-test-renderer": ^17.0.1
-    lineupjs: ^4.4.0
+    lineupjs: ^4.5.0
     react: ^17.0.2
     react-dom: ^17.0.2
   peerDependencies:
@@ -3840,16 +3818,16 @@ __metadata:
   resolution: "@essex/themed-components@workspace:packages/themed-components"
   dependencies:
     "@essex/hooks": "workspace:^"
-    "@essex/scripts": ^20.4.4
+    "@essex/scripts": ^20.4.6
     "@essex/toolbox": "workspace:^"
     "@fluentui/font-icons-mdl2": ^8.2.0
-    "@fluentui/react": ^8.57.0
+    "@fluentui/react": ^8.58.0
     "@fluentui/theme": ^2.5.0
-    "@thematic/color": ^2.0.4
-    "@thematic/core": ^2.0.4
-    "@thematic/d3": ^2.0.4
-    "@thematic/fluent": ^3.0.4
-    "@thematic/react": ^2.0.4
+    "@thematic/color": ^2.0.5
+    "@thematic/core": ^2.0.5
+    "@thematic/d3": ^2.0.5
+    "@thematic/fluent": ^3.0.5
+    "@thematic/react": ^2.0.5
     "@types/d3": ^7.1.0
     "@types/d3-array": ^3.0.2
     "@types/d3-axis": ^3.0.1
@@ -3893,7 +3871,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@essex/toolbox@workspace:packages/toolbox"
   dependencies:
-    "@essex/scripts": ^20.4.4
+    "@essex/scripts": ^20.4.6
     regenerator-runtime: ^0.13.9
   languageName: unknown
   linkType: soft
@@ -4035,9 +4013,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/react@npm:^8.57.0":
-  version: 8.57.0
-  resolution: "@fluentui/react@npm:8.57.0"
+"@fluentui/react@npm:^8.58.0":
+  version: 8.58.0
+  resolution: "@fluentui/react@npm:8.58.0"
   dependencies:
     "@fluentui/date-time-utilities": ^8.4.0
     "@fluentui/font-icons-mdl2": ^8.2.0
@@ -4057,7 +4035,7 @@ __metadata:
     "@types/react-dom": ">=16.8.0 <18.0.0"
     react: ">=16.8.0 <18.0.0"
     react-dom: ">=16.8.0 <18.0.0"
-  checksum: 60b3325fb38c7381de8b25033519e1036883a91e9d8f26217030396cce79f358483987aea3e2bd5cdfa7ba08f553502b27d48f88b16bd245633edd655245988e
+  checksum: 80854ac7bdd3435b67e0a4d13f601648a7a36450f0ede7760828f780142df948eed6ccb7292db71651cbe9c607ded6f8b0a559b6665485d45d04d34ead64484f
   languageName: node
   linkType: hard
 
@@ -4718,7 +4696,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@popperjs/core@npm:^2.10.2":
+"@popperjs/core@npm:^2.11.2":
   version: 2.11.2
   resolution: "@popperjs/core@npm:2.11.2"
   checksum: 5695bf020eda54636e16a62dc9b5fdd92beaf7b2d19f62fcef049d57c5cff92773562d80cbf760b217c3ec928da310eb24994ab6a00fd39dffa0af9b5dfc01a6
@@ -5991,114 +5969,114 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core-android-arm-eabi@npm:1.2.147":
-  version: 1.2.147
-  resolution: "@swc/core-android-arm-eabi@npm:1.2.147"
+"@swc/core-android-arm-eabi@npm:1.2.148":
+  version: 1.2.148
+  resolution: "@swc/core-android-arm-eabi@npm:1.2.148"
   conditions: os=android & cpu=arm
   languageName: node
   linkType: hard
 
-"@swc/core-android-arm64@npm:1.2.147":
-  version: 1.2.147
-  resolution: "@swc/core-android-arm64@npm:1.2.147"
+"@swc/core-android-arm64@npm:1.2.148":
+  version: 1.2.148
+  resolution: "@swc/core-android-arm64@npm:1.2.148"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-arm64@npm:1.2.147":
-  version: 1.2.147
-  resolution: "@swc/core-darwin-arm64@npm:1.2.147"
+"@swc/core-darwin-arm64@npm:1.2.148":
+  version: 1.2.148
+  resolution: "@swc/core-darwin-arm64@npm:1.2.148"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-x64@npm:1.2.147":
-  version: 1.2.147
-  resolution: "@swc/core-darwin-x64@npm:1.2.147"
+"@swc/core-darwin-x64@npm:1.2.148":
+  version: 1.2.148
+  resolution: "@swc/core-darwin-x64@npm:1.2.148"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-freebsd-x64@npm:1.2.147":
-  version: 1.2.147
-  resolution: "@swc/core-freebsd-x64@npm:1.2.147"
+"@swc/core-freebsd-x64@npm:1.2.148":
+  version: 1.2.148
+  resolution: "@swc/core-freebsd-x64@npm:1.2.148"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm-gnueabihf@npm:1.2.147":
-  version: 1.2.147
-  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.2.147"
+"@swc/core-linux-arm-gnueabihf@npm:1.2.148":
+  version: 1.2.148
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.2.148"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-gnu@npm:1.2.147":
-  version: 1.2.147
-  resolution: "@swc/core-linux-arm64-gnu@npm:1.2.147"
+"@swc/core-linux-arm64-gnu@npm:1.2.148":
+  version: 1.2.148
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.2.148"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-musl@npm:1.2.147":
-  version: 1.2.147
-  resolution: "@swc/core-linux-arm64-musl@npm:1.2.147"
+"@swc/core-linux-arm64-musl@npm:1.2.148":
+  version: 1.2.148
+  resolution: "@swc/core-linux-arm64-musl@npm:1.2.148"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-gnu@npm:1.2.147":
-  version: 1.2.147
-  resolution: "@swc/core-linux-x64-gnu@npm:1.2.147"
+"@swc/core-linux-x64-gnu@npm:1.2.148":
+  version: 1.2.148
+  resolution: "@swc/core-linux-x64-gnu@npm:1.2.148"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-musl@npm:1.2.147":
-  version: 1.2.147
-  resolution: "@swc/core-linux-x64-musl@npm:1.2.147"
+"@swc/core-linux-x64-musl@npm:1.2.148":
+  version: 1.2.148
+  resolution: "@swc/core-linux-x64-musl@npm:1.2.148"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-win32-arm64-msvc@npm:1.2.147":
-  version: 1.2.147
-  resolution: "@swc/core-win32-arm64-msvc@npm:1.2.147"
+"@swc/core-win32-arm64-msvc@npm:1.2.148":
+  version: 1.2.148
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.2.148"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-win32-ia32-msvc@npm:1.2.147":
-  version: 1.2.147
-  resolution: "@swc/core-win32-ia32-msvc@npm:1.2.147"
+"@swc/core-win32-ia32-msvc@npm:1.2.148":
+  version: 1.2.148
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.2.148"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@swc/core-win32-x64-msvc@npm:1.2.147":
-  version: 1.2.147
-  resolution: "@swc/core-win32-x64-msvc@npm:1.2.147"
+"@swc/core-win32-x64-msvc@npm:1.2.148":
+  version: 1.2.148
+  resolution: "@swc/core-win32-x64-msvc@npm:1.2.148"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core@npm:1.2.147":
-  version: 1.2.147
-  resolution: "@swc/core@npm:1.2.147"
+"@swc/core@npm:1.2.148":
+  version: 1.2.148
+  resolution: "@swc/core@npm:1.2.148"
   dependencies:
-    "@swc/core-android-arm-eabi": 1.2.147
-    "@swc/core-android-arm64": 1.2.147
-    "@swc/core-darwin-arm64": 1.2.147
-    "@swc/core-darwin-x64": 1.2.147
-    "@swc/core-freebsd-x64": 1.2.147
-    "@swc/core-linux-arm-gnueabihf": 1.2.147
-    "@swc/core-linux-arm64-gnu": 1.2.147
-    "@swc/core-linux-arm64-musl": 1.2.147
-    "@swc/core-linux-x64-gnu": 1.2.147
-    "@swc/core-linux-x64-musl": 1.2.147
-    "@swc/core-win32-arm64-msvc": 1.2.147
-    "@swc/core-win32-ia32-msvc": 1.2.147
-    "@swc/core-win32-x64-msvc": 1.2.147
+    "@swc/core-android-arm-eabi": 1.2.148
+    "@swc/core-android-arm64": 1.2.148
+    "@swc/core-darwin-arm64": 1.2.148
+    "@swc/core-darwin-x64": 1.2.148
+    "@swc/core-freebsd-x64": 1.2.148
+    "@swc/core-linux-arm-gnueabihf": 1.2.148
+    "@swc/core-linux-arm64-gnu": 1.2.148
+    "@swc/core-linux-arm64-musl": 1.2.148
+    "@swc/core-linux-x64-gnu": 1.2.148
+    "@swc/core-linux-x64-musl": 1.2.148
+    "@swc/core-win32-arm64-msvc": 1.2.148
+    "@swc/core-win32-ia32-msvc": 1.2.148
+    "@swc/core-win32-x64-msvc": 1.2.148
   dependenciesMeta:
     "@swc/core-android-arm-eabi":
       optional: true
@@ -6128,7 +6106,7 @@ __metadata:
       optional: true
   bin:
     swcx: run_swcx.js
-  checksum: 6cf22c758e1a2fd018b809662a3a12e1d3e1be3a261ed76e7372e5325ad9447ae1538cce54964bdbe00343318b6810524715e0d294bc4c32d5e8cd4c170e9a23
+  checksum: 3c3c68b36b2a1913246c029e73b84a1615eb4ba78bc478e70c3ba51d0c467d6d2e55d55b3936366a0a99bc7370028b5bd82931626515501d639e42397e039d2e
   languageName: node
   linkType: hard
 
@@ -6173,9 +6151,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/color@npm:2.0.4, @thematic/color@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "@thematic/color@npm:2.0.4"
+"@thematic/color@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@thematic/color@npm:2.0.5"
   dependencies:
     chroma-js: ^2.4.2
     color-blind: ^0.1.1
@@ -6188,15 +6166,15 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: b16c89f5a8c0a6ac69fd46c9c21138cac5a86496ae22c0126382313efc39be1ec99c69a1278fc8d42b3c4ae11d4a82b5d018490901773c6d0bc434b78fb3b40c
+  checksum: b9deffdcafb94e181a41238ac7c7e34418983f643107334f12323f3d793ee071236fcd16c66afa7a2474868679af78b2c031bbd9a1f7f3650c1fb1e05408d459
   languageName: node
   linkType: hard
 
-"@thematic/core@npm:2.0.4, @thematic/core@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "@thematic/core@npm:2.0.4"
+"@thematic/core@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@thematic/core@npm:2.0.5"
   dependencies:
-    "@thematic/color": 2.0.4
+    "@thematic/color": ^2.0.5
     d3-scale: ^3.3.0
     lodash-es: ^4.17.21
     murmurhash-js: ^1.0.0
@@ -6208,15 +6186,15 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: 8fc45b87fb9b0786559cda0f5f8ad754f70f3835085a22e565534a1dbe836502adcee4ed5918a554bedb1ca3f7d181130202707dfd61912fe13abd4962dc7ced
+  checksum: 7da6682a73033d811c908e68ec7ac04dec5fdeda3a1f83eea7a02da0a9e1abc8227b7b1e636ac68d093ecded8beac90b7cb9b51040ced15465b66485d7a7999a
   languageName: node
   linkType: hard
 
-"@thematic/d3@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "@thematic/d3@npm:2.0.4"
+"@thematic/d3@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@thematic/d3@npm:2.0.5"
   dependencies:
-    "@thematic/core": 2.0.4
+    "@thematic/core": ^2.0.5
     d3-axis: ^1.0.12
     d3-selection: ^1.4.2
   peerDependencies:
@@ -6230,18 +6208,18 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: 4922a9549ea6e2f4cfbf7b62a01ad8f42028f4a6b06d11d495f21a4a778fb15e9aae1e26ef085158eef0e05bec388184999468e6e850b2fb9c48842fcc8aae5b
+  checksum: 7186518f0e6a2bd5fcc52b0290e43aca183f9f77bc6f70c01f4f670dcbf6224596dbbca3579929154e0661eacc6ed3bc5c3eaa772245ea39429f5b61eb889bcb
   languageName: node
   linkType: hard
 
-"@thematic/fluent@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "@thematic/fluent@npm:3.0.4"
+"@thematic/fluent@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "@thematic/fluent@npm:3.0.5"
   dependencies:
-    "@essex-js-toolkit/hooks": ^4.0.0
-    "@thematic/color": 2.0.4
-    "@thematic/core": 2.0.4
-    "@thematic/react": 2.0.4
+    "@essex/hooks": ^4.0.4
+    "@thematic/color": ^2.0.5
+    "@thematic/core": ^2.0.5
+    "@thematic/react": ^2.0.5
     d3-scale: ^3.3.0
   peerDependencies:
     "@fluentui/font-icons-mdl2": ">= 8"
@@ -6260,16 +6238,16 @@ __metadata:
       optional: true
     react:
       optional: false
-  checksum: 985b841829d73bbc25118d5abede55964fa16cb5425a5bc180ee7bc7f1c7ed9e3bdb92b9204c4a530cd729805c45037eb57fcbd07550df4ca14c06929f470536
+  checksum: 9ff6e64ca96626f2050c3745df4b9971d10d9301fa5157f5a0226cb21fbde62851e291b85c7663e0de7bc1c92a5e6d12089f8c1817ecbd4b9171afffb0acdc84
   languageName: node
   linkType: hard
 
-"@thematic/react@npm:2.0.4, @thematic/react@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "@thematic/react@npm:2.0.4"
+"@thematic/react@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@thematic/react@npm:2.0.5"
   dependencies:
-    "@thematic/color": 2.0.4
-    "@thematic/core": 2.0.4
+    "@thematic/color": ^2.0.5
+    "@thematic/core": ^2.0.5
   peerDependencies:
     "@types/node": "*"
     "@types/react": ">= 17"
@@ -6281,7 +6259,7 @@ __metadata:
       optional: true
     react:
       optional: false
-  checksum: fc77aeb6e8f80c89bc9691110d907d0cdae8c6136868acacebb90f58065a9f2cdcc259e47b643364148b1f3182d94beceac09abfa795307864ae1b0c1c015cb9
+  checksum: e614797b3314a374948dd4372a4e7df0583916aec9820b407ff2651cec75b7b3c1ff0d9e5b6d1c9c74fe88377fb488cb6561f3ccc464799992028b811b44b36a
   languageName: node
   linkType: hard
 
@@ -10820,7 +10798,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"detect-browser@npm:^5.2.1":
+"detect-browser@npm:^5.3.0":
   version: 5.3.0
   resolution: "detect-browser@npm:5.3.0"
   checksum: dd6e08d55da1d9e0f22510ac79872078ae03d9dfa13c5e66c96baedc1c86567345a88f96949161f6be8f3e0fafa93bf179bdb1cd311b14f5f163112fcc70ab49
@@ -11690,11 +11668,11 @@ __metadata:
     "@babel/preset-typescript": ^7.16.7
     "@essex/boolean-expression-component": "workspace:^"
     "@essex/hierarchy-browser": "workspace:^"
-    "@essex/scripts": ^20.4.4
+    "@essex/scripts": ^20.4.6
     "@essex/thematic-lineup": "workspace:^"
     "@essex/themed-components": "workspace:^"
     "@fluentui/font-icons-mdl2": ^8.2.0
-    "@fluentui/react": ^8.57.0
+    "@fluentui/react": ^8.58.0
     "@storybook/addon-a11y": ^6.4.19
     "@storybook/addon-essentials": ^6.4.19
     "@storybook/addon-links": ^6.4.19
@@ -11703,9 +11681,9 @@ __metadata:
     "@storybook/core": ^6.4.19
     "@storybook/core-events": ^6.4.19
     "@storybook/react": ^6.4.19
-    "@thematic/core": ^2.0.4
-    "@thematic/fluent": ^3.0.4
-    "@thematic/react": ^2.0.4
+    "@thematic/core": ^2.0.5
+    "@thematic/fluent": ^3.0.5
+    "@thematic/react": ^2.0.5
     "@types/babel__core": ^7.1.18
     "@types/babel__preset-env": ^7.9.2
     "@types/form-data": ^2.5.0
@@ -11727,11 +11705,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "essex-js-toolkit@workspace:."
   dependencies:
-    "@essex/eslint-config": ^20.0.5
-    "@essex/eslint-plugin": ^20.0.6
-    "@essex/jest-config": ^21.0.2
+    "@essex/eslint-config": ^20.0.6
+    "@essex/eslint-plugin": ^20.0.7
+    "@essex/jest-config": ^21.0.4
     "@essex/prettier-config": ^18.0.2
-    "@essex/scripts": ^20.4.4
+    "@essex/scripts": ^20.4.6
     "@types/jest": ^27.4.1
     "@types/node": ^17.0.21
     debug: ^4.3.3
@@ -11739,7 +11717,7 @@ __metadata:
     eslint-import-resolver-node: ^0.3.6
     husky: ^7.0.4
     jest: ^27.5.1
-    lint-staged: ^12.3.4
+    lint-staged: ^12.3.5
     npm-run-all: ^4.1.5
     prettier: ^2.5.1
     regenerator-runtime: ^0.13.9
@@ -12140,9 +12118,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fastify@npm:^3.27.2":
-  version: 3.27.2
-  resolution: "fastify@npm:3.27.2"
+"fastify@npm:^3.27.3":
+  version: 3.27.3
+  resolution: "fastify@npm:3.27.3"
   dependencies:
     "@fastify/ajv-compiler": ^1.0.0
     abstract-logging: ^2.0.0
@@ -12159,7 +12137,7 @@ __metadata:
     secure-json-parse: ^2.0.0
     semver: ^7.3.2
     tiny-lru: ^8.0.1
-  checksum: cf52f1f0d9fd94ffc09c1cc0787df5454d806da1affc40f4823d6f252bc9ef79e7ed32cb84e6224bac7be05e51fee1d550695b6329d80e8afd454f25c88bb454
+  checksum: a527f82304b3c3a1d2145ebc06ed9746c4def764b5cbdc857ae1a388c49283b3759ffc2506990327d3af115c70a27946a652694bd2bbe4ae69d8e7bc7cd2ced5
   languageName: node
   linkType: hard
 
@@ -15264,11 +15242,11 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"lineupjs@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "lineupjs@npm:4.4.0"
+"lineupjs@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "lineupjs@npm:4.5.0"
   dependencies:
-    "@popperjs/core": ^2.10.2
+    "@popperjs/core": ^2.11.2
     "@types/d3-color": ^2.0.1
     "@types/d3-dispatch": ^2.0.0
     "@types/d3-format": ^2.0.0
@@ -15284,18 +15262,18 @@ fsevents@^1.2.7:
     d3-scale-chromatic: ^2.0.0
     d3-time: ^2.1.1
     d3-time-format: ^3.0.0
-    detect-browser: ^5.2.1
+    detect-browser: ^5.3.0
     fast-deep-equal: ^3.1.3
     lineupengine: ^2.4.0
     lodash.get: ^4.4.2
     reflect-metadata: ^0.1.13
-  checksum: 526e9f01fc1fc28efced2ef0f762e63c6380bc59ee93b97b9d189959dfb11c9700d2b6016b9dffdeae4490399aa686294e587b5023e670a9e3e0970a96e041d5
+  checksum: 44a4016de2541070117f3cab36f2b4b01d8a8b4b66edf042351b4e1ebf3787f7531f10723dab838f5e1efc26641b474f3eef20b9e5599d043f5c6a520c436d9f
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^12.3.4":
-  version: 12.3.4
-  resolution: "lint-staged@npm:12.3.4"
+"lint-staged@npm:^12.3.5":
+  version: 12.3.5
+  resolution: "lint-staged@npm:12.3.5"
   dependencies:
     cli-truncate: ^3.1.0
     colorette: ^2.0.16
@@ -15312,7 +15290,7 @@ fsevents@^1.2.7:
     yaml: ^1.10.2
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 4e0b4b9da4183a0daeab35d41e4d243fb1270a39db997efa0c3745fa148a7a4b8b723a51cb757595fc8bb118796ca1465e67aede72f25e9ea48165aec36cec3b
+  checksum: 6653c7078b36741e521e5f309b56bb75db198a05cbdd188124ff82a290e352ade3eb1e6080265729e19711ac08d190e300874af00e4e540b57b3c8f0690e2573
   languageName: node
   linkType: hard
 

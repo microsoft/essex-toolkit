@@ -3,25 +3,25 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useCallback, useMemo } from 'react'
-import {
+import type {
 	ILoadParams,
 	IHierarchyDataResponse,
 	IEntityDetail,
 	ILoadEntitiesAsync,
 } from '../../../index.js'
-import { INeighborCommunityDetail } from '../../../types/index.js'
+import type { INeighborCommunityDetail } from '../../../types/index.js'
 import {
 	createEntityMap,
 	getStaticEntities,
 	isEntitiesAsync,
 } from '../../../utils/utils.js'
-import {
-	ENTITY_TYPE,
+import type {
 	ICommunitiesAsyncHook,
 	ICommunity,
 	IEntityCounter,
 	IEntityMap,
 } from '../../types/index.js'
+import { ENTITY_TYPE } from '../../types/index.js'
 
 export const useEntityProvider = (
 	communities: ICommunity[],

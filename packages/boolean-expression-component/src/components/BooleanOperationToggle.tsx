@@ -2,8 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { CSSProperties, memo, FC } from 'react'
-import { BooleanOperation, Palette } from '../types.js'
+import type { CSSProperties, FC } from 'react'
+import { memo } from 'react'
+import type { Palette } from '../types.js'
+import { BooleanOperation } from '../types.js'
 import { DEFAULT_PALETTE, NO_OP } from './constants.js'
 
 export const BooleanOperationToggle: React.FC<{

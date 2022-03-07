@@ -3,10 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Spinner } from '@fluentui/react'
-import { memo, ReactNode } from 'react'
+import type { ReactNode } from 'react'
+import { memo } from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
-import { IEntityLoadParams } from '../hooks/useLoadMoreEntitiesHandler.js'
-import { IEntityDetail } from '../index.js'
+import type { IEntityLoadParams } from '../hooks/useLoadMoreEntitiesHandler.js'
+import type { IEntityDetail } from '../index.js'
 
 export interface IScrollAreaProps {
 	loadMore: (

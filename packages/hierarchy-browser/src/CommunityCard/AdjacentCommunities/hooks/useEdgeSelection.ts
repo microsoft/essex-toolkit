@@ -3,15 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useCallback, useState } from 'react'
-import { CommunityDataProvider } from '../../../common/dataProviders/index.js'
+import type { CommunityDataProvider } from '../../../common/dataProviders/index.js'
 import { ENTITY_TYPE } from '../../../common/types/index.js'
 import { useEntitiesLoadedHandler } from '../../../hooks/useEntitiesLoadedHandler.js'
 import { useLoadInitialEntitiesHandler } from '../../../hooks/useLoadInitialEntitiesHandler.js'
-import {
-	IEntityLoadParams,
-	useLoadMoreEntitiesHandler,
-} from '../../../hooks/useLoadMoreEntitiesHandler.js'
-import { INeighborCommunityDetail, IEntityDetail } from '../../../index.js'
+import type { IEntityLoadParams } from '../../../hooks/useLoadMoreEntitiesHandler.js'
+import { useLoadMoreEntitiesHandler } from '../../../hooks/useLoadMoreEntitiesHandler.js'
+import type { INeighborCommunityDetail, IEntityDetail } from '../../../index.js'
 
 export function useEdgeSelection(dataProvider?: CommunityDataProvider): [
 	// setEdgeSelection

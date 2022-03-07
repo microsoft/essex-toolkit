@@ -4,8 +4,8 @@
  */
 import { max } from 'd3-array'
 import { useMemo } from 'react'
-import { ICommunity } from '../common/types/index.js'
-import { CommunityId, ICommunityDetail } from '../index.js'
+import type { ICommunity } from '../common/types/index.js'
+import type { CommunityId, ICommunityDetail } from '../index.js'
 
 export function useCommunityLevelText(
 	level: number,

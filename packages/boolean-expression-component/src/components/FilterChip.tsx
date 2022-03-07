@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { memo, CSSProperties } from 'react'
+import type { CSSProperties } from 'react'
+import { memo } from 'react'
 import { CloseButton } from './CloseButton.js'
 
 export interface FilterChipProps {

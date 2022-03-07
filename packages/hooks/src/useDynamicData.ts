@@ -4,7 +4,7 @@
  */
 import { delay } from '@essex/toolbox'
 import { useState, useLayoutEffect, useMemo } from 'react'
-import { DynamicData } from './interfaces/index.js'
+import type { DynamicData } from './interfaces/index.js'
 
 /**
  * A interface for dynamic data

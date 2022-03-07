@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import {
+import type {
 	ICommunityDetail,
 	INeighborCommunityDetail,
 	IEntityDetail,
@@ -11,7 +11,7 @@ import {
 	IHierarchyDataResponse,
 	EntityId,
 } from '../../index.js'
-import { CommunityDataProvider } from '../dataProviders/index.js'
+import type { CommunityDataProvider } from '../dataProviders/index.js'
 
 export interface ICommunity extends ICommunityDetail {
 	level: number
