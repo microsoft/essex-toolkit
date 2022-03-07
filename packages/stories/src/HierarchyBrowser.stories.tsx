@@ -2,10 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { EntityId, HierarchyBrowser } from '@essex/hierarchy-browser'
-import { IChoiceGroupOption } from '@fluentui/react'
+import type { EntityId } from '@essex/hierarchy-browser'
+import { HierarchyBrowser } from '@essex/hierarchy-browser'
+import type { IChoiceGroupOption } from '@fluentui/react'
 import { useCallback, useMemo, useState } from 'react'
-import { CSF } from './types'
+import type { CSF } from './types'
 import { ControlGroup, Selections } from './utils/components'
 import { useAsyncCallbacks } from './utils/useAsyncCallbacks'
 import { useData } from './utils/useData'

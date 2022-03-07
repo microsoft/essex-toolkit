@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ITextProps } from '@fluentui/react'
+import type { ITextProps } from '@fluentui/react'
 
 const tiny = 'tiny' as ITextProps['variant']
 const xSmall = 'xSmall' as ITextProps['variant']

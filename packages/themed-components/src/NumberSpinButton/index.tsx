@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { SpinButton, Position } from '@fluentui/react'
+import type { Position } from '@fluentui/react'
+import { SpinButton } from '@fluentui/react'
 import { useCallback } from 'react'
 export interface NumberSpinButtonProps {
 	label: string

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useMemo, Children, cloneElement } from 'react'
-import { CollapsiblePanelContainerProps } from './interfaces.js'
+import type { CollapsiblePanelContainerProps } from './interfaces.js'
 
 /**
  * Receives an array of CollapsiblePanel as children to render it

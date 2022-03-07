@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useEffect } from 'react'
-import { ILoadParams } from '../index.js'
+import type { ILoadParams } from '../index.js'
 
 export function useLoadEntitiesOnMountEffect(
 	loadInitialEntities: (

@@ -3,12 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import {
+import type {
 	ICommunity,
 	IEntityCounter,
 	IEntityMap,
 } from '../common/types/types.js'
-import {
+import type {
 	EntityId,
 	IEntityDetail,
 	CommunityId,

@@ -4,13 +4,14 @@
  */
 import { ApolloServerPluginLandingPageDisabled } from 'apollo-server-core'
 import { ApolloServer } from 'apollo-server-fastify'
-import fastify, { FastifyInstance, FastifyRequest } from 'fastify'
-import { GraphQLSchema } from 'graphql'
-import { Logger } from 'pino'
+import type { FastifyInstance, FastifyRequest } from 'fastify'
+import fastify from 'fastify'
+import type { GraphQLSchema } from 'graphql'
+import type { Logger } from 'pino'
 import { inject, singleton } from 'tsyringe'
-import { IBaseConfiguration } from '../configuration/index.js'
+import type { IBaseConfiguration } from '../configuration/index.js'
 import { BaseInjectorNames } from '../injectors.js'
-import { IBuiltAppContext, IRequestAppContext } from './index.js'
+import type { IBuiltAppContext, IRequestAppContext } from './index.js'
 
 export type PreRunCb = (app: FastifyInstance) => Promise<void>
 

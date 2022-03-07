@@ -22,7 +22,7 @@
 	},
 	"devDependencies": {
 		"@azure/msal-browser": "^2.22.0",
-		"@essex/scripts": "^20.4.4",
+		"@essex/scripts": "^20.4.6",
 		"@types/debug": "^4.1.7"
 	},
 	"dependencies": {

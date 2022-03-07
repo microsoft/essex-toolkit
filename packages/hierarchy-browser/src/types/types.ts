@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IButtonStyles, ITextProps } from '@fluentui/react'
+import type { IButtonStyles, ITextProps } from '@fluentui/react'
 export type CommunityId = string
 export type EntityId = string
 

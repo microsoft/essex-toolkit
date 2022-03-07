@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { BaseButton, Button } from '@fluentui/react'
+import type { BaseButton, Button } from '@fluentui/react'
 import { useState, useCallback } from 'react'
 
-import { IEntityDetail } from '../index.js'
-import { CommunityId } from '../types/index.js'
+import type { IEntityDetail } from '../index.js'
+import type { CommunityId } from '../types/index.js'
 import { exportCSVFile } from '../utils/utils.js'
-import { IEntityLoadParams } from './useLoadMoreEntitiesHandler.js'
+import type { IEntityLoadParams } from './useLoadMoreEntitiesHandler.js'
 
 export const downloadCommunityMemebers = async (
 	communityId: CommunityId,

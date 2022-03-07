@@ -6,7 +6,7 @@ import { Settings } from '@essex/themed-components'
 import { MessageBar, DefaultButton } from '@fluentui/react'
 import { useCallback, useState } from 'react'
 
-import { CSF } from './types'
+import type { CSF } from './types'
 
 const story = {
 	title: 'Settings Pane',

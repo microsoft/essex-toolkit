@@ -7,12 +7,12 @@ import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { EmptyEntityList } from '../EntityItem/EmptyEntityList.js'
 import { ScrollArea } from '../ScollArea/index.js'
-import { CommunityDataProvider } from '../common/dataProviders/index.js'
+import type { CommunityDataProvider } from '../common/dataProviders/index.js'
 import { useContainerStyle } from '../hooks/theme.js'
 import { useCommunityData } from '../hooks/useCommunityData.js'
 import { useCommunitySizePercent } from '../hooks/useCommunitySizePercent.js'
 import { useUpdatedCommunityProvider } from '../hooks/useUpdatedCommunityProvider.js'
-import {
+import type {
 	EntityId,
 	ILoadNeighborCommunities,
 	IOnSelectionChange,

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useMemo } from 'react'
-import { IControls } from '../types/index.js'
+import type { IControls } from '../types/index.js'
 interface IControlSettings {
 	showLevel: boolean
 	showMembership: boolean

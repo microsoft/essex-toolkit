@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 // import { useState } from 'react'
-import { CommunityDataProvider } from '../../../common/dataProviders/index.js'
+import type { CommunityDataProvider } from '../../../common/dataProviders/index.js'
 import { useLoadCommunitiesOnMountEffect } from '../../../hooks/useLoadEntitiesOnMountEffect.js'
 import { useLoadInitialCommunities } from '../../../hooks/useLoadInitialCommunities.js'
-import { INeighborCommunityDetail } from '../../../index.js'
+import type { INeighborCommunityDetail } from '../../../index.js'
 // import { useLoadMoreCommunitiesHandler } from '../../../hooks/useLoadMoreCommunitiesHandler'
 import { useNeighborsLoadedHandler } from './useNeighborsLoadedHandler.js'
 

@@ -3,11 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useCallback } from 'react'
-import {
-	CommunityDataProvider,
-	DEFAULT_LOAD_COUNT,
-} from '../common/dataProviders/index.js'
-import { INeighborCommunityDetail } from '../index.js'
+import type { CommunityDataProvider } from '../common/dataProviders/index.js'
+import { DEFAULT_LOAD_COUNT } from '../common/dataProviders/index.js'
+import type { INeighborCommunityDetail } from '../index.js'
 export function useLoadMoreCommunitiesHandler(
 	communities: INeighborCommunityDetail[],
 	moreToLoad: boolean,

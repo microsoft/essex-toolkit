@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
+import type {
 	INeighborCommunityDetail,
 	CommunityId,
 	ICommunityDetail,
 } from '@essex/hierarchy-browser'
 import { useMemo, useCallback } from 'react'
-import { LocalEntity, NeighborLocalEntity, JoinData } from './types'
+import type { LocalEntity, NeighborLocalEntity, JoinData } from './types'
 
 interface StaticProps {
 	communities: ICommunityDetail[]

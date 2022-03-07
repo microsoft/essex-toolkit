@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IEntityDetail } from '@essex/hierarchy-browser'
+import type { IEntityDetail } from '@essex/hierarchy-browser'
 export interface NodeData {
 	id: string
 	x: number

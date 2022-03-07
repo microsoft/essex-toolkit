@@ -2,11 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import pino, { Logger } from 'pino'
+import type { Logger } from 'pino'
+import pino from 'pino'
 import { inject, singleton } from 'tsyringe'
-import { IBaseConfiguration } from '../configuration/index.js'
+import type { IBaseConfiguration } from '../configuration/index.js'
 import { BaseInjectorNames } from '../injectors.js'
-import { Provider } from './Provider.js'
+import type { Provider } from './Provider.js'
 
 @singleton()
 export class LoggerProvider<TConfiguration extends IBaseConfiguration>

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import {
+import type {
 	CommunityId,
 	INeighborCommunityDetail,
 	ICommunityDetail,
@@ -12,7 +12,8 @@ import {
 	ILoadNeighborCommunities,
 	IHierarchyDataResponse,
 } from '../../index.js'
-import { ENTITY_TYPE, ICommunitiesAsyncHook } from '../types/types.js'
+import type { ICommunitiesAsyncHook } from '../types/types.js'
+import { ENTITY_TYPE } from '../types/types.js'
 import { EntityDataProvider } from './EntityDataProvider.js'
 
 export const DEFAULT_LOAD_COUNT = 100

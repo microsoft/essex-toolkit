@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
+import type {
 	SettingsI,
 	SettingConfig,
 	ParsedSettingConfig,
-	ControlType,
 } from './interfaces.js'
+import { ControlType } from './interfaces.js'
 
 // this follows the label convention of Fluent, which is that the first word
 // is capitalized and the rest are lowercase

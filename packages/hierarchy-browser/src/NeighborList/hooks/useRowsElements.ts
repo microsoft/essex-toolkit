@@ -2,11 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Dimensions } from '@essex/hooks'
-import { SelectionState, Theme, ThemeVariant } from '@thematic/core'
-import { scaleLinear, ScaleLinear } from 'd3-scale'
+import type { Dimensions } from '@essex/hooks'
+import type { Theme } from '@thematic/core'
+import { SelectionState, ThemeVariant } from '@thematic/core'
+import type { ScaleLinear } from 'd3-scale'
+import { scaleLinear } from 'd3-scale'
 import { useCallback, useMemo } from 'react'
-import { INeighborCommunityDetail } from '../../index.js'
+import type { INeighborCommunityDetail } from '../../index.js'
 import { useMaxEdges } from './useMaxEdges.js'
 
 export interface IMeasurements {

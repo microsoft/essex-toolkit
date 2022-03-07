@@ -6,7 +6,7 @@ import {
 	BooleanOperation,
 	FilterExpressionView,
 } from '@essex/boolean-expression-component'
-import { CSF } from './types'
+import type { CSF } from './types'
 
 const story = {
 	title: 'BooleanExpression',

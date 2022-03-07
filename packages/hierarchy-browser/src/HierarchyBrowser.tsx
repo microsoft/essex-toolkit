@@ -12,14 +12,14 @@ import {
 import styled from 'styled-components'
 import { CommunityCard } from './CommunityCard/CommunityCard.js'
 import { useEntityProvider } from './common/dataProviders/hooks/useEntityProvider.js'
-import { IDataProvidersCache, ICardOrder } from './common/types/types.js'
+import type { IDataProvidersCache, ICardOrder } from './common/types/types.js'
 import {
 	useCommunityLevelCalculator,
 	useCommunitySizeCalculator,
 } from './hooks/useCommunityDetails.js'
 import { useCommunityProvider } from './hooks/useCommunityProvider.js'
 import { useSettings } from './hooks/useSettings.js'
-import {
+import type {
 	EntityId,
 	ICommunityDetail,
 	IEntityDetail,

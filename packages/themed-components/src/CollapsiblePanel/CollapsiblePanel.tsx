@@ -7,7 +7,7 @@ import { IconButton } from '@fluentui/react'
 import { useThematicFluent } from '@thematic/fluent'
 import { useCallback, useMemo, useState, useEffect, memo } from 'react'
 import { default as AnimateHeight } from 'react-animate-height'
-import { CollapsiblePanelProps } from './interfaces.js'
+import type { CollapsiblePanelProps } from './interfaces.js'
 
 /**
  * CollapsiblePanel displays a Header and it's child

@@ -2,14 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { GraphQLSchema } from 'graphql'
-import { container, DependencyContainer } from 'tsyringe'
-import {
-	AppBuilder,
-	BaseInjectorNames,
-	LoggerProvider,
-	RequestContextProvider,
-} from '../index.js'
+import type { GraphQLSchema } from 'graphql'
+import type { DependencyContainer } from 'tsyringe'
+import { container } from 'tsyringe'
+import type { RequestContextProvider } from '../index.js'
+import { AppBuilder, BaseInjectorNames, LoggerProvider } from '../index.js'
 
 export function registerAppBuilder(ctx: DependencyContainer = container): void {
 	ctx.register(BaseInjectorNames.AppBuilder, { useClass: AppBuilder })

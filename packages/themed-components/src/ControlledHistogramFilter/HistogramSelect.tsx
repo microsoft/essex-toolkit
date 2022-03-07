@@ -8,8 +8,10 @@ import { useThematic } from '@thematic/react'
 import { bin, max } from 'd3-array'
 import { axisBottom, axisLeft } from 'd3-axis'
 import { brushX } from 'd3-brush'
-import { scaleLinear, ScaleLinear } from 'd3-scale'
-import { select, Selection } from 'd3-selection'
+import type { ScaleLinear } from 'd3-scale'
+import { scaleLinear } from 'd3-scale'
+import type { Selection } from 'd3-selection'
+import { select } from 'd3-selection'
 import { useRef, useEffect, useMemo } from 'react'
 
 const DEFAULT_MARGINS = {
