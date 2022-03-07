@@ -1,0 +1,6 @@
+releases:
+  "@essex/hierarchy-browser": patch
+  "@essex/thematic-lineup": patch
+  "@essex/themed-components": patch
+  essex-js-toolkit: patch
+  essex-js-toolkit-stories: patch
