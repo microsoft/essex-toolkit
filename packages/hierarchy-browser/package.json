@@ -28,9 +28,9 @@
 	"devDependencies": {
 		"@essex/scripts": "^20.4.6",
 		"@fluentui/react": "^8.58.0",
-		"@thematic/core": "^2.0.5",
-		"@thematic/fluent": "^3.0.5",
-		"@thematic/react": "^2.0.5",
+		"@thematic/core": "^2.0.6",
+		"@thematic/fluent": "^3.0.6",
+		"@thematic/react": "^2.0.6",
 		"@types/d3-array": "^3.0.2",
 		"@types/d3-scale": "^4.0.2",
 		"@types/d3-selection": "^3.0.2",
