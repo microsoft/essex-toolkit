@@ -11706,7 +11706,6 @@ __metadata:
   resolution: "essex-js-toolkit@workspace:."
   dependencies:
     "@essex/eslint-config": ^20.0.6
-    "@essex/eslint-plugin": ^20.0.7
     "@essex/jest-config": ^21.0.4
     "@essex/prettier-config": ^18.0.2
     "@essex/scripts": ^20.4.6
@@ -11714,7 +11713,6 @@ __metadata:
     "@types/node": ^17.0.21
     debug: ^4.3.3
     eslint: ^8.10.0
-    eslint-import-resolver-node: ^0.3.6
     husky: ^7.0.4
     jest: ^27.5.1
     lint-staged: ^12.3.5
