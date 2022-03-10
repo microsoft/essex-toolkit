@@ -3,7 +3,8 @@ node_modules
 packages/*/src/**/*.js
 packages/*/lib/
 packages/*/dist/
-packages/*/storybook-static
+packages/*/storybook-static/
+packages/*/docsTemp/
 .swc/
 
 # Test Output

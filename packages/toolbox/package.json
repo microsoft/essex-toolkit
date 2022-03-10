@@ -14,10 +14,10 @@
 	"license": "MIT",
 	"scripts": {
 		"clean": "essex clean",
-		"build": "essex build"
+		"build": "essex build --docs"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.4.6",
+		"@essex/scripts": "^20.5.1",
 		"regenerator-runtime": "^0.13.9"
 	}
 }

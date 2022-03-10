@@ -16,14 +16,14 @@
 		"directory": "packages/boolean-expression-component"
 	},
 	"scripts": {
-		"build": "essex build --skipExportCheck",
+		"build": "essex build --skipExportCheck --docs",
 		"clean": "essex clean",
 		"watch": "essex watch"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.4.6",
-		"@fluentui/react": "^8.58.0",
-		"@types/react": "^17.0.39",
+		"@essex/scripts": "^20.5.1",
+		"@fluentui/react": "^8.60.2",
+		"@types/react": "^17.0.40",
 		"@types/react-dom": "^17.0.13",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2"
