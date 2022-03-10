@@ -4,7 +4,7 @@
  */
 import type { IButtonStyles } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
-import { memo, useMemo, useCallback } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
 interface ITableExpander {

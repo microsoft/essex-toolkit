@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { histogram, interpolate } from '@essex/toolbox'
-import { chart, plotArea, line as lineRenderer } from '@thematic/d3'
+import { chart, line as lineRenderer, plotArea } from '@thematic/d3'
 import { useThematic } from '@thematic/react'
 import { scaleLinear } from 'd3-scale'
 import { select } from 'd3-selection'
-import { useRef, useMemo, useEffect } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 
 const BINS = 10
 

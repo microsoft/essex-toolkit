@@ -4,7 +4,6 @@
  */
 import type { ScaleLinear } from 'd3-scale'
 import { memo, useMemo } from 'react'
-
 import styled from 'styled-components'
 
 interface ICellComponentProps {

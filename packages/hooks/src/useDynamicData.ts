@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { delay } from '@essex/toolbox'
-import { useState, useLayoutEffect, useMemo } from 'react'
+import { useLayoutEffect, useMemo, useState } from 'react'
+
 import type { DynamicData } from './interfaces/index.js'
 
 /**
@@ -27,6 +28,7 @@ export function useDynamicData<InputType, OutputType = InputType>(
 		let done = false
 		if (values) {
 			if (typeof (values as any)[Symbol.asyncIterator] === 'function') {
+				/* eslint-disable-next-line @typescript-eslint/no-misused-promises */
 				setTimeout(async () => {
 					for await (const value of values as any as AsyncIterable<InputType>) {
 						if (!done) {

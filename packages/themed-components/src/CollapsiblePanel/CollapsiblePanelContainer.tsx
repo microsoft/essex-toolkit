@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useMemo, Children, cloneElement } from 'react'
+import { Children, cloneElement, useMemo } from 'react'
+
 import type { CollapsiblePanelContainerProps } from './interfaces.js'
 
 /**

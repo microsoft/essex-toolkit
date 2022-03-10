@@ -5,8 +5,9 @@
 import { useDimensions } from '@essex/hooks'
 import { Text } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
-import { useCallback, memo, useRef } from 'react'
+import { memo, useCallback, useRef } from 'react'
 import styled from 'styled-components'
+
 import { textStyle } from '../common/styles/index.js'
 import { useTableStyles } from '../hooks/useStyles.js'
 import type { INeighborCommunityDetail, ITableSettings } from '../index.js'
@@ -18,7 +19,7 @@ const SUBHEADERS = ['community', 'connections', 'members']
 
 export interface ICommunityEdgeListProps {
 	edges?: INeighborCommunityDetail[]
-	onEdgeClick: (edge?: INeighborCommunityDetail) => Promise<void>
+	onEdgeClick: (edge?: INeighborCommunityDetail) => void
 	clearCurrentSelection: () => Promise<void>
 	selectedEdge?: INeighborCommunityDetail
 	isOpen: boolean
@@ -45,7 +46,7 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 		const theme = useThematic()
 		const handleEdgeClick = useCallback(
 			(edge?: INeighborCommunityDetail) => {
-				clearCurrentSelection().then(() => {
+				void clearCurrentSelection().then(() => {
 					if (
 						edge &&
 						selectedEdge &&

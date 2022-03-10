@@ -4,10 +4,10 @@
  */
 
 import type {
-	IEntityDetail,
 	EntityId,
-	ILoadParams,
+	IEntityDetail,
 	IHierarchyDataResponse,
+	ILoadParams,
 } from '../../index.js'
 import type { ENTITY_TYPE } from '../types/types.js'
 

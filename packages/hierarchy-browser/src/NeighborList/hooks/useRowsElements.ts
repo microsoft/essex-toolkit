@@ -8,6 +8,7 @@ import { SelectionState, ThemeVariant } from '@thematic/core'
 import type { ScaleLinear } from 'd3-scale'
 import { scaleLinear } from 'd3-scale'
 import { useCallback, useMemo } from 'react'
+
 import type { INeighborCommunityDetail } from '../../index.js'
 import { useMaxEdges } from './useMaxEdges.js'
 

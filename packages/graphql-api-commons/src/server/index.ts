@@ -4,7 +4,8 @@
  */
 import type { Logger } from 'pino'
 import { inject, singleton } from 'tsyringe'
-import type { AppBuilder, PreRunCb, IBuiltAppContext } from '../app/index.js'
+
+import type { AppBuilder, IBuiltAppContext, PreRunCb } from '../app/index.js'
 import type { IBaseConfiguration } from '../configuration/index.js'
 import { BaseInjectorNames } from '../injectors.js'
 

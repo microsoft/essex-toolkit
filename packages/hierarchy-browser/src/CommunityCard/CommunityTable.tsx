@@ -3,16 +3,17 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Text } from '@fluentui/react'
-import { memo, useMemo, useCallback } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { EntityItem } from '../EntityItem/EntityItem.js'
+
 import { textStyle } from '../common/styles/index.js'
+import { EntityItem } from '../EntityItem/EntityItem.js'
 import { useTableStyles } from '../hooks/useStyles.js'
 import type {
 	CommunityId,
-	ITableSettings,
 	EntityId,
 	IEntityDetail,
+	ITableSettings,
 } from '../types/index.js'
 
 export interface ICommunityTableProps {

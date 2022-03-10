@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { MutableRefObject } from 'react'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+
 import type { Dimensions } from './interfaces/index.js'
 
 /**
@@ -44,5 +45,5 @@ export function useDimensions(
 			}
 		}
 	}, [ref])
-	return dimensions as Dimensions | undefined
+	return dimensions
 }

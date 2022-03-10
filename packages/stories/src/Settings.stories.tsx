@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Settings } from '@essex/themed-components'
-import { MessageBar, DefaultButton } from '@fluentui/react'
+import { DefaultButton, MessageBar } from '@fluentui/react'
 import { useCallback, useState } from 'react'
 
 import type { CSF } from './types'

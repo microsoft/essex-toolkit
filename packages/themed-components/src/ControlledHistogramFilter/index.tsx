@@ -4,14 +4,15 @@
  */
 import type { IContextualMenuProps } from '@fluentui/react'
 import {
-	IconButton,
 	ContextualMenuItemType,
 	DirectionalHint,
+	IconButton,
 	Label,
 	Link,
 	TextField,
 } from '@fluentui/react'
-import { useState, useMemo, useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+
 import { NumberSpinButton } from '../NumberSpinButton/index.js'
 import { HistogramSelect } from './HistogramSelect.js'
 

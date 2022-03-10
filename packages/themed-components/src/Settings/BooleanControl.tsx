@@ -2,8 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Toggle, Checkbox } from '@fluentui/react'
+import { Checkbox, Toggle } from '@fluentui/react'
 import { useCallback } from 'react'
+
 import type { ControlProps } from './interfaces.js'
 import { ControlType } from './interfaces.js'
 
@@ -49,6 +50,8 @@ export const BooleanControl = ({
 				/>
 			)
 		default:
-			throw new Error(`Unsupported control type ${control} for ${type}`)
+			throw new Error(
+				`Unsupported control type ${JSON.stringify(control)} for ${type}`,
+			)
 	}
 }

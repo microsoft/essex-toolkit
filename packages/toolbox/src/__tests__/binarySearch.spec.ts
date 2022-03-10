@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { binarySearch } from '../binarySearch'
+import { binarySearch } from '../binarySearch.js'
 
 describe('binarySearch', () => {
 	it('should return -1 for an empty array', () => {

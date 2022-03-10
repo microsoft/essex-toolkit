@@ -4,6 +4,7 @@
  */
 import type { CSSProperties } from 'react'
 import { memo } from 'react'
+
 import { CloseButton } from './CloseButton.js'
 
 export interface FilterChipProps {

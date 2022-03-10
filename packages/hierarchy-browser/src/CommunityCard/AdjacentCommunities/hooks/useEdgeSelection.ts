@@ -3,17 +3,18 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useCallback, useState } from 'react'
+
 import type { CommunityDataProvider } from '../../../common/dataProviders/index.js'
 import { ENTITY_TYPE } from '../../../common/types/index.js'
 import { useEntitiesLoadedHandler } from '../../../hooks/useEntitiesLoadedHandler.js'
 import { useLoadInitialEntitiesHandler } from '../../../hooks/useLoadInitialEntitiesHandler.js'
 import type { IEntityLoadParams } from '../../../hooks/useLoadMoreEntitiesHandler.js'
 import { useLoadMoreEntitiesHandler } from '../../../hooks/useLoadMoreEntitiesHandler.js'
-import type { INeighborCommunityDetail, IEntityDetail } from '../../../index.js'
+import type { IEntityDetail, INeighborCommunityDetail } from '../../../index.js'
 
 export function useEdgeSelection(dataProvider?: CommunityDataProvider): [
 	// setEdgeSelection
-	(edge: INeighborCommunityDetail | undefined) => Promise<void>,
+	(edge: INeighborCommunityDetail | undefined) => void,
 	// loadMoreEntities
 	(
 		pageNumber?: number,
@@ -73,6 +74,7 @@ export function useEdgeSelection(dataProvider?: CommunityDataProvider): [
 	)
 
 	const clearCurrentSelection = useCallback(async () => {
+		await Promise.resolve()
 		setMoreEntitiesToLoad(true)
 		clearEntities(true)
 		setLoading(false)
@@ -80,7 +82,7 @@ export function useEdgeSelection(dataProvider?: CommunityDataProvider): [
 	}, [clearEntities, setMoreEntitiesToLoad, setLoading, dataProvider])
 
 	const setEdgeSelection = useCallback(
-		async (edge?: INeighborCommunityDetail) => {
+		(edge?: INeighborCommunityDetail) => {
 			setSelectedCommunityEdge(edge)
 			if (edge) {
 				const params = {
@@ -91,7 +93,7 @@ export function useEdgeSelection(dataProvider?: CommunityDataProvider): [
 					max: edge.size,
 				} as IEntityLoadParams
 				dataProvider && dataProvider.clearNeighborEdges()
-				await loadInitialEntities(undefined, params)
+				loadInitialEntities(undefined, params)
 			}
 		},
 		[setSelectedCommunityEdge, loadInitialEntities, dataProvider],

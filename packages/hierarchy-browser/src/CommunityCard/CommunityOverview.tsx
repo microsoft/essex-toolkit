@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IconButton, Spinner, TooltipHost, Text } from '@fluentui/react'
+import { IconButton, Spinner, Text, TooltipHost } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
-import { MagBar } from '../MagBar/index.js'
+
 import { paddingLeft } from '../common/styles/index.js'
 import type { IFilterProps } from '../hooks/interfaces.js'
 import { useThemesStyle } from '../hooks/theme.js'
@@ -18,6 +18,7 @@ import { useControls } from '../hooks/useControls.js'
 import type { IEntityLoadParams } from '../hooks/useLoadMoreEntitiesHandler.js'
 import { useOverviewStyles } from '../hooks/useStyles.js'
 import type { CommunityId, IControls, IEntityDetail } from '../index.js'
+import { MagBar } from '../MagBar/index.js'
 import type { ICardOverviewSettings } from '../types/index.js'
 
 export interface ICommunityOverviewProps {

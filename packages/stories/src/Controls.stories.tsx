@@ -4,8 +4,8 @@
  */
 import {
 	FilterTextbox,
-	SearchBox,
 	NumberSpinButton,
+	SearchBox,
 	ToggleLink,
 } from '@essex/themed-components'
 import React, { useCallback, useState } from 'react'

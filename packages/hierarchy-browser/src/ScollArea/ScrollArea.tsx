@@ -6,6 +6,7 @@ import { Spinner } from '@fluentui/react'
 import type { ReactNode } from 'react'
 import { memo } from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
+
 import type { IEntityLoadParams } from '../hooks/useLoadMoreEntitiesHandler.js'
 import type { IEntityDetail } from '../index.js'
 

@@ -5,6 +5,7 @@
 import type { Logger } from 'pino'
 import pino from 'pino'
 import { inject, singleton } from 'tsyringe'
+
 import type { IBaseConfiguration } from '../configuration/index.js'
 import { BaseInjectorNames } from '../injectors.js'
 import type { Provider } from './Provider.js'

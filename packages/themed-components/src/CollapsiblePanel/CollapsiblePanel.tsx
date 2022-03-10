@@ -5,8 +5,9 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { IconButton } from '@fluentui/react'
 import { useThematicFluent } from '@thematic/fluent'
-import { useCallback, useMemo, useState, useEffect, memo } from 'react'
+import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { default as AnimateHeight } from 'react-animate-height'
+
 import type { CollapsiblePanelProps } from './interfaces.js'
 
 /**

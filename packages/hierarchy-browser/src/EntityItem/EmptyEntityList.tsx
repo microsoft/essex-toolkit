@@ -4,6 +4,7 @@
  */
 import { memo } from 'react'
 import styled from 'styled-components'
+
 import type { IFilterProps } from '../hooks/interfaces.js'
 import type { IEntityDetail } from '../index.js'
 

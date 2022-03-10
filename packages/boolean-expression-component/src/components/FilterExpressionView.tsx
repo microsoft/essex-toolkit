@@ -3,10 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { memo, useCallback, useRef } from 'react'
+
 import type {
 	BooleanOperation,
-	FilterClauseGroup,
 	FilterClause,
+	FilterClauseGroup,
 	Palette,
 } from '../types.js'
 import { toggleOperation } from '../utils.js'

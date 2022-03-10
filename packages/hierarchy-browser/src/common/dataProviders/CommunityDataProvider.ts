@@ -5,12 +5,12 @@
 
 import type {
 	CommunityId,
-	INeighborCommunityDetail,
 	ICommunityDetail,
-	ILoadParams,
 	IEntityDetail,
-	ILoadNeighborCommunities,
 	IHierarchyDataResponse,
+	ILoadNeighborCommunities,
+	ILoadParams,
+	INeighborCommunityDetail,
 } from '../../index.js'
 import type { ICommunitiesAsyncHook } from '../types/types.js'
 import { ENTITY_TYPE } from '../types/types.js'
@@ -158,8 +158,7 @@ export class CommunityDataProvider {
 			filtered: this._filterEntitiesFlag,
 		}
 		try {
-			const nextNeighbors = this.loadNeighborsAsync(params)
-			return nextNeighbors || []
+			return this.loadNeighborsAsync(params).then(res => res || [])
 		} catch (err) {
 			console.warn(err)
 			throw Error(

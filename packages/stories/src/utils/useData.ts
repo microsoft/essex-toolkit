@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ICommunityDetail } from '@essex/hierarchy-browser'
-import { useState, useEffect, useMemo, useCallback } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+
 import type {
 	CommunityData,
 	EdgeData,
@@ -11,8 +12,8 @@ import type {
 	LocalEntity,
 	NeighborLocalEntity,
 	NodeData,
-} from './types'
-import { loadRemoteData, search } from './utils'
+} from './types.js'
+import { loadRemoteData, search } from './utils.js'
 
 export function useData(
 	selectedOption: string,
@@ -90,13 +91,13 @@ export function useData(
 
 	useEffect(() => {
 		if (!nodes) {
-			loadRemoteData('./data/static/nodes.csv', setNodes)
+			void loadRemoteData('./data/static/nodes.csv', setNodes)
 		}
 		if (!edges) {
-			loadRemoteData('./data/static/edges.csv', setEdges)
+			void loadRemoteData('./data/static/edges.csv', setEdges)
 		}
 		if (!join) {
-			loadRemoteData('./data/static/join.csv', setJoin)
+			void loadRemoteData('./data/static/join.csv', setJoin)
 		}
 	}, [setNodes, setEdges, setJoin, nodes, edges, join])
 

@@ -6,13 +6,14 @@ import type { EntityId } from '@essex/hierarchy-browser'
 import { HierarchyBrowser } from '@essex/hierarchy-browser'
 import type { IChoiceGroupOption } from '@fluentui/react'
 import { useCallback, useMemo, useState } from 'react'
-import type { CSF } from './types'
-import { ControlGroup, Selections } from './utils/components'
-import { useAsyncCallbacks } from './utils/useAsyncCallbacks'
-import { useData } from './utils/useData'
-import { useHierarchyState } from './utils/useHierarchyState'
-import { useStaticEntities } from './utils/useStaticEntities'
-import { options, selectedClusterID, visibleColumns } from './utils/utils'
+
+import type { CSF } from './types.js'
+import { ControlGroup, Selections } from './utils/components/index.js'
+import { useAsyncCallbacks } from './utils/useAsyncCallbacks.js'
+import { useData } from './utils/useData.js'
+import { useHierarchyState } from './utils/useHierarchyState.js'
+import { useStaticEntities } from './utils/useStaticEntities.js'
+import { options, selectedClusterID, visibleColumns } from './utils/utils.js'
 
 const story = {
 	title: 'HierarchyBrowser',

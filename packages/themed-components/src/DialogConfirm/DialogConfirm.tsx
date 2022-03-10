@@ -4,9 +4,9 @@
  */
 import {
 	DefaultButton,
-	DialogType,
 	Dialog,
 	DialogFooter,
+	DialogType,
 	PrimaryButton,
 } from '@fluentui/react'
 import { memo, useMemo } from 'react'

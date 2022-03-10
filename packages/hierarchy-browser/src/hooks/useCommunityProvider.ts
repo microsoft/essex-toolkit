@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useMemo } from 'react'
+
 import { CommunityDataProvider } from '../common/dataProviders/index.js'
 import type {
 	ICommunitiesAsyncHook,

@@ -99,7 +99,7 @@ const filterNumber = (filterDefinition: Filter, filterInstance: any): any => {
 // also note the cast required, because rankings is a private property
 // TODO: steeltoe this
 const findSort = (lineup: LineUp): FindSortCriteria => {
-	const l = lineup as any
+	const l = lineup
 	const sortCriteria =
 		l.data.rankings &&
 		l.data.rankings.length > 0 &&
@@ -130,7 +130,7 @@ export const findColumn = (lineup: LineUp, name: string): any | undefined => {
 export const applyFilters = (lineup: LineUp, filters: Filter[]): void => {
 	filters.forEach(flt => {
 		const { propertyName, type } = flt
-		const column = lineup && (findColumn(lineup, propertyName) as any)
+		const column = lineup && findColumn(lineup, propertyName)
 		if (column) {
 			let filter = { ...column.getFilter() }
 			switch (type) {

@@ -4,7 +4,7 @@
  */
 import { useThematic } from '@thematic/react'
 import { select } from 'd3-selection'
-import { useRef, useLayoutEffect } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import styled from 'styled-components'
 
 interface IMagBarProps {

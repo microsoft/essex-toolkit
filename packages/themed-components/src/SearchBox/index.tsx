@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { PrimaryButton, TextField } from '@fluentui/react'
-import { useState, useCallback } from 'react'
+import { useCallback, useState } from 'react'
 
 const static_style = { display: 'flex', alignItems: 'flex-end' }
 const static_text_style = { flex: 1, marginRight: 8 }

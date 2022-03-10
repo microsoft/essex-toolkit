@@ -20,7 +20,7 @@ export const interpolate = (
 	return data.reduce((acc, cur, idx, arr) => {
 		const a = cur
 		const b = arr[idx + 1]
-		const av = accessor(a)
+		const av = accessor(a) as number
 		if (b) {
 			const bv = accessor(b)
 			const delta = bv - av

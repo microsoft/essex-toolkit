@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { IPublicClientApplication, AccountInfo } from '@azure/msal-browser'
+import type { AccountInfo, IPublicClientApplication } from '@azure/msal-browser'
 import debug from 'debug'
 
 const log = debug('essex:msal-interactor')

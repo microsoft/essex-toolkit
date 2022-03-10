@@ -28,12 +28,12 @@ export const variants = {
 	mega,
 }
 
-export const rowHeader = variants.large as ITextProps['variant']
-export const rowSubHeader = variants.mediumPlus as ITextProps['variant']
-export const headerLabel = variants.large as ITextProps['variant']
-export const subHeaderLabel = variants.mediumPlus as ITextProps['variant']
+export const rowHeader = variants.large
+export const rowSubHeader = variants.mediumPlus
+export const headerLabel = variants.large
+export const subHeaderLabel = variants.mediumPlus
 
-export const tableItems = variants.medium as ITextProps['variant']
+export const tableItems = variants.medium
 export const paddingLeft = 10
 
 export const textStyle = { root: { marginLeft: paddingLeft } }

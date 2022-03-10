@@ -2,8 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Slider, Position } from '@fluentui/react'
+import { Position, Slider } from '@fluentui/react'
 import { useCallback } from 'react'
+
 import { NumberSpinButton } from '../NumberSpinButton/index.js'
 import type { ControlProps } from './interfaces.js'
 import { ControlType } from './interfaces.js'
@@ -32,8 +33,8 @@ export const NumberControl = ({
 					label={label || ''}
 					value={value}
 					labelPosition={Position.top}
-					incrementButtonAriaLabel={`increment ${label}`}
-					decrementButtonAriaLabel={`decrement ${label}`}
+					incrementButtonAriaLabel={`increment ${JSON.stringify(label)}`}
+					decrementButtonAriaLabel={`decrement ${JSON.stringify(label)}`}
 					{...params}
 					onChange={handleChange}
 				/>
@@ -49,6 +50,8 @@ export const NumberControl = ({
 				/>
 			)
 		default:
-			throw new Error(`Unsupported control type ${control} for ${type}`)
+			throw new Error(
+				`Unsupported control type ${JSON.stringify(control)} for ${type}`,
+			)
 	}
 }
