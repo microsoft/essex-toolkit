@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Link } from '@fluentui/react'
-import { useCallback, useState, memo } from 'react'
+import { memo, useCallback, useState } from 'react'
 
 export interface ToggleLinkProps {
 	messages: [string, string]

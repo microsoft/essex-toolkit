@@ -2,18 +2,19 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Stack, Separator } from '@fluentui/react'
+import { Separator, Stack } from '@fluentui/react'
 import { useCallback } from 'react'
+
 import { BooleanControl } from './BooleanControl.js'
-import { NumberControl } from './NumberControl.js'
-import { TextControl } from './TextControl.js'
 import type {
-	SettingConfig,
 	ParsedSettingConfig,
+	SettingConfig,
 	SortedSettings,
 	SortedSettingsGrouped,
 } from './interfaces.js'
+import { NumberControl } from './NumberControl.js'
 import { parseSettings } from './reader.js'
+import { TextControl } from './TextControl.js'
 
 interface Group {
 	keys: string[]

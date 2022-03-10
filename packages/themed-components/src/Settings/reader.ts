@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
-	SettingsI,
-	SettingConfig,
 	ParsedSettingConfig,
+	SettingConfig,
+	SettingsI,
 } from './interfaces.js'
 import { ControlType } from './interfaces.js'
 

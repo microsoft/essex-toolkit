@@ -5,6 +5,7 @@
 import type { GraphQLSchema } from 'graphql'
 import type { DependencyContainer } from 'tsyringe'
 import { container } from 'tsyringe'
+
 import type { RequestContextProvider } from '../index.js'
 import { AppBuilder, BaseInjectorNames, LoggerProvider } from '../index.js'
 

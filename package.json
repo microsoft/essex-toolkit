@@ -28,17 +28,16 @@
 		"release": "yarn workspaces foreach --exclude essex-js-toolkit --exclude essex-js-toolkit-stories -pivt npm publish --tolerate-republish --access public",
 		"jest": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
 		"jest_coverage": "yarn jest --coverage",
-		"lint": "essex lint --strict",
-		"lint_fix": "yarn lint --fix",
+		"lint": "essex lint --strict --fix",
 		"git_is_clean": "essex git-is-clean",
 		"format": "essex prettify",
-		"ci": "run-s build lint_fix test jest_coverage git_is_clean"
+		"ci": "run-s build lint test jest_coverage git_is_clean"
 	},
 	"devDependencies": {
-		"@essex/eslint-config": "^20.0.6",
-		"@essex/jest-config": "^21.0.4",
+		"@essex/eslint-config": "^20.3.0",
+		"@essex/jest-config": "^21.0.7",
 		"@essex/prettier-config": "^18.0.2",
-		"@essex/scripts": "^20.4.6",
+		"@essex/scripts": "^20.5.1",
 		"@types/jest": "^27.4.1",
 		"@types/node": "^17.0.21",
 		"debug": "^4.3.3",

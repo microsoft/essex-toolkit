@@ -5,6 +5,7 @@
  * @jest-environment jsdom
  */
 import { render } from '@testing-library/react'
+
 import semantic from '../index.js'
 
 const ComponentA: React.FC<{

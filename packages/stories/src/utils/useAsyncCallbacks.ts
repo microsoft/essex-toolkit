@@ -3,14 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
-	ILoadParams,
-	INeighborCommunityDetail,
-	CommunityId,
 	ILoadEntitiesAsync,
 	ILoadNeighborCommunitiesAsync,
+	ILoadParams,
+	INeighborCommunityDetail,
 } from '@essex/hierarchy-browser'
-import { useMemo, useCallback } from 'react'
-import type { LocalEntity, NeighborLocalEntity, JoinData } from './types'
+import { useCallback, useMemo } from 'react'
+
+import type { JoinData, LocalEntity, NeighborLocalEntity } from './types'
 
 interface AsyncProps {
 	nodes: LocalEntity[]
@@ -29,6 +29,9 @@ export function useAsyncCallbacks({
 	// Callback for HB to fetch entities in community based communityId
 	const getEntities = useCallback(
 		async (params: ILoadParams) => {
+			// this seems useless, should be sync
+			await Promise.resolve()
+
 			if (allEntities) {
 				const communityId = params.communityId
 				const selection = allEntities.reduce(
@@ -52,6 +55,9 @@ export function useAsyncCallbacks({
 	// Callback for HB to fetch neighbor communities based communityId
 	const getNeighbors = useCallback(
 		async (params: ILoadParams) => {
+			// this seems useless, should be sync
+			await Promise.resolve()
+
 			if (edges && loadState) {
 				const selected = edges.filter(
 					d => `${d.neighbor}` === params.communityId,
@@ -63,7 +69,7 @@ export function useAsyncCallbacks({
 				const data = Object.keys(parents).map((key: string) => {
 					const connections = parents[key]
 					const edgeCommunityId = params.communityId
-					const communityId = key as CommunityId
+					const communityId = key
 					const values = searchForChildren(communityId)
 					let count = 0
 					if (values) {

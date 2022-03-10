@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { mapSchema, MapperKind, getDirectives } from '@graphql-tools/utils'
+import { getDirectives, MapperKind, mapSchema } from '@graphql-tools/utils'
 import type { GraphQLSchema } from 'graphql'
 import { defaultFieldResolver } from 'graphql'
 

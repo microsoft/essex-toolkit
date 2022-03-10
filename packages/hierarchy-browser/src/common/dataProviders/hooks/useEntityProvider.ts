@@ -3,11 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useCallback, useMemo } from 'react'
+
 import type {
-	ILoadParams,
-	IHierarchyDataResponse,
 	IEntityDetail,
+	IHierarchyDataResponse,
 	ILoadEntitiesAsync,
+	ILoadParams,
 } from '../../../index.js'
 import type { INeighborCommunityDetail } from '../../../types/index.js'
 import {
@@ -131,11 +132,7 @@ export const useEntityProvider = (
 			if (isAsync) {
 				return await getEntitiesAsync(loadParams)
 			}
-			return await getStaticEntitiesByType(
-				loadParams,
-				neighborCommunities,
-				type,
-			)
+			return getStaticEntitiesByType(loadParams, neighborCommunities, type)
 		},
 		[getStaticEntitiesByType, isAsync, getEntitiesAsync],
 	)

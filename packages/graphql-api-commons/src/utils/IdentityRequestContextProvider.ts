@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { FastifyRequest } from 'fastify'
+
 import type {
 	IAuthenticator,
 	IBaseConfiguration,

@@ -9,14 +9,14 @@ import type {
 	IEntityMap,
 } from '../common/types/types.js'
 import type {
-	EntityId,
-	IEntityDetail,
 	CommunityId,
-	INeighborCommunityDetail,
+	EntityId,
+	ICommunityDetail,
+	IEntityDetail,
 	IHierarchyDataResponse,
 	IHierarchyNeighborResponse,
 	ILoadParams,
-	ICommunityDetail,
+	INeighborCommunityDetail,
 } from '../index.js'
 
 interface IFlattenedEntities {

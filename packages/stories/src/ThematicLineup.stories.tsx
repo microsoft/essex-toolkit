@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ThematicLineup } from '@essex/thematic-lineup'
+
 import type { CSF } from './types'
 
 const story = {

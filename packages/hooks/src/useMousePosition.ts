@@ -5,6 +5,7 @@
 import debounce from 'lodash-es/debounce.js'
 import type { MutableRefObject } from 'react'
 import { useState } from 'react'
+
 import { useEventListener } from './useEventListener.js'
 
 interface Position {

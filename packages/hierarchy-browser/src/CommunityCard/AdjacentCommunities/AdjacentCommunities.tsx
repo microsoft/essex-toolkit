@@ -4,10 +4,11 @@
  */
 import { Spinner } from '@fluentui/react'
 import styled from 'styled-components'
-import CommunityEdgeList from '../../NeighborList/CommunityEdgeList.js'
-import { ScrollArea } from '../../ScollArea/index.js'
+
 import type { CommunityDataProvider } from '../../common/dataProviders/index.js'
 import { useThemesAccentStyle } from '../../hooks/theme.js'
+import CommunityEdgeList from '../../NeighborList/CommunityEdgeList.js'
+import { ScrollArea } from '../../ScollArea/index.js'
 import type { EntityId, ITableSettings } from '../../types/index.js'
 import { CommunityTable } from '../CommunityTable.js'
 import { TableExpander } from '../TableExpander.js'

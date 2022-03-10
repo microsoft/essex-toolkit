@@ -3,12 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
-	INeighborCommunityDetail,
-	CommunityId,
 	ICommunityDetail,
+	INeighborCommunityDetail,
 } from '@essex/hierarchy-browser'
-import { useMemo, useCallback } from 'react'
-import type { LocalEntity, NeighborLocalEntity, JoinData } from './types'
+import { useCallback, useMemo } from 'react'
+
+import type { JoinData, LocalEntity, NeighborLocalEntity } from './types'
 
 interface StaticProps {
 	communities: ICommunityDetail[]
@@ -37,7 +37,7 @@ export function useStaticEntities({
 				const data = Object.keys(parents).map((key: string) => {
 					const connections = parents[key]
 					const edgeCommunityId = communityId
-					const commID = key as CommunityId
+					const commID = key
 					const values = searchForChildren(commID)
 					let ids: string[] = []
 					if (values) {

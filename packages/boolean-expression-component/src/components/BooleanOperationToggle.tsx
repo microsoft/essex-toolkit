@@ -4,6 +4,7 @@
  */
 import type { CSSProperties, FC } from 'react'
 import { memo } from 'react'
+
 import type { Palette } from '../types.js'
 import { BooleanOperation } from '../types.js'
 import { DEFAULT_PALETTE, NO_OP } from './constants.js'

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const NONE: unknown[] = []
 

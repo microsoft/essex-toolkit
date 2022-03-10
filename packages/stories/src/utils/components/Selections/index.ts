@@ -2,4 +2,4 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export { Selections, ControlGroup } from './Selections'
+export { ControlGroup, Selections } from './Selections.js'

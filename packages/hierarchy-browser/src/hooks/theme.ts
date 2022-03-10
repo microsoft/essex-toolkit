@@ -5,6 +5,7 @@
 import type { ITextProps } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import { useMemo } from 'react'
+
 import type { ICardOverviewSettings } from '../types/index.js'
 
 export function useContainerStyle(isOpen: boolean): React.CSSProperties {

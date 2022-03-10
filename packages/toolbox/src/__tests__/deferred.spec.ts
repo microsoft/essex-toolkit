@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { deferred } from '../deferred'
+import { deferred } from '../deferred.js'
 
 describe('deferred', () => {
 	it('should not crash when creating a deferred', () => {
@@ -15,14 +15,14 @@ describe('deferred', () => {
 			const instance = deferred()
 			const expectedArgs = [1, 2]
 
-			instance.resolve(expectedArgs)
+			void instance.resolve(expectedArgs)
 
 			const promise = instance.promise
 			return promise.then(args => {
 				expect(args).toEqual(expectedArgs)
 			})
 		})
-		it('should return a promise that does not have the resolve function on it', async () => {
+		it('should return a promise that does not have the resolve function on it', () => {
 			const instance = deferred()
 			const promise = instance.promise
 			expect((promise as any)['resolve']).toBeUndefined()
@@ -34,13 +34,13 @@ describe('deferred', () => {
 			const expectedArgs = [1, 2]
 
 			return new Promise<void>(resolve => {
-				instance.promise.then(args => {
+				void instance.promise.then(args => {
 					expect(args).toEqual(expectedArgs)
 					resolve()
 				})
 
 				// Resolve the initial promise
-				instance.resolve(expectedArgs)
+				void instance.resolve(expectedArgs)
 			})
 		})
 		it('should return a promise when called', async () => {
@@ -72,7 +72,7 @@ describe('deferred', () => {
 					})
 
 				// Resolve the reject promise
-				instance.reject(expectedArgs)
+				void instance.reject(expectedArgs)
 			})
 		})
 		it('should return a promise when called', async () => {

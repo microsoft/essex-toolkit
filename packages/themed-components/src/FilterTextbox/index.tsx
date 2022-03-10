@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IconButton, TextField, Label } from '@fluentui/react'
+import { IconButton, Label, TextField } from '@fluentui/react'
 import { useState } from 'react'
 
 export interface TextFilterProps {

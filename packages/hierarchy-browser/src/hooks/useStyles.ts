@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ITextProps, IButtonStyles } from '@fluentui/react'
+import type { IButtonStyles, ITextProps } from '@fluentui/react'
+
 import {
 	headerLabel,
 	subHeaderLabel,

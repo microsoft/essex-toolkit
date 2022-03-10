@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { BaseButton, Button } from '@fluentui/react'
-import { useState, useCallback } from 'react'
+import { useCallback, useState } from 'react'
 
 import type { IEntityDetail } from '../index.js'
 import type { CommunityId } from '../types/index.js'

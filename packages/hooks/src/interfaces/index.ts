@@ -3,5 +3,5 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './Destroyable.js'
-export * from './DynamicData.js'
 export * from './Dimensions.js'
+export * from './DynamicData.js'

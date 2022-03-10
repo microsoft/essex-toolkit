@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { SelectionState } from '@thematic/core'
-import { chart, axis, rect as rectRenderer } from '@thematic/d3'
+import { axis, chart, rect as rectRenderer } from '@thematic/d3'
 import { useThematic } from '@thematic/react'
 import { bin, max } from 'd3-array'
 import { axisBottom, axisLeft } from 'd3-axis'
@@ -12,7 +12,7 @@ import type { ScaleLinear } from 'd3-scale'
 import { scaleLinear } from 'd3-scale'
 import type { Selection } from 'd3-selection'
 import { select } from 'd3-selection'
-import { useRef, useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 
 const DEFAULT_MARGINS = {
 	top: 8,

@@ -4,8 +4,9 @@
  */
 import type { ISettings } from '@essex/hierarchy-browser'
 import type { IChoiceGroupOption } from '@fluentui/react'
-import { useMemo, useState, useCallback } from 'react'
-import { selectedClusterID, customStyle, visibleColumns } from './utils'
+import { useCallback, useMemo, useState } from 'react'
+
+import { customStyle, selectedClusterID, visibleColumns } from './utils.js'
 
 export function useHierarchyState(): [
 	string,

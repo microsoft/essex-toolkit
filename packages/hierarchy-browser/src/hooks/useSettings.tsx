@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useCallback } from 'react'
+
 import type { ISettings } from '../types/index.js'
 
 export function useSettings(

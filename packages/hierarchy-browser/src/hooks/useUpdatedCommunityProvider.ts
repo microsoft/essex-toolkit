@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useMemo, useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
+
 import type { CommunityDataProvider } from '../common/dataProviders/index.js'
 import type { ILoadNeighborCommunities } from '../types/index.js'
 

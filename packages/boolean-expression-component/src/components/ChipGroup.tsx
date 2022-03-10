@@ -2,11 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { memo, useMemo, useCallback } from 'react'
+import { memo, useCallback, useMemo } from 'react'
+
 import type {
 	BooleanOperation,
-	FilterClauseGroup,
 	FilterClause,
+	FilterClauseGroup,
 	Palette,
 } from '../types.js'
 import { toggleOperation } from '../utils.js'

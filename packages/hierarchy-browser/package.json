@@ -12,7 +12,7 @@
 	},
 	"sideEffects": false,
 	"scripts": {
-		"build": "essex build --skipExportCheck",
+		"build": "essex build --skipExportCheck --docs",
 		"clean": "essex clean",
 		"start": "essex watch",
 		"lint": "essex lint"
@@ -26,8 +26,8 @@
 		"styled-components": "^5.3.3"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.4.6",
-		"@fluentui/react": "^8.58.0",
+		"@essex/scripts": "^20.5.1",
+		"@fluentui/react": "^8.60.2",
 		"@thematic/core": "^2.0.6",
 		"@thematic/fluent": "^3.0.6",
 		"@thematic/react": "^2.0.6",
@@ -35,7 +35,7 @@
 		"@types/d3-scale": "^4.0.2",
 		"@types/d3-selection": "^3.0.2",
 		"@types/prop-types": "^15.7.4",
-		"@types/react": "^17.0.39",
+		"@types/react": "^17.0.40",
 		"@types/react-infinite-scroller": "^1.2.2",
 		"@types/styled-components": "^5.1.24",
 		"prop-types": "^15.8.1",

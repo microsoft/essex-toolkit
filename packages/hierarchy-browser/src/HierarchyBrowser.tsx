@@ -3,16 +3,17 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import {
-	useMemo,
-	useState,
 	useCallback,
 	useEffect,
 	useLayoutEffect,
+	useMemo,
+	useState,
 } from 'react'
 import styled from 'styled-components'
-import { CommunityCard } from './CommunityCard/CommunityCard.js'
+
 import { useEntityProvider } from './common/dataProviders/hooks/useEntityProvider.js'
-import type { IDataProvidersCache, ICardOrder } from './common/types/types.js'
+import type { ICardOrder, IDataProvidersCache } from './common/types/types.js'
+import { CommunityCard } from './CommunityCard/CommunityCard.js'
 import {
 	useCommunityLevelCalculator,
 	useCommunitySizeCalculator,

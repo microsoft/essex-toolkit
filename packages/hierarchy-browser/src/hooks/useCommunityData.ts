@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useState, useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
+
 import type { CommunityDataProvider } from '../common/dataProviders/index.js'
 import type { IEntityDetail } from '../index.js'
 import type { IFilterProps } from './interfaces.js'
@@ -77,7 +78,7 @@ export function useCommunityData(
 	const toggleOpen = useCallback(() => {
 		setIsOpen(!isOpen)
 	}, [isOpen, setIsOpen])
-	const toggleFilter = useCallback(async () => {
+	const toggleFilter = useCallback(() => {
 		clearEntities(true) // reset offset
 		setMoreToLoad(true)
 		setFilterEntities(!filterEntities)

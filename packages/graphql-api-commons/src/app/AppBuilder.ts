@@ -9,6 +9,7 @@ import fastify from 'fastify'
 import type { GraphQLSchema } from 'graphql'
 import type { Logger } from 'pino'
 import { inject, singleton } from 'tsyringe'
+
 import type { IBaseConfiguration } from '../configuration/index.js'
 import { BaseInjectorNames } from '../injectors.js'
 import type { IBuiltAppContext, IRequestAppContext } from './index.js'
@@ -78,11 +79,13 @@ export class AppBuilder<
 		await this._apolloServer.start()
 		app.setErrorHandler(async (error, request, reply) => {
 			if (error.validation) {
-				reply
+				void reply
 					.code(400)
 					.send({ message: error.message, validation: error.validation })
 			} else {
-				reply.code(error.statusCode || 500).send({ messsage: error.message })
+				void reply
+					.code(error.statusCode || 500)
+					.send({ messsage: error.message })
 			}
 		})
 		/* eslint-disable  @essex/adjacent-await */

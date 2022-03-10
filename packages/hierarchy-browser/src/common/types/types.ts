@@ -4,12 +4,12 @@
  */
 
 import type {
-	ICommunityDetail,
-	INeighborCommunityDetail,
-	IEntityDetail,
-	ILoadParams,
-	IHierarchyDataResponse,
 	EntityId,
+	ICommunityDetail,
+	IEntityDetail,
+	IHierarchyDataResponse,
+	ILoadParams,
+	INeighborCommunityDetail,
 } from '../../index.js'
 import type { CommunityDataProvider } from '../dataProviders/index.js'
 
