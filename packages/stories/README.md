@@ -1,4 +1,4 @@
-# @essex-js-toolkit/themed-components-stories
+# @essex/themed-components-stories
 
 Provides a set of useful UI components with built-in Thematic theming.
 This is a visual testing playground for some themed components in the /themed-components package.

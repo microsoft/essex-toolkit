@@ -1,4 +1,4 @@
-# @essex-js-toolkit/themed-components
+# @essex/themed-components
 
 Provides a set of Experimental React components with built-in Thematic support
 works in harmony with Thematic library styling and contains ready-to-use data visuals.

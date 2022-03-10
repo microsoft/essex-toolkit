@@ -6,7 +6,7 @@ See individual package README for specific information
 
 # Packages
 
-## [@essex-js-toolkit/hooks](packages/hooks/README.md)
+## [@essex/hooks](packages/hooks/README.md)
 
 Provides a set of useful react hooks to address common use-cases in webGL/canvas/svg applications
 
@@ -14,31 +14,31 @@ Provides a set of useful react hooks to address common use-cases in webGL/canvas
 
 A wrapper around [@azure/msal-browser](https://www.npmjs.com/package/@azure/msal-browser).
 
-## [@essex-js-toolkit/hierarchy-browser](packages/hierarchy-browser/README.md)
+## [@essex/hierarchy-browser](packages/hierarchy-browser/README.md)
 
 This component creates tables to view connected data, allowing theming with Thematic.
 
-## [@essex-js-toolkit/thematic-lineup](packages/thematic-lineup/README.md)
+## [@essex/thematic-lineup](packages/thematic-lineup/README.md)
 
 This component uses the standard [LineUp.js](https://lineup.js.org/) table, and does (a) injection of Thematic, (b) cleans it up a little bit, and (c) adds a custom filtering mechanism
 ThematicLineupStory displays a LineUp instance, while also applying default thematic styles and data colors.
 Use it for a React-style JSX wrapper around LineUp that has more potential flexibility than the very configuration limited version exposed by the LineUp project.
 This allows arbitrary column configurations via jsx, and a set of global filters if desired.
 
-## [@essex-js-toolkit/themed-components](packages/themed-components/README.md)
+## [@essex/themed-components](packages/themed-components/README.md)
 
 Provides a set of React components with built-in Thematic support
 Works in harmony with Thematic library styling and contains ready-to-use data visuals
 
-## [@essex-js-toolkit/themed-components-stories](packages/themed-components-stories/README.md)
+## [@essex/themed-components-stories](packages/themed-components-stories/README.md)
 
 Storybook of themed-components package to test and view example components
 
-## [@essex-js-toolkit/toolbox](packages/toolbox/README.md)
+## [@essex/toolbox](packages/toolbox/README.md)
 
 Provides is a collection of helper functions
 
-## [@essex-js-toolkit/boolean-expression-component](packages/boolean-expression-component/README.md)
+## [@essex/boolean-expression-component](packages/boolean-expression-component/README.md)
 
 An expression component to view and toggle filters
 

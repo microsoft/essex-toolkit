@@ -1,4 +1,4 @@
-# @essex-js-toolkit/hierarchy-browser
+# @essex/hierarchy-browser
 
 A React component to view hierarchical data relating to graph communities.
 

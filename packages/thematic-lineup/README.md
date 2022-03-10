@@ -1,4 +1,4 @@
-# @essex-js-toolkit/thematic-lineup
+# @essex/thematic-lineup
 
 ### [ThematicLineup](/packages/themed-components-stories/stories/ThematicLineup.stories.tsx)
 
