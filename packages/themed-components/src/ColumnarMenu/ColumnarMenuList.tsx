@@ -4,6 +4,7 @@
  */
 import type {
 	IContextualMenuItem,
+	IContextualMenuItemProps,
 	IContextualMenuListProps,
 } from '@fluentui/react'
 import { ContextualMenuItemType } from '@fluentui/react'
@@ -24,42 +25,59 @@ export const ColumnarMenuList: React.FC<IContextualMenuListProps> = memo(
 
 		const { defaultMenuItemRenderer, items } = props
 		const formatted: IContextualMenuItem[] = useMemo(() => {
-			return items.map(item =>
-				merge({}, item, {
-					itemProps,
-					sectionProps: item.sectionProps
-						? {
-								items: item.sectionProps.items.map(subitem =>
-									merge({}, subitem, {
-										itemProps,
-									}),
-								),
-						  }
-						: undefined,
-				}),
-			)
+			return items
+				.filter(i => !i?.data?.button)
+				.map(item =>
+					merge({}, item, {
+						itemProps,
+						sectionProps: item.sectionProps
+							? {
+									items: item.sectionProps.items.map(subitem =>
+										merge({}, subitem, {
+											itemProps,
+										}),
+									),
+							  }
+							: undefined,
+					}),
+				)
 		}, [items])
+
+		const buttons: IContextualMenuItem[] | undefined = useMemo(() => {
+			const _header = items.filter(item => {
+				if (item?.data?.button) {
+					item.itemProps = itemProps
+					return item
+				}
+				return false
+			})
+			return _header
+		}, [items])
+
 		return (
 			<MenuLayout>
-				{formatted.map(item => {
-					const { key } = item
-					return (
-						<Column key={`menu-group-${key}`}>
-							<ColumnHeader style={headerStyle}>
-								{item.sectionProps?.title}
-							</ColumnHeader>
-							{item.itemType === ContextualMenuItemType.Section ? (
-								<>
-									{item.sectionProps?.items.map(subitem =>
-										defaultMenuItemRenderer(subitem as any),
-									)}
-								</>
-							) : (
-								defaultMenuItemRenderer(item as any)
-							)}
-						</Column>
-					)
-				})}
+				{buttons && buttons.map(b => defaultMenuItemRenderer(b as any))}
+				<Options>
+					{formatted.map(item => {
+						const { key } = item
+						return (
+							<Column key={`menu-group-${key}`}>
+								<ColumnHeader style={headerStyle}>
+									{item.sectionProps?.title}
+								</ColumnHeader>
+								{item.itemType === ContextualMenuItemType.Section ? (
+									<>
+										{item.sectionProps?.items.map(subitem =>
+											defaultMenuItemRenderer(subitem as any),
+										)}
+									</>
+								) : (
+									defaultMenuItemRenderer(item as any)
+								)}
+							</Column>
+						)
+					})}
+				</Options>
 			</MenuLayout>
 		)
 	},
@@ -79,11 +97,15 @@ const itemProps = {
 			overflow: 'hidden',
 		},
 	},
-}
+} as Partial<IContextualMenuItemProps>
+
 const MenuLayout = styled.div`
-	display: flex;
 	padding: 8px 0 8px 0;
 	gap: 12px;
+`
+
+const Options = styled.div`
+	display: flex;
 `
 
 const Column = styled.div`

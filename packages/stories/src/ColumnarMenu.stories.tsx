@@ -16,6 +16,14 @@ export default story
 
 const data = [
 	{
+		key: `section-0`,
+		text: 'Reset',
+		data: {
+			button: true,
+		},
+		onClick: () => console.log('Reset clicked'),
+	},
+	{
 		key: `section-1`,
 		itemType: ContextualMenuItemType.Section,
 		sectionProps: {
@@ -79,6 +87,7 @@ export const ColumnarMenuStory: CSF = () => {
 		items: data,
 		buttonStyles: styles,
 		onRenderMenuList: renderMenuList,
+		onItemClick: () => alert('ue'),
 	}
 
 	return <ColumnarMenu text={'Eletronics and furniture list'} {...menuProps} />
