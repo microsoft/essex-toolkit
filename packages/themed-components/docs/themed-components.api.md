@@ -6,6 +6,7 @@
 
 /// <reference types="react" />
 
+import type { IButtonStyles } from '@fluentui/react';
 import type { IContextualMenuListProps } from '@fluentui/react';
 import type { IContextualMenuProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
@@ -43,6 +44,8 @@ export const ColumnarMenuList: React.FC<IContextualMenuListProps>;
 //
 // @public (undocumented)
 export interface ColumnarMenuProps extends IContextualMenuProps {
+    // (undocumented)
+    buttonStyles?: IButtonStyles;
     // (undocumented)
     text?: string;
 }
