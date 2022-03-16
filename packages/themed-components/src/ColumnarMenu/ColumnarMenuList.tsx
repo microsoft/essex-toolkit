@@ -75,6 +75,9 @@ const itemProps = {
 		item: {
 			listStyleType: 'none',
 		},
+		label: {
+			overflow: 'hidden',
+		},
 	},
 }
 const MenuLayout = styled.div`
@@ -85,6 +88,7 @@ const MenuLayout = styled.div`
 
 const Column = styled.div`
 	min-width: 120px;
+	max-width: 200px;
 `
 
 const ColumnHeader = styled.div`
