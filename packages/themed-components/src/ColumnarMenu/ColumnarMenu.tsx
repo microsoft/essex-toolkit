@@ -64,6 +64,7 @@ export const ColumnarMenu: React.FC<ColumnarMenuProps> = memo(
 
 		return (
 			<DefaultButton
+				disabled={!menuProps.items.length}
 				styles={buttonStyle}
 				text={props.text}
 				menuProps={menuProps}
