@@ -6,6 +6,8 @@
 
 /// <reference types="react" />
 
+import type { IContextualMenuListProps } from '@fluentui/react';
+import type { IContextualMenuProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { Position } from '@fluentui/react';
 
@@ -26,6 +28,24 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps>;
 //
 // @public
 export const CollapsiblePanelContainer: React.FC<CollapsiblePanelContainerProps>;
+
+// Warning: (ae-missing-release-tag) "ColumnarMenu" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const ColumnarMenu: React.FC<ColumnarMenuProps>;
+
+// Warning: (ae-missing-release-tag) "ColumnarMenuList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const ColumnarMenuList: React.FC<IContextualMenuListProps>;
+
+// Warning: (ae-missing-release-tag) "ColumnarMenuProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ColumnarMenuProps extends IContextualMenuProps {
+    // (undocumented)
+    text?: string;
+}
 
 // Warning: (ae-missing-release-tag) "ControlledHistogramFilter" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
