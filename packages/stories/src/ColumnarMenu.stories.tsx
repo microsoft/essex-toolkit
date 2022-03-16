@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ColumnarMenu, ColumnarMenuList } from '@essex/themed-components'
-import type { IContextualMenuItem } from '@fluentui/react';
+import type { IContextualMenuItem } from '@fluentui/react'
 import { ContextualMenuItemType } from '@fluentui/react'
 import { useCallback } from 'react'
 

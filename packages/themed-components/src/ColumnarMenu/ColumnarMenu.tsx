@@ -9,6 +9,7 @@ import type {
 	IRenderFunction,
 } from '@fluentui/react'
 import { DefaultButton } from '@fluentui/react'
+import { merge } from 'lodash-es'
 import { memo, useCallback, useMemo } from 'react'
 
 import { ColumnarMenuList } from './ColumnarMenuList.js'
@@ -19,7 +20,6 @@ export interface ColumnarMenuProps extends IContextualMenuProps {
 
 const dropdownButtonStyles: IButtonStyles = {
 	root: {
-		width: 220,
 		// match the dropdowns for better visual alignment
 		paddingLeft: 4,
 		paddingRight: 4,
@@ -47,20 +47,15 @@ export const ColumnarMenu: React.FC<ColumnarMenuProps> = memo(
 		)
 		const menuProps = useMemo(
 			(): IContextualMenuProps => ({
-				...props,
 				onRenderMenuList: render,
+				...props,
 				styles: { root: { width: 'auto' } },
 			}),
 			[props, render],
 		)
 
-		const buttonStyles = useMemo(
-			() => ({
-				...dropdownButtonStyles,
-				...styles,
-			}),
-			[dropdownButtonStyles, styles],
-		)
+		const buttonStyles = merge(dropdownButtonStyles, styles)
+
 		return (
 			<DefaultButton
 				styles={buttonStyles}
