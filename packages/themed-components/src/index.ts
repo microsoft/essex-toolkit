@@ -4,6 +4,7 @@
  */
 export * from './ClippedGraph/index.js'
 export * from './CollapsiblePanel/index.js'
+export * from './ColumnarMenu/index.js'
 export * from './ControlledHistogramFilter/index.js'
 export * from './DialogConfirm/index.js'
 export * from './FilterTextbox/index.js'
