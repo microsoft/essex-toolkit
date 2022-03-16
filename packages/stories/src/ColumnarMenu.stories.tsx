@@ -87,7 +87,7 @@ export const ColumnarMenuStory: CSF = () => {
 		items: data,
 		buttonStyles: styles,
 		onRenderMenuList: renderMenuList,
-		onItemClick: () => alert('ue'),
+		onItemClick: () => alert('item clicked'),
 	}
 
 	return <ColumnarMenu text={'Eletronics and furniture list'} {...menuProps} />

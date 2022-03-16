@@ -11,7 +11,6 @@ import { ContextualMenuItemType } from '@fluentui/react'
 import { useThematicFluent } from '@thematic/fluent'
 import { merge } from 'lodash-es'
 import { memo, useMemo } from 'react'
-import styled from 'styled-components'
 
 export const ColumnarMenuList: React.FC<IContextualMenuListProps> = memo(
 	function ColumnarMenuList(props) {
@@ -19,6 +18,9 @@ export const ColumnarMenuList: React.FC<IContextualMenuListProps> = memo(
 		const headerStyle = useMemo(
 			() => ({
 				color: theme.application().accent().hex(),
+				padding: '0 12px 0 12px',
+				marginBottom: '8',
+				fontWeight: 700,
 			}),
 			[theme],
 		)
@@ -55,16 +57,14 @@ export const ColumnarMenuList: React.FC<IContextualMenuListProps> = memo(
 		}, [items])
 
 		return (
-			<MenuLayout>
+			<div style={styles.menu}>
 				{buttons && buttons.map(b => defaultMenuItemRenderer(b as any))}
-				<Options>
+				<div style={styles.options}>
 					{formatted.map(item => {
 						const { key } = item
 						return (
-							<Column key={`menu-group-${key}`}>
-								<ColumnHeader style={headerStyle}>
-									{item.sectionProps?.title}
-								</ColumnHeader>
+							<div style={styles.column} key={`menu-group-${key}`}>
+								<div style={headerStyle}>{item.sectionProps?.title}</div>
 								{item.itemType === ContextualMenuItemType.Section ? (
 									<>
 										{item.sectionProps?.items.map(subitem =>
@@ -74,11 +74,11 @@ export const ColumnarMenuList: React.FC<IContextualMenuListProps> = memo(
 								) : (
 									defaultMenuItemRenderer(item as any)
 								)}
-							</Column>
+							</div>
 						)
 					})}
-				</Options>
-			</MenuLayout>
+				</div>
+			</div>
 		)
 	},
 )
@@ -99,22 +99,16 @@ const itemProps = {
 	},
 } as Partial<IContextualMenuItemProps>
 
-const MenuLayout = styled.div`
-	padding: 8px 0 8px 0;
-	gap: 12px;
-`
-
-const Options = styled.div`
-	display: flex;
-`
-
-const Column = styled.div`
-	min-width: 120px;
-	max-width: 200px;
-`
-
-const ColumnHeader = styled.div`
-	padding: 0 12px 0 12px;
-	margin-bottom: 8px;
-	font-weight: bold;
-`
+const styles = {
+	menu: {
+		padding: '8px 0 8px 0',
+		gap: '12px',
+	},
+	options: {
+		display: 'flex',
+	},
+	column: {
+		minWidth: 120,
+		maxWidth: 200,
+	},
+}
