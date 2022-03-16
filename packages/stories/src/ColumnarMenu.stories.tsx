@@ -16,6 +16,14 @@ export default story
 
 const data = [
 	{
+		key: `section-0`,
+		text: 'Reset',
+		data: {
+			button: true,
+		},
+		onClick: () => console.log('Reset clicked'),
+	},
+	{
 		key: `section-1`,
 		itemType: ContextualMenuItemType.Section,
 		sectionProps: {
@@ -45,10 +53,12 @@ const data = [
 				{
 					key: 'Table',
 					text: 'Table',
+					title: 'Table',
 				},
 				{
 					key: 'Chair',
-					text: 'Chair',
+					text: 'Chair in a brown color with starts on top',
+					title: 'Chair in a brown color with starts on top',
 				},
 			],
 		},
@@ -57,7 +67,10 @@ const data = [
 
 const styles = {
 	root: {
-		width: 100,
+		width: 150,
+	},
+	label: {
+		width: 120,
 	},
 }
 
@@ -72,12 +85,14 @@ export const ColumnarMenuStory: CSF = () => {
 
 	const menuProps = {
 		items: data,
-		styles: styles,
+		buttonStyles: styles,
 		onRenderMenuList: renderMenuList,
+		onItemClick: () => alert('ue'),
 	}
 
-	return <ColumnarMenu text={'Test'} {...menuProps} />
+	return <ColumnarMenu text={'Eletronics and furniture list'} {...menuProps} />
 }
+
 ColumnarMenuStory.story = {
 	name: 'main',
 }

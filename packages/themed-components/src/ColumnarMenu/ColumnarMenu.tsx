@@ -16,6 +16,7 @@ import { ColumnarMenuList } from './ColumnarMenuList.js'
 
 export interface ColumnarMenuProps extends IContextualMenuProps {
 	text?: string
+	buttonStyles?: IButtonStyles
 }
 
 const dropdownButtonStyles: IButtonStyles = {
@@ -26,7 +27,10 @@ const dropdownButtonStyles: IButtonStyles = {
 		textAlign: 'left',
 	},
 	label: {
+		whiteSpace: 'nowrap',
 		fontWeight: 'normal',
+		overflow: 'hidden',
+		textOverflow: 'ellipsis',
 	},
 }
 
@@ -35,7 +39,7 @@ const dropdownButtonStyles: IButtonStyles = {
  */
 export const ColumnarMenu: React.FC<ColumnarMenuProps> = memo(
 	function ColumnarMenu(props) {
-		const { onRenderMenuList, styles } = props
+		const { onRenderMenuList, buttonStyles } = props
 		const render: IRenderFunction<IContextualMenuListProps> = useCallback(
 			menuProps => {
 				if (onRenderMenuList) {
@@ -49,16 +53,18 @@ export const ColumnarMenu: React.FC<ColumnarMenuProps> = memo(
 			(): IContextualMenuProps => ({
 				onRenderMenuList: render,
 				...props,
-				styles: { root: { width: 'auto' } },
+				styles: merge(props.styles, {
+					root: { width: 'auto' },
+				}),
 			}),
 			[props, render],
 		)
 
-		const buttonStyles = merge(dropdownButtonStyles, styles)
+		const buttonStyle = merge(dropdownButtonStyles, buttonStyles)
 
 		return (
 			<DefaultButton
-				styles={buttonStyles}
+				styles={buttonStyle}
 				text={props.text}
 				menuProps={menuProps}
 			/>
