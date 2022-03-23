@@ -1,7 +1,7 @@
 {
 	"name": "essex-js-toolkit-stories",
 	"private": true,
-	"version": "3.1.2",
+	"version": "3.2.0",
 	"description": "A set of visual components that include built-in thematic",
 	"repository": "https://github.com/microsoft/essex-js-toolkit",
 	"author": "Nathan Evans <naevans@microsoft.com>",
