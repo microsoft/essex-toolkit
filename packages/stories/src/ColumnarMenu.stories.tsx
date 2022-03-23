@@ -20,6 +20,7 @@ const data = [
 		text: 'Reset',
 		data: {
 			button: true,
+			bottomDivider: true,
 		},
 		onClick: () => console.log('Reset clicked'),
 	},

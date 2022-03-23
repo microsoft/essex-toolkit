@@ -7,10 +7,10 @@ import type {
 	IContextualMenuItemProps,
 	IContextualMenuListProps,
 } from '@fluentui/react'
-import { ContextualMenuItemType } from '@fluentui/react'
+import { ContextualMenuItemType, Separator } from '@fluentui/react'
 import { useThematicFluent } from '@thematic/fluent'
 import { merge } from 'lodash-es'
-import { memo, useMemo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 
 export const ColumnarMenuList: React.FC<IContextualMenuListProps> = memo(
 	function ColumnarMenuList(props) {
@@ -45,6 +45,11 @@ export const ColumnarMenuList: React.FC<IContextualMenuListProps> = memo(
 				)
 		}, [items])
 
+		const verifySeparator = useCallback(
+			(show?: boolean) => show && <Separator />,
+			[],
+		)
+
 		const buttons: IContextualMenuItem[] | undefined = useMemo(() => {
 			const _header = items.filter(item => {
 				if (item?.data?.button) {
@@ -58,7 +63,14 @@ export const ColumnarMenuList: React.FC<IContextualMenuListProps> = memo(
 
 		return (
 			<div style={styles.menu}>
-				{buttons && buttons.map(b => defaultMenuItemRenderer(b as any))}
+				{buttons &&
+					buttons.map(b => (
+						<>
+							{verifySeparator(b.data?.topDivider)}
+							{defaultMenuItemRenderer(b as any)}
+							{verifySeparator(b.data?.bottomDivider)}
+						</>
+					))}
 				<div style={styles.options}>
 					{formatted.map(item => {
 						const { key } = item
@@ -67,12 +79,18 @@ export const ColumnarMenuList: React.FC<IContextualMenuListProps> = memo(
 								<div style={headerStyle}>{item.sectionProps?.title}</div>
 								{item.itemType === ContextualMenuItemType.Section ? (
 									<>
+										{verifySeparator(item.sectionProps?.topDivider)}
 										{item.sectionProps?.items.map(subitem =>
 											defaultMenuItemRenderer(subitem as any),
 										)}
+										{verifySeparator(item.sectionProps?.bottomDivider)}
 									</>
 								) : (
-									defaultMenuItemRenderer(item as any)
+									<>
+										{verifySeparator(item.data?.topDivider)}
+										{defaultMenuItemRenderer(item as any)}
+										{verifySeparator(item.data?.bottomDivider)}
+									</>
 								)}
 							</div>
 						)
