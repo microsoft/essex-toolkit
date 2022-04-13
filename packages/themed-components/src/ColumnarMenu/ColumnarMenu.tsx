@@ -45,7 +45,7 @@ export const ColumnarMenu: React.FC<ColumnarMenuProps> = memo(
 				if (onRenderMenuList) {
 					return onRenderMenuList(menuProps)
 				}
-				return <ColumnarMenuList {...menuProps!} />
+				return menuProps ? <ColumnarMenuList {...menuProps} /> : null
 			},
 			[onRenderMenuList],
 		)

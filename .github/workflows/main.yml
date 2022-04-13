@@ -30,14 +30,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - run: yarn version check
-        if: "github.actor != 'dependabot-preview[bot]' && !contains(github.ref , 'release/') && !contains(github.head_ref , 'release/')"
-        name: Version Check
-
       - run: yarn install
         name: Install Dependencies
 
       - run: yarn ci
         name: Execute Tests
-        env:
-          CI: true

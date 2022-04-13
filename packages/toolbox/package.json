@@ -5,8 +5,8 @@
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
-		"main": "dist/index.js",
-		"types": "dist/index.d.ts"
+		"main": "dist/lib/index.js",
+		"types": "dist/lib/index.d.ts"
 	},
 	"sideEffects": false,
 	"repository": "https://github.com/microsoft/essex-js-toolkit",
@@ -17,7 +17,7 @@
 		"build": "essex build --docs"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.5.1",
+		"@essex/scripts": "^21.0.1",
 		"regenerator-runtime": "^0.13.9"
 	}
 }
