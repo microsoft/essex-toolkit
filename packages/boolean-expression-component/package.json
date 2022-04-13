@@ -6,8 +6,8 @@
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
-		"main": "dist/index.js",
-		"types": "dist/index.d.ts"
+		"main": "dist/lib/index.js",
+		"types": "dist/lib/index.d.ts"
 	},
 	"sideEffects": false,
 	"repository": {
@@ -21,7 +21,7 @@
 		"watch": "essex watch"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.5.1",
+		"@essex/scripts": "^21.0.1",
 		"@fluentui/react": "^8.60.2",
 		"@types/react": "^17.0.40",
 		"@types/react-dom": "^17.0.13",

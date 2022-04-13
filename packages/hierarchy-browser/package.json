@@ -7,8 +7,8 @@
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
-		"main": "dist/index.js",
-		"types": "dist/index.d.ts"
+		"main": "dist/lib/index.js",
+		"types": "dist/lib/index.d.ts"
 	},
 	"sideEffects": false,
 	"scripts": {
@@ -26,7 +26,7 @@
 		"styled-components": "^5.3.3"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.5.1",
+		"@essex/scripts": "^21.0.1",
 		"@fluentui/react": "^8.60.2",
 		"@thematic/core": "^2.0.6",
 		"@thematic/fluent": "^3.0.6",

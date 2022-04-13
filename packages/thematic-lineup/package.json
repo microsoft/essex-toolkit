@@ -5,8 +5,8 @@
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
-		"main": "dist/index.js",
-		"types": "dist/index.d.ts"
+		"main": "dist/lib/index.js",
+		"types": "dist/lib/index.d.ts"
 	},
 	"sideEffects": false,
 	"repository": "https://github.com/microsoft/essex-js-toolkit",
@@ -18,13 +18,13 @@
 		"watch": "essex watch"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.5.1",
+		"@essex/scripts": "^21.0.1",
 		"@thematic/color": "^2.0.6",
 		"@thematic/core": "^2.0.6",
 		"@thematic/d3": "^2.0.6",
 		"@thematic/fluent": "^3.0.6",
 		"@thematic/react": "^2.0.6",
-		"@types/node": "^17.0.21",
+		"@types/node": "^17.0.23",
 		"@types/react": "^17.0.40",
 		"@types/react-dom": "^17.0.13",
 		"@types/react-test-renderer": "^17.0.1",
