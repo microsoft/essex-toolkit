@@ -138,7 +138,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		}
 		// subscribe to the new input
 		const input: BoundInput<T> = new DefaultBoundInput(binding)
-		this._inputs.set(name, input )
+		this._inputs.set(name, input)
 		input.onValueChange(() => this.recalculate())
 		this.recalculate()
 		this._bindingsChanged.next()
@@ -200,10 +200,9 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 */
 	protected recalculate = (): void => {
 		try {
-			const result = this.doRecalculate() as Promise<void>
-			// @ts-ignore - we are casting this to a promise for readability; checking 'then' is important.
-			if (result?.then) {
-				result.catch(err => this.emitError(err))
+			const result = this.doRecalculate()
+			if ((result as Promise<void>)?.then) {
+				;(result as Promise<void>).catch(err => this.emitError(err))
 			}
 		} catch (err) {
 			this.emitError(err)
