@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+/* eslint-disable @typescript-eslint/no-this-alias */
 // https://stackoverflow.com/questions/27078285/simple-throttle-in-js
 
 // Returns a function, that, when invoked, will only be triggered at most once
