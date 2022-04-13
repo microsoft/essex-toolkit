@@ -1,5 +1,5 @@
 import { DefaultGraph } from '../DefaultGraph.js'
-import { AddNode, Input, ValueNode } from './numericNodes.js'
+import { AddNode, Input, ValueNode } from '../nodes/__tests__/numericNodes.js'
 
 describe('DefaultGraph', () => {
 	it('can register simple nodes', () => {
