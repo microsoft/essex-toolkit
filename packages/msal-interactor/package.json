@@ -21,12 +21,12 @@
 		"watch": "essex watch"
 	},
 	"devDependencies": {
-		"@azure/msal-browser": "^2.22.1",
-		"@essex/scripts": "^21.0.1",
+		"@azure/msal-browser": "^2.23.0",
+		"@essex/scripts": "^21.0.2",
 		"@types/debug": "^4.1.7"
 	},
 	"dependencies": {
-		"debug": "^4.3.3"
+		"debug": "^4.3.4"
 	},
 	"peerDependencies": {
 		"@azure/msal-browser": "> 2"

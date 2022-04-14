@@ -21,12 +21,12 @@
 		"watch": "essex watch"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^21.0.1",
-		"@fluentui/react": "^8.60.2",
-		"@types/react": "^17.0.40",
-		"@types/react-dom": "^17.0.13",
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2"
+		"@essex/scripts": "^21.0.2",
+		"@fluentui/react": "^8.64.4",
+		"@types/react": "^18.0.5",
+		"@types/react-dom": "^18.0.0",
+		"react": "^18.0.0",
+		"react-dom": "^18.0.0"
 	},
 	"peerDependencies": {
 		"@fluentui/react": "*",

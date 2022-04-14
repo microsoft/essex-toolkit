@@ -19,7 +19,7 @@
 		"uuid": "^8.3.2"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^21.0.1",
+		"@essex/scripts": "^21.0.2",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@types/jest": "^27.4.1",
 		"@types/toposort": "^2.0.3",
