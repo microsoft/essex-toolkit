@@ -24,20 +24,20 @@
 		"build": "essex build --mode dual --skipExportCheck --docs"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^21.0.1",
-		"@graphql-tools/utils": "^8.6.2",
+		"@essex/scripts": "^21.0.2",
+		"@graphql-tools/utils": "^8.6.7",
 		"@tsconfig/node14": "^1.0.1",
 		"@types/pino": "^7.0.5",
-		"apollo-server-core": "^3.6.4",
-		"apollo-server-fastify": "^3.6.4",
-		"fastify": "^3.27.4",
+		"apollo-server-core": "^3.6.7",
+		"apollo-server-fastify": "^3.6.7",
+		"fastify": "^3.28.0",
 		"graphql": "^16.3.0",
 		"tsyringe": "^4.6.0",
 		"typescript": "^4.6.3"
 	},
 	"dependencies": {
-		"pino": "^7.8.1",
-		"pino-pretty": "^7.5.3"
+		"pino": "^7.10.0",
+		"pino-pretty": "^7.6.1"
 	},
 	"peerDependencies": {
 		"@graphql-tools/utils": ">= 8.2.2",
