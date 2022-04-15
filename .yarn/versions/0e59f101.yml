@@ -1,0 +1,13 @@
+declined:
+  - essex-js-toolkit
+  - "@essex/graphql-api-commons"
+  - "@essex/msal-interactor"
+  - "@essex/dataflow"
+  - "@essex/toolbox"
+  - "@essex/boolean-expression-component"
+  - "@essex/hierarchy-browser"
+  - "@essex/hooks"
+  - "@essex/semantic-components"
+  - essex-js-toolkit-stories
+  - "@essex/thematic-lineup"
+  - "@essex/themed-components"
