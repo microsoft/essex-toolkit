@@ -98,11 +98,20 @@ export const interpolate: (data: any[], multiple: number, accessor?: (d: any) =>
 // @public
 export function parseRgbFromCssColor(color: string): RGB;
 
-// Warning: (ae-forgotten-export) The symbol "Options" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "throttle" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function throttle(func: (...args: any[]) => any, wait?: number, options?: Options): any;
+export function throttle(func: (...args: any[]) => any, wait?: number, options?: ThrottleOptions): any;
+
+// Warning: (ae-missing-release-tag) "ThrottleOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ThrottleOptions {
+    // (undocumented)
+    leading: boolean;
+    // (undocumented)
+    trailing: boolean;
+}
 
 // (No @packageDocumentation comment for this package)
 
