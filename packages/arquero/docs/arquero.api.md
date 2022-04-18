@@ -26,6 +26,16 @@ export interface Category {
     name: string;
 }
 
+// Warning: (ae-missing-release-tag) "coerce" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function coerce(value: Value, dataType: DataType): Value;
+
+// Warning: (ae-missing-release-tag) "columnIndexesWithZeros" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function columnIndexesWithZeros(table: ColumnTable): number[];
+
 // Warning: (ae-missing-release-tag) "ColumnMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -37,6 +47,11 @@ export interface ColumnMetadata {
     // (undocumented)
     type: DataType;
 }
+
+// Warning: (ae-missing-release-tag) "columnNamesWithZeros" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function columnNamesWithZeros(table: ColumnTable): string[];
 
 // Warning: (ae-missing-release-tag) "ColumnStats" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -68,6 +83,16 @@ export interface ColumnStats {
     type: DataType;
 }
 
+// Warning: (ae-missing-release-tag) "columnType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function columnType(table: ColumnTable, column: string): DataType;
+
+// Warning: (ae-missing-release-tag) "columnTypes" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function columnTypes(table: ColumnTable, columns?: string[]): Record<string, DataType>;
+
 // Warning: (ae-missing-release-tag) "container" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -97,6 +122,59 @@ export enum DataType {
     Unknown = "unknown"
 }
 
+// Warning: (ae-missing-release-tag) "determineType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function determineType(value: Value): DataType;
+
+// Warning: (ae-missing-release-tag) "fixedBinCount" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function fixedBinCount(column: string, min: number, max: number, count: number, clamped?: boolean, distinct?: number): string | object;
+
+// Warning: (ae-missing-release-tag) "fixedBinStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function fixedBinStep(column: string, min: number, max: number, step: number, clamped?: boolean, distinct?: number): string | object;
+
+// Warning: (ae-missing-release-tag) "format" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function format(value: number, options?: {
+    minExp?: number;
+    precision?: number;
+}): string;
+
+// Warning: (ae-missing-release-tag) "formatIfNumber" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function formatIfNumber(value: Value): string | Value;
+
+// Warning: (ae-missing-release-tag) "getters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function getters(table: ColumnTable): Record<string, (i: number) => any>;
+
+// Warning: (ae-missing-release-tag) "introspect" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function introspect(table: ColumnTable, detailed?: boolean,
+columns?: string[]): TableMetadata;
+
+// Warning: (ae-missing-release-tag) "rows" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function rows(table: ColumnTable, options?: RowsOptions): any[][];
+
+// Warning: (ae-missing-release-tag) "RowsOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface RowsOptions {
+    format?: Record<string, (d: any) => any>;
+    skipHeader?: boolean;
+    stringify?: boolean;
+}
+
 // Warning: (ae-missing-release-tag) "SortDirection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -106,6 +184,11 @@ export enum SortDirection {
     // (undocumented)
     Descending = "desc"
 }
+
+// Warning: (ae-missing-release-tag) "stats" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function stats(table: ColumnTable, columns?: string[]): Record<string, ColumnStats>;
 
 // Warning: (ae-missing-release-tag) "TableContainer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
