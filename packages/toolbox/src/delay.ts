@@ -7,7 +7,7 @@
  * i.e.
  * 	await delay(100)
  *  execute()
- * @param myDelay The delay to use
+ * @param myDelay - The delay to use
  */
 export function delay(myDelay: number): Promise<any> {
 	return new Promise(resolve => {

@@ -46,12 +46,12 @@ export interface IHierarchyBrowserProps {
 
 /**
  * Component creates tables to view connected data while also applying default thematic styles and data colors.
- * @param communities required ICommunityDetail[]
- * @param entities (optional) IEntityDetail[] | ILoadEntitiesAsync
- * @param neighbors (optional) INeighborCommunityDetail[] | ILoadNeighborCommunitiesAsync
- * @param settings (optional) ISettings
- * @param selections (optional)  EntityId[]
- * @param onSelectionChange (optional) IOnSelectionChange
+ * @param communities - required ICommunityDetail[]
+ * @param entities - (optional) IEntityDetail[] | ILoadEntitiesAsync
+ * @param neighbors - (optional) INeighborCommunityDetail[] | ILoadNeighborCommunitiesAsync
+ * @param settings - (optional) ISettings
+ * @param selections - (optional)  EntityId[]
+ * @param onSelectionChange - (optional) IOnSelectionChange
  */
 export const HierarchyBrowser: React.FC<IHierarchyBrowserProps> =
 	function HierarchyBrowser({

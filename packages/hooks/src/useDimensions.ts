@@ -10,7 +10,7 @@ import type { Dimensions } from './interfaces/index.js'
 /**
  * A hook for getting the dimensions of the given element. This hook also updates when the given element resizes.
  * NOTE: ResizeObserver must be defined in the target runtime. BYO polyfill if it is not provided by default
- * @param ref A ref to the element to measure
+ * @param ref - A ref to the element to measure
  * @returns The dimensions for the element.
  */
 export function useDimensions(

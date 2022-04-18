@@ -8,9 +8,9 @@
  * This returns a list of numberic values.
  * The input does not have to be numeric, but if it isn't an accessor function should be supplied.
  * Note that this just performs linear interpolation
- * @param data Array of objects to compute interpolated values for
- * @param multiple Multiplier, e.g., 2 means to "double" the length of the array by puttting a value between each value
- * @param accessor Accessor function to return a numeric property value, if the input data is not numeric
+ * @param data - Array of objects to compute interpolated values for
+ * @param multiple - Multiplier, e.g., 2 means to "double" the length of the array by puttting a value between each value
+ * @param accessor - Accessor function to return a numeric property value, if the input data is not numeric
  */
 export const interpolate = (
 	data: any[],

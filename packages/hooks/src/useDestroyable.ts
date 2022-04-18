@@ -9,7 +9,7 @@ import type { Destroyable } from './interfaces/index.js'
 /**
  * A hook for using a destroyable thing, so when the value changes
  * the previous value is destroyed
- * @param initialValue The initial value
+ * @param initialValue - The initial value
  * @returns The current value as well as a setter for the new value
  */
 export function useDestroyable<T extends Partial<Destroyable>>(

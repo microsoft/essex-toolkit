@@ -18,9 +18,9 @@ interface ListenerMap {
 
 /**
  * Adds various listeners to the given element and cleans them up when done
- * @param listenerMap The listeners
- * @param element The element to attach the listeners to
- * @param deps The optional list of dependencies
+ * @param listenerMap - The listeners
+ * @param element - The element to attach the listeners to
+ * @param deps - The optional list of dependencies
  */
 export function useEventListener(
 	listenerMap: ListenerMap,

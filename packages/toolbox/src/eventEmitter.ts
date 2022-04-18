@@ -43,9 +43,8 @@ export class EventEmitter {
 			const { namespace, event } = this.getNamespaceAndEvent(key)
 			if (namespace && !event) {
 				Object.keys(this.listeners).forEach(otherKey => {
-					const { namespace: otherNamespace } = this.getNamespaceAndEvent(
-						otherKey,
-					)
+					const { namespace: otherNamespace } =
+						this.getNamespaceAndEvent(otherKey)
 					if (otherNamespace === namespace) {
 						delete this.listeners[otherKey]
 					}
@@ -78,7 +77,7 @@ export class EventEmitter {
 
 	/**
 	 * Returns the namespace and event name
-	 * @param eventKey The event key, either "<event>" or "<event>.<namespace>"
+	 * @param eventKey - The event key, either "<event>" or "<event>.<namespace>"
 	 */
 	private getNamespaceAndEvent(eventKey: string): EventNameSpace {
 		if (eventKey) {

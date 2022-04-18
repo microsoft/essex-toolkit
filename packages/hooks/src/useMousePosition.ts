@@ -14,8 +14,8 @@ interface Position {
 }
 /**
  * Gets the current mouse position on the given element
- * @param ref The ref to the element
- * @param debouceTime The amount of time to wait between state updates
+ * @param ref - The ref to the element
+ * @param debouceTime - The amount of time to wait between state updates
  * @returns The current mouse position
  */
 export function useMousePosition(

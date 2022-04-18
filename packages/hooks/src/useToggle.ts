@@ -6,7 +6,7 @@ import { useCallback, useState } from 'react'
 
 /**
  * A hook for a toggleable state
- * @param defaultValue The default value for the toggle
+ * @param defaultValue - The default value for the toggle
  * @returns The current toggle state as well as a function that can be called to toggle the state
  */
 export function useToggle(

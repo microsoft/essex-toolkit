@@ -1,6 +1,6 @@
 {
 	"name": "@essex/arquero",
-	"version": "6.1.0",
+	"version": "1.0.0",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -21,10 +21,10 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/microsoft/data-wrangling-components"
+		"url": "git+https://github.com/microsoft/essex-js-toolkit"
 	},
 	"bugs": {
-		"url": "https://github.com/microsoft/data-wrangling-components/issues"
+		"url": "https://github.com/microsoft/essex-js-toolkit/issues"
 	},
 	"scripts": {
 		"clean": "essex clean dist docs",

@@ -46,10 +46,10 @@ const DEFAULT_CONSENT_OPTIONS: ConsentOptions = Object.freeze({})
  * Uses the Microsoft cookie consent banner. The banner code should be loaded from CDN using a script tag.
  * <script src="https://wcpstatic.microsoft.com/mscc/lib/v2/wcp-consent.js"></script>
  * You should also include a div for the cookie banner to render into: e.g. <div id="cookie-banner" />
- * @param options The consent banner options. (optional)
+ * @param options - The consent banner options. (optional)
  * 		options.theme; "light" | "dark", default "dark")
  * 		options.elementId; default = "cookie-banner"
- * 		options.onChange; (consent: Consent) => void; default=noop
+ * 		options.onChange; (consent: Consent) =\> void; default=noop
  * @returns [current consent; manageConsent function (to be used in footer)]
  */
 export function useMicrosoftConsentBanner({
