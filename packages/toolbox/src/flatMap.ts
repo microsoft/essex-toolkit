@@ -4,7 +4,7 @@
  */
 /**
  * Flattens a multi dimensional array
- * @param arr The multi-dimensional array
+ * @param arr - The multi-dimensional array
  */
 export function flatMap(arr: any[][]): any[] {
 	const mapped = [] as any[]

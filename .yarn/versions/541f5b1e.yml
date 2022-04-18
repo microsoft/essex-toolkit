@@ -1,0 +1,13 @@
+releases:
+  "@essex/hierarchy-browser": patch
+  "@essex/hooks": patch
+  "@essex/thematic-lineup": patch
+  "@essex/themed-components": patch
+  "@essex/toolbox": patch
+  essex-js-toolkit: patch
+
+declined:
+  - "@essex/arquero"
+  - "@essex/arquero-react"
+  - "@essex/charts-react"
+  - essex-js-toolkit-stories

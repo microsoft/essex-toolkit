@@ -13,9 +13,9 @@ import type { DynamicData } from './interfaces/index.js'
 
 /**
  * Hook which allows for the use of a dynamic data source
- * @param values The raw set of values, or an iterator to get the values
- * @param map An optional mapping function which takes a list of values and transforms them
- * @param deps The optional list of dependencies to use when updating the values
+ * @param values - The raw set of values, or an iterator to get the values
+ * @param map - An optional mapping function which takes a list of values and transforms them
+ * @param deps - The optional list of dependencies to use when updating the values
  * @returns The last value from the iterator
  */
 export function useDynamicData<InputType, OutputType = InputType>(

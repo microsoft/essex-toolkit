@@ -10,27 +10,27 @@
 // as much as it can, without ever going more than once per `wait` duration;
 // but if you'd like to disable the execution on the leading edge, pass
 // `{leading: false}`. To disable execution on the trailing edge, ditto.
-interface Options {
+export interface ThrottleOptions {
 	leading: boolean
 	trailing: boolean
 }
 /**
  * Debounces function based on options provided
- * @param func function to throttle
- * @param wait time in milliseconds
- * @param options optional object param to control timing, ex. {trailing: false, leading: true}
+ * @param func - function to throttle
+ * @param wait - time in milliseconds
+ * @param options - optional object param to control timing, ex. {trailing: false, leading: true}
  */
 export function throttle(
 	func: (...args: any[]) => any,
 	wait = 100,
-	options?: Options,
+	options?: ThrottleOptions,
 ): any {
 	let context: any
 	let lastArgs: any
 	let result: any
 	let timeout: any = null
 	let previous = 0
-	const currentOptions: Options = options
+	const currentOptions: ThrottleOptions = options
 		? options
 		: { leading: false, trailing: false }
 

@@ -77,8 +77,8 @@ const applyCommonConfig = (
  * Gets unique list of categories for a column.
  * If the data property used for the column is a single value,
  * categoryKey is not required, because it is the same as
- * @param data
- * @param config
+ * @param config - the column configuration
+ * @param data - the data
  */
 export const deriveCategories = (
 	config: ColumnConfig,
@@ -100,8 +100,8 @@ export const deriveCategories = (
  * This looks through the configs to count up the numeric columns,
  * so that each one can be assigned a unique color from the scale.
  * TODO: the scale function could be much more flexbile like d3 scales (domain/range), this just assumes an auto-incrementing index based on column order
- * @param scaleCreator Function that returns a scale. The returned scale should accept a number and return a mapped Color.
- * @param configs List of ColumnConfig object so we can count up the number columns
+ * @param scaleCreator - Function that returns a scale. The returned scale should accept a number and return a mapped Color.
+ * @param configs - List of ColumnConfig object so we can count up the number columns
  */
 export const createNumberColorScale = (
 	scaleCreator: (count: number) => (index: number) => Color,
@@ -118,8 +118,8 @@ export const createNumberColorScale = (
 
 /**
  * Builds a standard number column, applying supplied domain or computing as needed.
- * @param config
- * @param data
+ * @param config - the number column configurationw
+ * @param data - the data
  */
 export const buildNumberColumn = (
 	config: NumberColumnConfig,
@@ -145,7 +145,7 @@ export const buildNumberColumn = (
 /**
  * Builds a boolean-based column, which is a variant on categorical.
  * Lineup only provides a subset of builders, so this wraps it with explicit typing.
- * @param config
+ * @param config - the column configuration
  */
 export const buildBooleanColumn = (config: ColumnConfig, data?: any[]): any => {
 	const column = bc('boolean', config.name)
@@ -155,8 +155,8 @@ export const buildBooleanColumn = (config: ColumnConfig, data?: any[]): any => {
 
 /**
  * Builds a basic string column, which is also the default column type.
- * @param config
- * @param data
+ * @param config - the column configuratino
+ * @param data - the data
  */
 export const buildStringColumn = (config: ColumnConfig, data?: any[]): any => {
 	const column = bsc(config.name)
@@ -167,8 +167,8 @@ export const buildStringColumn = (config: ColumnConfig, data?: any[]): any => {
 /**
  * Builds a link column, which is a string column where the text is a hyperlink.
  * Note that pattern and params are optional config properties, that if omitted simply results in a plain string.
- * @param config
- * @param data
+ * @param config - the link column configuration
+ * @param data - the data
  */
 export const buildLinkColumn = (
 	config: LinkColumnConfig,
@@ -188,8 +188,8 @@ export const buildLinkColumn = (
 
 /**
  * Builds a categorical column, computing the unique categories as needed.
- * @param config
- * @param data
+ * @param config - the categorical column configuration
+ * @param data - the data
  */
 export const buildCategoricalColumn = (
 	config: CategoricalColumnConfig,
@@ -211,8 +211,8 @@ export const buildCategoricalColumn = (
 /**
  * Builds a set-style column, which is a form of categorical column.
  * Here we default the renderer to a heatmap.
- * @param config
- * @param data
+ * @param config - the set-column configuration
+ * @param data - the data
  */
 export const buildSetColumn = (config: SetColumnConfig, data?: any[]): any => {
 	return buildCategoricalColumn(
@@ -250,7 +250,7 @@ export const selectColumnBuilder = (config: ColumnConfig): any => {
  * the instance is built, so we often have to filter based on the label.
  * Note that this is error-prone, because the label could be hand set by a dev.
  * See https://github.com/lineupjs/lineupjs/blob/23ca83caefc3200156d4a3af5d1f14c59db76657/src/builder/column/ColumnBuilder.ts#L7
- * @param name
+ * @param name - the name to convert
  */
 export const nameToLabel = (name?: string): string | undefined => {
 	return name && name[0].toUpperCase() + name.slice(1)

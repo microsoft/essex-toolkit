@@ -19,8 +19,8 @@ export function DEFAULT_COMPARE<T>(item1: T, item2: T): number {
 
 /**
  * Performs a binary search on the given array
- * @param array The array of numbers to search
- * @param item The item to look for
+ * @param array - The array of numbers to search
+ * @param item - The item to look for
  * @returns index of found item
  */
 export function binarySearch<T = number>(

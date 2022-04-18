@@ -9,8 +9,8 @@ type ClickHandler<T> = (item?: T) => any
 
 /**
  * Provides basic selection handling,
- * @param equal A object equality function
- * @param singleSelect If it should operate in single select mode
+ * @param equal - A object equality function
+ * @param singleSelect - If it should operate in single select mode
  * @returns The list of selected objects and a handler for adding new selections
  */
 export function useSelectionHandler<T>(
