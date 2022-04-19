@@ -1,0 +1,7 @@
+releases:
+  "@essex/arquero-react": patch
+  "@essex/boolean-expression-component": patch
+  "@essex/hierarchy-browser": patch
+  "@essex/themed-components": patch
+  essex-js-toolkit: patch
+  essex-js-toolkit-stories: patch
