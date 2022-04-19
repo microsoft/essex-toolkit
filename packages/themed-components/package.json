@@ -67,9 +67,9 @@
 		"@types/d3": "*",
 		"@types/d3-axis": "^2.0.0",
 		"@types/node": "*",
-		"@types/react": ">= 16.9",
+		"@types/react": ">= 18",
 		"@uifabric/icons": ">= 7.3.38",
-		"react": ">= 16.8.6",
-		"react-dom": ">= 16.8.6"
+		"react": ">= 18",
+		"react-dom": ">= 18"
 	}
 }

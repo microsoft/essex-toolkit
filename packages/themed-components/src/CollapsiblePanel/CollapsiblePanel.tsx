@@ -5,6 +5,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { IconButton } from '@fluentui/react'
 import { useThematicFluent } from '@thematic/fluent'
+import * as React from 'react'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 
 import type { CollapsiblePanelProps } from './interfaces.js'
@@ -150,6 +151,7 @@ const HeaderContainer: React.FC<{
 	expanded?: boolean
 	onClick: () => void
 	onKeyDown: (ev: React.KeyboardEvent) => void
+	children?: React.ReactNode
 }> = memo(function HeaderContainer({
 	first,
 	last,

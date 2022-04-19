@@ -39,6 +39,6 @@
 		"@types/node": "*",
 		"@types/react": "*",
 		"@types/react-dom": "*",
-		"react": ">=16.8.0"
+		"react": ">= 18"
 	}
 }
