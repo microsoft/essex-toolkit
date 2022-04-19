@@ -4132,7 +4132,7 @@ __metadata:
     lodash-es: ^4.17.21
     prop-types: ^15.8.1
     react: ^18.0.0
-    react-animate-height: ^2.1.0
+    react-animate-height: ^2.1.2
     react-dom: ^18.0.0
   peerDependencies:
     "@fluentui/react": ">= 7.114.2"
@@ -20316,16 +20316,16 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-animate-height@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "react-animate-height@npm:2.1.0"
+"react-animate-height@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "react-animate-height@npm:2.1.2"
   dependencies:
     classnames: ^2.2.5
     prop-types: ^15.6.1
   peerDependencies:
     react: ">=15.6.2"
     react-dom: ">=15.6.2"
-  checksum: 992bcdfd9d9694eccb85afb527d1404b255732db96f63a97fa58533c38399adb39f1f8e6ec442dcea451372ebec2e71b18d9d73cf8c4b81f6591e5adb595702a
+  checksum: 56f0db8a8a53a8e115cc9d38ce290aad4bb989e83b573a1b5a01d4b33bddf28810ae6b60cb95cd870fb11bf83eae3ef33ffd4bfd58c578e8c2a28b410e3e9885
   languageName: node
   linkType: hard
 
