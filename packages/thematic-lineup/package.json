@@ -1,6 +1,6 @@
 {
 	"name": "@essex/thematic-lineup",
-	"version": "2.0.7",
+	"version": "2.0.8",
 	"description": "thematic-themed adaption of lineup.js",
 	"type": "module",
 	"main": "src/index.ts",
