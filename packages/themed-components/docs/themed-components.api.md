@@ -12,7 +12,7 @@ import type { IContextualMenuProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { Position } from '@fluentui/react';
 import * as React_2 from 'react';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 // Warning: (ae-forgotten-export) The symbol "ClippedGraphProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "ClippedGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

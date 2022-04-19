@@ -7,7 +7,7 @@
 /// <reference types="react" />
 
 import type { CSSProperties } from 'react';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 // Warning: (ae-missing-release-tag) "BooleanOperation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
