@@ -76,8 +76,6 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 		}),
 		[expanded, theme],
 	)
-	console.log('AnimateHeightRaw', AnimateHeightRaw)
-	console.log('AnimateHeight', AnimateHeight)
 	return (
 		<div>
 			<HeaderContainer
