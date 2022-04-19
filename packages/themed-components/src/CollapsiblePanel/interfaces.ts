@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { IRenderFunction } from '@fluentui/react'
+import type { ReactNode } from 'react'
 
 /**
  * Props for the CollapsiblePanel
@@ -36,6 +37,7 @@ export interface CollapsiblePanelProps {
 	 * Optional function to control the state outside the component
 	 */
 	onHeaderClick?: (nextState: boolean) => void
+	children?: ReactNode
 }
 
 /**
@@ -44,5 +46,5 @@ export interface CollapsiblePanelProps {
  * the last and first params automatically.
  */
 export interface CollapsiblePanelContainerProps {
-	children: CollapsiblePanelProps[]
+	children?: ReactNode
 }

@@ -5,10 +5,15 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { IconButton } from '@fluentui/react'
 import { useThematicFluent } from '@thematic/fluent'
+import * as React from 'react'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
-import { default as AnimateHeight } from 'react-animate-height'
 
 import type { CollapsiblePanelProps } from './interfaces.js'
+
+// NOTE: react-animate-height has malformed es code, hence require
+// eslint-disable-next-line
+const AnimateHeightRaw = require('react-animate-height')
+const AnimateHeight = (AnimateHeightRaw as any).default
 
 /**
  * CollapsiblePanel displays a Header and it's child
@@ -71,7 +76,6 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 		}),
 		[expanded, theme],
 	)
-
 	return (
 		<div>
 			<HeaderContainer
@@ -145,6 +149,7 @@ const HeaderContainer: React.FC<{
 	expanded?: boolean
 	onClick: () => void
 	onKeyDown: (ev: React.KeyboardEvent) => void
+	children?: React.ReactNode
 }> = memo(function HeaderContainer({
 	first,
 	last,

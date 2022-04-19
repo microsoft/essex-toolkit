@@ -11,6 +11,8 @@ import type { IContextualMenuListProps } from '@fluentui/react';
 import type { IContextualMenuProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { Position } from '@fluentui/react';
+import * as React_2 from 'react';
+import type { ReactNode } from 'react';
 
 // Warning: (ae-forgotten-export) The symbol "ClippedGraphProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "ClippedGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -22,7 +24,7 @@ export const ClippedGraph: ({ data, width, height, clipped, percentile, gradient
 // Warning: (ae-missing-release-tag) "CollapsiblePanel" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const CollapsiblePanel: React.FC<CollapsiblePanelProps>;
+export const CollapsiblePanel: React_2.FC<CollapsiblePanelProps>;
 
 // Warning: (ae-forgotten-export) The symbol "CollapsiblePanelContainerProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "CollapsiblePanelContainer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

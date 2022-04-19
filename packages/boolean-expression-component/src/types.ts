@@ -2,6 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { ReactNode } from 'react'
+
 export enum BooleanOperation {
 	AND = 'and',
 	OR = 'or',
@@ -31,4 +33,8 @@ export interface FilterClauseGroup {
 	filters: FilterClause[]
 	operation: BooleanOperation
 	locked?: boolean
+}
+
+export interface WithChildren {
+	children?: ReactNode
 }

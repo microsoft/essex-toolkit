@@ -9,6 +9,7 @@ import type {
 	FilterClause,
 	FilterClauseGroup,
 	Palette,
+	WithChildren,
 } from '../types.js'
 import { toggleOperation } from '../utils.js'
 import { BooleanOperationToggle as Toggle } from './BooleanOperationToggle.js'
@@ -84,13 +85,20 @@ const ToggleStyle: React.CSSProperties = {
 	margin: 4,
 }
 
-const Border: React.FC<{
+interface BorderProps extends WithChildren {
 	borderColor: string
-}> = memo(function Border({ borderColor, children }) {
+}
+
+const Border: React.FC<BorderProps> = memo(function Border({
+	borderColor,
+	children,
+}) {
 	return <BorderContainer color={borderColor}>{children}</BorderContainer>
 })
 
-const Container: React.FC = memo(function Container({ children }) {
+const Container: React.FC<WithChildren> = memo(function Container({
+	children,
+}) {
 	return <div style={ContainerStyle}>{children}</div>
 })
 const ContainerStyle: React.CSSProperties = {
@@ -102,14 +110,20 @@ const ContainerStyle: React.CSSProperties = {
 	flexShrink: 0,
 }
 
-const OperationText: React.FC<{ backgroundColor: string; color: string }> =
-	memo(function OperationText({ color, backgroundColor, children }) {
+interface OperationTextProps extends WithChildren {
+	backgroundColor: string
+	color: string
+}
+
+const OperationText: React.FC<OperationTextProps> = memo(
+	function OperationText({ color, backgroundColor, children }) {
 		return (
 			<div style={{ ...OperationTextStyle, color, backgroundColor }}>
 				{children}
 			</div>
 		)
-	})
+	},
+)
 
 const OperationTextStyle: React.CSSProperties = {
 	position: 'absolute',
@@ -121,7 +135,11 @@ const OperationTextStyle: React.CSSProperties = {
 	padding: '0 4px 0 4px',
 }
 
-const BorderContainer: React.FC<{ color: string }> = memo(
+interface BorderContainerProps extends WithChildren {
+	color: string
+}
+
+const BorderContainer: React.FC<BorderContainerProps> = memo(
 	function BorderContainer({ color, children }) {
 		return (
 			<div

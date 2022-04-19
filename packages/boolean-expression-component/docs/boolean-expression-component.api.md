@@ -7,6 +7,7 @@
 /// <reference types="react" />
 
 import type { CSSProperties } from 'react';
+import type { ReactNode } from 'react';
 
 // Warning: (ae-missing-release-tag) "BooleanOperation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -106,6 +107,14 @@ export interface Palette {
 //
 // @public (undocumented)
 export function toggleOperation(op: BooleanOperation): BooleanOperation;
+
+// Warning: (ae-missing-release-tag) "WithChildren" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface WithChildren {
+    // (undocumented)
+    children?: ReactNode;
+}
 
 // (No @packageDocumentation comment for this package)
 

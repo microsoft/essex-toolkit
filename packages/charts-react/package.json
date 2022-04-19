@@ -58,6 +58,6 @@
 		"@thematic/core": "^1.3.0",
 		"@thematic/d3": "^1.3.0",
 		"@thematic/react": "^1.3.0",
-		"react": "^17.0.2"
+		"react": ">= 18"
 	}
 }
