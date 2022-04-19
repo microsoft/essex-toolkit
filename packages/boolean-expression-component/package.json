@@ -22,7 +22,7 @@
 	},
 	"devDependencies": {
 		"@essex/scripts": "^21.0.2",
-		"@fluentui/react": "^8.64.4",
+		"@fluentui/react": "^8.65.1",
 		"@types/react": "^18.0.5",
 		"@types/react-dom": "^18.0.0",
 		"react": "^18.0.0",

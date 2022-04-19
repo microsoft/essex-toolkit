@@ -35,9 +35,9 @@
 	},
 	"devDependencies": {
 		"@essex/scripts": "^21.0.2",
-		"@fluentui/font-icons-mdl2": "^8.3.0",
-		"@fluentui/react": "^8.64.4",
-		"@fluentui/theme": "^2.6.4",
+		"@fluentui/font-icons-mdl2": "^8.3.1",
+		"@fluentui/react": "^8.65.1",
+		"@fluentui/theme": "^2.6.5",
 		"@thematic/color": "^2.0.6",
 		"@thematic/core": "^2.0.6",
 		"@thematic/d3": "^2.0.6",

@@ -27,7 +27,7 @@
 	},
 	"devDependencies": {
 		"@essex/scripts": "^21.0.2",
-		"@fluentui/react": "^8.64.4",
+		"@fluentui/react": "^8.65.1",
 		"@thematic/core": "^2.0.6",
 		"@thematic/fluent": "^3.0.6",
 		"@thematic/react": "^2.0.6",
