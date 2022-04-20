@@ -6,7 +6,7 @@ import type { ColumnMetadata } from '@essex/arquero'
 import { DataType } from '@essex/arquero'
 import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
-import { Case, Default as RawDefault, Switch as RawSwitch } from 'react-if'
+import { Case, Default, Switch } from 'react-if'
 
 import { categories, getValue, isEmpty } from '../util/index.js'
 import { ArrayDropdownCell } from './ArrayDropdownCell.js'

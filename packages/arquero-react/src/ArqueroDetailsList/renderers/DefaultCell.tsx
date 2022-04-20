@@ -4,7 +4,7 @@
  */
 import { DataType, determineType } from '@essex/arquero'
 import { memo, useCallback, useMemo } from 'react'
-import { Case, Default as RawDefault, Switch as RawSwitch } from 'react-if'
+import { Case, Default, Switch } from 'react-if'
 
 import { getValue, isEmpty } from '../util/index.js'
 import { ArrayCell } from './ArrayCell.js'
@@ -17,10 +17,6 @@ import {
 	TextCell,
 } from './index.js'
 import type { RichCellProps } from './types.js'
-
-// children was removed from FC; react-if has not been updated yet
-const Switch = RawSwitch as React.FC<React.PropsWithChildren<unknown>>
-const Default = RawDefault as React.FC<React.PropsWithChildren<unknown>>
 
 /**
  * Default rendering of cell contents.
