@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import AnimateHeightRaw from '@essex/react-animate-height'
 import { IconButton } from '@fluentui/react'
 import { useThematicFluent } from '@thematic/fluent'
 import * as React from 'react'
@@ -10,10 +11,7 @@ import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 
 import type { CollapsiblePanelProps } from './interfaces.js'
 
-// NOTE: react-animate-height has malformed es code, hence require
-// eslint-disable-next-line
-const AnimateHeightRaw = require('react-animate-height')
-const AnimateHeight = (AnimateHeightRaw as any).default
+const AnimateHeight = AnimateHeightRaw as any
 
 /**
  * CollapsiblePanel displays a Header and it's child

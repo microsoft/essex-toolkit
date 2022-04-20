@@ -5,14 +5,10 @@
 import type { IDetailsGroupDividerProps, IGroup } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Else as RawElse, If as RawIf, Then as RawThen } from 'react-if'
+import { Else, If, Then } from 'react-if'
 import styled from 'styled-components'
 
 import { useIntersection } from './GroupHeader.hooks.js'
-
-const Else = RawElse as React.FC<React.PropsWithChildren<unknown>>
-const If = RawIf as React.FC<React.PropsWithChildren<{ condition: boolean }>>
-const Then = RawThen as React.FC<React.PropsWithChildren<unknown>>
 
 export interface GroupHeaderProps {
 	props: IDetailsGroupDividerProps
