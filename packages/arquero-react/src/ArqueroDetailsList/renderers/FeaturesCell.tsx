@@ -24,11 +24,6 @@ import {
 } from './index.js'
 import type { FeatureCellProps } from './types.js'
 
-/* eslint-disable @typescript-eslint/ban-types */
-const Switch = RawSwitch as React.FC<React.PropsWithChildren<{}>>
-const Default = RawDefault as React.FC<React.PropsWithChildren<{}>>
-/* eslint-enable @typescript-eslint/ban-types */
-
 /**
  * Chooses what to render based on the features prop
  */
