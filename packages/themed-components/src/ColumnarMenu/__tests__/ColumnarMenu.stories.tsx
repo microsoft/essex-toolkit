@@ -7,8 +7,6 @@ import type { IContextualMenuItem } from '@fluentui/react'
 import { ContextualMenuItemType } from '@fluentui/react'
 import { useCallback } from 'react'
 
-import type { CSF } from './types'
-
 const story = {
 	title: 'ColumnarMenu',
 }
@@ -75,7 +73,7 @@ const styles = {
 	},
 }
 
-export const ColumnarMenuStory: CSF = () => {
+export const ColumnarMenuStory = () => {
 	const renderMenuList = useCallback(menuListProps => {
 		return (
 			<div>

@@ -7,7 +7,6 @@ import { HierarchyBrowser } from '@essex/hierarchy-browser'
 import type { IChoiceGroupOption } from '@fluentui/react'
 import { useCallback, useMemo, useState } from 'react'
 
-import type { CSF } from './types.js'
 import { ControlGroup, Selections } from './utils/components/index.js'
 import { useAsyncCallbacks } from './utils/useAsyncCallbacks.js'
 import { useData } from './utils/useData.js'
@@ -22,7 +21,7 @@ const story = {
 export default story
 const DEFAULT_SELECTIONS = ['4_100']
 
-export const HierarchyBrowserAsync: CSF = () => {
+export const HierarchyBrowserAsync = () => {
 	const [
 		selectedOption,
 		onChange,
@@ -79,7 +78,7 @@ HierarchyBrowserAsync.story = {
 	name: 'Async',
 }
 
-export const HierarchyBrowserSynchronous: CSF = () => {
+export const HierarchyBrowserSynchronous = () => {
 	const [selectedOption, setSelectedOption] = useState<string>(
 		`${selectedClusterID}`,
 	)

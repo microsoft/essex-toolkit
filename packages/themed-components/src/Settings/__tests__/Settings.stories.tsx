@@ -6,8 +6,6 @@ import { Settings } from '@essex/themed-components'
 import { DefaultButton, MessageBar } from '@fluentui/react'
 import { useCallback, useState } from 'react'
 
-import type { CSF } from './types'
-
 const story = {
 	title: 'Settings Pane',
 }
@@ -27,7 +25,7 @@ const basicSettings = {
  * Shows a basic object parsed into settings and rendered into
  * the default control set
  */
-export const BasicSettingsStory: CSF = () => {
+export const BasicSettingsStory = () => {
 	const [settings, setSettings] = useState(basicSettings)
 	const handleChange = useCallback(
 		(key, value) => {
@@ -68,7 +66,7 @@ BasicSettingsStory.story = {
  * Shows a dynamic object parsed into settings and rendered into
  * the default control set
  */
-export const AdvancedSettingsStory: CSF = () => {
+export const AdvancedSettingsStory = () => {
 	const [settings, setSettings] = useState(basicSettings)
 	const handleChange = useCallback(
 		(key, value) => {
@@ -148,7 +146,7 @@ const GroupedPanel = () => {
  * GroupedSettingsStory shows settings within groups, which automatically get a
  * separator and optional label
  */
-export const GroupedSettingsStory: CSF = () => {
+export const GroupedSettingsStory = () => {
 	return (
 		<>
 			<MessageBar>
@@ -168,7 +166,7 @@ GroupedSettingsStory.story = {
 /**
  * ContextSettingsStory shows the settings panel in a dropdown context menu.
  */
-export const ContextSettingsStory: CSF = () => {
+export const ContextSettingsStory = () => {
 	const renderPanel = useCallback(
 		() => (
 			<div style={{ margin: 10 }}>

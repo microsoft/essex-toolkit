@@ -15,7 +15,8 @@
 	"scripts": {
 		"build": "essex build --skipExportCheck --docs",
 		"clean": "essex clean",
-		"watch": "essex watch"
+		"watch": "essex watch",
+		"stories": "essex serve-stories"
 	},
 	"dependencies": {
 		"@essex/hooks": "workspace:^",

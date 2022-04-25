@@ -4,8 +4,6 @@
  */
 import { ThematicLineup } from '@essex/thematic-lineup'
 
-import type { CSF } from './types'
-
 const story = {
 	title: 'ThematicLineup',
 }
@@ -60,7 +58,7 @@ const config = [
  * config-limited version exposed by the LineUp project.
  * This allows arbitrary column configs via JSON, and a set of global filters if desired.
  */
-export const ThematicLineupStory: CSF = () => (
+export const ThematicLineupStory = () => (
 	<div>
 		<ThematicLineup data={data} columns={config} width={600} height={300} />
 	</div>

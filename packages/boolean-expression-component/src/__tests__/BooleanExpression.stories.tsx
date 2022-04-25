@@ -7,14 +7,12 @@ import {
 	FilterExpressionView,
 } from '@essex/boolean-expression-component'
 
-import type { CSF } from './types'
-
 const story = {
 	title: 'BooleanExpression',
 }
 export default story
 
-export const SingleClause: CSF = () => {
+export const SingleClause = () => {
 	return (
 		<div>
 			<FilterExpressionView
@@ -36,7 +34,7 @@ SingleClause.story = {
 	name: 'Single Clause',
 }
 
-export const TwoClausesInAttribute: CSF = () => {
+export const TwoClausesInAttribute = () => {
 	return (
 		<div>
 			<FilterExpressionView
@@ -58,7 +56,7 @@ export const TwoClausesInAttribute: CSF = () => {
 }
 TwoClausesInAttribute.story = { name: 'Two Clauses in Single Attribute' }
 
-export const TwoAttributes: CSF = () => {
+export const TwoAttributes = () => {
 	return (
 		<div>
 			<FilterExpressionView
@@ -89,7 +87,7 @@ export const TwoAttributes: CSF = () => {
 }
 TwoAttributes.story = { name: 'Two Attributes' }
 
-// export const GroupDismiss: CSF = () => {
+// export const GroupDismiss = () => {
 // 	const chipGroupDismissed = useCallback(group => {
 // 		alert(`Chip group with id ${group.id} dismiss function`)
 // 	}, [])
