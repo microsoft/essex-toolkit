@@ -109,7 +109,9 @@ function binning(
 		const min = optStats[`${cur}.min`]
 		const max = optStats[`${cur}.max`]
 		const distinct = reqStats[`${cur}.distinct`]
-		acc[cur] = fixedBinCount(cur, min, max, 10, true, distinct)
+		if (distinct > 10) {
+			acc[cur] = fixedBinCount(cur, min, max, 10, true)
+		}
 		return acc
 	}, {} as Record<string, any>)
 
