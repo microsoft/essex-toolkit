@@ -6,8 +6,6 @@ import { Settings } from '@essex/themed-components'
 import { DefaultButton, MessageBar } from '@fluentui/react'
 import { useCallback, useState } from 'react'
 
-import type { CSF } from './types'
-
 const story = {
 	title: 'Settings Pane',
 }
@@ -27,7 +25,7 @@ const basicSettings = {
  * Shows a basic object parsed into settings and rendered into
  * the default control set
  */
-export const BasicSettingsStory: CSF = () => {
+export const BasicSettingsStory = () => {
 	const [settings, setSettings] = useState(basicSettings)
 	const handleChange = useCallback(
 		(key, value) => {
