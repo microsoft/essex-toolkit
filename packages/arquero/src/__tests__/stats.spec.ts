@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { table } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
