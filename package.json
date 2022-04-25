@@ -23,15 +23,14 @@
 		"postinstall": "husky install",
 		"clean": "yarn workspaces foreach -pv run clean",
 		"build": "yarn workspaces foreach -pivt --exclude essex-js-toolkit-stories run build",
-		"test": "yarn workspaces foreach -piv run test",
+		"test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
+		"test:coverage": "yarn test --coverage",
 		"start:": "yarn workspaces foreach -piv run start",
 		"release": "yarn workspaces foreach --exclude essex-js-toolkit --exclude essex-js-toolkit-stories -pivt npm publish --tolerate-republish --access public",
-		"jest": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
-		"jest_coverage": "yarn jest --coverage",
 		"lint": "essex lint --strict --fix",
 		"git_is_clean": "essex git-is-clean",
 		"format": "essex prettify",
-		"ci": "run-s build lint test jest_coverage git_is_clean"
+		"ci": "run-s build lint test:coverage git_is_clean"
 	},
 	"devDependencies": {
 		"@essex/eslint-config": "^20.3.3",

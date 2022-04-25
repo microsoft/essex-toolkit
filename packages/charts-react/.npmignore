@@ -1,2 +1,4 @@
 .swc/
 tsconfig.json
+__tests__
+*.stories.js
