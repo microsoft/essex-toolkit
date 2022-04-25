@@ -5,7 +5,7 @@
 import type { CSSProperties, FC } from 'react'
 import { memo } from 'react'
 
-import type { Palette } from '../types.js'
+import type { Palette, WithChildren } from '../types.js'
 import { BooleanOperation } from '../types.js'
 import { DEFAULT_PALETTE, NO_OP } from './constants.js'
 
@@ -43,7 +43,7 @@ const labels: Record<BooleanOperation, string> = {
 	[BooleanOperation.OR]: 'OR',
 }
 
-interface ColorProps {
+interface ColorProps extends WithChildren {
 	className?: string
 	style?: CSSProperties
 	color: string
@@ -81,7 +81,7 @@ const ButtonStyle: CSSProperties = {
 	outline: 'none',
 }
 
-const Text: FC = memo(function Text({ children }) {
+const Text: FC<WithChildren> = memo(function Text({ children }) {
 	return <div style={TextStyle}>{children}</div>
 })
 const TextStyle: CSSProperties = {

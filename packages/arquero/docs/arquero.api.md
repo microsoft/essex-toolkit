@@ -129,13 +129,13 @@ export function determineType(value: Value): DataType;
 
 // Warning: (ae-missing-release-tag) "fixedBinCount" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
-export function fixedBinCount(column: string, min: number, max: number, count: number, clamped?: boolean, distinct?: number): string | object;
+// @public
+export function fixedBinCount(column: string, min: number, max: number, count: number, clamped?: boolean, format?: boolean): string | object;
 
 // Warning: (ae-missing-release-tag) "fixedBinStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
-export function fixedBinStep(column: string, min: number, max: number, step: number, clamped?: boolean, distinct?: number): string | object;
+// @public
+export function fixedBinStep(column: string, min: number, max: number, step: number, clamped?: boolean, format?: boolean): string | object;
 
 // Warning: (ae-missing-release-tag) "format" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
