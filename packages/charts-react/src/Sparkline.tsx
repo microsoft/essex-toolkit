@@ -39,7 +39,7 @@ export const Sparkline: React.FC<SparklineProps> = memo(function Sparkline({
 	}, [theme, color])
 
 	const xScale = useIndexedScale(data, [0, width])
-	const yScale = useNumericLinearScale(data, [0, height])
+	const yScale = useNumericLinearScale(data, [height, 0])
 
 	useChartSVG(ref, width, height)
 	const group = usePlotGroup(ref, width, height)
