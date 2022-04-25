@@ -1,4 +1,5 @@
 declined:
+  - essex-js-toolkit
   - "@essex/boolean-expression-component"
   - "@essex/hierarchy-browser"
   - essex-js-toolkit-stories
