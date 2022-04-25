@@ -87,7 +87,7 @@ export const TwoAttributes = () => {
 }
 TwoAttributes.story = { name: 'Two Attributes' }
 
-// export const GroupDismiss= () => {
+// export const GroupDismiss = () => {
 // 	const chipGroupDismissed = useCallback(group => {
 // 		alert(`Chip group with id ${group.id} dismiss function`)
 // 	}, [])
