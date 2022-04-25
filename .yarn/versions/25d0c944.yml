@@ -1,7 +1,12 @@
-releases:
-  "@essex/arquero-react": patch
-  "@essex/boolean-expression-component": patch
-  "@essex/hierarchy-browser": patch
-  "@essex/themed-components": patch
-  essex-js-toolkit: patch
-  essex-js-toolkit-stories: patch
+declined:
+  - essex-js-toolkit
+  - "@essex/arquero-react"
+  - "@essex/boolean-expression-component"
+  - "@essex/charts-react"
+  - "@essex/graphql-api-commons"
+  - "@essex/hierarchy-browser"
+  - "@essex/hooks"
+  - "@essex/semantic-components"
+  - essex-js-toolkit-stories
+  - "@essex/thematic-lineup"
+  - "@essex/themed-components"
