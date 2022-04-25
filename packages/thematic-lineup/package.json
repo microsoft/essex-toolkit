@@ -15,7 +15,8 @@
 	"scripts": {
 		"build": "essex build --skipExportCheck --docs",
 		"clean": "essex clean",
-		"watch": "essex watch"
+		"watch": "essex watch",
+		"stories": "essex serve-stories"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^21.0.2",

@@ -15,7 +15,7 @@ export default meta
  * Fluent Component
  * adapted for Thematic styling
  */
-export const SearchBoxStory: CSF = () => {
+export const SearchBoxStory = () => {
 	return <SearchBox label={'Label'} placeholder={'placeholder'} />
 }
 

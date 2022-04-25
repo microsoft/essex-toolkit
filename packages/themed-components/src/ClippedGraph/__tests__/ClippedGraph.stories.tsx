@@ -4,8 +4,6 @@
  */
 import { ClippedGraph } from '@essex/themed-components'
 
-import type { CSF } from './types'
-
 const story = {
 	title: 'ClippedGraph',
 }
@@ -20,7 +18,7 @@ const data = [
  * ClippedGraphStory contains react component to display charts larger than viewable area
  * It provides an alternative view of "clipped" chart area
  */
-export const ClippedGraphStory: CSF = () => (
+export const ClippedGraphStory = () => (
 	<div>
 		Full graph
 		<div style={{ width: 800, height: 100, marginBottom: 20 }}>

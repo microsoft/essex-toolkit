@@ -8,15 +8,13 @@ import {
 } from '@essex/themed-components'
 import { useCallback } from 'react'
 
-import type { CSF } from './types'
-
 const meta = {
 	title: 'CollapsiblePanel',
 }
 
 export default meta
 
-export const CollapsiblePanelChildrenStory: CSF = () => {
+export const CollapsiblePanelChildrenStory = () => {
 	return (
 		<CollapsiblePanel title="Panel">
 			<div>This panel has a default title and children</div>
@@ -28,7 +26,7 @@ CollapsiblePanelChildrenStory.story = {
 	name: 'Just title and children',
 }
 
-export const CollapsiblePanelHeaderStory: CSF = () => {
+export const CollapsiblePanelHeaderStory = () => {
 	const renderHeader = useCallback(() => <div>Header</div>, [])
 	return (
 		<CollapsiblePanel onRenderHeader={renderHeader}>
@@ -41,7 +39,7 @@ CollapsiblePanelHeaderStory.story = {
 	name: 'Render header function',
 }
 
-export const CollapsiblePanelContainerStory: CSF = () => {
+export const CollapsiblePanelContainerStory = () => {
 	return (
 		<CollapsiblePanelContainer>
 			<CollapsiblePanel title="First">

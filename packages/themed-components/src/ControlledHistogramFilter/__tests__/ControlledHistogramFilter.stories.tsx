@@ -5,8 +5,6 @@
 import { ControlledHistogramFilter } from '@essex/themed-components'
 import { useState } from 'react'
 
-import type { CSF } from './types'
-
 const story = {
 	title: 'ControlledHistogramFilter',
 }
@@ -21,7 +19,7 @@ const data = [
  * ControlledHistogramFilter story shows basic capabilities
  * of brushing and menu filter for thematic themed D3 histogram
  */
-export const ControlledHistogramFilterStory: CSF = () => {
+export const ControlledHistogramFilterStory = () => {
 	const [selectedRange, setSelectedRange] = useState<
 		[number | undefined, number | undefined]
 	>([undefined, undefined])

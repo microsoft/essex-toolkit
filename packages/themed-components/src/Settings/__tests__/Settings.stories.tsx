@@ -66,7 +66,7 @@ BasicSettingsStory.story = {
  * Shows a dynamic object parsed into settings and rendered into
  * the default control set
  */
-export const AdvancedSettingsStory: CSF = () => {
+export const AdvancedSettingsStory = () => {
 	const [settings, setSettings] = useState(basicSettings)
 	const handleChange = useCallback(
 		(key, value) => {
@@ -146,7 +146,7 @@ const GroupedPanel = () => {
  * GroupedSettingsStory shows settings within groups, which automatically get a
  * separator and optional label
  */
-export const GroupedSettingsStory: CSF = () => {
+export const GroupedSettingsStory = () => {
 	return (
 		<>
 			<MessageBar>
@@ -166,7 +166,7 @@ GroupedSettingsStory.story = {
 /**
  * ContextSettingsStory shows the settings panel in a dropdown context menu.
  */
-export const ContextSettingsStory: CSF = () => {
+export const ContextSettingsStory = () => {
 	const renderPanel = useCallback(
 		() => (
 			<div style={{ margin: 10 }}>
