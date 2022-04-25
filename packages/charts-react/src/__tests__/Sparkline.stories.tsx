@@ -9,6 +9,6 @@ const meta = {
 }
 export default meta
 
-export const Basic = () => {
+export const BasicAscending = () => {
 	return <Sparkline width={150} height={30} data={[1, 2, 3, 4]}></Sparkline>
 }
