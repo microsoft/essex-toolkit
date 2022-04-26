@@ -134,5 +134,43 @@ describe('binning expressions', () => {
 			expect(get(5)).toBe('5 to <6')
 			expect(get(11)).toBe('9 to 10')
 		})
+
+		test('100000 step unclamped with a wide range', () => {
+			// this mimics one of the bin examples in the wrangling components
+			const tbl = table({
+				num: [
+					9000, 20000, 85000, 11000, 3000000, 90000, 120000, 3000, 60000,
+					4000000, 25000, 600000, 8000, 35000, 38000, 600000, 1, 800, 30000,
+				],
+			})
+			const expr = fixedBinStep('num', 20000, 1000000, 100000, false, true)
+			const result = tbl.derive({
+				bin: expr,
+			})
+			const get = result.getter('bin')
+			expect(get(0)).toBe('<20000') // below min (-infinity)
+			expect(get(1)).toBe('20000 to <120000') // at min
+			expect(get(2)).toBe('20000 to <120000') // mid-bin
+			expect(get(4)).toBe('>1000000') // over max (infinity)
+		})
+
+		test('100000 step clamped with a wide range', () => {
+			// this mimics one of the bin examples in the wrangling components
+			const tbl = table({
+				num: [
+					9000, 20000, 85000, 11000, 3000000, 90000, 120000, 3000, 60000,
+					4000000, 25000, 600000, 8000, 35000, 38000, 600000, 1, 800, 30000,
+				],
+			})
+			const expr = fixedBinStep('num', 20000, 1000000, 100000, true, true)
+			const result = tbl.derive({
+				bin: expr,
+			})
+			const get = result.getter('bin')
+			expect(get(0)).toBe('20000 to <120000') // below min (clamped at min)
+			expect(get(1)).toBe('20000 to <120000') // at min
+			expect(get(2)).toBe('20000 to <120000') // mid-bin
+			expect(get(4)).toBe('920000 to 1000000') // over max (clamped at max)
+		})
 	})
 })
