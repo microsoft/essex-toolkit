@@ -6,8 +6,8 @@
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
-		"main": "dist/lib/index.js",
-		"types": "dist/lib/index.d.ts"
+		"main": "dist/index.js",
+		"types": "dist/index.d.ts"
 	},
 	"sideEffects": false,
 	"repository": {
@@ -22,10 +22,10 @@
 		"stories": "essex serve-stories"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^21.0.2",
+		"@essex/scripts": "^22.0.0",
 		"@fluentui/react": "^8.67.0",
 		"@types/react": "^18.0.7",
-		"@types/react-dom": "^18.0.1",
+		"@types/react-dom": "^18.0.2",
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0"
 	},
