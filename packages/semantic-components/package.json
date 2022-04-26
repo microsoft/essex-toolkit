@@ -17,11 +17,11 @@
 		"watch": "essex watch"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^21.0.2",
+		"@essex/scripts": "^22.0.0",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@testing-library/react": "^13.1.1",
 		"@types/react": "^18.0.7",
-		"@types/react-dom": "^18.0.1",
+		"@types/react-dom": "^18.0.2",
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0"
 	},
