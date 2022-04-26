@@ -1,0 +1,6 @@
+releases:
+  "@essex/arquero": patch
+
+declined:
+  - essex-js-toolkit
+  - "@essex/arquero-react"

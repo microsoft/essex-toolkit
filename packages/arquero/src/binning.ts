@@ -66,11 +66,13 @@ export function fixedBinStep(
 			if (value > max) {
 				return `>${max}`
 			}
-			// our final bin is inclusive of the max bound
+			const top = value + step
+			// our final bin is inclusive of the max value,
+			// so change the wording for last bin
 			if (value >= max - step) {
-				return `${value} to ${value + step}`
+				return `${value} to ${top > max ? max : top}`
 			}
-			return `${value} to <${value + step}`
+			return `${value} to <${top}`
 		}
 		return value
 	})
