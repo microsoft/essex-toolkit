@@ -5,8 +5,8 @@
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
-		"main": "dist/lib/index.js",
-		"types": "dist/lib/index.d.ts"
+		"main": "dist/index.js",
+		"types": "dist/index.d.ts"
 	},
 	"sideEffects": false,
 	"repository": "https://github.com/microsoft/essex-js-toolkit",
