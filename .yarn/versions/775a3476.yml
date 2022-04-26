@@ -1,0 +1,7 @@
+declined:
+  - essex-js-toolkit
+  - "@essex/boolean-expression-component"
+  - "@essex/charts-react"
+  - "@essex/hierarchy-browser"
+  - "@essex/thematic-lineup"
+  - "@essex/themed-components"

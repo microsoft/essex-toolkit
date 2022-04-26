@@ -26,6 +26,7 @@
 		"test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
 		"start:": "yarn workspaces foreach -piv run start",
 		"release": "yarn workspaces foreach --exclude essex-js-toolkit --exclude essex-js-toolkit-stories -pivt npm publish --tolerate-republish --access public",
+		"stories": "essex serve-stories",
 		"lint": "essex lint --strict --fix",
 		"git_is_clean": "essex git-is-clean",
 		"format": "essex prettify",

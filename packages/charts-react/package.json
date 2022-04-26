@@ -28,8 +28,7 @@
 	},
 	"scripts": {
 		"clean": "essex clean dist docs",
-		"build": "essex build --docs",
-		"stories": "essex serve-stories"
+		"build": "essex build --docs"
 	},
 	"dependencies": {
 		"d3-format": "^3.1.0",

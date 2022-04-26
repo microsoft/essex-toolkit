@@ -15,8 +15,7 @@
 		"build": "essex build --skipExportCheck --docs",
 		"clean": "essex clean",
 		"start": "essex watch",
-		"lint": "essex lint",
-		"stories": "essex serve-stories"
+		"lint": "essex lint"
 	},
 	"dependencies": {
 		"@essex/hooks": "workspace:^",
