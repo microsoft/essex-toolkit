@@ -1,5 +1,12 @@
 releases:
   "@essex/dataflow": patch
+  "@essex/graphql-api-commons": patch
+  "@essex/hierarchy-browser": patch
+  "@essex/hooks": patch
+  "@essex/thematic-lineup": patch
+  "@essex/themed-components": patch
+  "@essex/toolbox": patch
+  essex-js-toolkit-stories: patch
 
 declined:
   - essex-js-toolkit
