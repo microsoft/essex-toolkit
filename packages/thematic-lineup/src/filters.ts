@@ -114,8 +114,8 @@ const findSort = (lineup: LineUp): FindSortCriteria => {
 
 /**
  *  find a lineup column using the label, because the id name is not copied to the final desc
- * @param lineup
- * @param name
+ * @param lineup - the lineup instance
+ * @param name - the column name
  */
 export const findColumn = (lineup: LineUp, name: string): any | undefined => {
 	const label = nameToLabel(name)
@@ -124,8 +124,8 @@ export const findColumn = (lineup: LineUp, name: string): any | undefined => {
 
 /**
  * Apply a list of Filters to a LineUp instance.
- * @param lineup
- * @param filters
+ * @param lineup - the lineup instance
+ * @param filters - the filter array
  */
 export const applyFilters = (lineup: LineUp, filters: Filter[]): void => {
 	filters.forEach(flt => {

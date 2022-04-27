@@ -4059,6 +4059,7 @@ __metadata:
   resolution: "@essex/toposort@workspace:packages/toposort"
   dependencies:
     "@essex/scripts": ^22.0.0
+    "@essex/tsconfig-base": ^1.0.2
   languageName: unknown
   linkType: soft
 

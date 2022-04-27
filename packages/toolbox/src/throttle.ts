@@ -18,7 +18,7 @@ export interface ThrottleOptions {
  * Debounces function based on options provided
  * @param func - function to throttle
  * @param wait - time in milliseconds
- * @param options - optional object param to control timing, ex. {trailing: false, leading: true}
+ * @param options - optional object param to control timing, ex. \{trailing: false, leading: true\}
  */
 export function throttle(
 	func: (...args: any[]) => any,

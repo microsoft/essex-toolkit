@@ -8,13 +8,13 @@
 export interface IAuthenticator<Credentials, Identity> {
 	/**
 	 * Log into the system with some credentials
-	 * @param credentials The credentials to provide
+	 * @param credentials - The credentials to provide
 	 */
 	login(credentials: Credentials): Promise<Identity | null>
 
 	/**
 	 * Log into the system with a JWT token
-	 * @param token The token to use
+	 * @param token - The token to use
 	 */
 	verifyToken(token: string | null): Promise<Identity | null>
 

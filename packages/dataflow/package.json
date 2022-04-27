@@ -11,7 +11,7 @@
 	"sideEffects": false,
 	"scripts": {
 		"clean": "essex clean",
-		"build": "essex build"
+		"build": "essex build --skipExportCheck"
 	},
 	"dependencies": {
 		"@essex/toposort": "workspace:^",

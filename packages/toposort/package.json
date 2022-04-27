@@ -20,6 +20,7 @@
 		"build": "essex build --docs"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^22.0.0"
+		"@essex/scripts": "^22.0.0",
+		"@essex/tsconfig-base": "^1.0.2"
 	}
 }

@@ -82,7 +82,7 @@ export class DefaultGraph<T> implements Graph<T> {
 
 	public validate(): void {
 		// toposort will throw if a cycle is detected
-		toposort(this.edges)
+		toposort<string>(this.edges)
 	}
 
 	private get edges(): Array<[string, string]> {

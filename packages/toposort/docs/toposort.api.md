@@ -11,7 +11,7 @@ export function array<T = string>(nodes: ReadonlyArray<T>, edges: ReadonlyArray<
 
 // Warning: (ae-missing-release-tag) "toposort" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public
+// @public (undocumented)
 function toposort<T = string>(edges: ReadonlyArray<[T, T | undefined]>): T[];
 export default toposort;
 
