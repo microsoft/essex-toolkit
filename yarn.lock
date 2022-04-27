@@ -3626,12 +3626,12 @@ __metadata:
   resolution: "@essex/dataflow@workspace:packages/dataflow"
   dependencies:
     "@essex/scripts": ^22.0.0
+    "@essex/toposort": "workspace:^"
     "@essex/tsconfig-base": ^1.0.2
     "@types/jest": ^27.4.1
     "@types/toposort": ^2.0.3
     "@types/uuid": ^8.3.4
     rxjs: ^7.5.5
-    toposort: ^2.0.2
     uuid: ^8.3.2
   languageName: unknown
   linkType: soft
@@ -4052,6 +4052,14 @@ __metadata:
   dependencies:
     "@essex/scripts": ^22.0.0
     regenerator-runtime: ^0.13.9
+  languageName: unknown
+  linkType: soft
+
+"@essex/toposort@workspace:^, @essex/toposort@workspace:packages/toposort":
+  version: 0.0.0-use.local
+  resolution: "@essex/toposort@workspace:packages/toposort"
+  dependencies:
+    "@essex/scripts": ^22.0.0
   languageName: unknown
   linkType: soft
 
@@ -23171,13 +23179,6 @@ resolve@^2.0.0-next.3:
   version: 1.0.1
   resolution: "toidentifier@npm:1.0.1"
   checksum: 952c29e2a85d7123239b5cfdd889a0dde47ab0497f0913d70588f19c53f7e0b5327c95f4651e413c74b785147f9637b17410ac8c846d5d4a20a5a33eb6dc3a45
-  languageName: node
-  linkType: hard
-
-"toposort@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "toposort@npm:2.0.2"
-  checksum: d64c74b570391c9432873f48e231b439ee56bc49f7cb9780b505cfdf5cb832f808d0bae072515d93834dd6bceca5bb34448b5b4b408335e4d4716eaf68195dcb
   languageName: node
   linkType: hard
 
