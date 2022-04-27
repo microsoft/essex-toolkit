@@ -1,7 +1,7 @@
 {
 	"name": "@essex/dataflow",
 	"description": "Reactive, graph-based dataflows",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
