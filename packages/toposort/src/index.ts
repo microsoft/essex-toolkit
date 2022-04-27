@@ -2,13 +2,25 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 
+/**
+ * Toposort an edge list
+ * @param edges - the edge list
+ * @returns the topologically sorted node array
+ */
 export default function toposort<T = string>(
 	edges: ReadonlyArray<[T, T | undefined]>,
 ): T[] {
 	return array(uniqueNodes(edges), edges)
 }
 
+/**
+ *
+ * @param nodes - the nodes array
+ * @param edges - the edges array
+ * @returns the topologically sorted node array
+ */
 export function array<T = string>(
 	nodes: ReadonlyArray<T>,
 	edges: ReadonlyArray<[T, T | undefined]>,
