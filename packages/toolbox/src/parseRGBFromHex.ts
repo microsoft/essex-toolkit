@@ -10,7 +10,7 @@ interface RGB {
 /**
  * Creates RGB color object from HEX color string
  * @param color - HEX color string
- * @returns rgb color object {r:number, g: number, b:number}
+ * @returns rgb color object \{r:number, g: number, b:number\}
  */
 
 export function parseRgbFromCssColor(color: string): RGB {

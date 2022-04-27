@@ -224,7 +224,7 @@ export const buildSetColumn = (config: SetColumnConfig, data?: any[]): any => {
 /**
  * Selects the column builder function based on data type indicated on the config.
  * TODO: support additional LineUp column types
- * @param config
+ * @param config - the column configuration
  */
 export const selectColumnBuilder = (config: ColumnConfig): any => {
 	switch (config.type) {

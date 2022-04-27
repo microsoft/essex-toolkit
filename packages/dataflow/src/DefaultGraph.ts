@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import toposort from '@essex/toposort'
 import type { Subscription } from 'rxjs'
-import toposort from 'toposort'
 
 import type { Graph, Node, NodeId } from './types'
 
@@ -82,7 +82,7 @@ export class DefaultGraph<T> implements Graph<T> {
 
 	public validate(): void {
 		// toposort will throw if a cycle is detected
-		toposort(this.edges)
+		toposort<string>(this.edges)
 	}
 
 	private get edges(): Array<[string, string]> {
