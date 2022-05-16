@@ -1,6 +1,0 @@
-releases:
-  "@essex/themed-components": patch
-  essex-js-toolkit: patch
-
-declined:
-  - essex-js-toolkit-stories
