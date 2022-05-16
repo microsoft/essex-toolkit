@@ -111,9 +111,6 @@ const itemProps = {
 		item: {
 			listStyleType: 'none',
 		},
-		label: {
-			overflow: 'hidden',
-		},
 	},
 } as Partial<IContextualMenuItemProps>
 
@@ -127,6 +124,5 @@ const styles = {
 	},
 	column: {
 		minWidth: 120,
-		maxWidth: 200,
 	},
 }
