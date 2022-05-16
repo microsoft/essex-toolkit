@@ -22,15 +22,13 @@ export interface ColumnarMenuProps extends IContextualMenuProps {
 const dropdownButtonStyles: IButtonStyles = {
 	root: {
 		// match the dropdowns for better visual alignment
+		width: 200,
 		paddingLeft: 4,
 		paddingRight: 4,
 		textAlign: 'left',
 	},
 	label: {
-		whiteSpace: 'nowrap',
 		fontWeight: 'normal',
-		overflow: 'hidden',
-		textOverflow: 'ellipsis',
 	},
 }
 
