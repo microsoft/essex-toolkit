@@ -4,4 +4,4 @@
  */
 export * from './filters.js'
 export * from './lineup.js'
-export * from './ThematicLineup.jsx'
+export * from './ThematicLineup.js'
