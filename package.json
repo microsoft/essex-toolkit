@@ -22,7 +22,7 @@
 		"node": ">= 12.0"
 	},
 	"scripts": {
-		"_release_packages": "turbo run release",
+		"_release_packages": "turbo run release --parallel",
 		"_ci_force": "yarn ci --force --no-cache",
 		"_version_cut": "yarn version apply --all",
 		"preinstall": "npx only-allow yarn",
@@ -31,6 +31,7 @@
 		"clean": "turbo run clean --parallel",
 		"test": "turbo run test",
 		"lint": "turbo run lint",
+		"start": "turbo run start --parallel",
 		"ci": "turbo run ci",
 		"stories": "yarn start:storybook",
 		"is_clean": "git diff-index HEAD --quiet || git status",
