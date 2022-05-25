@@ -31,7 +31,7 @@
 		"release": "turbo run release",
 		"stories": "essex serve-stories",
 		"lint": "turbo run lint",
-		"is_clean": "essex git-is-clean",
+		"is_clean": "git diff-index HEAD --quiet || git status",
 		"format": "essex prettify",
 		"ci": "turbo run ci"
 	},
