@@ -5,7 +5,7 @@
 import { Sparkline } from '../Sparkline.js'
 
 const meta = {
-	title: 'Sparkline',
+	title: '@essex:charts-react/Sparkline',
 }
 export default meta
 

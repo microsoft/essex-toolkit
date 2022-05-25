@@ -5,7 +5,7 @@
 import { ThematicLineup } from '@essex/thematic-lineup'
 
 const story = {
-	title: 'ThematicLineup',
+	title: '@essex:thematic-lineup/ThematicLineup',
 }
 export default story
 

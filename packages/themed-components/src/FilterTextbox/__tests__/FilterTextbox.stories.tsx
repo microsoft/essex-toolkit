@@ -5,7 +5,7 @@
 import { FilterTextbox } from '@essex/themed-components'
 
 const meta = {
-	title: 'Filter Textbox',
+	title: '@essex:themed-components/Filter Textbox',
 }
 
 export default meta

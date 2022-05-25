@@ -7,7 +7,7 @@ import { DefaultButton, MessageBar } from '@fluentui/react'
 import { useCallback, useState } from 'react'
 
 const story = {
-	title: 'Settings Pane',
+	title: '@essex:themed-components/Settings Pane',
 }
 export default story
 

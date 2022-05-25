@@ -5,7 +5,7 @@
 import { Sparkbar } from '../Sparkbar.js'
 
 const meta = {
-	title: 'Sparkbar',
+	title: '@essex:charts-react/Sparkbar',
 }
 export default meta
 

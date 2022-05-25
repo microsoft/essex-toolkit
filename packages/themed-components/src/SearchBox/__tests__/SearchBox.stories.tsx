@@ -5,7 +5,7 @@
 import { SearchBox } from '@essex/themed-components'
 
 const meta = {
-	title: 'SearchBox',
+	title: '@essex:themed-components/SearchBox',
 }
 
 export default meta

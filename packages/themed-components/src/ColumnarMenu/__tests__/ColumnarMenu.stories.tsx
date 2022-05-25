@@ -8,7 +8,7 @@ import { ContextualMenuItemType } from '@fluentui/react'
 import { useCallback } from 'react'
 
 const story = {
-	title: 'ColumnarMenu',
+	title: '@essex:themed-components/ColumnarMenu',
 }
 export default story
 

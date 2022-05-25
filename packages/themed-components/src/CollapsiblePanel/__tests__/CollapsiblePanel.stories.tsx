@@ -9,7 +9,7 @@ import {
 import { useCallback } from 'react'
 
 const meta = {
-	title: 'CollapsiblePanel',
+	title: '@essex:themed-components/CollapsiblePanel',
 }
 
 export default meta

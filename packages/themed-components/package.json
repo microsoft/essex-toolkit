@@ -39,6 +39,8 @@
 		"@fluentui/font-icons-mdl2": "^8.4.0",
 		"@fluentui/react": "^8.70.0",
 		"@fluentui/theme": "^2.6.6",
+		"@mdx-js/react": "^1.6.22",
+		"@storybook/addon-docs": "^6.5.5",
 		"@thematic/color": "^2.0.8",
 		"@thematic/core": "^2.1.1",
 		"@thematic/d3": "^2.0.9",

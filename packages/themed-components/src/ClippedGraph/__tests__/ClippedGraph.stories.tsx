@@ -5,7 +5,7 @@
 import { ClippedGraph } from '@essex/themed-components'
 
 const story = {
-	title: 'ClippedGraph',
+	title: '@essex:themed-components/ClippedGraph',
 }
 export default story
 const data = [

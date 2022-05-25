@@ -8,7 +8,7 @@ import {
 } from '@essex/boolean-expression-component'
 
 const story = {
-	title: 'BooleanExpression',
+	title: '@essex:boolean-expression-component/BooleanExpression',
 }
 export default story
 
