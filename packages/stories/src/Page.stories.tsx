@@ -1,6 +1,12 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { within, userEvent } from '@storybook/testing-library'
-import { Page } from './Page'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+/* eslint-disable @typescript-eslint/await-thenable */
+import type { ComponentMeta, ComponentStory } from '@storybook/react'
+import { userEvent, within } from '@storybook/testing-library'
+
+import { Page } from './Page.js'
 
 export default {
 	title: 'Example/Page',

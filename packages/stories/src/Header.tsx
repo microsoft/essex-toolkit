@@ -1,5 +1,10 @@
-import { Button } from './Button'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import './header.css'
+
+import { Button } from './Button.js'
 
 export type User = {
 	name: string

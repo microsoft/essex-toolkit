@@ -1,6 +1,11 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import type { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import { Button, ButtonProps } from './Button'
+import type { ButtonProps } from './Button.js'
+import { Button } from './Button.js'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

@@ -1,7 +1,10 @@
-import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import type { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import { Header } from './Header'
+import { Header } from './Header.js'
 
 export default {
 	title: 'Example/Header',
