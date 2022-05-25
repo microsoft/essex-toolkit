@@ -15,7 +15,7 @@ import { useStaticEntities } from './utils/useStaticEntities.js'
 import { options, selectedClusterID, visibleColumns } from './utils/utils.js'
 
 const story = {
-	title: 'HierarchyBrowser',
+	title: '@essex:hierarchy-browser/HierarchyBrowser',
 }
 
 export default story

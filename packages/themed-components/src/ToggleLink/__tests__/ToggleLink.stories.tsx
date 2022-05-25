@@ -6,7 +6,7 @@ import { ToggleLink } from '@essex/themed-components'
 import { useCallback, useState } from 'react'
 
 const meta = {
-	title: 'ToggleLink',
+	title: '@essex:themed-components/ToggleLink',
 }
 
 export default meta

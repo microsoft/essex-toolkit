@@ -1,10 +1,11 @@
 const ResolveTypescriptPlugin = require('resolve-typescript-plugin')
 
 module.exports = {
-	stories: ['../src/**/*.stories.@(mdx|js|jsx|ts|tsx)'],
+	stories: ['../../*/src/**/*.stories.@(mdx|js|jsx|ts|tsx)'],
 	addons: [
 		'@storybook/addon-essentials',
-		//'@storybook/addon-a11y',
+		'@storybook/addon-links',
+		'@storybook/addon-interactions',
 	],
 	webpackFinal: async (config, { configType }) => {
 		if (!config.resolve) {

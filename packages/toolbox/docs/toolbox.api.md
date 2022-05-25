@@ -85,7 +85,7 @@ export type Histogram = Array<Bin>;
 // Warning: (ae-missing-release-tag) "histogram" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const histogram: (data: any[], bins: number, accessor?: (d: any) => any, quantize?: boolean | undefined, smooth?: boolean | undefined) => Histogram;
+export const histogram: (data: any[], bins: number, accessor?: (d: any) => any, quantize?: boolean, smooth?: boolean) => Histogram;
 
 // Warning: (ae-missing-release-tag) "interpolate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

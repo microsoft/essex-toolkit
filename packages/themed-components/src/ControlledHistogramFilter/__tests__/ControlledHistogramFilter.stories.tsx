@@ -6,7 +6,7 @@ import { ControlledHistogramFilter } from '@essex/themed-components'
 import { useState } from 'react'
 
 const story = {
-	title: 'ControlledHistogramFilter',
+	title: '@essex:themed-components/ControlledHistogramFilter',
 }
 export default story
 

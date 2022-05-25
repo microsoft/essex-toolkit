@@ -5,7 +5,7 @@
 import toposort from '@essex/toposort'
 import type { Subscription } from 'rxjs'
 
-import type { Graph, Node, NodeId } from './types'
+import type { Graph, Node, NodeId } from './types.js'
 
 export class DefaultGraph<T> implements Graph<T> {
 	private _nodes: Map<NodeId, Node<T>> = new Map()
