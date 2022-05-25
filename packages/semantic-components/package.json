@@ -1,6 +1,6 @@
 {
 	"name": "@essex/semantic-components",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"description": "Semantic UI components for React",
 	"type": "module",
 	"main": "src/index.ts",
