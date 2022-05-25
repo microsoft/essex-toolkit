@@ -2,7 +2,10 @@
 	"name": "essex-js-toolkit",
 	"version": "2.1.6",
 	"description": "A set of packages for developers",
-	"repository": "git@ssh.dev.azure.com:v3/msrp-essex/Alpha/alpha-developer",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/microsoft/essex-js-toolkit.git"
+	},
 	"author": "David Tittsworth <datittsw@microsoft.com>",
 	"contributors": [
 		"David Tittsworth <datittsw@microsoft.com>",
