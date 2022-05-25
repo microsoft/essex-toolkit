@@ -22,12 +22,12 @@
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^22.0.0",
-		"@fluentui/react": "^8.67.0",
-		"@types/react": "^18.0.7",
-		"@types/react-dom": "^18.0.2",
-		"react": "^18.0.0",
-		"react-dom": "^18.0.0"
+		"@essex/scripts": "^22.0.4",
+		"@fluentui/react": "^8.70.0",
+		"@types/react": "^18.0.9",
+		"@types/react-dom": "^18.0.5",
+		"react": "^18.1.0",
+		"react-dom": "^18.1.0"
 	},
 	"peerDependencies": {
 		"@fluentui/react": "*",
