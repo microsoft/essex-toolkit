@@ -17,32 +17,32 @@ export const applyFilters: (lineup: LineUp, filters: Filter[]) => void;
 // Warning: (ae-missing-release-tag) "buildBooleanColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const buildBooleanColumn: (config: ColumnConfig, data?: any[] | undefined) => any;
+export const buildBooleanColumn: (config: ColumnConfig, data?: any[]) => any;
 
 // Warning: (ae-missing-release-tag) "buildCategoricalColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const buildCategoricalColumn: (config: CategoricalColumnConfig, data?: any[] | undefined) => any;
+export const buildCategoricalColumn: (config: CategoricalColumnConfig, data?: any[]) => any;
 
 // Warning: (ae-missing-release-tag) "buildLinkColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const buildLinkColumn: (config: LinkColumnConfig, data?: any[] | undefined) => any;
+export const buildLinkColumn: (config: LinkColumnConfig, data?: any[]) => any;
 
 // Warning: (ae-missing-release-tag) "buildNumberColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const buildNumberColumn: (config: NumberColumnConfig, data?: any[] | undefined) => any;
+export const buildNumberColumn: (config: NumberColumnConfig, data?: any[]) => any;
 
 // Warning: (ae-missing-release-tag) "buildSetColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const buildSetColumn: (config: SetColumnConfig, data?: any[] | undefined) => any;
+export const buildSetColumn: (config: SetColumnConfig, data?: any[]) => any;
 
 // Warning: (ae-missing-release-tag) "buildStringColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const buildStringColumn: (config: ColumnConfig, data?: any[] | undefined) => any;
+export const buildStringColumn: (config: ColumnConfig, data?: any[]) => any;
 
 // Warning: (ae-missing-release-tag) "CategoricalColumnConfig" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -84,7 +84,7 @@ export const createNumberColorScale: (scaleCreator: (count: number) => (index: n
 // Warning: (ae-missing-release-tag) "deriveCategories" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const deriveCategories: (config: ColumnConfig, data?: any[] | undefined) => string[];
+export const deriveCategories: (config: ColumnConfig, data?: any[]) => string[];
 
 // Warning: (ae-missing-release-tag) "Filter" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -150,7 +150,7 @@ export interface LinkColumnConfig extends ColumnConfig {
 // Warning: (ae-missing-release-tag) "nameToLabel" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const nameToLabel: (name?: string | undefined) => string | undefined;
+export const nameToLabel: (name?: string) => string | undefined;
 
 // Warning: (ae-missing-release-tag) "NumberColumnConfig" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
