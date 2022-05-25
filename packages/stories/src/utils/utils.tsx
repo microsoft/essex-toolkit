@@ -5,7 +5,7 @@
 import type { IStyles } from '@essex/hierarchy-browser'
 import type { IChoiceGroupOption } from '@fluentui/react'
 
-import type { JoinData } from './types'
+import type { JoinData } from './types.js'
 
 export const selectedClusterID = 204
 

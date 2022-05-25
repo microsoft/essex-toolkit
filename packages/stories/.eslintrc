@@ -1,3 +1,6 @@
 {
-	"extends": "../../.eslintrc"
+	"extends": "../../.eslintrc",
+	"rules": {
+		"@essex/extensions": ["error", [{ "expectedExtensions": [".js", ".css"] }]]
+	}
 }

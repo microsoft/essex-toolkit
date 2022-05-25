@@ -8,7 +8,7 @@ import type {
 } from '@essex/hierarchy-browser'
 import { useCallback, useMemo } from 'react'
 
-import type { JoinData, LocalEntity, NeighborLocalEntity } from './types'
+import type { JoinData, LocalEntity, NeighborLocalEntity } from './types.js'
 
 interface StaticProps {
 	communities: ICommunityDetail[]

@@ -27,6 +27,7 @@ export const ScrollArea: React.FC<IScrollAreaProps> = memo(function ScrollArea({
 	return (
 		<InfiniteScroll
 			pageStart={0}
+			/* eslint-disable-next-line @typescript-eslint/no-misused-promises */
 			loadMore={loadMore}
 			hasMore={hasMore}
 			useWindow={false}
