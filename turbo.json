@@ -27,9 +27,6 @@
 		},
 		"release": {
 			"cache": false
-		},
-		"start": {
-			"cache": false
 		}
 	}
 }
