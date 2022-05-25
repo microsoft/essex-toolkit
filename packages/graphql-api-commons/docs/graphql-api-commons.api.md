@@ -7,8 +7,8 @@
 import type { DependencyContainer } from 'tsyringe';
 import type { FastifyInstance } from 'fastify';
 import type { FastifyRequest } from 'fastify';
-import type { GraphQLSchema } from 'graphql';
-import type { Logger } from 'pino';
+import { GraphQLSchema } from 'graphql';
+import { Logger } from 'pino';
 
 // Warning: (ae-missing-release-tag) "AppBuilder" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

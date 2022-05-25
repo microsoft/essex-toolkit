@@ -18,7 +18,7 @@
 	"scripts": {
 		"build": "essex build --skipExportCheck --docs",
 		"clean": "essex clean",
-		"watch": "essex watch"
+		"lint": "essex lint"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^22.0.0",

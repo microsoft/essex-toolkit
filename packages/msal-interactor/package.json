@@ -18,7 +18,7 @@
 	"scripts": {
 		"build": "essex build --docs",
 		"clean": "essex clean",
-		"watch": "essex watch"
+		"lint": "essex lint"
 	},
 	"devDependencies": {
 		"@azure/msal-browser": "^2.23.0",

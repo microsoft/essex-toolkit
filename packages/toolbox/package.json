@@ -14,10 +14,14 @@
 	"license": "MIT",
 	"scripts": {
 		"clean": "essex clean",
-		"build": "essex build --docs"
+		"build": "essex build --docs",
+		"test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
+		"lint": "essex lint"
 	},
 	"devDependencies": {
+		"@essex/jest-config": "^21.0.11",
 		"@essex/scripts": "^22.0.0",
+		"jest": "^28.1.0",
 		"regenerator-runtime": "^0.13.9"
 	}
 }

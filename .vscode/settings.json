@@ -10,5 +10,14 @@
 	"javascript.preferences.importModuleSpecifier": "relative",
 	"javascript.preferences.importModuleSpecifierEnding": "js",
 	"typescript.preferences.importModuleSpecifier": "relative",
-	"typescript.preferences.importModuleSpecifierEnding": "js"
+	"typescript.preferences.importModuleSpecifierEnding": "js",
+	"explorer.fileNesting.enabled": true,
+	"explorer.fileNesting.patterns": {
+		"*.ts": "${capture}.ts, ${capture}.hooks.ts, ${capture}.hooks.tsx, ${capture}.stories.tsx, ${capture}.spec.tsx, ${capture}.base.ts, ${capture}.base.tsx, ${capture}.types.ts, ${capture}.styles.ts, ${capture}.styles.tsx, ${capture}.utils.ts, ${capture}.utils.tsx, ${capture}.module.scss, ${capture}.module.css, ${capture}.md",
+		"*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+		"*.jsx": "${capture}.js",
+		"*.tsx": "${capture}.ts, ${capture}.hooks.ts, ${capture}.hooks.tsx, ${capture}.stories.tsx, ${capture}.spec.tsx, ${capture}.base.ts, ${capture}.base.tsx, ${capture}.types.ts, ${capture}.styles.ts, ${capture}.styles.tsx, ${capture}.utils.ts, ${capture}.utils.tsx, ${capture}.module.scss, ${capture}.module.css, ${capture}.md, ${capture}.css",
+		"package.json": "LICENSE, yarn.lock, .yarnrc.yml, .pnp.cjs, .pnp.loader.mjs, .eslintrc, .eslintignore, .prettierignore, .gitattributes, .gitignore, turbo.json, tsconfig.json, .npmignore, tsconfig.*.json, jest.config.js, .huskyrc.json, .npmignore, .npmrc, .prettierrc, .lintstagedrc.json, .editorconfig",
+		"README.md": "SECURITY.md, SUPPORT.md, CODE_OF_CONDUCT.md"
+	}
 }
