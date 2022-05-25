@@ -9,9 +9,10 @@
 	"scripts": {
 		"clean": "essex clean",
 		"start:storybook": "start-storybook -s ./public",
-		"build:storybook": "build-storybook --quiet",
+		"bundle:storybook": "build-storybook --quiet",
 		"start": "yarn start:storybook",
-		"build": "yarn build:storybook"
+		"bundle": "yarn bundle:storybook",
+		"lint": "essex lint"
 	},
 	"dependencies": {
 		"@essex/boolean-expression-component": "workspace:^",
@@ -28,6 +29,7 @@
 		"@babel/preset-env": "^7.16.11",
 		"@babel/preset-react": "^7.16.7",
 		"@babel/preset-typescript": "^7.16.7",
+		"@essex/jest-config": "^21.0.11",
 		"@essex/scripts": "^22.0.0",
 		"@fluentui/font-icons-mdl2": "^8.3.2",
 		"@fluentui/react": "^8.67.0",
@@ -49,6 +51,7 @@
 		"@types/react-is": "^17.0.3",
 		"@uifabric/icons": "^7.7.0",
 		"babel-loader": "^8.2.5",
+		"jest": "^28.1.0",
 		"react-is": "^18.0.0",
 		"regenerator-runtime": "^0.13.9",
 		"resolve-typescript-plugin": "^1.2.0"

@@ -28,7 +28,9 @@
 	},
 	"scripts": {
 		"clean": "essex clean dist docs",
-		"build": "essex build --docs --skipExportCheck"
+		"build": "essex build --docs --skipExportCheck",
+		"lint": "essex lint",
+		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
 		"@essex/arquero": "workspace:^",

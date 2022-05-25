@@ -4,5 +4,5 @@
 		"outDir": "lib",
 		"types": ["jest"]
 	},
-	"include": ["src/index.ts"]
+	"include": ["src"]
 }

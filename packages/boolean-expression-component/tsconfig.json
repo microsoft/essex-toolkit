@@ -6,5 +6,5 @@
 		"outDir": "lib",
 		"jsx": "react-jsx"
 	},
-	"include": ["src/index.ts"]
+	"include": ["src"]
 }

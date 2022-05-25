@@ -14,8 +14,8 @@
 	"scripts": {
 		"build": "essex build --skipExportCheck --docs",
 		"clean": "essex clean",
-		"start": "essex watch",
-		"lint": "essex lint"
+		"lint": "essex lint",
+		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
 		"@essex/hooks": "workspace:^",

@@ -21,7 +21,9 @@
 	},
 	"scripts": {
 		"clean": "essex clean dist lib",
-		"build": "essex build --mode dual --skipExportCheck --docs"
+		"build": "essex build --mode dual --skipExportCheck --docs",
+		"lint": "essex lint",
+		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^22.0.0",

@@ -11,7 +11,10 @@
 	"sideEffects": false,
 	"scripts": {
 		"clean": "essex clean",
-		"build": "essex build --skipExportCheck"
+		"build": "essex build --skipExportCheck",
+		"test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
+		"lint": "essex lint",
+		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
 		"@essex/toposort": "workspace:^",
@@ -19,9 +22,11 @@
 		"uuid": "^8.3.2"
 	},
 	"devDependencies": {
+		"@essex/jest-config": "^21.0.11",
 		"@essex/scripts": "^22.0.0",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@types/jest": "^27.4.1",
-		"@types/uuid": "^8.3.4"
+		"@types/uuid": "^8.3.4",
+		"jest": "^28.1.0"
 	}
 }
