@@ -22,18 +22,20 @@
 		"node": ">= 12.0"
 	},
 	"scripts": {
+		"_release_packages": "turbo run release",
+		"_ci_force": "turbo run ci --force",
 		"preinstall": "npx only-allow yarn",
 		"postinstall": "husky install",
 		"clean": "turbo run clean",
 		"build": "turbo run build",
 		"test": "turbo run test",
 		"start:": "turbo run start",
-		"release": "turbo run release",
 		"stories": "yarn start:storybook",
 		"lint": "turbo run lint",
 		"is_clean": "git diff-index HEAD --quiet || git status",
 		"format": "essex prettify",
-		"ci": "turbo run ci"
+		"ci": "turbo run ci",
+		"release": "run-s clean _ci_force _release_packages"
 	},
 	"devDependencies": {
 		"@essex/eslint-config": "^20.3.5",
