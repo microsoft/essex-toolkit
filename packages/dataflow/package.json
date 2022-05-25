@@ -13,7 +13,8 @@
 		"clean": "essex clean",
 		"build": "essex build --skipExportCheck",
 		"test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
-		"lint": "essex lint"
+		"lint": "essex lint",
+		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
 		"@essex/toposort": "workspace:^",

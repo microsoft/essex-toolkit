@@ -18,7 +18,8 @@
 	"scripts": {
 		"build": "essex build --docs",
 		"clean": "essex clean",
-		"lint": "essex lint"
+		"lint": "essex lint",
+		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {
 		"@azure/msal-browser": "^2.23.0",

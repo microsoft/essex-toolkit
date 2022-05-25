@@ -18,7 +18,8 @@
 	"scripts": {
 		"clean": "essex clean",
 		"build": "essex build --docs",
-		"lint": "essex lint"
+		"lint": "essex lint",
+		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^22.0.0",

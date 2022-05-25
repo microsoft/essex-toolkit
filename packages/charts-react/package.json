@@ -29,7 +29,8 @@
 	"scripts": {
 		"clean": "essex clean dist docs",
 		"build": "essex build --docs",
-		"lint": "essex lint"
+		"lint": "essex lint",
+		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
 		"d3-format": "^3.1.0",
