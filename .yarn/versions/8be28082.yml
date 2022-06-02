@@ -1,0 +1,4 @@
+releases:
+  "@essex/arquero": minor
+  "@essex/arquero-react": minor
+  essex-js-toolkit: patch
