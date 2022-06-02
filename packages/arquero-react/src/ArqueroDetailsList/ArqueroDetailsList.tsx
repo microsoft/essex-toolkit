@@ -229,7 +229,8 @@ const DetailsWrapper = styled.div`
 	overflow-x: auto;
 
 	span.ms-DetailsHeader-cellTitle {
-		background-color: ${({ theme }) => theme.application().background().hex()};
+		background-color: ${({ theme }) =>
+			theme.application?.().background().hex()};
 	}
 
 	.ms-List-cell {
