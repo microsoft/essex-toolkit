@@ -58,6 +58,8 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		columns,
 		onColumnHeaderClick,
 		styles,
+		defaultSortColumn,
+		defaultSortDirection,
 		isHeadersFixed = false,
 		compact = false,
 		isResizable = true,
@@ -66,7 +68,12 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 	}) {
 		const [version, setVersion] = useState(0)
 		const { sortColumn, sortDirection, handleColumnHeaderClick } =
-			useSortHandling(isSortable, onColumnHeaderClick)
+			useSortHandling(
+				isSortable,
+				onColumnHeaderClick,
+				defaultSortColumn,
+				defaultSortDirection,
+			)
 
 		// first subset the table using the visible columns
 		// this will prevent any further operations on columns we aren't going to show
@@ -221,10 +228,6 @@ const DetailsWrapper = styled.div`
 	overflow-y: auto;
 	overflow-x: auto;
 
-	span.ms-DetailsHeader-cellTitle {
-		background-color: ${({ theme }) => theme.application().background().hex()};
-	}
-
 	.ms-List-cell {
 		min-height: unset;
 	}
@@ -237,6 +240,12 @@ const DetailsWrapper = styled.div`
 		justify-content: center;
 	}
 `
+
+/*
+span.ms-DetailsHeader-cellTitle {
+		background-color: ${({ theme }) => theme.application().background().hex()};
+	}
+ */
 
 function anyStatsFeatures(features?: DetailsListFeatures) {
 	return Object.values(features || {}).some(v => v === true)

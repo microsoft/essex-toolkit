@@ -12,6 +12,7 @@ import type {
 	IRenderFunction,
 } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { SortDirection } from '@essex/arquero'
 
 export type ColumnRenderFunction = (
 	item?: any,
@@ -198,4 +199,12 @@ export interface ArqueroDetailsListProps
 	 * Resizable columns
 	 */
 	isResizable?: boolean
+	/**
+	 * Default sort column
+	 */
+	defaultSortColumn?: string
+	/**
+	 * Resizable sort direction
+	 */
+	defaultSortDirection?: SortDirection
 }
