@@ -28,8 +28,6 @@ export const ArqueroTableHeaderStory = () => {
 			showRowCount={true}
 			showColumnCount={true}
 			visibleColumns={['ID', 'FY20', 'FY21']}
-			bgColor={'red'}
-			color={'white'}
 		/>
 	)
 }

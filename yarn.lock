@@ -2036,16 +2036,16 @@ __metadata:
     styled-components: ^5.3.5
     typescript: ^4.7.2
   peerDependencies:
-    "@fluentui/react": ^8.24.0
-    "@fluentui/utilities": ^8.2.1
-    "@thematic/core": ^1.3.0
-    "@thematic/d3": ^1.3.0
-    "@thematic/react": ^1.3.0
-    "@types/react-is": ^17.0.3
-    arquero: ^4.8.7
+    "@fluentui/react": ">= 8.24.0"
+    "@fluentui/utilities": ">= 8.2.1"
+    "@thematic/core": ">= 1.3.0"
+    "@thematic/d3": ">= 1.3.0"
+    "@thematic/react": ">= 1.3.0"
+    "@types/react-is": ">= 17.0.3"
+    arquero: ">= 4.8.7"
     react: ">= 18"
-    react-is: ^18.1.0
-    styled-components: ^5.3.0
+    react-is: ">= 18.1.0"
+    styled-components: ">= 5"
   languageName: unknown
   linkType: soft
 

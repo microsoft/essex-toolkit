@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react'
+import React, { useState, useCallback, useMemo, StrictMode } from 'react'
 import { Toggle } from '@fluentui/react'
 import { ThemeVariant, loadById } from '@thematic/core'
 import { ApplicationStyles } from '@thematic/react'
@@ -28,13 +28,15 @@ export const ThematicFluentDecorator = (
 		setDark(v)
 	}, [])
 	return (
-		<ThematicFluentProvider theme={thematicTheme}>
-			<ApplicationStyles />
-			<Toggle label="Dark mode" checked={dark} onChange={handleDarkChange} />
-			<ThemeProvider theme={thematicTheme}>
-				<Container>{storyFn(undefined, undefined)}</Container>
-			</ThemeProvider>
-		</ThematicFluentProvider>
+		<StrictMode>
+			<ThematicFluentProvider theme={thematicTheme}>
+				<ApplicationStyles />
+				<Toggle label="Dark mode" checked={dark} onChange={handleDarkChange} />
+				<ThemeProvider theme={thematicTheme}>
+					<Container>{storyFn(undefined, undefined)}</Container>
+				</ThemeProvider>
+			</ThematicFluentProvider>
+		</StrictMode>
 	)
 }
 

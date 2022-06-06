@@ -230,7 +230,7 @@ const DetailsWrapper = styled.div`
 
 	span.ms-DetailsHeader-cellTitle {
 		background-color: ${({ theme }) =>
-			theme.application?.().background().hex() ?? ''};
+			theme.application?.().background().hex()};
 	}
 
 	.ms-List-cell {
