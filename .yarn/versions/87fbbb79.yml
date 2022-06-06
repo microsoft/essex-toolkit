@@ -1,3 +1,4 @@
 releases:
   "@essex/arquero": major
   "@essex/arquero-react": minor
+  essex-js-toolkit: major
