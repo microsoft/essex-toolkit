@@ -71,10 +71,6 @@ export interface TableContainer<T = unknown> {
 	 */
 	id: string
 	/**
-	 * This is an optional alias or friendly name for the table.
-	 */
-	name?: string
-	/**
 	 * This is the actual Arquero table instance to store.
 	 * If it has not been resolved yet it will be undefined.
 	 */

@@ -96,7 +96,7 @@ export function columnTypes(table: ColumnTable, columns?: string[]): Record<stri
 // Warning: (ae-missing-release-tag) "container" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function container(id: string, table?: ColumnTable, options?: Omit<TableContainer, 'id' | 'table'>): TableContainer;
+export function container(id: string, table?: ColumnTable): TableContainer;
 
 // Warning: (ae-missing-release-tag) "DataType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -197,7 +197,6 @@ export interface TableContainer<T = unknown> {
     context?: T;
     id: string;
     metadata?: TableMetadata;
-    name?: string;
     table?: ColumnTable;
 }
 
