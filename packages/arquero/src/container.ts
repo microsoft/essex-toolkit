@@ -6,14 +6,9 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import type { TableContainer } from './types.js'
 
-export function container(
-	id: string,
-	table?: ColumnTable,
-	options: Omit<TableContainer, 'id' | 'table'> = {},
-): TableContainer {
+export function container(id: string, table?: ColumnTable): TableContainer {
 	return {
 		id,
 		table,
-		name: options.name || id,
 	}
 }
