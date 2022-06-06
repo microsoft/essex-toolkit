@@ -5,6 +5,8 @@
 import { ArqueroDetailsList } from '@essex/arquero-react'
 import { table } from 'arquero'
 import { DetailsListLayoutMode, SelectionMode } from '@fluentui/react'
+import { SortDirection } from '@essex/arquero'
+import { StatsColumnType } from '../types.js'
 
 const meta = {
 	title: '@essex:arquero-react/Arquero Details List',
@@ -30,7 +32,13 @@ const mockColumns = [
 
 const mockFeatures = {
 	statsColumnHeaders: true,
-	statsColumnTypes: ['type', 'min', 'max', 'distinct', 'invalid'],
+	statsColumnTypes: [
+		StatsColumnType.Type,
+		StatsColumnType.Min,
+		StatsColumnType.Max,
+		StatsColumnType.Distinct,
+		StatsColumnType.Invalid,
+	],
 }
 
 /**
@@ -46,18 +54,19 @@ export const ArqueroDetailsListStory = () => {
 			offset={0}
 			limit={Infinity}
 			includeAllColumns={true}
-			visibleColumns={true}
+			visibleColumns={['ID', 'FY20', 'FY21']}
 			isSortable={true}
 			isStriped={false}
 			isColumnClickable={false}
 			showColumnBorders={false}
-			selectedColumn={true}
 			selectionMode={SelectionMode.none}
 			layoutMode={DetailsListLayoutMode.fixedColumns}
 			columns={mockColumns}
 			isHeadersFixed={false}
 			compact={false}
 			isResizable={true}
+			defaultSortDirection={SortDirection.Ascending}
+			defaultSortColumn={'FY21'}
 		/>
 	)
 }

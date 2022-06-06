@@ -23,9 +23,11 @@ export function useSortHandling(
 	defaultSortColumn?: string,
 	defaultSortDirection?: SortDirection,
 ): SortParameters {
-	const [sortColumn, setSortColumn] = useState<string | undefined>()
+	const [sortColumn, setSortColumn] = useState<string | undefined>(
+		defaultSortColumn,
+	)
 	const [sortDirection, setSortDirection] =
-		useState<SortParameters['sortDirection']>()
+		useState<SortParameters['sortDirection']>(defaultSortDirection)
 	const handleColumnHeaderClick = useCallback(
 		(
 			evt: React.MouseEvent<HTMLElement, MouseEvent> | undefined,

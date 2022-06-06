@@ -229,7 +229,8 @@ const DetailsWrapper = styled.div`
 	overflow-x: auto;
 
 	span.ms-DetailsHeader-cellTitle {
-		background-color: ${({ theme }) => theme.application().background().hex()};
+		background-color: ${({ theme }) =>
+			theme.application?.().background().hex() ?? ''};
 	}
 
 	.ms-List-cell {
@@ -244,12 +245,6 @@ const DetailsWrapper = styled.div`
 		justify-content: center;
 	}
 `
-
-/*
-span.ms-DetailsHeader-cellTitle {
-		background-color: ${({ theme }) => theme.application().background().hex()};
-	}
- */
 
 function anyStatsFeatures(features?: DetailsListFeatures) {
 	return Object.values(features || {}).some(v => v === true)
