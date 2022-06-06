@@ -44,7 +44,7 @@ const TableMenu: React.FC<{
 		return {
 			items: tables.map(table => ({
 				key: table.id,
-				text: table.id || table.name,
+				text: table.id,
 				onClick: () => onChange && onChange(table.id),
 			})) as IContextualMenuItem[],
 		}
@@ -78,7 +78,7 @@ function useStyles() {
 function chooseLabel(tables: TableContainer[], selectedKey?: string): string {
 	const match = tables.find(t => t.id === selectedKey)
 	if (match) {
-		return match.name || match.id
+		return match.id
 	}
 	return 'Choose table'
 }
