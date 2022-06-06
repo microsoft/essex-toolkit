@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ColumnMetadata, TableMetadata } from '@essex/arquero'
+import type { SortDirection } from '@essex/arquero'
 import type {
 	IColumn,
 	IDetailsColumnProps,
@@ -12,7 +13,6 @@ import type {
 	IRenderFunction,
 } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import type { SortDirection } from '@essex/arquero'
 
 export type ColumnRenderFunction = (
 	item?: any,

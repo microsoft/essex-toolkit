@@ -2,10 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ArqueroDetailsList } from '@essex/arquero-react'
-import { table } from 'arquero'
-import { DetailsListLayoutMode, SelectionMode } from '@fluentui/react'
 import { SortDirection } from '@essex/arquero'
+import { ArqueroDetailsList } from '@essex/arquero-react'
+import { DetailsListLayoutMode, SelectionMode } from '@fluentui/react'
+import { table } from 'arquero'
+
 import { StatsColumnType } from '../types.js'
 
 const meta = {
