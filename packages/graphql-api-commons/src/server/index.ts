@@ -2,10 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Logger } from 'pino'
+
+/* eslint-disable @typescript-eslint/consistent-type-imports */
+import { Logger } from 'pino'
 import { inject, singleton } from 'tsyringe'
 
-import type { AppBuilder } from '../app/AppBuilder.js'
+import { AppBuilder } from '../app/AppBuilder.js'
 import type { IBuiltAppContext, PreRunCb } from '../app/index.js'
 import type { IBaseConfiguration } from '../configuration/index.js'
 import { BaseInjectorNames } from '../injectors.js'
