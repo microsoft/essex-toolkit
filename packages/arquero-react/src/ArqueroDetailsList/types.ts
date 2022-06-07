@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ColumnMetadata, TableMetadata } from '@essex/arquero'
+import type { SortDirection } from '@essex/arquero'
 import type {
 	IColumn,
 	IDetailsColumnProps,
@@ -198,4 +199,12 @@ export interface ArqueroDetailsListProps
 	 * Resizable columns
 	 */
 	isResizable?: boolean
+	/**
+	 * Default sort column
+	 */
+	defaultSortColumn?: string
+	/**
+	 * Resizable sort direction
+	 */
+	defaultSortDirection?: SortDirection
 }

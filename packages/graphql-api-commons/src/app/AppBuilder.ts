@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+/* eslint-disable @typescript-eslint/consistent-type-imports */
 import { ApolloServerPluginLandingPageDisabled } from 'apollo-server-core'
 import { ApolloServer } from 'apollo-server-fastify'
 import type { FastifyInstance, FastifyRequest } from 'fastify'

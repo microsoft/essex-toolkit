@@ -1,9 +1,10 @@
-import { useState, useCallback, useMemo } from 'react'
+import React, { useState, useCallback, useMemo, StrictMode } from 'react'
 import { Toggle } from '@fluentui/react'
 import { ThemeVariant, loadById } from '@thematic/core'
 import { ApplicationStyles } from '@thematic/react'
 import { ThematicFluentProvider } from '@thematic/fluent'
 import { StoryFnReactReturnType } from '@storybook/react/dist/ts3.9/client/preview/types'
+import styled, { ThemeProvider } from 'styled-components'
 
 /**
  * ThematicFluentDecorator configures both Thematic and the Fluent wrapper
@@ -22,20 +23,23 @@ export const ThematicFluentDecorator = (
 			}),
 		[dark],
 	)
+
 	const handleDarkChange = useCallback((e, v) => {
 		setDark(v)
 	}, [])
 	return (
-		<ThematicFluentProvider theme={thematicTheme}>
-			<ApplicationStyles />
-			<Toggle label="Dark mode" checked={dark} onChange={handleDarkChange} />
-			<div
-				style={{
-					borderTop: `1px solid ${thematicTheme.application().faint().hex()}`,
-				}}
-			>
-				{storyFn(undefined, undefined)}
-			</div>
-		</ThematicFluentProvider>
+		<StrictMode>
+			<ThematicFluentProvider theme={thematicTheme}>
+				<ApplicationStyles />
+				<Toggle label="Dark mode" checked={dark} onChange={handleDarkChange} />
+				<ThemeProvider theme={thematicTheme}>
+					<Container>{storyFn(undefined, undefined)}</Container>
+				</ThemeProvider>
+			</ThematicFluentProvider>
+		</StrictMode>
 	)
 }
+
+const Container = styled.div`
+	border: 1px solid ${({ theme }) => theme.application().faint().hex()};
+`

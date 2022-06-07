@@ -16,6 +16,12 @@ module.exports = {
 		}
 		config.resolve.plugins.push(new ResolveTypescriptPlugin())
 
+		if (!config.resolve.alias) {
+			config.resolve.alias = {}
+		}
+		config.resolve.alias[`styled-components`] =
+			require.resolve('styled-components')
+
 		return config
 	},
 }

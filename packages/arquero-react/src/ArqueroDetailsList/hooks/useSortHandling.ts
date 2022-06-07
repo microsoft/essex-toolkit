@@ -12,16 +12,22 @@ import type { ColumnClickFunction } from '../index.js'
 export interface SortParameters {
 	sortColumn?: string
 	sortDirection?: SortDirection
+	defaultSortColumn?: string
+	defaultSortDirection?: SortDirection
 	handleColumnHeaderClick: ColumnClickFunction
 }
 
 export function useSortHandling(
 	allowSorting: boolean,
 	onColumnHeaderClick: ColumnClickFunction = noop,
+	defaultSortColumn?: string,
+	defaultSortDirection?: SortDirection,
 ): SortParameters {
-	const [sortColumn, setSortColumn] = useState<string | undefined>()
+	const [sortColumn, setSortColumn] = useState<string | undefined>(
+		defaultSortColumn,
+	)
 	const [sortDirection, setSortDirection] =
-		useState<SortParameters['sortDirection']>()
+		useState<SortParameters['sortDirection']>(defaultSortDirection)
 	const handleColumnHeaderClick = useCallback(
 		(
 			evt: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
