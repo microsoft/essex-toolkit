@@ -1,11 +1,6 @@
-import type {
-	ICommandBarItemProps,
-	ICommandBarProps,
-	IDetailsColumnProps,
-} from '@fluentui/react'
-import { ReactElement, useCallback } from 'react'
-import merge from 'lodash-es/merge.js'
-import { CommandBar } from '../../CommandBar/CommandBar.js'
+import type { ICommandBarItemProps, IDetailsColumnProps } from '@fluentui/react'
+import { useCallback } from 'react'
+import { createDefaultCommandBar } from './component-factories.js'
 
 export function useColumnCommands(): (
 	props?: IDetailsColumnProps,
@@ -44,21 +39,4 @@ export function useColumnCommands(): (
 			},
 		})
 	}, [])
-}
-
-export function createDefaultCommandBar({
-	styles,
-	...props
-}: ICommandBarProps): ReactElement<ICommandBarProps, any> {
-	const defaultStyles = merge(defStyles, styles)
-	return <CommandBar {...props} styles={defaultStyles} />
-}
-
-const defStyles = {
-	root: {
-		height: 36,
-	},
-	primarySet: {
-		width: '100%',
-	},
 }

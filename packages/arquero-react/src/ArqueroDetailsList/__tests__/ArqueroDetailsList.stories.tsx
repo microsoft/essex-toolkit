@@ -45,11 +45,6 @@ const mockFeatures = {
 	],
 }
 
-/**
- * FilterTextboxStory is a FilterTextbox based on
- * Fluent Component
- * adapted for Thematic styling
- */
 export const ArqueroDetailsListStory = () => {
 	return (
 		<ArqueroDetailsList
