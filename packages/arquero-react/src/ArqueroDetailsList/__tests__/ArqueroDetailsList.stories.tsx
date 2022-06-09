@@ -3,14 +3,17 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { SortDirection } from '@essex/arquero'
-import { ArqueroDetailsList } from '@essex/arquero-react'
-import { DetailsListLayoutMode, SelectionMode } from '@fluentui/react'
+import { ArqueroDetailsList, ArqueroTableHeader } from '@essex/arquero-react'
+import { DetailsListLayoutMode, IColumn, SelectionMode } from '@fluentui/react'
 import { table } from 'arquero'
-
+import { loadCSV } from 'arquero'
 import { StatsColumnType } from '../types.js'
+import { introspect } from '@essex/arquero'
+import { useColumnCommands } from './ArqueroDetailsList.hooks.js'
+import { useMemo } from 'react'
 
 const meta = {
-	title: '@essex:arquero-react/Arquero Details List',
+	title: '@essex:arquero-react/ArqueroDetailsList',
 }
 
 export default meta
@@ -74,4 +77,51 @@ export const ArqueroDetailsListStory = () => {
 
 ArqueroDetailsListStory.story = {
 	name: 'ArqueroDetailsList',
+}
+
+export const ArqueroDetailsListPerformanceStory = async () => {
+	const mockTablePerformance = await loadCSV('./stocks.csv', {
+		autoMax: 1000000,
+	})
+
+	const metadata = introspect(mockTablePerformance, true)
+
+	const columnCommands = useColumnCommands()
+
+	const columns = useMemo((): IColumn[] | undefined => {
+		if (!mockTablePerformance) return undefined
+		return mockTablePerformance.columnNames().map(x => {
+			return {
+				name: x,
+				key: x,
+				fieldName: x,
+				minWidth: 180,
+			} as IColumn
+		})
+	}, [mockTablePerformance])
+
+	return (
+		<div>
+			<ArqueroTableHeader table={mockTablePerformance} name={'Table1'} />
+
+			<ArqueroDetailsList
+				table={mockTablePerformance}
+				metadata={metadata}
+				features={{
+					smartCells: true,
+					smartHeaders: true,
+					commandBar: [columnCommands],
+				}}
+				columns={columns}
+				isSortable
+				isHeadersFixed
+				isStriped
+				showColumnBorders
+			/>
+		</div>
+	)
+}
+
+ArqueroDetailsListPerformanceStory.story = {
+	name: 'Performance story',
 }
