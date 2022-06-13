@@ -8,8 +8,8 @@ import { DetailsListLayoutMode, IColumn, SelectionMode } from '@fluentui/react'
 import { table } from 'arquero'
 import { ArqueroDetailsListProps, StatsColumnType } from '../types.js'
 import { introspect } from '@essex/arquero'
-import { useColumnCommands, useCommandBar } from './ArqueroDetailsList.hooks.js'
-import { ReactNode, useMemo, useState, useEffect } from 'react'
+import { useColumnCommands } from './ArqueroDetailsList.hooks.js'
+import { ReactNode, useMemo, useState } from 'react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 const meta = {
