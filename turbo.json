@@ -30,6 +30,9 @@
 		},
 		"start": {
 			"cache": false
+		},
+		"stories": {
+			"cache": false
 		}
 	}
 }

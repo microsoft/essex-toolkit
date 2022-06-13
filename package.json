@@ -27,7 +27,7 @@
 		"_version_cut": "yarn version apply --all",
 		"preinstall": "npx only-allow yarn",
 		"postinstall": "husky install",
-		"build": "turbo run build",
+		"build": "turbo run build --force",
 		"clean": "turbo run clean --parallel",
 		"test": "turbo run test",
 		"lint": "turbo run lint",
