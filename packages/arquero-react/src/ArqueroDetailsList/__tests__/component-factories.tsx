@@ -2,6 +2,7 @@ import type { ICommandBarProps } from '@fluentui/react'
 import type { ReactElement } from 'react'
 import merge from 'lodash-es/merge.js'
 import { CommandBar } from '../../CommandBar/CommandBar.js'
+import type { Theme } from '@thematic/core'
 
 export function createDefaultCommandBar({
 	styles,
@@ -18,4 +19,41 @@ const defStyles = {
 	primarySet: {
 		width: '100%',
 	},
+}
+
+/**
+ * Creates a header command bar using the inverted style for our default table header
+ * @param props - the component props
+ * @param theme - the theme
+ * @param far - use far mode
+ * @returns
+ */
+export function createDefaultHeaderCommandBar(
+	{ styles, ...props }: ICommandBarProps,
+	theme: Theme,
+	far = false,
+): ReactElement<ICommandBarProps, any> {
+	const defaultStyles = merge(
+		{
+			root: {
+				display: 'flex',
+				justifyContent: far ? 'flex-end' : 'flex-start',
+			},
+		},
+		defStyles,
+		{},
+		styles,
+	)
+	const { bgColor, color } = {
+		bgColor: theme.application().accent().hex(),
+		color: theme.application().background().hex(),
+	}
+	return (
+		<CommandBar
+			{...props}
+			styles={defaultStyles}
+			bgColor={bgColor}
+			color={color}
+		/>
+	)
 }

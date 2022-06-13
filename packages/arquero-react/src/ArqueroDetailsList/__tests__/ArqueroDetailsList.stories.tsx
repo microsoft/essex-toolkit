@@ -2,14 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { SortDirection } from '@essex/arquero'
+import { SortDirection, TableMetadata } from '@essex/arquero'
 import { ArqueroDetailsList, ArqueroTableHeader } from '@essex/arquero-react'
 import { DetailsListLayoutMode, IColumn, SelectionMode } from '@fluentui/react'
 import { table } from 'arquero'
 import { ArqueroDetailsListProps, StatsColumnType } from '../types.js'
 import { introspect } from '@essex/arquero'
-import { useColumnCommands } from './ArqueroDetailsList.hooks.js'
-import { ReactNode, useMemo } from 'react'
+import { useColumnCommands, useCommandBar } from './ArqueroDetailsList.hooks.js'
+import { ReactNode, useMemo, useState, useEffect } from 'react'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 const meta = {
 	title: '@essex:arquero-react/ArqueroDetailsList',
@@ -78,13 +79,17 @@ export const ArqueroDetailsListPerformanceStory = (
 		ArqueroDetailsListProps & { children?: ReactNode },
 	{ loaded: { mockTablePerformance } }: any,
 ) => {
-	const metadata = introspect(mockTable, true)
+	const [table, setTable] = useState<ColumnTable | undefined>(
+		mockTablePerformance,
+	)
+	const [metadata, setMetadata] = useState<TableMetadata | undefined>()
+	const [tableName, setTableName] = useState('Table1')
 
 	const columnCommands = useColumnCommands()
 
 	const columns = useMemo((): IColumn[] | undefined => {
-		if (!mockTable) return undefined
-		return mockTable.columnNames().map(x => {
+		if (!mockTablePerformance) return undefined
+		return mockTablePerformance.columnNames().map(x => {
 			return {
 				name: x,
 				key: x,
@@ -92,13 +97,24 @@ export const ArqueroDetailsListPerformanceStory = (
 				minWidth: 180,
 			} as IColumn
 		})
-	}, [mockTable])
+	}, [mockTablePerformance])
 
-	console.log(mockTablePerformance)
+	mockTablePerformance.ungroup()
+	// make sure we have a large enough number of rows to impact rendering perf
+	for (let i = 0; i < 10; i++) {
+		mockTablePerformance = mockTablePerformance.concat(mockTablePerformance)
+	}
+	setMetadata(introspect(mockTablePerformance, true))
+
+	//const commandBar = useCommandBar(table, metadata, setTable, setMetadata)
 
 	return (
 		<div>
-			<ArqueroTableHeader table={mockTable} name={'Table1'} />
+			<ArqueroTableHeader
+				table={mockTablePerformance}
+				name={tableName}
+				onRenameTable={name => setTableName(name)}
+			/>
 
 			<ArqueroDetailsList
 				{...args}

@@ -1,6 +1,15 @@
 import type { ICommandBarItemProps, IDetailsColumnProps } from '@fluentui/react'
-import { useCallback } from 'react'
-import { createDefaultCommandBar } from './component-factories.js'
+import {
+	createDefaultCommandBar,
+	createDefaultHeaderCommandBar,
+} from './component-factories.js'
+import type { TableMetadata } from '@essex/arquero'
+import { introspect } from '@essex/arquero'
+import { useThematic } from '@thematic/react'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import type { Struct } from 'arquero/dist/types/table/transformable'
+import type { SetStateAction } from 'react'
+import { useCallback, useMemo } from 'react'
 
 export function useColumnCommands(): (
 	props?: IDetailsColumnProps,
@@ -39,4 +48,52 @@ export function useColumnCommands(): (
 			},
 		})
 	}, [])
+}
+
+export function useCommandBar(
+	table: ColumnTable | undefined,
+	metadata: TableMetadata | undefined,
+	setTable: React.Dispatch<SetStateAction<ColumnTable | undefined>>,
+	setMetadata: React.Dispatch<SetStateAction<TableMetadata | undefined>>,
+): JSX.Element {
+	const theme = useThematic()
+	const addNewColumn = useCallback(() => {
+		if (!table || !metadata) return
+		console.time('new column')
+		const newTable = table.derive(
+			{ [`New ${Math.round(Math.random() * 100)}`]: (d: Struct) => d.Close },
+			{ before: 'Date' },
+		)
+		console.timeEnd('new column')
+		// since we're just appending, we can reuse the prior stats
+		console.time('new meta')
+		const newColumns = newTable.columnNames(name => !metadata.columns[name])
+		const newMetadata = introspect(newTable, true, newColumns)
+		console.timeEnd('new meta')
+		setMetadata({
+			...newMetadata,
+			columns: {
+				...metadata.columns,
+				...newMetadata.columns,
+			},
+		})
+		setTable(newTable)
+	}, [table, setMetadata, setTable, metadata])
+	return useMemo(() => {
+		return createDefaultHeaderCommandBar(
+			{
+				items: [
+					{
+						key: 'add-column',
+						text: 'Add column',
+						iconProps: {
+							iconName: 'Add',
+						},
+						onClick: addNewColumn,
+					},
+				],
+			},
+			theme,
+		)
+	}, [theme, addNewColumn])
 }
