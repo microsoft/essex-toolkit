@@ -86,14 +86,16 @@ export const ArqueroDetailsListPerformanceStory = (
 	useEffect(() => {
 		if (mockTablePerformance !== undefined) {
 			mockTablePerformance.ungroup()
-			setTable(mockTablePerformance)
+			let mockTablePerformanceCopy = mockTablePerformance
 			// make sure we have a large enough number of rows to impact rendering perf
 			for (let i = 0; i < 10; i++) {
-				mockTablePerformance = mockTablePerformance.concat(mockTablePerformance)
+				mockTablePerformanceCopy = mockTablePerformanceCopy.concat(
+					mockTablePerformanceCopy,
+				)
 			}
 
-			setTable(mockTablePerformance)
-			setMetadata(introspect(table, true))
+			setTable(mockTablePerformanceCopy)
+			setMetadata(introspect(mockTablePerformanceCopy, true))
 		}
 	}, [mockTablePerformance])
 
@@ -110,7 +112,7 @@ export const ArqueroDetailsListPerformanceStory = (
 				minWidth: 180,
 			} as IColumn
 		})
-	}, [mockTablePerformance])
+	}, [table])
 
 	if (!table || !metadata) {
 		return null
@@ -125,7 +127,6 @@ export const ArqueroDetailsListPerformanceStory = (
 			/>
 
 			<ArqueroDetailsList
-				{...args}
 				table={table}
 				metadata={metadata}
 				features={{
