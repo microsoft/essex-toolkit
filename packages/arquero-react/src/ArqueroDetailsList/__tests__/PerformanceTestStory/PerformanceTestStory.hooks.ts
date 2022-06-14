@@ -14,7 +14,7 @@ import { useCallback, useMemo } from 'react'
 import {
 	createDefaultCommandBar,
 	createDefaultHeaderCommandBar,
-} from './component-factories.js'
+} from '../component-factories.js'
 
 export function useColumnCommands(): (
 	props?: IDetailsColumnProps,

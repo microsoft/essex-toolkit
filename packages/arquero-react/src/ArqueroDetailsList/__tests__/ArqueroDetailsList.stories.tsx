@@ -3,16 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/consistent-type-imports */
-import { SortDirection, TableMetadata } from '@essex/arquero'
-import { introspect } from '@essex/arquero'
-import { ArqueroDetailsList, ArqueroTableHeader } from '@essex/arquero-react'
-import { DetailsListLayoutMode, IColumn, SelectionMode } from '@fluentui/react'
+import { SortDirection } from '@essex/arquero'
+import { ArqueroDetailsList } from '@essex/arquero-react'
+import { DetailsListLayoutMode, SelectionMode } from '@fluentui/react'
 import { table } from 'arquero'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { useEffect, useMemo, useState } from 'react'
-
 import { StatsColumnType } from '../types.js'
-import { useColumnCommands, useCommandBar } from './ArqueroDetailsList.hooks.js'
+import { PerformanceTestStory } from './PerformanceTestStory/PerformanceTestStory.js'
 
 const meta = {
 	title: '@essex:arquero-react/ArqueroDetailsList',
@@ -76,77 +72,17 @@ ArqueroDetailsListStory.story = {
 	name: 'ArqueroDetailsList',
 }
 
-export const ArqueroDetailsListPerformanceStory = (
+export const PerformanceStory = (
 	args,
 	{ loaded: { mockTablePerformance } }: any,
 ) => {
-	const [table, setTable] = useState<ColumnTable | undefined>()
-	const [metadata, setMetadata] = useState<TableMetadata | undefined>()
-	const [tableName, setTableName] = useState('Table1')
-
-	useEffect(() => {
-		if (mockTablePerformance !== undefined) {
-			mockTablePerformance.ungroup()
-			let mockTablePerformanceCopy = mockTablePerformance
-			// make sure we have a large enough number of rows to impact rendering perf
-			for (let i = 0; i < 10; i++) {
-				mockTablePerformanceCopy = mockTablePerformanceCopy.concat(
-					mockTablePerformanceCopy,
-				)
-			}
-
-			setTable(mockTablePerformanceCopy)
-			setMetadata(introspect(mockTablePerformanceCopy, true))
-		}
-	}, [mockTablePerformance])
-
-	const commandBar = useCommandBar(table, metadata, setTable, setMetadata)
-	const columnCommands = useColumnCommands()
-
-	const columns = useMemo((): IColumn[] | undefined => {
-		if (table === undefined) return undefined
-		return table.columnNames().map(x => {
-			return {
-				name: x,
-				key: x,
-				fieldName: x,
-				minWidth: 180,
-			} as IColumn
-		})
-	}, [table])
-
-	if (!table || !metadata) {
+	if (!mockTablePerformance) {
 		return <div>Loading</div>
 	}
 
-	return (
-		<div style={{ marginTop: '12px', height: 'calc(100vh - 220px)' }}>
-			<ArqueroTableHeader
-				table={table}
-				name={tableName}
-				commandBar={commandBar}
-				onRenameTable={name => setTableName(name)}
-			/>
-
-			<ArqueroDetailsList
-				{...args}
-				table={table}
-				metadata={metadata}
-				features={{
-					smartCells: true,
-					smartHeaders: true,
-					commandBar: [columnCommands],
-				}}
-				columns={columns}
-				isSortable
-				isHeadersFixed
-				isStriped
-				showColumnBorders
-			/>
-		</div>
-	)
+	return <PerformanceTestStory mockTablePerformance={mockTablePerformance} />
 }
 
-ArqueroDetailsListPerformanceStory.story = {
+PerformanceStory.story = {
 	name: 'Performance story',
 }
