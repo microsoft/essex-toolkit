@@ -1,15 +1,20 @@
-import type { ICommandBarItemProps, IDetailsColumnProps } from '@fluentui/react'
-import {
-	createDefaultCommandBar,
-	createDefaultHeaderCommandBar,
-} from './component-factories.js'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import type { TableMetadata } from '@essex/arquero'
 import { introspect } from '@essex/arquero'
+import type { ICommandBarItemProps, IDetailsColumnProps } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { Struct } from 'arquero/dist/types/table/transformable'
 import type { SetStateAction } from 'react'
 import { useCallback, useMemo } from 'react'
+
+import {
+	createDefaultCommandBar,
+	createDefaultHeaderCommandBar,
+} from './component-factories.js'
 
 export function useColumnCommands(): (
 	props?: IDetailsColumnProps,

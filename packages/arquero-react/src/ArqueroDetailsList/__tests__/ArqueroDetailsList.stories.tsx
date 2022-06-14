@@ -4,14 +4,15 @@
  */
 /* eslint-disable @typescript-eslint/consistent-type-imports */
 import { SortDirection, TableMetadata } from '@essex/arquero'
+import { introspect } from '@essex/arquero'
 import { ArqueroDetailsList, ArqueroTableHeader } from '@essex/arquero-react'
 import { DetailsListLayoutMode, IColumn, SelectionMode } from '@fluentui/react'
 import { table } from 'arquero'
-import { StatsColumnType } from '../types.js'
-import { introspect } from '@essex/arquero'
-import { useColumnCommands, useCommandBar } from './ArqueroDetailsList.hooks.js'
-import { useMemo, useState, useEffect } from 'react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { useEffect, useMemo, useState } from 'react'
+
+import { StatsColumnType } from '../types.js'
+import { useColumnCommands, useCommandBar } from './ArqueroDetailsList.hooks.js'
 
 const meta = {
 	title: '@essex:arquero-react/ArqueroDetailsList',
