@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+/* eslint-disable @typescript-eslint/consistent-type-imports */
 import { SortDirection, TableMetadata } from '@essex/arquero'
 import { ArqueroDetailsList, ArqueroTableHeader } from '@essex/arquero-react'
 import { DetailsListLayoutMode, IColumn, SelectionMode } from '@fluentui/react'
