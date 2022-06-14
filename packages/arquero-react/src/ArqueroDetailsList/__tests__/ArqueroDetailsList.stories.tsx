@@ -112,6 +112,9 @@ export const ArqueroDetailsListPerformanceStory = (
 		})
 	}, [mockTablePerformance])
 
+	if (!table || !metadata) {
+		return null
+	}
 	return (
 		<div>
 			<ArqueroTableHeader
