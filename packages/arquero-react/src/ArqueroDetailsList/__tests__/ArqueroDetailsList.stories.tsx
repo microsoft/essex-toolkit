@@ -6,11 +6,12 @@ import { SortDirection, TableMetadata } from '@essex/arquero'
 import { ArqueroDetailsList, ArqueroTableHeader } from '@essex/arquero-react'
 import { DetailsListLayoutMode, IColumn, SelectionMode } from '@fluentui/react'
 import { table } from 'arquero'
-import { ArqueroDetailsListProps, StatsColumnType } from '../types.js'
+import { StatsColumnType } from '../types.js'
 import { introspect } from '@essex/arquero'
 import { useColumnCommands, useCommandBar } from './ArqueroDetailsList.hooks.js'
-import { ReactNode, useMemo, useState, useEffect } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+import styled from 'styled-components'
 
 const meta = {
 	title: '@essex:arquero-react/ArqueroDetailsList',
@@ -75,8 +76,7 @@ ArqueroDetailsListStory.story = {
 }
 
 export const ArqueroDetailsListPerformanceStory = (
-	args: JSX.IntrinsicAttributes &
-		ArqueroDetailsListProps & { children?: ReactNode },
+	args,
 	{ loaded: { mockTablePerformance } }: any,
 ) => {
 	const [table, setTable] = useState<ColumnTable | undefined>()
@@ -115,10 +115,11 @@ export const ArqueroDetailsListPerformanceStory = (
 	}, [table])
 
 	if (!table || !metadata) {
-		return null
+		return <div>Loading</div>
 	}
+
 	return (
-		<div>
+		<div style={{ marginTop: '12px', height: 'calc(100vh - 220px)' }}>
 			<ArqueroTableHeader
 				table={table}
 				name={tableName}
@@ -127,6 +128,7 @@ export const ArqueroDetailsListPerformanceStory = (
 			/>
 
 			<ArqueroDetailsList
+				{...args}
 				table={table}
 				metadata={metadata}
 				features={{
