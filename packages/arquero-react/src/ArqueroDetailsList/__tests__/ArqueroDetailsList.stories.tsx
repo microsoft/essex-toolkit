@@ -8,8 +8,8 @@ import { DetailsListLayoutMode, IColumn, SelectionMode } from '@fluentui/react'
 import { table } from 'arquero'
 import { ArqueroDetailsListProps, StatsColumnType } from '../types.js'
 import { introspect } from '@essex/arquero'
-import { useColumnCommands } from './ArqueroDetailsList.hooks.js'
-import { ReactNode, useMemo, useState } from 'react'
+import { useColumnCommands, useCommandBar } from './ArqueroDetailsList.hooks.js'
+import { ReactNode, useMemo, useState, useEffect } from 'react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 const meta = {
@@ -79,17 +79,30 @@ export const ArqueroDetailsListPerformanceStory = (
 		ArqueroDetailsListProps & { children?: ReactNode },
 	{ loaded: { mockTablePerformance } }: any,
 ) => {
-	const [table, setTable] = useState<ColumnTable | undefined>(
-		mockTablePerformance,
-	)
+	const [table, setTable] = useState<ColumnTable | undefined>()
 	const [metadata, setMetadata] = useState<TableMetadata | undefined>()
 	const [tableName, setTableName] = useState('Table1')
 
+	useEffect(() => {
+		if (mockTablePerformance !== undefined) {
+			mockTablePerformance.ungroup()
+			setTable(mockTablePerformance)
+			// make sure we have a large enough number of rows to impact rendering perf
+			for (let i = 0; i < 10; i++) {
+				mockTablePerformance = mockTablePerformance.concat(mockTablePerformance)
+			}
+
+			setTable(mockTablePerformance)
+			setMetadata(introspect(table, true))
+		}
+	}, [mockTablePerformance])
+
+	const commandBar = useCommandBar(table, metadata, setTable, setMetadata)
 	const columnCommands = useColumnCommands()
 
 	const columns = useMemo((): IColumn[] | undefined => {
-		if (!mockTablePerformance) return undefined
-		return mockTablePerformance.columnNames().map(x => {
+		if (table === undefined) return undefined
+		return table.columnNames().map(x => {
 			return {
 				name: x,
 				key: x,
@@ -99,26 +112,18 @@ export const ArqueroDetailsListPerformanceStory = (
 		})
 	}, [mockTablePerformance])
 
-	mockTablePerformance.ungroup()
-	// make sure we have a large enough number of rows to impact rendering perf
-	for (let i = 0; i < 10; i++) {
-		mockTablePerformance = mockTablePerformance.concat(mockTablePerformance)
-	}
-	setMetadata(introspect(mockTablePerformance, true))
-
-	//const commandBar = useCommandBar(table, metadata, setTable, setMetadata)
-
 	return (
 		<div>
 			<ArqueroTableHeader
-				table={mockTablePerformance}
+				table={table}
 				name={tableName}
+				commandBar={commandBar}
 				onRenameTable={name => setTableName(name)}
 			/>
 
 			<ArqueroDetailsList
 				{...args}
-				table={mockTablePerformance}
+				table={table}
 				metadata={metadata}
 				features={{
 					smartCells: true,
