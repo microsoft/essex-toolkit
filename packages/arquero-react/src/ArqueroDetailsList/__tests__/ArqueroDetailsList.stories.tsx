@@ -2,15 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+/* eslint-disable @typescript-eslint/consistent-type-imports */
 import { SortDirection } from '@essex/arquero'
 import { ArqueroDetailsList } from '@essex/arquero-react'
 import { DetailsListLayoutMode, SelectionMode } from '@fluentui/react'
 import { table } from 'arquero'
 
 import { StatsColumnType } from '../types.js'
+import { PerformanceTestStory } from './PerformanceTestStory/PerformanceTestStory.js'
 
 const meta = {
-	title: '@essex:arquero-react/Arquero Details List',
+	title: '@essex:arquero-react/ArqueroDetailsList',
 }
 
 export default meta
@@ -42,11 +44,6 @@ const mockFeatures = {
 	],
 }
 
-/**
- * FilterTextboxStory is a FilterTextbox based on
- * Fluent Component
- * adapted for Thematic styling
- */
 export const ArqueroDetailsListStory = () => {
 	return (
 		<ArqueroDetailsList
@@ -74,4 +71,19 @@ export const ArqueroDetailsListStory = () => {
 
 ArqueroDetailsListStory.story = {
 	name: 'ArqueroDetailsList',
+}
+
+export const PerformanceStory = (
+	args,
+	{ loaded: { mockTablePerformance } }: any,
+) => {
+	if (!mockTablePerformance) {
+		return <div>Loading</div>
+	}
+
+	return <PerformanceTestStory mockTablePerformance={mockTablePerformance} />
+}
+
+PerformanceStory.story = {
+	name: 'Performance story',
 }

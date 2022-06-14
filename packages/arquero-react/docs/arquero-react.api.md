@@ -8,8 +8,12 @@
 
 import type { ColumnMetadata } from '@essex/arquero';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
+import type { IButtonProps } from '@fluentui/react';
 import type { IColumn } from '@fluentui/react';
 import type { ICommandBarItemProps } from '@fluentui/react';
+import type { ICommandBarProps } from '@fluentui/react';
+import type { ICommandBarStyleProps } from '@fluentui/react';
+import type { ICommandBarStyles } from '@fluentui/react';
 import type { IDetailsColumnProps } from '@fluentui/react';
 import type { IDetailsColumnStyles } from '@fluentui/react';
 import type { IDetailsGroupDividerProps } from '@fluentui/react';
@@ -20,9 +24,11 @@ import type { IDetailsRowProps } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { IRenderFunction as IRenderFunction_2 } from '@fluentui/utilities';
+import type { IStyleFunctionOrObject } from '@fluentui/utilities';
 import type { ReactElement } from 'react';
 import type { RowObject } from 'arquero/dist/types/table/table';
 import { SortDirection } from '@essex/arquero';
+import { StyledComponent } from 'styled-components';
 import type { TableContainer } from '@essex/arquero';
 import type { TableMetadata } from '@essex/arquero';
 
@@ -35,6 +41,8 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps>;
 //
 // @public (undocumented)
 export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'> {
+    defaultSortColumn?: string;
+    defaultSortDirection?: SortDirection;
     // (undocumented)
     features?: DetailsListFeatures;
     includeAllColumns?: boolean;
@@ -136,6 +144,32 @@ export interface ColumnOptions {
 // @public (undocumented)
 export type ColumnRenderFunction = (item?: any, index?: number, column?: IColumn) => any;
 
+// Warning: (ae-missing-release-tag) "CommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const CommandBar: React.FC<CommandBarProps>;
+
+// Warning: (ae-missing-release-tag) "CommandBarProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface CommandBarProps extends ICommandBarProps {
+    // (undocumented)
+    bgColor?: string;
+    // (undocumented)
+    color?: string;
+    // (undocumented)
+    height?: string;
+}
+
+// Warning: (ae-missing-release-tag) "CommandBarWrapper" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const CommandBarWrapper: StyledComponent<"div", any, {
+height?: string | undefined;
+bgColor: string;
+color: string;
+}, never>;
+
 // Warning: (ae-missing-release-tag) "DetailsListFeatures" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -187,6 +221,10 @@ export type SaveMetadataFunction = (meta: TableMetadata, table: ColumnTable) => 
 //
 // @public (undocumented)
 export interface SortParameters {
+    // (undocumented)
+    defaultSortColumn?: string;
+    // (undocumented)
+    defaultSortDirection?: SortDirection;
     // (undocumented)
     handleColumnHeaderClick: ColumnClickFunction;
     // (undocumented)
@@ -242,6 +280,14 @@ export function useCellDimensions(column?: IColumn, considerCompactMode?: boolea
 // @public (undocumented)
 export function useCellDropdownSelectHandler(clickable: boolean, onOptionSelect?: DropdownOptionSelect): DropdownOptionSelect | undefined;
 
+// Warning: (ae-missing-release-tag) "useColorDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useColorDefaults(color?: string, bgColor?: string): {
+    background: string;
+    foreground: string;
+};
+
 // Warning: (ae-missing-release-tag) "useColumnNamesList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -256,6 +302,16 @@ export function useColumns(table: ColumnTable, computedMetadata?: TableMetadata,
 //
 // @public (undocumented)
 export function useColumnStyles(clickable: boolean, separator: boolean): Partial<IDetailsColumnStyles>;
+
+// Warning: (ae-missing-release-tag) "useCommands" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useCommands(commands: ICommandBarItemProps[] | undefined, background: string, color: string): ICommandBarItemProps[];
+
+// Warning: (ae-missing-release-tag) "useCommandStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useCommandStyles(styles?: IStyleFunctionOrObject<ICommandBarStyleProps, ICommandBarStyles>): ICommandBarStyles;
 
 // Warning: (ae-missing-release-tag) "useDetailsHeaderRenderer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -277,10 +333,25 @@ export function useFormattedNumber(value: number | undefined, formatter?: string
 // @public
 export function useGroupHeaderRenderer(table: ColumnTable, computedMetadata?: TableMetadata, groupHeaderFunction?: GroupHeaderFunction, lazyLoadGroups?: boolean): IRenderFunction<IDetailsGroupDividerProps>;
 
+// Warning: (ae-missing-release-tag) "useHandleOnDataGrown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useHandleOnDataGrown(color: string): (item: ICommandBarItemProps) => void;
+
+// Warning: (ae-missing-release-tag) "useHandleOnDataReduce" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useHandleOnDataReduce(color: string): (item: ICommandBarItemProps) => void;
+
 // Warning: (ae-missing-release-tag) "useIncrementingColumnColorScale" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export function useIncrementingColumnColorScale(meta?: TableMetadata): () => string;
+
+// Warning: (ae-missing-release-tag) "useOverflowButtonProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useOverflowButtonProps(background: string, color: string): IButtonProps;
 
 // Warning: (ae-missing-release-tag) "useReifiedTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -305,7 +376,7 @@ export function useSortedTable(table: ColumnTable, column?: string, sort?: SortD
 // Warning: (ae-missing-release-tag) "useSortHandling" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useSortHandling(allowSorting: boolean, onColumnHeaderClick?: ColumnClickFunction): SortParameters;
+export function useSortHandling(allowSorting: boolean, onColumnHeaderClick?: ColumnClickFunction, defaultSortColumn?: string, defaultSortDirection?: SortDirection): SortParameters;
 
 // Warning: (ae-missing-release-tag) "useStripedRowsRenderer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

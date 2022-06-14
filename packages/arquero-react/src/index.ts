@@ -4,3 +4,4 @@
  */
 export * from './ArqueroDetailsList/index.js'
 export * from './ArqueroTableHeader/index.js'
+export * from './CommandBar/index.js'
