@@ -11,7 +11,6 @@ import { introspect } from '@essex/arquero'
 import { useColumnCommands, useCommandBar } from './ArqueroDetailsList.hooks.js'
 import { useMemo, useState, useEffect } from 'react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import styled from 'styled-components'
 
 const meta = {
 	title: '@essex:arquero-react/ArqueroDetailsList',
