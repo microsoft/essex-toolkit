@@ -4,4 +4,5 @@ releases:
 
 declined:
   - essex-js-toolkit
+  - "@essex/arquero"
   - "@essex/charts-react"
