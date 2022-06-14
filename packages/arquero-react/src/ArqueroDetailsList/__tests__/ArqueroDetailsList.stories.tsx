@@ -7,6 +7,7 @@ import { SortDirection } from '@essex/arquero'
 import { ArqueroDetailsList } from '@essex/arquero-react'
 import { DetailsListLayoutMode, SelectionMode } from '@fluentui/react'
 import { table } from 'arquero'
+
 import { StatsColumnType } from '../types.js'
 import { PerformanceTestStory } from './PerformanceTestStory/PerformanceTestStory.js'
 

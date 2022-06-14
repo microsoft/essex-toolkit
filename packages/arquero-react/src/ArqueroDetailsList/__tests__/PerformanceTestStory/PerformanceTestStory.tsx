@@ -1,13 +1,18 @@
-import { memo, useEffect, useMemo, useState } from 'react'
-import { ArqueroDetailsList, ArqueroTableHeader } from '@essex/arquero-react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableMetadata } from '@essex/arquero'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import type { TableMetadata } from '@essex/arquero'
 import { introspect } from '@essex/arquero'
+import { ArqueroDetailsList, ArqueroTableHeader } from '@essex/arquero-react'
+import type { IColumn } from '@fluentui/react'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { memo, useEffect, useMemo, useState } from 'react'
+
 import {
 	useColumnCommands,
 	useCommandBar,
 } from './PerformanceTestStory.hooks.js'
-import { IColumn } from '@fluentui/react'
 
 export interface PerformanceTestStoryProps {
 	mockTablePerformance: ColumnTable | undefined
