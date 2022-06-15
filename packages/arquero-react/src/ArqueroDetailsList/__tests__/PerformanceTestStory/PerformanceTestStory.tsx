@@ -26,8 +26,8 @@ export const PerformanceTestStory: React.FC<PerformanceTestStoryProps> = memo(
 
 		useEffect(() => {
 			if (mockTablePerformance !== undefined) {
-				mockTablePerformance.ungroup()
 				let mockTablePerformanceCopy = mockTablePerformance
+				mockTablePerformanceCopy.ungroup()
 				// make sure we have a large enough number of rows to impact rendering perf
 				for (let i = 0; i < 10; i++) {
 					mockTablePerformanceCopy = mockTablePerformanceCopy.concat(

@@ -10,6 +10,7 @@ import { table } from 'arquero'
 
 import { StatsColumnType } from '../types.js'
 import { PerformanceTestStory } from './PerformanceTestStory/PerformanceTestStory.js'
+import { RowGroupingTestStory } from './RowGroupingTestStory/RowGroupingTestStory.js'
 
 const meta = {
 	title: '@essex:arquero-react/ArqueroDetailsList',
@@ -86,4 +87,19 @@ export const PerformanceStory = (
 
 PerformanceStory.story = {
 	name: 'Performance story',
+}
+
+export const RowGroupingStory = (
+	args,
+	{ loaded: { mockTablePerformance } }: any,
+) => {
+	if (!mockTablePerformance) {
+		return <div>Loading</div>
+	}
+
+	return <RowGroupingTestStory mockTable={mockTablePerformance} />
+}
+
+RowGroupingStory.story = {
+	name: 'Row grouping story',
 }
