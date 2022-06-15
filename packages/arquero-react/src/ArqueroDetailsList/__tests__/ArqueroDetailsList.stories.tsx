@@ -71,7 +71,7 @@ export const ArqueroDetailsListStory = () => {
 }
 
 ArqueroDetailsListStory.story = {
-	name: 'ArqueroDetailsList',
+	name: 'Arquero Details List Story',
 }
 
 export const PerformanceStory = (

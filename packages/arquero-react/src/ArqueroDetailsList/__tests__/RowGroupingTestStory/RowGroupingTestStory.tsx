@@ -2,12 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableMetadata, ColumnMetadata } from '@essex/arquero'
+import type { ColumnMetadata, TableMetadata } from '@essex/arquero'
 import { introspect } from '@essex/arquero'
 import { ArqueroDetailsList, ArqueroTableHeader } from '@essex/arquero-react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { memo, useEffect, useState, useCallback } from 'react'
 import type { IDetailsGroupDividerProps } from '@fluentui/react'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { memo, useCallback, useEffect, useState } from 'react'
+
 import { createLazyLoadingGroupHeader } from '../component-factories.js'
 
 export interface RowGroupingTestStoryProps {
@@ -23,7 +24,7 @@ export const RowGroupingTestStory: React.FC<RowGroupingTestStoryProps> = memo(
 
 		useEffect(() => {
 			if (mockTable !== undefined) {
-				let mockTableCopy = mockTable
+				const mockTableCopy = mockTable
 				setGroupedTable(mockTableCopy.groupby(['Symbol', 'Month']))
 				setGroupedMetadata(introspect(mockTableCopy, true))
 			}
