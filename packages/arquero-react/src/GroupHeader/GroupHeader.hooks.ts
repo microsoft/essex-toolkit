@@ -2,7 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useEffect, useState } from 'react'
+
+import type { IGroup } from '@fluentui/react'
+import { useCallback, useEffect, useState } from 'react'
 
 export function useIntersection(
 	element: HTMLDivElement | undefined,
@@ -23,4 +25,16 @@ export function useIntersection(
 	}, [element, rootMargin])
 
 	return isVisible
+}
+
+export function useCountChildren(): (children: IGroup[]) => number {
+	const countChildren = useCallback((children: IGroup[]) => {
+		let total = 0
+		children.forEach(child => {
+			total += child.count
+			total += child.children ? countChildren(child.children) : 0
+		})
+		return total
+	}, [])
+	return countChildren
 }

@@ -6,10 +6,13 @@ import type { ColumnMetadata, TableMetadata } from '@essex/arquero'
 import { introspect } from '@essex/arquero'
 import { ArqueroDetailsList, ArqueroTableHeader } from '@essex/arquero-react'
 import type { IDetailsGroupDividerProps } from '@fluentui/react'
+import { PrimaryButton, Label } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useEffect, useState } from 'react'
 
 import { createLazyLoadingGroupHeader } from '../component-factories.js'
+
+import { Table, ButtonContainer } from './RowGroupingTestStory.styles.js'
 
 export interface RowGroupingTestStoryProps {
 	mockTable: ColumnTable | undefined
@@ -22,13 +25,17 @@ export const RowGroupingTestStory: React.FC<RowGroupingTestStoryProps> = memo(
 			TableMetadata | undefined
 		>()
 
+		const [groupBy, setGroupBy] = useState<string>('')
+
 		useEffect(() => {
 			if (mockTable !== undefined) {
 				const mockTableCopy = mockTable
-				setGroupedTable(mockTableCopy.groupby(['Symbol', 'Month']))
+				groupBy === ''
+					? setGroupedTable(mockTableCopy)
+					: setGroupedTable(mockTableCopy.groupby([groupBy]))
 				setGroupedMetadata(introspect(mockTableCopy, true))
 			}
-		}, [mockTable])
+		}, [mockTable, groupBy])
 
 		const customGroupHeader = useCallback(
 			(
@@ -47,7 +54,17 @@ export const RowGroupingTestStory: React.FC<RowGroupingTestStoryProps> = memo(
 		}
 
 		return (
-			<div style={{ marginTop: '12px', height: 'calc(100vh - 220px)' }}>
+			<Table>
+				<Label>Group by: </Label>
+				<ButtonContainer>
+					<PrimaryButton onClick={() => setGroupBy('Symbol')}>
+						Symbol
+					</PrimaryButton>
+					<PrimaryButton onClick={() => setGroupBy('Month')}>
+						Month
+					</PrimaryButton>
+				</ButtonContainer>
+
 				<ArqueroTableHeader table={groupedTable} />
 				<ArqueroDetailsList
 					table={groupedTable}
@@ -59,7 +76,7 @@ export const RowGroupingTestStory: React.FC<RowGroupingTestStoryProps> = memo(
 					onRenderGroupHeader={customGroupHeader}
 					isSortable
 				/>
-			</div>
+			</Table>
 		)
 	},
 )

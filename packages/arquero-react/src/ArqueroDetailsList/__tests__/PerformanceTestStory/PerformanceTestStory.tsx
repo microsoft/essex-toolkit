@@ -14,6 +14,8 @@ import {
 	useCommandBar,
 } from './PerformanceTestStory.hooks.js'
 
+import { Table } from './PerformanceTestStory.styles.js'
+
 export interface PerformanceTestStoryProps {
 	mockTablePerformance: ColumnTable | undefined
 }
@@ -22,7 +24,6 @@ export const PerformanceTestStory: React.FC<PerformanceTestStoryProps> = memo(
 	function PerformanceTestStory({ mockTablePerformance }) {
 		const [table, setTable] = useState<ColumnTable | undefined>()
 		const [metadata, setMetadata] = useState<TableMetadata | undefined>()
-		const [tableName, setTableName] = useState('Table1')
 
 		useEffect(() => {
 			if (mockTablePerformance !== undefined) {
@@ -60,12 +61,11 @@ export const PerformanceTestStory: React.FC<PerformanceTestStoryProps> = memo(
 		}
 
 		return (
-			<div style={{ marginTop: '12px', height: 'calc(100vh - 220px)' }}>
+			<Table>
 				<ArqueroTableHeader
 					table={table}
-					name={tableName}
+					name={'table1'}
 					commandBar={commandBar}
-					onRenameTable={name => setTableName(name)}
 				/>
 
 				<ArqueroDetailsList
@@ -82,7 +82,7 @@ export const PerformanceTestStory: React.FC<PerformanceTestStoryProps> = memo(
 					isStriped
 					showColumnBorders
 				/>
-			</div>
+			</Table>
 		)
 	},
 )

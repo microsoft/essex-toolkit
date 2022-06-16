@@ -74,30 +74,24 @@ ArqueroDetailsListStory.story = {
 	name: 'Arquero Details List Story',
 }
 
-export const PerformanceStory = (
-	args,
-	{ loaded: { mockTablePerformance } }: any,
-) => {
-	if (!mockTablePerformance) {
+export const PerformanceStory = (args, { loaded: { stocks } }: any) => {
+	if (!stocks) {
 		return <div>Loading</div>
 	}
 
-	return <PerformanceTestStory mockTablePerformance={mockTablePerformance} />
+	return <PerformanceTestStory mockTablePerformance={stocks} />
 }
 
 PerformanceStory.story = {
 	name: 'Performance story',
 }
 
-export const RowGroupingStory = (
-	args,
-	{ loaded: { mockTablePerformance } }: any,
-) => {
-	if (!mockTablePerformance) {
+export const RowGroupingStory = (args, { loaded: { stocks } }: any) => {
+	if (!stocks) {
 		return <div>Loading</div>
 	}
 
-	return <RowGroupingTestStory mockTable={mockTablePerformance} />
+	return <RowGroupingTestStory mockTable={stocks} />
 }
 
 RowGroupingStory.story = {
