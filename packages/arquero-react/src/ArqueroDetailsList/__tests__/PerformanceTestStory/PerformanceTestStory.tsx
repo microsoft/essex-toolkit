@@ -13,7 +13,6 @@ import {
 	useColumnCommands,
 	useCommandBar,
 } from './PerformanceTestStory.hooks.js'
-
 import { Table } from './PerformanceTestStory.styles.js'
 
 export interface PerformanceTestStoryProps {

@@ -6,13 +6,12 @@ import type { ColumnMetadata, TableMetadata } from '@essex/arquero'
 import { introspect } from '@essex/arquero'
 import { ArqueroDetailsList, ArqueroTableHeader } from '@essex/arquero-react'
 import type { IDetailsGroupDividerProps } from '@fluentui/react'
-import { PrimaryButton, Label } from '@fluentui/react'
+import { Label, PrimaryButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useEffect, useState } from 'react'
 
 import { createLazyLoadingGroupHeader } from '../component-factories.js'
-
-import { Table, ButtonContainer } from './RowGroupingTestStory.styles.js'
+import { ButtonContainer, Table } from './RowGroupingTestStory.styles.js'
 
 export interface RowGroupingTestStoryProps {
 	mockTable: ColumnTable | undefined
