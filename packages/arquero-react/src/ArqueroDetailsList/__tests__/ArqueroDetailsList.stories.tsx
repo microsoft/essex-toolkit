@@ -6,11 +6,18 @@
 import { SortDirection } from '@essex/arquero'
 import { ArqueroDetailsList } from '@essex/arquero-react'
 import { DetailsListLayoutMode, SelectionMode } from '@fluentui/react'
-import { table } from 'arquero'
 
 import { StatsColumnType } from '../types.js'
 import { PerformanceTestStory } from './PerformanceTestStory/PerformanceTestStory.js'
 import { RowGroupingTestStory } from './RowGroupingTestStory/RowGroupingTestStory.js'
+import {
+	ControlBlock,
+	Control,
+	dropdownStyles,
+} from './ArqueroDetailsListStory.styles.js'
+import { Checkbox, Dropdown } from '@fluentui/react'
+import { useCallback, useState } from 'react'
+import type { IDropdownOption } from '@fluentui/react'
 
 const meta = {
 	title: '@essex:arquero-react/ArqueroDetailsList',
@@ -18,24 +25,21 @@ const meta = {
 
 export default meta
 
-const mockTable = table({
-	ID: [1, 2, 3, 4, 5, 6],
-	FY20: [10000, 56000, 45000, 5000, 8900, 90000],
-	FY21: [5000, 4000, 45000, 6000, 9000, 78000],
-})
-
 const mockColumns = [
 	{
-		key: 'ID',
-		name: 'ID',
-		fieldName: 'ID',
+		key: 'Symbol',
+		name: 'Symbol',
+		fieldName: 'Symbol',
 		minWidth: 50,
 		iconName: 'FavoriteStarFill',
 	},
 ]
 
 const mockFeatures = {
+	smartHeaders: false,
 	statsColumnHeaders: true,
+	histogramColumnHeaders: true,
+	smartCells: true,
 	statsColumnTypes: [
 		StatsColumnType.Type,
 		StatsColumnType.Min,
@@ -45,28 +49,120 @@ const mockFeatures = {
 	],
 }
 
-export const ArqueroDetailsListStory = () => {
+export interface Features {
+	smartHeaders: boolean
+	statsColumnHeaders: boolean
+	histogramColumnHeaders: boolean
+	smartCells: boolean
+	statsColumnTypes: StatsColumnType[]
+}
+
+const options: IDropdownOption[] = Object.values(StatsColumnType).map(o => {
+	return { key: o, text: o } as IDropdownOption
+})
+
+export const ArqueroDetailsListStory = (args, { loaded: { stocks } }: any) => {
+	const [features, setFeatures] = useState<Features>(mockFeatures)
+
+	const handleFeaturesChange = useCallback(
+		(propName: string, checked?: boolean) =>
+			setFeatures({ ...features, [propName]: checked }),
+		[features, setFeatures],
+	)
+
+	const handleStatsColumnTypeChange = useCallback(
+		(e: any, option: IDropdownOption | undefined) => {
+			const selectedKeys = features.statsColumnTypes || []
+			const selectedTypes = option?.selected
+				? [...selectedKeys, option.key as StatsColumnType]
+				: selectedKeys.filter(key => key !== option?.key)
+
+			option &&
+				setFeatures({
+					...features,
+					statsColumnTypes: selectedTypes,
+				})
+		},
+		[features, setFeatures],
+	)
+
+	if (!stocks) {
+		return <div>Loading</div>
+	}
+
 	return (
-		<ArqueroDetailsList
-			table={mockTable}
-			features={mockFeatures}
-			offset={0}
-			limit={Infinity}
-			includeAllColumns={true}
-			visibleColumns={['ID', 'FY20', 'FY21']}
-			isSortable={true}
-			isStriped={false}
-			isColumnClickable={false}
-			showColumnBorders={false}
-			selectionMode={SelectionMode.none}
-			layoutMode={DetailsListLayoutMode.fixedColumns}
-			columns={mockColumns}
-			isHeadersFixed={false}
-			compact={false}
-			isResizable={true}
-			defaultSortDirection={SortDirection.Ascending}
-			defaultSortColumn={'FY21'}
-		/>
+		<div>
+			<ControlBlock>
+				<Control>
+					<Checkbox
+						label={'Column header stats'}
+						checked={features.statsColumnHeaders}
+						disabled={features.smartHeaders}
+						onChange={(e: any, checked) =>
+							handleFeaturesChange('statsColumnHeaders', checked)
+						}
+					/>
+					<Dropdown
+						disabled={!features.statsColumnHeaders && !features.smartHeaders}
+						onChange={handleStatsColumnTypeChange}
+						multiSelect
+						options={options}
+						selectedKeys={features.statsColumnTypes}
+						styles={dropdownStyles}
+					/>
+				</Control>
+				<Control>
+					<Checkbox
+						label={'Column header histograms'}
+						checked={features.histogramColumnHeaders}
+						disabled={features.smartHeaders}
+						onChange={(e: any, checked) =>
+							handleFeaturesChange('histogramColumnHeaders', checked)
+						}
+					/>
+				</Control>
+				<Control>
+					<Checkbox
+						label={'Smart cells'}
+						checked={features.smartCells}
+						onChange={(e: any, checked) =>
+							handleFeaturesChange('smartCells', checked)
+						}
+					/>
+				</Control>
+			</ControlBlock>
+
+			<ArqueroDetailsList
+				table={stocks}
+				features={features}
+				offset={0}
+				limit={Infinity}
+				includeAllColumns={true}
+				visibleColumns={[
+					'Symbol',
+					'Date',
+					'Close',
+					'Volume',
+					'Open',
+					'High',
+					'Low',
+					'Week',
+					'Month',
+				]}
+				isSortable={true}
+				isStriped={false}
+				isColumnClickable={false}
+				showColumnBorders={false}
+				selectionMode={SelectionMode.none}
+				layoutMode={DetailsListLayoutMode.fixedColumns}
+				columns={mockColumns}
+				isHeadersFixed={false}
+				compact={false}
+				isResizable={true}
+				defaultSortDirection={SortDirection.Ascending}
+				defaultSortColumn={'Volume'}
+			/>
+		</div>
 	)
 }
 
