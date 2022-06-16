@@ -5,19 +5,23 @@
 /* eslint-disable @typescript-eslint/consistent-type-imports */
 import { SortDirection } from '@essex/arquero'
 import { ArqueroDetailsList } from '@essex/arquero-react'
-import { DetailsListLayoutMode, SelectionMode } from '@fluentui/react'
+import type { IDropdownOption } from '@fluentui/react'
+import {
+	Checkbox,
+	DetailsListLayoutMode,
+	Dropdown,
+	SelectionMode,
+} from '@fluentui/react'
+import { useCallback, useState } from 'react'
 
 import { StatsColumnType } from '../types.js'
-import { PerformanceTestStory } from './PerformanceTestStory/PerformanceTestStory.js'
-import { RowGroupingTestStory } from './RowGroupingTestStory/RowGroupingTestStory.js'
 import {
-	ControlBlock,
 	Control,
+	ControlBlock,
 	dropdownStyles,
 } from './ArqueroDetailsListStory.styles.js'
-import { Checkbox, Dropdown } from '@fluentui/react'
-import { useCallback, useState } from 'react'
-import type { IDropdownOption } from '@fluentui/react'
+import { PerformanceTestStory } from './PerformanceTestStory/PerformanceTestStory.js'
+import { RowGroupingTestStory } from './RowGroupingTestStory/RowGroupingTestStory.js'
 
 const meta = {
 	title: '@essex:arquero-react/ArqueroDetailsList',
