@@ -16,10 +16,10 @@ import { useCallback, useState } from 'react'
 
 import { DetailsListFeatures, StatsColumnType } from '../types.js'
 import {
+	BlockContainer,
 	Control,
 	ControlBlock,
 	dropdownStyles,
-	BlockContainer,
 } from './ArqueroDetailsListStory.styles.js'
 import { PerformanceTestStory } from './PerformanceTestStory/PerformanceTestStory.js'
 import { RowGroupingTestStory } from './RowGroupingTestStory/RowGroupingTestStory.js'
