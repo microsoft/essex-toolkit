@@ -14,11 +14,12 @@ import {
 } from '@fluentui/react'
 import { useCallback, useState } from 'react'
 
-import { StatsColumnType } from '../types.js'
+import { DetailsListFeatures, StatsColumnType } from '../types.js'
 import {
 	Control,
 	ControlBlock,
 	dropdownStyles,
+	BlockContainer,
 } from './ArqueroDetailsListStory.styles.js'
 import { PerformanceTestStory } from './PerformanceTestStory/PerformanceTestStory.js'
 import { RowGroupingTestStory } from './RowGroupingTestStory/RowGroupingTestStory.js'
@@ -44,6 +45,13 @@ const mockFeatures = {
 	statsColumnHeaders: true,
 	histogramColumnHeaders: true,
 	smartCells: true,
+	showNumberMagnitude: false,
+	showBooleanSymbol: false,
+	showDateFormatted: false,
+	showSparkbar: false,
+	showSparkline: false,
+	showCategoricalBar: false,
+	showDropdown: false,
 	statsColumnTypes: [
 		StatsColumnType.Type,
 		StatsColumnType.Min,
@@ -53,20 +61,19 @@ const mockFeatures = {
 	],
 }
 
-export interface Features {
-	smartHeaders: boolean
-	statsColumnHeaders: boolean
-	histogramColumnHeaders: boolean
-	smartCells: boolean
-	statsColumnTypes: StatsColumnType[]
-}
-
 const options: IDropdownOption[] = Object.values(StatsColumnType).map(o => {
 	return { key: o, text: o } as IDropdownOption
 })
 
 export const ArqueroDetailsListStory = (args, { loaded: { stocks } }: any) => {
-	const [features, setFeatures] = useState<Features>(mockFeatures)
+	const [features, setFeatures] = useState<DetailsListFeatures>(mockFeatures)
+	const [compact, setCompact] = useState<boolean>(false)
+
+	const handleSmartHeadersChange = useCallback(
+		(e: any, checked?: boolean) =>
+			setFeatures({ ...features, smartHeaders: checked }),
+		[features, setFeatures],
+	)
 
 	const handleFeaturesChange = useCallback(
 		(propName: string, checked?: boolean) =>
@@ -90,51 +97,157 @@ export const ArqueroDetailsListStory = (args, { loaded: { stocks } }: any) => {
 		[features, setFeatures],
 	)
 
+	const handleArrayFeaturesChange = useCallback(
+		(propName: string, checked?: boolean) => {
+			setFeatures({
+				...features,
+				[propName]: checked,
+			})
+		},
+
+		[features, setFeatures],
+	)
+
+	const handleCompactChange = useCallback(
+		(_e: any, checked: boolean | undefined) => setCompact(checked ?? false),
+		[setCompact],
+	)
+
 	if (!stocks) {
 		return <div>Loading</div>
 	}
 
 	return (
 		<div>
-			<ControlBlock>
-				<Control>
-					<Checkbox
-						label={'Column header stats'}
-						checked={features.statsColumnHeaders}
-						disabled={features.smartHeaders}
-						onChange={(e: any, checked) =>
-							handleFeaturesChange('statsColumnHeaders', checked)
-						}
-					/>
-					<Dropdown
-						disabled={!features.statsColumnHeaders && !features.smartHeaders}
-						onChange={handleStatsColumnTypeChange}
-						multiSelect
-						options={options}
-						selectedKeys={features.statsColumnTypes}
-						styles={dropdownStyles}
-					/>
-				</Control>
-				<Control>
-					<Checkbox
-						label={'Column header histograms'}
-						checked={features.histogramColumnHeaders}
-						disabled={features.smartHeaders}
-						onChange={(e: any, checked) =>
-							handleFeaturesChange('histogramColumnHeaders', checked)
-						}
-					/>
-				</Control>
-				<Control>
-					<Checkbox
-						label={'Smart cells'}
-						checked={features.smartCells}
-						onChange={(e: any, checked) =>
-							handleFeaturesChange('smartCells', checked)
-						}
-					/>
-				</Control>
-			</ControlBlock>
+			<BlockContainer>
+				<ControlBlock>
+					<Control>
+						<Checkbox
+							label={'Smart headers'}
+							checked={features.smartHeaders}
+							onChange={handleSmartHeadersChange}
+						/>
+					</Control>
+					<Control>
+						<Checkbox
+							label={'Column header stats'}
+							checked={features.statsColumnHeaders}
+							disabled={features.smartHeaders}
+							onChange={(e: any, checked) =>
+								handleFeaturesChange('statsColumnHeaders', checked)
+							}
+						/>
+						<Dropdown
+							disabled={!features.statsColumnHeaders && !features.smartHeaders}
+							onChange={handleStatsColumnTypeChange}
+							multiSelect
+							options={options}
+							selectedKeys={features.statsColumnTypes}
+							styles={dropdownStyles}
+						/>
+					</Control>
+					<Control>
+						<Checkbox
+							label={'Column header histograms'}
+							checked={features.histogramColumnHeaders}
+							disabled={features.smartHeaders}
+							onChange={(e: any, checked) =>
+								handleFeaturesChange('histogramColumnHeaders', checked)
+							}
+						/>
+					</Control>
+				</ControlBlock>
+				<ControlBlock>
+					<Control>
+						<Checkbox
+							label={'Smart cells'}
+							checked={features.smartCells}
+							onChange={(e: any, checked) =>
+								handleFeaturesChange('smartCells', checked)
+							}
+						/>
+					</Control>
+					<Control>
+						<Checkbox
+							label={'Number magnitude'}
+							checked={features.showNumberMagnitude}
+							disabled={features.smartCells}
+							onChange={(e: any, checked) =>
+								handleFeaturesChange('showNumberMagnitude', checked)
+							}
+						/>
+					</Control>
+					<Control>
+						<Checkbox
+							label={'Boolean symbol'}
+							checked={features.showBooleanSymbol}
+							disabled={features.smartCells}
+							onChange={(e: any, checked) =>
+								handleFeaturesChange('showBooleanSymbol', checked)
+							}
+						/>
+					</Control>
+					<Control>
+						<Checkbox
+							label={'Format date'}
+							checked={features.showDateFormatted}
+							disabled={features.smartCells}
+							onChange={(e: any, checked) =>
+								handleFeaturesChange('showDateFormatted', checked)
+							}
+						/>
+					</Control>
+				</ControlBlock>
+				<ControlBlock>
+					<Control>
+						<Checkbox
+							label={'Sparkbar'}
+							checked={!!features.showSparkbar}
+							disabled={features.smartCells}
+							onChange={(e: any, checked) =>
+								handleArrayFeaturesChange('showSparkbar', checked)
+							}
+						/>
+					</Control>
+					<Control>
+						<Checkbox
+							label={'Sparkline'}
+							checked={!!features.showSparkline}
+							disabled={features.smartCells}
+							onChange={(e: any, checked) =>
+								handleArrayFeaturesChange('showSparkline', checked)
+							}
+						/>
+					</Control>
+					<Control>
+						<Checkbox
+							label={'Categorical bar'}
+							checked={!!features.showCategoricalBar}
+							disabled={features.smartCells}
+							onChange={(e: any, checked) =>
+								handleArrayFeaturesChange('showCategoricalBar', checked)
+							}
+						/>
+					</Control>
+					<Control>
+						<Checkbox
+							label={'Multivalues on dropdown'}
+							checked={!!features.showDropdown}
+							disabled={features.smartCells}
+							onChange={(e: any, checked) =>
+								handleArrayFeaturesChange('showDropdown', checked)
+							}
+						/>
+					</Control>
+					<Control>
+						<Checkbox
+							label={'Compact rows'}
+							checked={compact}
+							onChange={handleCompactChange}
+						/>
+					</Control>
+				</ControlBlock>
+			</BlockContainer>
 
 			<ArqueroDetailsList
 				table={stocks}
@@ -153,6 +266,7 @@ export const ArqueroDetailsListStory = (args, { loaded: { stocks } }: any) => {
 					'Week',
 					'Month',
 				]}
+				compact={compact}
 				isSortable={true}
 				isStriped={false}
 				isColumnClickable={false}
@@ -161,7 +275,6 @@ export const ArqueroDetailsListStory = (args, { loaded: { stocks } }: any) => {
 				layoutMode={DetailsListLayoutMode.fixedColumns}
 				columns={mockColumns}
 				isHeadersFixed={false}
-				compact={false}
 				isResizable={true}
 				defaultSortDirection={SortDirection.Ascending}
 				defaultSortColumn={'Volume'}

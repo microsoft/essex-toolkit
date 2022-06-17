@@ -6,12 +6,14 @@
 import type { IDropdownStyles } from '@fluentui/react'
 import styled from 'styled-components'
 
-export const ControlBlock = styled.div`
+export const BlockContainer = styled.div`
 	display: flex;
-	flex-direction: column;
+`
+
+export const ControlBlock = styled.div`
+	display: inline;
 	gap: 8px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding: 10px;
 `
 export const Control = styled.div`
 	width: 200px;
