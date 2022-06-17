@@ -4,12 +4,9 @@
  */
 /* eslint-disable @typescript-eslint/consistent-type-imports */
 import { ArqueroDetailsList } from '@essex/arquero-react'
-import {
-	ArqueroDetailsListProps,
-	DetailsListFeatures,
-	StatsColumnType,
-} from '../types.js'
 import type { ComponentMeta, ComponentStory } from '@storybook/react'
+
+import { ArqueroDetailsListProps, StatsColumnType } from '../types.js'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
