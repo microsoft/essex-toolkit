@@ -8,23 +8,20 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react'
 
 import { ArqueroDetailsListProps, StatsColumnType } from '../types.js'
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-	title: '@essex:arquero-react/ArqueroDetailsList with Parameters',
+	title: '@essex:arquero-react/ArqueroDetailsList',
 
 	component: ArqueroDetailsList,
 	argTypes: {},
 } as ComponentMeta<typeof ArqueroDetailsList>
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof ArqueroDetailsList> = (
 	args: ArqueroDetailsListProps,
 	{ loaded: { stocks } }: any,
 ) => <ArqueroDetailsList {...args} table={stocks} />
 
-export const Parameters = Template.bind({})
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Parameters.args = {
+export const ParameterizedStory = Template.bind({})
+ParameterizedStory.args = {
 	isSortable: true,
 	isHeadersFixed: false,
 	isResizable: true,
