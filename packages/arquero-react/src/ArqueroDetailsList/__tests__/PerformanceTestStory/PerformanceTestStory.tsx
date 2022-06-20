@@ -9,11 +9,8 @@ import type { IColumn } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useEffect, useMemo, useState } from 'react'
 
-import {
-	useColumnCommands,
-	useCommandBar,
-} from './PerformanceTestStory.hooks.js'
-import { Table } from './PerformanceTestStory.styles.js'
+import { useColumnCommands } from './PerformanceTestStory.hooks.js'
+import { Table } from '../SharedStyles.styles.js'
 
 export interface PerformanceTestStoryProps {
 	mockTablePerformance: ColumnTable | undefined
@@ -40,7 +37,6 @@ export const PerformanceTestStory: React.FC<PerformanceTestStoryProps> = memo(
 			}
 		}, [mockTablePerformance])
 
-		const commandBar = useCommandBar(table, metadata, setTable, setMetadata)
 		const columnCommands = useColumnCommands()
 
 		const columns = useMemo((): IColumn[] | undefined => {
@@ -61,11 +57,7 @@ export const PerformanceTestStory: React.FC<PerformanceTestStoryProps> = memo(
 
 		return (
 			<Table>
-				<ArqueroTableHeader
-					table={table}
-					name={'table1'}
-					commandBar={commandBar}
-				/>
+				<ArqueroTableHeader table={table} name={'table1'} />
 
 				<ArqueroDetailsList
 					table={table}

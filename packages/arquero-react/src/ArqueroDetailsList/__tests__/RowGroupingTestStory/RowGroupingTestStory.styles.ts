@@ -5,11 +5,6 @@
 
 import styled from 'styled-components'
 
-export const Table = styled.div`
-	margin-top: 12px;
-	height: calc(100vh - 220px);
-`
-
 export const ButtonContainer = styled.div`
 	padding-bottom: 10px;
 `

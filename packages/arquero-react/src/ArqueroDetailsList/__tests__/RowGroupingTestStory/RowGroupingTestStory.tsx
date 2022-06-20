@@ -11,7 +11,9 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useEffect, useState } from 'react'
 
 import { createLazyLoadingGroupHeader } from '../component-factories.js'
-import { ButtonContainer, Table } from './RowGroupingTestStory.styles.js'
+import { useToggleTableFeatures } from './RowGroupingTestStory.hooks.js'
+import { ButtonContainer } from './RowGroupingTestStory.styles.js'
+import { Table } from '../SharedStyles.styles.js'
 
 export interface RowGroupingTestStoryProps {
 	mockTable: ColumnTable | undefined
@@ -28,10 +30,11 @@ export const RowGroupingTestStory: React.FC<RowGroupingTestStoryProps> = memo(
 
 		useEffect(() => {
 			if (mockTable !== undefined) {
-				const mockTableCopy = mockTable
-				groupBy === ''
-					? setGroupedTable(mockTableCopy)
-					: setGroupedTable(mockTableCopy.groupby([groupBy]))
+				let mockTableCopy = mockTable
+
+				if (groupBy !== '') mockTableCopy = mockTableCopy.groupby([groupBy])
+
+				setGroupedTable(mockTableCopy)
 				setGroupedMetadata(introspect(mockTableCopy, true))
 			}
 		}, [mockTable, groupBy])
@@ -47,6 +50,8 @@ export const RowGroupingTestStory: React.FC<RowGroupingTestStoryProps> = memo(
 			},
 			[],
 		)
+
+		const { tableFeatures } = useToggleTableFeatures()
 
 		if (!groupedTable || !groupedMetadata) {
 			return <div>Loading</div>
@@ -66,14 +71,18 @@ export const RowGroupingTestStory: React.FC<RowGroupingTestStoryProps> = memo(
 
 				<ArqueroTableHeader table={groupedTable} />
 				<ArqueroDetailsList
+					isSortable
+					compact
+					showColumnBorders
+					isHeadersFixed
 					table={groupedTable}
 					metadata={groupedMetadata}
 					features={{
+						...tableFeatures,
 						smartCells: true,
 						smartHeaders: true,
 					}}
 					onRenderGroupHeader={customGroupHeader}
-					isSortable
 				/>
 			</Table>
 		)
