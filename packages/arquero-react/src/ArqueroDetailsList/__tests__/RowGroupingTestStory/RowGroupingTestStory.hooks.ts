@@ -1,5 +1,10 @@
-import { DetailsListFeatures } from '../../types.js'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { useCallback, useState } from 'react'
+
+import type { DetailsListFeatures } from '../../types.js'
 
 export function useToggleTableFeatures(
 	features?: Partial<DetailsListFeatures>,

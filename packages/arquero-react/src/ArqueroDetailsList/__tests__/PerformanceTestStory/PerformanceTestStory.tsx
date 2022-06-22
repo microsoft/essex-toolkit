@@ -9,8 +9,8 @@ import type { IColumn } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useEffect, useMemo, useState } from 'react'
 
-import { useColumnCommands } from './PerformanceTestStory.hooks.js'
 import { Table } from '../SharedStyles.styles.js'
+import { useColumnCommands } from './PerformanceTestStory.hooks.js'
 
 export interface PerformanceTestStoryProps {
 	mockTablePerformance: ColumnTable | undefined

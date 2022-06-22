@@ -9,12 +9,12 @@ import { Label } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useEffect, useState } from 'react'
 
+import { Table } from '../SharedStyles.styles.js'
 import { useToggleTableFeatures } from './RowGroupingTestStory.hooks.js'
 import {
 	ButtonContainer,
 	GroupByToggle,
 } from './RowGroupingTestStory.styles.js'
-import { Table } from '../SharedStyles.styles.js'
 
 export interface RowGroupingTestStoryProps {
 	mockTable: ColumnTable | undefined
@@ -50,7 +50,7 @@ export const RowGroupingTestStory: React.FC<RowGroupingTestStoryProps> = memo(
 			if (checked) {
 				setGroupByList([...groupByList, 'Symbol'])
 			} else {
-				let listCopy = groupByList.filter(e => e !== 'Symbol')
+				const listCopy = groupByList.filter(e => e !== 'Symbol')
 				setGroupByList(listCopy)
 			}
 		}
@@ -62,7 +62,7 @@ export const RowGroupingTestStory: React.FC<RowGroupingTestStoryProps> = memo(
 			if (checked) {
 				setGroupByList([...groupByList, 'Month'])
 			} else {
-				let listCopy = groupByList.filter(e => e !== 'Month')
+				const listCopy = groupByList.filter(e => e !== 'Month')
 				setGroupByList(listCopy)
 			}
 		}
