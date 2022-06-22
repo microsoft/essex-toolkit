@@ -2,17 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ColumnMetadata, TableMetadata } from '@essex/arquero'
+import type { TableMetadata } from '@essex/arquero'
 import { introspect } from '@essex/arquero'
 import { ArqueroDetailsList, ArqueroTableHeader } from '@essex/arquero-react'
-import type { IDetailsGroupDividerProps } from '@fluentui/react'
-import { Label, PrimaryButton } from '@fluentui/react'
+import { Label } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { memo, useCallback, useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 
-import { createLazyLoadingGroupHeader } from '../component-factories.js'
 import { useToggleTableFeatures } from './RowGroupingTestStory.hooks.js'
-import { ButtonContainer } from './RowGroupingTestStory.styles.js'
+import {
+	ButtonContainer,
+	GroupByToggle,
+} from './RowGroupingTestStory.styles.js'
 import { Table } from '../SharedStyles.styles.js'
 
 export interface RowGroupingTestStoryProps {
@@ -26,47 +27,68 @@ export const RowGroupingTestStory: React.FC<RowGroupingTestStoryProps> = memo(
 			TableMetadata | undefined
 		>()
 
-		const [groupBy, setGroupBy] = useState<string>('')
+		const [groupByList, setGroupByList] = useState<string[]>([])
 
 		useEffect(() => {
 			if (mockTable !== undefined) {
 				let mockTableCopy = mockTable
 
-				if (groupBy !== '') mockTableCopy = mockTableCopy.groupby([groupBy])
+				if (groupByList.length > 0)
+					mockTableCopy = mockTableCopy.groupby(groupByList)
 
 				setGroupedTable(mockTableCopy)
 				setGroupedMetadata(introspect(mockTableCopy, true))
 			}
-		}, [mockTable, groupBy])
-
-		const customGroupHeader = useCallback(
-			(
-				meta?: ColumnMetadata,
-				columnName?: string,
-				props?: IDetailsGroupDividerProps | undefined,
-			) => {
-				const custom = <h3>{meta?.name}</h3>
-				return createLazyLoadingGroupHeader(props, custom, columnName, meta)
-			},
-			[],
-		)
+		}, [mockTable, groupByList])
 
 		const { tableFeatures } = useToggleTableFeatures()
 
-		if (!groupedTable || !groupedMetadata) {
-			return <div>Loading</div>
+		function _onChangeSymbol(
+			ev: React.MouseEvent<HTMLElement>,
+			checked?: boolean,
+		) {
+			if (checked) {
+				setGroupByList([...groupByList, 'Symbol'])
+			} else {
+				let listCopy = groupByList.filter(e => e !== 'Symbol')
+				setGroupByList(listCopy)
+			}
 		}
+
+		function _onChangeMonth(
+			ev: React.MouseEvent<HTMLElement>,
+			checked?: boolean,
+		) {
+			if (checked) {
+				setGroupByList([...groupByList, 'Month'])
+			} else {
+				let listCopy = groupByList.filter(e => e !== 'Month')
+				setGroupByList(listCopy)
+			}
+		}
+
+		if (!groupedTable || !groupedMetadata) {
+			return <div>Loading...</div>
+		}
+
+		console.log(groupByList)
 
 		return (
 			<Table>
 				<Label>Group by: </Label>
 				<ButtonContainer>
-					<PrimaryButton onClick={() => setGroupBy('Symbol')}>
-						Symbol
-					</PrimaryButton>
-					<PrimaryButton onClick={() => setGroupBy('Month')}>
-						Month
-					</PrimaryButton>
+					<GroupByToggle
+						label="Symbol"
+						onText="On"
+						offText="Off"
+						onChange={_onChangeSymbol}
+					/>
+					<GroupByToggle
+						label="Month"
+						onText="On"
+						offText="Off"
+						onChange={_onChangeMonth}
+					/>
 				</ButtonContainer>
 
 				<ArqueroTableHeader table={groupedTable} />
@@ -82,7 +104,6 @@ export const RowGroupingTestStory: React.FC<RowGroupingTestStoryProps> = memo(
 						smartCells: true,
 						smartHeaders: true,
 					}}
-					onRenderGroupHeader={customGroupHeader}
 				/>
 			</Table>
 		)

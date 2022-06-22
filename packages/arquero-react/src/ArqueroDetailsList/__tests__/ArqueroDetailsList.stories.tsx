@@ -14,14 +14,14 @@ export default meta
 
 export const PerformanceStory = (args, { loaded: { stocks } }: any) => {
 	if (!stocks) {
-		return <div>Loading</div>
+		return <div>Loading...</div>
 	}
 
 	return <PerformanceTestStory mockTablePerformance={stocks} />
 }
 
 PerformanceStory.story = {
-	name: 'Performance story',
+	name: 'Performance',
 }
 
 export const RowGroupingStory = (args, { loaded: { stocks } }: any) => {
@@ -33,5 +33,5 @@ export const RowGroupingStory = (args, { loaded: { stocks } }: any) => {
 }
 
 RowGroupingStory.story = {
-	name: 'Row grouping story',
+	name: 'Row grouping',
 }

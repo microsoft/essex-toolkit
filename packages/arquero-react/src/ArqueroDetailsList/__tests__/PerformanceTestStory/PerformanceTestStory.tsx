@@ -52,7 +52,7 @@ export const PerformanceTestStory: React.FC<PerformanceTestStoryProps> = memo(
 		}, [table])
 
 		if (!table || !metadata) {
-			return <div>Loading</div>
+			return <div>Loading...</div>
 		}
 
 		return (

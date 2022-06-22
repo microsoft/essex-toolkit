@@ -4,7 +4,13 @@
  */
 
 import styled from 'styled-components'
+import { Toggle } from '@fluentui/react'
 
 export const ButtonContainer = styled.div`
 	padding-bottom: 10px;
+	display: flex;
+`
+
+export const GroupByToggle = styled(Toggle)`
+	padding-right: 10px;
 `
