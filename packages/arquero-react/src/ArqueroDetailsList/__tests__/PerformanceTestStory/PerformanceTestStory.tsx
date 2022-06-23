@@ -9,10 +9,8 @@ import type { IColumn } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useEffect, useMemo, useState } from 'react'
 
-import {
-	useColumnCommands,
-	useCommandBar,
-} from './PerformanceTestStory.hooks.js'
+import { Table } from '../SharedStyles.styles.js'
+import { useColumnCommands } from './PerformanceTestStory.hooks.js'
 
 export interface PerformanceTestStoryProps {
 	mockTablePerformance: ColumnTable | undefined
@@ -22,12 +20,11 @@ export const PerformanceTestStory: React.FC<PerformanceTestStoryProps> = memo(
 	function PerformanceTestStory({ mockTablePerformance }) {
 		const [table, setTable] = useState<ColumnTable | undefined>()
 		const [metadata, setMetadata] = useState<TableMetadata | undefined>()
-		const [tableName, setTableName] = useState('Table1')
 
 		useEffect(() => {
 			if (mockTablePerformance !== undefined) {
-				mockTablePerformance.ungroup()
 				let mockTablePerformanceCopy = mockTablePerformance
+				mockTablePerformanceCopy.ungroup()
 				// make sure we have a large enough number of rows to impact rendering perf
 				for (let i = 0; i < 10; i++) {
 					mockTablePerformanceCopy = mockTablePerformanceCopy.concat(
@@ -40,7 +37,6 @@ export const PerformanceTestStory: React.FC<PerformanceTestStoryProps> = memo(
 			}
 		}, [mockTablePerformance])
 
-		const commandBar = useCommandBar(table, metadata, setTable, setMetadata)
 		const columnCommands = useColumnCommands()
 
 		const columns = useMemo((): IColumn[] | undefined => {
@@ -56,17 +52,12 @@ export const PerformanceTestStory: React.FC<PerformanceTestStoryProps> = memo(
 		}, [table])
 
 		if (!table || !metadata) {
-			return <div>Loading</div>
+			return <div>Loading...</div>
 		}
 
 		return (
-			<div style={{ marginTop: '12px', height: 'calc(100vh - 220px)' }}>
-				<ArqueroTableHeader
-					table={table}
-					name={tableName}
-					commandBar={commandBar}
-					onRenameTable={name => setTableName(name)}
-				/>
+			<Table>
+				<ArqueroTableHeader table={table} name={'table1'} />
 
 				<ArqueroDetailsList
 					table={table}
@@ -82,7 +73,7 @@ export const PerformanceTestStory: React.FC<PerformanceTestStoryProps> = memo(
 					isStriped
 					showColumnBorders
 				/>
-			</div>
+			</Table>
 		)
 	},
 )

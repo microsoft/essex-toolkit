@@ -10,7 +10,7 @@ addDecorator(ThematicFluentDecorator)
 
 export const loaders = [
 	async () => ({
-		mockTablePerformance: await loadCSV('./data/stocks.csv', {
+		stocks: await loadCSV('./data/stocks.csv', {
 			autoMax: 1000000,
 		}),
 	}),

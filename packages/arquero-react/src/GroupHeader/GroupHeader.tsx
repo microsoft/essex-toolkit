@@ -2,19 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { IDetailsGroupDividerProps, IGroup } from '@fluentui/react'
-import { IconButton } from '@fluentui/react'
+import type { IGroup } from '@fluentui/react'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Else, If, Then } from 'react-if'
-import styled from 'styled-components'
 
-import { useIntersection } from './GroupHeader.hooks.js'
-
-export interface GroupHeaderProps {
-	props: IDetailsGroupDividerProps
-	lazyLoadGroups: boolean
-	columnName?: string
-}
+import { useCountChildren, useIntersection } from './GroupHeader.hooks.js'
+import {
+	Bold,
+	HeaderContainer,
+	HeaderDetailsText,
+	LevelButton,
+} from './GroupHeader.styles.js'
+import type { GroupHeaderProps } from './GroupHeader.types.js'
 
 export const GroupHeader: React.FC<React.PropsWithChildren<GroupHeaderProps>> =
 	memo(function GroupHeader({ columnName, props, children, lazyLoadGroups }) {
@@ -25,25 +24,17 @@ export const GroupHeader: React.FC<React.PropsWithChildren<GroupHeaderProps>> =
 
 		// trigger as soon as the element becomes visible
 		const inViewport = useIntersection(ref.current, '0px')
-
-		const countChildren = useCallback((children: IGroup[]) => {
-			let total = 0
-			children.forEach(child => {
-				total += child.count
-				total += child.children ? countChildren(child.children) : 0
-			})
-			return total
-		}, [])
+		const countChildren = useCountChildren()
 
 		useEffect(() => {
-			if (inViewport && group?.isCollapsed && onToggleCollapse) {
-				onToggleCollapse(group)
+			if (inViewport && group?.isCollapsed) {
+				onToggleCollapse?.(group)
 			}
 		}, [inViewport, group, onToggleCollapse])
 
 		const onManualLevelToggle = useCallback(() => {
 			setManualToggle(true)
-			onToggleCollapse && onToggleCollapse(group as IGroup)
+			onToggleCollapse?.(group as IGroup)
 		}, [group, onToggleCollapse, setManualToggle])
 
 		const shouldLazyLoad = useMemo((): boolean => {
@@ -84,19 +75,3 @@ export const GroupHeader: React.FC<React.PropsWithChildren<GroupHeaderProps>> =
 			</HeaderContainer>
 		)
 	})
-
-const HeaderContainer = styled.div<{ groupLevel: number }>`
-	padding-left: ${({ groupLevel }) => `${groupLevel * 12}px`};
-	display: flex;
-	gap: 8px;
-`
-
-const LevelButton = styled(IconButton as any)`
-	width: 5%;
-`
-
-const HeaderDetailsText = styled.span`
-	align-self: center;
-`
-
-const Bold = styled.b``
