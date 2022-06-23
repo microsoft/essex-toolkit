@@ -7,7 +7,7 @@ import { introspect } from '@essex/arquero'
 import { ArqueroDetailsList, ArqueroTableHeader } from '@essex/arquero-react'
 import { Label } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { memo, useEffect, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 
 import { Table } from '../SharedStyles.styles.js'
 import { useToggleTableFeatures } from './RowGroupingTestStory.hooks.js'
@@ -43,35 +43,33 @@ export const RowGroupingTestStory: React.FC<RowGroupingTestStoryProps> = memo(
 
 		const { tableFeatures } = useToggleTableFeatures()
 
-		function _onChangeSymbol(
-			ev: React.MouseEvent<HTMLElement>,
-			checked?: boolean,
-		) {
-			if (checked) {
-				setGroupByList([...groupByList, 'Symbol'])
-			} else {
-				const listCopy = groupByList.filter(e => e !== 'Symbol')
-				setGroupByList(listCopy)
-			}
-		}
+		const _onChangeSymbol = useCallback(
+			(ev: React.MouseEvent<HTMLElement>, checked?: boolean) => {
+				if (checked) {
+					setGroupByList([...groupByList, 'Symbol'])
+				} else {
+					const listCopy = groupByList.filter(e => e !== 'Symbol')
+					setGroupByList(listCopy)
+				}
+			},
+			[setGroupByList, groupByList],
+		)
 
-		function _onChangeMonth(
-			ev: React.MouseEvent<HTMLElement>,
-			checked?: boolean,
-		) {
-			if (checked) {
-				setGroupByList([...groupByList, 'Month'])
-			} else {
-				const listCopy = groupByList.filter(e => e !== 'Month')
-				setGroupByList(listCopy)
-			}
-		}
+		const _onChangeMonth = useCallback(
+			(ev: React.MouseEvent<HTMLElement>, checked?: boolean) => {
+				if (checked) {
+					setGroupByList([...groupByList, 'Month'])
+				} else {
+					const listCopy = groupByList.filter(e => e !== 'Month')
+					setGroupByList(listCopy)
+				}
+			},
+			[setGroupByList, groupByList],
+		)
 
 		if (!groupedTable || !groupedMetadata) {
 			return <div>Loading...</div>
 		}
-
-		console.log(groupByList)
 
 		return (
 			<Table>
