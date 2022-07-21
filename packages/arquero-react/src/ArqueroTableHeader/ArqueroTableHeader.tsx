@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { memo, useMemo } from 'react'
 import styled from '@essex/styled-components'
+import { memo, useMemo } from 'react'
 
 import { HEIGHT } from './constants.js'
 import {

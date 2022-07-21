@@ -3,12 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@essex/arquero'
+import styled from '@essex/styled-components'
 import type { ICommandBarItemProps, IContextualMenuItem } from '@fluentui/react'
 import { DefaultButton } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
-import styled from '@essex/styled-components'
 
 /**
  * Displays a table name along with a dropdown menu for selection of different tables.

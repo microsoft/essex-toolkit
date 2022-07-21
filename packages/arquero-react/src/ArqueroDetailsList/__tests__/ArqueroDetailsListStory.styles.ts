@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { IDropdownStyles } from '@fluentui/react'
 import styled from '@essex/styled-components'
+import type { IDropdownStyles } from '@fluentui/react'
 
 export const BlockContainer = styled.div`
 	display: flex;

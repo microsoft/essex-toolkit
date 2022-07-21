@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { Toggle } from '@fluentui/react'
 import styled from '@essex/styled-components'
+import { Toggle } from '@fluentui/react'
 
 export const ButtonContainer = styled.div`
 	padding-bottom: 10px;
