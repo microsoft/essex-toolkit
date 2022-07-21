@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import styled from '@essex/styled-components'
 import { DirectionalHint, FocusTrapCallout, TextField } from '@fluentui/react'
 import { memo, useCallback } from 'react'
-import styled from 'styled-components'
 
 interface RenameCalloutProps {
 	onSend: (name?: string) => void

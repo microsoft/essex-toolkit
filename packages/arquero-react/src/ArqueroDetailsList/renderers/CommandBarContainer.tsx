@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import styled from '@essex/styled-components'
 import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import { memo } from 'react'
-import styled from 'styled-components'
 
 interface CommandBarContainerProps {
 	props: IDetailsColumnProps

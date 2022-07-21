@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import styled from '@essex/styled-components'
 import { memo, useCallback, useEffect, useState } from 'react'
 import { Else, If, Then } from 'react-if'
-import styled from 'styled-components'
 
 import { RenameCallout } from './RenameCallout.js'
 

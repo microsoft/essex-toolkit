@@ -22,6 +22,7 @@ import type { IDetailsListProps } from '@fluentui/react';
 import type { IDetailsListStyles } from '@fluentui/react';
 import type { IDetailsRowProps } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
+import type { IGroup } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { IRenderFunction as IRenderFunction_2 } from '@fluentui/utilities';
 import type { IStyleFunctionOrObject } from '@fluentui/utilities';
@@ -98,6 +99,11 @@ export interface ArqueroTableHeaderProps {
     // (undocumented)
     visibleColumns?: string[];
 }
+
+// Warning: (ae-missing-release-tag) "Bold" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const Bold: StyledComponent<"b", any, {}, never>;
 
 // Warning: (ae-missing-release-tag) "checkedItemsCommand" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -202,10 +208,44 @@ export function downloadCommand(table: ColumnTable, downloadFilename?: string, p
 // @public (undocumented)
 export type DropdownOptionSelect = ((event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption<any> | undefined, index?: number | undefined) => void) | undefined;
 
+// Warning: (ae-missing-release-tag) "GroupHeader" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const GroupHeader: React.FC<React.PropsWithChildren<GroupHeaderProps>>;
+
 // Warning: (ae-missing-release-tag) "GroupHeaderFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type GroupHeaderFunction = (meta?: ColumnMetadata, columnName?: string, props?: IDetailsGroupDividerProps | undefined) => any;
+
+// Warning: (ae-missing-release-tag) "GroupHeaderProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface GroupHeaderProps {
+    // (undocumented)
+    columnName?: string;
+    // (undocumented)
+    lazyLoadGroups: boolean;
+    // (undocumented)
+    props: IDetailsGroupDividerProps;
+}
+
+// Warning: (ae-missing-release-tag) "HeaderContainer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const HeaderContainer: StyledComponent<"div", any, {
+groupLevel: number;
+}, never>;
+
+// Warning: (ae-missing-release-tag) "HeaderDetailsText" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const HeaderDetailsText: StyledComponent<"span", any, {}, never>;
+
+// Warning: (ae-missing-release-tag) "LevelButton" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const LevelButton: StyledComponent<any, any, object, string | number | symbol>;
 
 // Warning: (ae-missing-release-tag) "MetadataClickFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -313,6 +353,11 @@ export function useCommands(commands: ICommandBarItemProps[] | undefined, backgr
 // @public (undocumented)
 export function useCommandStyles(styles?: IStyleFunctionOrObject<ICommandBarStyleProps, ICommandBarStyles>): ICommandBarStyles;
 
+// Warning: (ae-missing-release-tag) "useCountChildren" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useCountChildren(): (children: IGroup[]) => number;
+
 // Warning: (ae-missing-release-tag) "useDetailsHeaderRenderer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -347,6 +392,11 @@ export function useHandleOnDataReduce(color: string): (item: ICommandBarItemProp
 //
 // @public
 export function useIncrementingColumnColorScale(meta?: TableMetadata): () => string;
+
+// Warning: (ae-missing-release-tag) "useIntersection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useIntersection(element: HTMLDivElement | undefined, rootMargin: string): boolean;
 
 // Warning: (ae-missing-release-tag) "useOverflowButtonProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

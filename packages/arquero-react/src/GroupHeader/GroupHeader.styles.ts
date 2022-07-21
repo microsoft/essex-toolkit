@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import styled from '@essex/styled-components'
 import { IconButton } from '@fluentui/react'
-import styled from 'styled-components'
 
 export const HeaderContainer = styled.div<{ groupLevel: number }>`
 	padding-left: ${({ groupLevel }) => `${groupLevel * 12}px`};

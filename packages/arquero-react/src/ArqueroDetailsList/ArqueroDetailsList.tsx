@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import styled from '@essex/styled-components'
 import type { IColumn, IDetailsListStyles } from '@fluentui/react'
 import {
 	ConstrainMode,
@@ -12,7 +13,6 @@ import {
 } from '@fluentui/react'
 import type { RowObject } from 'arquero/dist/types/table/table'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
-import styled from 'styled-components'
 
 import { groupBuilder } from '../common/groups.js'
 import {
