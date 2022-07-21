@@ -4,7 +4,7 @@
  */
 
 import { IconButton } from '@fluentui/react'
-import styled from 'styled-components'
+import styled from '@essex/styled-components'
 
 export const HeaderContainer = styled.div<{ groupLevel: number }>`
 	padding-left: ${({ groupLevel }) => `${groupLevel * 12}px`};

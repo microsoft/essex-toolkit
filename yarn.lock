@@ -2015,6 +2015,7 @@ __metadata:
     "@essex/arquero": "workspace:^"
     "@essex/charts-react": "workspace:^"
     "@essex/scripts": ^22.0.4
+    "@essex/styled-components": "workspace:^"
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/react": ^8.70.0
     "@fluentui/utilities": ^8.8.3
@@ -2457,6 +2458,20 @@ __metadata:
   checksum: 9154082c0bad3849da932c1deb43ee50af0957525e27c89d744120ffd5135695b35b1fe5d716b9efb7a955ab92997239ec52159e53ef3a02a5833d7cb31eacc8
   languageName: node
   linkType: hard
+
+"@essex/styled-components@workspace:^, @essex/styled-components@workspace:packages/styled-components":
+  version: 0.0.0-use.local
+  resolution: "@essex/styled-components@workspace:packages/styled-components"
+  dependencies:
+    "@essex/scripts": ^22.0.4
+    "@essex/tsconfig-base": ^1.0.2
+    "@types/styled-components": ^5.1.25
+    styled-components: ^5.3.5
+    typescript: ^4.7.2
+  peerDependencies:
+    styled-components: ">= 5"
+  languageName: unknown
+  linkType: soft
 
 "@essex/swc-opts@npm:^20.0.14":
   version: 20.0.14

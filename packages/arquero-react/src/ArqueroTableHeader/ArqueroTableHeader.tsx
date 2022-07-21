@@ -4,7 +4,7 @@
  */
 
 import { memo, useMemo } from 'react'
-import styled from 'styled-components'
+import styled from '@essex/styled-components'
 
 import { HEIGHT } from './constants.js'
 import {

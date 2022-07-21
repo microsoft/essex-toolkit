@@ -12,7 +12,7 @@ import {
 } from '@fluentui/react'
 import type { RowObject } from 'arquero/dist/types/table/table'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
-import styled from 'styled-components'
+import styled from '@essex/styled-components'
 
 import { groupBuilder } from '../common/groups.js'
 import {

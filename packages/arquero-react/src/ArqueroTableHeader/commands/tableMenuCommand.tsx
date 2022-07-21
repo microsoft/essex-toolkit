@@ -8,7 +8,7 @@ import { DefaultButton } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
-import styled from 'styled-components'
+import styled from '@essex/styled-components'
 
 /**
  * Displays a table name along with a dropdown menu for selection of different tables.

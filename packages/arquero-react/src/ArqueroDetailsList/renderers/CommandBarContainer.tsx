@@ -4,7 +4,7 @@
  */
 import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import { memo } from 'react'
-import styled from 'styled-components'
+import styled from '@essex/styled-components'
 
 interface CommandBarContainerProps {
 	props: IDetailsColumnProps

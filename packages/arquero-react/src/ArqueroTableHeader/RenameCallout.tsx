@@ -4,7 +4,7 @@
  */
 import { DirectionalHint, FocusTrapCallout, TextField } from '@fluentui/react'
 import { memo, useCallback } from 'react'
-import styled from 'styled-components'
+import styled from '@essex/styled-components'
 
 interface RenameCalloutProps {
 	onSend: (name?: string) => void

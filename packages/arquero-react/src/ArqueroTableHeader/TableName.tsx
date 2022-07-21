@@ -4,7 +4,7 @@
  */
 import { memo, useCallback, useEffect, useState } from 'react'
 import { Else, If, Then } from 'react-if'
-import styled from 'styled-components'
+import styled from '@essex/styled-components'
 
 import { RenameCallout } from './RenameCallout.js'
 

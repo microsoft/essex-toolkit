@@ -4,7 +4,7 @@
  */
 
 import { Toggle } from '@fluentui/react'
-import styled from 'styled-components'
+import styled from '@essex/styled-components'
 
 export const ButtonContainer = styled.div`
 	padding-bottom: 10px;
