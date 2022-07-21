@@ -1,5 +1,0 @@
-releases:
-  "@essex/arquero-react": minor
-
-declined:
-  - essex-js-toolkit

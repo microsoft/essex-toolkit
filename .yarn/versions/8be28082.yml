@@ -1,7 +1,0 @@
-releases:
-  "@essex/arquero": minor
-  "@essex/arquero-react": minor
-  "@essex/charts-react": minor
-  "@essex/graphql-api-commons": minor
-  essex-js-toolkit: minor
-  essex-js-toolkit-stories: minor
