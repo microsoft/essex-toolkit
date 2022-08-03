@@ -19,7 +19,7 @@ export function useSubsetTable(
 			existingColumnNames = columns.filter(x => tableColumns.includes(x))
 		}
 
-		// with some delimiters some data get parsed different and
+		// choosing wrong delimiters makes data get wrongly parsed and in some cases
 		// it generates some columnsNames as arrays instead of strings with ,
 		existingColumnNames = existingColumnNames.map(column => {
 			if (isArray(column)) {
