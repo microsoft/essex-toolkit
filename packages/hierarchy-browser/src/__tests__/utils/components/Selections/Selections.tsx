@@ -41,6 +41,7 @@ export const Selections: React.FC<ISelections> = memo(function Selections({
 			onChange={_onChange}
 			label={label}
 			required={true}
+			className="hierarchy-choice-group"
 		/>
 	)
 })
