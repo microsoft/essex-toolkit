@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+export * from './ButtonChoiceGroup/index.js'
 export * from './ClippedGraph/index.js'
 export * from './CollapsiblePanel/index.js'
 export * from './ColumnarMenu/index.js'
