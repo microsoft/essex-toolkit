@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IChoiceGroupOption } from '@fluentui/react'
+import type { IChoiceGroupOption } from '@fluentui/react'
+
 import { ButtonChoiceGroup } from '../index.js'
 
 const meta = {
