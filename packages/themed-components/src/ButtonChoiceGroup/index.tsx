@@ -58,7 +58,7 @@ const onRenderField = (props?: IChoiceGroupOptionProps) => {
 			style={DefaultButtonStyle}
 			toggle
 			checked={props?.checked}
-			onClick={() => props?.onChange && props?.onChange(undefined, props)}
+			onClick={() => props?.onChange?.(undefined, props)}
 		>
 			{props?.text}
 		</DefaultButton>
