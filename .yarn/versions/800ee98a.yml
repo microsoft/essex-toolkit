@@ -1,4 +1,5 @@
 releases:
+  "@essex/hierarchy-browser": patch
   "@essex/themed-components": minor
   essex-js-toolkit: minor
   essex-js-toolkit-stories: minor

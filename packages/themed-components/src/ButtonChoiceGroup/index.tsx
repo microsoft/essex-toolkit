@@ -32,7 +32,7 @@ export const ButtonChoiceGroup: React.FC<IChoiceGroupProps> = memo(
 						styles: {
 							...o.styles,
 							root: {
-								margin: 'unset !important',
+								margin: 'unset',
 								borderRadius: '2px',
 							},
 						},
