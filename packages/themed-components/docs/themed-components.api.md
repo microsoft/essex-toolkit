@@ -6,6 +6,8 @@
 
 /// <reference types="react" />
 
+import type { CSSProperties } from 'react';
+import type { FC } from 'react';
 import type { IButtonStyles } from '@fluentui/react';
 import type { IChoiceGroupProps } from '@fluentui/react';
 import type { IContextualMenuListProps } from '@fluentui/react';
@@ -125,6 +127,36 @@ export enum ControlType {
     toggle = "toggle"
 }
 
+// Warning: (ae-missing-release-tag) "CookieConsent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CookieConsent = Record<CookieConsentCategories, boolean>;
+
+// Warning: (ae-missing-release-tag) "CookieConsentBannerThemes" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CookieConsentBannerThemes = 'light' | 'dark' | 'high-contrast';
+
+// Warning: (ae-missing-release-tag) "CookieConsentCategories" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum CookieConsentCategories {
+    Advertising = "Advertising",
+    Analytics = "Analytics",
+    Required = "Required",
+    SocialMedia = "SocialMedia"
+}
+
+// Warning: (ae-missing-release-tag) "CookieConsentManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CookieConsentManager = {
+    readonly isConsentRequired: boolean;
+    getConsent(): CookieConsent;
+    getConsentFor(consentCategory: CookieConsentCategories): boolean;
+    manageConsent(): void;
+};
+
 // Warning: (ae-missing-release-tag) "DialogConfirm" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -181,6 +213,31 @@ export interface ParsedSettingConfig extends SettingConfig {
     // (undocumented)
     value: any;
 }
+
+// Warning: (ae-missing-release-tag) "PolicyAndCookieBanner" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const PolicyAndCookieBanner: FC<PolicyAndCookieBannerProps>;
+
+// Warning: (ae-missing-release-tag) "PolicyAndCookieBannerProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type PolicyAndCookieBannerProps = {
+    language?: string;
+    theme?: CookieConsentBannerThemes;
+    onConsentChanged?: (newConsent: CookieConsent) => void;
+    className?: string;
+    styles?: CSSProperties;
+    links?: Array<PolicyLinkDetails>;
+};
+
+// Warning: (ae-missing-release-tag) "PolicyLinkDetails" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type PolicyLinkDetails = {
+    name: string;
+    href: string;
+};
 
 // Warning: (ae-missing-release-tag) "SearchBox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -282,6 +339,13 @@ export interface ToggleLinkProps {
     // (undocumented)
     style?: React.CSSProperties;
 }
+
+// Warning: (ae-missing-release-tag) "WcpConsent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WcpConsent = {
+    init: (culture: string, placeholderIdOrElement: string | HTMLElement, initCallback?: (err?: Error, siteConsent?: CookieConsentManager) => void, onConsentChanged?: (newConsent: CookieConsent) => void, theme?: CookieConsentBannerThemes, stylesNonce?: string) => void;
+};
 
 // (No @packageDocumentation comment for this package)
 
