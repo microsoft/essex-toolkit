@@ -30,7 +30,7 @@
 		"@graphql-tools/utils": "^8.6.12",
 		"@tsconfig/node14": "^1.0.1",
 		"@types/pino": "^7.0.5",
-		"apollo-server-core": "^3.8.1",
+		"apollo-server-core": "^3.10.1",
 		"apollo-server-fastify": "^3.8.1",
 		"fastify": "^3.29.0",
 		"graphql": "^16.5.0",
