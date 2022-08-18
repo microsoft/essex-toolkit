@@ -27,9 +27,13 @@ const dropdownButtonStyles: IButtonStyles = {
 		paddingRight: 4,
 		textAlign: 'left',
 	},
+	textContainer: {
+		overflow: 'hidden',
+	},
 	label: {
 		fontWeight: 'normal',
 		textOverflow: 'ellipsis',
+		overflow: 'hidden',
 	},
 }
 
