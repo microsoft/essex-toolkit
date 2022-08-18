@@ -95,3 +95,26 @@ export const ColumnarMenuStory = () => {
 ColumnarMenuStory.story = {
 	name: 'main',
 }
+
+export const ColumnarMenuStoryOverflow = () => {
+	const renderMenuList = useCallback(menuListProps => {
+		return (
+			<div>
+				<ColumnarMenuList {...menuListProps} />
+			</div>
+		)
+	}, [])
+
+	const menuProps = {
+		items: data,
+		buttonStyles: styles,
+		onRenderMenuList: renderMenuList,
+		onItemClick: () => alert('item clicked'),
+	}
+
+	return <ColumnarMenu text={'EletronicsAndFurnitureList.csv'} {...menuProps} />
+}
+
+ColumnarMenuStoryOverflow.story = {
+	name: 'overflow',
+}
