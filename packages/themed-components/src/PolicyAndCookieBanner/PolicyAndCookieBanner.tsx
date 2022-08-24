@@ -4,12 +4,13 @@
  */
 import { Link, Text } from '@fluentui/react'
 import type { CSSProperties, FC } from 'react'
-import { memo, useMemo } from 'react'
+import React, { memo, useMemo } from 'react'
 
 import { useLoadMSFTCookieScript } from './PolicyAndCookieBanner.hooks.js'
 import type {
-	CookieConsent,
-	CookieConsentBannerThemes,
+	PolicyAndCookieBannerProps,
+	PolicyLinkDetails,
+	PolicyLinkProps,
 } from './PolicyAndCookieBanner.types.js'
 
 const containerStyles: CSSProperties = {
@@ -20,34 +21,33 @@ const containerStyles: CSSProperties = {
 	padding: '10px',
 }
 
-export type PolicyLinkDetails = { name: string; href: string }
 const defaultLinks: Array<PolicyLinkDetails> = [
 	{
-		name: 'Privacy',
-		href: 'https://privacy.microsoft.com/en-us/privacystatement',
+		name: 'Privacy & Cookies',
+		href: ' https://go.microsoft.com/fwlink/?LinkId=521839',
 	},
 	{
 		name: 'Terms of Use',
-		href: 'https://www.microsoft.com/en-us/legal/terms-of-use',
+		href: 'https://go.microsoft.com/fwlink/?LinkID=760869',
 	},
 	{
 		name: 'Trademarks',
-		href: 'https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks',
+		href: 'https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/EN-US.aspx',
+	},
+	{
+		name: 'Contact Us',
+		href: 'https://go.microsoft.com/?linkid=2028325',
+	},
+	{
+		name: 'Code of Conduct',
+		href: 'https://opensource.microsoft.com/codeofconduct/',
 	},
 	{
 		name: `©️ ${new Date().getFullYear()} Microsoft`,
-		href: 'https://www.microsoft.com',
+		href: 'https://www.microsoft.com/en-us/legal/intellectualproperty/copyright',
 	},
 ]
 
-export type PolicyAndCookieBannerProps = {
-	language?: string
-	theme?: CookieConsentBannerThemes
-	onConsentChanged?: (newConsent: CookieConsent) => void
-	className?: string
-	styles?: CSSProperties
-	links?: Array<PolicyLinkDetails>
-}
 export const PolicyAndCookieBanner: FC<PolicyAndCookieBannerProps> = memo(
 	function CookieConsentProvider({
 		language = navigator.language ?? 'en-US',
@@ -83,7 +83,8 @@ export const PolicyAndCookieBanner: FC<PolicyAndCookieBannerProps> = memo(
 				{consentManager?.isConsentRequired && (
 					<>
 						<PolicyLink
-							name="Cookies"
+							name="Manage Cookies"
+							id="MSFTManageCookiesLink"
 							onClick={() => {
 								consentManager?.manageConsent()
 							}}
@@ -98,23 +99,18 @@ export const PolicyAndCookieBanner: FC<PolicyAndCookieBannerProps> = memo(
 )
 PolicyAndCookieBanner.displayName = 'PolicyAndCookieBanner'
 
-type PolicyLinkProps = {
-	name: string
-	href?: string
-	onClick?: () => void
-	divider?: boolean
-}
 const PolicyLink: FC<PolicyLinkProps> = memo(function PolicyLink({
 	name,
 	href,
 	onClick,
 	divider = false,
+	id,
 }) {
 	return (
 		<>
 			{divider && <Text variant="tiny">|</Text>}
 			<Text variant="smallPlus">
-				<Link href={href} target="_blank" onClick={onClick}>
+				<Link id={id} href={href} target="_blank" onClick={onClick}>
 					{name}
 				</Link>
 			</Text>
