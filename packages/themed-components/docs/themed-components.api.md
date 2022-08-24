@@ -239,6 +239,17 @@ export type PolicyLinkDetails = {
     href: string;
 };
 
+// Warning: (ae-missing-release-tag) "PolicyLinkProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type PolicyLinkProps = {
+    name: string;
+    id?: string;
+    href?: string;
+    onClick?: () => void;
+    divider?: boolean;
+};
+
 // Warning: (ae-missing-release-tag) "SearchBox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
