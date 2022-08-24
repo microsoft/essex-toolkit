@@ -5,6 +5,9 @@
 
 import type { CSSProperties } from 'react'
 
+/**
+ * @public
+ */
 export enum CookieConsentCategories {
 	/**
 	 * Cookies to perform essential website functions (sign-in, language settings,...)
@@ -24,35 +27,42 @@ export enum CookieConsentCategories {
 	Advertising = 'Advertising',
 }
 
+/**
+ * Theme of the cookie consent banner popup that is managed by
+ * the wcp script. This sets the theme for the popup only and
+ * does not impact the theme of the policy footer or links.
+ * The policy footer uses FluentUI so it should pick up the theme from
+ * parent FluentUI theme provider.
+ *
+ *  @public
+ */
 export type CookieConsentBannerThemes = 'light' | 'dark' | 'high-contrast'
 
+/**
+ * Record of approved and blocked cookie types.
+ *
+ * Record<"Required" | "Analytics" | "SocialMedia" | "Advertising", boolean>
+ *
+ * @public
+ */
 export type CookieConsent = Record<CookieConsentCategories, boolean>
 
+/**
+ * @internal
+ */
 export type CookieConsentManager = {
-	/**
-	 * `true` if consent is required for current user region
-	 */
 	readonly isConsentRequired: boolean
 
-	/**
-	 * Returns consent state for all categories
-	 */
 	getConsent(): CookieConsent
 
-	/**
-	 * Returns consent state for a category.
-	 * @param consentCategory one of `consentCategories` values to get the consent state for
-	 * @returns `true` if consent was given, `false` otherwise
-	 */
 	getConsentFor(consentCategory: CookieConsentCategories): boolean
 
-	/**
-	 * Shows the preferences dialog box
-	 */
 	manageConsent(): void
 }
 
-/* eslint-disable-next-line */
+/**
+ * @internal
+ */
 export type WcpConsent = {
 	/**
 	 * Library initialization method
@@ -73,17 +83,59 @@ export type WcpConsent = {
 	) => void
 }
 
+/**
+ * @public
+ */
 export type PolicyLinkDetails = { name: string; href: string }
 
+/**
+ * Defaults to {
+ * 	language: navigator.language ?? 'en-US'
+ * 	theme: 'light',
+ * 	onConsentChange: () => void,
+ *  links: [
+ *		{
+ *			name: 'Privacy & Cookies',
+ *			href: ' https://go.microsoft.com/fwlink/?LinkId=521839',
+ *		},
+ *		{
+ *			name: 'Terms of Use',
+ *			href: 'https://go.microsoft.com/fwlink/?LinkID=760869',
+ *		},
+ *		{
+ *			name: 'Trademarks',
+ *			href: 'https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/EN-US.aspx',
+ *		},
+ *		{
+ *			name: 'Contact Us',
+ *			href: 'https://go.microsoft.com/?linkid=2028325',
+ *		},
+ *		{
+ *			name: 'Code of Conduct',
+ *			href: 'https://opensource.microsoft.com/codeofconduct/',
+ *		},
+ *		{
+ *			name: `©️ ${new Date().getFullYear()} Microsoft`,
+ *			href: 'https://www.microsoft.com/en-us/legal/intellectualproperty/copyright',
+ *		},
+ *	]
+ * }
+ *
+ * @public
+ */
 export type PolicyAndCookieBannerProps = {
 	language?: string
 	theme?: CookieConsentBannerThemes
-	onConsentChanged?: (newConsent: CookieConsent) => void
+	onConsentChange?: (newConsent: CookieConsent) => void
+	onError: (error: unknown) => void
 	className?: string
 	styles?: CSSProperties
 	links?: Array<PolicyLinkDetails>
 }
 
+/**
+ * @internal
+ */
 export type PolicyLinkProps = {
 	name: string
 	id?: string

@@ -4,7 +4,7 @@
  */
 import { Link, Text } from '@fluentui/react'
 import type { CSSProperties, FC } from 'react'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 
 import { useLoadMSFTCookieScript } from './PolicyAndCookieBanner.hooks.js'
 import type {
@@ -52,10 +52,11 @@ export const PolicyAndCookieBanner: FC<PolicyAndCookieBannerProps> = memo(
 	function CookieConsentProvider({
 		language = navigator.language ?? 'en-US',
 		theme = 'light',
-		onConsentChanged = () => undefined,
+		onConsentChange = () => undefined,
+		onError,
 		className,
 		styles,
-		links,
+		links = defaultLinks,
 	}) {
 		const divStyles: CSSProperties = useMemo(() => {
 			return {
@@ -65,7 +66,7 @@ export const PolicyAndCookieBanner: FC<PolicyAndCookieBannerProps> = memo(
 		}, [styles])
 
 		const policyLinks = useMemo(() => {
-			return (links ?? defaultLinks).map(({ name, href }, i) => {
+			return links.map(({ name, href }, i) => {
 				return (
 					<PolicyLink key={name} divider={i !== 0} name={name} href={href} />
 				)
@@ -75,7 +76,8 @@ export const PolicyAndCookieBanner: FC<PolicyAndCookieBannerProps> = memo(
 		const consentManager = useLoadMSFTCookieScript({
 			language,
 			theme,
-			onConsentChanged,
+			onConsentChange,
+			onError,
 		})
 
 		return (

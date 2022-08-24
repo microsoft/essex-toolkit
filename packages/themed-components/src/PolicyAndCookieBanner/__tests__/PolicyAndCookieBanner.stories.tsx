@@ -9,6 +9,8 @@ const meta = {
 	title: '@essex:themed-components/Policy and Cookie Banner',
 }
 
+const onError = window.alert.bind(window)
+
 export default meta
 
 export const PolicyAndCookieBannerStory = () => {
@@ -27,7 +29,7 @@ export const PolicyAndCookieBannerStory = () => {
 	 * There is no need to add any aditional script tags to the index.html
 	 * page when using this component.
 	 */
-	return <PolicyAndCookieBanner />
+	return <PolicyAndCookieBanner onError={onError} />
 }
 PolicyAndCookieBannerStory.story = {
 	name: 'Simple use case',
@@ -41,7 +43,7 @@ export const PolicyAndCookieBannerThemeStory = () => {
 	 * The overall policy banner styles are controlled by fluent components and classNames
 	 * See the styling example
 	 */
-	return <PolicyAndCookieBanner theme={'dark'} />
+	return <PolicyAndCookieBanner onError={onError} theme={'dark'} />
 }
 PolicyAndCookieBannerThemeStory.story = {
 	name: 'Theming cookie banner',
@@ -61,7 +63,8 @@ export const PolicyAndCookieBannerListeningForCookieChangesStory = () => {
 	 */
 	return (
 		<PolicyAndCookieBanner
-			onConsentChanged={consents => {
+			onError={window.alert.bind(window)}
+			onConsentChange={consents => {
 				console.log(consents)
 			}}
 		/>
@@ -81,6 +84,7 @@ export const PolicyAndCookieBannerStylingStory = () => {
 	 */
 	return (
 		<PolicyAndCookieBanner
+			onError={onError}
 			className="some-class-perhaps-provided-by-StyledComponets"
 			styles={{ flexDirection: 'column' }}
 		/>
@@ -104,6 +108,7 @@ export const PolicyAndCookieBannerCustomLinksStory = () => {
 	 */
 	return (
 		<PolicyAndCookieBanner
+			onError={onError}
 			links={[{ name: 'Bing', href: 'https://bing.com' }]}
 		/>
 	)
