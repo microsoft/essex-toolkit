@@ -58,13 +58,13 @@ CollapsiblePanelContainerStory.story = {
 
 export const CollapsiblePanelStyled = () => {
 	return (
-		<CollapsiblePanel title="Panel" headerStyles={headerStyles}>
+		<CollapsiblePanel title="Panel" headerStyle={headerStyle}>
 			<div>This panel has a default title and children</div>
 		</CollapsiblePanel>
 	)
 }
 
-const headerStyles = {
+const headerStyle = {
 	backgroundColor: 'white',
 	color: 'black',
 	padding: '0.5rem',

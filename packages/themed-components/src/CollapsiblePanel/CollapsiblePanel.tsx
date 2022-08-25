@@ -25,7 +25,7 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 	children,
 	onRenderHeader,
 	onHeaderClick,
-	headerStyles,
+	headerStyle,
 }) => {
 	const theme = useThematicFluent()
 	const [expanded, setExpanded] = useState<boolean>(defaultExpanded)
@@ -81,7 +81,7 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 				expanded={expanded}
 				onClick={handleClick}
 				onKeyDown={handleKeyDown}
-				styles={headerStyles}
+				styles={headerStyle}
 			>
 				<div style={ButtonContainerStyle}>
 					<IconButton
@@ -90,7 +90,7 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 						style={{
 							...IconButtonStyle,
 							color:
-								headerStyles?.color || theme.application().foreground().hex(),
+								headerStyle?.color || theme.application().foreground().hex(),
 						}}
 					/>
 				</div>
