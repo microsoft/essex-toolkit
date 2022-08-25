@@ -81,7 +81,7 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 				expanded={expanded}
 				onClick={handleClick}
 				onKeyDown={handleKeyDown}
-				styles={headerStyle}
+				style={headerStyle}
 			>
 				<div style={ButtonContainerStyle}>
 					<IconButton
@@ -148,7 +148,7 @@ const HeaderContainer: React.FC<{
 	expanded?: boolean
 	onClick: () => void
 	onKeyDown: (ev: React.KeyboardEvent) => void
-	styles?: React.CSSProperties
+	style?: React.CSSProperties
 	children?: React.ReactNode
 }> = memo(function HeaderContainer({
 	first,
@@ -157,10 +157,10 @@ const HeaderContainer: React.FC<{
 	children,
 	onClick,
 	onKeyDown,
-	styles = {},
+	style = {},
 }) {
 	const theme = useThematicFluent()
-	const style = useMemo<React.CSSProperties>(() => {
+	const _style = useMemo<React.CSSProperties>(() => {
 		const background = theme.application().faint().hex()
 		const borderTop = first
 			? ''
@@ -174,11 +174,11 @@ const HeaderContainer: React.FC<{
 			background,
 			borderTop,
 			borderBottom,
-			...styles,
+			...style,
 		}
 	}, [first, last, expanded, theme])
 	return (
-		<div style={style} onClick={onClick} onKeyDown={onKeyDown} role="group">
+		<div style={_style} onClick={onClick} onKeyDown={onKeyDown} role="group">
 			{children}
 		</div>
 	)
