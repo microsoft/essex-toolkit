@@ -38,6 +38,7 @@ export interface CollapsiblePanelProps {
 	 */
 	onHeaderClick?: (nextState: boolean) => void
 	children?: ReactNode
+	headerStyle?: React.CSSProperties
 }
 
 /**
