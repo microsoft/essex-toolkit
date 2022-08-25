@@ -55,3 +55,26 @@ export const CollapsiblePanelContainerStory = () => {
 CollapsiblePanelContainerStory.story = {
 	name: 'Container with multiple children',
 }
+
+export const CollapsiblePanelStyled = () => {
+	return (
+		<CollapsiblePanel title="Panel" headerStyles={headerStyles}>
+			<div>This panel has a default title and children</div>
+		</CollapsiblePanel>
+	)
+}
+
+const headerStyles = {
+	backgroundColor: 'white',
+	color: 'black',
+	padding: '0.5rem',
+	textTransform: 'uppercase',
+	fontWeight: 500,
+	fontSize: ' 1.5rem',
+	display: 'flex',
+	alignItems: 'center',
+}
+
+CollapsiblePanelStyled.story = {
+	name: 'Styled Panel Header',
+}
