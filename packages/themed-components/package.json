@@ -1,6 +1,6 @@
 {
 	"name": "@essex/themed-components",
-	"version": "2.3.2",
+	"version": "2.4.0",
 	"description": "A set of visual components that include built-in thematic",
 	"type": "module",
 	"main": "src/index.ts",
