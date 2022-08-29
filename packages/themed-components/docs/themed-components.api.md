@@ -6,6 +6,8 @@
 
 /// <reference types="react" />
 
+import type { CSSProperties } from 'react';
+import type { FC } from 'react';
 import type { IButtonStyles } from '@fluentui/react';
 import type { IChoiceGroupProps } from '@fluentui/react';
 import type { IContextualMenuListProps } from '@fluentui/react';
@@ -125,6 +127,30 @@ export enum ControlType {
     toggle = "toggle"
 }
 
+// @public
+export type CookieConsent = Record<CookieConsentCategories, boolean>;
+
+// @public
+export type CookieConsentBannerThemes = 'light' | 'dark' | 'high-contrast';
+
+// @public (undocumented)
+export enum CookieConsentCategories {
+    Advertising = "Advertising",
+    Analytics = "Analytics",
+    Required = "Required",
+    SocialMedia = "SocialMedia"
+}
+
+// Warning: (ae-internal-missing-underscore) The name "CookieConsentManager" should be prefixed with an underscore because the declaration is marked as @internal
+//
+// @internal (undocumented)
+export type CookieConsentManager = {
+    readonly isConsentRequired: boolean;
+    getConsent(): CookieConsent;
+    getConsentFor(consentCategory: CookieConsentCategories): boolean;
+    manageConsent(): void;
+};
+
 // Warning: (ae-missing-release-tag) "DialogConfirm" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -181,6 +207,39 @@ export interface ParsedSettingConfig extends SettingConfig {
     // (undocumented)
     value: any;
 }
+
+// Warning: (ae-missing-release-tag) "PolicyAndCookieBanner" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const PolicyAndCookieBanner: FC<PolicyAndCookieBannerProps>;
+
+// @public
+export type PolicyAndCookieBannerProps = {
+    language?: string;
+    theme?: CookieConsentBannerThemes;
+    onConsentChange?: (newConsent: CookieConsent) => void;
+    onError: (error: unknown) => void;
+    className?: string;
+    styles?: CSSProperties;
+    links?: Array<PolicyLinkDetails>;
+};
+
+// @public (undocumented)
+export type PolicyLinkDetails = {
+    name: string;
+    href: string;
+};
+
+// Warning: (ae-internal-missing-underscore) The name "PolicyLinkProps" should be prefixed with an underscore because the declaration is marked as @internal
+//
+// @internal (undocumented)
+export type PolicyLinkProps = {
+    name: string;
+    id?: string;
+    href?: string;
+    onClick?: () => void;
+    divider?: boolean;
+};
 
 // Warning: (ae-missing-release-tag) "SearchBox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -282,6 +341,13 @@ export interface ToggleLinkProps {
     // (undocumented)
     style?: React.CSSProperties;
 }
+
+// Warning: (ae-internal-missing-underscore) The name "WcpConsent" should be prefixed with an underscore because the declaration is marked as @internal
+//
+// @internal (undocumented)
+export type WcpConsent = {
+    init: (culture: string, placeholderIdOrElement: string | HTMLElement, initCallback?: (err?: Error, siteConsent?: CookieConsentManager) => void, onConsentChanged?: (newConsent: CookieConsent) => void, theme?: CookieConsentBannerThemes, stylesNonce?: string) => void;
+};
 
 // (No @packageDocumentation comment for this package)
 
