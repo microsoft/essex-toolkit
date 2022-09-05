@@ -1,0 +1,5 @@
+releases:
+  "@essex/styled-components": patch
+  "@essex/themed-components": minor
+  essex-js-toolkit: patch
+  essex-js-toolkit-stories: minor
