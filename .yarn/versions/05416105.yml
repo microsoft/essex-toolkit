@@ -1,3 +1,8 @@
 releases:
+  "@essex/charts-react": patch
+  "@essex/styled-components": patch
   "@essex/themed-components": minor
   essex-js-toolkit-stories: minor
+
+undecided:
+  - essex-js-toolkit
