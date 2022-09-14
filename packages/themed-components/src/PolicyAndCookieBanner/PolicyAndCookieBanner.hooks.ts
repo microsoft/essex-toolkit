@@ -60,9 +60,20 @@ export function useLoadMSFTCookieScript({
 
 				const cookieBannerPlaceholderElement = document.getElementById(
 					cookieConsentBannerId,
-				)!
+				)
+				if (!cookieBannerPlaceholderElement) {
+					throw new Error(
+						`Error loading cookie-banner placeholder element. Failed to find element with id ${cookieConsentBannerId} in the DOM.`,
+					)
+				}
 
-				window.WcpConsent!.init(
+				if (!window.WcpConsent) {
+					throw new Error(
+						`WcpConsent is undefined - did you include the script tag?`,
+					)
+				}
+
+				window.WcpConsent.init(
 					language,
 					cookieBannerPlaceholderElement,
 					function initializeConsentManager(err, consentManager) {
@@ -82,6 +93,10 @@ export function useLoadMSFTCookieScript({
 
 		void initialize()
 	}, [
+		cookieConsentBannerId,
+		cookieScriptSrc,
+		cookieScriptTagId,
+		maxScriptLoadingTimeMs,
 		language,
 		theme,
 		onConsentChange,

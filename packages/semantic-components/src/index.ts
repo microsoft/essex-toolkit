@@ -21,11 +21,17 @@ export default function semantic<P, D extends DefaultsObject>(
 	const DecoratedComponent: React.FC<Defaulted<P, D>> = (
 		props: Defaulted<P, D>,
 	) => {
-		return createElement(decorated, {
-			...defaults,
-			...props,
-			className: cx(defaults?.className, props.className),
-		} as any)
+		return createElement(
+			decorated as
+				| string
+				| React.ComponentClass<unknown>
+				| React.FunctionComponent<unknown>,
+			{
+				...defaults,
+				...props,
+				className: cx(defaults?.className, props.className),
+			} as any,
+		)
 	}
 	return DecoratedComponent
 }

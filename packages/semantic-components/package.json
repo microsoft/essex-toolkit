@@ -16,18 +16,19 @@
 		"clean": "essex clean",
 		"test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
 		"lint": "essex lint",
+		"lint_fix": "essex lint --fix",
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {
-		"@essex/jest-config": "^21.0.12",
-		"@essex/scripts": "^22.0.4",
+		"@essex/jest-config": "^21.0.14",
+		"@essex/scripts": "^22.0.7",
 		"@essex/tsconfig-base": "^1.0.2",
-		"@testing-library/react": "^13.2.0",
-		"@types/react": "^18.0.9",
-		"@types/react-dom": "^18.0.5",
-		"jest": "^28.1.0",
-		"react": "^18.1.0",
-		"react-dom": "^18.1.0"
+		"@testing-library/react": "^13.4.0",
+		"@types/react": "^18.0.20",
+		"@types/react-dom": "^18.0.6",
+		"jest": "^29.0.3",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
 	},
 	"essex": {
 		"exports": {
@@ -35,8 +36,8 @@
 		}
 	},
 	"dependencies": {
-		"@types/jest": "^27.5.1",
-		"classnames": "^2.3.1"
+		"@types/jest": "^29.0.2",
+		"classnames": "^2.3.2"
 	},
 	"peerDependencies": {
 		"@types/react-dom": "*"

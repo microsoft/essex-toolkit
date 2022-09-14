@@ -17,12 +17,13 @@
 		"build": "essex build --docs",
 		"test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
 		"lint": "essex lint",
+		"lint_fix": "essex lint --fix",
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {
-		"@essex/jest-config": "^21.0.12",
-		"@essex/scripts": "^22.0.4",
-		"jest": "^28.1.0",
+		"@essex/jest-config": "^21.0.14",
+		"@essex/scripts": "^22.0.7",
+		"jest": "^29.0.3",
 		"regenerator-runtime": "^0.13.9"
 	}
 }
