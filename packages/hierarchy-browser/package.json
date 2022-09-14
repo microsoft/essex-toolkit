@@ -1,6 +1,6 @@
 {
 	"name": "@essex/hierarchy-browser",
-	"version": "4.0.12",
+	"version": "4.0.13",
 	"description": "React component to display hierarchical community data",
 	"license": "MIT",
 	"repository": "https://github.com/microsoft/essex-js-toolkit",
