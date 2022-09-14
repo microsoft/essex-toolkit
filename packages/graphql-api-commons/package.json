@@ -23,6 +23,7 @@
 		"clean": "essex clean dist lib",
 		"build": "essex build --mode dual --skipExportCheck --docs",
 		"lint": "essex lint",
+		"lint_fix": "essex lint --fix",
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { Toggle } from '@fluentui/react'
 import { ThemeVariant, loadById } from '@thematic/core'
 import { ApplicationStyles } from '@thematic/react'

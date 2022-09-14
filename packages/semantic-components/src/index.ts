@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import cx from 'classnames'
-import React, { createElement } from 'react'
+import { createElement } from 'react'
 
 export interface DefaultsObject {
 	id?: string

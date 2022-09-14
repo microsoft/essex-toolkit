@@ -75,7 +75,7 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 				: 'none',
 			...styles.contents,
 		}),
-		[expanded, theme],
+		[expanded, theme, styles.contents],
 	)
 	return (
 		<div>
@@ -180,7 +180,7 @@ const HeaderContainer: React.FC<{
 			borderBottom,
 			...style,
 		}
-	}, [first, last, expanded, theme])
+	}, [first, last, expanded, theme, style])
 	return (
 		<div style={_style} onClick={onClick} onKeyDown={onKeyDown} role="group">
 			{children}

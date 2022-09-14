@@ -31,6 +31,7 @@
 		"clean": "turbo run clean --parallel",
 		"test": "turbo run test",
 		"lint": "turbo run lint",
+		"lint_fix": "turbo run lint_fix",
 		"start": "turbo run start --parallel",
 		"ci": "turbo run ci",
 		"stories": "yarn start:storybook",
