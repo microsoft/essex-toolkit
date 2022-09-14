@@ -36,8 +36,8 @@ export const ButtonChoiceGroup: React.FC<IChoiceGroupProps> = memo(
 								borderRadius: '2px',
 							},
 						},
-						onRenderField: onRenderField,
-					}
+						onRenderField,
+					} as IChoiceGroupOption
 				}),
 			[options],
 		)
