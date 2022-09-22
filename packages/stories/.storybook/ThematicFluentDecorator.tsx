@@ -18,7 +18,7 @@ export const ThematicFluentDecorator = (
 	// this helps identify problems with theme application in Fluent, which looks a lot like our default essex theme
 	const thematicTheme = useMemo(
 		() =>
-			loadById('ocean', {
+			loadById('autumn', {
 				variant: dark ? ThemeVariant.Dark : ThemeVariant.Light,
 			}),
 		[dark],
