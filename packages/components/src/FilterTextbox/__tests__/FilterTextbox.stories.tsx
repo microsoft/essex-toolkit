@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { FilterTextbox } from '@essex/themed-components'
+import { FilterTextbox } from '@essex/components'
 
 const meta = {
-	title: '@essex:themed-components/Filter Textbox',
+	title: '@essex:components/Filter Textbox',
 }
 
 export default meta

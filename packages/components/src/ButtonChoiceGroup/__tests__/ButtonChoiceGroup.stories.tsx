@@ -7,7 +7,7 @@ import type { IChoiceGroupOption } from '@fluentui/react'
 import { ButtonChoiceGroup } from '../index.js'
 
 const meta = {
-	title: '@essex:themed-components/Button Choice Group',
+	title: '@essex:components/Button Choice Group',
 }
 
 export default meta

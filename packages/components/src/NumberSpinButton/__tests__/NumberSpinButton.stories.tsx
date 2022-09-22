@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { NumberSpinButton as NSB } from '@essex/themed-components'
+import { NumberSpinButton as NSB } from '@essex/components'
 import { useCallback, useState } from 'react'
 
 const meta = {
-	title: '@essex:themed-components/NumberSpinButton',
+	title: '@essex:components/NumberSpinButton',
 }
 export default meta
 /**

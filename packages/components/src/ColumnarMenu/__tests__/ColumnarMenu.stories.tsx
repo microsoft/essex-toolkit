@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnarMenu, ColumnarMenuList } from '@essex/themed-components'
+import { ColumnarMenu, ColumnarMenuList } from '@essex/components'
 import type { IContextualMenuItem } from '@fluentui/react'
 import { ContextualMenuItemType } from '@fluentui/react'
 import { useCallback } from 'react'
 
 const story = {
-	title: '@essex:themed-components/ColumnarMenu',
+	title: '@essex:components/ColumnarMenu',
 }
 export default story
 

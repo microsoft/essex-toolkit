@@ -1,6 +1,6 @@
 # @essex/thematic-lineup
 
-### [ThematicLineup](/packages/themed-components-stories/stories/ThematicLineup.stories.tsx)
+### [ThematicLineup](/packages/thematic-lineup/src/__tests__/ThematicLineup.stories.tsx)
 
 This component uses the standard [LineUp.js](https://lineup.js.org/) table, and does:
 

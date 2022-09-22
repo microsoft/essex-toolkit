@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ClippedGraph } from '@essex/themed-components'
+import { ClippedGraph } from '@essex/components'
 
 const story = {
-	title: '@essex:themed-components/ClippedGraph',
+	title: '@essex:components/ClippedGraph',
 }
 export default story
 const data = [

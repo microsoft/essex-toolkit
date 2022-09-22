@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ControlledHistogramFilter } from '@essex/themed-components'
+import { ControlledHistogramFilter } from '@essex/components'
 import { useState } from 'react'
 
 const story = {
-	title: '@essex:themed-components/ControlledHistogramFilter',
+	title: '@essex:components/ControlledHistogramFilter',
 }
 export default story
 

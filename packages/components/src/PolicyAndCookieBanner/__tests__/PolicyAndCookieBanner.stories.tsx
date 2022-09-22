@@ -6,7 +6,7 @@
 import { PolicyAndCookieBanner } from '../index.js'
 
 const meta = {
-	title: '@essex:themed-components/Policy and Cookie Banner',
+	title: '@essex:components/Policy and Cookie Banner',
 }
 
 const onError = window.alert.bind(window)

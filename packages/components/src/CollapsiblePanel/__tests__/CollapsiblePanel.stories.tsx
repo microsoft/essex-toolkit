@@ -2,14 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	CollapsiblePanel,
-	CollapsiblePanelContainer,
-} from '@essex/themed-components'
+import { CollapsiblePanel, CollapsiblePanelContainer } from '@essex/components'
 import { useCallback } from 'react'
 
 const meta = {
-	title: '@essex:themed-components/CollapsiblePanel',
+	title: '@essex:components/CollapsiblePanel',
 }
 
 export default meta

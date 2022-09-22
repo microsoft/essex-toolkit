@@ -25,14 +25,10 @@ ThematicLineupStory displays a LineUp instance, while also applying default them
 Use it for a React-style JSX wrapper around LineUp that has more potential flexibility than the very configuration limited version exposed by the LineUp project.
 This allows arbitrary column configurations via jsx, and a set of global filters if desired.
 
-## [@essex/themed-components](packages/themed-components/README.md)
+## [@essex/components](packages/components/README.md)
 
-Provides a set of React components with built-in Thematic support
+Provides a set of React components
 Works in harmony with Thematic library styling and contains ready-to-use data visuals
-
-## [@essex/themed-components-stories](packages/themed-components-stories/README.md)
-
-Storybook of themed-components package to test and view example components
 
 ## [@essex/toolbox](packages/toolbox/README.md)
 

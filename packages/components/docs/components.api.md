@@ -9,7 +9,7 @@
 import type { CSSProperties } from 'react';
 import type { FC } from 'react';
 import type { IButtonStyles } from '@fluentui/react';
-import type { IChoiceGroupProps } from '@fluentui/react';
+import { IChoiceGroupProps } from '@fluentui/react';
 import type { IContextualMenuListProps } from '@fluentui/react';
 import type { IContextualMenuProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';

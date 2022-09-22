@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Settings } from '@essex/themed-components'
+import { Settings } from '@essex/components'
 import { DefaultButton, MessageBar } from '@fluentui/react'
 import { useCallback, useState } from 'react'
 
 const story = {
-	title: '@essex:themed-components/Settings Pane',
+	title: '@essex:components/Settings Pane',
 }
 export default story
 

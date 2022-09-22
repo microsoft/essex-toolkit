@@ -2,25 +2,25 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
+import {
 	IChoiceGroupOption,
 	IChoiceGroupOptionProps,
 	IChoiceGroupProps,
+	useTheme,
 } from '@fluentui/react'
 import { ChoiceGroup, DefaultButton } from '@fluentui/react'
-import { useThematic } from '@thematic/react'
 import { memo, useMemo } from 'react'
 
 export const ButtonChoiceGroup: React.FC<IChoiceGroupProps> = memo(
 	function ButtonChoiceGroup({ options, ...props }) {
-		const theme = useThematic()
+		const theme = useTheme()
 		const choiceGroupStyles = {
 			flexContainer: {
 				display: 'inline-flex',
 				flexDirection: 'row',
 				flexWrap: 'wrap',
 				borderRadius: '2px',
-				border: `1px solid ${theme.application().border().hex()}`,
+				border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
 			},
 		}
 

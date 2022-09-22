@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ToggleLink } from '@essex/themed-components'
+import { ToggleLink } from '@essex/components'
 import { useCallback, useState } from 'react'
 
 const meta = {
-	title: '@essex:themed-components/ToggleLink',
+	title: '@essex:components/ToggleLink',
 }
 
 export default meta

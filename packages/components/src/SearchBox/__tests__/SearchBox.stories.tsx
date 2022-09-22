@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { SearchBox } from '@essex/themed-components'
+import { SearchBox } from '@essex/components'
 
 const meta = {
-	title: '@essex:themed-components/SearchBox',
+	title: '@essex:components/SearchBox',
 }
 
 export default meta
