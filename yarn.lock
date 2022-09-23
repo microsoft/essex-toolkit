@@ -3320,6 +3320,7 @@ __metadata:
     prop-types: ^15.8.1
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-if: ^4.1.4
   peerDependencies:
     "@fluentui/react": ">= 7.114.2"
     "@thematic/color": ">= 0.8.0"
@@ -19368,6 +19369,15 @@ __metadata:
     react: ">= 16.3"
     react-dom: ">= 16.3"
   checksum: 1843c48dce41a0af03590dd7351baaf8a68ecac4e850d9819d093517a34d1097668c2b2cd809a8f5cd70791c011c6f2dcaf90d43b6e773b33c212f1f4cf17f55
+  languageName: node
+  linkType: hard
+
+"react-if@npm:^4.1.4":
+  version: 4.1.4
+  resolution: "react-if@npm:4.1.4"
+  peerDependencies:
+    react: ^16.x || ^17.x || ^18.x
+  checksum: 107ba70562b97c2262d8bdbf9076e66113a4225a04abd2feb55001d38902a50a416d358ca0e4783736149e2a6d47db86d7e46a1e5a4d8acf1d7b1383caedf1a4
   languageName: node
   linkType: hard
 

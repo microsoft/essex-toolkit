@@ -1,11 +1,12 @@
 import { useState, useCallback, useMemo } from 'react'
-import { Toggle } from '@fluentui/react'
+import { initializeIcons, Toggle } from '@fluentui/react'
 import { ThemeVariant, loadById } from '@thematic/core'
 import { ApplicationStyles } from '@thematic/react'
 import { ThematicFluentProvider } from '@thematic/fluent'
 import { StoryFnReactReturnType } from '@storybook/react/dist/ts3.9/client/preview/types'
 import styled, { ThemeProvider } from 'styled-components'
 
+initializeIcons()
 /**
  * ThematicFluentDecorator configures both Thematic and the Fluent wrapper
  * @param storyFn
