@@ -4,7 +4,7 @@
  */
 import { Children, cloneElement, useMemo } from 'react'
 
-import type { CollapsiblePanelContainerProps } from './interfaces.js'
+import type { CollapsiblePanelContainerProps } from './CollapsiblePanel.types.js'
 
 /**
  * Receives an array of CollapsiblePanel as children to render it

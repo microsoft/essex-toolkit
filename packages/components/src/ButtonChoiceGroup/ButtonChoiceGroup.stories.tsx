@@ -4,7 +4,7 @@
  */
 import type { IChoiceGroupOption } from '@fluentui/react'
 
-import { ButtonChoiceGroup } from '../index.js'
+import { ButtonChoiceGroup } from './ButtonChoiceGroup.js'
 
 const meta = {
 	title: '@essex:components/Button Choice Group',

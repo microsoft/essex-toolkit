@@ -5,8 +5,8 @@
 import { ChoiceGroup, Dropdown, TextField } from '@fluentui/react'
 import { useCallback } from 'react'
 
-import type { ControlProps } from './interfaces.js'
-import { ControlType } from './interfaces.js'
+import type { ControlProps } from './Settings.types.js'
+import { ControlType } from './Settings.types.js'
 
 /**
  * TextControl creates either thematic themed TextField, Dropdown, or ChoiceGroup

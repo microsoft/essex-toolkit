@@ -13,7 +13,7 @@ import {
 } from '@fluentui/react'
 import { useEffect, useMemo, useState } from 'react'
 
-import { NumberSpinButton } from '../NumberSpinButton/index.js'
+import { NumberSpinButton } from '../NumberSpinButton/NumberSpinButton.js'
 import { HistogramSelect } from './HistogramSelect.js'
 
 export interface ControlledHistogramFilterProps {

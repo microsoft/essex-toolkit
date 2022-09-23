@@ -2,23 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { IIconStyles } from '@fluentui/react'
 import { IconButton, Link } from '@fluentui/react'
 import { memo } from 'react'
 import { When } from 'react-if'
 
 import { useExpando } from './Expando.hooks.js'
 import { defaultIconStyles, defaultToggleStyles } from './Expando.styles.js'
-
-export interface ExpandoProps
-	extends React.PropsWithChildren<{
-		/* nothing */
-	}> {
-	label: string
-	defaultExpanded?: boolean
-	iconStyles?: IIconStyles
-	toggleStyles?: React.CSSProperties
-}
+import type { ExpandoProps } from './Expando.types.js'
 
 /**
  * Toggle link with a chevron and show/hide of children.

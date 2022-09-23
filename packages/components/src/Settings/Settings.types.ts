@@ -86,3 +86,34 @@ export interface ControlProps {
 	config: ParsedSettingConfig
 	onChange?: (key: string, value: any) => void
 }
+
+export interface SettingsGroup {
+	keys: string[]
+	label?: string
+}
+
+export interface SettingsProps {
+	/**
+	 * Required object to render into a settings panel.
+	 * This can be basically anything, but should be flat
+	 * at the moment, as complex/nest objects are not supported.
+	 */
+	settings: any
+	/**
+	 * Map of optional config params for individual settings.
+	 * The key should match the key present in the settings object.
+	 */
+	config?: { [key: string]: SettingConfig }
+	/**
+	 * List of optional groups to sort the settings into, with a separator between each.
+	 * The group is a list of the keys to include, with an optional label for the separator.
+	 */
+	groups?: SettingsGroup[]
+	/**
+	 * Handler to notify when any of the settings has changed.
+	 * Callback args will be the key and value that changed.
+	 * Merging, etc. is up to the consumer.
+	 *
+	 */
+	onChange?: (key: string, value: any) => void
+}

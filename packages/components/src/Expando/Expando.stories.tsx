@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ExpandoProps } from './Expando.js'
 import { Expando as ExpandoComponent } from './Expando.js'
+import type { ExpandoProps } from './Expando.types.js'
 
 const storyMetadata = {
 	title: '@essex:components/Expando',

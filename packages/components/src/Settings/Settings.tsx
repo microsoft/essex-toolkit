@@ -6,20 +6,16 @@ import { Separator, Stack } from '@fluentui/react'
 import { useCallback } from 'react'
 
 import { BooleanControl } from './BooleanControl.js'
-import type {
-	ParsedSettingConfig,
-	SettingConfig,
-	SortedSettings,
-	SortedSettingsGrouped,
-} from './interfaces.js'
 import { NumberControl } from './NumberControl.js'
 import { parseSettings } from './reader.js'
+import type {
+	ParsedSettingConfig,
+	SettingsGroup,
+	SettingsProps,
+	SortedSettings,
+	SortedSettingsGrouped,
+} from './Settings.types.js'
 import { TextControl } from './TextControl.js'
-
-interface Group {
-	keys: string[]
-	label?: string
-}
 
 // chooses the top-level control type and renders it as a row
 const renderControl = (
@@ -51,7 +47,7 @@ const renderControl = (
 
 const sortIntoGroups = (
 	parsed: ParsedSettingConfig[],
-	groups: Group[] = [],
+	groups: SettingsGroup[] = [],
 ): any[] => {
 	const depleting = [...parsed]
 	const grouped = groups.reduce((acc: any, cur: any) => {
@@ -76,32 +72,6 @@ const sortIntoGroups = (
 		} as SortedSettings,
 		...grouped,
 	]
-}
-
-export interface SettingsProps {
-	/**
-	 * Required object to render into a settings panel.
-	 * This can be basically anything, but should be flat
-	 * at the moment, as complex/nest objects are not supported.
-	 */
-	settings: any
-	/**
-	 * Map of optional config params for individual settings.
-	 * The key should match the key present in the settings object.
-	 */
-	config?: { [key: string]: SettingConfig }
-	/**
-	 * List of optional groups to sort the settings into, with a separator between each.
-	 * The group is a list of the keys to include, with an optional label for the separator.
-	 */
-	groups?: Group[]
-	/**
-	 * Handler to notify when any of the settings has changed.
-	 * Callback args will be the key and value that changed.
-	 * Merging, etc. is up to the consumer.
-	 *
-	 */
-	onChange?: (key: string, value: any) => void
 }
 
 /**

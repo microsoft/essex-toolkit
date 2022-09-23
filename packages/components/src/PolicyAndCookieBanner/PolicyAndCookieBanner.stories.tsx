@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { PolicyAndCookieBanner } from '../index.js'
+import { PolicyAndCookieBanner } from './index.js'
 
 const meta = {
 	title: '@essex:components/Policy and Cookie Banner',

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { SearchBox } from '@essex/components'
+import { SearchBox as SearchBoxComponent } from '@essex/components'
 
 const meta = {
 	title: '@essex:components/SearchBox',
@@ -15,10 +15,6 @@ export default meta
  * Fluent Component
  * adapted for Thematic styling
  */
-export const SearchBoxStory = () => {
-	return <SearchBox label={'Label'} placeholder={'placeholder'} />
-}
-
-SearchBoxStory.story = {
-	name: 'SearchBox',
+export const SearchBox = () => {
+	return <SearchBoxComponent label={'Label'} placeholder={'placeholder'} />
 }
