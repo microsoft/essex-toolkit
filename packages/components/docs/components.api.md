@@ -10,12 +10,15 @@ import type { CSSProperties } from 'react';
 import type { FC } from 'react';
 import type { IButtonStyles } from '@fluentui/react';
 import type { IChoiceGroupProps } from '@fluentui/react';
+import type { ICommandBarStyleProps } from '@fluentui/react';
+import type { ICommandBarStyles } from '@fluentui/react';
 import type { IContextualMenuListProps } from '@fluentui/react';
 import type { IContextualMenuProps } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
 import type { IDropdownProps } from '@fluentui/react';
-import { IIconStyles } from '@fluentui/react';
+import type { IIconStyles } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
+import type { IStyleFunctionOrObject } from '@fluentui/react';
 import type { Position } from '@fluentui/react';
 import * as React_2 from 'react';
 import type { ReactNode } from 'react';
@@ -31,17 +34,43 @@ export const ButtonChoiceGroup: React.FC<IChoiceGroupProps>;
 // @public
 export const ClippedGraph: ({ data, width, height, clipped, percentile, gradient, gradientInterpolation, gradientBand, horizon, sparkline, }: ClippedGraphProps) => JSX.Element;
 
-// Warning: (ae-forgotten-export) The symbol "CollapsiblePanelProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "CollapsiblePanel" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export const CollapsiblePanel: React_2.FC<CollapsiblePanelProps>;
 
-// Warning: (ae-forgotten-export) The symbol "CollapsiblePanelContainerProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "CollapsiblePanelContainer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export const CollapsiblePanelContainer: React.FC<CollapsiblePanelContainerProps>;
+
+// Warning: (ae-missing-release-tag) "CollapsiblePanelContainerProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface CollapsiblePanelContainerProps {
+    // (undocumented)
+    children?: ReactNode;
+}
+
+// Warning: (ae-missing-release-tag) "CollapsiblePanelProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface CollapsiblePanelProps {
+    // (undocumented)
+    children?: ReactNode;
+    defaultExpanded?: boolean;
+    expandedState?: boolean;
+    first?: boolean;
+    last?: boolean;
+    onHeaderClick?: (nextState: boolean) => void;
+    onRenderHeader?: IRenderFunction<any>;
+    // (undocumented)
+    styles?: {
+        header?: React.CSSProperties;
+        contents?: React.CSSProperties;
+    };
+    title?: string;
+}
 
 // Warning: (ae-missing-release-tag) "ColumnarMenu" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -124,6 +153,28 @@ export const DialogConfirm: React.FC<{
     title: string;
     subText?: string;
 }>;
+
+// Warning: (ae-missing-release-tag) "EnumButtonBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function EnumButtonBar<E>({ enumeration, selected, onChange, styles, iconNames, iconOnly, }: EnumButtonBarProps<E>): JSX.Element;
+
+// Warning: (ae-missing-release-tag) "EnumButtonBarProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface EnumButtonBarProps<E> {
+    // (undocumented)
+    enumeration: any;
+    iconNames?: string[];
+    // (undocumented)
+    iconOnly?: boolean;
+    // (undocumented)
+    onChange?: (selected: string | number) => void;
+    // (undocumented)
+    selected?: E;
+    // (undocumented)
+    styles?: IStyleFunctionOrObject<ICommandBarStyleProps, ICommandBarStyles>;
+}
 
 // Warning: (ae-missing-release-tag) "EnumDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
