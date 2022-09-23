@@ -12,6 +12,8 @@ import type { IButtonStyles } from '@fluentui/react';
 import type { IChoiceGroupProps } from '@fluentui/react';
 import type { IContextualMenuListProps } from '@fluentui/react';
 import type { IContextualMenuProps } from '@fluentui/react';
+import type { IDropdownProps } from '@fluentui/react';
+import type { IIconStyles } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { Position } from '@fluentui/react';
 import * as React_2 from 'react';
@@ -161,6 +163,31 @@ export const DialogConfirm: React.FC<{
     title: string;
     subText?: string;
 }>;
+
+// Warning: (ae-forgotten-export) The symbol "EnumDropdownProps" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "EnumDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const EnumDropdown: React.FC<EnumDropdownProps>;
+
+// Warning: (ae-missing-release-tag) "Expando" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const Expando: React.FC<ExpandoProps>;
+
+// Warning: (ae-missing-release-tag) "ExpandoProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ExpandoProps extends React.PropsWithChildren<{}> {
+    // (undocumented)
+    defaultExpanded?: boolean;
+    // (undocumented)
+    iconStyles?: IIconStyles;
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    toggleStyles?: React.CSSProperties;
+}
 
 // Warning: (ae-missing-release-tag) "FilterTextbox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
