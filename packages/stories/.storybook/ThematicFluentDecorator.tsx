@@ -40,5 +40,6 @@ export const ThematicFluentDecorator = (
 }
 
 const Container = styled.div`
+	padding: 20px;
 	border: 1px solid ${({ theme }) => theme.application().faint().hex()};
 `

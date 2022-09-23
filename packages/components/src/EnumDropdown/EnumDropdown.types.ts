@@ -8,7 +8,8 @@ export interface EnumDropdownProps<E = unknown>
 	extends Omit<IDropdownProps, 'options'> {
 	enumeration: E
 	/**
-	 * Optional labels to map enum keys to alternate text
+	 * Optional labels to map enum keys to alternate text.
+	 * This is helpful for when the enum values may not be as user-friendly.
 	 */
 	labels?: Record<string, string>
 }

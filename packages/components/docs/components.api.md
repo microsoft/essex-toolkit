@@ -12,6 +12,7 @@ import type { IButtonStyles } from '@fluentui/react';
 import type { IChoiceGroupProps } from '@fluentui/react';
 import type { IContextualMenuListProps } from '@fluentui/react';
 import type { IContextualMenuProps } from '@fluentui/react';
+import type { IDropdownOption } from '@fluentui/react';
 import type { IDropdownProps } from '@fluentui/react';
 import type { IIconStyles } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
@@ -193,6 +194,12 @@ export interface ExpandoProps extends React.PropsWithChildren<{}> {
 //
 // @public
 export const FilterTextbox: ({ label, includePlaceholder, excludePlaceholder, onFilter, }: TextFilterProps) => JSX.Element;
+
+// Warning: (ae-forgotten-export) The symbol "MultiDropdownProps" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "MultiDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const MultiDropdown: React.FC<MultiDropdownProps>;
 
 // Warning: (ae-missing-release-tag) "NumberSpinButton" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

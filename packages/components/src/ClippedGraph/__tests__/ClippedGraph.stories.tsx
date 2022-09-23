@@ -14,6 +14,15 @@ const data = [
 	5, 6,
 ]
 
+const WIDTH = 800
+const HEIGHT = 100
+
+const wrapper: React.CSSProperties = {
+	width: WIDTH,
+	height: HEIGHT,
+	marginBottom: 20,
+}
+
 /**
  * ClippedGraphStory contains react component to display charts larger than viewable area
  * It provides an alternative view of "clipped" chart area
@@ -21,18 +30,22 @@ const data = [
 export const ClippedGraphStory = () => (
 	<div>
 		Full graph
-		<div style={{ width: 800, height: 100, marginBottom: 20 }}>
-			<ClippedGraph width={800} height={100} data={data} />
+		<div style={wrapper}>
+			<ClippedGraph width={WIDTH} height={HEIGHT} data={data} />
 		</div>
 		Clipped graph
-		<div style={{ width: 800, height: 100 }}>
+		<div style={wrapper}>
 			<ClippedGraph
-				width={800}
-				height={100}
+				width={WIDTH}
+				height={HEIGHT}
 				data={data}
-				clipped={true}
-				gradient={true}
+				clipped
+				gradient
 			/>
+		</div>
+		Clipped horizon graph
+		<div style={wrapper}>
+			<ClippedGraph width={WIDTH} height={HEIGHT} data={data} horizon clipped />
 		</div>
 	</div>
 )

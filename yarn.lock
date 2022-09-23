@@ -3290,6 +3290,7 @@ __metadata:
     "@fluentui/font-icons-mdl2": ^8.4.13
     "@fluentui/react": ^8.94.4
     "@fluentui/theme": ^2.6.16
+    "@fluentui/utilities": ^8.13.1
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-docs": ^6.5.12
     "@thematic/color": ^2.0.10
@@ -12726,6 +12727,7 @@ __metadata:
     "@essex/thematic-lineup": "workspace:^"
     "@fluentui/font-icons-mdl2": ^8.4.13
     "@fluentui/react": ^8.94.4
+    "@fluentui/utilities": ^8.13.1
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-a11y": ^6.5.12
     "@storybook/addon-docs": ^6.5.12

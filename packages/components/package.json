@@ -23,6 +23,7 @@
 		"@essex/hooks": "workspace:^",
 		"@essex/react-animate-height": "^2.1.4",
 		"@essex/toolbox": "workspace:^",
+		"@fluentui/utilities": "^8.13.1",
 		"@types/d3-array": "^3.0.3",
 		"@types/d3-axis": "^3.0.1",
 		"@types/d3-brush": "^3.0.1",
