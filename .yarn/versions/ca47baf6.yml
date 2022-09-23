@@ -1,0 +1,4 @@
+releases:
+  "@essex/components": minor
+  essex-js-toolkit: patch
+  essex-js-toolkit-stories: patch
