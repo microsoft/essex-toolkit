@@ -2,13 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
+import type {
 	IChoiceGroupOption,
 	IChoiceGroupOptionProps,
 	IChoiceGroupProps,
-	useTheme,
 } from '@fluentui/react'
-import { ChoiceGroup, DefaultButton } from '@fluentui/react'
+import { ChoiceGroup, DefaultButton, useTheme } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 
 export const ButtonChoiceGroup: React.FC<IChoiceGroupProps> = memo(

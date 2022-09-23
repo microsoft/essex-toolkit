@@ -36,7 +36,7 @@
 		"ci": "turbo run ci",
 		"stories": "yarn start:storybook",
 		"is_clean": "git diff-index HEAD --quiet || git status",
-		"format": "essex prettify",
+		"prettify": "essex prettify",
 		"release": "run-s clean _version_cut _ci_force _release_packages",
 		"update_sdks": "yarn dlx @yarnpkg/sdks vscode"
 	},
