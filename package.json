@@ -1,10 +1,10 @@
 {
-	"name": "essex-js-toolkit",
+	"name": "essex-toolkit",
 	"version": "2.4.2",
 	"description": "A set of packages for developers",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/microsoft/essex-js-toolkit.git"
+		"url": "https://github.com/microsoft/essex-toolkit.git"
 	},
 	"author": "David Tittsworth <datittsw@microsoft.com>",
 	"contributors": [

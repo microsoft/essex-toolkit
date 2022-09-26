@@ -8,7 +8,7 @@
 		"types": "dist/index.d.ts"
 	},
 	"sideEffects": false,
-	"repository": "https://github.com/microsoft/essex-js-toolkit",
+	"repository": "https://github.com/microsoft/essex-toolkit",
 	"author": "Chris Trevino <chtrevin@microsoft.com>",
 	"contributors": [
 		"Chris Trevino <chtrevin@microsoft.com>",

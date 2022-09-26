@@ -1,4 +1,4 @@
-# essex-js-toolkit
+# essex-toolkit
 
 Provides a set of useful tools, utilities, reusable components, and React hooks built to support our team built library ecosystem
 Packages are designed to capture common components and utilities common among projects

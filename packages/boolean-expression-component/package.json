@@ -12,7 +12,7 @@
 	"sideEffects": false,
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/microsoft/essex-js-toolkit.git",
+		"url": "https://github.com/microsoft/essex-toolkit.git",
 		"directory": "packages/boolean-expression-component"
 	},
 	"scripts": {

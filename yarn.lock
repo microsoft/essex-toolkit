@@ -12751,9 +12751,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"essex-js-toolkit-stories@workspace:packages/stories":
+"essex-toolkit-stories@workspace:packages/stories":
   version: 0.0.0-use.local
-  resolution: "essex-js-toolkit-stories@workspace:packages/stories"
+  resolution: "essex-toolkit-stories@workspace:packages/stories"
   dependencies:
     "@babel/core": ^7.19.1
     "@babel/preset-env": ^7.19.1
@@ -12803,9 +12803,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"essex-js-toolkit@workspace:.":
+"essex-toolkit@workspace:.":
   version: 0.0.0-use.local
-  resolution: "essex-js-toolkit@workspace:."
+  resolution: "essex-toolkit@workspace:."
   dependencies:
     "@essex/eslint-config": ^20.3.5
     "@essex/prettier-config": ^18.0.3

@@ -1,4 +1,4 @@
-# @essex-js-toolkit/hooks
+# @essex-toolkit/hooks
 
 Provides a set of useful react hooks for common applications
 
