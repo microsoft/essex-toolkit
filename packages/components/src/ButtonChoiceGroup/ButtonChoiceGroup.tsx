@@ -13,15 +13,18 @@ import { memo, useMemo } from 'react'
 export const ButtonChoiceGroup: React.FC<IChoiceGroupProps> = memo(
 	function ButtonChoiceGroup({ options, ...props }) {
 		const theme = useTheme()
-		const choiceGroupStyles = {
-			flexContainer: {
-				display: 'inline-flex',
-				flexDirection: 'row',
-				flexWrap: 'wrap',
-				borderRadius: '2px',
-				border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
-			},
-		}
+		const choiceGroupStyles = useMemo(
+			() => ({
+				flexContainer: {
+					display: 'inline-flex',
+					flexDirection: 'row',
+					flexWrap: 'wrap',
+					borderRadius: '2px',
+					border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
+				},
+			}),
+			[theme],
+		)
 
 		const buttonOptions = useMemo(
 			(): IChoiceGroupOption[] | undefined =>

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { NumberSpinButton as NSB } from '@essex/components'
+import { NumberSpinButton as NumberSpinButtonComponent } from '@essex/components'
 import { useCallback, useState } from 'react'
 
 const meta = {
@@ -17,5 +17,12 @@ export default meta
 export const NumberSpinButton = () => {
 	const [value, setValue] = useState(10)
 	const handleChange = useCallback(n => setValue(n), [setValue])
-	return <NSB label={'Label'} max={20} value={value} onChange={handleChange} />
+	return (
+		<NumberSpinButtonComponent
+			label={'Label'}
+			max={20}
+			value={value}
+			onChange={handleChange}
+		/>
+	)
 }

@@ -10,9 +10,15 @@ import type { CSSProperties } from 'react';
 import type { FC } from 'react';
 import type { IButtonStyles } from '@fluentui/react';
 import type { IChoiceGroupProps } from '@fluentui/react';
+import type { ICommandBarStyleProps } from '@fluentui/react';
+import type { ICommandBarStyles } from '@fluentui/react';
 import type { IContextualMenuListProps } from '@fluentui/react';
 import type { IContextualMenuProps } from '@fluentui/react';
+import type { IDropdownOption } from '@fluentui/react';
+import type { IDropdownProps } from '@fluentui/react';
+import type { IIconStyles } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
+import type { IStyleFunctionOrObject } from '@fluentui/react';
 import type { Position } from '@fluentui/react';
 import * as React_2 from 'react';
 import type { ReactNode } from 'react';
@@ -28,17 +34,43 @@ export const ButtonChoiceGroup: React.FC<IChoiceGroupProps>;
 // @public
 export const ClippedGraph: ({ data, width, height, clipped, percentile, gradient, gradientInterpolation, gradientBand, horizon, sparkline, }: ClippedGraphProps) => JSX.Element;
 
-// Warning: (ae-forgotten-export) The symbol "CollapsiblePanelProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "CollapsiblePanel" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export const CollapsiblePanel: React_2.FC<CollapsiblePanelProps>;
 
-// Warning: (ae-forgotten-export) The symbol "CollapsiblePanelContainerProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "CollapsiblePanelContainer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export const CollapsiblePanelContainer: React.FC<CollapsiblePanelContainerProps>;
+
+// Warning: (ae-missing-release-tag) "CollapsiblePanelContainerProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface CollapsiblePanelContainerProps {
+    // (undocumented)
+    children?: ReactNode;
+}
+
+// Warning: (ae-missing-release-tag) "CollapsiblePanelProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface CollapsiblePanelProps {
+    // (undocumented)
+    children?: ReactNode;
+    defaultExpanded?: boolean;
+    expandedState?: boolean;
+    first?: boolean;
+    last?: boolean;
+    onHeaderClick?: (nextState: boolean) => void;
+    onRenderHeader?: IRenderFunction<any>;
+    // (undocumented)
+    styles?: {
+        header?: React.CSSProperties;
+        contents?: React.CSSProperties;
+    };
+    title?: string;
+}
 
 // Warning: (ae-missing-release-tag) "ColumnarMenu" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -87,46 +119,6 @@ export interface ControlledHistogramFilterProps {
     width: number;
 }
 
-// Warning: (ae-missing-release-tag) "ControlParams" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface ControlParams {
-    max?: number;
-    min?: number;
-    options?: string[];
-    step?: number;
-}
-
-// Warning: (ae-missing-release-tag) "ControlProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface ControlProps {
-    // (undocumented)
-    config: ParsedSettingConfig;
-    // (undocumented)
-    onChange?: (key: string, value: any) => void;
-}
-
-// Warning: (ae-missing-release-tag) "ControlType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export enum ControlType {
-    // (undocumented)
-    checkbox = "checkbox",
-    // (undocumented)
-    dropdown = "dropdown",
-    // (undocumented)
-    radio = "radio",
-    // (undocumented)
-    slider = "slider",
-    // (undocumented)
-    spinner = "spinner",
-    // (undocumented)
-    textbox = "textbox",
-    // (undocumented)
-    toggle = "toggle"
-}
-
 // @public
 export type CookieConsent = Record<CookieConsentCategories, boolean>;
 
@@ -162,10 +154,93 @@ export const DialogConfirm: React.FC<{
     subText?: string;
 }>;
 
+// Warning: (ae-missing-release-tag) "EnumButtonBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function EnumButtonBar<E>({ enumeration, selected, onChange, styles, iconNames, iconOnly, }: EnumButtonBarProps<E>): JSX.Element;
+
+// Warning: (ae-missing-release-tag) "EnumButtonBarProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface EnumButtonBarProps<E> {
+    // (undocumented)
+    enumeration: any;
+    iconNames?: string[];
+    // (undocumented)
+    iconOnly?: boolean;
+    // (undocumented)
+    onChange?: (selected: string | number) => void;
+    // (undocumented)
+    selected?: E;
+    // (undocumented)
+    styles?: IStyleFunctionOrObject<ICommandBarStyleProps, ICommandBarStyles>;
+}
+
+// Warning: (ae-missing-release-tag) "EnumDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const EnumDropdown: React.FC<EnumDropdownProps>;
+
+// Warning: (ae-missing-release-tag) "EnumDropdownProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface EnumDropdownProps<E = unknown> extends Omit<IDropdownProps, 'options'> {
+    // (undocumented)
+    enumeration: E;
+    labels?: Record<string, string>;
+}
+
+// Warning: (ae-missing-release-tag) "Expando" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const Expando: React.FC<ExpandoProps>;
+
+// Warning: (ae-missing-release-tag) "ExpandoProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ExpandoProps extends React.PropsWithChildren<{}> {
+    // (undocumented)
+    defaultExpanded?: boolean;
+    // (undocumented)
+    iconStyles?: IIconStyles;
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    toggleStyles?: React.CSSProperties;
+}
+
 // Warning: (ae-missing-release-tag) "FilterTextbox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const FilterTextbox: ({ label, includePlaceholder, excludePlaceholder, onFilter, }: TextFilterProps) => JSX.Element;
+export const FilterTextbox: ({ label, includePlaceholder, excludePlaceholder, onFilter, }: FilterTextboxProps) => JSX.Element;
+
+// Warning: (ae-missing-release-tag) "FilterTextboxProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface FilterTextboxProps {
+    excludePlaceholder?: string;
+    includePlaceholder?: string;
+    label?: string;
+    onFilter?: (text: string, exclude: boolean) => any;
+}
+
+// Warning: (ae-missing-release-tag) "getEnumDropdownOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function getEnumDropdownOptions<E = Record<string, string>>(enumeration: E, labels?: Record<string, string>): IDropdownOption[];
+
+// Warning: (ae-missing-release-tag) "MultiDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const MultiDropdown: React.FC<MultiDropdownProps>;
+
+// Warning: (ae-missing-release-tag) "MultiDropdownProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface MultiDropdownProps extends IDropdownProps {
+    // (undocumented)
+    onChangeAll?: (event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement | HTMLElement>, options: IDropdownOption[]) => void;
+}
 
 // Warning: (ae-missing-release-tag) "NumberSpinButton" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -194,18 +269,6 @@ export interface NumberSpinButtonProps {
     step?: number;
     // (undocumented)
     value: number;
-}
-
-// Warning: (ae-missing-release-tag) "ParsedSettingConfig" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface ParsedSettingConfig extends SettingConfig {
-    // (undocumented)
-    key: string;
-    // (undocumented)
-    type: string;
-    // (undocumented)
-    value: any;
 }
 
 // Warning: (ae-missing-release-tag) "PolicyAndCookieBanner" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -257,29 +320,19 @@ export interface SearchBoxProps {
     placeholder?: string;
 }
 
-// Warning: (ae-missing-release-tag) "SettingConfig" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface SettingConfig {
-    // (undocumented)
-    control?: ControlType;
-    // (undocumented)
-    label?: string;
-    // (undocumented)
-    params?: ControlParams;
-}
-
 // Warning: (ae-missing-release-tag) "Settings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export const Settings: ({ settings, config, groups, onChange, }: SettingsProps) => JSX.Element;
 
-// Warning: (ae-missing-release-tag) "SettingsI" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "SettingsGroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface SettingsI extends SettingConfig {
+export interface SettingsGroup {
     // (undocumented)
-    [key: string]: any;
+    keys: string[];
+    // (undocumented)
+    label?: string;
 }
 
 // Warning: (ae-missing-release-tag) "SettingsProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -289,38 +342,9 @@ export interface SettingsProps {
     config?: {
         [key: string]: SettingConfig;
     };
-    // Warning: (ae-forgotten-export) The symbol "Group" needs to be exported by the entry point index.d.ts
-    groups?: Group[];
+    groups?: SettingsGroup[];
     onChange?: (key: string, value: any) => void;
     settings: any;
-}
-
-// Warning: (ae-missing-release-tag) "SortedSettings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface SortedSettings {
-    // (undocumented)
-    settings: ParsedSettingConfig[];
-}
-
-// Warning: (ae-missing-release-tag) "SortedSettingsGrouped" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface SortedSettingsGrouped extends ParsedSettingConfig {
-    // (undocumented)
-    separator: boolean;
-    // (undocumented)
-    settings: any[];
-}
-
-// Warning: (ae-missing-release-tag) "TextFilterProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface TextFilterProps {
-    excludePlaceholder?: string;
-    includePlaceholder?: string;
-    label?: string;
-    onFilter?: (text: string, exclude: boolean) => any;
 }
 
 // Warning: (ae-missing-release-tag) "ToggleLink" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -348,6 +372,10 @@ export interface ToggleLinkProps {
 export type WcpConsent = {
     init: (culture: string, placeholderIdOrElement: string | HTMLElement, initCallback?: (err?: Error, siteConsent?: CookieConsentManager) => void, onConsentChanged?: (newConsent: CookieConsent) => void, theme?: CookieConsentBannerThemes, stylesNonce?: string) => void;
 };
+
+// Warnings were encountered during analysis:
+//
+// dist/Settings/Settings.types.d.ts:97:9 - (ae-forgotten-export) The symbol "SettingConfig" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

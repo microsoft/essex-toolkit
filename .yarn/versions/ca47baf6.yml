@@ -1,0 +1,7 @@
+releases:
+  "@essex/charts-react": patch
+  "@essex/components": minor
+  "@essex/hierarchy-browser": patch
+  "@essex/thematic-lineup": patch
+  essex-js-toolkit: patch
+  essex-js-toolkit-stories: patch

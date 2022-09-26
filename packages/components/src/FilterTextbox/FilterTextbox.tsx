@@ -5,26 +5,7 @@
 import { IconButton, Label, TextField } from '@fluentui/react'
 import { useState } from 'react'
 
-export interface TextFilterProps {
-	/**
-	 * Label to display above the textbox.
-	 */
-	label?: string
-	/**
-	 * Placeholder text to use when filter is in 'include' state.
-	 */
-	includePlaceholder?: string
-	/**
-	 * Placeholder text to use when filter is in 'exclude' state.
-	 */
-	excludePlaceholder?: string
-	/**
-	 * Callback that fires when filter text changes or the include/exclude button is toggled.
-	 * @param text - value from the textbox
-	 * @param exclude - indicates whether exclusion toggle was on
-	 */
-	onFilter?: (text: string, exclude: boolean) => any
-}
+import type { FilterTextboxProps } from './FilterTextbox.types.js'
 
 /**
  * This component presents a compound textbox filter that includes an inline
@@ -37,7 +18,7 @@ export const FilterTextbox = ({
 	includePlaceholder = 'contains...',
 	excludePlaceholder = 'does not contain...',
 	onFilter = () => null,
-}: TextFilterProps): JSX.Element => {
+}: FilterTextboxProps): JSX.Element => {
 	const [checked, setChecked] = useState<boolean>(false)
 	const [text, setText] = useState<string>('')
 

@@ -9,7 +9,7 @@ import { useThematicFluent } from '@thematic/fluent'
 import * as React from 'react'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 
-import type { CollapsiblePanelProps } from './interfaces.js'
+import type { CollapsiblePanelProps } from './CollapsiblePanel.types.js'
 
 /**
  * CollapsiblePanel displays a Header and it's child
