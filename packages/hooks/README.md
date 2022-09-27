@@ -14,6 +14,7 @@ Provides a set of useful react hooks for common applications
 - **useToggle:** hook for a toggleable state
 - **useDestroyable:** hook for using a destroyable thing, so when the value changes
 - **useInterval:** creates an interval with the specified delay, and clears it on unmount
+- **useModalState:** hook to consolidate view-state for modals
 
 ### License
 
