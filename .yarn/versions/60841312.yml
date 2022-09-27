@@ -1,0 +1,6 @@
+releases:
+  "@essex/hooks": minor
+
+declined:
+  - "@essex/components"
+  - "@essex/hierarchy-browser"
