@@ -2,12 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
+import {
+	ChoiceGroup,
+	DefaultButton,
 	IChoiceGroupOption,
 	IChoiceGroupOptionProps,
 	IChoiceGroupProps,
+	IconButton,
+	useTheme,
 } from '@fluentui/react'
-import { ChoiceGroup, DefaultButton, useTheme } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 
 export const ButtonChoiceGroup: React.FC<IChoiceGroupProps> = memo(
@@ -55,12 +58,23 @@ export const ButtonChoiceGroup: React.FC<IChoiceGroupProps> = memo(
 )
 
 const onRenderField = (props?: IChoiceGroupOptionProps) => {
-	return (
+	const iconOnly = props?.iconProps && !props.text
+
+	return iconOnly ? (
+		<IconButton
+			title={props?.title}
+			iconProps={props?.iconProps}
+			checked={props?.checked}
+			toggle
+			onClick={() => props?.onChange?.(undefined, props)}
+		/>
+	) : (
 		<DefaultButton
 			style={DefaultButtonStyle}
 			title={props?.title}
 			iconProps={props?.iconProps}
 			checked={props?.checked}
+			toggle
 			onClick={() => props?.onChange?.(undefined, props)}
 		>
 			{props?.text}

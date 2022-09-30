@@ -31,6 +31,12 @@ const options = [
 		title: 'button title',
 		iconProps: { iconName: 'Save' },
 	},
+	{
+		key: '5',
+		text: '',
+		title: 'icon only',
+		iconProps: { iconName: 'History' },
+	},
 ]
 /**
  * Button Choice Group is a ChoiceGroup component based on
