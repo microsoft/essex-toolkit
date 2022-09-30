@@ -7,12 +7,19 @@ import type {
 	IChoiceGroupOptionProps,
 	IChoiceGroupProps,
 } from '@fluentui/react'
-import { ChoiceGroup, DefaultButton, useTheme } from '@fluentui/react'
+import {
+	ChoiceGroup,
+	DefaultButton,
+	IconButton,
+	useTheme,
+} from '@fluentui/react'
+import { useThematic } from '@thematic/react'
 import { memo, useMemo } from 'react'
 
 export const ButtonChoiceGroup: React.FC<IChoiceGroupProps> = memo(
 	function ButtonChoiceGroup({ options, ...props }) {
 		const theme = useTheme()
+		const thematic = useThematic()
 		const choiceGroupStyles = useMemo(
 			() => ({
 				flexContainer: {
@@ -36,12 +43,13 @@ export const ButtonChoiceGroup: React.FC<IChoiceGroupProps> = memo(
 							root: {
 								margin: 'unset',
 								borderRadius: '2px',
+								backgroundColor: thematic.application().background().hex(),
 							},
 						},
 						onRenderField,
 					} as IChoiceGroupOption
 				}),
-			[options],
+			[options, thematic],
 		)
 
 		return (
@@ -55,11 +63,23 @@ export const ButtonChoiceGroup: React.FC<IChoiceGroupProps> = memo(
 )
 
 const onRenderField = (props?: IChoiceGroupOptionProps) => {
-	return (
+	const iconOnly = props?.iconProps && !props.text
+
+	return iconOnly ? (
+		<IconButton
+			title={props?.title}
+			iconProps={props?.iconProps}
+			checked={props?.checked}
+			toggle
+			onClick={() => props?.onChange?.(undefined, props)}
+		/>
+	) : (
 		<DefaultButton
 			style={DefaultButtonStyle}
-			toggle
+			title={props?.title}
+			iconProps={props?.iconProps}
 			checked={props?.checked}
+			toggle
 			onClick={() => props?.onChange?.(undefined, props)}
 		>
 			{props?.text}
