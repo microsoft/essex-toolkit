@@ -58,7 +58,8 @@ const onRenderField = (props?: IChoiceGroupOptionProps) => {
 	return (
 		<DefaultButton
 			style={DefaultButtonStyle}
-			toggle
+			title={props?.title}
+			iconProps={props?.iconProps}
 			checked={props?.checked}
 			onClick={() => props?.onChange?.(undefined, props)}
 		>
