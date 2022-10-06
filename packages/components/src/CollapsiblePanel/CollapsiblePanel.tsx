@@ -80,26 +80,8 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 		if (onRenderHeader) {
 			return onRenderHeader()
 		}
-		return (
-			<div
-				role="group"
-				//the element is interactive when tabIndex is defined
-				//eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-				tabIndex={expandsWithIcon ? 0 : undefined}
-				onKeyDown={expandsWithIcon ? handleHeaderKeyDown : undefined}
-				onClick={expandsWithIcon ? handleHeaderClick : undefined}
-				style={HeaderLabelStyle}
-			>
-				{title}
-			</div>
-		)
-	}, [
-		onRenderHeader,
-		title,
-		handleHeaderClick,
-		handleHeaderKeyDown,
-		expandsWithIcon,
-	])
+		return <span style={HeaderLabelStyle}>{title}</span>
+	}, [onRenderHeader, title])
 	const contentsStyle = useMemo(
 		() => ({
 			border: expanded
@@ -134,7 +116,17 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 						}}
 					/>
 				</div>
-				{header}
+				<div
+					role="group"
+					//the element is interactive when tabIndex is defined
+					//eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+					tabIndex={expandsWithIcon ? 0 : undefined}
+					onKeyDown={expandsWithIcon ? handleHeaderKeyDown : undefined}
+					onClick={expandsWithIcon ? handleHeaderClick : undefined}
+					style={HeaderStyle}
+				>
+					{header}
+				</div>
 			</HeaderContainer>
 			<div style={contentsStyle}>
 				<AnimateHeight duration={500} height={expanded ? 'auto' : 0}>
@@ -169,8 +161,11 @@ const ButtonContainerStyle: React.CSSProperties = {
 }
 
 const HeaderLabelStyle: React.CSSProperties = {
-	marginLeft: 4,
 	fontSize: '0.8em',
+}
+
+const HeaderStyle: React.CSSProperties = {
+	marginLeft: 4,
 	width: '100%',
 }
 
