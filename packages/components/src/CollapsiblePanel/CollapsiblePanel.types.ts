@@ -37,6 +37,10 @@ export interface CollapsiblePanelProps {
 	 * Optional function to control the state outside the component
 	 */
 	onHeaderClick?: (nextState: boolean) => void
+	/**
+	 * Optional function to control the state outside the component, should be passed along with
+	 */
+	iconControlState?: boolean
 	children?: ReactNode
 	styles?: {
 		header?: React.CSSProperties
