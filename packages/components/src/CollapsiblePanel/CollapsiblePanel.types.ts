@@ -38,9 +38,9 @@ export interface CollapsiblePanelProps {
 	 */
 	onHeaderClick?: (nextState: boolean) => void
 	/**
-	 * Optional function to control the state outside the component, should be passed along with
+	 * If true panel will be toggled only when carret icon click directly
 	 */
-	iconControlState?: boolean
+	expandsWithIcon?: boolean
 	children?: ReactNode
 	styles?: {
 		header?: React.CSSProperties

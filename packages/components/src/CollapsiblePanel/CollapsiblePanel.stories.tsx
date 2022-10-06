@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { CollapsiblePanel, CollapsiblePanelContainer } from '@essex/components'
-import { useCallback, useState } from 'react'
+import { useCallback } from 'react'
 
 const meta = {
 	title: '@essex:components/CollapsiblePanel',
@@ -86,12 +86,10 @@ CollapsiblePanelStyled.story = {
 }
 
 export const CollapsiblePanelIconClickStory = () => {
-	const [expanded, setExpanded] = useState(false)
-
 	return (
 		<CollapsiblePanel
 			title="Panel"
-			iconControlState
+			expandsWithIcon
 			onHeaderClick={() => alert('header clicked')}
 		>
 			<div>This panel opens only with click on the icon</div>
