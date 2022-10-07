@@ -1,0 +1,4 @@
+releases:
+  "@essex/components": minor
+  essex-toolkit: minor
+  essex-toolkit-stories: minor

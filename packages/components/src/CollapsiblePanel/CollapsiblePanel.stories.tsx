@@ -84,3 +84,23 @@ const styles = {
 CollapsiblePanelStyled.story = {
 	name: 'Styled Panel Header and Contents',
 }
+
+export const CollapsiblePanelIconClickStory = () => {
+	return (
+		<CollapsiblePanel
+			title="Panel"
+			expandsWithIcon
+			onHeaderClick={() => alert('header clicked')}
+		>
+			<div>This panel opens only with click on the icon</div>
+			<div>
+				This panel emits an alert when the header is clicked (except for the
+				icon)
+			</div>
+		</CollapsiblePanel>
+	)
+}
+
+CollapsiblePanelIconClickStory.story = {
+	name: 'Icon click function',
+}

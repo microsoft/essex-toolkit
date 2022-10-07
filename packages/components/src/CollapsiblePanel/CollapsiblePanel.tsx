@@ -25,6 +25,7 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 	children,
 	onRenderHeader,
 	onHeaderClick,
+	expandsWithIcon = false,
 	styles = {
 		header: {},
 		contents: {},
@@ -33,14 +34,18 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 	const theme = useThematicFluent()
 	const [expanded, setExpanded] = useState<boolean>(defaultExpanded)
 	const handleClick = useCallback(() => {
-		if (onHeaderClick) {
-			onHeaderClick(!expanded)
-		}
 		// if not controlled component, set local state
 		if (expandedState === undefined) {
 			setExpanded(!expanded)
 		}
-	}, [expanded, onHeaderClick, expandedState])
+	}, [expanded, expandedState])
+
+	const handleHeaderClick = useCallback(() => {
+		if (onHeaderClick) {
+			onHeaderClick(!expanded)
+		}
+		!expandsWithIcon && handleClick()
+	}, [handleClick, onHeaderClick, expandsWithIcon, expanded])
 
 	const handleKeyDown = useCallback(
 		(event: React.KeyboardEvent) => {
@@ -55,18 +60,27 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 		[handleClick, expanded],
 	)
 
+	const handleHeaderKeyDown = useCallback(
+		(event: React.KeyboardEvent) => {
+			if ('Enter' === event.key || ' ' === event.key) {
+				return handleHeaderClick()
+			}
+		},
+		[handleHeaderClick],
+	)
+
 	useEffect(() => {
 		if (expandedState !== undefined) {
 			setExpanded(expandedState)
 		}
 	}, [setExpanded, expandedState])
 
-	const iconProps = useIconProps(expanded)
+	const iconProps = useIconProps(expanded, expandsWithIcon ? 12 : 10)
 	const header = useMemo(() => {
 		if (onRenderHeader) {
 			return onRenderHeader()
 		}
-		return <div style={HeaderLabelStyle}>{title}</div>
+		return <span style={HeaderLabelStyle}>{title}</span>
 	}, [onRenderHeader, title])
 	const contentsStyle = useMemo(
 		() => ({
@@ -83,11 +97,15 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 				first={first}
 				last={last}
 				expanded={expanded}
-				onClick={handleClick}
-				onKeyDown={handleKeyDown}
+				onKeyDown={!expandsWithIcon ? handleKeyDown : undefined}
+				onClick={!expandsWithIcon ? handleHeaderClick : undefined}
 				style={styles.header}
 			>
-				<div style={ButtonContainerStyle}>
+				<div
+					onKeyDown={expandsWithIcon ? handleKeyDown : undefined}
+					onClick={expandsWithIcon ? handleClick : undefined}
+					style={ButtonContainerStyle}
+				>
 					<IconButton
 						title="collapse"
 						iconProps={iconProps}
@@ -98,7 +116,17 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 						}}
 					/>
 				</div>
-				{header}
+				<div
+					role="group"
+					//the element is interactive when tabIndex is defined
+					//eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+					tabIndex={expandsWithIcon ? 0 : undefined}
+					onKeyDown={expandsWithIcon ? handleHeaderKeyDown : undefined}
+					onClick={expandsWithIcon ? handleHeaderClick : undefined}
+					style={HeaderStyle}
+				>
+					{header}
+				</div>
 			</HeaderContainer>
 			<div style={contentsStyle}>
 				<AnimateHeight duration={500} height={expanded ? 'auto' : 0}>
@@ -133,8 +161,11 @@ const ButtonContainerStyle: React.CSSProperties = {
 }
 
 const HeaderLabelStyle: React.CSSProperties = {
-	marginLeft: 4,
 	fontSize: '0.8em',
+}
+
+const HeaderStyle: React.CSSProperties = {
+	marginLeft: 4,
 	width: '100%',
 }
 
@@ -150,8 +181,8 @@ const HeaderContainer: React.FC<{
 	first?: boolean
 	last?: boolean
 	expanded?: boolean
-	onClick: () => void
-	onKeyDown: (ev: React.KeyboardEvent) => void
+	onClick?: () => void
+	onKeyDown?: (ev: React.KeyboardEvent) => void
 	style?: React.CSSProperties
 	children?: React.ReactNode
 }> = memo(function HeaderContainer({
@@ -189,6 +220,6 @@ const HeaderContainer: React.FC<{
 })
 
 const IconButtonStyle: React.CSSProperties = {
-	width: 18,
-	height: 18,
+	width: 20,
+	height: 20,
 }
