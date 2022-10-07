@@ -60,6 +60,7 @@ export interface CollapsiblePanelProps {
     children?: ReactNode;
     defaultExpanded?: boolean;
     expandedState?: boolean;
+    expandsWithIcon?: boolean;
     first?: boolean;
     last?: boolean;
     onHeaderClick?: (nextState: boolean) => void;
