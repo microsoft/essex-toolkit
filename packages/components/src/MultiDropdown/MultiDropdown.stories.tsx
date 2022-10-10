@@ -21,7 +21,7 @@ const Template = (args: MultiDropdownProps) => {
 			setSelectedKeys(prev => {
 				return option?.selected
 					? [...prev, option?.key]
-					: prev.filter((d: string | number) => d === option?.key)
+					: prev.filter((d: string | number) => d !== option?.key)
 			})
 		},
 		[setSelectedKeys],
