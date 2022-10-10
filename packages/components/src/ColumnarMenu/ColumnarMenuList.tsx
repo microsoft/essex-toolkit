@@ -7,17 +7,16 @@ import type {
 	IContextualMenuItemProps,
 	IContextualMenuListProps,
 } from '@fluentui/react'
-import { ContextualMenuItemType, Separator } from '@fluentui/react'
-import { useThematicFluent } from '@thematic/fluent'
+import { ContextualMenuItemType, Separator, useTheme } from '@fluentui/react'
 import { merge } from 'lodash-es'
 import { memo, useCallback, useMemo } from 'react'
 
 export const ColumnarMenuList: React.FC<IContextualMenuListProps> = memo(
 	function ColumnarMenuList(props) {
-		const theme = useThematicFluent()
+		const theme = useTheme()
 		const headerStyle = useMemo(
 			() => ({
-				color: theme.application().accent().hex(),
+				color: theme.palette.themePrimary,
 				padding: '0 12px 0 12px',
 				marginBottom: '8',
 				fontWeight: 700,

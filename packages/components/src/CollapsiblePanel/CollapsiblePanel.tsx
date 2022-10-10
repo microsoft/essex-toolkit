@@ -4,8 +4,7 @@
  */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import AnimateHeight from '@essex/react-animate-height'
-import { IconButton } from '@fluentui/react'
-import { useThematicFluent } from '@thematic/fluent'
+import { IconButton, useTheme } from '@fluentui/react'
 import * as React from 'react'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 
@@ -31,7 +30,7 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 		contents: {},
 	},
 }) => {
-	const theme = useThematicFluent()
+	const theme = useTheme()
 	const [expanded, setExpanded] = useState<boolean>(defaultExpanded)
 	const handleClick = useCallback(() => {
 		// if not controlled component, set local state
@@ -84,9 +83,7 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 	}, [onRenderHeader, title])
 	const contentsStyle = useMemo(
 		() => ({
-			border: expanded
-				? `1px solid ${theme.application().faint().hex()}`
-				: 'none',
+			border: expanded ? `1px solid ${theme.palette.neutralLighter}` : 'none',
 			...styles.contents,
 		}),
 		[expanded, theme, styles.contents],
@@ -111,8 +108,7 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 						iconProps={iconProps}
 						style={{
 							...IconButtonStyle,
-							color:
-								styles?.header?.color || theme.application().foreground().hex(),
+							color: styles?.header?.color || theme.palette.neutralPrimary,
 						}}
 					/>
 				</div>
@@ -194,16 +190,14 @@ const HeaderContainer: React.FC<{
 	onKeyDown,
 	style = {},
 }) {
-	const theme = useThematicFluent()
+	const theme = useTheme()
 	const _style = useMemo<React.CSSProperties>(() => {
-		const background = theme.application().faint().hex()
+		const background = theme.palette.neutralLighter
 		const borderTop = first
 			? ''
-			: `1px solid ${theme.application().lowContrast().hex()}`
+			: `1px solid ${theme.palette.neutralTertiaryAlt}`
 		const borderBottom =
-			last || expanded
-				? `1px solid ${theme.application().lowContrast().hex()}`
-				: ''
+			last || expanded ? `1px solid ${theme.palette.neutralTertiaryAlt}` : ''
 		return {
 			...HeaderContainerStyle,
 			background,

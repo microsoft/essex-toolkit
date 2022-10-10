@@ -26,7 +26,7 @@ const data = [
 		key: `section-1`,
 		itemType: ContextualMenuItemType.Section,
 		sectionProps: {
-			title: 'Eletronics',
+			title: 'Electronics',
 			items: [
 				{
 					key: 'Laptop',
@@ -89,7 +89,7 @@ export const ColumnarMenuStory = () => {
 		onItemClick: () => alert('item clicked'),
 	}
 
-	return <ColumnarMenu text={'Eletronics and furniture list'} {...menuProps} />
+	return <ColumnarMenu text={'Electronics and furniture list'} {...menuProps} />
 }
 
 ColumnarMenuStory.story = {
@@ -112,7 +112,9 @@ export const ColumnarMenuStoryOverflow = () => {
 		onItemClick: () => alert('item clicked'),
 	}
 
-	return <ColumnarMenu text={'EletronicsAndFurnitureList.csv'} {...menuProps} />
+	return (
+		<ColumnarMenu text={'ElectronicsAndFurnitureList.csv'} {...menuProps} />
+	)
 }
 
 ColumnarMenuStoryOverflow.story = {
