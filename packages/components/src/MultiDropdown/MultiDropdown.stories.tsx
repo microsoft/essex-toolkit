@@ -31,8 +31,8 @@ const Template = (args: MultiDropdownProps) => {
 			_event: React.MouseEvent<
 				HTMLAnchorElement | HTMLButtonElement | HTMLElement
 			>,
-			options: IDropdownOption[],
-		) => setSelectedKeys(options.map(opt => opt.key as string)),
+			options?: IDropdownOption[],
+		) => setSelectedKeys(options?.map(opt => opt.key as string) || []),
 		[setSelectedKeys],
 	)
 	return (

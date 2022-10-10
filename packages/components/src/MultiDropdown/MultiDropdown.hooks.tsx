@@ -39,7 +39,12 @@ export function useOptionRenderer(
 			event: React.MouseEvent<
 				HTMLAnchorElement | HTMLButtonElement | HTMLElement
 			>,
-		) => onChangeAll?.(event, options),
+		) =>
+			onChangeAll?.(
+				event,
+				options,
+				options.map((_o, i) => i),
+			),
 		[onChangeAll, options],
 	)
 	const handleSelectNone = useCallback(
@@ -47,7 +52,7 @@ export function useOptionRenderer(
 			event: React.MouseEvent<
 				HTMLAnchorElement | HTMLButtonElement | HTMLElement
 			>,
-		) => onChangeAll?.(event, []),
+		) => onChangeAll?.(event),
 		[onChangeAll],
 	)
 

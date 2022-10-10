@@ -10,6 +10,7 @@ export interface MultiDropdownProps extends IDropdownProps {
 		event: React.MouseEvent<
 			HTMLAnchorElement | HTMLButtonElement | HTMLElement
 		>,
-		options: IDropdownOption[],
+		options?: IDropdownOption[],
+		indexes?: number[],
 	) => void
 }
