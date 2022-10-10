@@ -13,13 +13,11 @@ import {
 	IconButton,
 	useTheme,
 } from '@fluentui/react'
-import { useThematic } from '@thematic/react'
 import { memo, useMemo } from 'react'
 
 export const ButtonChoiceGroup: React.FC<IChoiceGroupProps> = memo(
 	function ButtonChoiceGroup({ options, ...props }) {
 		const theme = useTheme()
-		const thematic = useThematic()
 		const choiceGroupStyles = useMemo(
 			() => ({
 				flexContainer: {
@@ -43,13 +41,13 @@ export const ButtonChoiceGroup: React.FC<IChoiceGroupProps> = memo(
 							root: {
 								margin: 'unset',
 								borderRadius: '2px',
-								backgroundColor: thematic.application().background().hex(),
+								backgroundColor: theme.palette.white,
 							},
 						},
 						onRenderField,
 					} as IChoiceGroupOption
 				}),
-			[options, thematic],
+			[options, theme],
 		)
 
 		return (

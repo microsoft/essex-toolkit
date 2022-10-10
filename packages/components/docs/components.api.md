@@ -240,7 +240,7 @@ export const MultiDropdown: React.FC<MultiDropdownProps>;
 // @public (undocumented)
 export interface MultiDropdownProps extends IDropdownProps {
     // (undocumented)
-    onChangeAll?: (event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement | HTMLElement>, options: IDropdownOption[]) => void;
+    onChangeAll?: (event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement | HTMLElement>, options?: IDropdownOption[], indexes?: number[]) => void;
 }
 
 // Warning: (ae-missing-release-tag) "NumberSpinButton" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
