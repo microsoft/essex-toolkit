@@ -15,9 +15,43 @@ const Template = (args: ExpandoProps) => (
 	<ExpandoComponent {...args}>Here is the child content!</ExpandoComponent>
 )
 
-export const Expando = Template.bind({}) as any as { args: ExpandoProps }
+export const Primary = Template.bind({}) as any as { args: ExpandoProps }
 
-Expando.args = {
+Primary.args = {
 	label: 'More...',
 	defaultExpanded: false,
+}
+
+export const Customized = Template.bind({}) as any as { args: ExpandoProps }
+
+Customized.args = {
+	label: 'More...',
+	defaultExpanded: false,
+	styles: {
+		root: {
+			border: '1px solid orange',
+			background: 'azure',
+		},
+		content: {
+			background: 'coral',
+			padding: 8,
+		},
+	},
+	iconButtonProps: {
+		iconProps: {
+			iconName: 'RedEye',
+			styles: {
+				root: {
+					fontSize: 12,
+				},
+			},
+		},
+	},
+	linkProps: {
+		styles: {
+			root: {
+				color: 'cornflowerblue',
+			},
+		},
+	},
 }

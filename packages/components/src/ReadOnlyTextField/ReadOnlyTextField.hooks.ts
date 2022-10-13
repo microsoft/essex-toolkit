@@ -13,6 +13,7 @@ export function useBaseStyles(
 	const theme = useTheme()
 	return useMemo(() => {
 		return merge(
+			{},
 			{
 				field: {
 					color: theme.palette.neutralTertiary,
