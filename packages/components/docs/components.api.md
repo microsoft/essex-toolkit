@@ -22,8 +22,6 @@ import type { IRenderFunction } from '@fluentui/react';
 import type { IStyleFunctionOrObject } from '@fluentui/react';
 import type { Position } from '@fluentui/react';
 import type { PropsWithChildren } from 'react';
-import * as React_2 from 'react';
-import type { ReactNode } from 'react';
 
 // Warning: (ae-missing-release-tag) "ButtonChoiceGroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -39,40 +37,49 @@ export const ClippedGraph: ({ data, width, height, clipped, percentile, gradient
 // Warning: (ae-missing-release-tag) "CollapsiblePanel" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const CollapsiblePanel: React_2.FC<CollapsiblePanelProps>;
+export const CollapsiblePanel: React.FC<PropsWithChildren<CollapsiblePanelProps>>;
 
 // Warning: (ae-missing-release-tag) "CollapsiblePanelContainer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const CollapsiblePanelContainer: React.FC<CollapsiblePanelContainerProps>;
+export const CollapsiblePanelContainer: React.FC<PropsWithChildren<CollapsiblePanelContainerProps>>;
 
 // Warning: (ae-missing-release-tag) "CollapsiblePanelContainerProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export interface CollapsiblePanelContainerProps {
     // (undocumented)
-    children?: ReactNode;
+    styles?: {
+        root?: CSSProperties;
+    };
 }
 
 // Warning: (ae-missing-release-tag) "CollapsiblePanelProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export interface CollapsiblePanelProps {
-    // (undocumented)
-    children?: ReactNode;
+    buttonProps?: IButtonProps;
     defaultExpanded?: boolean;
-    expandedState?: boolean;
-    expandsWithIcon?: boolean;
+    duration?: number;
+    expanded?: boolean;
     first?: boolean;
+    hideIcon?: boolean;
     last?: boolean;
     onHeaderClick?: (nextState: boolean) => void;
     onRenderHeader?: IRenderFunction<any>;
-    // (undocumented)
-    styles?: {
-        header?: React.CSSProperties;
-        contents?: React.CSSProperties;
-    };
+    styles?: CollapsiblePanelStyles;
     title?: string;
+}
+
+// Warning: (ae-missing-release-tag) "CollapsiblePanelStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface CollapsiblePanelStyles {
+    content?: CSSProperties;
+    header?: CSSProperties;
+    root?: CSSProperties;
+    title?: CSSProperties;
+    titleContainer?: CSSProperties;
 }
 
 // Warning: (ae-missing-release-tag) "ColumnarMenu" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

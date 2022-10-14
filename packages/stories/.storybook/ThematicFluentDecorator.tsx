@@ -30,6 +30,11 @@ export const ThematicFluentDecorator = (
 	}, [])
 	return (
 		<ThematicFluentProvider theme={thematicTheme}>
+			<style>
+				{`* {
+					box-sizing: border-box;
+				}`}
+			</style>
 			<ApplicationStyles />
 			<Toggle label="Dark mode" checked={dark} onChange={handleDarkChange} />
 			<ThemeProvider theme={thematicTheme}>
