@@ -6,7 +6,6 @@
 import AnimateHeight from '@essex/react-animate-height'
 import { IconButton } from '@fluentui/react'
 import type { PropsWithChildren } from 'react'
-import { useMemo } from 'react'
 
 import { useEventHandlers, useIconProps } from './CollapsiblePanel.hooks.js'
 import { useStyles } from './CollapsiblePanel.styles.js'

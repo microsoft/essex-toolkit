@@ -25,7 +25,7 @@ import type { PropsWithChildren } from 'react';
 
 // Warning: (ae-missing-release-tag) "ButtonChoiceGroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export const ButtonChoiceGroup: React.FC<IChoiceGroupProps>;
 
 // Warning: (ae-forgotten-export) The symbol "ClippedGraphProps" needs to be exported by the entry point index.d.ts

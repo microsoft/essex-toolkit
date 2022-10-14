@@ -2,15 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { IChoiceGroupOption } from '@fluentui/react'
+import type { IChoiceGroupOption, IChoiceGroupProps } from '@fluentui/react'
+import type { ComponentStory } from '@storybook/react'
 
 import { ButtonChoiceGroup } from './ButtonChoiceGroup.js'
 
-const meta = {
-	title: '@essex:components/Button Choice Group',
+const storyMetadata = {
+	title: '@essex:components/ButtonChoiceGroup',
+	component: ButtonChoiceGroup,
 }
 
-export default meta
+export default storyMetadata
 
 const options = [
 	{
@@ -38,21 +40,33 @@ const options = [
 		iconProps: { iconName: 'History' },
 	},
 ]
-/**
- * Button Choice Group is a ChoiceGroup component based on
- * Fluent adapted for Thematic styling with Button appearance
- */
-export const ButtonChoiceGroupStory = () => {
+
+const Template: ComponentStory<typeof ButtonChoiceGroup> = (
+	args: IChoiceGroupProps,
+) => {
 	return (
 		<ButtonChoiceGroup
 			options={options}
 			onChange={(
 				_?: React.FormEvent<HTMLElement | HTMLInputElement>,
 				opt?: IChoiceGroupOption,
-			) => console.log('option:', opt?.key)}
+			) => console.log('option:' + opt?.key)}
+			{...args}
 		/>
 	)
 }
-ButtonChoiceGroupStory.story = {
-	name: 'ButtonChoiceGroup',
+
+export const Primary = Template.bind({})
+
+export const Customized = Template.bind({})
+Customized.args = {
+	styles: {
+		root: {
+			border: '1px solid orange',
+			padding: 8,
+		},
+		flexContainer: {
+			border: '1px solid cornflowerblue',
+		},
+	},
 }
