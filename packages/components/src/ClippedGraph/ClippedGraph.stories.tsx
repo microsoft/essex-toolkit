@@ -50,6 +50,4 @@ export const ClippedGraphStory = () => (
 	</div>
 )
 
-ClippedGraphStory.story = {
-	name: 'main',
-}
+ClippedGraphStory.storyName = 'main'

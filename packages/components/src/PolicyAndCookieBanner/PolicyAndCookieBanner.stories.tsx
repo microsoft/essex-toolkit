@@ -31,9 +31,7 @@ export const PolicyAndCookieBannerStory = () => {
 	 */
 	return <PolicyAndCookieBanner onError={onError} />
 }
-PolicyAndCookieBannerStory.story = {
-	name: 'Simple use case',
-}
+PolicyAndCookieBannerStory.storyName = 'Simple use case'
 
 export const PolicyAndCookieBannerThemeStory = () => {
 	/**
@@ -45,9 +43,7 @@ export const PolicyAndCookieBannerThemeStory = () => {
 	 */
 	return <PolicyAndCookieBanner onError={onError} theme={'dark'} />
 }
-PolicyAndCookieBannerThemeStory.story = {
-	name: 'Theming cookie banner',
-}
+PolicyAndCookieBannerThemeStory.storyName = 'Theming cookie banner'
 
 export const PolicyAndCookieBannerListeningForCookieChangesStory = () => {
 	/**
@@ -70,9 +66,8 @@ export const PolicyAndCookieBannerListeningForCookieChangesStory = () => {
 		/>
 	)
 }
-PolicyAndCookieBannerListeningForCookieChangesStory.story = {
-	name: 'Listen for cookie consent changes',
-}
+PolicyAndCookieBannerListeningForCookieChangesStory.storyName =
+	'Listen for cookie consent changes'
 
 export const PolicyAndCookieBannerStylingStory = () => {
 	/**
@@ -90,9 +85,7 @@ export const PolicyAndCookieBannerStylingStory = () => {
 		/>
 	)
 }
-PolicyAndCookieBannerStylingStory.story = {
-	name: 'Styling',
-}
+PolicyAndCookieBannerStylingStory.storyName = 'Styling'
 
 export const PolicyAndCookieBannerCustomLinksStory = () => {
 	/**
@@ -113,6 +106,4 @@ export const PolicyAndCookieBannerCustomLinksStory = () => {
 		/>
 	)
 }
-PolicyAndCookieBannerCustomLinksStory.story = {
-	name: 'Custom links',
-}
+PolicyAndCookieBannerCustomLinksStory.storyName = 'Custom links'

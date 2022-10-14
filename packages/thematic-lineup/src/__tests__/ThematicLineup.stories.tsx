@@ -64,6 +64,4 @@ export const ThematicLineupStory = () => (
 	</div>
 )
 
-ThematicLineupStory.story = {
-	name: 'main',
-}
+ThematicLineupStory.storyName = 'main'

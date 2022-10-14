@@ -30,9 +30,7 @@ export const SingleClause = () => {
 	)
 }
 
-SingleClause.story = {
-	name: 'Single Clause',
-}
+SingleClause.storyName = 'Single Clause'
 
 export const TwoClausesInAttribute = () => {
 	return (
@@ -54,7 +52,7 @@ export const TwoClausesInAttribute = () => {
 		</div>
 	)
 }
-TwoClausesInAttribute.story = { name: 'Two Clauses in Single Attribute' }
+TwoClausesInAttribute.storyName = 'Two Clauses in Single Attribute'
 
 export const TwoAttributes = () => {
 	return (
@@ -85,31 +83,4 @@ export const TwoAttributes = () => {
 		</div>
 	)
 }
-TwoAttributes.story = { name: 'Two Attributes' }
-
-// export const GroupDismiss = () => {
-// 	const chipGroupDismissed = useCallback(group => {
-// 		alert(`Chip group with id ${group.id} dismiss function`)
-// 	}, [])
-
-// 	return (
-// 		<div>
-// 			<FilterExpressionView
-// 				onChipGroupDismissed={chipGroupDismissed}
-// 				operation={BooleanOperation.AND}
-// 				filters={[
-// 					{
-// 						id: 'age',
-// 						label: 'Age',
-// 						operation: BooleanOperation.AND,
-// 						filters: [
-// 							{ id: 'age.20+', label: '20-29' },
-// 							{ id: 'age.30+', label: '30-39' },
-// 						],
-// 					},
-// 				]}
-// 			/>
-// 		</div>
-// 	)
-// }
-// GroupDismiss.story = { name: 'Group Dismiss' }
+TwoAttributes.storyName = 'Two Attributes'

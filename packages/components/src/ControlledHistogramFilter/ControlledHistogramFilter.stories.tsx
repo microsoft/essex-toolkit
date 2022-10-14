@@ -40,6 +40,4 @@ export const ControlledHistogramFilterStory = () => {
 	)
 }
 
-ControlledHistogramFilterStory.story = {
-	name: 'main',
-}
+ControlledHistogramFilterStory.storyName = 'main'

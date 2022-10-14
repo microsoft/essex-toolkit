@@ -56,9 +56,7 @@ export const BasicSettingsStory = () => {
 	)
 }
 
-BasicSettingsStory.story = {
-	name: 'Basic Settings',
-}
+BasicSettingsStory.storyName = 'Basic Settings'
 
 /**
  * AdvancedSettingsStory is a zero-config settings panel that simply parses a supplied object
@@ -108,9 +106,7 @@ export const AdvancedSettingsStory = () => {
 	)
 }
 
-AdvancedSettingsStory.story = {
-	name: 'Advanced Settings',
-}
+AdvancedSettingsStory.storyName = 'Advanced Settings'
 
 const GroupedPanel = () => {
 	const [settings, setSettings] = useState(basicSettings)
@@ -159,9 +155,7 @@ export const GroupedSettingsStory = () => {
 	)
 }
 
-GroupedSettingsStory.story = {
-	name: 'Grouped Settings',
-}
+GroupedSettingsStory.storyName = 'Grouped Settings'
 
 /**
  * ContextSettingsStory shows the settings panel in a dropdown context menu.
@@ -195,6 +189,4 @@ export const ContextSettingsStory = () => {
 	)
 }
 
-ContextSettingsStory.story = {
-	name: 'Context Menu Settings',
-}
+ContextSettingsStory.storyName = 'Context Menu Settings'

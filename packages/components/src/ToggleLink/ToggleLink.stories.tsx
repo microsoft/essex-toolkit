@@ -34,6 +34,4 @@ export const ToggleLinkStory = () => {
 	)
 }
 
-ToggleLinkStory.story = {
-	name: 'ToggleLink',
-}
+ToggleLinkStory.storyName = 'ToggleLink'

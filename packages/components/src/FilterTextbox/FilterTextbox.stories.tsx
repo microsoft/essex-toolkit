@@ -25,6 +25,4 @@ export const FilterTextboxStory = () => {
 	)
 }
 
-FilterTextboxStory.story = {
-	name: 'FilterTextbox',
-}
+FilterTextboxStory.storyName = 'FilterTextbox'

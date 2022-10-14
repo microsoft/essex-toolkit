@@ -74,9 +74,7 @@ export const HierarchyBrowserAsync = () => {
 	)
 }
 
-HierarchyBrowserAsync.story = {
-	name: 'Async',
-}
+HierarchyBrowserAsync.storyName = 'Async'
 
 export const HierarchyBrowserSynchronous = () => {
 	const [selectedOption, setSelectedOption] = useState<string>(
@@ -117,6 +115,4 @@ export const HierarchyBrowserSynchronous = () => {
 	)
 }
 
-HierarchyBrowserSynchronous.story = {
-	name: 'Synchronous',
-}
+HierarchyBrowserSynchronous.storyName = 'Synchronous'
