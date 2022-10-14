@@ -8,18 +8,20 @@
 
 import type { CSSProperties } from 'react';
 import type { FC } from 'react';
-import type { IButtonStyles } from '@fluentui/react';
+import type { IButtonProps } from '@fluentui/react';
 import type { IChoiceGroupProps } from '@fluentui/react';
 import type { ICommandBarStyleProps } from '@fluentui/react';
 import type { ICommandBarStyles } from '@fluentui/react';
+import type { IContextualMenuItemStyles } from '@fluentui/react';
 import type { IContextualMenuListProps } from '@fluentui/react';
 import type { IContextualMenuProps } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
 import type { IDropdownProps } from '@fluentui/react';
-import type { IIconStyles } from '@fluentui/react';
+import type { ILinkProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { IStyleFunctionOrObject } from '@fluentui/react';
 import type { Position } from '@fluentui/react';
+import type { PropsWithChildren } from 'react';
 import * as React_2 from 'react';
 import type { ReactNode } from 'react';
 
@@ -78,18 +80,19 @@ export interface CollapsiblePanelProps {
 // @public
 export const ColumnarMenu: React.FC<ColumnarMenuProps>;
 
+// Warning: (ae-forgotten-export) The symbol "ColumnarMenuListProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "ColumnarMenuList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
-export const ColumnarMenuList: React.FC<IContextualMenuListProps>;
+// @public
+export const ColumnarMenuList: React.FC<ColumnarMenuListProps>;
 
 // Warning: (ae-missing-release-tag) "ColumnarMenuProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export interface ColumnarMenuProps extends IContextualMenuProps {
+    buttonProps?: IButtonProps;
     // (undocumented)
-    buttonStyles?: IButtonStyles;
-    // (undocumented)
+    menuListProps?: Partial<ColumnarMenuListProps>;
     text?: string;
 }
 
@@ -194,20 +197,26 @@ export interface EnumDropdownProps<E = unknown> extends Omit<IDropdownProps, 'op
 // Warning: (ae-missing-release-tag) "Expando" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const Expando: React.FC<ExpandoProps>;
+export const Expando: FC<PropsWithChildren<ExpandoProps>>;
 
 // Warning: (ae-missing-release-tag) "ExpandoProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ExpandoProps extends React.PropsWithChildren<{}> {
-    // (undocumented)
+export interface ExpandoProps {
     defaultExpanded?: boolean;
-    // (undocumented)
-    iconStyles?: IIconStyles;
-    // (undocumented)
+    iconButtonProps?: IButtonProps;
     label: string;
-    // (undocumented)
-    toggleStyles?: React.CSSProperties;
+    linkProps?: ILinkProps;
+    styles?: ExpandoStyles;
+}
+
+// Warning: (ae-missing-release-tag) "ExpandoStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ExpandoStyles {
+    content?: CSSProperties;
+    expando?: CSSProperties;
+    root?: CSSProperties;
 }
 
 // Warning: (ae-missing-release-tag) "FilterTextbox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
