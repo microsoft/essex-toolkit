@@ -7,26 +7,24 @@ import {
 	FilterExpressionView,
 } from '@essex/boolean-expression-component'
 
-const story = {
+const meta = {
 	title: '@essex:boolean-expression-component/BooleanExpression',
 }
-export default story
+export default meta
 
 export const SingleClause = () => {
 	return (
-		<div>
-			<FilterExpressionView
-				operation={BooleanOperation.AND}
-				filters={[
-					{
-						id: 'age',
-						label: 'Age',
-						operation: BooleanOperation.AND,
-						filters: [{ id: 'age.20+', label: '20+' }],
-					},
-				]}
-			/>
-		</div>
+		<FilterExpressionView
+			operation={BooleanOperation.AND}
+			filters={[
+				{
+					id: 'age',
+					label: 'Age',
+					operation: BooleanOperation.AND,
+					filters: [{ id: 'age.20+', label: '20+' }],
+				},
+			]}
+		/>
 	)
 }
 
@@ -34,53 +32,49 @@ SingleClause.storyName = 'Single Clause'
 
 export const TwoClausesInAttribute = () => {
 	return (
-		<div>
-			<FilterExpressionView
-				operation={BooleanOperation.AND}
-				filters={[
-					{
-						id: 'age',
-						label: 'Age',
-						operation: BooleanOperation.AND,
-						filters: [
-							{ id: 'age.20+', label: '20-29' },
-							{ id: 'age.30+', label: '30-39' },
-						],
-					},
-				]}
-			/>
-		</div>
+		<FilterExpressionView
+			operation={BooleanOperation.AND}
+			filters={[
+				{
+					id: 'age',
+					label: 'Age',
+					operation: BooleanOperation.AND,
+					filters: [
+						{ id: 'age.20+', label: '20-29' },
+						{ id: 'age.30+', label: '30-39' },
+					],
+				},
+			]}
+		/>
 	)
 }
 TwoClausesInAttribute.storyName = 'Two Clauses in Single Attribute'
 
 export const TwoAttributes = () => {
 	return (
-		<div>
-			<FilterExpressionView
-				operation={BooleanOperation.AND}
-				filters={[
-					{
-						id: 'age',
-						label: 'Age',
-						operation: BooleanOperation.AND,
-						filters: [
-							{ id: 'age.20+', label: '20-29' },
-							{ id: 'age.30+', label: '30-39' },
-						],
-					},
-					{
-						id: 'location',
-						label: 'Location',
-						operation: BooleanOperation.OR,
-						filters: [
-							{ id: 'us', label: 'USA' },
-							{ id: 'canada', label: 'Canada' },
-						],
-					},
-				]}
-			/>
-		</div>
+		<FilterExpressionView
+			operation={BooleanOperation.AND}
+			filters={[
+				{
+					id: 'age',
+					label: 'Age',
+					operation: BooleanOperation.AND,
+					filters: [
+						{ id: 'age.20+', label: '20-29' },
+						{ id: 'age.30+', label: '30-39' },
+					],
+				},
+				{
+					id: 'location',
+					label: 'Location',
+					operation: BooleanOperation.OR,
+					filters: [
+						{ id: 'us', label: 'USA' },
+						{ id: 'canada', label: 'Canada' },
+					],
+				},
+			]}
+		/>
 	)
 }
 TwoAttributes.storyName = 'Two Attributes'

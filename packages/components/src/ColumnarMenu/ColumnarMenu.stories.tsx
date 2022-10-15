@@ -2,16 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ColumnarMenuProps } from '@essex/components'
-import { ColumnarMenu as ColumnarMenuComponent } from '@essex/components'
 import type { IContextualMenuItem } from '@fluentui/react'
 import { ContextualMenuItemType } from '@fluentui/react'
+import type { ComponentStory } from '@storybook/react'
 
-const storyMetadata = {
-	title: '@essex:components/ColumnarMenu',
-	component: ColumnarMenuComponent,
-}
-export default storyMetadata
+import { ColumnarMenu } from './ColumnarMenu.js'
+import type { ColumnarMenuProps } from './ColumnarMenu.types.js'
 
 const items = [
 	{
@@ -56,20 +52,27 @@ const items = [
 	},
 ] as IContextualMenuItem[]
 
-const props = {
-	items,
-	buttonStyles: {
-		root: {
-			width: 150,
+const meta = {
+	title: '@essex:components/ColumnarMenu',
+	component: ColumnarMenu,
+	args: {
+		items,
+		buttonStyles: {
+			root: {
+				width: 150,
+			},
+			label: {
+				width: 120,
+			},
 		},
-		label: {
-			width: 120,
-		},
+		onItemClick: () => alert('item clicked'),
 	},
-	onItemClick: () => alert('item clicked'),
 }
+export default meta
 
-const Template = (args: ColumnarMenuProps) => {
+const Template: ComponentStory<typeof ColumnarMenu> = (
+	args: ColumnarMenuProps,
+) => {
 	return (
 		<div
 			style={{
@@ -82,23 +85,17 @@ const Template = (args: ColumnarMenuProps) => {
 				border: '1px solid orange',
 			}}
 		>
-			<ColumnarMenuComponent {...props} {...args}>
-				Here is the child content!
-			</ColumnarMenuComponent>
+			<ColumnarMenu {...args} />
 		</div>
 	)
 }
 
-export const Primary = Template.bind({}) as any as {
-	args: Partial<ColumnarMenuProps>
-}
+export const Primary = Template.bind({})
 Primary.args = {
 	text: 'Electronics and furniture list',
 }
 
-export const Customized = Template.bind({}) as any as {
-	args: Partial<ColumnarMenuProps>
-}
+export const Customized = Template.bind({})
 Customized.args = {
 	text: 'Furniture',
 	buttonProps: {
@@ -130,18 +127,13 @@ Customized.args = {
 	},
 }
 
-export const Overflow = Template.bind({}) as any as {
-	args: Partial<ColumnarMenuProps>
-}
+export const Overflow = Template.bind({})
 Overflow.args = {
 	// demonstrates ellipsis text overflow
 	text: 'ElectronicsAndFurnitureList.csv',
 }
 
-export const WithButtons = Template.bind({}) as any as {
-	args: Partial<ColumnarMenuProps>
-}
-
+export const WithButtons = Template.bind({})
 WithButtons.args = {
 	text: 'Allows reset',
 	items: [

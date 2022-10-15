@@ -7,54 +7,48 @@ import type { ComponentStory } from '@storybook/react'
 
 import { ButtonChoiceGroup } from './ButtonChoiceGroup.js'
 
-const storyMetadata = {
+const meta = {
 	title: '@essex:components/ButtonChoiceGroup',
 	component: ButtonChoiceGroup,
+	args: {
+		options: [
+			{
+				key: '1',
+				text: 'Option 1',
+			},
+			{
+				key: '2',
+				text: 'Option 2',
+			},
+			{
+				key: '3',
+				text: 'Option 3',
+			},
+			{
+				key: '4',
+				text: 'Icon option',
+				title: 'button title',
+				iconProps: { iconName: 'Save' },
+			},
+			{
+				key: '5',
+				text: '',
+				title: 'icon only',
+				iconProps: { iconName: 'History' },
+			},
+		],
+	},
+	onChange: (
+		_?: React.FormEvent<HTMLElement | HTMLInputElement>,
+		opt?: IChoiceGroupOption,
+	) => console.log(`option: ${opt?.key}`),
 }
 
-export default storyMetadata
-
-const options = [
-	{
-		key: '1',
-		text: 'Option 1',
-	},
-	{
-		key: '2',
-		text: 'Option 2',
-	},
-	{
-		key: '3',
-		text: 'Option 3',
-	},
-	{
-		key: '4',
-		text: 'Icon option',
-		title: 'button title',
-		iconProps: { iconName: 'Save' },
-	},
-	{
-		key: '5',
-		text: '',
-		title: 'icon only',
-		iconProps: { iconName: 'History' },
-	},
-]
+export default meta
 
 const Template: ComponentStory<typeof ButtonChoiceGroup> = (
 	args: IChoiceGroupProps,
-) => {
-	return (
-		<ButtonChoiceGroup
-			options={options}
-			onChange={(
-				_?: React.FormEvent<HTMLElement | HTMLInputElement>,
-				opt?: IChoiceGroupOption,
-			) => console.log('option:' + opt?.key)}
-			{...args}
-		/>
-	)
-}
+) => <ButtonChoiceGroup {...args} />
 
 export const Primary = Template.bind({})
 

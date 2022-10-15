@@ -2,31 +2,29 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Expando as ExpandoComponent } from './Expando.js'
+import type { ComponentStory } from '@storybook/react'
+
+import { Expando } from './Expando.js'
 import type { ExpandoProps } from './Expando.types.js'
 
-const storyMetadata = {
+const meta = {
 	title: '@essex:components/Expando',
-	component: ExpandoComponent,
+	component: Expando,
+	args: {
+		label: 'More...',
+		defaultExpanded: false,
+	},
 }
-export default storyMetadata
+export default meta
 
-const Template = (args: ExpandoProps) => (
-	<ExpandoComponent {...args}>Here is the child content!</ExpandoComponent>
+const Template: ComponentStory<typeof Expando> = (args: ExpandoProps) => (
+	<Expando {...args}>Here is the child content!</Expando>
 )
 
-export const Primary = Template.bind({}) as any as { args: ExpandoProps }
+export const Primary = Template.bind({})
 
-Primary.args = {
-	label: 'More...',
-	defaultExpanded: false,
-}
-
-export const Customized = Template.bind({}) as any as { args: ExpandoProps }
-
+export const Customized = Template.bind({})
 Customized.args = {
-	label: 'More...',
-	defaultExpanded: false,
 	styles: {
 		root: {
 			border: '1px solid orange',

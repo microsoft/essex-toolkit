@@ -47,7 +47,7 @@ export function useAsyncCallbacks({
 
 				return { data: selection[1], error: undefined }
 			}
-			return { error: new Error('nodes not loaded in story'), data: undefined }
+			return { error: new Error('nodes not loaded in meta'), data: undefined }
 		},
 		[allEntities],
 	)
@@ -87,7 +87,7 @@ export function useAsyncCallbacks({
 				})
 				return { data }
 			}
-			return { error: new Error('edges not loaded in story') }
+			return { error: new Error('edges not loaded in meta') }
 		},
 		[edges, loadState, searchForChildren],
 	)

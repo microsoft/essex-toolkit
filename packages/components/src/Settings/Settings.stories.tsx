@@ -2,14 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Settings } from '@essex/components'
 import { DefaultButton, MessageBar } from '@fluentui/react'
 import { useCallback, useState } from 'react'
 
-const story = {
-	title: '@essex:components/Settings Pane',
+import { Settings } from './Settings.js'
+
+const meta = {
+	title: '@essex:components/Settings',
 }
-export default story
+export default meta
 
 // cover the three basic data types
 const basicSettings = {

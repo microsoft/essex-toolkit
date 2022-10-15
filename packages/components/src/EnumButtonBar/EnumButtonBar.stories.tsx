@@ -3,16 +3,17 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useTheme } from '@fluentui/react'
+import type { ComponentStory } from '@storybook/react'
 import { useCallback, useState } from 'react'
 
 import type { EnumButtonBarProps } from './EnumButtonBar.js'
-import { EnumButtonBar as EnumButtonBarComponent } from './EnumButtonBar.js'
+import { EnumButtonBar } from './EnumButtonBar.js'
 
-const storyMetadata = {
+const meta = {
 	title: '@essex:components/EnumButtonBar',
-	component: EnumButtonBarComponent,
+	component: EnumButtonBar,
 }
-export default storyMetadata
+export default meta
 
 enum Stuff {
 	First = 'first',
@@ -21,13 +22,15 @@ enum Stuff {
 	CamelCase = 'camelcase',
 }
 
-const Template = (args: EnumButtonBarProps<Stuff>) => {
+const Template: ComponentStory<typeof EnumButtonBar<Stuff>> = (
+	args: EnumButtonBarProps<Stuff>,
+) => {
 	const theme = useTheme()
 	const [selected, setSelected] = useState<Stuff | undefined>(Stuff.First)
 	const onChange = useCallback(opt => setSelected(opt), [setSelected])
 	console.log(selected)
 	return (
-		<EnumButtonBarComponent
+		<EnumButtonBar
 			{...args}
 			onChange={onChange}
 			styles={{
@@ -41,12 +44,11 @@ const Template = (args: EnumButtonBarProps<Stuff>) => {
 	)
 }
 
-export const EnumButtonBar = Template.bind({}) as any as {
-	args: EnumButtonBarProps<Stuff>
-}
+export const Primary = Template.bind({})
 
-EnumButtonBar.args = {
+Primary.args = {
 	enumeration: Stuff,
 	iconOnly: true,
 	iconNames: ['Document', 'Database', 'LightningBolt', 'Code'],
 }
+Primary.storyName = 'EnumButtonBar'

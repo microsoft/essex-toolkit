@@ -28,11 +28,26 @@ import type { PropsWithChildren } from 'react';
 // @public
 export const ButtonChoiceGroup: React.FC<IChoiceGroupProps>;
 
-// Warning: (ae-forgotten-export) The symbol "ClippedGraphProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "ClippedGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export const ClippedGraph: ({ data, width, height, clipped, percentile, gradient, gradientInterpolation, gradientBand, horizon, sparkline, }: ClippedGraphProps) => JSX.Element;
+
+// Warning: (ae-missing-release-tag) "ClippedGraphProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ClippedGraphProps {
+    clipped?: boolean;
+    data: number[];
+    gradient?: boolean;
+    gradientBand?: number;
+    gradientInterpolation?: number;
+    height: number;
+    horizon?: boolean;
+    percentile?: number;
+    sparkline?: boolean;
+    width: number;
+}
 
 // Warning: (ae-missing-release-tag) "CollapsiblePanel" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

@@ -2,17 +2,22 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { CollapsiblePanelProps } from '@essex/components'
-import { CollapsiblePanel, CollapsiblePanelContainer } from '@essex/components'
 import { Toggle } from '@fluentui/react'
 import type { ComponentStory } from '@storybook/react'
 
-const storyMetadata = {
+import { CollapsiblePanel } from './CollapsiblePanel.js'
+import type { CollapsiblePanelProps } from './CollapsiblePanel.types.js'
+import { CollapsiblePanelContainer } from './CollapsiblePanelContainer.js'
+
+const meta = {
 	title: '@essex:components/CollapsiblePanel',
 	component: CollapsiblePanel,
+	args: {
+		title: 'Header title',
+	},
 }
 
-export default storyMetadata
+export default meta
 
 const Lorem = () => (
 	<div
@@ -34,7 +39,7 @@ const Template: ComponentStory<typeof CollapsiblePanel> = (
 	args: CollapsiblePanelProps,
 ) => {
 	return (
-		<CollapsiblePanel title={'Header title'} {...args}>
+		<CollapsiblePanel {...args}>
 			<Lorem />
 		</CollapsiblePanel>
 	)

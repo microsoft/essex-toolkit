@@ -16,13 +16,13 @@ This allows arbitrary column configurations via jsx, and a set of global filters
 
 <br />
 
-!["Themed-Lineup Light Preview"](../../assets/ThematicLineup-story.JPG)
+!["Themed-Lineup Light Preview"](../../assets/ThematicLineup-meta.JPG)
 
 <b>Dark Theme</b>
 
 <br />
 
-!["Themed-Lineup Dark Preview"](../../assets/ThematicLineup-dark-story.JPG)
+!["Themed-Lineup Dark Preview"](../../assets/ThematicLineup-dark-meta.JPG)
 
 ### Extending webpack config example
 
