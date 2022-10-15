@@ -1,0 +1,10 @@
+releases:
+  "@essex/components": major
+
+declined:
+  - essex-toolkit
+  - "@essex/boolean-expression-component"
+  - "@essex/charts-react"
+  - "@essex/hierarchy-browser"
+  - essex-toolkit-stories
+  - "@essex/thematic-lineup"
