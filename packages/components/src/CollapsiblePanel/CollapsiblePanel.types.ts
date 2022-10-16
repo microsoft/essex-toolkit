@@ -2,8 +2,31 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { IRenderFunction } from '@fluentui/react'
-import type { ReactNode } from 'react'
+import type { IButtonProps, IRenderFunction } from '@fluentui/react'
+import type { CSSProperties } from 'react'
+
+export interface CollapsiblePanelStyles {
+	/**
+	 * Style for outer component container
+	 */
+	root?: CSSProperties
+	/**
+	 * Style for the outer header container
+	 */
+	header?: CSSProperties
+	/**
+	 * Container box around the title text
+	 */
+	titleContainer?: CSSProperties
+	/**
+	 * Style for the header title text
+	 */
+	title?: CSSProperties
+	/**
+	 * Style for the content container
+	 */
+	content?: CSSProperties
+}
 
 /**
  * Props for the CollapsiblePanel
@@ -20,7 +43,7 @@ export interface CollapsiblePanelProps {
 	/**
 	 * Optional boolean to control the state outside this component
 	 */
-	expandedState?: boolean
+	expanded?: boolean
 	/**
 	 * If it's the first element of the panel it applies a different style
 	 */
@@ -30,7 +53,10 @@ export interface CollapsiblePanelProps {
 	 */
 	last?: boolean
 	/**
-	 * Optional function to render a different header than the default
+	 * Optional function to render a different header than the default.
+	 * Note that if you supply a custom header renderer with interactive controls,
+	 * you may need to call e.stopPropagation in their click handlers to prevent
+	 * unwanted expand/collapse behavior.
 	 */
 	onRenderHeader?: IRenderFunction<any>
 	/**
@@ -38,14 +64,21 @@ export interface CollapsiblePanelProps {
 	 */
 	onHeaderClick?: (nextState: boolean) => void
 	/**
-	 * If true panel will be toggled only when carret icon click directly
+	 * Custom styles for the subcomponents
 	 */
-	expandsWithIcon?: boolean
-	children?: ReactNode
-	styles?: {
-		header?: React.CSSProperties
-		contents?: React.CSSProperties
-	}
+	styles?: CollapsiblePanelStyles
+	/**
+	 * Duration of the expand/collapse content animation.
+	 */
+	duration?: number
+	/**
+	 * Hide the expand/collapse icon entirely. It is visible by default.
+	 */
+	hideIcon?: boolean
+	/**
+	 * Custom props for the expand/collapse icon button.
+	 */
+	buttonProps?: IButtonProps
 }
 
 /**
@@ -54,5 +87,7 @@ export interface CollapsiblePanelProps {
  * the last and first params automatically.
  */
 export interface CollapsiblePanelContainerProps {
-	children?: ReactNode
+	styles?: {
+		root?: CSSProperties
+	}
 }

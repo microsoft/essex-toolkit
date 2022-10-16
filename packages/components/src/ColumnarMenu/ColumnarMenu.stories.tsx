@@ -2,26 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnarMenu, ColumnarMenuList } from '@essex/components'
 import type { IContextualMenuItem } from '@fluentui/react'
 import { ContextualMenuItemType } from '@fluentui/react'
-import { useCallback } from 'react'
+import type { ComponentStory } from '@storybook/react'
 
-const story = {
-	title: '@essex:components/ColumnarMenu',
-}
-export default story
+import { ColumnarMenu } from './ColumnarMenu.js'
+import type { ColumnarMenuProps } from './ColumnarMenu.types.js'
 
-const data = [
-	{
-		key: `section-0`,
-		text: 'Reset',
-		data: {
-			button: true,
-			bottomDivider: true,
-		},
-		onClick: () => console.log('Reset clicked'),
-	},
+const items = [
 	{
 		key: `section-1`,
 		itemType: ContextualMenuItemType.Section,
@@ -64,59 +52,100 @@ const data = [
 	},
 ] as IContextualMenuItem[]
 
-const styles = {
-	root: {
-		width: 150,
-	},
-	label: {
-		width: 120,
-	},
-}
-
-export const ColumnarMenuStory = () => {
-	const renderMenuList = useCallback(menuListProps => {
-		return (
-			<div>
-				<ColumnarMenuList {...menuListProps} />
-			</div>
-		)
-	}, [])
-
-	const menuProps = {
-		items: data,
-		buttonStyles: styles,
-		onRenderMenuList: renderMenuList,
+const meta = {
+	title: '@essex:components/ColumnarMenu',
+	component: ColumnarMenu,
+	args: {
+		items,
+		buttonStyles: {
+			root: {
+				width: 150,
+			},
+			label: {
+				width: 120,
+			},
+		},
 		onItemClick: () => alert('item clicked'),
-	}
-
-	return <ColumnarMenu text={'Electronics and furniture list'} {...menuProps} />
+	},
 }
+export default meta
 
-ColumnarMenuStory.story = {
-	name: 'main',
-}
-
-export const ColumnarMenuStoryOverflow = () => {
-	const renderMenuList = useCallback(menuListProps => {
-		return (
-			<div>
-				<ColumnarMenuList {...menuListProps} />
-			</div>
-		)
-	}, [])
-
-	const menuProps = {
-		items: data,
-		buttonStyles: styles,
-		onRenderMenuList: renderMenuList,
-		onItemClick: () => alert('item clicked'),
-	}
-
+const Template: ComponentStory<typeof ColumnarMenu> = (
+	args: ColumnarMenuProps,
+) => {
 	return (
-		<ColumnarMenu text={'ElectronicsAndFurnitureList.csv'} {...menuProps} />
+		<div
+			style={{
+				width: 200,
+				height: 100,
+				padding: 12,
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+				border: '1px solid orange',
+			}}
+		>
+			<ColumnarMenu {...args} />
+		</div>
 	)
 }
 
-ColumnarMenuStoryOverflow.story = {
-	name: 'overflow',
+export const Primary = Template.bind({})
+Primary.args = {
+	text: 'Electronics and furniture list',
+}
+
+export const Customized = Template.bind({})
+Customized.args = {
+	text: 'Furniture',
+	buttonProps: {
+		styles: {
+			root: {
+				width: 120,
+			},
+		},
+	},
+	styles: {
+		root: {
+			background: 'azure',
+		},
+	},
+	menuListProps: {
+		styles: {
+			header: {
+				color: 'cornflowerblue',
+			},
+			column: {
+				border: '1px dotted coral',
+			},
+			item: {
+				root: {
+					color: 'green',
+				},
+			},
+		},
+	},
+}
+
+export const Overflow = Template.bind({})
+Overflow.args = {
+	// demonstrates ellipsis text overflow
+	text: 'ElectronicsAndFurnitureList.csv',
+}
+
+export const WithButtons = Template.bind({})
+WithButtons.args = {
+	text: 'Allows reset',
+	items: [
+		{
+			key: `reset-button`,
+			text: 'Reset',
+			data: {
+				button: true,
+				bottomDivider: true,
+			},
+			onClick: () => alert('Reset clicked'),
+		},
+		...items,
+	],
 }

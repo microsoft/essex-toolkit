@@ -7,47 +7,34 @@ import type {
 	IChoiceGroupOptionProps,
 	IChoiceGroupProps,
 } from '@fluentui/react'
-import {
-	ChoiceGroup,
-	DefaultButton,
-	IconButton,
-	useTheme,
-} from '@fluentui/react'
+import { ChoiceGroup, DefaultButton, IconButton } from '@fluentui/react'
+import merge from 'lodash-es/merge.js'
 import { memo, useMemo } from 'react'
 
-export const ButtonChoiceGroup: React.FC<IChoiceGroupProps> = memo(
-	function ButtonChoiceGroup({ options, ...props }) {
-		const theme = useTheme()
-		const choiceGroupStyles = useMemo(
-			() => ({
-				flexContainer: {
-					display: 'inline-flex',
-					flexDirection: 'row',
-					flexWrap: 'wrap',
-					borderRadius: '2px',
-					border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
-				},
-			}),
-			[theme],
-		)
+import {
+	useButtonOptionStyles,
+	useChoiceGroupStyles,
+} from './ButtonChoiceGroup.styles.js'
 
+/**
+ * ButtonChoiceGroup is a ChoiceGroup component that renders as buttons instead of radios.
+ */
+export const ButtonChoiceGroup: React.FC<IChoiceGroupProps> = memo(
+	function ButtonChoiceGroup({ options, styles, ...props }) {
+		const choiceGroupStyles = useChoiceGroupStyles(styles)
+		const buttonOptionStyles = useButtonOptionStyles()
 		const buttonOptions = useMemo(
 			(): IChoiceGroupOption[] | undefined =>
-				options?.map(o => {
-					return {
-						...o,
-						styles: {
-							...o.styles,
-							root: {
-								margin: 'unset',
-								borderRadius: '2px',
-								backgroundColor: theme.palette.white,
-							},
-						},
-						onRenderField,
-					} as IChoiceGroupOption
-				}),
-			[options, theme],
+				options?.map(option =>
+					merge(
+						{
+							styles: buttonOptionStyles,
+							onRenderField,
+						} as IChoiceGroupOption,
+						option,
+					),
+				),
+			[options, buttonOptionStyles],
 		)
 
 		return (
@@ -62,30 +49,23 @@ export const ButtonChoiceGroup: React.FC<IChoiceGroupProps> = memo(
 
 const onRenderField = (props?: IChoiceGroupOptionProps) => {
 	const iconOnly = props?.iconProps && !props.text
-
+	const shared = {
+		title: props?.title,
+		iconProps: props?.iconProps,
+		toggle: true,
+		checked: props?.checked,
+		onClick: () => props?.onChange?.(undefined, props),
+	}
 	return iconOnly ? (
-		<IconButton
-			title={props?.title}
-			iconProps={props?.iconProps}
-			checked={props?.checked}
-			toggle
-			onClick={() => props?.onChange?.(undefined, props)}
-		/>
+		<IconButton {...shared} />
 	) : (
-		<DefaultButton
-			style={DefaultButtonStyle}
-			title={props?.title}
-			iconProps={props?.iconProps}
-			checked={props?.checked}
-			toggle
-			onClick={() => props?.onChange?.(undefined, props)}
-		>
+		<DefaultButton style={defaultButtonStyle} {...shared}>
 			{props?.text}
 		</DefaultButton>
 	)
 }
 
-const DefaultButtonStyle: React.CSSProperties = {
+const defaultButtonStyle: React.CSSProperties = {
 	border: 'unset',
 	marginTop: 'unset',
 }

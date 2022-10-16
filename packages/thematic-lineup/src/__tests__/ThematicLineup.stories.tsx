@@ -4,10 +4,10 @@
  */
 import { ThematicLineup } from '@essex/thematic-lineup'
 
-const story = {
+const meta = {
 	title: '@essex:thematic-lineup/ThematicLineup',
 }
-export default story
+export default meta
 
 const data = [
 	{
@@ -59,11 +59,6 @@ const config = [
  * This allows arbitrary column configs via JSON, and a set of global filters if desired.
  */
 export const ThematicLineupStory = () => (
-	<div>
-		<ThematicLineup data={data} columns={config} width={600} height={300} />
-	</div>
+	<ThematicLineup data={data} columns={config} width={600} height={300} />
 )
-
-ThematicLineupStory.story = {
-	name: 'main',
-}
+ThematicLineupStory.storyName = 'ThematicLineup'

@@ -2,14 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { EnumDropdown as EnumDropdownComponent } from './EnumDropdown.js'
-import type { EnumDropdownProps } from './EnumDropdown.types.js'
+import type { ComponentStory } from '@storybook/react'
 
-const storyMetadata = {
-	title: '@essex:components/EnumDropdown',
-	component: EnumDropdownComponent,
-}
-export default storyMetadata
+import { EnumDropdown } from './EnumDropdown.js'
+import type { EnumDropdownProps } from './EnumDropdown.types.js'
 
 enum Stuff {
 	First = 'one',
@@ -18,14 +14,18 @@ enum Stuff {
 	CamelCase = 'camelcase',
 }
 
-const Template = (args: EnumDropdownProps) => (
-	<EnumDropdownComponent {...args} />
-)
-
-export const EnumDropdown = Template.bind({}) as any as {
-	args: EnumDropdownProps
+const meta = {
+	title: '@essex:components/EnumDropdown',
+	component: EnumDropdown,
+	args: {
+		enumeration: Stuff,
+	},
 }
+export default meta
 
-EnumDropdown.args = {
-	enumeration: Stuff,
-}
+const Template: ComponentStory<typeof EnumDropdown> = (
+	args: EnumDropdownProps,
+) => <EnumDropdown {...args} />
+
+export const Primary = Template.bind({})
+Primary.storyName = 'EnumDropdown'

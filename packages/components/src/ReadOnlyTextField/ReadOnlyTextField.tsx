@@ -6,7 +6,7 @@ import type { ITextFieldProps } from '@fluentui/react'
 import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 
-import { useBaseStyles } from './ReadOnlyTextField.hooks.js'
+import { useBaseStyles } from './ReadOnlyTextField.styles.js'
 
 /**
  * This is a standard TextField, with default styles overridden

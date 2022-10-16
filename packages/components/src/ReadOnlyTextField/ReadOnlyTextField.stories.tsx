@@ -3,23 +3,22 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ITextFieldProps } from '@fluentui/react'
+import type { ComponentStory } from '@storybook/react'
 
-import { ReadOnlyTextField as ReadOnlyTextFieldComponent } from './ReadOnlyTextField.js'
+import { ReadOnlyTextField } from './ReadOnlyTextField.js'
 
-const storyMetadata = {
+const meta = {
 	title: '@essex:components/ReadOnlyTextField',
-	component: ReadOnlyTextFieldComponent,
+	component: ReadOnlyTextField,
+	args: {
+		value: 'Read only text',
+	},
 }
-export default storyMetadata
+export default meta
 
-const Template = (args: ITextFieldProps) => (
-	<ReadOnlyTextFieldComponent {...args} />
-)
+const Template: ComponentStory<typeof ReadOnlyTextField> = (
+	args: ITextFieldProps,
+) => <ReadOnlyTextField {...args} />
 
-export const ReadOnlyTextField = Template.bind({}) as any as {
-	args: ITextFieldProps
-}
-
-ReadOnlyTextField.args = {
-	value: 'Read only text',
-}
+export const Primary = Template.bind({})
+Primary.storyName = 'ReadOnlyTextField'

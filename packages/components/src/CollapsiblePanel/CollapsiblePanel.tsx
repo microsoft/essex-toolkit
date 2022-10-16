@@ -4,216 +4,75 @@
  */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import AnimateHeight from '@essex/react-animate-height'
-import { IconButton, useTheme } from '@fluentui/react'
-import * as React from 'react'
-import { memo, useCallback, useEffect, useMemo, useState } from 'react'
+import { IconButton } from '@fluentui/react'
+import type { PropsWithChildren } from 'react'
 
+import { useEventHandlers, useIconProps } from './CollapsiblePanel.hooks.js'
+import { useStyles } from './CollapsiblePanel.styles.js'
 import type { CollapsiblePanelProps } from './CollapsiblePanel.types.js'
 
 /**
- * CollapsiblePanel displays a Header and it's child
+ * CollapsiblePanel displays a Header and its child
  * that collapse and expands with keyboard arrows, space, enter or onclick
  * showing the 'hidden' rendering
  */
-export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
+export const CollapsiblePanel: React.FC<
+	PropsWithChildren<CollapsiblePanelProps>
+> = ({
 	title,
 	defaultExpanded = false,
-	expandedState,
+	expanded,
 	first,
 	last,
 	children,
 	onRenderHeader,
 	onHeaderClick,
-	expandsWithIcon = false,
-	styles = {
-		header: {},
-		contents: {},
-	},
+	hideIcon = false,
+	styles,
+	duration = 300,
+	buttonProps,
 }) => {
-	const theme = useTheme()
-	const [expanded, setExpanded] = useState<boolean>(defaultExpanded)
-	const handleClick = useCallback(() => {
-		// if not controlled component, set local state
-		if (expandedState === undefined) {
-			setExpanded(!expanded)
-		}
-	}, [expanded, expandedState])
+	const {
+		expandedState,
+		handleClick,
+		handleKeyDown,
+		handleHeaderKeyDown,
+		handleHeaderClick,
+	} = useEventHandlers(defaultExpanded, expanded, onHeaderClick)
 
-	const handleHeaderClick = useCallback(() => {
-		if (onHeaderClick) {
-			onHeaderClick(!expanded)
-		}
-		!expandsWithIcon && handleClick()
-	}, [handleClick, onHeaderClick, expandsWithIcon, expanded])
+	const _styles = useStyles(styles, expandedState, first, last)
+	const _buttonProps = useIconProps(buttonProps, expandedState)
 
-	const handleKeyDown = useCallback(
-		(event: React.KeyboardEvent) => {
-			if ('ArrowLeft' === event.key && expanded) {
-				return handleClick()
-			}
-
-			if ('ArrowRight' === event.key && !expanded) {
-				return handleClick()
-			}
-		},
-		[handleClick, expanded],
-	)
-
-	const handleHeaderKeyDown = useCallback(
-		(event: React.KeyboardEvent) => {
-			if ('Enter' === event.key || ' ' === event.key) {
-				return handleHeaderClick()
-			}
-		},
-		[handleHeaderClick],
-	)
-
-	useEffect(() => {
-		if (expandedState !== undefined) {
-			setExpanded(expandedState)
-		}
-	}, [setExpanded, expandedState])
-
-	const iconProps = useIconProps(expanded, expandsWithIcon ? 12 : 10)
-	const header = useMemo(() => {
-		if (onRenderHeader) {
-			return onRenderHeader()
-		}
-		return <span style={HeaderLabelStyle}>{title}</span>
-	}, [onRenderHeader, title])
-	const contentsStyle = useMemo(
-		() => ({
-			border: expanded ? `1px solid ${theme.palette.neutralLighter}` : 'none',
-			...styles.contents,
-		}),
-		[expanded, theme, styles.contents],
-	)
 	return (
-		<div>
-			<HeaderContainer
-				first={first}
-				last={last}
-				expanded={expanded}
-				onKeyDown={!expandsWithIcon ? handleKeyDown : undefined}
-				onClick={!expandsWithIcon ? handleHeaderClick : undefined}
-				style={styles.header}
-			>
-				<div
-					onKeyDown={expandsWithIcon ? handleKeyDown : undefined}
-					onClick={expandsWithIcon ? handleClick : undefined}
-					style={ButtonContainerStyle}
-				>
+		<div style={_styles.root}>
+			<div style={_styles.header}>
+				{!hideIcon && (
 					<IconButton
-						title="collapse"
-						iconProps={iconProps}
-						style={{
-							...IconButtonStyle,
-							color: styles?.header?.color || theme.palette.neutralPrimary,
-						}}
+						title={expandedState ? 'collapse' : 'expand'}
+						onKeyDown={handleKeyDown as any}
+						onClick={handleClick}
+						{..._buttonProps}
 					/>
-				</div>
+				)}
 				<div
-					role="group"
-					//the element is interactive when tabIndex is defined
-					//eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-					tabIndex={expandsWithIcon ? 0 : undefined}
-					onKeyDown={expandsWithIcon ? handleHeaderKeyDown : undefined}
-					onClick={expandsWithIcon ? handleHeaderClick : undefined}
-					style={HeaderStyle}
+					role="button"
+					tabIndex={onHeaderClick ? 0 : undefined}
+					onKeyDown={handleHeaderKeyDown}
+					onClick={handleHeaderClick}
+					style={_styles.titleContainer}
 				>
-					{header}
+					{onRenderHeader ? (
+						onRenderHeader()
+					) : (
+						<div style={_styles.title}>{title}</div>
+					)}
 				</div>
-			</HeaderContainer>
-			<div style={contentsStyle}>
-				<AnimateHeight duration={500} height={expanded ? 'auto' : 0}>
+			</div>
+			<div style={_styles.content}>
+				<AnimateHeight duration={duration} height={expandedState ? 'auto' : 0}>
 					{children}
 				</AnimateHeight>
 			</div>
 		</div>
 	)
-}
-
-function useIconProps(expanded?: boolean, iconSize = 10) {
-	return useMemo(
-		() => ({
-			iconName: expanded ? 'ChevronDown' : 'ChevronRight',
-			styles: {
-				root: {
-					width: iconSize,
-					height: iconSize,
-					fontSize: iconSize,
-					lineHeight: iconSize,
-				},
-			},
-		}),
-		[expanded, iconSize],
-	)
-}
-
-const ButtonContainerStyle: React.CSSProperties = {
-	display: 'flex',
-	alignItems: 'center',
-	height: '100%',
-}
-
-const HeaderLabelStyle: React.CSSProperties = {
-	fontSize: '0.8em',
-}
-
-const HeaderStyle: React.CSSProperties = {
-	marginLeft: 4,
-	width: '100%',
-}
-
-const HeaderContainerStyle: React.CSSProperties = {
-	paddingTop: 2,
-	paddingBottom: 2,
-	display: 'flex',
-	alignContent: 'center',
-	cursor: 'pointer',
-	width: '100%',
-}
-const HeaderContainer: React.FC<{
-	first?: boolean
-	last?: boolean
-	expanded?: boolean
-	onClick?: () => void
-	onKeyDown?: (ev: React.KeyboardEvent) => void
-	style?: React.CSSProperties
-	children?: React.ReactNode
-}> = memo(function HeaderContainer({
-	first,
-	last,
-	expanded,
-	children,
-	onClick,
-	onKeyDown,
-	style = {},
-}) {
-	const theme = useTheme()
-	const _style = useMemo<React.CSSProperties>(() => {
-		const background = theme.palette.neutralLighter
-		const borderTop = first
-			? ''
-			: `1px solid ${theme.palette.neutralTertiaryAlt}`
-		const borderBottom =
-			last || expanded ? `1px solid ${theme.palette.neutralTertiaryAlt}` : ''
-		return {
-			...HeaderContainerStyle,
-			background,
-			borderTop,
-			borderBottom,
-			...style,
-		}
-	}, [first, last, expanded, theme, style])
-	return (
-		<div style={_style} onClick={onClick} onKeyDown={onKeyDown} role="group">
-			{children}
-		</div>
-	)
-})
-
-const IconButtonStyle: React.CSSProperties = {
-	width: 20,
-	height: 20,
 }

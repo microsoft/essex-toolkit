@@ -7,7 +7,7 @@
  * Generic type referencing for all stories
  */
 export type CSF<P = Record<string, any>> = React.FC<P> & {
-	story?: {
+	meta?: {
 		name: string
 	}
 }

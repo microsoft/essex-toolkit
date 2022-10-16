@@ -2,73 +2,22 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	IButtonStyles,
-	IContextualMenuListProps,
-	IContextualMenuProps,
-	IRenderFunction,
-} from '@fluentui/react'
 import { DefaultButton } from '@fluentui/react'
-import { merge } from 'lodash-es'
-import { memo, useCallback, useMemo } from 'react'
+import { memo } from 'react'
 
-import { ColumnarMenuList } from './ColumnarMenuList.js'
-
-export interface ColumnarMenuProps extends IContextualMenuProps {
-	text?: string
-	buttonStyles?: IButtonStyles
-}
-
-const dropdownButtonStyles: IButtonStyles = {
-	root: {
-		// match the dropdowns for better visual alignment
-		width: 220,
-		paddingLeft: 4,
-		paddingRight: 4,
-		textAlign: 'left',
-	},
-	textContainer: {
-		overflow: 'hidden',
-	},
-	label: {
-		fontWeight: 'normal',
-		textOverflow: 'ellipsis',
-		overflow: 'hidden',
-	},
-}
+import { useButtonProps, useMenuProps } from './ColumnarMenu.hooks.js'
+import type { ColumnarMenuProps } from './ColumnarMenu.types.js'
 
 /**
  * Dropdown button menu that supports grouped items (using sectionProps) in a columnar layout.
+ * This is a hybrid control that uses a button to create the dropdown menu,
+ * but overrides the menu renderer to lay out any item sections as columns instead of a vertical stack.
  */
 export const ColumnarMenu: React.FC<ColumnarMenuProps> = memo(
-	function ColumnarMenu(props) {
-		const { onRenderMenuList, buttonStyles } = props
-		const render: IRenderFunction<IContextualMenuListProps> = useCallback(
-			menuProps => {
-				if (onRenderMenuList) {
-					return onRenderMenuList(menuProps)
-				}
-				return menuProps ? <ColumnarMenuList {...menuProps} /> : null
-			},
-			[onRenderMenuList],
-		)
-		const menuProps = useMemo(
-			(): IContextualMenuProps => ({
-				onRenderMenuList: render,
-				...props,
-				styles: merge(props.styles, {}),
-			}),
-			[props, render],
-		)
+	function ColumnarMenu({ text, buttonProps, menuListProps, ...props }) {
+		const menuProps = useMenuProps(props, menuListProps)
+		const _buttonProps = useButtonProps(buttonProps)
 
-		const buttonStyle = merge(dropdownButtonStyles, buttonStyles)
-
-		return (
-			<DefaultButton
-				styles={buttonStyle}
-				text={props.text}
-				menuProps={menuProps}
-			/>
-		)
+		return <DefaultButton {..._buttonProps} menuProps={menuProps} text={text} />
 	},
 )

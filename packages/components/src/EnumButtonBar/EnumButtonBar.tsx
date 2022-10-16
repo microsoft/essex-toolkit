@@ -50,7 +50,6 @@ export function EnumButtonBar<E>({
 			Object.entries(enumeration).map((m, i) => {
 				const key = m[1] as string
 				const text = splitCamel(m[0])
-				console.log(selectedKey, key)
 				return {
 					key,
 					text,

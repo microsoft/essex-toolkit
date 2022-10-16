@@ -3,18 +3,41 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { IDropdownOption } from '@fluentui/react'
+import type { ComponentStory } from '@storybook/react'
 import { useCallback, useState } from 'react'
 
-import { MultiDropdown as MultiDropdownComponent } from './MultiDropdown.js'
+import { MultiDropdown } from './MultiDropdown.js'
 import type { MultiDropdownProps } from './MultiDropdown.types.js'
 
-const storyMetadata = {
+const meta = {
 	title: '@essex:components/MultiDropdown',
-	component: MultiDropdownComponent,
+	component: MultiDropdown,
+	args: {
+		options: [
+			{
+				key: 'one',
+				text: 'One',
+			},
+			{
+				key: 'two',
+				text: 'Two',
+			},
+			{
+				key: 'three',
+				text: 'Three',
+			},
+			{
+				key: 'four',
+				text: 'Four',
+			},
+		],
+	},
 }
-export default storyMetadata
+export default meta
 
-const Template = (args: MultiDropdownProps) => {
+const Template: ComponentStory<typeof MultiDropdown> = (
+	args: MultiDropdownProps,
+) => {
 	const [selectedKeys, setSelectedKeys] = useState<string[] | number[]>(['one'])
 	const onChange = useCallback(
 		(_event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
@@ -36,7 +59,7 @@ const Template = (args: MultiDropdownProps) => {
 		[setSelectedKeys],
 	)
 	return (
-		<MultiDropdownComponent
+		<MultiDropdown
 			{...args}
 			selectedKeys={selectedKeys}
 			onChange={onChange}
@@ -45,27 +68,5 @@ const Template = (args: MultiDropdownProps) => {
 	)
 }
 
-export const MultiDropdown = Template.bind({}) as any as {
-	args: MultiDropdownProps
-}
-
-MultiDropdown.args = {
-	options: [
-		{
-			key: 'one',
-			text: 'One',
-		},
-		{
-			key: 'two',
-			text: 'Two',
-		},
-		{
-			key: 'three',
-			text: 'Three',
-		},
-		{
-			key: 'four',
-			text: 'Four',
-		},
-	],
-}
+export const Primary = Template.bind({})
+Primary.storyName = 'MultiDropdown'

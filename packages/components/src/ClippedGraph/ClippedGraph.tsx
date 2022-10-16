@@ -11,7 +11,7 @@ import { useEffect, useMemo, useRef } from 'react'
 
 const BINS = 10
 
-interface ClippedGraphProps {
+export interface ClippedGraphProps {
 	/**
 	 * List of values to plot. Currently this is the y axis, the x axis is ordinal.
 	 * TODO: support more complex data types such as x/y points or explicit time series.
@@ -156,7 +156,7 @@ export const ClippedGraph = ({
 					.append('path')
 					.attr('d', clip)
 					.attr('transform', `translate(0,${height * w})`)
-					.attr('fill', d => color(fullMax * (w / wrapCount)).hex())
+					.attr('fill', () => color(fullMax * (w / wrapCount)).hex())
 					.attr('stroke', 'none')
 				g.append('g')
 					.append('path')
@@ -178,7 +178,7 @@ export const ClippedGraph = ({
 				.enter()
 				.append('rect')
 				.attr('class', 'gradient')
-				.attr('x', (d, i) => (sScale(i) || 0) - sPer / 2)
+				.attr('x', (_d, i) => (sScale(i) || 0) - sPer / 2)
 				.attr('height', gradientBand || height)
 				.attr('width', sPer)
 				.attr('fill', (d: number) => color(d).hex())

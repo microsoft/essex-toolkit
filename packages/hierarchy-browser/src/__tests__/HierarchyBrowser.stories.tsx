@@ -14,11 +14,11 @@ import { useHierarchyState } from './utils/useHierarchyState.js'
 import { useStaticEntities } from './utils/useStaticEntities.js'
 import { options, selectedClusterID, visibleColumns } from './utils/utils.js'
 
-const story = {
+const meta = {
 	title: '@essex:hierarchy-browser/HierarchyBrowser',
 }
 
-export default story
+export default meta
 const DEFAULT_SELECTIONS = ['4_100']
 
 export const HierarchyBrowserAsync = () => {
@@ -74,9 +74,7 @@ export const HierarchyBrowserAsync = () => {
 	)
 }
 
-HierarchyBrowserAsync.story = {
-	name: 'Async',
-}
+HierarchyBrowserAsync.storyName = 'Async'
 
 export const HierarchyBrowserSynchronous = () => {
 	const [selectedOption, setSelectedOption] = useState<string>(
@@ -117,6 +115,4 @@ export const HierarchyBrowserSynchronous = () => {
 	)
 }
 
-HierarchyBrowserSynchronous.story = {
-	name: 'Synchronous',
-}
+HierarchyBrowserSynchronous.storyName = 'Synchronous'

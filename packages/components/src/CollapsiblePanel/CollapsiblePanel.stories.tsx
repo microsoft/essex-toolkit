@@ -2,105 +2,131 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { CollapsiblePanel, CollapsiblePanelContainer } from '@essex/components'
-import { useCallback } from 'react'
+import { Toggle } from '@fluentui/react'
+import type { ComponentStory } from '@storybook/react'
+
+import { CollapsiblePanel } from './CollapsiblePanel.js'
+import type { CollapsiblePanelProps } from './CollapsiblePanel.types.js'
+import { CollapsiblePanelContainer } from './CollapsiblePanelContainer.js'
 
 const meta = {
 	title: '@essex:components/CollapsiblePanel',
+	component: CollapsiblePanel,
+	args: {
+		title: 'Header title',
+	},
 }
 
 export default meta
 
-export const CollapsiblePanelChildrenStory = () => {
+const Lorem = () => (
+	<div
+		style={{
+			padding: 4,
+			width: '100%',
+		}}
+	>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+		non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	</div>
+)
+
+const Template: ComponentStory<typeof CollapsiblePanel> = (
+	args: CollapsiblePanelProps,
+) => {
 	return (
-		<CollapsiblePanel title="Panel">
-			<div>This panel has a default title and children</div>
+		<CollapsiblePanel {...args}>
+			<Lorem />
 		</CollapsiblePanel>
 	)
 }
 
-CollapsiblePanelChildrenStory.story = {
-	name: 'Just title and children',
+export const Primary = Template.bind({})
+
+export const Customized = Template.bind({})
+Customized.args = {
+	defaultExpanded: true,
+	styles: {
+		root: {
+			width: 300,
+		},
+		header: {
+			backgroundColor: 'azure',
+			padding: '0.5rem',
+			textTransform: 'uppercase' as const,
+			fontWeight: 500,
+			fontSize: ' 1.5rem',
+		},
+		title: {
+			fontFamily: 'monospace',
+		},
+		content: {
+			border: 'none',
+			backgroundColor: 'purple',
+			color: 'white',
+			padding: 10,
+			borderRadius: '0 0 0.5rem 0.5rem',
+		},
+	},
+	buttonProps: {
+		iconProps: {
+			iconName: 'RedEye',
+			styles: {
+				root: {
+					color: 'orange',
+				},
+			},
+		},
+	},
+	duration: 2000,
 }
 
-export const CollapsiblePanelHeaderStory = () => {
-	const renderHeader = useCallback(() => <div>Header</div>, [])
-	return (
-		<CollapsiblePanel onRenderHeader={renderHeader}>
-			<div>This panel has an onRenderHeader function</div>
-		</CollapsiblePanel>
-	)
+export const Header = Template.bind({})
+Header.args = {
+	onRenderHeader: () => (
+		<div
+			style={{
+				display: 'flex',
+				alignItems: 'center',
+				gap: 8,
+			}}
+		>
+			<div>Header</div>
+			<Toggle
+				styles={{ root: { margin: 0 } }}
+				onClick={e => e.stopPropagation()}
+			/>
+		</div>
+	),
 }
+Header.storyName = 'Custom onRenderHeader'
 
-CollapsiblePanelHeaderStory.story = {
-	name: 'Render header function',
+export const IconClick = Template.bind({})
+IconClick.args = {
+	onHeaderClick: () => alert('header clicked'),
+}
+IconClick.storyName = 'Icon/header separate click'
+
+export const NoIcon = Template.bind({})
+NoIcon.args = {
+	hideIcon: true,
 }
 
 export const CollapsiblePanelContainerStory = () => {
 	return (
 		<CollapsiblePanelContainer>
 			<CollapsiblePanel title="First">
-				<div>First panel</div>
+				<Lorem />
 			</CollapsiblePanel>
 			<CollapsiblePanel title="Second">
-				<div>Second panel</div>
+				<Lorem />
 			</CollapsiblePanel>
 		</CollapsiblePanelContainer>
 	)
 }
 
-CollapsiblePanelContainerStory.story = {
-	name: 'Container with multiple children',
-}
-
-export const CollapsiblePanelStyled = () => {
-	return (
-		<CollapsiblePanel title="Panel" styles={styles}>
-			<div>This panel has a default title and children</div>
-		</CollapsiblePanel>
-	)
-}
-
-const styles = {
-	header: {
-		backgroundColor: 'white',
-		color: 'black',
-		padding: '0.5rem',
-		textTransform: 'uppercase',
-		fontWeight: 500,
-		fontSize: ' 1.5rem',
-		display: 'flex',
-		alignItems: 'center',
-	},
-	contents: {
-		border: 'none',
-		backgroundColor: 'purple',
-		color: 'white',
-		padding: '0 1rem',
-		borderRadius: '0 0 0.5rem 0.5rem',
-	},
-}
-
-CollapsiblePanelStyled.story = {
-	name: 'Styled Panel Header and Contents',
-}
-
-export const CollapsiblePanelIconClickStory = () => {
-	return (
-		<CollapsiblePanel
-			title="Panel"
-			expandsWithIcon
-			onHeaderClick={() => alert('header clicked')}
-		>
-			<div>This panel opens only with click on the icon</div>
-			<div>
-				This panel emits an alert when the header is clicked (except for the
-				icon)
-			</div>
-		</CollapsiblePanel>
-	)
-}
-
-CollapsiblePanelIconClickStory.story = {
-	name: 'Icon click function',
-}
+CollapsiblePanelContainerStory.storyName = 'Container with multiple children'

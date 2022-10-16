@@ -8,69 +8,93 @@
 
 import type { CSSProperties } from 'react';
 import type { FC } from 'react';
-import type { IButtonStyles } from '@fluentui/react';
+import type { IButtonProps } from '@fluentui/react';
 import type { IChoiceGroupProps } from '@fluentui/react';
 import type { ICommandBarStyleProps } from '@fluentui/react';
 import type { ICommandBarStyles } from '@fluentui/react';
+import type { IContextualMenuItemStyles } from '@fluentui/react';
 import type { IContextualMenuListProps } from '@fluentui/react';
 import type { IContextualMenuProps } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
 import type { IDropdownProps } from '@fluentui/react';
-import type { IIconStyles } from '@fluentui/react';
+import type { ILinkProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { IStyleFunctionOrObject } from '@fluentui/react';
 import type { Position } from '@fluentui/react';
-import * as React_2 from 'react';
-import type { ReactNode } from 'react';
+import type { PropsWithChildren } from 'react';
 
 // Warning: (ae-missing-release-tag) "ButtonChoiceGroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export const ButtonChoiceGroup: React.FC<IChoiceGroupProps>;
 
-// Warning: (ae-forgotten-export) The symbol "ClippedGraphProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "ClippedGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export const ClippedGraph: ({ data, width, height, clipped, percentile, gradient, gradientInterpolation, gradientBand, horizon, sparkline, }: ClippedGraphProps) => JSX.Element;
 
+// Warning: (ae-missing-release-tag) "ClippedGraphProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ClippedGraphProps {
+    clipped?: boolean;
+    data: number[];
+    gradient?: boolean;
+    gradientBand?: number;
+    gradientInterpolation?: number;
+    height: number;
+    horizon?: boolean;
+    percentile?: number;
+    sparkline?: boolean;
+    width: number;
+}
+
 // Warning: (ae-missing-release-tag) "CollapsiblePanel" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const CollapsiblePanel: React_2.FC<CollapsiblePanelProps>;
+export const CollapsiblePanel: React.FC<PropsWithChildren<CollapsiblePanelProps>>;
 
 // Warning: (ae-missing-release-tag) "CollapsiblePanelContainer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const CollapsiblePanelContainer: React.FC<CollapsiblePanelContainerProps>;
+export const CollapsiblePanelContainer: React.FC<PropsWithChildren<CollapsiblePanelContainerProps>>;
 
 // Warning: (ae-missing-release-tag) "CollapsiblePanelContainerProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export interface CollapsiblePanelContainerProps {
     // (undocumented)
-    children?: ReactNode;
+    styles?: {
+        root?: CSSProperties;
+    };
 }
 
 // Warning: (ae-missing-release-tag) "CollapsiblePanelProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export interface CollapsiblePanelProps {
-    // (undocumented)
-    children?: ReactNode;
+    buttonProps?: IButtonProps;
     defaultExpanded?: boolean;
-    expandedState?: boolean;
-    expandsWithIcon?: boolean;
+    duration?: number;
+    expanded?: boolean;
     first?: boolean;
+    hideIcon?: boolean;
     last?: boolean;
     onHeaderClick?: (nextState: boolean) => void;
     onRenderHeader?: IRenderFunction<any>;
-    // (undocumented)
-    styles?: {
-        header?: React.CSSProperties;
-        contents?: React.CSSProperties;
-    };
+    styles?: CollapsiblePanelStyles;
     title?: string;
+}
+
+// Warning: (ae-missing-release-tag) "CollapsiblePanelStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface CollapsiblePanelStyles {
+    content?: CSSProperties;
+    header?: CSSProperties;
+    root?: CSSProperties;
+    title?: CSSProperties;
+    titleContainer?: CSSProperties;
 }
 
 // Warning: (ae-missing-release-tag) "ColumnarMenu" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -78,18 +102,19 @@ export interface CollapsiblePanelProps {
 // @public
 export const ColumnarMenu: React.FC<ColumnarMenuProps>;
 
+// Warning: (ae-forgotten-export) The symbol "ColumnarMenuListProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "ColumnarMenuList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
-export const ColumnarMenuList: React.FC<IContextualMenuListProps>;
+// @public
+export const ColumnarMenuList: React.FC<ColumnarMenuListProps>;
 
 // Warning: (ae-missing-release-tag) "ColumnarMenuProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export interface ColumnarMenuProps extends IContextualMenuProps {
+    buttonProps?: IButtonProps;
     // (undocumented)
-    buttonStyles?: IButtonStyles;
-    // (undocumented)
+    menuListProps?: Partial<ColumnarMenuListProps>;
     text?: string;
 }
 
@@ -194,20 +219,26 @@ export interface EnumDropdownProps<E = unknown> extends Omit<IDropdownProps, 'op
 // Warning: (ae-missing-release-tag) "Expando" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const Expando: React.FC<ExpandoProps>;
+export const Expando: FC<PropsWithChildren<ExpandoProps>>;
 
 // Warning: (ae-missing-release-tag) "ExpandoProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ExpandoProps extends React.PropsWithChildren<{}> {
-    // (undocumented)
+export interface ExpandoProps {
     defaultExpanded?: boolean;
-    // (undocumented)
-    iconStyles?: IIconStyles;
-    // (undocumented)
+    iconButtonProps?: IButtonProps;
     label: string;
-    // (undocumented)
-    toggleStyles?: React.CSSProperties;
+    linkProps?: ILinkProps;
+    styles?: ExpandoStyles;
+}
+
+// Warning: (ae-missing-release-tag) "ExpandoStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ExpandoStyles {
+    content?: CSSProperties;
+    expando?: CSSProperties;
+    root?: CSSProperties;
 }
 
 // Warning: (ae-missing-release-tag) "FilterTextbox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

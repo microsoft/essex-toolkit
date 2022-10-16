@@ -2,14 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Settings } from '@essex/components'
 import { DefaultButton, MessageBar } from '@fluentui/react'
 import { useCallback, useState } from 'react'
 
-const story = {
-	title: '@essex:components/Settings Pane',
+import { Settings } from './Settings.js'
+
+const meta = {
+	title: '@essex:components/Settings',
 }
-export default story
+export default meta
 
 // cover the three basic data types
 const basicSettings = {
@@ -56,9 +57,7 @@ export const BasicSettingsStory = () => {
 	)
 }
 
-BasicSettingsStory.story = {
-	name: 'Basic Settings',
-}
+BasicSettingsStory.storyName = 'Basic Settings'
 
 /**
  * AdvancedSettingsStory is a zero-config settings panel that simply parses a supplied object
@@ -108,9 +107,7 @@ export const AdvancedSettingsStory = () => {
 	)
 }
 
-AdvancedSettingsStory.story = {
-	name: 'Advanced Settings',
-}
+AdvancedSettingsStory.storyName = 'Advanced Settings'
 
 const GroupedPanel = () => {
 	const [settings, setSettings] = useState(basicSettings)
@@ -159,9 +156,7 @@ export const GroupedSettingsStory = () => {
 	)
 }
 
-GroupedSettingsStory.story = {
-	name: 'Grouped Settings',
-}
+GroupedSettingsStory.storyName = 'Grouped Settings'
 
 /**
  * ContextSettingsStory shows the settings panel in a dropdown context menu.
@@ -195,6 +190,4 @@ export const ContextSettingsStory = () => {
 	)
 }
 
-ContextSettingsStory.story = {
-	name: 'Context Menu Settings',
-}
+ContextSettingsStory.storyName = 'Context Menu Settings'
