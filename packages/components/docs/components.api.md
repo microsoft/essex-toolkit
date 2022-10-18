@@ -17,11 +17,13 @@ import type { IContextualMenuListProps } from '@fluentui/react';
 import type { IContextualMenuProps } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
 import type { IDropdownProps } from '@fluentui/react';
+import type { IIconProps } from '@fluentui/react';
 import type { ILinkProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { IStyleFunctionOrObject } from '@fluentui/react';
 import type { Position } from '@fluentui/react';
 import type { PropsWithChildren } from 'react';
+import type { default as React_2 } from 'react';
 
 // Warning: (ae-missing-release-tag) "ButtonChoiceGroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -396,6 +398,45 @@ export interface ToggleLinkProps {
     onChange?: (toggled: boolean) => void;
     // (undocumented)
     style?: React.CSSProperties;
+}
+
+// Warning: (ae-missing-release-tag) "ToolPanel" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const ToolPanel: React.FC<React.PropsWithChildren<ToolPanelProps>>;
+
+// Warning: (ae-missing-release-tag) "ToolPanelProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ToolPanelProps {
+    // (undocumented)
+    closeIconProps?: IIconProps;
+    // (undocumented)
+    hasCloseButton?: boolean;
+    // (undocumented)
+    headerIconProps?: IIconProps;
+    // (undocumented)
+    headerText?: string;
+    // (undocumented)
+    onDismiss?: () => void;
+    // (undocumented)
+    styles?: ToolPanelStyles;
+}
+
+// Warning: (ae-missing-release-tag) "ToolPanelStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ToolPanelStyles {
+    // (undocumented)
+    content?: React_2.CSSProperties;
+    // (undocumented)
+    header?: React_2.CSSProperties;
+    // (undocumented)
+    root?: React_2.CSSProperties;
+    // (undocumented)
+    title?: React_2.CSSProperties;
+    // (undocumented)
+    titleContainer?: React_2.CSSProperties;
 }
 
 // Warning: (ae-internal-missing-underscore) The name "WcpConsent" should be prefixed with an underscore because the declaration is marked as @internal

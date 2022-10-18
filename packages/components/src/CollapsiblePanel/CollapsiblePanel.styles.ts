@@ -16,8 +16,6 @@ export const buttonContainerStyle: CSSProperties = {
 	height: '100%',
 }
 
-export const iconButtonStyle: React.CSSProperties = {}
-
 export function useStyles(
 	styles?: CollapsiblePanelStyles,
 	expanded?: boolean,
