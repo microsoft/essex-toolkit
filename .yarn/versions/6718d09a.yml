@@ -1,0 +1,6 @@
+releases:
+  "@essex/components": minor
+
+declined:
+  - essex-toolkit
+  - essex-toolkit-stories

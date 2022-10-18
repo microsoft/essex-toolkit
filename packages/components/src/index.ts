@@ -27,4 +27,9 @@ export * from './SearchBox/SearchBox.js'
 export * from './Settings/Settings.js'
 export type { SettingsGroup, SettingsProps } from './Settings/Settings.types.js'
 export * from './ToggleLink/ToggleLink.js'
+export * from './ToolPanel/ToolPanel.js'
+export type {
+	ToolPanelProps,
+	ToolPanelStyles,
+} from './ToolPanel/ToolPanel.types.js'
 export * from './util/enums.js'
