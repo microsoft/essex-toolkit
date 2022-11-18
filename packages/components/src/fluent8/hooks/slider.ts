@@ -40,7 +40,7 @@ function useStyles(
 					fontSize: SMALL_FONT_SIZE,
 				},
 				thumb: {
-					top: -3.5,
+					top: -3,
 					width: SMALL_THUMB_SIZE,
 					height: SMALL_THUMB_SIZE,
 					borderWidth: 1,
