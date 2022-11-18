@@ -11,12 +11,12 @@ import type {
 import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
 
-import type { Size } from '../types.js'
 import {
 	SMALL_FONT_SIZE,
 	SMALL_INPUT_HEIGHT,
 	SMALL_PILL_SIZE,
 } from './constants.js'
+import type { Size } from './types.js'
 
 export function useColorPickerProps(
 	props: Partial<IColorPickerProps>,

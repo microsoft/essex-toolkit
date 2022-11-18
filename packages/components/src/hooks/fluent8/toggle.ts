@@ -3,55 +3,64 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
-	ISliderProps,
-	ISliderStyleProps,
-	ISliderStyles,
 	IStyleFunctionOrObject,
+	IToggleProps,
+	IToggleStyleProps,
+	IToggleStyles,
 } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
 
-import type { Size } from '../types.js'
-import { SMALL_FONT_SIZE, SMALL_THUMB_SIZE } from './constants.js'
+import {
+	SMALL_FONT_SIZE,
+	SMALL_PILL_SIZE,
+	SMALL_THUMB_SIZE,
+} from './constants.js'
+import type { Size } from './types.js'
 
-export function useSliderProps(
-	props: Partial<ISliderProps>,
+export function useToggleProps(
+	props: Partial<IToggleProps>,
 	size: Size = 'medium',
-): Partial<ISliderProps> {
+): Partial<IToggleProps> {
 	const styles = useStyles(props?.styles, size)
 	return useMemo(() => merge({ styles }, props), [styles, props])
 }
-
+/**
+ * Note that this is renamed Switch in Fluent 9
+ * @param styles
+ * @param size
+ * @returns
+ */
 function useStyles(
-	styles?: IStyleFunctionOrObject<ISliderStyleProps, ISliderStyles>,
+	styles?: IStyleFunctionOrObject<IToggleStyleProps, IToggleStyles>,
 	size: Size = 'medium',
 ) {
 	const sizedBase = useMemo(() => {
 		if (size === 'small') {
 			return {
-				root: {},
-				titleLabel: {
-					fontSize: SMALL_FONT_SIZE,
+				root: {
+					margin: 0,
 				},
 				container: {
-					flex: 1,
+					alignItems: 'center',
 				},
-				valueLabel: {
+				label: {
+					fontSize: SMALL_FONT_SIZE,
+				},
+				pill: {
+					height: SMALL_PILL_SIZE,
+					width: SMALL_PILL_SIZE * 2,
+					padding: 2,
 					fontSize: SMALL_FONT_SIZE,
 				},
 				thumb: {
-					top: -3,
 					width: SMALL_THUMB_SIZE,
 					height: SMALL_THUMB_SIZE,
-					borderWidth: 1,
+					fontSize: SMALL_THUMB_SIZE,
+					borderWidth: SMALL_THUMB_SIZE / 2,
 				},
-				lineContainer: {
-					height: 2,
-					borderRadius: 2,
-				},
-				slideBox: {
-					paddingTop: 1,
-					paddingRight: 0,
+				text: {
+					fontSize: SMALL_FONT_SIZE,
 				},
 			}
 		}

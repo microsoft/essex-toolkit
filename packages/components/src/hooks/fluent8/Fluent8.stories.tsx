@@ -14,13 +14,13 @@ import {
 	Toggle,
 } from '@fluentui/react'
 
-import { useButtonProps, useIconButtonProps } from './hooks/button.js'
-import { useChoiceGroupProps } from './hooks/choicegroup.js'
-import { useColorPickerProps } from './hooks/colorpicker.js'
-import { useDropdownProps } from './hooks/dropdown.js'
-import { useSliderProps } from './hooks/slider.js'
-import { useSpinButtonProps } from './hooks/spinbutton.js'
-import { useToggleProps } from './hooks/toggle.js'
+import { useButtonProps, useIconButtonProps } from './button.js'
+import { useChoiceGroupProps } from './choicegroup.js'
+import { useColorPickerProps } from './colorpicker.js'
+import { useDropdownProps } from './dropdown.js'
+import { useSliderProps } from './slider.js'
+import { useSpinButtonProps } from './spinbutton.js'
+import { useToggleProps } from './toggle.js'
 
 const meta = {
 	title: '@essex:components/Fluent8',
