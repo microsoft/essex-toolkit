@@ -5,6 +5,7 @@
 import {
 	ActionButton,
 	ChoiceGroup,
+	ColorPicker,
 	DefaultButton,
 	Dropdown,
 	IconButton,
@@ -15,6 +16,7 @@ import {
 
 import { useButtonProps, useIconButtonProps } from './hooks/button.js'
 import { useChoiceGroupProps } from './hooks/choicegroup.js'
+import { useColorPickerProps } from './hooks/colorpicker.js'
 import { useDropdownProps } from './hooks/dropdown.js'
 import { useSliderProps } from './hooks/slider.js'
 import { useSpinButtonProps } from './hooks/spinbutton.js'
@@ -78,6 +80,8 @@ export const Fluent8 = () => {
 		},
 		'small',
 	)
+	const mediumColorPickerProps = useColorPickerProps({})
+	const smallColorPickerProps = useColorPickerProps({}, 'small')
 	return (
 		<div style={container}>
 			<div style={controls}>
@@ -212,6 +216,21 @@ export const Fluent8 = () => {
 						/>
 					</div>
 				</div>
+				<div style={pair}>
+					<div style={label}>
+						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/colorpicker">
+							ColorPicker
+						</a>
+					</div>
+					<div style={sideby}>
+						<div style={colorpicker}>
+							<ColorPicker color={'dodgerblue'} {...mediumColorPickerProps} />
+						</div>
+						<div style={colorpickersmall}>
+							<ColorPicker color={'dodgerblue'} {...smallColorPickerProps} />
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	)
@@ -236,4 +255,19 @@ const label = {}
 const control = {
 	width: 200,
 	height: 100,
+}
+
+const sideby = {
+	display: 'flex',
+	flexDirection: 'row' as const,
+	gap: 8,
+}
+
+const colorpicker = {
+	width: 300,
+	height: 400,
+}
+const colorpickersmall = {
+	width: 200,
+	height: 300,
 }
