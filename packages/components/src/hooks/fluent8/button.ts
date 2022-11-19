@@ -64,6 +64,15 @@ function useIconButtonStyles(styles?: IButtonStyles, size: Size = 'medium') {
 					paddingLeft: 4,
 					paddingRight: 4,
 				},
+				flexContainer: {
+					alignItems: 'center',
+				},
+				menuIcon: {
+					fontSize: SMALL_FONT_SIZE,
+					width: SMALL_FONT_SIZE,
+					height: SMALL_FONT_SIZE,
+					lineHeight: SMALL_FONT_SIZE,
+				},
 			}
 		}
 		return {}
