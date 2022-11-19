@@ -44,6 +44,43 @@ export const Fluent8 = () => {
 		},
 		'small',
 	)
+	const mediumIconButtonMenuProps = useIconButtonProps({
+		iconProps: {
+			iconName: 'Calendar',
+		},
+		menuProps: {
+			items: [
+				{
+					key: 'first',
+					text: 'First',
+				},
+				{
+					key: 'second',
+					text: 'Second',
+				},
+			],
+		},
+	})
+	const smallIconButtonMenuProps = useIconButtonProps(
+		{
+			iconProps: {
+				iconName: 'Calendar',
+			},
+			menuProps: {
+				items: [
+					{
+						key: 'first',
+						text: 'First',
+					},
+					{
+						key: 'second',
+						text: 'Second',
+					},
+				],
+			},
+		},
+		'small',
+	)
 	const mediumActionButtonProps = useButtonProps({
 		iconProps: {
 			iconName: 'Add',
@@ -109,6 +146,19 @@ export const Fluent8 = () => {
 					</div>
 					<div style={control}>
 						<IconButton {...smallIconButtonProps} />
+					</div>
+				</div>
+				<div style={pair}>
+					<div style={label}>
+						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/button">
+							IconButton with menuProps
+						</a>
+					</div>
+					<div style={control}>
+						<IconButton {...mediumIconButtonMenuProps} />
+					</div>
+					<div style={control}>
+						<IconButton {...smallIconButtonMenuProps} />
 					</div>
 				</div>
 				<div style={pair}>
