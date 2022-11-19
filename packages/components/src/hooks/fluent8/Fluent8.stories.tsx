@@ -11,6 +11,7 @@ import {
 	IconButton,
 	Slider,
 	SpinButton,
+	TextField,
 	Toggle,
 } from '@fluentui/react'
 
@@ -20,6 +21,7 @@ import { useColorPickerProps } from './colorpicker.js'
 import { useDropdownProps } from './dropdown.js'
 import { useSliderProps } from './slider.js'
 import { useSpinButtonProps } from './spinbutton.js'
+import { useTextFieldProps } from './textfield.js'
 import { useToggleProps } from './toggle.js'
 
 const meta = {
@@ -29,6 +31,8 @@ const meta = {
 export default meta
 
 export const Fluent8 = () => {
+	const mediumTextFieldProps = useTextFieldProps({})
+	const smallTextFieldProps = useTextFieldProps({}, 'small')
 	const mediumButtonProps = useButtonProps({})
 	const smallButtonProps = useButtonProps({}, 'small')
 	const mediumIconButtonProps = useIconButtonProps({
@@ -85,6 +89,19 @@ export const Fluent8 = () => {
 	return (
 		<div style={container}>
 			<div style={controls}>
+				<div style={pair}>
+					<div style={label}>
+						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/textfield">
+							TextField
+						</a>
+					</div>
+					<div style={control}>
+						<TextField {...mediumTextFieldProps} value={'Text content'} />
+					</div>
+					<div style={control}>
+						<TextField {...smallTextFieldProps} value={'Text content'} />
+					</div>
+				</div>
 				<div style={pair}>
 					<div style={label}>
 						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/button">
@@ -240,7 +257,7 @@ const container = {}
 
 const controls = {
 	display: 'flex',
-	gap: 12,
+	gap: 20,
 	flexWrap: 'wrap' as const,
 }
 

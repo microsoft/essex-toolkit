@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
-	IDropdownProps,
-	IDropdownStyleProps,
-	IDropdownStyles,
 	IStyleFunctionOrObject,
+	ITextFieldProps,
+	ITextFieldStyleProps,
+	ITextFieldStyles,
 } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
@@ -14,10 +14,10 @@ import { useMemo } from 'react'
 import { SMALL_FONT_SIZE, SMALL_INPUT_HEIGHT } from './constants.js'
 import type { Size } from './types.js'
 
-export function useDropdownProps(
-	props: Partial<IDropdownProps>,
+export function useTextFieldProps(
+	props: Partial<ITextFieldProps>,
 	size: Size = 'medium',
-): Partial<IDropdownProps> {
+): Partial<ITextFieldProps> {
 	const styles = useStyles(props.styles, size)
 	return useMemo(() => merge({ styles }, props), [styles, props])
 }
@@ -25,36 +25,20 @@ export function useDropdownProps(
 const item = {
 	fontSize: SMALL_FONT_SIZE,
 	height: SMALL_INPUT_HEIGHT,
-	minHeight: SMALL_INPUT_HEIGHT,
-	lineHeight: 16,
+	lineHeight: SMALL_FONT_SIZE,
 }
 
 function useStyles(
-	styles?: IStyleFunctionOrObject<IDropdownStyleProps, IDropdownStyles>,
+	styles?: IStyleFunctionOrObject<ITextFieldStyleProps, ITextFieldStyles>,
 	size: Size = 'medium',
 ) {
 	const sizedBase = useMemo(() => {
 		if (size === 'small') {
 			return {
-				root: {
-					fontSize: SMALL_FONT_SIZE,
-				},
-				label: {
-					fontSize: SMALL_FONT_SIZE,
-				},
-				dropdown: item,
-				dropdownItem: item,
-				dropdownItemHeader: item,
-				title: {
-					...item,
-					paddingTop: 3,
-				},
-				caretDown: {
-					...item,
-					fontSize: 10,
-					paddingTop: 3,
-				},
-				caretDownWrapper: item,
+				root: item,
+				wrapper: item,
+				fieldGroup: item,
+				field: item,
 			}
 		}
 	}, [size])

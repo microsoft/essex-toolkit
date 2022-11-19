@@ -6,7 +6,7 @@ import type { IButtonProps, IButtonStyles, IIconProps } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
 
-import { SMALL_FONT_SIZE } from './constants.js'
+import { SMALL_FONT_SIZE, SMALL_INPUT_HEIGHT } from './constants.js'
 import type { Size } from './types.js'
 
 export function useButtonProps(
@@ -39,8 +39,7 @@ function useButtonStyles(styles?: IButtonStyles, size: Size = 'medium') {
 			return {
 				root: {
 					fontSize: SMALL_FONT_SIZE,
-					// dimensions match fluent9 small button
-					height: 30,
+					height: SMALL_INPUT_HEIGHT,
 					minWidth: 64,
 					paddingLeft: 8,
 					paddingRight: 8,
