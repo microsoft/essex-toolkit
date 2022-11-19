@@ -40,7 +40,6 @@ function useButtonStyles(styles?: IButtonStyles, size: Size = 'medium') {
 				root: {
 					fontSize: SMALL_FONT_SIZE,
 					height: SMALL_INPUT_HEIGHT,
-					minWidth: 64,
 					paddingLeft: 8,
 					paddingRight: 8,
 				},
@@ -68,8 +67,8 @@ function useIconButtonStyles(styles?: IButtonStyles, size: Size = 'medium') {
 					alignItems: 'center',
 				},
 				menuIcon: {
-					fontSize: SMALL_FONT_SIZE,
-					width: SMALL_FONT_SIZE,
+					fontSize: 10,
+					width: 10,
 					height: SMALL_FONT_SIZE,
 					lineHeight: SMALL_FONT_SIZE,
 				},
