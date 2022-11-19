@@ -43,7 +43,13 @@ function useStyles(
 				labelWrapper: item,
 				label: item,
 				input: item,
-				arrowButtonContainer: item,
+				arrowButtonsContainer: {
+					...item,
+					width: 20,
+					'> button': {
+						width: 20,
+					},
+				},
 			}
 		}
 	}, [size])
