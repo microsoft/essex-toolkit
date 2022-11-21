@@ -10,6 +10,7 @@ import type { CSSProperties } from 'react';
 import type { FC } from 'react';
 import type { IButtonProps } from '@fluentui/react';
 import type { IChoiceGroupProps } from '@fluentui/react';
+import type { IColorPickerProps } from '@fluentui/react';
 import type { ICommandBarStyleProps } from '@fluentui/react';
 import type { ICommandBarStyles } from '@fluentui/react';
 import type { IContextualMenuItemStyles } from '@fluentui/react';
@@ -20,7 +21,10 @@ import type { IDropdownProps } from '@fluentui/react';
 import type { IIconProps } from '@fluentui/react';
 import type { ILinkProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
+import type { ISliderProps } from '@fluentui/react';
+import type { ISpinButtonProps } from '@fluentui/react';
 import type { IStyleFunctionOrObject } from '@fluentui/react';
+import type { IToggleProps } from '@fluentui/react';
 import type { Position } from '@fluentui/react';
 import type { PropsWithChildren } from 'react';
 import type { default as React_2 } from 'react';
@@ -381,6 +385,19 @@ export interface SettingsProps {
     settings: any;
 }
 
+// Warning: (ae-missing-release-tag) "Size" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type Size = 'small' | 'medium';
+
+// Warning: (ae-missing-release-tag) "Sized" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface Sized {
+    // (undocumented)
+    size?: Size;
+}
+
 // Warning: (ae-missing-release-tag) "ToggleLink" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -438,6 +455,46 @@ export interface ToolPanelStyles {
     // (undocumented)
     titleContainer?: React_2.CSSProperties;
 }
+
+// Warning: (ae-missing-release-tag) "useButtonProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useButtonProps(props: Partial<IButtonProps>, size?: Size): Partial<IButtonProps>;
+
+// Warning: (ae-missing-release-tag) "useChoiceGroupProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useChoiceGroupProps(props: Partial<IChoiceGroupProps>, size?: Size): Partial<IChoiceGroupProps>;
+
+// Warning: (ae-missing-release-tag) "useColorPickerProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useColorPickerProps(props: Partial<IColorPickerProps>, size?: Size): Partial<IColorPickerProps>;
+
+// Warning: (ae-missing-release-tag) "useDropdownProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useDropdownProps(props: Partial<IDropdownProps>, size?: Size): Partial<IDropdownProps>;
+
+// Warning: (ae-missing-release-tag) "useIconButtonProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useIconButtonProps(props: IButtonProps, size?: Size): IButtonProps;
+
+// Warning: (ae-missing-release-tag) "useSliderProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useSliderProps(props: Partial<ISliderProps>, size?: Size): Partial<ISliderProps>;
+
+// Warning: (ae-missing-release-tag) "useSpinButtonProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useSpinButtonProps(props: Partial<ISpinButtonProps>, size?: Size): Partial<ISpinButtonProps>;
+
+// Warning: (ae-missing-release-tag) "useToggleProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useToggleProps(props: Partial<IToggleProps>, size?: Size): Partial<IToggleProps>;
 
 // Warning: (ae-internal-missing-underscore) The name "WcpConsent" should be prefixed with an underscore because the declaration is marked as @internal
 //
