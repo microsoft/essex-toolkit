@@ -2,4 +2,5 @@ releases:
   "@essex/components": patch
 
 declined:
+  - essex-toolkit
   - essex-toolkit-stories
