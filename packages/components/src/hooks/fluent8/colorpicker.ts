@@ -37,7 +37,7 @@ function useStyles(
 					fontSize: SMALL_FONT_SIZE,
 				},
 				panel: {
-					padding: 4,
+					padding: 6,
 				},
 				colorRectangle: {
 					minWidth: 168,
