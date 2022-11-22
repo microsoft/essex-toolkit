@@ -57,7 +57,10 @@ function useStyles(
 					fontSize: 10,
 					paddingTop: 3,
 				},
-				caretDownWrapper: item,
+				caretDownWrapper: {
+					...item,
+					right: 6,
+				},
 			}
 		}
 	}, [size])
