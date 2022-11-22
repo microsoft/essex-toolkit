@@ -45,6 +45,9 @@ function useStyles(
 				dropdown: item,
 				dropdownItem: item,
 				dropdownItemHeader: item,
+				dropdownItemDisabled: item,
+				dropdownItemSelected: item,
+				dropdownItemSelectedAndDisabled: item,
 				title: {
 					...item,
 					paddingTop: 3,
@@ -54,7 +57,10 @@ function useStyles(
 					fontSize: 10,
 					paddingTop: 3,
 				},
-				caretDownWrapper: item,
+				caretDownWrapper: {
+					...item,
+					right: 6,
+				},
 			}
 		}
 	}, [size])
