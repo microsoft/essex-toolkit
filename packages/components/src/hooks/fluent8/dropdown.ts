@@ -45,6 +45,9 @@ function useStyles(
 				dropdown: item,
 				dropdownItem: item,
 				dropdownItemHeader: item,
+				dropdownItemDisabled: item,
+				dropdownItemSelected: item,
+				dropdownItemSelectedAndDisabled: item,
 				title: {
 					...item,
 					paddingTop: 3,
