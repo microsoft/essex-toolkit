@@ -90,7 +90,8 @@ export interface CollapsiblePanelProps {
     first?: boolean;
     hideIcon?: boolean;
     last?: boolean;
-    onHeaderClick?: (nextState: boolean) => void;
+    onHeaderClick?: () => void;
+    onIconClick?: () => void;
     onRenderHeader?: IRenderFunction<any>;
     styles?: CollapsiblePanelStyles;
     title?: string;

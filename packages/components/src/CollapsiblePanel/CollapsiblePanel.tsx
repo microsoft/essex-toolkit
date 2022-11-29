@@ -27,6 +27,7 @@ export const CollapsiblePanel: React.FC<
 	children,
 	onRenderHeader,
 	onHeaderClick,
+	onIconClick,
 	hideIcon = false,
 	styles,
 	duration = 300,
@@ -34,11 +35,11 @@ export const CollapsiblePanel: React.FC<
 }) => {
 	const {
 		expandedState,
-		handleClick,
-		handleKeyDown,
+		handleIconClick,
+		handleIconKeyDown,
 		handleHeaderKeyDown,
 		handleHeaderClick,
-	} = useEventHandlers(defaultExpanded, expanded, onHeaderClick)
+	} = useEventHandlers(defaultExpanded, expanded, onHeaderClick, onIconClick)
 
 	const _styles = useStyles(styles, expandedState, first, last)
 	const _buttonProps = useIconProps(buttonProps, expandedState)
@@ -49,8 +50,8 @@ export const CollapsiblePanel: React.FC<
 				{!hideIcon && (
 					<IconButton
 						title={expandedState ? 'collapse' : 'expand'}
-						onKeyDown={handleKeyDown as any}
-						onClick={handleClick}
+						onKeyDown={handleIconKeyDown as any}
+						onClick={handleIconClick}
 						{..._buttonProps}
 					/>
 				)}

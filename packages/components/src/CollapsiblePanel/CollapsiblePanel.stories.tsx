@@ -4,6 +4,7 @@
  */
 import { Toggle } from '@fluentui/react'
 import type { ComponentStory } from '@storybook/react'
+import { useCallback, useState } from 'react'
 
 import { CollapsiblePanel } from './CollapsiblePanel.js'
 import type { CollapsiblePanelProps } from './CollapsiblePanel.types.js'
@@ -110,6 +111,22 @@ IconClick.args = {
 	onHeaderClick: () => alert('header clicked'),
 }
 IconClick.storyName = 'Icon/header separate click'
+
+export const Controlled: ComponentStory<typeof CollapsiblePanel> = (
+	args: CollapsiblePanelProps,
+) => {
+	const [expanded, setExpanded] = useState<boolean>(false)
+	const onHeaderClick = useCallback(
+		() => setExpanded(prev => !prev),
+		[setExpanded],
+	)
+	return (
+		<CollapsiblePanel {...args} expanded={expanded} onIconClick={onHeaderClick}>
+			<Lorem />
+		</CollapsiblePanel>
+	)
+}
+Controlled.storyName = 'Controlled expand/collapse'
 
 export const NoIcon = Template.bind({})
 NoIcon.args = {
