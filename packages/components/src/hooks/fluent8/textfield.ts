@@ -39,6 +39,11 @@ function useStyles(
 				wrapper: item,
 				fieldGroup: item,
 				field: item,
+				label: {
+					root: {
+						fontSize: SMALL_FONT_SIZE,
+					},
+				},
 			}
 		}
 	}, [size])
