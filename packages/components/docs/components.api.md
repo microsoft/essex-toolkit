@@ -24,6 +24,7 @@ import type { IRenderFunction } from '@fluentui/react';
 import type { ISliderProps } from '@fluentui/react';
 import type { ISpinButtonProps } from '@fluentui/react';
 import type { IStyleFunctionOrObject } from '@fluentui/react';
+import type { ITextFieldProps } from '@fluentui/react';
 import type { IToggleProps } from '@fluentui/react';
 import type { Position } from '@fluentui/react';
 import type { PropsWithChildren } from 'react';
@@ -490,6 +491,11 @@ export function useSliderProps(props: Partial<ISliderProps>, size?: Size): Parti
 //
 // @public (undocumented)
 export function useSpinButtonProps(props: Partial<ISpinButtonProps>, size?: Size): Partial<ISpinButtonProps>;
+
+// Warning: (ae-missing-release-tag) "useTextFieldProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useTextFieldProps(props: Partial<ITextFieldProps>, size?: Size): Partial<ITextFieldProps>;
 
 // Warning: (ae-missing-release-tag) "useToggleProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
