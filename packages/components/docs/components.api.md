@@ -9,6 +9,7 @@
 import type { CSSProperties } from 'react';
 import type { FC } from 'react';
 import type { IButtonProps } from '@fluentui/react';
+import type { ICheckboxProps } from '@fluentui/react';
 import type { IChoiceGroupProps } from '@fluentui/react';
 import type { IColorPickerProps } from '@fluentui/react';
 import type { ICommandBarStyleProps } from '@fluentui/react';
@@ -19,7 +20,9 @@ import type { IContextualMenuProps } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
 import type { IDropdownProps } from '@fluentui/react';
 import type { IIconProps } from '@fluentui/react';
+import type { ILabelProps } from '@fluentui/react';
 import type { ILinkProps } from '@fluentui/react';
+import type { IPivotProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { ISliderProps } from '@fluentui/react';
 import type { ISpinButtonProps } from '@fluentui/react';
@@ -462,6 +465,11 @@ export interface ToolPanelStyles {
 // @public (undocumented)
 export function useButtonProps(props: Partial<IButtonProps>, size?: Size): Partial<IButtonProps>;
 
+// Warning: (ae-missing-release-tag) "useCheckboxProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useCheckboxProps(props: Partial<ICheckboxProps>, size?: Size): Partial<ICheckboxProps>;
+
 // Warning: (ae-missing-release-tag) "useChoiceGroupProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -481,6 +489,16 @@ export function useDropdownProps(props: Partial<IDropdownProps>, size?: Size): P
 //
 // @public (undocumented)
 export function useIconButtonProps(props: IButtonProps, size?: Size): IButtonProps;
+
+// Warning: (ae-missing-release-tag) "useLabelProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useLabelProps(props: Partial<ILabelProps>, size?: Size): Partial<ILabelProps>;
+
+// Warning: (ae-missing-release-tag) "usePivotProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function usePivotProps(props: Partial<IPivotProps>, size?: Size): Partial<IPivotProps>;
 
 // Warning: (ae-missing-release-tag) "useSliderProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

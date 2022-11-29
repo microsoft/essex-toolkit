@@ -4,11 +4,15 @@
  */
 import {
 	ActionButton,
+	Checkbox,
 	ChoiceGroup,
 	ColorPicker,
 	DefaultButton,
 	Dropdown,
 	IconButton,
+	Label,
+	Pivot,
+	PivotItem,
 	Slider,
 	SpinButton,
 	TextField,
@@ -16,9 +20,12 @@ import {
 } from '@fluentui/react'
 
 import { useButtonProps, useIconButtonProps } from './button.js'
+import { useCheckboxProps } from './checkbox.js'
 import { useChoiceGroupProps } from './choicegroup.js'
 import { useColorPickerProps } from './colorpicker.js'
 import { useDropdownProps } from './dropdown.js'
+import { useLabelProps } from './label.js'
+import { usePivotProps } from './pivot.js'
 import { useSliderProps } from './slider.js'
 import { useSpinButtonProps } from './spinbutton.js'
 import { useTextFieldProps } from './textfield.js'
@@ -31,6 +38,8 @@ const meta = {
 export default meta
 
 export const Fluent8 = () => {
+	const mediumLabelProps = useLabelProps({})
+	const smallLabelProps = useLabelProps({}, 'small')
 	const mediumTextFieldProps = useTextFieldProps({})
 	const smallTextFieldProps = useTextFieldProps({}, 'small')
 	const mediumButtonProps = useButtonProps({})
@@ -104,6 +113,8 @@ export const Fluent8 = () => {
 	const smallSliderProps = useSliderProps({}, 'small')
 	const mediumToggleProps = useToggleProps({})
 	const smallToggleProps = useToggleProps({}, 'small')
+	const mediumCheckboxProps = useCheckboxProps({})
+	const smallCheckboxProps = useCheckboxProps({}, 'small')
 	const mediumDropdownProps = useDropdownProps({})
 	const smallDropdownProps = useDropdownProps({}, 'small')
 	const mediumChoiceGroupProps = useChoiceGroupProps({
@@ -123,9 +134,24 @@ export const Fluent8 = () => {
 	)
 	const mediumColorPickerProps = useColorPickerProps({})
 	const smallColorPickerProps = useColorPickerProps({}, 'small')
+	const mediumPivotProps = usePivotProps({})
+	const smallPivotProps = usePivotProps({}, 'small')
 	return (
 		<div style={container}>
 			<div style={controls}>
+				<div style={pair}>
+					<div style={label}>
+						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/label">
+							Label
+						</a>
+					</div>
+					<div style={control}>
+						<Label {...mediumLabelProps}>Label</Label>
+					</div>
+					<div style={control}>
+						<Label {...smallLabelProps}>Label</Label>
+					</div>
+				</div>
 				<div style={pair}>
 					<div style={label}>
 						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/textfield">
@@ -133,10 +159,20 @@ export const Fluent8 = () => {
 						</a>
 					</div>
 					<div style={control}>
-						<TextField {...mediumTextFieldProps} value={'Text content'} />
+						<TextField
+							label={'Label'}
+							{...mediumTextFieldProps}
+							defaultValue={'Text content'}
+							placeholder={'Enter text'}
+						/>
 					</div>
 					<div style={control}>
-						<TextField {...smallTextFieldProps} value={'Text content'} />
+						<TextField
+							label={'Label'}
+							{...smallTextFieldProps}
+							defaultValue={'Text content'}
+							placeholder={'Enter text'}
+						/>
 					</div>
 				</div>
 				<div style={pair}>
@@ -235,6 +271,19 @@ export const Fluent8 = () => {
 				</div>
 				<div style={pair}>
 					<div style={label}>
+						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/checkbox">
+							Checkbox
+						</a>
+					</div>
+					<div style={control}>
+						<Checkbox label="Label" {...mediumCheckboxProps} />
+					</div>
+					<div style={control}>
+						<Checkbox label="Label" {...smallCheckboxProps} />
+					</div>
+				</div>
+				<div style={pair}>
+					<div style={label}>
 						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/dropdown">
 							Dropdown
 						</a>
@@ -297,6 +346,25 @@ export const Fluent8 = () => {
 							<ColorPicker color={'dodgerblue'} {...smallColorPickerProps} />
 						</div>
 					</div>
+				</div>
+			</div>
+			<div style={pair}>
+				<div style={label}>
+					<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/pivot">
+						Pivot
+					</a>
+				</div>
+				<div style={control}>
+					<Pivot {...mediumPivotProps}>
+						<PivotItem headerText={'Tab 1'} />
+						<PivotItem headerText={'Tab 2'} />
+					</Pivot>
+				</div>
+				<div style={control}>
+					<Pivot {...smallPivotProps}>
+						<PivotItem headerText={'Tab 1'} />
+						<PivotItem headerText={'Tab 2'} />
+					</Pivot>
 				</div>
 			</div>
 		</div>

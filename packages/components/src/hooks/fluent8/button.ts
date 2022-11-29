@@ -39,6 +39,7 @@ function useButtonStyles(styles?: IButtonStyles, size: Size = 'medium') {
 			return {
 				root: {
 					fontSize: SMALL_FONT_SIZE,
+					minWidth: 'unset',
 					height: SMALL_INPUT_HEIGHT,
 					paddingLeft: 8,
 					paddingRight: 8,
@@ -57,9 +58,9 @@ function useIconButtonStyles(styles?: IButtonStyles, size: Size = 'medium') {
 		if (size === 'small') {
 			return {
 				root: {
-					minWidth: SMALL_FONT_SIZE * 2,
-					width: SMALL_FONT_SIZE * 2,
-					height: SMALL_FONT_SIZE * 2,
+					minWidth: SMALL_INPUT_HEIGHT,
+					width: SMALL_INPUT_HEIGHT,
+					height: SMALL_INPUT_HEIGHT,
 					paddingLeft: 4,
 					paddingRight: 4,
 				},
