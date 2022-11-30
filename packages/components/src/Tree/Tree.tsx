@@ -12,7 +12,7 @@ import {
 	useExpansion,
 	useItemMenuInteraction,
 } from './Tree.hooks.js'
-import { useItemButtonStyles, useItemStyles, useStyles } from './Tree.styles.js'
+import { useItemStyles, useStyles } from './Tree.styles.js'
 import type {
 	TreeItem,
 	TreeItemDetails,
@@ -86,7 +86,7 @@ const TreeItemNode: React.FC<{
 
 	const iconButtonProps = useExpandIconProps(item)
 	const handleClick = useCallback(() => item.onClick(), [item])
-	const buttonStyles = useItemButtonStyles(item)
+
 	const iconProps = item.iconName
 		? {
 				iconName: item.iconName,
@@ -98,6 +98,8 @@ const TreeItemNode: React.FC<{
 		  }
 		: undefined
 	const {
+		buttonStyles,
+		listItemContentStyles,
 		menuButtonStyles,
 		menuProps,
 		menuIconProps,
@@ -105,11 +107,14 @@ const TreeItemNode: React.FC<{
 		onMouseLeave,
 		onMenuClick,
 		onAfterMenuDismiss,
-	} = useItemMenuInteraction(item)
-	// TODO: hover style on the entire row would be nice for consistency. right now you can see individual button elements
+	} = useItemMenuInteraction(item, _styles)
 	return (
 		<li style={_styles.listItem} key={`tree-item-li-${item.key}`}>
-			<div style={_styles.listItemContent}>
+			<div
+				style={listItemContentStyles}
+				onMouseEnter={onMouseEnter}
+				onMouseLeave={onMouseLeave}
+			>
 				<div style={_styles.indicator} />
 
 				<div style={_styles.flexContainer}>
@@ -118,8 +123,6 @@ const TreeItemNode: React.FC<{
 						styles={buttonStyles}
 						iconProps={iconProps}
 						onClick={handleClick}
-						onMouseEnter={onMouseEnter}
-						onMouseLeave={onMouseLeave}
 					>
 						{item.text}
 					</DefaultButton>
@@ -128,8 +131,6 @@ const TreeItemNode: React.FC<{
 							styles={menuButtonStyles}
 							menuProps={menuProps}
 							menuIconProps={menuIconProps}
-							onMouseEnter={onMouseEnter}
-							onMouseLeave={onMouseLeave}
 							onMenuClick={onMenuClick}
 							onAfterMenuDismiss={onAfterMenuDismiss}
 						/>

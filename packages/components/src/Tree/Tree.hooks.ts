@@ -2,14 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { DirectionalHint } from '@fluentui/react'
+import { DirectionalHint, useTheme } from '@fluentui/react'
 import { useCallback, useMemo, useState } from 'react'
 
 import {
 	useExpandIconButtonStyles,
 	useExpandIconIconStyles,
+	useItemButtonStyles,
 } from './Tree.styles.js'
-import type { TreeItemDetails } from './Tree.types.js'
+import type { TreeItemDetails, TreeStyles } from './Tree.types.js'
 
 export interface Expansion {
 	is: (key: string) => boolean
@@ -46,15 +47,20 @@ export function useExpandIconProps(item: TreeItemDetails) {
 	)
 }
 
-export function useItemMenuInteraction(item: TreeItemDetails) {
+export function useItemMenuInteraction(
+	item: TreeItemDetails,
+	styles: TreeStyles,
+) {
+	const theme = useTheme()
 	const [hovered, setHovered] = useState<boolean>(false)
 	const onMouseEnter = useCallback(() => setHovered(true), [setHovered])
 	const onMouseLeave = useCallback(() => setHovered(false), [setHovered])
 	const [open, setOpen] = useState<boolean>(false)
 	const onMenuClick = useCallback(() => setOpen(true), [setOpen])
 	const onAfterMenuDismiss = useCallback(() => setOpen(false), [setOpen])
+	const shown = item.menuItems && (hovered || open)
 	const menuProps = useMemo(() => {
-		if (item.menuItems && (hovered || open)) {
+		if (item.menuItems && shown) {
 			return {
 				styles: {
 					subComponentStyles: {
@@ -75,14 +81,14 @@ export function useItemMenuInteraction(item: TreeItemDetails) {
 				},
 			}
 		}
-	}, [item, hovered, open])
+	}, [item, shown])
 	const menuIconProps = useMemo(() => {
-		if (item.menuItems && (hovered || open)) {
+		if (shown) {
 			return {
 				iconName: 'MoreVertical',
 			}
 		}
-	}, [item, hovered, open])
+	}, [shown])
 	const menuButtonStyles = useMemo(
 		() => ({
 			root: {
@@ -93,7 +99,17 @@ export function useItemMenuInteraction(item: TreeItemDetails) {
 		}),
 		[],
 	)
+	const buttonStyles = useItemButtonStyles(item, shown)
+	const listItemContentStyles = useMemo(
+		() => ({
+			...styles.listItemContent,
+			background: hovered ? theme.palette.neutralLighter : 'unset',
+		}),
+		[theme, styles, hovered],
+	)
 	return {
+		buttonStyles,
+		listItemContentStyles,
 		menuButtonStyles,
 		menuProps,
 		menuIconProps,

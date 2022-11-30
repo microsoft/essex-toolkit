@@ -14,6 +14,7 @@ import type { IChoiceGroupProps } from '@fluentui/react';
 import type { IColorPickerProps } from '@fluentui/react';
 import type { ICommandBarStyleProps } from '@fluentui/react';
 import type { ICommandBarStyles } from '@fluentui/react';
+import type { IContextualMenuItem } from '@fluentui/react';
 import type { IContextualMenuItemStyles } from '@fluentui/react';
 import type { IContextualMenuListProps } from '@fluentui/react';
 import type { IContextualMenuProps } from '@fluentui/react';
@@ -22,6 +23,7 @@ import type { IDropdownProps } from '@fluentui/react';
 import type { IIconProps } from '@fluentui/react';
 import type { ILabelProps } from '@fluentui/react';
 import type { ILinkProps } from '@fluentui/react';
+import type { INavProps } from '@fluentui/react';
 import type { IPivotProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { ISliderProps } from '@fluentui/react';
@@ -461,6 +463,43 @@ export interface ToolPanelStyles {
     titleContainer?: React_2.CSSProperties;
 }
 
+// Warning: (ae-missing-release-tag) "Tree" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const Tree: React.FC<TreeProps>;
+
+// Warning: (ae-missing-release-tag) "TreeItem" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TreeItem {
+    // (undocumented)
+    children?: TreeItem[];
+    // (undocumented)
+    iconName?: string;
+    // (undocumented)
+    key: string;
+    // (undocumented)
+    menuItems?: IContextualMenuItem[];
+    // (undocumented)
+    text: string;
+}
+
+// Warning: (ae-missing-release-tag) "TreeProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TreeProps {
+    // (undocumented)
+    items: TreeItem[];
+    // (undocumented)
+    onItemClick?: (item: TreeItem) => void;
+    // (undocumented)
+    selectedKey?: string;
+    // Warning: (ae-forgotten-export) The symbol "TreeStyles" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    styles?: TreeStyles;
+}
+
 // Warning: (ae-missing-release-tag) "useButtonProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -495,6 +534,11 @@ export function useIconButtonProps(props: IButtonProps, size?: Size): IButtonPro
 //
 // @public (undocumented)
 export function useLabelProps(props: Partial<ILabelProps>, size?: Size): Partial<ILabelProps>;
+
+// Warning: (ae-missing-release-tag) "useNavProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useNavProps(props: Partial<INavProps>, size?: Size): Partial<INavProps>;
 
 // Warning: (ae-missing-release-tag) "usePivotProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

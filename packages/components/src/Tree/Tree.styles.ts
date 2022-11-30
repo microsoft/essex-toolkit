@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { IButtonStyles } from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
 import { useMemo } from 'react'
 
@@ -81,7 +82,11 @@ export function useItemStyles(
 	)
 }
 
-export function useItemButtonStyles(item: TreeItemDetails) {
+export function useItemButtonStyles(
+	item: TreeItemDetails,
+	hovered = false,
+): IButtonStyles {
+	const theme = useTheme()
 	return useMemo(
 		() => ({
 			root: {
@@ -93,12 +98,13 @@ export function useItemButtonStyles(item: TreeItemDetails) {
 				padding: 0,
 				width: '100%',
 				cursor: item.clickable ? 'pointer' : 'default',
+				background: hovered ? theme.palette.neutralLighter : 'unset',
 			},
 			label: {
 				fontWeight: 'normal',
 			},
 		}),
-		[item],
+		[theme, item, hovered],
 	)
 }
 
