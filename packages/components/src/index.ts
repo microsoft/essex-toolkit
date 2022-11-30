@@ -33,4 +33,6 @@ export type {
 	ToolPanelProps,
 	ToolPanelStyles,
 } from './ToolPanel/ToolPanel.types.js'
+export { Tree } from './Tree/Tree.js'
+export type { TreeItem, TreeProps } from './Tree/Tree.types.js'
 export * from './util/enums.js'
