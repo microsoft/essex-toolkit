@@ -41,6 +41,7 @@ function useStyles(
 				},
 				label: {
 					fontSize: SMALL_FONT_SIZE,
+					height: SMALL_INPUT_HEIGHT,
 				},
 				dropdown: item,
 				dropdownItem: item,

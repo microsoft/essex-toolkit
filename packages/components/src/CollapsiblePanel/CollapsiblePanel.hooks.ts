@@ -12,6 +12,7 @@ export function useEventHandlers(
 	defaultExpanded: boolean,
 	expanded?: boolean,
 	onHeaderClick?: any,
+	onIconClick?: any,
 ) {
 	const [expandedState, setExpanded] = useState<boolean>(defaultExpanded)
 
@@ -21,32 +22,35 @@ export function useEventHandlers(
 		}
 	}, [setExpanded, expanded])
 
-	const handleClick = useCallback(() => {
-		// if not controlled component, set local state
-		if (expanded === undefined) {
-			setExpanded(!expandedState)
+	// these two handlers will defer to user-specified clicks if defined
+	// otherwise they will check for controlled expanded state and manage it internally if absent
+	const handleIconClick = useCallback(() => {
+		if (onIconClick) {
+			onIconClick()
+		} else if (expanded === undefined) {
+			setExpanded(prev => !prev)
 		}
-	}, [expandedState, expanded])
+	}, [onIconClick, setExpanded, expanded])
 
 	const handleHeaderClick = useCallback(() => {
 		if (onHeaderClick) {
-			onHeaderClick(!expandedState)
-		} else {
-			handleClick()
+			onHeaderClick()
+		} else if (expanded === undefined) {
+			setExpanded(prev => !prev)
 		}
-	}, [handleClick, onHeaderClick, expandedState])
+	}, [onHeaderClick, setExpanded, expanded])
 
-	const handleKeyDown = useCallback(
+	const handleIconKeyDown = useCallback(
 		(event: React.KeyboardEvent) => {
 			if ('ArrowLeft' === event.key && expandedState) {
-				return handleClick()
+				return handleIconClick()
 			}
 
 			if ('ArrowRight' === event.key && !expandedState) {
-				return handleClick()
+				return handleIconClick()
 			}
 		},
-		[handleClick, expandedState],
+		[handleIconClick, expandedState],
 	)
 
 	const handleHeaderKeyDown = useCallback(
@@ -60,8 +64,8 @@ export function useEventHandlers(
 
 	return {
 		expandedState,
-		handleClick,
-		handleKeyDown,
+		handleIconClick,
+		handleIconKeyDown,
 		handleHeaderKeyDown,
 		handleHeaderClick,
 	}

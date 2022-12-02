@@ -60,9 +60,13 @@ export interface CollapsiblePanelProps {
 	 */
 	onRenderHeader?: IRenderFunction<any>
 	/**
-	 * Optional function to control the state outside the component
+	 * Optional function to respond to clicks in the general header area.
 	 */
-	onHeaderClick?: (nextState: boolean) => void
+	onHeaderClick?: () => void
+	/**
+	 * Optional function to respond to clicks on the expand/collapse icon directly.
+	 */
+	onIconClick?: () => void
 	/**
 	 * Custom styles for the subcomponents
 	 */

@@ -53,6 +53,7 @@ function useStyles(
 				},
 				label: {
 					fontSize: SMALL_FONT_SIZE,
+					height: SMALL_INPUT_HEIGHT,
 				},
 			}
 		}
@@ -84,7 +85,7 @@ function useOptionStyles(size: Size = 'medium'): IChoiceGroupOptionStyles {
 					minHeight: SMALL_INPUT_HEIGHT,
 					fontSize: SMALL_FONT_SIZE,
 					'.ms-ChoiceFieldLabel': {
-						paddingLeft: SMALL_FONT_SIZE + 8,
+						paddingLeft: SMALL_FONT_SIZE + 6,
 					},
 				},
 				field: {

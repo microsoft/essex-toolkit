@@ -11,7 +11,11 @@ import type {
 import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
 
-import { SMALL_FONT_SIZE, SMALL_THUMB_SIZE } from './constants.js'
+import {
+	SMALL_FONT_SIZE,
+	SMALL_INPUT_HEIGHT,
+	SMALL_THUMB_SIZE,
+} from './constants.js'
 import type { Size } from './types.js'
 
 export function useSliderProps(
@@ -38,9 +42,12 @@ function useStyles(
 				},
 				valueLabel: {
 					fontSize: SMALL_FONT_SIZE,
+					marginLeft: SMALL_THUMB_SIZE / 2 + 2,
+					marginRight: 0,
 				},
 				thumb: {
-					top: -3,
+					// make sure thumb stays centered at smaller diameter
+					top: -(SMALL_THUMB_SIZE / 2) + 1,
 					width: SMALL_THUMB_SIZE,
 					height: SMALL_THUMB_SIZE,
 					borderWidth: 1,
@@ -50,7 +57,8 @@ function useStyles(
 					borderRadius: 2,
 				},
 				slideBox: {
-					paddingTop: 1,
+					height: SMALL_INPUT_HEIGHT,
+					paddingLeft: SMALL_THUMB_SIZE / 2,
 					paddingRight: 0,
 				},
 			}

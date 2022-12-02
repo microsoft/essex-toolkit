@@ -9,17 +9,22 @@
 import type { CSSProperties } from 'react';
 import type { FC } from 'react';
 import type { IButtonProps } from '@fluentui/react';
+import type { ICheckboxProps } from '@fluentui/react';
 import type { IChoiceGroupProps } from '@fluentui/react';
 import type { IColorPickerProps } from '@fluentui/react';
 import type { ICommandBarStyleProps } from '@fluentui/react';
 import type { ICommandBarStyles } from '@fluentui/react';
+import type { IContextualMenuItem } from '@fluentui/react';
 import type { IContextualMenuItemStyles } from '@fluentui/react';
 import type { IContextualMenuListProps } from '@fluentui/react';
 import type { IContextualMenuProps } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
 import type { IDropdownProps } from '@fluentui/react';
 import type { IIconProps } from '@fluentui/react';
+import type { ILabelProps } from '@fluentui/react';
 import type { ILinkProps } from '@fluentui/react';
+import type { INavProps } from '@fluentui/react';
+import type { IPivotProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { ISliderProps } from '@fluentui/react';
 import type { ISpinButtonProps } from '@fluentui/react';
@@ -87,7 +92,8 @@ export interface CollapsiblePanelProps {
     first?: boolean;
     hideIcon?: boolean;
     last?: boolean;
-    onHeaderClick?: (nextState: boolean) => void;
+    onHeaderClick?: () => void;
+    onIconClick?: () => void;
     onRenderHeader?: IRenderFunction<any>;
     styles?: CollapsiblePanelStyles;
     title?: string;
@@ -457,10 +463,59 @@ export interface ToolPanelStyles {
     titleContainer?: React_2.CSSProperties;
 }
 
+// Warning: (ae-missing-release-tag) "Tree" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const Tree: React.FC<TreeProps>;
+
+// Warning: (ae-missing-release-tag) "TreeItem" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TreeItem {
+    // (undocumented)
+    children?: TreeItem[];
+    // (undocumented)
+    iconName?: string;
+    // (undocumented)
+    key: string;
+    // (undocumented)
+    menuItems?: IContextualMenuItem[];
+    // (undocumented)
+    text: string;
+}
+
+// Warning: (ae-missing-release-tag) "TreeProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TreeProps extends TreePropsBase {
+    items: TreeItem[];
+    onItemClick?: (item: TreeItem) => void;
+    selectedKey?: string;
+}
+
+// Warning: (ae-missing-release-tag) "TreePropsBase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TreePropsBase {
+    contentButtonProps?: IButtonProps;
+    // Warning: (ae-forgotten-export) The symbol "ExpandIconButtonProps" needs to be exported by the entry point index.d.ts
+    expandButtonProps?: ExpandIconButtonProps;
+    // Warning: (ae-forgotten-export) The symbol "MenuButtonProps" needs to be exported by the entry point index.d.ts
+    menuButtonProps?: MenuButtonProps;
+    size?: Size;
+    // Warning: (ae-forgotten-export) The symbol "TreeStyles" needs to be exported by the entry point index.d.ts
+    styles?: TreeStyles;
+}
+
 // Warning: (ae-missing-release-tag) "useButtonProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export function useButtonProps(props: Partial<IButtonProps>, size?: Size): Partial<IButtonProps>;
+
+// Warning: (ae-missing-release-tag) "useCheckboxProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useCheckboxProps(props: Partial<ICheckboxProps>, size?: Size): Partial<ICheckboxProps>;
 
 // Warning: (ae-missing-release-tag) "useChoiceGroupProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -481,6 +536,21 @@ export function useDropdownProps(props: Partial<IDropdownProps>, size?: Size): P
 //
 // @public (undocumented)
 export function useIconButtonProps(props: IButtonProps, size?: Size): IButtonProps;
+
+// Warning: (ae-missing-release-tag) "useLabelProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useLabelProps(props: Partial<ILabelProps>, size?: Size): Partial<ILabelProps>;
+
+// Warning: (ae-missing-release-tag) "useNavProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useNavProps(props: Partial<INavProps>, size?: Size): Partial<INavProps>;
+
+// Warning: (ae-missing-release-tag) "usePivotProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function usePivotProps(props: Partial<IPivotProps>, size?: Size): Partial<IPivotProps>;
 
 // Warning: (ae-missing-release-tag) "useSliderProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

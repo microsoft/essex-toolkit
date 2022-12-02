@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
+	ICheckboxProps,
+	ICheckboxStyleProps,
+	ICheckboxStyles,
 	IStyleFunctionOrObject,
-	IToggleProps,
-	IToggleStyleProps,
-	IToggleStyles,
 } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
@@ -19,10 +19,10 @@ import {
 } from './constants.js'
 import type { Size } from './types.js'
 
-export function useToggleProps(
-	props: Partial<IToggleProps>,
+export function useCheckboxProps(
+	props: Partial<ICheckboxProps>,
 	size: Size = 'medium',
-): Partial<IToggleProps> {
+): Partial<ICheckboxProps> {
 	const styles = useStyles(props?.styles, size)
 	return useMemo(() => merge({ styles }, props), [styles, props])
 }
@@ -33,36 +33,29 @@ export function useToggleProps(
  * @returns
  */
 function useStyles(
-	styles?: IStyleFunctionOrObject<IToggleStyleProps, IToggleStyles>,
+	styles?: IStyleFunctionOrObject<ICheckboxStyleProps, ICheckboxStyles>,
 	size: Size = 'medium',
 ) {
 	const sizedBase = useMemo(() => {
 		if (size === 'small') {
 			return {
-				root: {
-					margin: 0,
-				},
-				container: {
-					alignItems: 'center',
-				},
-				label: {
-					fontSize: SMALL_FONT_SIZE,
-					height: SMALL_INPUT_HEIGHT,
-				},
-				pill: {
+				checkbox: {
+					marginRight: 2,
+					width: SMALL_PILL_SIZE,
 					height: SMALL_PILL_SIZE,
-					width: SMALL_PILL_SIZE * 2,
-					padding: 2,
-					fontSize: SMALL_FONT_SIZE,
 				},
-				thumb: {
+				checkmark: {
+					fontSize: SMALL_THUMB_SIZE,
 					width: SMALL_THUMB_SIZE,
 					height: SMALL_THUMB_SIZE,
-					fontSize: SMALL_THUMB_SIZE,
-					borderWidth: SMALL_THUMB_SIZE / 2,
+				},
+				label: {
+					height: SMALL_INPUT_HEIGHT,
+					alignItems: 'center',
 				},
 				text: {
 					fontSize: SMALL_FONT_SIZE,
+					marginLeft: 2,
 				},
 			}
 		}
