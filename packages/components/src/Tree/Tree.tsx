@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { IButtonProps } from '@fluentui/react'
 import { DefaultButton, IconButton } from '@fluentui/react'
 import { memo } from 'react'
 
@@ -17,12 +16,10 @@ import {
 } from './Tree.hooks.js'
 import { useTreeItemStyles, useTreeStyles } from './Tree.styles.js'
 import type {
-	ExpandIconButtonProps,
-	MenuButtonProps,
 	TreeItem,
 	TreeItemDetails,
+	TreeItemProps,
 	TreeProps,
-	TreeStyles,
 } from './Tree.types.js'
 
 export const Tree: React.FC<TreeProps> = memo(function Tree({
@@ -33,6 +30,7 @@ export const Tree: React.FC<TreeProps> = memo(function Tree({
 	expandButtonProps,
 	contentButtonProps,
 	menuButtonProps,
+	size = 'medium',
 }) {
 	const _styles = useTreeStyles(styles)
 	const expansion = useExpansion()
@@ -54,6 +52,7 @@ export const Tree: React.FC<TreeProps> = memo(function Tree({
 						expandButtonProps={expandButtonProps}
 						contentButtonProps={contentButtonProps}
 						menuButtonProps={menuButtonProps}
+						size={size}
 					/>
 				))}
 			</ul>
@@ -105,29 +104,36 @@ function makeDetailedItems(
  * level of interaction and styling we want for the row.
  * The outer li is too comprehensive because it grows if there are children.
  */
-const TreeItemNode: React.FC<{
-	item: TreeItemDetails
-	styles?: TreeStyles
-	expandButtonProps?: ExpandIconButtonProps
-	contentButtonProps?: IButtonProps
-	menuButtonProps?: MenuButtonProps
-}> = memo(function TreeItem({
+const TreeItemNode: React.FC<TreeItemProps> = memo(function TreeItem({
 	item,
 	styles,
 	expandButtonProps,
 	contentButtonProps,
 	menuButtonProps,
+	size,
 }) {
-	const _styles = useTreeItemStyles(item, styles)
+	const _styles = useTreeItemStyles(item, styles, size)
 
-	const _expandButtonProps = useExpandIconButtonProps(item, expandButtonProps)
-	const _contentButtonProps = useContentButtonProps(item, contentButtonProps)
+	const _expandButtonProps = useExpandIconButtonProps(
+		item,
+		expandButtonProps,
+		size,
+	)
+	const _contentButtonProps = useContentButtonProps(
+		item,
+		contentButtonProps,
+		size,
+	)
 
 	const { listItemContentStyles, hovered, onMouseEnter, onMouseLeave } =
 		useItemHoverInteraction(item, _styles)
 
-	const _menuButtonProps = useMenuButtonProps(item, hovered, menuButtonProps)
-
+	const _menuButtonProps = useMenuButtonProps(
+		item,
+		hovered,
+		menuButtonProps,
+		size,
+	)
 	return (
 		<li style={_styles.listItem} key={`tree-item-li-${item.key}`}>
 			<div
@@ -154,6 +160,7 @@ const TreeItemNode: React.FC<{
 								expandButtonProps={expandButtonProps}
 								contentButtonProps={contentButtonProps}
 								menuButtonProps={menuButtonProps}
+								size={size}
 							/>
 					  ))
 					: null}

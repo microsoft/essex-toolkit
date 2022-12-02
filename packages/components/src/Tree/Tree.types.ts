@@ -5,6 +5,8 @@
 import type { IButtonProps, IContextualMenuItem } from '@fluentui/react'
 import type { CSSProperties } from 'react'
 
+import type { Size } from '../hooks/fluent8/types.js'
+
 export interface TreeStyles {
 	/**
 	 * Styles for root container
@@ -32,19 +34,7 @@ export interface TreeStyles {
 	indicator?: CSSProperties
 }
 
-export interface TreeProps {
-	/**
-	 * List of items to render in the tree.
-	 */
-	items: TreeItem[]
-	/**
-	 * Handler for individual item clicks.
-	 */
-	onItemClick?: (item: TreeItem) => void
-	/**
-	 * Selected item in the tree.
-	 */
-	selectedKey?: string
+export interface TreePropsBase {
 	/**
 	 * General styles for customizing the tree.
 	 */
@@ -62,6 +52,29 @@ export interface TreeProps {
 	 * Override props for the right-side menu item for each item (if they have menuItems).
 	 */
 	menuButtonProps?: MenuButtonProps
+	/**
+	 * Set the size mode of the tree
+	 */
+	size?: Size
+}
+
+export interface TreeProps extends TreePropsBase {
+	/**
+	 * List of items to render in the tree.
+	 */
+	items: TreeItem[]
+	/**
+	 * Handler for individual item clicks.
+	 */
+	onItemClick?: (item: TreeItem) => void
+	/**
+	 * Selected item in the tree.
+	 */
+	selectedKey?: string
+}
+
+export interface TreeItemProps extends TreePropsBase {
+	item: TreeItemDetails
 }
 
 export interface TreeItem {

@@ -487,15 +487,22 @@ export interface TreeItem {
 // Warning: (ae-missing-release-tag) "TreeProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface TreeProps {
+export interface TreeProps extends TreePropsBase {
+    items: TreeItem[];
+    onItemClick?: (item: TreeItem) => void;
+    selectedKey?: string;
+}
+
+// Warning: (ae-missing-release-tag) "TreePropsBase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TreePropsBase {
     contentButtonProps?: IButtonProps;
     // Warning: (ae-forgotten-export) The symbol "ExpandIconButtonProps" needs to be exported by the entry point index.d.ts
     expandButtonProps?: ExpandIconButtonProps;
-    items: TreeItem[];
     // Warning: (ae-forgotten-export) The symbol "MenuButtonProps" needs to be exported by the entry point index.d.ts
     menuButtonProps?: MenuButtonProps;
-    onItemClick?: (item: TreeItem) => void;
-    selectedKey?: string;
+    size?: Size;
     // Warning: (ae-forgotten-export) The symbol "TreeStyles" needs to be exported by the entry point index.d.ts
     styles?: TreeStyles;
 }

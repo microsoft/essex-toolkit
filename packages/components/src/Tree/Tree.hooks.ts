@@ -7,6 +7,7 @@ import { useTheme } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 import { useCallback, useMemo, useState } from 'react'
 
+import type { Size } from '../hooks/fluent8/types.js'
 import {
 	useContentButtonStyles,
 	useContentIconStyles,
@@ -49,9 +50,10 @@ export function useExpansion(): Expansion {
 export function useExpandIconButtonProps(
 	item: TreeItemDetails,
 	props?: ExpandIconButtonProps,
+	size: Size = 'medium',
 ) {
-	const iconStyles = useExpandIconIconStyles()
-	const buttonStyles = useExpandIconButtonStyles()
+	const buttonStyles = useExpandIconButtonStyles(size)
+	const iconStyles = useExpandIconIconStyles(size)
 	return useMemo(
 		() =>
 			merge(
@@ -80,9 +82,10 @@ export function useExpandIconButtonProps(
 export function useContentButtonProps(
 	item: TreeItemDetails,
 	props?: IButtonProps,
+	size: Size = 'medium',
 ) {
-	const buttonStyles = useContentButtonStyles(item)
-	const iconStyles = useContentIconStyles()
+	const buttonStyles = useContentButtonStyles(item, size)
+	const iconStyles = useContentIconStyles(size)
 	return useMemo(
 		() =>
 			merge(
@@ -136,6 +139,7 @@ export function useMenuButtonProps(
 	item: TreeItemDetails,
 	hovered: boolean,
 	props?: MenuButtonProps,
+	size: Size = 'medium',
 ) {
 	const [open, setOpen] = useState<boolean>(false)
 	const onMenuClick = useCallback(
@@ -150,23 +154,19 @@ export function useMenuButtonProps(
 		props?.onAfterMenuDismiss && props?.onAfterMenuDismiss()
 	}, [setOpen, props])
 	const shown = hovered || open || props?.alwaysVisible
-	const buttonStyles = useMenuButtonStyles()
-	const menuItemsStyles = useMenuItemsStyles()
+	const buttonStyles = useMenuButtonStyles(size)
+	const menuItemsStyles = useMenuItemsStyles(size)
 	const menuIconButtonProps = useMemo(() => {
 		if (item.menuItems) {
-			const base: IButtonProps = merge(
-				{
-					styles: buttonStyles,
-					menuProps: {
-						items: item.menuItems,
-						styles: menuItemsStyles,
-					},
+			const base: IButtonProps = {
+				styles: buttonStyles,
+				menuProps: {
+					items: item.menuItems,
+					styles: menuItemsStyles,
 				},
-				props,
-			)
+			}
 			// layer in the base, user customization, and our logic
-			return {
-				...base,
+			return merge(base, props, {
 				menuIconProps: {
 					iconName: shown
 						? props?.menuIconProps?.iconName || 'MoreVertical'
@@ -174,7 +174,7 @@ export function useMenuButtonProps(
 				},
 				onMenuClick,
 				onAfterMenuDismiss,
-			}
+			})
 		}
 	}, [
 		item,

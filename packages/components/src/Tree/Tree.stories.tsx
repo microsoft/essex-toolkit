@@ -116,16 +116,43 @@ const Template = (args: TreeProps) => {
 	return (
 		<div
 			style={{
-				width: 300,
-				height: 600,
-				border: '1px solid orange',
+				display: 'flex',
+				gap: 20,
 			}}
 		>
-			<Tree
-				{...args}
-				selectedKey={selected}
-				onItemClick={item => setSelected(item.key)}
-			></Tree>
+			<div>
+				Medium size (default)
+				<div
+					style={{
+						width: 300,
+						height: 400,
+						border: '1px solid orange',
+					}}
+				>
+					<Tree
+						{...args}
+						selectedKey={selected}
+						onItemClick={item => setSelected(item.key)}
+					></Tree>
+				</div>
+			</div>
+			<div>
+				Small size
+				<div
+					style={{
+						width: 300,
+						height: 400,
+						border: '1px solid orange',
+					}}
+				>
+					<Tree
+						{...args}
+						size={'small'}
+						selectedKey={selected}
+						onItemClick={item => setSelected(item.key)}
+					></Tree>
+				</div>
+			</div>
 		</div>
 	)
 }
