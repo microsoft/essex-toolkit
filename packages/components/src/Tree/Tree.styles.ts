@@ -4,17 +4,26 @@
  */
 import type { IButtonStyles } from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
+import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
 
 import type { TreeItemDetails, TreeStyles } from './Tree.types.js'
 
-const FONT_SIZE = 12
-const CARET_FONT_SIZE = 10
-const INDENT = 12
 const SIZE = 24
+const FONT_SIZE = 12
+const CARET_FONT_SIZE = 8
+const INDICATOR_HEIGHT = FONT_SIZE + 2
+const INDICATOR_WIDTH = 2
+const ICON_SIZE = 14
+const INDENT = 12
 const FLEX_GAP = 0
 
-export function useStyles(styles?: TreeStyles): TreeStyles {
+/**
+ * Only extract the styles props that matter for the root tree.
+ * @param styles
+ * @returns
+ */
+export function useTreeStyles(styles?: TreeStyles): TreeStyles {
 	return useMemo(
 		() => ({
 			root: {
@@ -32,7 +41,13 @@ export function useStyles(styles?: TreeStyles): TreeStyles {
 	)
 }
 
-export function useItemStyles(
+/**
+ * Extract the styles per item so they can be modulated by item state.
+ * @param item
+ * @param styles
+ * @returns
+ */
+export function useTreeItemStyles(
 	item: TreeItemDetails,
 	styles?: TreeStyles,
 ): TreeStyles {
@@ -59,6 +74,7 @@ export function useItemStyles(
 				alignItems: 'center',
 				gap: FLEX_GAP,
 				height: SIZE,
+				...styles?.listItemContent,
 			},
 			flexContainer: {
 				width: '100%',
@@ -68,13 +84,14 @@ export function useItemStyles(
 				paddingLeft: item.children
 					? item.depth * INDENT
 					: item.depth * INDENT + SIZE,
+				...styles?.flexContainer,
 			},
 			indicator: {
-				height: 14,
-				border: `2px solid ${
-					item.selected ? theme.palette.themePrimary : 'transparent'
-				}`,
-				borderRadius: 4,
+				height: INDICATOR_HEIGHT,
+				borderRadius: INDICATOR_WIDTH * 2,
+				borderWidth: INDICATOR_WIDTH,
+				borderColor: item.selected ? theme.palette.themePrimary : 'transparent',
+				borderStyle: 'solid',
 				...styles?.indicator,
 			},
 		}),
@@ -82,45 +99,36 @@ export function useItemStyles(
 	)
 }
 
-export function useItemButtonStyles(
-	item: TreeItemDetails,
-	hovered = false,
-): IButtonStyles {
-	const theme = useTheme()
-	return useMemo(
-		() => ({
-			root: {
-				border: 'none',
-				borderRadius: 0,
-				height: 24,
-				fontSize: 12,
-				textAlign: 'left',
-				padding: 0,
-				width: '100%',
-				cursor: item.clickable ? 'pointer' : 'default',
-				background: hovered ? theme.palette.neutralLighter : 'unset',
-			},
-			label: {
-				fontWeight: 'normal',
-			},
-		}),
-		[theme, item, hovered],
-	)
-}
+// enforce transparency with a mixin for all button styles,
+// so we can control hover/selection styling at the list item level
+const transparentBackgroundButtonStyles = [
+	'root',
+	'rootFocused',
+	'rootHovered',
+	'rootPressed',
+].reduce((acc, cur) => {
+	acc[cur as keyof IButtonStyles] = {
+		background: 'transparent',
+	}
+	return acc
+}, {} as IButtonStyles)
 
 // styles for the IconButton
 export function useExpandIconButtonStyles() {
 	return useMemo(
-		() => ({
-			root: {
-				borderRadius: 0,
-				fontSize: CARET_FONT_SIZE,
-				padding: 0,
-				margin: 0,
-				width: SIZE,
-				height: SIZE,
-			},
-		}),
+		() =>
+			merge(
+				{
+					root: {
+						borderRadius: 0,
+						padding: 0,
+						margin: 0,
+						width: SIZE,
+						height: SIZE,
+					},
+				},
+				transparentBackgroundButtonStyles,
+			),
 		[],
 	)
 }
@@ -132,11 +140,98 @@ export function useExpandIconIconStyles() {
 		() => ({
 			root: {
 				// this will default to theme color, but that's too busy for a tree caret
-				color: theme.palette.neutralPrimary,
+				color: theme.palette.neutralPrimaryAlt,
 				fontSize: CARET_FONT_SIZE,
-				margin: 0,
 			},
 		}),
 		[theme],
+	)
+}
+
+/**
+ * The main item row in the list is represented as a button for (a) clickability/a11y, and (b) menu dropdown
+ * @param item
+ * @param hovered
+ * @returns
+ */
+export function useContentButtonStyles(item: TreeItemDetails): IButtonStyles {
+	return useMemo(
+		() =>
+			merge(
+				{
+					root: {
+						border: 'none',
+						borderRadius: 0,
+						height: SIZE,
+						fontSize: FONT_SIZE,
+						textAlign: 'left',
+						padding: 0,
+						margin: 0,
+						width: '100%',
+						cursor: item.clickable ? 'pointer' : 'default',
+					},
+					label: {
+						fontWeight: item.selected ? 'bold' : 'normal',
+					},
+				},
+				transparentBackgroundButtonStyles,
+			),
+		[item],
+	)
+}
+
+export function useContentIconStyles() {
+	return useMemo(
+		() => ({
+			root: {
+				fontSize: ICON_SIZE,
+			},
+		}),
+		[],
+	)
+}
+
+/**
+ * These are the styles for the far-right menu button, if needed.
+ * @returns
+ */
+export function useMenuButtonStyles() {
+	return useMemo(
+		() =>
+			merge(
+				{
+					root: {
+						width: SIZE,
+						height: SIZE,
+						fontSize: FONT_SIZE,
+						borderRadius: 0,
+					},
+				},
+				transparentBackgroundButtonStyles,
+			),
+		[],
+	)
+}
+
+/**
+ * These are the styles for the menu items in the dropdown (callout).
+ * @returns
+ */
+export function useMenuItemsStyles() {
+	return useMemo(
+		() => ({
+			subComponentStyles: {
+				menuItem: {
+					root: {
+						fontSize: FONT_SIZE,
+						height: SIZE,
+					},
+					icon: {
+						fontSize: FONT_SIZE,
+					},
+				},
+			},
+		}),
+		[],
 	)
 }

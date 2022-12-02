@@ -13,6 +13,104 @@ const meta = {
 }
 export default meta
 
+const onClick = (evt: any, item: any) => console.log(evt, item)
+
+const TREE_ITEMS = [
+	{
+		text: 'Item 1',
+		key: 'item-1',
+		menuItems: [
+			{
+				key: 'item-1-add',
+				text: 'Add item',
+				iconProps: {
+					iconName: 'Add',
+				},
+				onClick,
+			},
+			{
+				key: 'item-1-delete',
+				text: 'Remove item',
+				iconProps: {
+					iconName: 'Delete',
+				},
+				onClick,
+			},
+		],
+		children: [
+			{
+				text: 'Item 1.1',
+				key: 'item-1.1',
+				menuItems: [
+					{
+						key: 'item-1.1-add',
+						text: 'Add item',
+						iconProps: {
+							iconName: 'Add',
+						},
+						onClick,
+					},
+					{
+						key: 'item-1.1-delete',
+						text: 'Remove item',
+						iconProps: {
+							iconName: 'Delete',
+						},
+						onClick,
+					},
+				],
+				children: [
+					{
+						text: 'Item 1.1.1',
+						key: 'item-1.1.1',
+					},
+					{
+						text: 'Item 1.1.2',
+						key: 'item-1.1.2',
+					},
+				],
+			},
+			{
+				text: 'Item 1.2',
+				key: 'item-1.2',
+			},
+		],
+	},
+	{
+		text: 'Item 2',
+		key: 'item-2',
+		iconName: 'TableComputed',
+		children: [
+			{
+				text: 'Item 2.1',
+				key: 'item-2.1',
+				iconName: 'Database',
+				children: [
+					{
+						text: 'Item 2.1.1',
+						key: 'item-2.1.1',
+						iconName: 'Calendar',
+					},
+					{
+						text: 'Item 2.1.2',
+						key: 'item-2.1.2',
+						iconName: 'Table',
+					},
+				],
+			},
+			{
+				text: 'Item 2.2',
+				key: 'item-2.2',
+				iconName: 'LightningBolt',
+			},
+		],
+	},
+	{
+		text: 'Item 3',
+		key: 'item-3',
+	},
+]
+
 const Template = (args: TreeProps) => {
 	const [selected, setSelected] = useState<string | undefined>()
 	return (
@@ -33,98 +131,62 @@ const Template = (args: TreeProps) => {
 }
 
 export const Primary = Template.bind({}) as any as { args: TreeProps }
-
 Primary.args = {
-	items: [
-		{
-			text: 'Item 1',
-			key: 'item-1',
-			menuItems: [
-				{
-					key: 'item-1-add',
-					text: 'Add item',
-					iconProps: {
-						iconName: 'Add',
-					},
-					onClick: () => console.log('clicked item-1 add'),
-				},
-				{
-					key: 'item-1-delete',
-					text: 'Remove item',
-					iconProps: {
-						iconName: 'Delete',
-					},
-				},
-			],
-			children: [
-				{
-					text: 'Item 1.1',
-					key: 'item-1.1',
-					menuItems: [
-						{
-							key: 'item-1.1-add',
-							text: 'Add item',
-							iconProps: {
-								iconName: 'Add',
-							},
-						},
-						{
-							key: 'item-1.1-delete',
-							text: 'Remove item',
-							iconProps: {
-								iconName: 'Delete',
-							},
-						},
-					],
-					children: [
-						{
-							text: 'Item 1.1.1',
-							key: 'item-1.1.1',
-						},
-						{
-							text: 'Item 1.1.2',
-							key: 'item-1.1.2',
-						},
-					],
-				},
-				{
-					text: 'Item 1.2',
-					key: 'item-1.2',
-				},
-			],
+	items: TREE_ITEMS,
+}
+
+export const Customized = Template.bind({}) as any as { args: TreeProps }
+Customized.args = {
+	items: TREE_ITEMS,
+	styles: {
+		listItemContent: {
+			background: 'azure',
 		},
-		{
-			text: 'Item 2',
-			key: 'item-2',
-			iconName: 'TableComputed',
-			children: [
-				{
-					text: 'Item 2.1',
-					key: 'item-2.1',
-					iconName: 'Database',
-					children: [
-						{
-							text: 'Item 2.1.1',
-							key: 'item-2.1.1',
-							iconName: 'Calendar',
-						},
-						{
-							text: 'Item 2.1.2',
-							key: 'item-2.1.2',
-							iconName: 'Table',
-						},
-					],
-				},
-				{
-					text: 'Item 2.2',
-					key: 'item-2.2',
-					iconName: 'LightningBolt',
-				},
-			],
+		indicator: {
+			borderWidth: 3,
+			height: 3,
 		},
-		{
-			text: 'Item 3',
-			key: 'item-3',
+	},
+	expandButtonProps: {
+		expandIconName: 'Add',
+		collapseIconName: 'Remove',
+	},
+	contentButtonProps: {
+		styles: {
+			label: {
+				color: 'darkorange',
+				fontFamily: 'monospace',
+			},
 		},
-	],
+		iconProps: {
+			styles: {
+				root: {
+					fontSize: 16,
+					color: 'orange',
+				},
+			},
+		},
+	},
+	menuButtonProps: {
+		alwaysVisible: true,
+		menuIconProps: {
+			iconName: 'LightningBolt',
+		},
+		styles: {
+			root: {
+				color: 'dodgerblue',
+			},
+			rootHovered: {
+				color: 'dodgerblue',
+			},
+			rootPressed: {
+				color: 'dodgerblue',
+			},
+			rootExpanded: {
+				color: 'dodgerblue',
+			},
+		},
+		onMenuClick: (e: any) => console.log('menu click', e),
+		onAfterMenuDismiss: () => console.log('menu dismiss'),
+	},
 }

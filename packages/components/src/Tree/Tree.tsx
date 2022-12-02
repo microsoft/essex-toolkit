@@ -3,17 +3,22 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import type { IButtonProps } from '@fluentui/react'
 import { DefaultButton, IconButton } from '@fluentui/react'
-import { memo, useCallback } from 'react'
+import { memo } from 'react'
 
 import type { Expansion } from './Tree.hooks.js'
 import {
-	useExpandIconProps,
+	useContentButtonProps,
+	useExpandIconButtonProps,
 	useExpansion,
-	useItemMenuInteraction,
+	useItemHoverInteraction,
+	useMenuButtonProps,
 } from './Tree.hooks.js'
-import { useItemStyles, useStyles } from './Tree.styles.js'
+import { useTreeItemStyles, useTreeStyles } from './Tree.styles.js'
 import type {
+	ExpandIconButtonProps,
+	MenuButtonProps,
 	TreeItem,
 	TreeItemDetails,
 	TreeProps,
@@ -25,8 +30,11 @@ export const Tree: React.FC<TreeProps> = memo(function Tree({
 	selectedKey,
 	onItemClick,
 	styles,
+	expandButtonProps,
+	contentButtonProps,
+	menuButtonProps,
 }) {
-	const _styles = useStyles(styles)
+	const _styles = useTreeStyles(styles)
 	const expansion = useExpansion()
 	const detailedItems = makeDetailedItems(
 		items,
@@ -39,7 +47,14 @@ export const Tree: React.FC<TreeProps> = memo(function Tree({
 		<div style={_styles.root}>
 			<ul style={_styles.list}>
 				{detailedItems.map(item => (
-					<TreeItemNode key={item.key} item={item} styles={styles} />
+					<TreeItemNode
+						key={item.key}
+						item={item}
+						styles={styles}
+						expandButtonProps={expandButtonProps}
+						contentButtonProps={contentButtonProps}
+						menuButtonProps={menuButtonProps}
+					/>
 				))}
 			</ul>
 		</div>
@@ -78,36 +93,41 @@ function makeDetailedItems(
 	})
 }
 
+/**
+ * A TreeNode is contructed of buttons, selection indicators, and recursive children.
+ * From the left:
+ * (1) Selection indicator (pill), only displayed if item.selected is true
+ * (2) Expand/collapse button, only visible if the item has children
+ * (3) The main item content as a clickable button
+ * (4) The far-right menu only shown on hover, and only if there are menu items
+ *
+ * The primary content resides within the listItemContent div, because that is the
+ * level of interaction and styling we want for the row.
+ * The outer li is too comprehensive because it grows if there are children.
+ */
 const TreeItemNode: React.FC<{
 	item: TreeItemDetails
 	styles?: TreeStyles
-}> = memo(function TreeItem({ item, styles }) {
-	const _styles = useItemStyles(item, styles)
+	expandButtonProps?: ExpandIconButtonProps
+	contentButtonProps?: IButtonProps
+	menuButtonProps?: MenuButtonProps
+}> = memo(function TreeItem({
+	item,
+	styles,
+	expandButtonProps,
+	contentButtonProps,
+	menuButtonProps,
+}) {
+	const _styles = useTreeItemStyles(item, styles)
 
-	const iconButtonProps = useExpandIconProps(item)
-	const handleClick = useCallback(() => item.onClick(), [item])
+	const _expandButtonProps = useExpandIconButtonProps(item, expandButtonProps)
+	const _contentButtonProps = useContentButtonProps(item, contentButtonProps)
 
-	const iconProps = item.iconName
-		? {
-				iconName: item.iconName,
-				styles: {
-					root: {
-						fontSize: 12,
-					},
-				},
-		  }
-		: undefined
-	const {
-		buttonStyles,
-		listItemContentStyles,
-		menuButtonStyles,
-		menuProps,
-		menuIconProps,
-		onMouseEnter,
-		onMouseLeave,
-		onMenuClick,
-		onAfterMenuDismiss,
-	} = useItemMenuInteraction(item, _styles)
+	const { listItemContentStyles, hovered, onMouseEnter, onMouseLeave } =
+		useItemHoverInteraction(item, _styles)
+
+	const _menuButtonProps = useMenuButtonProps(item, hovered, menuButtonProps)
+
 	return (
 		<li style={_styles.listItem} key={`tree-item-li-${item.key}`}>
 			<div
@@ -116,31 +136,25 @@ const TreeItemNode: React.FC<{
 				onMouseLeave={onMouseLeave}
 			>
 				<div style={_styles.indicator} />
-
 				<div style={_styles.flexContainer}>
-					{item.children && <IconButton {...iconButtonProps} />}
-					<DefaultButton
-						styles={buttonStyles}
-						iconProps={iconProps}
-						onClick={handleClick}
-					>
+					{item.children && <IconButton {..._expandButtonProps} />}
+					<DefaultButton {..._contentButtonProps} onClick={item.onClick}>
 						{item.text}
 					</DefaultButton>
-					{item.menuItems && (
-						<IconButton
-							styles={menuButtonStyles}
-							menuProps={menuProps}
-							menuIconProps={menuIconProps}
-							onMenuClick={onMenuClick}
-							onAfterMenuDismiss={onAfterMenuDismiss}
-						/>
-					)}
+					{item.menuItems && <IconButton {..._menuButtonProps} />}
 				</div>
 			</div>
 			<ul style={_styles.list}>
 				{item.children && item.expanded
 					? item.children.map(child => (
-							<TreeItemNode key={child.key} item={child} styles={styles} />
+							<TreeItemNode
+								key={child.key}
+								item={child}
+								styles={styles}
+								expandButtonProps={expandButtonProps}
+								contentButtonProps={contentButtonProps}
+								menuButtonProps={menuButtonProps}
+							/>
 					  ))
 					: null}
 			</ul>

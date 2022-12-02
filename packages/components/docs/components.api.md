@@ -488,15 +488,15 @@ export interface TreeItem {
 //
 // @public (undocumented)
 export interface TreeProps {
-    // (undocumented)
+    contentButtonProps?: IButtonProps;
+    // Warning: (ae-forgotten-export) The symbol "ExpandIconButtonProps" needs to be exported by the entry point index.d.ts
+    expandButtonProps?: ExpandIconButtonProps;
     items: TreeItem[];
-    // (undocumented)
+    // Warning: (ae-forgotten-export) The symbol "MenuButtonProps" needs to be exported by the entry point index.d.ts
+    menuButtonProps?: MenuButtonProps;
     onItemClick?: (item: TreeItem) => void;
-    // (undocumented)
     selectedKey?: string;
     // Warning: (ae-forgotten-export) The symbol "TreeStyles" needs to be exported by the entry point index.d.ts
-    //
-    // (undocumented)
     styles?: TreeStyles;
 }
 
