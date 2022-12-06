@@ -34,6 +34,27 @@ export interface TreeStyles {
 	indicator?: CSSProperties
 }
 
+export interface ExpandIconButtonProps extends IButtonProps {
+	/**
+	 * Icon name indicating that the list can be expanded (i.e., is in the closed position)
+	 * Default: 'ChevronRight'
+	 */
+	expandIconName?: string
+	/**
+	 * Icon name indicating that the list can be collapsed (i.e., is in the open position)
+	 * Default: 'ChevronDown'
+	 */
+	collapseIconName?: string
+}
+
+export interface MenuButtonProps extends IButtonProps {
+	/**
+	 * By default we only show the menu button icon on hover,
+	 * to make it persistently visible set this to true.
+	 */
+	alwaysVisible?: boolean
+}
+
 export interface TreePropsBase {
 	/**
 	 * General styles for customizing the tree.
@@ -73,46 +94,34 @@ export interface TreeProps extends TreePropsBase {
 	selectedKey?: string
 }
 
-export interface TreeItemProps extends TreePropsBase {
-	item: TreeItemDetails
-}
-
 export interface TreeItem {
 	key: string
 	text: string
+	/**
+	 * Optional icon to show before the text
+	 */
 	iconName?: string
+	/**
+	 * Individual click handler for this item.
+	 * Will suppress top-level onItemClick if set.
+	 */
+	onClick?: (item: TreeItem) => void
+	selected?: boolean
+	expanded?: boolean
 	menuItems?: IContextualMenuItem[]
 	children?: TreeItem[]
-}
-
-export interface ExpandIconButtonProps extends IButtonProps {
-	/**
-	 * Icon name indicating that the list can be expanded (i.e., is in the closed position)
-	 * Default: 'ChevronRight'
-	 */
-	expandIconName?: string
-	/**
-	 * Icon name indicating that the list can be collapsed (i.e., is in the open position)
-	 * Default: 'ChevronDown'
-	 */
-	collapseIconName?: string
-}
-
-export interface MenuButtonProps extends IButtonProps {
-	/**
-	 * By default we only show the menu button icon on hover,
-	 * to make it persistently visible set this to true.
-	 */
-	alwaysVisible?: boolean
 }
 
 // internal interface used to provide an enriched item for rendering
 export interface TreeItemDetails extends TreeItem {
 	depth: number
-	selected: boolean
-	expanded: boolean
 	clickable: boolean
 	children?: TreeItemDetails[]
 	onClick: () => void
 	onExpand: () => void
+}
+
+// internal interface used to provide props for the TreeItem sub component
+export interface TreeItemProps extends TreePropsBase {
+	item: TreeItemDetails
 }

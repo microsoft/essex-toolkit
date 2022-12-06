@@ -5,7 +5,7 @@
 import { useState } from 'react'
 
 import { Tree } from '../Tree/Tree.js'
-import type { TreeProps } from '../Tree/Tree.types.js'
+import type { TreeItem, TreeProps } from '../Tree/Tree.types.js'
 
 const meta = {
 	title: '@essex:components/Tree',
@@ -15,7 +15,7 @@ export default meta
 
 const onClick = (evt: any, item: any) => console.log(evt, item)
 
-const TREE_ITEMS = [
+const TREE_ITEMS: TreeItem[] = [
 	{
 		text: 'Item 1',
 		key: 'item-1',
@@ -152,6 +152,7 @@ const Template = (args: TreeProps) => {
 						onItemClick={item => setSelected(item.key)}
 					></Tree>
 				</div>
+				<div></div>
 			</div>
 		</div>
 	)
@@ -216,4 +217,31 @@ Customized.args = {
 		onMenuClick: (e: any) => console.log('menu click', e),
 		onAfterMenuDismiss: () => console.log('menu dismiss'),
 	},
+}
+
+export const ItemProps = Template.bind({}) as any as { args: TreeProps }
+// add in a few custom click, selection, etc. props to test full item overrives
+ItemProps.args = {
+	items: [
+		{
+			key: 'item-1',
+			text: 'Item 1 (selected, onClick)',
+			selected: true,
+			onClick: item => console.log('click', item),
+			children: [
+				{
+					key: 'item-1.1',
+					text: 'Item 1.1 (expanded)',
+					expanded: true,
+					children: [
+						{
+							key: 'item-1.1.1 ',
+							text: 'Item 1.1.1 (selected)',
+							selected: true,
+						},
+					],
+				},
+			],
+		},
+	],
 }

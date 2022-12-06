@@ -66,18 +66,24 @@ function makeDetailedItems(
 	depth: number,
 	expansion: Expansion,
 	selectedKey?: string,
-	onClick?: (item: TreeItem) => void,
+	onItemClick?: (item: TreeItem) => void,
 ): TreeItemDetails[] {
 	return items.map(item => {
-		const { children, ...rest } = item
+		const { children, onClick, selected, expanded, ...rest } = item
 		const base: TreeItemDetails = {
 			...rest,
 			depth,
-			selected: item.key === selectedKey,
-			expanded: expansion.is(item.key),
+			selected: selected || item.key === selectedKey,
+			expanded: expanded || expansion.is(item.key),
 			onExpand: () => expansion.on(item.key),
-			clickable: onClick !== undefined,
-			onClick: () => onClick && onClick(item),
+			clickable: (onClick || onItemClick) !== undefined,
+			onClick: () => {
+				if (onClick) {
+					onClick(item)
+				} else if (onItemClick) {
+					onItemClick(item)
+				}
+			},
 		}
 		if (children) {
 			base.children = makeDetailedItems(
@@ -85,7 +91,7 @@ function makeDetailedItems(
 				depth + 1,
 				expansion,
 				selectedKey,
-				onClick,
+				onItemClick,
 			)
 		}
 		return base

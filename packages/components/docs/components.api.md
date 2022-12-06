@@ -475,11 +475,15 @@ export interface TreeItem {
     // (undocumented)
     children?: TreeItem[];
     // (undocumented)
+    expanded?: boolean;
     iconName?: string;
     // (undocumented)
     key: string;
     // (undocumented)
     menuItems?: IContextualMenuItem[];
+    onClick?: (item: TreeItem) => void;
+    // (undocumented)
+    selected?: boolean;
     // (undocumented)
     text: string;
 }
