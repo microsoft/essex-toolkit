@@ -26,6 +26,7 @@ export const Tree: React.FC<TreeProps> = memo(function Tree({
 	items,
 	selectedKey,
 	onItemClick,
+	onItemExpandClick,
 	styles,
 	expandButtonProps,
 	contentButtonProps,
@@ -40,6 +41,7 @@ export const Tree: React.FC<TreeProps> = memo(function Tree({
 		expansion,
 		selectedKey,
 		onItemClick,
+		onItemExpandClick,
 	)
 	return (
 		<div style={_styles.root}>
@@ -67,15 +69,23 @@ function makeDetailedItems(
 	expansion: Expansion,
 	selectedKey?: string,
 	onItemClick?: (item: TreeItem) => void,
+	onItemExpandClick?: (item: TreeItem) => void,
 ): TreeItemDetails[] {
 	return items.map(item => {
-		const { children, onClick, selected, expanded, ...rest } = item
+		const { children, onClick, onExpand, selected, expanded, ...rest } = item
 		const base: TreeItemDetails = {
 			...rest,
 			depth,
 			selected: selected || item.key === selectedKey,
 			expanded: expanded || expansion.is(item.key),
-			onExpand: () => expansion.on(item.key),
+			onExpand: () => {
+				expansion.on(item.key)
+				if (onExpand) {
+					onExpand(item)
+				} else if (onItemExpandClick) {
+					onItemExpandClick(item)
+				}
+			},
 			clickable: (onClick || onItemClick) !== undefined,
 			onClick: () => {
 				if (onClick) {
@@ -92,6 +102,7 @@ function makeDetailedItems(
 				expansion,
 				selectedKey,
 				onItemClick,
+				onItemExpandClick,
 			)
 		}
 		return base

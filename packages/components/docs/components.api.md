@@ -483,6 +483,8 @@ export interface TreeItem {
     menuItems?: IContextualMenuItem[];
     onClick?: (item: TreeItem) => void;
     // (undocumented)
+    onExpand?: (item: TreeItem) => void;
+    // (undocumented)
     selected?: boolean;
     // (undocumented)
     text: string;
@@ -494,6 +496,8 @@ export interface TreeItem {
 export interface TreeProps extends TreePropsBase {
     items: TreeItem[];
     onItemClick?: (item: TreeItem) => void;
+    // (undocumented)
+    onItemExpandClick?: (item: TreeItem) => void;
     selectedKey?: string;
 }
 

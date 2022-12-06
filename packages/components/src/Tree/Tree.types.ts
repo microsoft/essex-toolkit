@@ -85,13 +85,14 @@ export interface TreeProps extends TreePropsBase {
 	 */
 	items: TreeItem[]
 	/**
-	 * Handler for individual item clicks.
-	 */
-	onItemClick?: (item: TreeItem) => void
-	/**
 	 * Selected item in the tree.
 	 */
 	selectedKey?: string
+	/**
+	 * Handler for individual item clicks.
+	 */
+	onItemClick?: (item: TreeItem) => void
+	onItemExpandClick?: (item: TreeItem) => void
 }
 
 export interface TreeItem {
@@ -106,6 +107,7 @@ export interface TreeItem {
 	 * Will suppress top-level onItemClick if set.
 	 */
 	onClick?: (item: TreeItem) => void
+	onExpand?: (item: TreeItem) => void
 	selected?: boolean
 	expanded?: boolean
 	menuItems?: IContextualMenuItem[]

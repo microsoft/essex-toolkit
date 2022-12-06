@@ -150,6 +150,7 @@ const Template = (args: TreeProps) => {
 						size={'small'}
 						selectedKey={selected}
 						onItemClick={item => setSelected(item.key)}
+						onItemExpandClick={item => console.log('expand clicked', item)}
 					></Tree>
 				</div>
 				<div></div>
@@ -220,19 +221,20 @@ Customized.args = {
 }
 
 export const ItemProps = Template.bind({}) as any as { args: TreeProps }
-// add in a few custom click, selection, etc. props to test full item overrives
+// add in a few custom click, selection, etc. props to test full item overrides
 ItemProps.args = {
 	items: [
 		{
 			key: 'item-1',
 			text: 'Item 1 (selected, onClick)',
 			selected: true,
-			onClick: item => console.log('click', item),
+			onClick: item => console.log('click override', item),
 			children: [
 				{
 					key: 'item-1.1',
-					text: 'Item 1.1 (expanded)',
+					text: 'Item 1.1 (expanded, onExpand)',
 					expanded: true,
+					onExpand: item => console.log('expand override', item),
 					children: [
 						{
 							key: 'item-1.1.1 ',
