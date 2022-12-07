@@ -54,40 +54,37 @@ export function useTreeItemGroups(
 ): TreeItemDetailsGroup[] {
 	const expansion = useExpansion()
 	return useMemo(() => {
-		// if there are no groups defined, create a single root group with no text
-		// TODO: collected any remaining items that don't have a group key
-		// this will allows us to replace this with a single function
-		if (groups && groups.length > 0) {
-			return groups.map(group => {
-				return {
-					key: group.key,
-					text: group.text,
-					items: makeDetailedItems(
-						items.filter(item => item.group === group.key),
-						0,
-						expansion,
-						selectedKey,
-						onItemClick,
-						onItemExpandClick,
-					),
-				}
-			})
-		} else {
-			return [
-				{
-					key: '--virtual-root--',
-					items: makeDetailedItems(
-						items,
-						0,
-						expansion,
-						selectedKey,
-						onItemClick,
-						onItemExpandClick,
-					),
-				},
-			]
-		}
+		const collected = collectItemsByGroup(items)
+		return [
+			...(groups || []),
+			{
+				key: rkey,
+			},
+		].map(group => ({
+			...group,
+			items: makeDetailedItems(
+				collected.get(group.key) || [],
+				0,
+				expansion,
+				selectedKey,
+				onItemClick,
+				onItemExpandClick,
+			),
+		}))
 	}, [items, groups, expansion, selectedKey, onItemClick, onItemExpandClick])
+}
+
+const rkey = '--virtual-root--'
+
+// sort items into groups, establishing a default group if none are provided
+function collectItemsByGroup(items: TreeItem[]): Map<string, TreeItem[]> {
+	return items.reduce((acc, cur) => {
+		const group = cur.group || rkey
+		const g = acc.get(group) || []
+		g.push(cur)
+		acc.set(group, g)
+		return acc
+	}, new Map<string, TreeItem[]>([[rkey, []]]))
 }
 
 // enrich each item recursively using top-level data

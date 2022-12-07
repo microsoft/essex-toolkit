@@ -258,11 +258,12 @@ ItemProps.args = {
 	],
 }
 
+// illustrate two groups, with the remaining item orphaned into the default
 export const Grouped = Template.bind({}) as any as { args: TreeProps }
 Grouped.args = {
 	items: TREE_ITEMS.map((item, index) => ({
 		...item,
-		group: index < 2 ? 'group-1' : 'group-2',
+		group: index < 2 ? 'group-1' : index < 3 ? 'group-2' : undefined,
 	})),
 	groups: [
 		{
