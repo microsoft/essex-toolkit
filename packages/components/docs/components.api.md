@@ -475,11 +475,18 @@ export interface TreeItem {
     // (undocumented)
     children?: TreeItem[];
     // (undocumented)
+    expanded?: boolean;
+    group?: string;
     iconName?: string;
     // (undocumented)
     key: string;
     // (undocumented)
     menuItems?: IContextualMenuItem[];
+    onClick?: (item: TreeItem) => void;
+    // (undocumented)
+    onExpand?: (item: TreeItem) => void;
+    // (undocumented)
+    selected?: boolean;
     // (undocumented)
     text: string;
 }
@@ -488,8 +495,12 @@ export interface TreeItem {
 //
 // @public (undocumented)
 export interface TreeProps extends TreePropsBase {
+    // Warning: (ae-forgotten-export) The symbol "TreeGroup" needs to be exported by the entry point index.d.ts
+    groups?: TreeGroup[];
     items: TreeItem[];
     onItemClick?: (item: TreeItem) => void;
+    // (undocumented)
+    onItemExpandClick?: (item: TreeItem) => void;
     selectedKey?: string;
 }
 

@@ -19,11 +19,14 @@ import {
 import type {
 	ExpandIconButtonProps,
 	MenuButtonProps,
+	TreeGroup,
+	TreeItem,
 	TreeItemDetails,
+	TreeItemDetailsGroup,
 	TreeStyles,
 } from './Tree.types.js'
 
-export interface Expansion {
+interface Expansion {
 	is: (key: string) => boolean
 	on: (key: string) => void
 }
@@ -40,6 +43,95 @@ export function useExpansion(): Expansion {
 		}),
 		[expandMap, setExpandMap],
 	)
+}
+
+export function useTreeItemGroups(
+	items: TreeItem[],
+	groups?: TreeGroup[],
+	selectedKey?: string,
+	onItemClick?: (item: TreeItem) => void,
+	onItemExpandClick?: (item: TreeItem) => void,
+): TreeItemDetailsGroup[] {
+	const expansion = useExpansion()
+	return useMemo(() => {
+		const collected = collectItemsByGroup(items)
+		return [
+			...(groups || []),
+			{
+				key: rkey,
+			},
+		].map(group => ({
+			...group,
+			items: makeDetailedItems(
+				collected.get(group.key) || [],
+				0,
+				expansion,
+				selectedKey,
+				onItemClick,
+				onItemExpandClick,
+			),
+		}))
+	}, [items, groups, expansion, selectedKey, onItemClick, onItemExpandClick])
+}
+
+const rkey = '--virtual-root--'
+
+// sort items into groups, establishing a default group if none are provided
+function collectItemsByGroup(items: TreeItem[]): Map<string, TreeItem[]> {
+	return items.reduce((acc, cur) => {
+		const group = cur.group || rkey
+		const g = acc.get(group) || []
+		g.push(cur)
+		acc.set(group, g)
+		return acc
+	}, new Map<string, TreeItem[]>([[rkey, []]]))
+}
+
+// enrich each item recursively using top-level data
+function makeDetailedItems(
+	items: TreeItem[],
+	depth: number,
+	expansion: Expansion,
+	selectedKey?: string,
+	onItemClick?: (item: TreeItem) => void,
+	onItemExpandClick?: (item: TreeItem) => void,
+): TreeItemDetails[] {
+	return items.map(item => {
+		const { children, onClick, onExpand, selected, expanded, ...rest } = item
+		const base: TreeItemDetails = {
+			...rest,
+			depth,
+			selected: selected || item.key === selectedKey,
+			expanded: expanded || expansion.is(item.key),
+			onExpand: () => {
+				expansion.on(item.key)
+				if (onExpand) {
+					onExpand(item)
+				} else if (onItemExpandClick) {
+					onItemExpandClick(item)
+				}
+			},
+			clickable: (onClick || onItemClick) !== undefined,
+			onClick: () => {
+				if (onClick) {
+					onClick(item)
+				} else if (onItemClick) {
+					onItemClick(item)
+				}
+			},
+		}
+		if (children) {
+			base.children = makeDetailedItems(
+				children,
+				depth + 1,
+				expansion,
+				selectedKey,
+				onItemClick,
+				onItemExpandClick,
+			)
+		}
+		return base
+	})
 }
 
 /**

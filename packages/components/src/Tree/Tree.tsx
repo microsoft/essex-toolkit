@@ -6,91 +6,64 @@
 import { DefaultButton, IconButton } from '@fluentui/react'
 import { memo } from 'react'
 
-import type { Expansion } from './Tree.hooks.js'
 import {
 	useContentButtonProps,
 	useExpandIconButtonProps,
-	useExpansion,
 	useItemHoverInteraction,
 	useMenuButtonProps,
+	useTreeItemGroups,
 } from './Tree.hooks.js'
 import { useTreeItemStyles, useTreeStyles } from './Tree.styles.js'
-import type {
-	TreeItem,
-	TreeItemDetails,
-	TreeItemProps,
-	TreeProps,
-} from './Tree.types.js'
+import type { TreeItemProps, TreeProps } from './Tree.types.js'
 
 export const Tree: React.FC<TreeProps> = memo(function Tree({
 	items,
+	groups,
 	selectedKey,
 	onItemClick,
+	onItemExpandClick,
 	styles,
 	expandButtonProps,
 	contentButtonProps,
 	menuButtonProps,
 	size = 'medium',
 }) {
-	const _styles = useTreeStyles(styles)
-	const expansion = useExpansion()
-	const detailedItems = makeDetailedItems(
+	const _styles = useTreeStyles(styles, size)
+
+	const treeGroups = useTreeItemGroups(
 		items,
-		0,
-		expansion,
+		groups,
 		selectedKey,
 		onItemClick,
+		onItemExpandClick,
 	)
 	return (
 		<div style={_styles.root}>
-			<ul style={_styles.list}>
-				{detailedItems.map(item => (
-					<TreeItemNode
-						key={item.key}
-						item={item}
-						styles={styles}
-						expandButtonProps={expandButtonProps}
-						contentButtonProps={contentButtonProps}
-						menuButtonProps={menuButtonProps}
-						size={size}
-					/>
-				))}
-			</ul>
+			{treeGroups.map(group => {
+				return (
+					<div style={_styles.group} key={`tree-group-${group.key}`}>
+						<ul style={_styles.list}>
+							{group.text && (
+								<div style={_styles.groupHeader}>{group.text}</div>
+							)}
+							{group.items.map(item => (
+								<TreeItemNode
+									key={item.key}
+									item={item}
+									styles={styles}
+									expandButtonProps={expandButtonProps}
+									contentButtonProps={contentButtonProps}
+									menuButtonProps={menuButtonProps}
+									size={size}
+								/>
+							))}
+						</ul>
+					</div>
+				)
+			})}
 		</div>
 	)
 })
-
-// enrich each item recursively using top-level data
-function makeDetailedItems(
-	items: TreeItem[],
-	depth: number,
-	expansion: Expansion,
-	selectedKey?: string,
-	onClick?: (item: TreeItem) => void,
-): TreeItemDetails[] {
-	return items.map(item => {
-		const { children, ...rest } = item
-		const base: TreeItemDetails = {
-			...rest,
-			depth,
-			selected: item.key === selectedKey,
-			expanded: expansion.is(item.key),
-			onExpand: () => expansion.on(item.key),
-			clickable: onClick !== undefined,
-			onClick: () => onClick && onClick(item),
-		}
-		if (children) {
-			base.children = makeDetailedItems(
-				children,
-				depth + 1,
-				expansion,
-				selectedKey,
-				onClick,
-			)
-		}
-		return base
-	})
-}
 
 /**
  * A TreeNode is contructed of buttons, selection indicators, and recursive children.

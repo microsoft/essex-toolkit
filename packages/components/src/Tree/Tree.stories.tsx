@@ -5,7 +5,7 @@
 import { useState } from 'react'
 
 import { Tree } from '../Tree/Tree.js'
-import type { TreeProps } from '../Tree/Tree.types.js'
+import type { TreeItem, TreeProps } from '../Tree/Tree.types.js'
 
 const meta = {
 	title: '@essex:components/Tree',
@@ -15,7 +15,7 @@ export default meta
 
 const onClick = (evt: any, item: any) => console.log(evt, item)
 
-const TREE_ITEMS = [
+const TREE_ITEMS: TreeItem[] = [
 	{
 		text: 'Item 1',
 		key: 'item-1',
@@ -108,6 +108,16 @@ const TREE_ITEMS = [
 	{
 		text: 'Item 3',
 		key: 'item-3',
+		children: [
+			{
+				key: 'item-3.1',
+				text: 'Item 3.1',
+			},
+		],
+	},
+	{
+		text: 'Item 4',
+		key: 'item-4',
 	},
 ]
 
@@ -150,8 +160,10 @@ const Template = (args: TreeProps) => {
 						size={'small'}
 						selectedKey={selected}
 						onItemClick={item => setSelected(item.key)}
+						onItemExpandClick={item => console.log('expand clicked', item)}
 					></Tree>
 				</div>
+				<div></div>
 			</div>
 		</div>
 	)
@@ -216,4 +228,51 @@ Customized.args = {
 		onMenuClick: (e: any) => console.log('menu click', e),
 		onAfterMenuDismiss: () => console.log('menu dismiss'),
 	},
+}
+
+export const ItemProps = Template.bind({}) as any as { args: TreeProps }
+// add in a few custom click, selection, etc. props to test full item overrides
+ItemProps.args = {
+	items: [
+		{
+			key: 'item-1',
+			text: 'Item 1 (selected, onClick)',
+			selected: true,
+			onClick: item => console.log('click override', item),
+			children: [
+				{
+					key: 'item-1.1',
+					text: 'Item 1.1 (expanded, onExpand)',
+					expanded: true,
+					onExpand: item => console.log('expand override', item),
+					children: [
+						{
+							key: 'item-1.1.1 ',
+							text: 'Item 1.1.1 (selected)',
+							selected: true,
+						},
+					],
+				},
+			],
+		},
+	],
+}
+
+// illustrate two groups, with the remaining item orphaned into the default
+export const Grouped = Template.bind({}) as any as { args: TreeProps }
+Grouped.args = {
+	items: TREE_ITEMS.map((item, index) => ({
+		...item,
+		group: index < 2 ? 'group-1' : index < 3 ? 'group-2' : undefined,
+	})),
+	groups: [
+		{
+			key: 'group-1',
+			text: 'Group 1',
+		},
+		{
+			key: 'group-2',
+			text: 'Group 2',
+		},
+	],
 }

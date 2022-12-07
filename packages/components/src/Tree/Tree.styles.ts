@@ -11,38 +11,59 @@ import type { Size } from '../hooks/fluent8/types.js'
 import type { TreeItemDetails, TreeStyles } from './Tree.types.js'
 
 // TODO: this should be merged with the fluent8 hooks content for reuse
-const SIZE = 24
-const FONT_SIZE = 12
-const MEDIUM_CARET_FONT_SIZE = 10
+const SMALL_SIZE = 24
+const SMALL_FONT_SIZE = 12
 const SMALL_CARET_FONT_SIZE = 8
-const INDICATOR_HEIGHT = FONT_SIZE + 2
-const MEDIUM_INDICATOR_WIDTH = 2
 const SMALL_INDICATOR_WIDTH = 1
-const ICON_SIZE = 14
+const SMALL_ICON_SIZE = 14
+
+const INDICATOR_HEIGHT = 14
 const INDENT = 12
+const ROOT_FLEX_GAP = 12
 const FLEX_GAP = 0
 
+const MEDIUM_CARET_FONT_SIZE = 10
+const MEDIUM_INDICATOR_WIDTH = 2
 /**
  * Only extract the styles props that matter for the root tree.
  * @param styles
  * @returns
  */
-export function useTreeStyles(styles?: TreeStyles): TreeStyles {
-	return useMemo(
-		() =>
-			merge({
-				root: {
-					...styles?.root,
-				},
-				list: {
-					padding: 0,
-					margin: 0,
-					listStyleType: 'none',
-					...styles?.list,
-				},
-			}),
-		[styles],
-	)
+export function useTreeStyles(
+	styles?: TreeStyles,
+	size: Size = 'medium',
+): TreeStyles {
+	const theme = useTheme()
+	return useMemo(() => {
+		const base = {
+			root: {
+				display: 'flex',
+				flexDirection: 'column',
+				gap: ROOT_FLEX_GAP,
+			},
+			list: {
+				padding: 0,
+				margin: 0,
+				listStyleType: 'none',
+			},
+			group: {
+				display: 'flex',
+				flexDirection: 'column',
+			},
+			groupHeader: {
+				padding: 4,
+				fontWeight: 'bold',
+				color: theme.palette.neutralSecondary,
+				background: theme.palette.neutralLighter,
+			},
+		}
+		const small = size === 'small' && {
+			groupHeader: {
+				fontSize: SMALL_FONT_SIZE,
+			},
+		}
+		return merge(base, small, styles)
+	}, [theme, styles, size])
 }
 
 /**
@@ -79,7 +100,7 @@ export function useTreeItemStyles(
 				gap: FLEX_GAP,
 				paddingLeft: item.children
 					? item.depth * INDENT
-					: item.depth * INDENT + SIZE,
+					: item.depth * INDENT + SMALL_SIZE,
 			},
 			indicator: {
 				marginLeft: 2,
@@ -92,7 +113,7 @@ export function useTreeItemStyles(
 		}
 		const small = size === 'small' && {
 			listItemContent: {
-				height: SIZE,
+				height: SMALL_SIZE,
 			},
 			indicator: {
 				borderRadius: SMALL_INDICATOR_WIDTH * 2,
@@ -129,8 +150,8 @@ export function useExpandIconButtonStyles(size: Size = 'medium') {
 		}
 		const small = size === 'small' && {
 			root: {
-				width: SIZE,
-				height: SIZE,
+				width: SMALL_SIZE,
+				height: SMALL_SIZE,
 			},
 		}
 		return merge(base, small, transparentBackgroundButtonStyles)
@@ -180,8 +201,8 @@ export function useContentButtonStyles(
 		}
 		const small = size === 'small' && {
 			root: {
-				height: SIZE,
-				fontSize: FONT_SIZE,
+				height: SMALL_SIZE,
+				fontSize: SMALL_FONT_SIZE,
 			},
 		}
 		return merge(base, small, transparentBackgroundButtonStyles)
@@ -193,7 +214,7 @@ export function useContentIconStyles(size: Size = 'medium') {
 		return (
 			size === 'small' && {
 				root: {
-					fontSize: ICON_SIZE,
+					fontSize: SMALL_ICON_SIZE,
 				},
 			}
 		)
@@ -213,9 +234,9 @@ export function useMenuButtonStyles(size: Size = 'medium') {
 		}
 		const small = size === 'small' && {
 			root: {
-				width: SIZE,
-				height: SIZE,
-				fontSize: FONT_SIZE,
+				width: SMALL_SIZE,
+				height: SMALL_SIZE,
+				fontSize: SMALL_FONT_SIZE,
 			},
 		}
 		return merge(base, small, transparentBackgroundButtonStyles)
@@ -233,11 +254,11 @@ export function useMenuItemsStyles(size: Size = 'medium') {
 					subComponentStyles: {
 						menuItem: {
 							root: {
-								fontSize: FONT_SIZE,
-								height: SIZE,
+								fontSize: SMALL_FONT_SIZE,
+								height: SMALL_SIZE,
 							},
 							icon: {
-								fontSize: FONT_SIZE,
+								fontSize: SMALL_FONT_SIZE,
 							},
 						},
 					},
