@@ -108,6 +108,16 @@ const TREE_ITEMS: TreeItem[] = [
 	{
 		text: 'Item 3',
 		key: 'item-3',
+		children: [
+			{
+				key: 'item-3.1',
+				text: 'Item 3.1',
+			},
+		],
+	},
+	{
+		text: 'Item 4',
+		key: 'item-4',
 	},
 ]
 
@@ -244,6 +254,24 @@ ItemProps.args = {
 					],
 				},
 			],
+		},
+	],
+}
+
+export const Grouped = Template.bind({}) as any as { args: TreeProps }
+Grouped.args = {
+	items: TREE_ITEMS.map((item, index) => ({
+		...item,
+		group: index < 2 ? 'group-1' : 'group-2',
+	})),
+	groups: [
+		{
+			key: 'group-1',
+			text: 'Group 1',
+		},
+		{
+			key: 'group-2',
+			text: 'Group 2',
 		},
 	],
 }

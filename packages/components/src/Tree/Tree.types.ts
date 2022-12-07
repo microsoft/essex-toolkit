@@ -13,6 +13,14 @@ export interface TreeStyles {
 	 */
 	root?: CSSProperties
 	/**
+	 * Styles for each group container.
+	 */
+	group?: CSSProperties
+	/**
+	 * Styles for the group name text.
+	 */
+	groupHeader?: CSSProperties
+	/**
 	 * Styles for recursive list containers (ul)
 	 */
 	list?: CSSProperties
@@ -85,6 +93,11 @@ export interface TreeProps extends TreePropsBase {
 	 */
 	items: TreeItem[]
 	/**
+	 * Optional group definitions.
+	 * If groups are defined, each root item must have a group key.
+	 */
+	groups?: TreeGroup[]
+	/**
 	 * Selected item in the tree.
 	 */
 	selectedKey?: string
@@ -99,7 +112,11 @@ export interface TreeItem {
 	key: string
 	text: string
 	/**
-	 * Optional icon to show before the text
+	 * Key of the group this item belongs to, if groups are specified.
+	 */
+	group?: string
+	/**
+	 * Optional icon to show before the text.
 	 */
 	iconName?: string
 	/**
@@ -114,6 +131,11 @@ export interface TreeItem {
 	children?: TreeItem[]
 }
 
+export interface TreeGroup {
+	key: string
+	text?: string
+}
+
 // internal interface used to provide an enriched item for rendering
 export interface TreeItemDetails extends TreeItem {
 	depth: number
@@ -123,6 +145,9 @@ export interface TreeItemDetails extends TreeItem {
 	onExpand: () => void
 }
 
+export interface TreeItemDetailsGroup extends TreeGroup {
+	items: TreeItemDetails[]
+}
 // internal interface used to provide props for the TreeItem sub component
 export interface TreeItemProps extends TreePropsBase {
 	item: TreeItemDetails

@@ -476,6 +476,7 @@ export interface TreeItem {
     children?: TreeItem[];
     // (undocumented)
     expanded?: boolean;
+    group?: string;
     iconName?: string;
     // (undocumented)
     key: string;
@@ -494,6 +495,10 @@ export interface TreeItem {
 //
 // @public (undocumented)
 export interface TreeProps extends TreePropsBase {
+    // Warning: (ae-forgotten-export) The symbol "TreeGroup" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    groups?: TreeGroup[];
     items: TreeItem[];
     onItemClick?: (item: TreeItem) => void;
     // (undocumented)
