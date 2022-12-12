@@ -313,6 +313,7 @@ CustomRenderers.args = {
 								display: 'flex',
 								flexDirection: 'column',
 								gap: 4,
+								padding: 4,
 								paddingLeft: depth * 12 + 32,
 							}}
 						>
