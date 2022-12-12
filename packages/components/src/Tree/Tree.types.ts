@@ -2,7 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { IButtonProps, IContextualMenuItem } from '@fluentui/react'
+import type {
+	IButtonProps,
+	IContextualMenuItem,
+	IRenderFunction,
+} from '@fluentui/react'
 import type { CSSProperties } from 'react'
 
 import type { Size } from '../hooks/fluent8/types.js'
@@ -102,15 +106,23 @@ export interface TreeProps extends TreePropsBase {
 	 */
 	selectedKey?: string
 	/**
-	 * Handler for individual item clicks.
+	 * Global handler for individual item clicks.
 	 */
 	onItemClick?: (item: TreeItem) => void
+	/**
+	 * Global handler for individual expand/collapse icon clicks.
+	 */
 	onItemExpandClick?: (item: TreeItem) => void
+}
+
+export interface TreeGroup {
+	key: string
+	text?: string
 }
 
 export interface TreeItem {
 	key: string
-	text: string
+	text?: string
 	/**
 	 * Key of the group this item belongs to, if groups are specified.
 	 */
@@ -124,31 +136,41 @@ export interface TreeItem {
 	 * Will suppress top-level onItemClick if set.
 	 */
 	onClick?: (item: TreeItem) => void
+	/**
+	 * Individual click handler for this item's expand/collapse icon.
+	 * Will suppress top-level onItemExpandClick if set.
+	 */
 	onExpand?: (item: TreeItem) => void
+	/**
+	 * Render function for the title content of the item. Includes the content *between* the expand/collapse button and the menu items.
+	 */
+	onRenderTitle?: IRenderFunction<TreeItemProps>
+	/**
+	 * Render function for the child content of the item, including child nodes.
+	 */
+	onRenderContent?: IRenderFunction<TreeItemProps>
+	/**
+	 * Indicates the item is selected and should be styled as such.
+	 */
 	selected?: boolean
+	/**
+	 * Indicates the item is expanded and should display child items and content.
+	 */
 	expanded?: boolean
+	/**
+	 * List of menu items to display in a right-side dropdown menu.
+	 */
 	menuItems?: IContextualMenuItem[]
+	/**
+	 * Child TreeItems to recursively render.
+	 */
 	children?: TreeItem[]
+	/**
+	 * Depth of the item, which affects its left position for hierarchical rendering.
+	 */
+	depth?: number
 }
 
-export interface TreeGroup {
-	key: string
-	text?: string
-}
-
-// internal interface used to provide an enriched item for rendering
-export interface TreeItemDetails extends TreeItem {
-	depth: number
-	clickable: boolean
-	children?: TreeItemDetails[]
-	onClick: () => void
-	onExpand: () => void
-}
-
-export interface TreeItemDetailsGroup extends TreeGroup {
-	items: TreeItemDetails[]
-}
-// internal interface used to provide props for the TreeItem sub component
 export interface TreeItemProps extends TreePropsBase {
-	item: TreeItemDetails
+	item: TreeItem
 }

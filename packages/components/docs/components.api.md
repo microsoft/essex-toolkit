@@ -472,23 +472,29 @@ export const Tree: React.FC<TreeProps>;
 //
 // @public (undocumented)
 export interface TreeItem {
-    // (undocumented)
     children?: TreeItem[];
-    // (undocumented)
+    depth?: number;
     expanded?: boolean;
     group?: string;
     iconName?: string;
     // (undocumented)
     key: string;
-    // (undocumented)
     menuItems?: IContextualMenuItem[];
     onClick?: (item: TreeItem) => void;
-    // (undocumented)
     onExpand?: (item: TreeItem) => void;
-    // (undocumented)
+    onRenderContent?: IRenderFunction<TreeItemProps>;
+    onRenderTitle?: IRenderFunction<TreeItemProps>;
     selected?: boolean;
     // (undocumented)
-    text: string;
+    text?: string;
+}
+
+// Warning: (ae-missing-release-tag) "TreeItemProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TreeItemProps extends TreePropsBase {
+    // (undocumented)
+    item: TreeItem;
 }
 
 // Warning: (ae-missing-release-tag) "TreeProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -499,7 +505,6 @@ export interface TreeProps extends TreePropsBase {
     groups?: TreeGroup[];
     items: TreeItem[];
     onItemClick?: (item: TreeItem) => void;
-    // (undocumented)
     onItemExpandClick?: (item: TreeItem) => void;
     selectedKey?: string;
 }
