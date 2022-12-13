@@ -30,7 +30,7 @@
 		"@essex/scripts": "^22.0.7",
 		"@fluentui/react": "^8.103.7",
 		"@mdx-js/react": "^1.6.22",
-		"@storybook/addon-docs": "^6.5.12",
+		"@storybook/addon-docs": "^6.5.14",
 		"@thematic/core": "^3.0.0",
 		"@thematic/fluent": "^4.0.1",
 		"@thematic/react": "^2.0.12",
