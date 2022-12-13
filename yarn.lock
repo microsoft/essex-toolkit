@@ -3254,7 +3254,7 @@ __metadata:
   resolution: "@essex/boolean-expression-component@workspace:packages/boolean-expression-component"
   dependencies:
     "@essex/scripts": ^22.0.7
-    "@fluentui/react": ^8.103.7
+    "@fluentui/react": ^8.103.8
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-docs": ^6.5.14
     "@types/react": ^18.0.20
@@ -3313,7 +3313,7 @@ __metadata:
     "@essex/scripts": ^22.0.7
     "@essex/toolbox": "workspace:^"
     "@fluentui/font-icons-mdl2": ^8.5.4
-    "@fluentui/react": ^8.103.7
+    "@fluentui/react": ^8.103.8
     "@fluentui/theme": ^2.6.19
     "@fluentui/utilities": ^8.13.4
     "@mdx-js/react": ^1.6.22
@@ -3336,7 +3336,7 @@ __metadata:
     "@types/react": ^18.0.20
     "@types/react-dom": ^18.0.6
     "@types/react-test-renderer": ^18.0.0
-    d3-array: ^3.2.0
+    d3-array: ^3.2.1
     d3-axis: ^3.0.0
     d3-brush: ^3.0.0
     d3-scale: ^4.0.2
@@ -3454,7 +3454,7 @@ __metadata:
   dependencies:
     "@essex/hooks": "workspace:^"
     "@essex/scripts": ^22.0.7
-    "@fluentui/react": ^8.103.7
+    "@fluentui/react": ^8.103.8
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-docs": ^6.5.14
     "@thematic/core": ^3.0.0
@@ -3467,14 +3467,14 @@ __metadata:
     "@types/react": ^18.0.20
     "@types/react-infinite-scroller": ^1.2.3
     "@types/styled-components": ^5.1.26
-    d3-array: ^3.2.0
+    d3-array: ^3.2.1
     d3-scale: ^4.0.2
     d3-selection: ^3.0.0
     prop-types: ^15.8.1
     react: ^18.2.0
     react-infinite-scroller: ^1.2.6
     react-is: ^18.2.0
-    styled-components: ^5.3.5
+    styled-components: ^5.3.6
   peerDependencies:
     "@fluentui/react": ">=7.146.1"
     "@thematic/core": ">= 0.9.0"
@@ -3690,7 +3690,7 @@ __metadata:
     "@essex/scripts": ^22.0.7
     "@essex/tsconfig-base": ^1.0.2
     "@types/styled-components": ^5.1.26
-    styled-components: ^5.3.5
+    styled-components: ^5.3.6
     typescript: ^4.8.3
   peerDependencies:
     styled-components: ">= 5"
@@ -3735,7 +3735,7 @@ __metadata:
     "@types/react": ^18.0.20
     "@types/react-dom": ^18.0.6
     "@types/react-test-renderer": ^18.0.0
-    lineupjs: ^4.6.2
+    lineupjs: ^4.7.0
     react: ^18.2.0
     react-dom: ^18.2.0
   peerDependencies:
@@ -3969,9 +3969,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/react@npm:^8.103.7":
-  version: 8.103.7
-  resolution: "@fluentui/react@npm:8.103.7"
+"@fluentui/react@npm:^8.103.8":
+  version: 8.103.8
+  resolution: "@fluentui/react@npm:8.103.8"
   dependencies:
     "@fluentui/date-time-utilities": ^8.5.3
     "@fluentui/font-icons-mdl2": ^8.5.4
@@ -3992,7 +3992,7 @@ __metadata:
     "@types/react-dom": ">=16.8.0 <19.0.0"
     react: ">=16.8.0 <19.0.0"
     react-dom: ">=16.8.0 <19.0.0"
-  checksum: 69c70e09a83f15333ba5c7915595577733b359a07b43282a05f5c774c140c91bc29517c34bdb9e6ac7711ab2332d8d01ce1d3c5d0ec9bed6ff814feb769808e2
+  checksum: d554fd8d7273e013e8b09e8c43bbca1e590639e7838e5a2fa443a2520d5a89c7b3ea1c7334d087ae370ac1dad8c00f416696fd27d3eb441fb0b3ecbba4e068e5
   languageName: node
   linkType: hard
 
@@ -11414,12 +11414,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"d3-array@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "d3-array@npm:3.2.0"
+"d3-array@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "d3-array@npm:3.2.1"
   dependencies:
     internmap: 1 - 2
-  checksum: e236f6670b60b64abb6c435da25b5cbbdc2c7c0decdbf9355bc4cf6803d6da4fa820b7b78b9cbd127edb493555934a9788d45084c2f39d7c2e1a2b7aa48264a4
+  checksum: 0bed33cc33b70f9d48ccef3e7a5956e134862e09179bf14df0bf9c8fc0ec02b8f847d4f5e1d32729cd5e02032af1d0a32bcc968ff1333795028455a749994623
   languageName: node
   linkType: hard
 
@@ -12974,7 +12974,7 @@ __metadata:
     "@essex/scripts": ^22.0.7
     "@essex/thematic-lineup": "workspace:^"
     "@fluentui/font-icons-mdl2": ^8.5.4
-    "@fluentui/react": ^8.103.7
+    "@fluentui/react": ^8.103.8
     "@fluentui/utilities": ^8.13.4
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-a11y": ^6.5.14
@@ -13006,7 +13006,7 @@ __metadata:
     react-is: ^18.2.0
     regenerator-runtime: ^0.13.9
     resolve-typescript-plugin: ^1.2.0
-    styled-components: ^5.3.5
+    styled-components: ^5.3.6
   languageName: unknown
   linkType: soft
 
@@ -16674,18 +16674,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lineupengine@npm:^2.4.2":
-  version: 2.4.2
-  resolution: "lineupengine@npm:2.4.2"
+"lineupengine@npm:^2.5.0":
+  version: 2.5.0
+  resolution: "lineupengine@npm:2.5.0"
   dependencies:
-    tslib: ^2.3.1
-  checksum: aa1217c8079aa362a64a3645f1ab561c17f3ed2d28ff8c4f7d72cade96c77e6f7c8870921c1a08d07f054736ed444a55839ff54614b26954a4f8fd91604a22c3
+    tslib: ^2.4.0
+  checksum: c14ce5205e39e2f9d1d44f304e6a3f2e98c57b2ade6490d9f82de542fd535660100e323d688438959cffaf87724082e0506b5a2a60bc9fd09324a57597eda9aa
   languageName: node
   linkType: hard
 
-"lineupjs@npm:^4.6.2":
-  version: 4.6.2
-  resolution: "lineupjs@npm:4.6.2"
+"lineupjs@npm:^4.7.0":
+  version: 4.7.0
+  resolution: "lineupjs@npm:4.7.0"
   dependencies:
     "@popperjs/core": ^2.11.5
     "@types/d3-color": ^2.0.1
@@ -16705,10 +16705,13 @@ __metadata:
     d3-time-format: ^3.0.0
     detect-browser: ^5.3.0
     fast-deep-equal: ^3.1.3
-    lineupengine: ^2.4.2
+    lineupengine: ^2.5.0
     lodash.get: ^4.4.2
     reflect-metadata: ^0.1.13
-  checksum: ce3f7aa67e4b4b39c55a723be4e5a30ef5e8b421c37076859b56685d4a24325892d0a217e6b0009ed66eb1caa1b08078e5c2f97d796225c34de7fb0753ab10f7
+  dependenciesMeta:
+    lineupengine@2.5.0:
+      unplugged: true
+  checksum: 08409df01da57cce182763173c6f2f25a21e9abc1949de0258ec8527908c67b7be1ed91fb8fb2c8550b224e85267a0885a346fb86268f478f736ad17b8a24fbc
   languageName: node
   linkType: hard
 
@@ -21605,9 +21608,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"styled-components@npm:^5.3.5":
-  version: 5.3.5
-  resolution: "styled-components@npm:5.3.5"
+"styled-components@npm:^5.3.6":
+  version: 5.3.6
+  resolution: "styled-components@npm:5.3.6"
   dependencies:
     "@babel/helper-module-imports": ^7.0.0
     "@babel/traverse": ^7.4.5
@@ -21623,7 +21626,7 @@ __metadata:
     react: ">= 16.8.0"
     react-dom: ">= 16.8.0"
     react-is: ">= 16.8.0"
-  checksum: 05a664dfe423c2906959a0f3f47f9b1ad630e493eb2e06deea0dc0906af33ba5ca17277b98948a6c9642e73894d6533391aebf45576489f5afe920c974e9f8eb
+  checksum: 68eac1e451be81d66739cf86de8ec9e72f46e7584aa359271761a2437468210bd7cf0a864281fc97dab08c32b35e6bf7513dc8b4104ed6b196cf8d65674dd289
   languageName: node
   linkType: hard
 
@@ -22151,7 +22154,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.2.0, tslib@npm:^2.3.1, tslib@npm:^2.4.0, tslib@npm:~2.4.0":
+"tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.2.0, tslib@npm:^2.4.0, tslib@npm:~2.4.0":
   version: 2.4.0
   resolution: "tslib@npm:2.4.0"
   checksum: 8c4aa6a3c5a754bf76aefc38026134180c053b7bd2f81338cb5e5ebf96fefa0f417bff221592bf801077f5bf990562f6264fecbc42cd3309b33872cb6fc3b113

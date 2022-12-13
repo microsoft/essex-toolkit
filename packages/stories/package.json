@@ -21,7 +21,7 @@
 		"@essex/thematic-lineup": "workspace:^",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"styled-components": "^5.3.5"
+		"styled-components": "^5.3.6"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.19.1",
@@ -31,7 +31,7 @@
 		"@essex/jest-config": "^21.0.17",
 		"@essex/scripts": "^22.0.7",
 		"@fluentui/font-icons-mdl2": "^8.5.4",
-		"@fluentui/react": "^8.103.7",
+		"@fluentui/react": "^8.103.8",
 		"@fluentui/utilities": "^8.13.4",
 		"@mdx-js/react": "^1.6.22",
 		"@storybook/addon-a11y": "^6.5.14",
