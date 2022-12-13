@@ -1,6 +1,5 @@
 {
 	"name": "essex-toolkit",
-	"version": "2.5.0",
 	"description": "A set of packages for developers",
 	"repository": {
 		"type": "git",
