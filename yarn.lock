@@ -3411,9 +3411,9 @@ __metadata:
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-docs": ^6.5.14
     "@storybook/react": ^6.5.14
-    "@thematic/core": ^4.0.1
-    "@thematic/d3": ^2.0.16
-    "@thematic/react": ^2.1.3
+    "@thematic/core": ^4.0.2
+    "@thematic/d3": ^2.0.17
+    "@thematic/react": ^2.1.4
     "@types/d3-format": ^3.0.1
     "@types/d3-scale": ^4.0.2
     "@types/d3-selection": ^3.0.3
@@ -3452,11 +3452,11 @@ __metadata:
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-docs": ^6.5.14
     "@storybook/react": ^6.5.14
-    "@thematic/color": ^4.0.1
-    "@thematic/core": ^4.0.1
-    "@thematic/d3": ^2.0.16
-    "@thematic/fluent": ^5.0.2
-    "@thematic/react": ^2.1.3
+    "@thematic/color": ^4.0.2
+    "@thematic/core": ^4.0.2
+    "@thematic/d3": ^2.0.17
+    "@thematic/fluent": ^5.0.3
+    "@thematic/react": ^2.1.4
     "@types/d3": ^7.4.0
     "@types/d3-array": ^3.0.3
     "@types/d3-axis": ^3.0.1
@@ -3590,9 +3590,9 @@ __metadata:
     "@fluentui/react": ^8.103.8
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-docs": ^6.5.14
-    "@thematic/core": ^4.0.1
-    "@thematic/fluent": ^5.0.2
-    "@thematic/react": ^2.1.3
+    "@thematic/core": ^4.0.2
+    "@thematic/fluent": ^5.0.3
+    "@thematic/react": ^2.1.4
     "@types/d3-array": ^3.0.3
     "@types/d3-scale": ^4.0.2
     "@types/d3-selection": ^3.0.3
@@ -3859,11 +3859,11 @@ __metadata:
     "@essex/scripts": ^22.0.7
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-docs": ^6.5.14
-    "@thematic/color": ^4.0.1
-    "@thematic/core": ^4.0.1
-    "@thematic/d3": ^2.0.16
-    "@thematic/fluent": ^5.0.2
-    "@thematic/react": ^2.1.3
+    "@thematic/color": ^4.0.2
+    "@thematic/core": ^4.0.2
+    "@thematic/d3": ^2.0.17
+    "@thematic/fluent": ^5.0.3
+    "@thematic/react": ^2.1.4
     "@types/node": ^18.11.14
     "@types/react": ^18.0.26
     "@types/react-dom": ^18.0.9
@@ -6874,9 +6874,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/color@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "@thematic/color@npm:4.0.1"
+"@thematic/color@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "@thematic/color@npm:4.0.2"
   dependencies:
     chroma-js: ^2.4.2
     color-blind: ^0.1.3
@@ -6889,15 +6889,15 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: 236f3e405581e56b990aa6af47e2122f26f9edf91181e614fd1b66aba28c3b2e994a1d6c61acd10d1e08d6b1f046e43d3dc4c68fea413a57ca2c2a0eaf517737
+  checksum: ae1749b4039df801d4aa21d8845da562cae413fc5af8a0580894e02662680d343f81612a48d662873444f3aad49d787120db3d8536a88dd8108a867f96eb416c
   languageName: node
   linkType: hard
 
-"@thematic/core@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "@thematic/core@npm:4.0.1"
+"@thematic/core@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "@thematic/core@npm:4.0.2"
   dependencies:
-    "@thematic/color": ^4.0.1
+    "@thematic/color": ^4.0.2
     d3-scale: ^4.0.2
     lodash-es: ^4.17.21
     murmurhash-js: ^1.0.0
@@ -6909,15 +6909,15 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: e9353a1a0b2749e3070d1f2812b96b5b14d1d92845ef8aa7587ef6e632e9af1662be6b91182a7e1c24eb9ceb4121e42b5dbb9e9356ccdbb7ea86c57854901dc4
+  checksum: 564fcb8ee3a2c96e5ed92a27dc2bf0c5269f5c28c935e9c681cc7c42ea0c69997b77348bee1aa1c2d34a8d903cfe5a4c45b0739965008772dcd0c4cc5824602d
   languageName: node
   linkType: hard
 
-"@thematic/d3@npm:^2.0.16":
-  version: 2.0.16
-  resolution: "@thematic/d3@npm:2.0.16"
+"@thematic/d3@npm:^2.0.17":
+  version: 2.0.17
+  resolution: "@thematic/d3@npm:2.0.17"
   dependencies:
-    "@thematic/core": ^4.0.1
+    "@thematic/core": ^4.0.2
     d3-axis: ^3.0.0
     d3-selection: ^3.0.0
   peerDependencies:
@@ -6931,24 +6931,24 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: 942536a200c84312cbd094d3ac6f0c586c228971d564dd33c6bae3f5e2cea5e90a0578d42ea3b7e8cb031df0fc5218fff687b67a5a026626272899ef06295954
+  checksum: 8e893783acde264732dbcddbcdd506783a9973bda2e752b19efcf49184054a8912b1a093f597b0307c442300507f27755af125c7cf0f3ec4a3aab645713ad40f
   languageName: node
   linkType: hard
 
-"@thematic/fluent@npm:^5.0.2":
-  version: 5.0.2
-  resolution: "@thematic/fluent@npm:5.0.2"
+"@thematic/fluent@npm:^5.0.3":
+  version: 5.0.3
+  resolution: "@thematic/fluent@npm:5.0.3"
   dependencies:
     "@essex/components": ^3.3.0
-    "@thematic/color": ^4.0.1
-    "@thematic/core": ^4.0.1
-    "@thematic/d3": ^2.0.16
-    "@thematic/react": ^2.1.3
+    "@thematic/color": ^4.0.2
+    "@thematic/core": ^4.0.2
+    "@thematic/d3": ^2.0.17
     ahooks: ^3.7.2
     d3-scale: ^4.0.2
     lodash-es: ^4.17.21
   peerDependencies:
     "@fluentui/react": ">= 8"
+    "@thematic/react": ^2.1.4
     "@types/node": "*"
     "@types/react": ">= 17"
     react: ">= 17"
@@ -6961,16 +6961,16 @@ __metadata:
       optional: true
     react:
       optional: false
-  checksum: ca1eee68250ad1169f2b42bc5db1e9e1bee2cda55ec4897d94dfc1111103a86478311794d133308d711ba4bbc35e064b70627d5051604522ef6c1ea3dd204dc1
+  checksum: 888ff8002e917bac299b0167c32f9b211d59e1fcfc59e7b00e9a3b8ba96a5a832416517d418f8b8725a4c415c56fae38eecc20a35e5d861800cc276202643c43
   languageName: node
   linkType: hard
 
-"@thematic/react@npm:^2.1.3":
-  version: 2.1.3
-  resolution: "@thematic/react@npm:2.1.3"
+"@thematic/react@npm:^2.1.4":
+  version: 2.1.4
+  resolution: "@thematic/react@npm:2.1.4"
   dependencies:
-    "@thematic/color": ^4.0.1
-    "@thematic/core": ^4.0.1
+    "@thematic/color": ^4.0.2
+    "@thematic/core": ^4.0.2
   peerDependencies:
     "@types/node": "*"
     "@types/react": ">= 17"
@@ -6982,7 +6982,7 @@ __metadata:
       optional: true
     react:
       optional: false
-  checksum: 52f100898055da5401b25f2ccd8af67154d1cf349c9c57c755171a33757dd914c977d31e0a5eaa8a362e62badcab3c301fcec1dddf987f90f4e6459d1f1a3677
+  checksum: 9caf6ecfa96a6cd4d72c0a67b224ea7c58072a8b2308f0795b5665e23708fbfa2cd1ad40bf9272c01bfcb275728d7b0178a8f04d22500e5f4c6ed66398a44c00
   languageName: node
   linkType: hard
 
@@ -13179,9 +13179,9 @@ __metadata:
     "@storybook/core-events": ^6.5.14
     "@storybook/react": ^6.5.14
     "@storybook/testing-library": ^0.0.13
-    "@thematic/core": ^4.0.1
-    "@thematic/fluent": ^5.0.2
-    "@thematic/react": ^2.1.3
+    "@thematic/core": ^4.0.2
+    "@thematic/fluent": ^5.0.3
+    "@thematic/react": ^2.1.4
     "@types/babel__core": ^7.1.20
     "@types/babel__preset-env": ^7.9.2
     "@types/form-data": ^2.5.0

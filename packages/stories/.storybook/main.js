@@ -20,8 +20,6 @@ module.exports = {
 			...(config.resolve.alias || {}),
 			'styled-components': require.resolve('styled-components'),
 			hsluv: require.resolve('hsluv'),
-			'@thematic/react': require.resolve('@thematic/react'),
-			'@thematic/fluent': require.resolve('@thematic/fluent'),
 		}
 
 		return config
