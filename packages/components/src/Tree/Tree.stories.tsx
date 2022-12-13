@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { ComponentStory } from '@storybook/react'
 import { useState } from 'react'
 
 import { Tree } from '../Tree/Tree.js'
@@ -121,7 +122,7 @@ const TREE_ITEMS: TreeItem[] = [
 	},
 ]
 
-const Template = (args: TreeProps) => {
+const Template: ComponentStory<typeof Tree> = (args: TreeProps) => {
 	const [selected, setSelected] = useState<string | undefined>()
 	return (
 		<div
@@ -169,12 +170,12 @@ const Template = (args: TreeProps) => {
 	)
 }
 
-export const Primary = Template.bind({}) as any as { args: TreeProps }
+export const Primary = Template.bind({})
 Primary.args = {
 	items: TREE_ITEMS,
 }
 
-export const Customized = Template.bind({}) as any as { args: TreeProps }
+export const Customized = Template.bind({})
 Customized.args = {
 	items: TREE_ITEMS,
 	styles: {
@@ -182,6 +183,7 @@ Customized.args = {
 			background: 'azure',
 		},
 		indicator: {
+			borderRadius: 3,
 			borderWidth: 3,
 			height: 3,
 		},
@@ -230,7 +232,7 @@ Customized.args = {
 	},
 }
 
-export const ItemProps = Template.bind({}) as any as { args: TreeProps }
+export const ItemProps = Template.bind({})
 // add in a few custom click, selection, etc. props to test full item overrides
 ItemProps.args = {
 	items: [
@@ -259,7 +261,7 @@ ItemProps.args = {
 }
 
 // illustrate two groups, with the remaining item orphaned into the default
-export const Grouped = Template.bind({}) as any as { args: TreeProps }
+export const Grouped = Template.bind({})
 Grouped.args = {
 	items: TREE_ITEMS.map((item, index) => ({
 		...item,
@@ -275,4 +277,76 @@ Grouped.args = {
 			text: 'Group 2',
 		},
 	],
+}
+
+export const CustomRenderers = Template.bind({})
+CustomRenderers.args = {
+	items: [
+		{
+			key: 'item-1',
+			text: 'Item 1 (normal)',
+		},
+		{
+			key: 'item-2',
+			onRenderTitle: () => (
+				<div
+					style={{
+						padding: 4,
+						background: 'azure',
+						border: '1px solid dodgerblue',
+					}}
+				>
+					Custom title
+				</div>
+			),
+		},
+		{
+			key: 'item-3',
+			text: 'Item 3',
+			expanded: true,
+			onRenderContent: (props, defaultRenderer) => {
+				const depth = (props?.item.depth || 0) + 1
+				return (
+					<div>
+						<div
+							style={{
+								display: 'flex',
+								flexDirection: 'column',
+								gap: 4,
+								padding: 4,
+								paddingLeft: depth * 12 + 32,
+							}}
+						>
+							<div style={fieldStyle}>
+								<div>Add codebook</div>
+							</div>
+							<div style={fieldStyle}>
+								<div>Add workflow</div>
+							</div>
+						</div>
+						{defaultRenderer?.(props)}
+					</div>
+				)
+			},
+			children: [
+				{
+					key: 'item-3.1',
+					text: 'table.csv',
+					iconName: 'Table',
+				},
+			],
+		},
+	],
+}
+
+const fieldStyle = {
+	width: 80,
+	height: 24,
+	background: '#efefef',
+	border: '1px dotted #ccc',
+	borderRadius: 3,
+	fontSize: 10,
+	display: 'flex',
+	alignItems: 'center',
+	padding: 4,
 }
