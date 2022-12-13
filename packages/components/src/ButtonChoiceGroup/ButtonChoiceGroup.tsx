@@ -49,12 +49,14 @@ export const ButtonChoiceGroup: React.FC<IChoiceGroupProps> = memo(
 
 const onRenderField = (props?: IChoiceGroupOptionProps) => {
 	const iconOnly = props?.iconProps && !props.text
+	// this is a silly workaround for messed up type changes in fluent that made key an optional prop when it will never be missing
+	const key = props?.key ? props.key : ''
 	const shared = {
 		title: props?.title,
 		iconProps: props?.iconProps,
 		toggle: true,
 		checked: props?.checked,
-		onClick: () => props?.onChange?.(undefined, props),
+		onClick: () => props?.onChange?.(undefined, { ...props, key }),
 	}
 	return iconOnly ? (
 		<IconButton {...shared} />
