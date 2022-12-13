@@ -20,7 +20,7 @@
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {
-		"@essex/jest-config": "^21.0.14",
+		"@essex/jest-config": "^21.0.17",
 		"@essex/scripts": "^22.0.7",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@testing-library/react": "^13.4.0",

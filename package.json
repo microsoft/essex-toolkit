@@ -42,7 +42,7 @@
 	},
 	"devDependencies": {
 		"@essex/eslint-config": "^20.3.5",
-		"@essex/prettier-config": "^18.0.3",
+		"@essex/prettier-config": "^18.0.4",
 		"@essex/scripts": "^22.0.7",
 		"@storybook/addons": "^6.5.12",
 		"@storybook/theming": "^6.5.12",

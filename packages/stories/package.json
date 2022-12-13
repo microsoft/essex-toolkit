@@ -28,7 +28,7 @@
 		"@babel/preset-env": "^7.19.1",
 		"@babel/preset-react": "^7.18.6",
 		"@babel/preset-typescript": "^7.18.6",
-		"@essex/jest-config": "^21.0.14",
+		"@essex/jest-config": "^21.0.17",
 		"@essex/scripts": "^22.0.7",
 		"@fluentui/font-icons-mdl2": "^8.5.4",
 		"@fluentui/react": "^8.103.7",

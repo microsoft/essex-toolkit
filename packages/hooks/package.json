@@ -25,7 +25,7 @@
 		"lodash-es": "^4.17.21"
 	},
 	"devDependencies": {
-		"@essex/jest-config": "^21.0.14",
+		"@essex/jest-config": "^21.0.17",
 		"@essex/scripts": "^22.0.7",
 		"@testing-library/react": "^13.4.0",
 		"@types/jest": "^29.0.2",
