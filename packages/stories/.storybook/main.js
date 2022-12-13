@@ -16,11 +16,13 @@ module.exports = {
 		}
 		config.resolve.plugins.push(new ResolveTypescriptPlugin())
 
-		if (!config.resolve.alias) {
-			config.resolve.alias = {}
+		config.resolve.alias = {
+			...(config.resolve.alias || {}),
+			'styled-components': require.resolve('styled-components'),
+			hsluv: require.resolve('hsluv'),
+			'@thematic/react': require.resolve('@thematic/react'),
+			'@thematic/fluent': require.resolve('@thematic/fluent'),
 		}
-		config.resolve.alias[`styled-components`] =
-			require.resolve('styled-components')
 
 		return config
 	},

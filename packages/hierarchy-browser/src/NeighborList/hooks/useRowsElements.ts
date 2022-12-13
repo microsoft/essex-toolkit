@@ -4,7 +4,7 @@
  */
 import type { Dimensions } from '@essex/hooks'
 import type { Theme } from '@thematic/core'
-import { SelectionState, ThemeVariant } from '@thematic/core'
+import { SelectionState } from '@thematic/core'
 import type { ScaleLinear } from 'd3-scale'
 import { scaleLinear } from 'd3-scale'
 import { useCallback, useMemo } from 'react'
@@ -55,7 +55,7 @@ export function useRowElements(
 			const selected =
 				selectedEdge && edge.communityId === selectedEdge.communityId
 			if (selected) {
-				const alpha = theme.config.variant === ThemeVariant.Dark ? 0.4 : 0.2
+				const alpha = theme.config.dark ? 0.4 : 0.2
 
 				const [r, g, b, a] = theme
 					.rect({ selectionState: SelectionState.Selected })
