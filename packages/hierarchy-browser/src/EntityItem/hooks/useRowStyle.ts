@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { SelectionState, ThemeVariant } from '@thematic/core'
+import { SelectionState } from '@thematic/core'
 import { useThematic } from '@thematic/react'
 import { useMemo } from 'react'
 
@@ -15,7 +15,7 @@ export function useRowStyle(
 		let backgroundColor =
 			index % 2 === 0 ? theme.application().faint().hex() : 'transparent'
 		if (selected) {
-			const alpha = theme.config.variant === ThemeVariant.Dark ? 0.4 : 0.2
+			const alpha = theme.config.dark ? 0.4 : 0.2
 			const [r, g, b, a] = theme
 				.rect({ selectionState: SelectionState.Selected })
 				.fill()

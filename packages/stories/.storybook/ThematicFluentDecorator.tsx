@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from 'react'
 import { initializeIcons, Toggle } from '@fluentui/react'
-import { ThemeVariant, loadById } from '@thematic/core'
+import { loadById } from '@thematic/core'
 import { ApplicationStyles } from '@thematic/react'
 import { ThematicFluentProvider } from '@thematic/fluent'
 import { StoryFnReactReturnType } from '@storybook/react/dist/ts3.9/client/preview/types'
@@ -20,7 +20,7 @@ export const ThematicFluentDecorator = (
 	const thematicTheme = useMemo(
 		() =>
 			loadById('autumn', {
-				variant: dark ? ThemeVariant.Dark : ThemeVariant.Light,
+				dark,
 			}),
 		[dark],
 	)

@@ -24,11 +24,11 @@
 	},
 	"devDependencies": {
 		"@essex/scripts": "^22.0.7",
-		"@fluentui/react": "^8.94.4",
+		"@fluentui/react": "^8.103.8",
 		"@mdx-js/react": "^1.6.22",
-		"@storybook/addon-docs": "^6.5.12",
-		"@types/react": "^18.0.20",
-		"@types/react-dom": "^18.0.6",
+		"@storybook/addon-docs": "^6.5.14",
+		"@types/react": "^18.0.26",
+		"@types/react-dom": "^18.0.9",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"
 	},
