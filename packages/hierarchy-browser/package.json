@@ -38,7 +38,7 @@
 		"@types/d3-scale": "^4.0.2",
 		"@types/d3-selection": "^3.0.3",
 		"@types/prop-types": "^15.7.5",
-		"@types/react": "^18.0.20",
+		"@types/react": "^18.0.26",
 		"@types/react-infinite-scroller": "^1.2.3",
 		"@types/styled-components": "^5.1.26",
 		"prop-types": "^15.8.1",
