@@ -58,8 +58,6 @@
 		"@types/react": "^18.0.20",
 		"@types/react-dom": "^18.0.6",
 		"@types/react-test-renderer": "^18.0.0",
-		"@uifabric/icons": "^7.8.6",
-		"@uifabric/utilities": "^7.38.0",
 		"prop-types": "^15.8.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"
@@ -75,7 +73,6 @@
 		"@types/d3-axis": "^2.0.0",
 		"@types/node": "*",
 		"@types/react": ">= 18",
-		"@uifabric/icons": ">= 7.3.38",
 		"react": ">= 18",
 		"react-dom": ">= 18"
 	}
