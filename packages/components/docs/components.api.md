@@ -468,6 +468,16 @@ export interface ToolPanelStyles {
 // @public (undocumented)
 export const Tree: React.FC<TreeProps>;
 
+// Warning: (ae-missing-release-tag) "TreeGroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TreeGroup {
+    // (undocumented)
+    key: string;
+    // (undocumented)
+    text?: string;
+}
+
 // Warning: (ae-missing-release-tag) "TreeItem" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -501,7 +511,6 @@ export interface TreeItemProps extends TreePropsBase {
 //
 // @public (undocumented)
 export interface TreeProps extends TreePropsBase {
-    // Warning: (ae-forgotten-export) The symbol "TreeGroup" needs to be exported by the entry point index.d.ts
     groups?: TreeGroup[];
     items: TreeItem[];
     onItemClick?: (item: TreeItem) => void;

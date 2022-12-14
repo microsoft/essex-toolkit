@@ -35,6 +35,7 @@ export type {
 } from './ToolPanel/ToolPanel.types.js'
 export { Tree } from './Tree/Tree.js'
 export type {
+	TreeGroup,
 	TreeItem,
 	TreeItemProps,
 	TreeProps,
