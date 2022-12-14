@@ -107,13 +107,13 @@ Customized.args = {
 	},
 	styles: {
 		root: {
-			background: 'azure',
+			background: 'aliceblue',
 		},
 	},
 	menuListProps: {
 		styles: {
 			header: {
-				color: 'cornflowerblue',
+				color: 'dodgerblue',
 			},
 			column: {
 				border: '1px dotted coral',

@@ -28,7 +28,7 @@ Customized.args = {
 	styles: {
 		root: {
 			border: '1px solid orange',
-			background: 'azure',
+			background: 'aliceblue',
 		},
 		content: {
 			background: 'coral',
@@ -48,7 +48,7 @@ Customized.args = {
 	linkProps: {
 		styles: {
 			root: {
-				color: 'cornflowerblue',
+				color: 'dodgerblue',
 			},
 		},
 	},

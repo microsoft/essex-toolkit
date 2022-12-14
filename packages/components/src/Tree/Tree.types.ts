@@ -113,11 +113,22 @@ export interface TreeProps extends TreePropsBase {
 	 * Global handler for individual expand/collapse icon clicks.
 	 */
 	onItemExpandClick?: (item: TreeItem) => void
+	/**
+	 * Render function to override the group header.
+	 */
+	onRenderGroupHeader?: IRenderFunction<TreeGroupProps>
 }
 
 export interface TreeGroup {
 	key: string
 	text?: string
+}
+
+export interface TreeGroupProps {
+	group: TreeGroup
+	onRenderGroupHeader?: IRenderFunction<TreeGroupProps>
+	styles?: TreeStyles
+	size?: Size
 }
 
 export interface TreeItem {

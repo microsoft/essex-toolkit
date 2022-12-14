@@ -36,6 +36,7 @@ export type {
 export { Tree } from './Tree/Tree.js'
 export type {
 	TreeGroup,
+	TreeGroupProps,
 	TreeItem,
 	TreeItemProps,
 	TreeProps,

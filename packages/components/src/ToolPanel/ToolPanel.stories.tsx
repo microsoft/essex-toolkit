@@ -71,10 +71,10 @@ Customized.args = {
 	hasCloseButton: false,
 	styles: {
 		root: {
-			background: 'azure',
+			background: 'aliceblue',
 		},
 		header: {
-			background: 'cornflowerblue',
+			background: 'dodgerblue',
 			height: 56,
 		},
 		title: {

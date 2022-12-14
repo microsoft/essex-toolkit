@@ -180,7 +180,7 @@ Customized.args = {
 	items: TREE_ITEMS,
 	styles: {
 		listItemContent: {
-			background: 'azure',
+			background: 'aliceblue',
 		},
 		indicator: {
 			borderRadius: 3,
@@ -281,28 +281,59 @@ Grouped.args = {
 
 export const CustomRenderers = Template.bind({})
 CustomRenderers.args = {
+	onRenderGroupHeader: (props, defaultRenderer) => {
+		return (
+			<>
+				{props.group.key === 'group-1' ? (
+					<div style={groupStyle}>{`${props.group.text} (custom)`}</div>
+				) : (
+					defaultRenderer(props)
+				)}
+			</>
+		)
+	},
+	groups: [
+		{
+			key: 'group-1',
+			text: 'Group 1',
+		},
+		{
+			key: 'group-2',
+			text: 'Group 2',
+		},
+	],
 	items: [
 		{
 			key: 'item-1',
 			text: 'Item 1 (normal)',
+			group: 'group-1',
 		},
 		{
 			key: 'item-2',
-			onRenderTitle: () => (
+			text: 'Item 2',
+			children: [
+				{
+					key: 'item-2.1',
+					text: 'Item 2.1',
+					iconName: 'Table',
+				},
+			],
+			onRenderTitle: props => (
 				<div
 					style={{
 						padding: 4,
-						background: 'azure',
+						background: 'aliceblue',
 						border: '1px solid dodgerblue',
 					}}
 				>
-					Custom title
+					<>{`${props.item.text} (Custom title)`}</>
 				</div>
 			),
 		},
 		{
 			key: 'item-3',
 			text: 'Item 3',
+			group: 'group-2',
 			expanded: true,
 			onRenderContent: (props, defaultRenderer) => {
 				const depth = (props?.item.depth || 0) + 1
@@ -337,6 +368,12 @@ CustomRenderers.args = {
 			],
 		},
 	],
+}
+
+const groupStyle = {
+	padding: 8,
+	background: 'aliceblue',
+	borderBottom: '2px solid dodgerblue',
 }
 
 const fieldStyle = {

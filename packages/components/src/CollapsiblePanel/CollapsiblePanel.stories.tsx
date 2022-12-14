@@ -56,7 +56,7 @@ Customized.args = {
 			width: 300,
 		},
 		header: {
-			backgroundColor: 'azure',
+			backgroundColor: 'aliceblue',
 			padding: '0.5rem',
 			textTransform: 'uppercase' as const,
 			fontWeight: 500,

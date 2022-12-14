@@ -29,6 +29,9 @@ export function useExpansion(): Expansion {
 	)
 }
 
+// empty string is a valid key: collect ungrouped items with it
+const rkey = ''
+
 export function useTreeItemGroups(
 	items: TreeItem[],
 	groups?: TreeGroup[],
@@ -57,8 +60,6 @@ export function useTreeItemGroups(
 		}))
 	}, [items, groups, expansion, selectedKey, onItemClick, onItemExpandClick])
 }
-
-const rkey = '--virtual-root--'
 
 // sort items into groups, establishing a default group if none are provided
 function collectItemsByGroup(items: TreeItem[]): Map<string, TreeItem[]> {
