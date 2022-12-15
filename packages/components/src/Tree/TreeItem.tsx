@@ -80,7 +80,11 @@ const TreeItemTitle: React.FC<TreeItemProps> = memo(function TreeItemTitle(
 		item.onClick && item.onClick(item)
 	}, [item])
 	return (
-		<DefaultButton {..._contentButtonProps} onClick={handleClick}>
+		<DefaultButton
+			{..._contentButtonProps}
+			onClick={handleClick}
+			title={item.text}
+		>
 			{item.text}
 		</DefaultButton>
 	)

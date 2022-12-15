@@ -119,6 +119,10 @@ export interface TreeProps extends TreePropsBase {
 	onRenderGroupHeader?: IRenderFunction<TreeGroupProps>
 }
 
+/**
+ * Defines groups available in a Tree.
+ * Individual TreeItems can use their group field to be sorted into known groups.
+ */
 export interface TreeGroup {
 	key: string
 	text?: string

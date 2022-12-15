@@ -70,7 +70,13 @@ const TreeGroupHeader: React.FC<TreeGroupProps> = memo(function TreeGroupHeader(
 	const { group, styles, size } = props
 	const _styles = useTreeStyles(styles, size)
 	return (
-		<>{group.text && <div style={_styles.groupHeader}>{group.text}</div>}</>
+		<>
+			{group.text && (
+				<div style={_styles.groupHeader} title={group.text}>
+					{group.text}
+				</div>
+			)}
+		</>
 	)
 })
 
