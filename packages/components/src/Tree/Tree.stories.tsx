@@ -64,6 +64,16 @@ const TREE_ITEMS: TreeItem[] = [
 					{
 						text: 'Item 1.1.1',
 						key: 'item-1.1.1',
+						children: [
+							{
+								text: 'Item 1.1.1.1',
+								key: 'item-1.1.1.1',
+							},
+							{
+								text: 'Item 1.1.1.2',
+								key: 'item-1.1.1.2',
+							},
+						],
 					},
 					{
 						text: 'Item 1.1.2',
@@ -74,6 +84,10 @@ const TREE_ITEMS: TreeItem[] = [
 			{
 				text: 'Item 1.2',
 				key: 'item-1.2',
+			},
+			{
+				text: 'Item 1.3',
+				key: 'item-1.3',
 			},
 		],
 	},
@@ -91,6 +105,18 @@ const TREE_ITEMS: TreeItem[] = [
 						text: 'Item 2.1.1',
 						key: 'item-2.1.1',
 						iconName: 'Calendar',
+						children: [
+							{
+								text: 'Item 2.1.1.1',
+								key: 'item-2.1.1.1',
+								iconName: 'Document',
+							},
+							{
+								text: 'Item 2.1.1.2',
+								key: 'item-2.1.1.2',
+								iconName: 'Home',
+							},
+						],
 					},
 					{
 						text: 'Item 2.1.2',
@@ -102,6 +128,11 @@ const TREE_ITEMS: TreeItem[] = [
 			{
 				text: 'Item 2.2',
 				key: 'item-2.2',
+				iconName: 'LightningBolt',
+			},
+			{
+				text: 'Item 2.3',
+				key: 'item-2.3',
 				iconName: 'LightningBolt',
 			},
 		],
@@ -122,24 +153,26 @@ const TREE_ITEMS: TreeItem[] = [
 	},
 ]
 
+const containerStyle = {
+	display: 'flex',
+	gap: 20,
+}
+
+const boxStyle = {
+	width: 300,
+	height: 400,
+	border: '1px solid orange',
+	overflowY: 'scroll',
+}
+
 const Template: ComponentStory<typeof Tree> = (args: TreeProps) => {
 	const [selected, setSelected] = useState<string | undefined>()
+
 	return (
-		<div
-			style={{
-				display: 'flex',
-				gap: 20,
-			}}
-		>
+		<div style={containerStyle}>
 			<div>
 				Medium size (default)
-				<div
-					style={{
-						width: 300,
-						height: 400,
-						border: '1px solid orange',
-					}}
-				>
+				<div style={boxStyle}>
 					<Tree
 						{...args}
 						selectedKey={selected}
@@ -149,13 +182,7 @@ const Template: ComponentStory<typeof Tree> = (args: TreeProps) => {
 			</div>
 			<div>
 				Small size
-				<div
-					style={{
-						width: 300,
-						height: 400,
-						border: '1px solid orange',
-					}}
-				>
+				<div style={boxStyle}>
 					<Tree
 						{...args}
 						size={'small'}
@@ -181,6 +208,9 @@ Customized.args = {
 	styles: {
 		listItemContent: {
 			background: 'aliceblue',
+		},
+		hierarchyLine: {
+			borderColor: 'transparent',
 		},
 		indicator: {
 			borderRadius: 3,
@@ -260,6 +290,18 @@ ItemProps.args = {
 	],
 }
 
+export const Narrow = Template.bind({})
+Narrow.args = {
+	narrow: true,
+	items: TREE_ITEMS,
+	styles: {
+		root: {
+			border: '1px solid dodgerblue',
+			width: 32,
+		},
+	},
+}
+
 // illustrate two groups, with the remaining item orphaned into the default
 export const Grouped = Template.bind({})
 Grouped.args = {
@@ -311,6 +353,7 @@ CustomRenderers.args = {
 		{
 			key: 'item-2',
 			text: 'Item 2',
+			group: 'group-2',
 			children: [
 				{
 					key: 'item-2.1',
@@ -333,7 +376,6 @@ CustomRenderers.args = {
 		{
 			key: 'item-3',
 			text: 'Item 3',
-			group: 'group-2',
 			expanded: true,
 			onRenderContent: (props, defaultRenderer) => {
 				const depth = (props?.item.depth || 0) + 1

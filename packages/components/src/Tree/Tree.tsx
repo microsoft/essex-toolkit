@@ -23,6 +23,7 @@ export const Tree: React.FC<TreeProps> = memo(function Tree({
 	menuButtonProps,
 	size = 'medium',
 	onRenderGroupHeader,
+	narrow = false,
 }) {
 	const _styles = useTreeStyles(styles, size)
 
@@ -54,6 +55,7 @@ export const Tree: React.FC<TreeProps> = memo(function Tree({
 									contentButtonProps={contentButtonProps}
 									menuButtonProps={menuButtonProps}
 									size={size}
+									narrow={narrow}
 								/>
 							))}
 						</ul>

@@ -470,7 +470,7 @@ export const Tree: React.FC<TreeProps>;
 
 // Warning: (ae-missing-release-tag) "TreeGroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface TreeGroup {
     // (undocumented)
     key: string;
@@ -544,6 +544,7 @@ export interface TreePropsBase {
     expandButtonProps?: ExpandIconButtonProps;
     // Warning: (ae-forgotten-export) The symbol "MenuButtonProps" needs to be exported by the entry point index.d.ts
     menuButtonProps?: MenuButtonProps;
+    narrow?: boolean;
     size?: Size;
     styles?: TreeStyles;
 }

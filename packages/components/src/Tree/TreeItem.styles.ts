@@ -10,19 +10,34 @@ import { useMemo } from 'react'
 import type { Size } from '../hooks/fluent8/types.js'
 import type { TreeItem, TreeStyles } from './Tree.types.js'
 
-const SMALL_FONT_SIZE = 12
-
 const INDICATOR_HEIGHT = 14
-const INDENT = 12
-const FLEX_GAP = 0
 
-const MEDIUM_CARET_FONT_SIZE = 10
+const DEPTH_TICK_WIDTH = 3
+const DEPTH_TICK_HEIGHT = 1
+const DEPTH_TICK_GAP = 2
+const SHORT_TICK = 6
+
+// standard size used in fluent controls
+const MEDIUM_SIZE = 32
+const MEDIUM_CARET_FONT_SIZE = 8
 const MEDIUM_INDICATOR_WIDTH = 2
+const MEDIUM_CARET_ICON_BUTTON_SIZE = 16
+const MEDIUM_ICON_FONT_SIZE = 16
+const MEDIUM_ICON_SIZE = 18
+const MEDIUM_FIRST_INDENT = 8
+const MEDIUM_INDENT = 14
+const MEDIUM_LONG_TICK = SHORT_TICK + MEDIUM_CARET_ICON_BUTTON_SIZE
 
 const SMALL_SIZE = 24
-const SMALL_CARET_FONT_SIZE = 8
+const SMALL_FONT_SIZE = 12
+const SMALL_CARET_ICON_BUTTON_SIZE = 12
+const SMALL_ICON_FONT_SIZE = 14
+const SMALL_ICON_SIZE = 16
+const SMALL_CARET_FONT_SIZE = 6
 const SMALL_INDICATOR_WIDTH = 1
-const SMALL_ICON_SIZE = 14
+const SMALL_FIRST_INDENT = 6
+const SMALL_INDENT = 12
+const SHORT_LONG_TICK = SHORT_TICK + SMALL_CARET_ICON_BUTTON_SIZE
 
 /**
  * Extract the styles per item so they can be modulated by item state.
@@ -34,9 +49,11 @@ export function useTreeItemStyles(
 	item: TreeItem,
 	styles?: TreeStyles,
 	size: Size = 'medium',
+	narrow = false,
 ): TreeStyles {
 	const theme = useTheme()
 	return useMemo(() => {
+		const depth = item.depth || 0
 		const base = {
 			list: {
 				padding: 0,
@@ -49,19 +66,32 @@ export function useTreeItemStyles(
 			listItemContent: {
 				display: 'flex',
 				alignItems: 'center',
-				gap: FLEX_GAP,
 			},
 			flexContainer: {
 				width: '100%',
 				display: 'flex',
 				alignItems: 'center',
-				gap: FLEX_GAP,
-				paddingLeft: item.children
-					? (item.depth || 0) * INDENT
-					: SMALL_SIZE + (item.depth || 0) * INDENT,
+				overflow: 'hidden',
+				paddingLeft:
+					depth === 0 ? 0 : MEDIUM_FIRST_INDENT + (depth - 1) * MEDIUM_INDENT,
+			},
+			hierarchyLine: {
+				width: item.children ? SHORT_TICK : MEDIUM_LONG_TICK,
+				minWidth: item.children ? SHORT_TICK : MEDIUM_LONG_TICK,
+				height: MEDIUM_SIZE / 2,
+				borderLeft: '1px solid',
+				borderBottom: '1px solid',
+				borderColor: theme.palette.neutralLight,
+			},
+			depthTicks: {
+				width: DEPTH_TICK_WIDTH,
+				minWidth: DEPTH_TICK_WIDTH,
+				height: DEPTH_TICK_HEIGHT,
+				background: theme.palette.neutralQuaternary,
 			},
 			indicator: {
-				marginLeft: 2,
+				marginLeft: 1,
+				marginRight: 1,
 				height: INDICATOR_HEIGHT,
 				borderRadius: MEDIUM_INDICATOR_WIDTH * 2,
 				borderWidth: MEDIUM_INDICATOR_WIDTH,
@@ -70,13 +100,28 @@ export function useTreeItemStyles(
 			},
 		}
 		const small = size === 'small' && {
+			flexContainer: {
+				paddingLeft:
+					depth === 0 ? 0 : SMALL_FIRST_INDENT + (depth - 1) * SMALL_INDENT,
+			},
+			hierarchyLine: {
+				width: item.children ? SHORT_TICK : SHORT_LONG_TICK,
+				minWidth: item.children ? SHORT_TICK : SHORT_LONG_TICK,
+				height: SMALL_SIZE / 2,
+			},
 			indicator: {
 				borderRadius: SMALL_INDICATOR_WIDTH * 2,
 				borderWidth: SMALL_INDICATOR_WIDTH,
 			},
 		}
-		return merge(base, small, styles)
-	}, [theme, styles, item, size])
+		// reduce paddings/widths/offsets so there is no depth
+		const narrowed = narrow && {
+			flexContainer: {
+				paddingLeft: 0,
+			},
+		}
+		return merge(base, small, narrowed, styles)
+	}, [theme, styles, item, size, narrow])
 }
 
 // enforce transparency with a mixin for all button styles,
@@ -101,12 +146,14 @@ export function useExpandIconButtonStyles(size: Size = 'medium') {
 				borderRadius: 0,
 				padding: 0,
 				margin: 0,
+				width: MEDIUM_CARET_ICON_BUTTON_SIZE,
+				height: MEDIUM_CARET_ICON_BUTTON_SIZE,
 			},
 		}
 		const small = size === 'small' && {
 			root: {
-				width: SMALL_SIZE,
-				height: SMALL_SIZE,
+				width: SMALL_CARET_ICON_BUTTON_SIZE,
+				height: SMALL_CARET_ICON_BUTTON_SIZE,
 			},
 		}
 		return merge(base, small, transparentBackgroundButtonStyles)
@@ -148,10 +195,17 @@ export function useContentButtonStyles(
 				padding: 0,
 				margin: 0,
 				width: '100%',
+				minWidth: 'unset',
 				cursor: item.onClick ? 'pointer' : 'default',
+			},
+			flexContainer: {
+				justifyContent: 'flex-start' as const,
+				gap: 2,
 			},
 			label: {
 				fontWeight: item.selected ? 'bold' : 'normal',
+				whiteSpace: 'nowrap',
+				margin: 0,
 			},
 		}
 		const small = size === 'small' && {
@@ -166,13 +220,25 @@ export function useContentButtonStyles(
 
 export function useContentIconStyles(size: Size = 'medium') {
 	return useMemo(() => {
-		return (
-			size === 'small' && {
-				root: {
-					fontSize: SMALL_ICON_SIZE,
-				},
-			}
-		)
+		const base = {
+			root: {
+				fontSize: MEDIUM_ICON_FONT_SIZE,
+				// 4 is the fluent default, but we've fixed the width so this is irrelevant
+				margin: 0,
+				width: MEDIUM_ICON_SIZE,
+				minWidth: MEDIUM_ICON_SIZE,
+			},
+		}
+
+		const small = size === 'small' && {
+			root: {
+				fontSize: SMALL_ICON_FONT_SIZE,
+				width: SMALL_ICON_SIZE,
+				minWidth: SMALL_ICON_SIZE,
+			},
+		}
+
+		return merge(base, small)
 	}, [size])
 }
 
@@ -185,11 +251,15 @@ export function useMenuButtonStyles(size: Size = 'medium') {
 		const base = {
 			root: {
 				borderRadius: 0,
+				width: MEDIUM_SIZE,
+				minWidth: MEDIUM_SIZE,
+				height: MEDIUM_SIZE,
 			},
 		}
 		const small = size === 'small' && {
 			root: {
 				width: SMALL_SIZE,
+				minWidth: SMALL_SIZE,
 				height: SMALL_SIZE,
 				fontSize: SMALL_FONT_SIZE,
 			},
@@ -220,4 +290,37 @@ export function useMenuItemsStyles(size: Size = 'medium') {
 			  }
 			: {}
 	}, [size])
+}
+/**
+ * Box container for the standard depth indicating "L".
+ * Used to establish the correct size/flex.
+ */
+export function useHierarchyBoxStyle(size: Size = 'medium') {
+	return useMemo(
+		() => ({
+			height: '100%',
+			minHeight: size === 'medium' ? MEDIUM_SIZE : SMALL_SIZE,
+			display: 'flex',
+			flexDirection: 'column' as const,
+			justifyContent: 'flex-start' as const,
+		}),
+		[size],
+	)
+}
+
+/**
+ * Box container for the narrow depth ticks, displayed as non-indented pips.
+ * @param size
+ */
+export function useDepthTicksBoxStyle(size: Size = 'medium') {
+	const box = useHierarchyBoxStyle(size)
+	return useMemo(
+		() => ({
+			...box,
+			justifyContent: 'center' as const,
+			gap: DEPTH_TICK_GAP,
+			marginRight: 2,
+		}),
+		[box],
+	)
 }

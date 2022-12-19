@@ -41,6 +41,18 @@ export interface TreeStyles {
 	 */
 	flexContainer?: CSSProperties
 	/**
+	 * Styling for the hierarchy depth indicator.
+	 * The is a square with bottom and left border to form an indent L shape.
+	 * Styling can change the color: use border-color: 'none' if you don't want it.
+	 * The width is computed based on whether the TreeItem has children.
+	 */
+	hierarchyLine?: CSSProperties
+	/**
+	 * In narrow display mode, the hierarchy line is replaced with non-indented
+	 * ticks that indicate the depth (tick count = depth).
+	 */
+	depthTicks?: CSSProperties
+	/**
 	 * Style for the selected item indicator (pill on the left)
 	 */
 	indicator?: CSSProperties
@@ -89,6 +101,10 @@ export interface TreePropsBase {
 	 * Set the size mode of the tree
 	 */
 	size?: Size
+	/**
+	 * Indicates that the Tree should be rendered in a narrow mode
+	 */
+	narrow?: boolean
 }
 
 export interface TreeProps extends TreePropsBase {
