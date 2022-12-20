@@ -9,8 +9,8 @@ import {
 	IconButton,
 	TooltipHost,
 } from '@fluentui/react'
-import { memo, useCallback, useMemo } from 'react'
 import type { PropsWithChildren } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 
 import type { TreeItemProps } from './Tree.types.js'
 import {
