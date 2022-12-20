@@ -87,7 +87,7 @@ export function useTreeItemStyles(
 				width: DEPTH_TICK_WIDTH,
 				minWidth: DEPTH_TICK_WIDTH,
 				height: DEPTH_TICK_HEIGHT,
-				background: theme.palette.neutralQuaternary,
+				background: theme.palette.neutralSecondaryAlt,
 			},
 			indicator: {
 				marginLeft: 2,
