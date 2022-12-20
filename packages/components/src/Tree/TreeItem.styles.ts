@@ -20,7 +20,7 @@ const SHORT_TICK = 6
 // standard size used in fluent controls
 const MEDIUM_SIZE = 32
 const MEDIUM_CARET_FONT_SIZE = 8
-const MEDIUM_INDICATOR_WIDTH = 2
+const MEDIUM_INDICATOR_WIDTH = 4
 const MEDIUM_CARET_ICON_BUTTON_SIZE = 16
 const MEDIUM_ICON_FONT_SIZE = 16
 const MEDIUM_ICON_SIZE = 18
@@ -34,7 +34,7 @@ const SMALL_CARET_ICON_BUTTON_SIZE = 12
 const SMALL_ICON_FONT_SIZE = 14
 const SMALL_ICON_SIZE = 16
 const SMALL_CARET_FONT_SIZE = 6
-const SMALL_INDICATOR_WIDTH = 1
+const SMALL_INDICATOR_WIDTH = 2
 const SMALL_FIRST_INDENT = 6
 const SMALL_INDENT = 12
 const SHORT_LONG_TICK = SHORT_TICK + SMALL_CARET_ICON_BUTTON_SIZE
@@ -90,13 +90,12 @@ export function useTreeItemStyles(
 				background: theme.palette.neutralQuaternary,
 			},
 			indicator: {
-				marginLeft: 1,
-				marginRight: 1,
+				marginLeft: 2,
+				marginRight: 2,
+				width: MEDIUM_INDICATOR_WIDTH,
+				background: item.selected ? theme.palette.themePrimary : 'transparent',
 				height: INDICATOR_HEIGHT,
 				borderRadius: MEDIUM_INDICATOR_WIDTH * 2,
-				borderWidth: MEDIUM_INDICATOR_WIDTH,
-				borderColor: item.selected ? theme.palette.themePrimary : 'transparent',
-				borderStyle: 'solid',
 			},
 		}
 		const small = size === 'small' && {
@@ -110,8 +109,8 @@ export function useTreeItemStyles(
 				height: SMALL_SIZE / 2,
 			},
 			indicator: {
+				width: SMALL_INDICATOR_WIDTH,
 				borderRadius: SMALL_INDICATOR_WIDTH * 2,
-				borderWidth: SMALL_INDICATOR_WIDTH,
 			},
 		}
 		// reduce paddings/widths/offsets so there is no depth
@@ -200,7 +199,7 @@ export function useContentButtonStyles(
 			},
 			flexContainer: {
 				justifyContent: 'flex-start' as const,
-				gap: 2,
+				gap: 4,
 			},
 			label: {
 				fontWeight: item.selected ? 'bold' : 'normal',

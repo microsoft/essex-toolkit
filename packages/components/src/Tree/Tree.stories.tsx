@@ -297,7 +297,7 @@ Narrow.args = {
 	styles: {
 		root: {
 			border: '1px solid dodgerblue',
-			width: 32,
+			width: 36,
 		},
 	},
 }
