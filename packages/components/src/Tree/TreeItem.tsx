@@ -3,7 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { IRenderFunction } from '@fluentui/react'
-import { DefaultButton, IconButton } from '@fluentui/react'
+import {
+	DefaultButton,
+	DirectionalHint,
+	IconButton,
+	TooltipHost,
+} from '@fluentui/react'
+import type { PropsWithChildren } from 'react'
 import { memo, useCallback, useMemo } from 'react'
 
 import type { TreeItemProps } from './Tree.types.js'
@@ -55,26 +61,51 @@ export const TreeItem: React.FC<TreeItemProps> = memo(function TreeItem(props) {
 
 	const Indicator = narrow ? DepthIndicator : HiearchyIndicator
 	return (
-		<li style={_styles.listItem} key={`tree-item-li-${item.key}`}>
-			<div
-				style={listItemContentStyles}
-				onMouseEnter={onMouseEnter}
-				onMouseLeave={onMouseLeave}
-			>
-				<div style={_styles.indicator} />
-				<div style={_styles.flexContainer}>
-					<Indicator {...props} styles={_styles} />
-					{item.children && !narrow && <IconButton {..._expandButtonProps} />}
-					{titleRenderer(props)}
-					{item.menuItems && <IconButton {..._menuButtonProps} />}
+		<TooltipWrapper {...props}>
+			<li style={_styles.listItem} key={`tree-item-li-${item.key}`}>
+				<div
+					style={listItemContentStyles}
+					onMouseEnter={onMouseEnter}
+					onMouseLeave={onMouseLeave}
+				>
+					<div style={_styles.indicator} />
+					<div style={_styles.flexContainer}>
+						<Indicator {...props} styles={_styles} />
+						{item.children && !narrow && <IconButton {..._expandButtonProps} />}
+						{titleRenderer(props)}
+						{item.menuItems && <IconButton {..._menuButtonProps} />}
+					</div>
 				</div>
-			</div>
-			{(item.expanded || narrow) && (
-				<ul style={_styles.list}>{contentRenderer(props)}</ul>
-			)}
-		</li>
+				{(item.expanded || narrow) && (
+					<ul style={_styles.list}>{contentRenderer(props)}</ul>
+				)}
+			</li>
+		</TooltipWrapper>
 	)
 })
+
+// if we're in narrow mode, use a standard tooltip to display the item text on hover
+const TooltipWrapper: React.FC<PropsWithChildren<TreeItemProps>> = props => {
+	const { narrow, item, children } = props
+	return (
+		<>
+			{narrow ? (
+				<TooltipHost
+					id={`tooltip-${item.key}`}
+					content={item.text}
+					directionalHint={DirectionalHint.rightTopEdge}
+					calloutProps={{
+						gapSpace: 4,
+					}}
+				>
+					{children}
+				</TooltipHost>
+			) : (
+				<>{children}</>
+			)}
+		</>
+	)
+}
 
 // draws an "L" to indicate hierarchy depth
 // styles are modulated so indent and width showing increasing depth
@@ -105,7 +136,7 @@ const DepthIndicator: React.FC<TreeItemProps> = memo(function DepthIndicator(
 			new Array((item.depth || 0) + 1)
 				.fill(1)
 				.map((_, i) => (
-					<div key={`depth-tick-${i}`} style={styles?.depthTicks} />
+					<div key={`depth-tick-${item.key}-${i}`} style={styles?.depthTicks} />
 				)),
 		[item, styles],
 	)
@@ -125,11 +156,7 @@ const TreeItemTitle: React.FC<TreeItemProps> = memo(function TreeItemTitle(
 		item.onClick && item.onClick(item)
 	}, [item])
 	return (
-		<DefaultButton
-			{..._contentButtonProps}
-			onClick={handleClick}
-			title={item.text}
-		>
+		<DefaultButton {..._contentButtonProps} onClick={handleClick}>
 			{item.text}
 		</DefaultButton>
 	)

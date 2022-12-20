@@ -10,9 +10,10 @@ import type { Size } from '../hooks/fluent8/types.js'
 import type { TreeStyles } from './Tree.types.js'
 
 // TODO: this should be merged with the fluent8 hooks content for reuse
-const SMALL_FONT_SIZE = 12
+const MEDIUM_FONT_SIZE = 12
+const SMALL_FONT_SIZE = 10
 
-const ROOT_FLEX_GAP = 12
+const ROOT_FLEX_GAP = 24
 /**
  * Only extract the styles props that matter for the root tree.
  * @param styles
@@ -40,10 +41,14 @@ export function useTreeStyles(
 				flexDirection: 'column',
 			},
 			groupHeader: {
+				fontSize: MEDIUM_FONT_SIZE,
 				padding: 4,
 				fontWeight: 'bold',
 				color: theme.palette.neutralSecondary,
-				background: theme.palette.neutralLighter,
+				background: theme.palette.neutralLighterAlt,
+				borderTop: '1px solid',
+				borderBottom: '1px solid',
+				borderColor: theme.palette.neutralTertiaryAlt,
 			},
 		}
 		const small = size === 'small' && {
