@@ -470,12 +470,28 @@ export const Tree: React.FC<TreeProps>;
 
 // Warning: (ae-missing-release-tag) "TreeGroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface TreeGroup {
     // (undocumented)
     key: string;
     // (undocumented)
     text?: string;
+}
+
+// Warning: (ae-missing-release-tag) "TreeGroupProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TreeGroupProps {
+    // (undocumented)
+    group: TreeGroup;
+    // (undocumented)
+    onRenderGroupHeader?: IRenderFunction<TreeGroupProps>;
+    // (undocumented)
+    size?: Size;
+    // Warning: (ae-forgotten-export) The symbol "TreeStyles" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    styles?: TreeStyles;
 }
 
 // Warning: (ae-missing-release-tag) "TreeItem" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -515,6 +531,7 @@ export interface TreeProps extends TreePropsBase {
     items: TreeItem[];
     onItemClick?: (item: TreeItem) => void;
     onItemExpandClick?: (item: TreeItem) => void;
+    onRenderGroupHeader?: IRenderFunction<TreeGroupProps>;
     selectedKey?: string;
 }
 
@@ -527,8 +544,8 @@ export interface TreePropsBase {
     expandButtonProps?: ExpandIconButtonProps;
     // Warning: (ae-forgotten-export) The symbol "MenuButtonProps" needs to be exported by the entry point index.d.ts
     menuButtonProps?: MenuButtonProps;
+    narrow?: boolean;
     size?: Size;
-    // Warning: (ae-forgotten-export) The symbol "TreeStyles" needs to be exported by the entry point index.d.ts
     styles?: TreeStyles;
 }
 

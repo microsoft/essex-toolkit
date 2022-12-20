@@ -60,7 +60,7 @@ Customized.args = {
 			padding: 8,
 		},
 		flexContainer: {
-			border: '1px solid cornflowerblue',
+			border: '1px solid dodgerblue',
 		},
 	},
 }

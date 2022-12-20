@@ -64,6 +64,16 @@ const TREE_ITEMS: TreeItem[] = [
 					{
 						text: 'Item 1.1.1',
 						key: 'item-1.1.1',
+						children: [
+							{
+								text: 'Item 1.1.1.1',
+								key: 'item-1.1.1.1',
+							},
+							{
+								text: 'Item 1.1.1.2',
+								key: 'item-1.1.1.2',
+							},
+						],
 					},
 					{
 						text: 'Item 1.1.2',
@@ -74,6 +84,10 @@ const TREE_ITEMS: TreeItem[] = [
 			{
 				text: 'Item 1.2',
 				key: 'item-1.2',
+			},
+			{
+				text: 'Item 1.3',
+				key: 'item-1.3',
 			},
 		],
 	},
@@ -91,6 +105,18 @@ const TREE_ITEMS: TreeItem[] = [
 						text: 'Item 2.1.1',
 						key: 'item-2.1.1',
 						iconName: 'Calendar',
+						children: [
+							{
+								text: 'Item 2.1.1.1',
+								key: 'item-2.1.1.1',
+								iconName: 'Document',
+							},
+							{
+								text: 'Item 2.1.1.2',
+								key: 'item-2.1.1.2',
+								iconName: 'Home',
+							},
+						],
 					},
 					{
 						text: 'Item 2.1.2',
@@ -102,6 +128,11 @@ const TREE_ITEMS: TreeItem[] = [
 			{
 				text: 'Item 2.2',
 				key: 'item-2.2',
+				iconName: 'LightningBolt',
+			},
+			{
+				text: 'Item 2.3',
+				key: 'item-2.3',
 				iconName: 'LightningBolt',
 			},
 		],
@@ -122,24 +153,26 @@ const TREE_ITEMS: TreeItem[] = [
 	},
 ]
 
+const containerStyle = {
+	display: 'flex',
+	gap: 20,
+}
+
+const boxStyle = {
+	width: 300,
+	height: 400,
+	border: '1px solid orange',
+	overflowY: 'scroll',
+}
+
 const Template: ComponentStory<typeof Tree> = (args: TreeProps) => {
 	const [selected, setSelected] = useState<string | undefined>()
+
 	return (
-		<div
-			style={{
-				display: 'flex',
-				gap: 20,
-			}}
-		>
+		<div style={containerStyle}>
 			<div>
 				Medium size (default)
-				<div
-					style={{
-						width: 300,
-						height: 400,
-						border: '1px solid orange',
-					}}
-				>
+				<div style={boxStyle}>
 					<Tree
 						{...args}
 						selectedKey={selected}
@@ -149,13 +182,7 @@ const Template: ComponentStory<typeof Tree> = (args: TreeProps) => {
 			</div>
 			<div>
 				Small size
-				<div
-					style={{
-						width: 300,
-						height: 400,
-						border: '1px solid orange',
-					}}
-				>
+				<div style={boxStyle}>
 					<Tree
 						{...args}
 						size={'small'}
@@ -180,7 +207,10 @@ Customized.args = {
 	items: TREE_ITEMS,
 	styles: {
 		listItemContent: {
-			background: 'azure',
+			background: 'aliceblue',
+		},
+		hierarchyLine: {
+			borderColor: 'transparent',
 		},
 		indicator: {
 			borderRadius: 3,
@@ -260,6 +290,18 @@ ItemProps.args = {
 	],
 }
 
+export const Narrow = Template.bind({})
+Narrow.args = {
+	narrow: true,
+	items: TREE_ITEMS,
+	styles: {
+		root: {
+			border: '1px solid dodgerblue',
+			width: 36,
+		},
+	},
+}
+
 // illustrate two groups, with the remaining item orphaned into the default
 export const Grouped = Template.bind({})
 Grouped.args = {
@@ -281,22 +323,53 @@ Grouped.args = {
 
 export const CustomRenderers = Template.bind({})
 CustomRenderers.args = {
+	onRenderGroupHeader: (props, defaultRenderer) => {
+		return (
+			<>
+				{props.group.key === 'group-1' ? (
+					<div style={groupStyle}>{`${props.group.text} (custom)`}</div>
+				) : (
+					defaultRenderer(props)
+				)}
+			</>
+		)
+	},
+	groups: [
+		{
+			key: 'group-1',
+			text: 'Group 1',
+		},
+		{
+			key: 'group-2',
+			text: 'Group 2',
+		},
+	],
 	items: [
 		{
 			key: 'item-1',
 			text: 'Item 1 (normal)',
+			group: 'group-1',
 		},
 		{
 			key: 'item-2',
-			onRenderTitle: () => (
+			text: 'Item 2',
+			group: 'group-2',
+			children: [
+				{
+					key: 'item-2.1',
+					text: 'Item 2.1',
+					iconName: 'Table',
+				},
+			],
+			onRenderTitle: props => (
 				<div
 					style={{
 						padding: 4,
-						background: 'azure',
+						background: 'aliceblue',
 						border: '1px solid dodgerblue',
 					}}
 				>
-					Custom title
+					<>{`${props.item.text} (Custom title)`}</>
 				</div>
 			),
 		},
@@ -337,6 +410,12 @@ CustomRenderers.args = {
 			],
 		},
 	],
+}
+
+const groupStyle = {
+	padding: 8,
+	background: 'aliceblue',
+	borderBottom: '2px solid dodgerblue',
 }
 
 const fieldStyle = {

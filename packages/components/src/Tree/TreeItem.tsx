@@ -4,7 +4,7 @@
  */
 import type { IRenderFunction } from '@fluentui/react'
 import { DefaultButton, IconButton } from '@fluentui/react'
-import { memo, useCallback } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 
 import type { TreeItemProps } from './Tree.types.js'
 import {
@@ -13,7 +13,11 @@ import {
 	useItemHoverInteraction,
 	useMenuButtonProps,
 } from './TreeItem.hooks.js'
-import { useTreeItemStyles } from './TreeItem.styles.js'
+import {
+	useDepthTicksBoxStyle,
+	useHierarchyBoxStyle,
+	useTreeItemStyles,
+} from './TreeItem.styles.js'
 
 /**
  * A TreeNode is contructed of buttons, selection indicators, and recursive children.
@@ -28,9 +32,10 @@ import { useTreeItemStyles } from './TreeItem.styles.js'
  * The outer li is too comprehensive because it grows if there are children.
  */
 export const TreeItem: React.FC<TreeItemProps> = memo(function TreeItem(props) {
-	const { item, styles, expandButtonProps, menuButtonProps, size } = props
+	const { item, styles, expandButtonProps, menuButtonProps, size, narrow } =
+		props
 
-	const _styles = useTreeItemStyles(item, styles, size)
+	const _styles = useTreeItemStyles(item, styles, size, narrow)
 
 	const _expandButtonProps = useExpandIconButtonProps(
 		item,
@@ -48,6 +53,7 @@ export const TreeItem: React.FC<TreeItemProps> = memo(function TreeItem(props) {
 		size,
 	)
 
+	const Indicator = narrow ? DepthIndicator : HiearchyIndicator
 	return (
 		<li style={_styles.listItem} key={`tree-item-li-${item.key}`}>
 			<div
@@ -57,14 +63,53 @@ export const TreeItem: React.FC<TreeItemProps> = memo(function TreeItem(props) {
 			>
 				<div style={_styles.indicator} />
 				<div style={_styles.flexContainer}>
-					{item.children && <IconButton {..._expandButtonProps} />}
+					<Indicator {...props} styles={_styles} />
+					{item.children && !narrow && <IconButton {..._expandButtonProps} />}
 					{titleRenderer(props)}
 					{item.menuItems && <IconButton {..._menuButtonProps} />}
 				</div>
 			</div>
-			{item.expanded && <ul style={_styles.list}>{contentRenderer(props)}</ul>}
+			{(item.expanded || narrow) && (
+				<ul style={_styles.list}>{contentRenderer(props)}</ul>
+			)}
 		</li>
 	)
+})
+
+// draws an "L" to indicate hierarchy depth
+// styles are modulated so indent and width showing increasing depth
+const HiearchyIndicator: React.FC<TreeItemProps> = memo(
+	function HiearchyIndicator(props) {
+		const { item, size, styles } = props
+		const boxStyle = useHierarchyBoxStyle(size)
+		if (item.depth === 0) {
+			return null
+		}
+		return (
+			<div style={boxStyle}>
+				<div style={styles?.hierarchyLine} />
+			</div>
+		)
+	},
+)
+
+// draws a series of fixed-width pips to indicate depth
+// this is for narrow mode, when increasing indent loses visible content quickly
+const DepthIndicator: React.FC<TreeItemProps> = memo(function DepthIndicator(
+	props,
+) {
+	const { item, size, styles } = props
+	const boxStyle = useDepthTicksBoxStyle(size)
+	const ticks = useMemo(
+		() =>
+			new Array((item.depth || 0) + 1)
+				.fill(1)
+				.map((_, i) => (
+					<div key={`depth-tick-${i}`} style={styles?.depthTicks} />
+				)),
+		[item, styles],
+	)
+	return <div style={boxStyle}>{ticks}</div>
 })
 
 const TreeItemTitle: React.FC<TreeItemProps> = memo(function TreeItemTitle(
@@ -80,7 +125,11 @@ const TreeItemTitle: React.FC<TreeItemProps> = memo(function TreeItemTitle(
 		item.onClick && item.onClick(item)
 	}, [item])
 	return (
-		<DefaultButton {..._contentButtonProps} onClick={handleClick}>
+		<DefaultButton
+			{..._contentButtonProps}
+			onClick={handleClick}
+			title={item.text}
+		>
 			{item.text}
 		</DefaultButton>
 	)
@@ -96,6 +145,7 @@ const TreeItemContent: React.FC<TreeItemProps> = memo(function TreeItemTitle(
 		contentButtonProps,
 		menuButtonProps,
 		size,
+		narrow,
 	} = props
 
 	return (
@@ -110,6 +160,7 @@ const TreeItemContent: React.FC<TreeItemProps> = memo(function TreeItemTitle(
 						contentButtonProps={contentButtonProps}
 						menuButtonProps={menuButtonProps}
 						size={size}
+						narrow={narrow}
 					/>
 				))}
 		</>
