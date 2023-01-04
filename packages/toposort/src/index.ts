@@ -61,7 +61,9 @@ export function array<T = string>(
 
 		if (!nodesHash.has(node)) {
 			throw new Error(
-				`Found unknown node. Make sure to provided all involved nodes. Unknown node: ${JSON.stringify(node)}`,
+				`Found unknown node. Make sure to provided all involved nodes. Unknown node: ${JSON.stringify(
+					node,
+				)}`,
 			)
 		}
 

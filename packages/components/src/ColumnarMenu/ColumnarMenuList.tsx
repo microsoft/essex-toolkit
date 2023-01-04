@@ -32,12 +32,12 @@ export const ColumnarMenuList: React.FC<ColumnarMenuListProps> = memo(
 		return (
 			<div style={styles.menu}>
 				{buttons?.map((b) => (
-						<>
-							{verifySeparator(b.data?.topDivider)}
-							{defaultMenuItemRenderer(b as any)}
-							{verifySeparator(b.data?.bottomDivider)}
-						</>
-					))}
+					<>
+						{verifySeparator(b.data?.topDivider)}
+						{defaultMenuItemRenderer(b as any)}
+						{verifySeparator(b.data?.bottomDivider)}
+					</>
+				))}
 				<div style={styles.options}>
 					{formatted.map((item) => {
 						const { key } = item

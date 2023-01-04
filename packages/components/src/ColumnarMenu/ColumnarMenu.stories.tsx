@@ -11,7 +11,7 @@ import type { ColumnarMenuProps } from './ColumnarMenu.types.js'
 
 const items = [
 	{
-		key: "section-1",
+		key: 'section-1',
 		itemType: ContextualMenuItemType.Section,
 		sectionProps: {
 			title: 'Electronics',
@@ -32,7 +32,7 @@ const items = [
 		},
 	},
 	{
-		key: "section-2",
+		key: 'section-2',
 		itemType: ContextualMenuItemType.Section,
 		sectionProps: {
 			title: 'Furniture',
@@ -138,7 +138,7 @@ WithButtons.args = {
 	text: 'Allows reset',
 	items: [
 		{
-			key: "reset-button",
+			key: 'reset-button',
 			text: 'Reset',
 			data: {
 				button: true,

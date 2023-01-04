@@ -42,8 +42,9 @@ export function useLoadMoreEntitiesHandler(
 			const initialOffset = entities ? entities.length : 0
 			const offset =
 				params?.offset !== undefined ? params.offset : initialOffset
-			const loadCount =
-				params?.loadCount ? params.loadCount : DEFAULT_LOAD_COUNT
+			const loadCount = params?.loadCount
+				? params.loadCount
+				: DEFAULT_LOAD_COUNT
 			if (!moreToLoad) {
 				return getEntities()
 			}

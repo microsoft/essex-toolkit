@@ -236,7 +236,9 @@ export const HistogramSelect = ({
 				.attr(
 					'transform',
 					(d) =>
-						`translate(${elements.xScale(d.x0 as number)},${elements.yScale(d.length)})`,
+						`translate(${elements.xScale(d.x0 as number)},${elements.yScale(
+							d.length,
+						)})`,
 				)
 				.attr('width', (d) =>
 					Math.max(

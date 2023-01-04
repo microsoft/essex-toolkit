@@ -35,9 +35,7 @@ test.skip('Setting a destroyable to undefined causes the original destroyable to
 			}
 
 			// First render with our destroyable
-			const { rerender } = render(
-				<DestroyableTest destroyable={destroyable} />,
-			)
+			const { rerender } = render(<DestroyableTest destroyable={destroyable} />)
 
 			// Then render again with nothing and make sure destroy is called
 			rerender(<DestroyableTest destroyable={undefined} />)

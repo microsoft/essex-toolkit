@@ -178,17 +178,17 @@ const TreeItemContent: React.FC<TreeItemProps> = memo(function TreeItemTitle(
 	return (
 		<>
 			{item.children?.map((child) => (
-					<TreeItem
-						key={child.key}
-						item={child}
-						styles={styles}
-						expandButtonProps={expandButtonProps}
-						contentButtonProps={contentButtonProps}
-						menuButtonProps={menuButtonProps}
-						size={size}
-						narrow={narrow}
-					/>
-				))}
+				<TreeItem
+					key={child.key}
+					item={child}
+					styles={styles}
+					expandButtonProps={expandButtonProps}
+					contentButtonProps={contentButtonProps}
+					menuButtonProps={menuButtonProps}
+					size={size}
+					narrow={narrow}
+				/>
+			))}
 		</>
 	)
 })

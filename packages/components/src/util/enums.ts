@@ -11,7 +11,7 @@ export function getEnumDropdownOptions<E = Record<string, string>>(
 	const options = Object.entries(enumeration as Record<string, string>).map(
 		(entry) => {
 			const [name, key] = entry
-			const text = (labels?.[key]) || formatEnumName(name)
+			const text = labels?.[key] || formatEnumName(name)
 			return {
 				key,
 				text,
