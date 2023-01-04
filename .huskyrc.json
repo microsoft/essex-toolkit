@@ -1,5 +1,0 @@
-{
-	"hooks": {
-		"pre-commit": "essex pre-commit"
-	}
-}

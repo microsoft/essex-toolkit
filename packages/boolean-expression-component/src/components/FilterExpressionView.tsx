@@ -50,7 +50,7 @@ export const FilterExpressionView: React.FC<{
 				/>
 			)}
 			{/* Attribute Filters */}
-			{filters.map(group => (
+			{filters.map((group) => (
 				<ChipGroup
 					key={group.id}
 					group={group}

@@ -35,8 +35,8 @@ export function useLoadMSFTCookieScript({
 	onConsentChange,
 	onError,
 	maxScriptLoadingTimeMs = 5000,
-	cookieScriptTagId = `msft-cookie-script`,
-	cookieConsentBannerId = `msft-cookie-consent-banner`,
+	cookieScriptTagId = "msft-cookie-script",
+	cookieConsentBannerId = "msft-cookie-consent-banner",
 	cookieScriptSrc = 'https://wcpstatic.microsoft.com/mscc/lib/v2/wcp-consent.js',
 }: useLoadMSFTCookieScriptOptions): CookieConsentManager | undefined {
 	const [consentManager, setConsentManager] = useState<
@@ -69,7 +69,7 @@ export function useLoadMSFTCookieScript({
 
 				if (!window.WcpConsent) {
 					throw new Error(
-						`WcpConsent is undefined - did you include the script tag?`,
+						"WcpConsent is undefined - did you include the script tag?",
 					)
 				}
 

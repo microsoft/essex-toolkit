@@ -22,13 +22,13 @@ export function getAccessToken(
 			scopes,
 			account,
 		})
-		.then(res => res.accessToken)
-		.catch(err => {
+		.then((res) => res.accessToken)
+		.catch((err) => {
 			log('error in acquireTokenSilent', err)
 			return instance
 				.acquireTokenPopup({ scopes })
-				.then(res => res.accessToken)
-				.catch(err => {
+				.then((res) => res.accessToken)
+				.catch((err) => {
 					log('error in acquireTokenPopup', err)
 					throw err
 				})

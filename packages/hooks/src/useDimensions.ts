@@ -18,7 +18,7 @@ export function useDimensions(
 ): Dimensions | undefined {
 	const [dimensions, setDimensions] = useState<Dimensions | undefined>()
 	useEffect(() => {
-		if (ref && ref.current) {
+		if (ref?.current) {
 			const rect = ref.current.getBoundingClientRect()
 			let dims: Dimensions = {
 				width: Math.floor(rect.width),
@@ -26,7 +26,7 @@ export function useDimensions(
 			}
 			setDimensions(dims)
 
-			const observer = new ResizeObserver(entries => {
+			const observer = new ResizeObserver((entries) => {
 				const entry = entries[0]
 				if (entry) {
 					const newDims = {

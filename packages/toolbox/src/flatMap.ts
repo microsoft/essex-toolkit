@@ -8,7 +8,7 @@
  */
 export function flatMap(arr: any[][]): any[] {
 	const mapped = [] as any[]
-	arr.forEach(item => {
+	arr.forEach((item) => {
 		mapped.push(...item)
 	})
 	return mapped

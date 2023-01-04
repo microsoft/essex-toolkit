@@ -21,7 +21,7 @@ const DestroyableTest = ({ destroyable }: any) => {
 
 test.skip('Setting an undefined destroyable does not cause a crash', () => {
 	act(() => {
-		render(<DestroyableTest destroyable={undefined}></DestroyableTest>)
+		render(<DestroyableTest destroyable={undefined} />)
 	})
 })
 /* eslint-disable jest/no-disabled-tests */
@@ -36,11 +36,11 @@ test.skip('Setting a destroyable to undefined causes the original destroyable to
 
 			// First render with our destroyable
 			const { rerender } = render(
-				<DestroyableTest destroyable={destroyable}></DestroyableTest>,
+				<DestroyableTest destroyable={destroyable} />,
 			)
 
 			// Then render again with nothing and make sure destroy is called
-			rerender(<DestroyableTest destroyable={undefined}></DestroyableTest>)
+			rerender(<DestroyableTest destroyable={undefined} />)
 		})
 	})
 })
@@ -62,11 +62,11 @@ test.skip('Setting a destroyable to a different destroyable causes the original 
 
 			// First render with our destroyable
 			const { rerender } = render(
-				<DestroyableTest destroyable={destroyable1}></DestroyableTest>,
+				<DestroyableTest destroyable={destroyable1} />,
 			)
 
 			// Then render again with nothing and make sure destroy is called
-			rerender(<DestroyableTest destroyable={destroyable2}></DestroyableTest>)
+			rerender(<DestroyableTest destroyable={destroyable2} />)
 		})
 	})
 })

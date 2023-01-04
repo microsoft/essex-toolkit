@@ -26,19 +26,19 @@ describe('histograms', () => {
 	describe('quantized histogram', () => {
 		const data = [1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4]
 		it('given sample dataset, asking for 10 bins should result in 4', () => {
-			const histo = histogram(data, 10, d => d, true)
+			const histo = histogram(data, 10, (d) => d, true)
 			expect(histo).toHaveLength(4)
 		})
 		it('given sample dataset, asking for 3 bins should result in 3', () => {
-			const histo = histogram(data, 3, d => d, true)
+			const histo = histogram(data, 3, (d) => d, true)
 			expect(histo).toHaveLength(3)
 		})
 		it('given sample dataset, asking for 2 bins should result in 2', () => {
-			const histo = histogram(data, 2, d => d, true)
+			const histo = histogram(data, 2, (d) => d, true)
 			expect(histo).toHaveLength(2)
 		})
 		it('total property should match data length', () => {
-			const histo = histogram(data, 10, d => d, true)
+			const histo = histogram(data, 10, (d) => d, true)
 			const total = histo.reduce((acc, cur) => acc + cur.length, 0)
 			expect(total).toEqual(data.length)
 		})

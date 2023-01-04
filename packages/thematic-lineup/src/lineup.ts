@@ -92,7 +92,7 @@ export const deriveCategories = (
 	}, new Set<string>())
 	return Array.from(categories)
 		.sort()
-		.filter(c => c !== undefined) as string[]
+		.filter((c) => c !== undefined) as string[]
 }
 
 /**
@@ -136,7 +136,7 @@ export const buildNumberColumn = (
 			},
 			[Number.MAX_VALUE, Number.MIN_VALUE],
 		)
-	const color = config.colorScale && config.colorScale()
+	const color = config.colorScale?.()
 	const column = bnc(config.name, domain)
 	applyCommonConfig(column, { color: color, ...config })
 	return column
@@ -179,7 +179,7 @@ export const buildLinkColumn = (
 		const pattern = Object.entries(config.params).reduce((acc, cur) => {
 			const [key, value] = cur
 			// NOTE: this is a concat because the ${} format is the template notation used by lineup!
-			return acc.replace('${' + key + '}', value)
+			return acc.replace(`\${${key}}`, value)
 		}, config.pattern)
 		column.pattern(pattern)
 	}

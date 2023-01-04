@@ -19,7 +19,7 @@ const meta = {
 export default meta
 
 const Template: ComponentStory<typeof Sparkbar> = (args: SparkbarProps) => (
-	<Sparkbar {...args}></Sparkbar>
+	<Sparkbar {...args} />
 )
 
 export const Primary = Template.bind({})

@@ -1,8 +1,8 @@
 {
 	"recommendations": [
+		"rome.rome",
 		"dbaeumer.vscode-eslint",
 		"esbenp.prettier-vscode",
-		"editorconfig.editorconfig",
 		"arcanis.vscode-zipfs",
 		"silvenon.mdx"
 	]

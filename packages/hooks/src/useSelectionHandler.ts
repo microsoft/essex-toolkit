@@ -19,7 +19,7 @@ export function useSelectionHandler<T>(
 ): [T[], ClickHandler<T>] {
 	const [selectedObjects, setSelectedObjects] = useState([] as T[])
 	const clickHandler = useCallback(
-		newObj => {
+		(newObj) => {
 			const newSelection = [] as T[]
 			if (newObj) {
 				newSelection.push(...selectedObjects)

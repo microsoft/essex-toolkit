@@ -107,8 +107,8 @@ const findSort = (lineup: LineUp): FindSortCriteria => {
 		l.data.rankings[0].sortCriteria &&
 		l.data.rankings[0].sortCriteria.length > 0 &&
 		l.data.rankings[0].sortCriteria[0]
-	const asc = sortCriteria && sortCriteria.asc
-	const col = sortCriteria && sortCriteria.col.desc.column
+	const asc = sortCriteria?.asc
+	const col = sortCriteria?.col.desc.column
 	return { asc, col }
 }
 
@@ -128,7 +128,7 @@ export const findColumn = (lineup: LineUp, name: string): any | undefined => {
  * @param filters - the filter array
  */
 export const applyFilters = (lineup: LineUp, filters: Filter[]): void => {
-	filters.forEach(flt => {
+	filters.forEach((flt) => {
 		const { propertyName, type } = flt
 		const column = lineup && findColumn(lineup, propertyName)
 		if (column) {
@@ -151,7 +151,7 @@ export const applyFilters = (lineup: LineUp, filters: Filter[]): void => {
 			if (column.desc.type === 'set') {
 				column.toggleMySorting()
 				const prev = lineup && findColumn(lineup, col)
-				prev && prev.sortByMe(asc)
+				prev?.sortByMe(asc)
 			}
 		}
 	})

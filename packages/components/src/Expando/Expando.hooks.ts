@@ -19,7 +19,10 @@ export function useExpando(defaultExpanded = false): {
 } {
 	const [expanded, setExpanded] = useState<boolean>(defaultExpanded)
 
-	const onToggle = useCallback(() => setExpanded(prev => !prev), [setExpanded])
+	const onToggle = useCallback(
+		() => setExpanded((prev) => !prev),
+		[setExpanded],
+	)
 	return {
 		expanded,
 		onToggle,

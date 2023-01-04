@@ -28,12 +28,13 @@
 		"clean": "turbo run clean --parallel",
 		"test": "turbo run test",
 		"lint": "turbo run lint",
-		"lint_fix": "turbo run lint_fix",
 		"start": "turbo run start --parallel",
 		"ci": "turbo run ci",
 		"stories": "yarn start:storybook",
 		"is_clean": "git diff-index HEAD --quiet || git status",
-		"prettify": "essex prettify",
+		"format": "rome format --write .",
+		"rome:check": "rome check --apply-suggested .",
+		"rome:ci": "rome ci .",
 		"release": "run-s clean _version_cut _ci_force _release_packages",
 		"update_sdks": "yarn dlx @yarnpkg/sdks vscode"
 	},
@@ -58,6 +59,7 @@
 		"react": "^18.2.0",
 		"react-is": "^18.2.0",
 		"regenerator-runtime": "^0.13.11",
+		"rome": "^11.0.0",
 		"turbo": "^1.6.3",
 		"typescript": "^4.9.4"
 	},

@@ -13,7 +13,7 @@ const ComponentA: React.FC<{
 	className: string
 	style: React.CSSProperties
 }> = ({ id, className, style }) => {
-	return <div id={id} className={className} style={style}></div>
+	return <div id={id} className={className} style={style} />
 }
 const SemanticA = semantic(ComponentA, {
 	className: 'my-class',

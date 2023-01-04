@@ -78,7 +78,7 @@ export function useEdgeSelection(dataProvider?: CommunityDataProvider): [
 		setMoreEntitiesToLoad(true)
 		clearEntities(true)
 		setLoading(false)
-		dataProvider && dataProvider.clearNeighborEdges()
+		dataProvider?.clearNeighborEdges()
 	}, [clearEntities, setMoreEntitiesToLoad, setLoading, dataProvider])
 
 	const setEdgeSelection = useCallback(
@@ -92,7 +92,7 @@ export function useEdgeSelection(dataProvider?: CommunityDataProvider): [
 					type: ENTITY_TYPE.NEIGHBOR,
 					max: edge.size,
 				} as IEntityLoadParams
-				dataProvider && dataProvider.clearNeighborEdges()
+				dataProvider?.clearNeighborEdges()
 				loadInitialEntities(undefined, params)
 			}
 		},

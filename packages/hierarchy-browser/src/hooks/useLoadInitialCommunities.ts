@@ -18,7 +18,7 @@ export function useLoadInitialCommunities(
 	return useCallback(() => {
 		dataProvider
 			.getAdjacentCommunities(0, DEFAULT_LOAD_COUNT)
-			.then(data => handleCommunitiesLoaded(data || [], undefined))
-			.catch(err => handleCommunitiesLoaded([], err))
+			.then((data) => handleCommunitiesLoaded(data || [], undefined))
+			.catch((err) => handleCommunitiesLoaded([], err))
 	}, [dataProvider, handleCommunitiesLoaded])
 }

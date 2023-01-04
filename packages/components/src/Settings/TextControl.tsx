@@ -19,13 +19,13 @@ export const TextControl = ({
 	const { key, value, type, label, control, params } = config
 	const handleTextChange = useCallback(
 		(evt, text) => {
-			onChange && onChange(key, text)
+			onChange?.(key, text)
 		},
 		[key, onChange],
 	)
 	const handleOptionChange = useCallback(
 		(evt, option) => {
-			onChange && onChange(key, option.text)
+			onChange?.(key, option.text)
 		},
 		[key, onChange],
 	)
@@ -40,14 +40,14 @@ export const TextControl = ({
 				/>
 			)
 		case ControlType.dropdown:
-			if (!params || !params?.options) {
+			if (!params?.options) {
 				throw new Error('Dropdown control type requires list of options')
 			}
 			return (
 				<Dropdown
 					key={`dropdown-${key}`}
 					label={label}
-					options={params.options.map(opt => ({
+					options={params.options.map((opt) => ({
 						key: opt,
 						text: opt,
 						selected: opt === value,
@@ -56,7 +56,7 @@ export const TextControl = ({
 				/>
 			)
 		case ControlType.radio:
-			if (!params || !params?.options) {
+			if (!params?.options) {
 				throw new Error('Radio control type requires list of options')
 			}
 			return (
@@ -64,7 +64,7 @@ export const TextControl = ({
 					key={`radio-${key}`}
 					label={label}
 					selectedKey={value}
-					options={params?.options.map(opt => ({
+					options={params?.options.map((opt) => ({
 						key: opt,
 						text: opt,
 					}))}

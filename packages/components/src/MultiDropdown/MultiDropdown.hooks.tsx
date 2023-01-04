@@ -42,7 +42,7 @@ export function useOptionRenderer(
 		) =>
 			onChangeAll?.(
 				event,
-				options.map(o => ({ ...o, selected: true })),
+				options.map((o) => ({ ...o, selected: true })),
 				options.map((_o, i) => i),
 			),
 		[onChangeAll, options],

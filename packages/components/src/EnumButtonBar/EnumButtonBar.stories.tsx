@@ -27,7 +27,7 @@ const Template: ComponentStory<typeof EnumButtonBar<Stuff>> = (
 ) => {
 	const theme = useTheme()
 	const [selected, setSelected] = useState<Stuff | undefined>(Stuff.First)
-	const onChange = useCallback(opt => setSelected(opt), [setSelected])
+	const onChange = useCallback((opt) => setSelected(opt), [setSelected])
 	console.log(selected)
 	return (
 		<EnumButtonBar

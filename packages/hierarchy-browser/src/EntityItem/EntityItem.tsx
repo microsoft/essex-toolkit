@@ -49,7 +49,7 @@ export const EntityItem: React.FC<IEntityItemProps> = ({
 							className={'tableItem'}
 							style={itemStyle}
 						>
-							{item.attrs && item.attrs[attr] ? (
+							{item.attrs?.[attr] ? (
 								<Text variant={itemVariant} styles={textStyle}>
 									{item.attrs[attr].toLocaleString()}
 								</Text>

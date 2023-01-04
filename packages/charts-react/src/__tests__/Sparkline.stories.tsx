@@ -19,7 +19,7 @@ const meta = {
 export default meta
 
 const Template: ComponentStory<typeof Sparkline> = (args: SparklineProps) => (
-	<Sparkline {...args}></Sparkline>
+	<Sparkline {...args} />
 )
 
 export const Primary = Template.bind({})

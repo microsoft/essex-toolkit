@@ -42,11 +42,11 @@ export class EventEmitter {
 		if (handler) {
 			const { namespace, event } = this.getNamespaceAndEvent(key)
 			if (namespace && !event) {
-				Object.keys(this.listeners).forEach(otherKey => {
+				Object.keys(this.listeners).forEach((otherKey) => {
 					const { namespace: otherNamespace } =
 						this.getNamespaceAndEvent(otherKey)
 					if (otherNamespace === namespace) {
-						delete this.listeners[otherKey]
+						this.listeners[otherKey] = undefined
 					}
 				})
 			} else {
@@ -65,10 +65,10 @@ export class EventEmitter {
 	 * Raises the given event
 	 */
 	public emit(name: string, ...args: any[]): void {
-		Object.keys(this.listeners).forEach(otherKey => {
+		Object.keys(this.listeners).forEach((otherKey) => {
 			const { event } = this.getNamespaceAndEvent(otherKey)
 			if (event === name) {
-				this.listeners[otherKey].forEach(l => {
+				this.listeners[otherKey].forEach((l) => {
 					l.apply(this, args)
 				})
 			}

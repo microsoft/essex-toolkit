@@ -90,7 +90,7 @@ export const HierarchyBrowser: React.FC<IHierarchyBrowserProps> =
 					}
 					const neighborsList = neighbors as INeighborCommunityDetail[]
 					const data = neighborsList.filter(
-						d => d.edgeCommunityId === communityId,
+						(d) => d.edgeCommunityId === communityId,
 					)
 					return { data, error: undefined }
 				}
@@ -153,7 +153,7 @@ export const HierarchyBrowser: React.FC<IHierarchyBrowserProps> =
 							toggleUpdate={forceUpdateNeighbors}
 							selections={selectedIds}
 							onSelectionChange={onSelectionChange}
-						></CommunityCard>
+						/>
 					)
 				})}
 			</CardContainer>

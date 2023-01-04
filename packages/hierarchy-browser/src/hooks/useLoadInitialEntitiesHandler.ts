@@ -35,8 +35,8 @@ export function useLoadInitialEntitiesHandler(
 					params?.type,
 					params?.max,
 				)
-				.then(data => handleEntitiesLoaded(data, undefined))
-				.catch(err => {
+				.then((data) => handleEntitiesLoaded(data, undefined))
+				.catch((err) => {
 					console.warn(`error loading initial entities: ${err}`)
 					handleEntitiesLoaded([], err)
 				})

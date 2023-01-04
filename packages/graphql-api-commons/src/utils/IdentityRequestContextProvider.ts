@@ -16,7 +16,7 @@ export interface IdentityRequestContext<Identity> {
 }
 
 export type Transformer<T> = (value: T) => T
-export const stripBearerPrefix: Transformer<string | null> = header =>
+export const stripBearerPrefix: Transformer<string | null> = (header) =>
 	header == null
 		? null
 		: header.indexOf('Bearer ') === 0

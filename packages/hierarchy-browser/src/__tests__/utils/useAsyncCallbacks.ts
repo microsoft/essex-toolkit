@@ -60,7 +60,7 @@ export function useAsyncCallbacks({
 
 			if (edges && loadState) {
 				const selected = edges.filter(
-					d => `${d.neighbor}` === params.communityId,
+					(d) => `${d.neighbor}` === params.communityId,
 				)
 				const parents = selected.reduce((acc, e: NeighborLocalEntity) => {
 					acc[e.cid] = acc[e.cid] ? acc[e.cid] + 1 : 1

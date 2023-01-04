@@ -46,7 +46,7 @@ export function useCommunityData(
 		isLoading,
 		entitiesLoaded,
 	] = useEntitiesLoadedHandler(false)
-	const [isOpen, setIsOpen] = useState(isOpenProp || false)
+	const [isOpen, setIsOpen] = useState(isOpenProp)
 	const setMoreDataToLoad = useCallback(
 		(state: boolean) => {
 			setMoreToLoad(state)
@@ -93,7 +93,7 @@ export function useCommunityData(
 	])
 
 	const filterProps: IFilterProps = useMemo(() => {
-		const disabled = maxLevel === dataProvider.level || false
+		const disabled = maxLevel === dataProvider.level
 		return { disabled, state: filterEntities, toggleFilter }
 	}, [maxLevel, toggleFilter, filterEntities, dataProvider])
 

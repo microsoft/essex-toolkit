@@ -28,7 +28,7 @@ export function useEventHandlers(
 		if (onIconClick) {
 			onIconClick()
 		} else if (expanded === undefined) {
-			setExpanded(prev => !prev)
+			setExpanded((prev) => !prev)
 		}
 	}, [onIconClick, setExpanded, expanded])
 
@@ -36,7 +36,7 @@ export function useEventHandlers(
 		if (onHeaderClick) {
 			onHeaderClick()
 		} else if (expanded === undefined) {
-			setExpanded(prev => !prev)
+			setExpanded((prev) => !prev)
 		}
 	}, [onHeaderClick, setExpanded, expanded])
 

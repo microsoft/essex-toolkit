@@ -36,7 +36,7 @@ const standardHistogram = (
 	bins: number,
 	accessor = (d: any) => d,
 ): Histogram => {
-	const values = data.map(d => accessor(d))
+	const values = data.map((d) => accessor(d))
 	const ext = extent(values)
 	const [min, max] = ext
 	const range = max - min
@@ -48,7 +48,9 @@ const standardHistogram = (
 		return bin
 	})
 	const histo = values.reduce((acc, cur) => {
-		const index = binStructure.findIndex(bin => cur >= bin.x0 && cur <= bin.x1)
+		const index = binStructure.findIndex(
+			(bin) => cur >= bin.x0 && cur <= bin.x1,
+		)
 		acc[index < 0 ? acc.length - 1 : index].push(cur)
 		return acc
 	}, binStructure)

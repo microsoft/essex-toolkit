@@ -30,9 +30,9 @@ export const useCommunityProvider = ({
 }: ICommunityProviderHook): void => {
 	useMemo(() => {
 		setProviderCache((cache: IDataProvidersCache) => {
-			const communityIds = communities.map(c => c.communityId)
+			const communityIds = communities.map((c) => c.communityId)
 			const cacheIds = Object.keys(cache)
-			const intersection = cacheIds.filter(value =>
+			const intersection = cacheIds.filter((value) =>
 				communityIds.includes(value),
 			)
 			return communities.reduce((acc, community): IDataProvidersCache => {
