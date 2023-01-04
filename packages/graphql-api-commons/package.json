@@ -27,7 +27,7 @@
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^22.0.7",
+		"@essex/scripts": "^22.2.1",
 		"@graphql-tools/utils": "^8.13.1",
 		"@tsconfig/node14": "^1.0.3",
 		"@types/pino": "^7.0.5",

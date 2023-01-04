@@ -17,7 +17,7 @@
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^22.0.7",
+		"@essex/scripts": "^22.2.1",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@types/styled-components": "^5.1.26",
 		"styled-components": "^5.3.6",
