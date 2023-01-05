@@ -1,28 +1,28 @@
 {
-	"name": "@essex/styled-components",
-	"description": "ESM export support for styled-components",
-	"version": "0.0.5",
-	"type": "module",
-	"main": "src/index.ts",
-	"publishConfig": {
-		"main": "dist/index.js",
-		"types": "dist/index.d.ts"
-	},
-	"sideEffects": false,
-	"scripts": {
-		"clean": "essex clean",
-		"build": "essex build --docs",
-		"lint": "essex lint --noFormat --fix",
-		"release": "yarn npm publish --tolerate-republish --access public"
-	},
-	"devDependencies": {
-		"@essex/scripts": "^22.2.1",
-		"@essex/tsconfig-base": "^1.0.2",
-		"@types/styled-components": "^5.1.26",
-		"styled-components": "^5.3.6",
-		"typescript": "^4.9.4"
-	},
-	"peerDependencies": {
-		"styled-components": ">= 5"
-	}
+  "name": "@essex/styled-components",
+  "description": "ESM export support for styled-components",
+  "version": "0.0.5",
+  "type": "module",
+  "main": "src/index.ts",
+  "publishConfig": {
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "clean": "essex clean",
+    "build": "essex build --docs",
+    "lint": "essex lint --fix",
+    "release": "yarn npm publish --tolerate-republish --access public"
+  },
+  "devDependencies": {
+    "@essex/scripts": "^22.2.1",
+    "@essex/tsconfig-base": "^1.0.2",
+    "@types/styled-components": "^5.1.26",
+    "styled-components": "^5.3.6",
+    "typescript": "^4.9.4"
+  },
+  "peerDependencies": {
+    "styled-components": ">= 5"
+  }
 }

@@ -1,44 +1,44 @@
 {
-	"name": "@essex/semantic-components",
-	"version": "0.0.9",
-	"description": "Semantic UI components for React",
-	"type": "module",
-	"main": "src/index.ts",
-	"publishConfig": {
-		"main": "dist/index.js",
-		"types": "dist/index.d.ts"
-	},
-	"sideEffects": false,
-	"author": "Chris Trevino <chtrevin@@microsoft.com>",
-	"license": "MIT",
-	"scripts": {
-		"build": "essex build --docs",
-		"clean": "essex clean",
-		"test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
-		"lint": "essex lint --noFormat --fix",
-		"release": "yarn npm publish --tolerate-republish --access public"
-	},
-	"devDependencies": {
-		"@essex/jest-config": "^21.0.18",
-		"@essex/scripts": "^22.2.1",
-		"@essex/tsconfig-base": "^1.0.2",
-		"@testing-library/react": "^13.4.0",
-		"@types/react": "^18.0.26",
-		"@types/react-dom": "^18.0.10",
-		"jest": "^29.3.1",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0"
-	},
-	"essex": {
-		"exports": {
-			"default": "function"
-		}
-	},
-	"dependencies": {
-		"@types/jest": "^29.2.5",
-		"classnames": "^2.3.2"
-	},
-	"peerDependencies": {
-		"@types/react-dom": "*"
-	}
+  "name": "@essex/semantic-components",
+  "version": "0.0.9",
+  "description": "Semantic UI components for React",
+  "type": "module",
+  "main": "src/index.ts",
+  "publishConfig": {
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts"
+  },
+  "sideEffects": false,
+  "author": "Chris Trevino <chtrevin@@microsoft.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "essex build --docs",
+    "clean": "essex clean",
+    "test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
+    "lint": "essex lint --fix",
+    "release": "yarn npm publish --tolerate-republish --access public"
+  },
+  "devDependencies": {
+    "@essex/jest-config": "^21.0.18",
+    "@essex/scripts": "^22.2.1",
+    "@essex/tsconfig-base": "^1.0.2",
+    "@testing-library/react": "^13.4.0",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.10",
+    "jest": "^29.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "essex": {
+    "exports": {
+      "default": "function"
+    }
+  },
+  "dependencies": {
+    "@types/jest": "^29.2.5",
+    "classnames": "^2.3.2"
+  },
+  "peerDependencies": {
+    "@types/react-dom": "*"
+  }
 }

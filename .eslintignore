@@ -3,6 +3,7 @@ storybook-static/
 build/
 dist/
 lib/
+docs/
 coverage/
 public/
 docs/

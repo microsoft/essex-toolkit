@@ -1,28 +1,28 @@
 {
-	"name": "@essex/toposort",
-	"version": "1.0.2",
-	"description": "An esm-variant of the 'toposort' package",
-	"type": "module",
-	"main": "src/index.ts",
-	"publishConfig": {
-		"main": "dist/index.js",
-		"types": "dist/index.d.ts"
-	},
-	"sideEffects": false,
-	"repository": "https://github.com/microsoft/essex-toolkit",
-	"author": "Marcel Klehr <mklehr@gmx.net>",
-	"contributors": [
-		"Chris Trevino <chtrevin@microsoft.com>"
-	],
-	"license": "MIT",
-	"scripts": {
-		"clean": "essex clean",
-		"build": "essex build --docs",
-		"lint": "essex lint --noFormat --fix",
-		"release": "yarn npm publish --tolerate-republish --access public"
-	},
-	"devDependencies": {
-		"@essex/scripts": "^22.2.1",
-		"@essex/tsconfig-base": "^1.0.2"
-	}
+  "name": "@essex/toposort",
+  "version": "1.0.2",
+  "description": "An esm-variant of the 'toposort' package",
+  "type": "module",
+  "main": "src/index.ts",
+  "publishConfig": {
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts"
+  },
+  "sideEffects": false,
+  "repository": "https://github.com/microsoft/essex-toolkit",
+  "author": "Marcel Klehr <mklehr@gmx.net>",
+  "contributors": [
+    "Chris Trevino <chtrevin@microsoft.com>"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "clean": "essex clean",
+    "build": "essex build --docs",
+    "lint": "essex lint --fix",
+    "release": "yarn npm publish --tolerate-republish --access public"
+  },
+  "devDependencies": {
+    "@essex/scripts": "^22.2.1",
+    "@essex/tsconfig-base": "^1.0.2"
+  }
 }

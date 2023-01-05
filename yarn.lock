@@ -5169,48 +5169,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rometools/cli-darwin-arm64@npm:11.0.0":
-  version: 11.0.0
-  resolution: "@rometools/cli-darwin-arm64@npm:11.0.0"
-  conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@rometools/cli-darwin-x64@npm:11.0.0":
-  version: 11.0.0
-  resolution: "@rometools/cli-darwin-x64@npm:11.0.0"
-  conditions: os=darwin & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@rometools/cli-linux-arm64@npm:11.0.0":
-  version: 11.0.0
-  resolution: "@rometools/cli-linux-arm64@npm:11.0.0"
-  conditions: os=linux & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@rometools/cli-linux-x64@npm:11.0.0":
-  version: 11.0.0
-  resolution: "@rometools/cli-linux-x64@npm:11.0.0"
-  conditions: os=linux & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@rometools/cli-win32-arm64@npm:11.0.0":
-  version: 11.0.0
-  resolution: "@rometools/cli-win32-arm64@npm:11.0.0"
-  conditions: os=win32 & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@rometools/cli-win32-x64@npm:11.0.0":
-  version: 11.0.0
-  resolution: "@rometools/cli-win32-x64@npm:11.0.0"
-  conditions: os=win32 & cpu=x64
-  languageName: node
-  linkType: hard
-
 "@rushstack/node-core-library@npm:3.50.1":
   version: 3.50.1
   resolution: "@rushstack/node-core-library@npm:3.50.1"
@@ -13499,7 +13457,6 @@ __metadata:
     "@types/react-is": ^17.0.3
     debug: ^4.3.4
     eslint: ^8.31.0
-    husky: ^8.0.2
     jest-environment-jsdom: ^29.3.1
     jest-util: ^29.3.1
     lint-staged: ^13.1.0
@@ -13508,7 +13465,6 @@ __metadata:
     react: ^18.2.0
     react-is: ^18.2.0
     regenerator-runtime: ^0.13.11
-    rome: ^11.0.0
     turbo: ^1.6.3
     typescript: ^4.9.4
   peerDependencies:
@@ -15121,7 +15077,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"has@npm:^1.0.3":
+"has@npm:*, has@npm:^1.0.3":
   version: 1.0.3
   resolution: "has@npm:1.0.3"
   dependencies:
@@ -15556,15 +15512,6 @@ __metadata:
   dependencies:
     ms: ^2.0.0
   checksum: 9c7a74a2827f9294c009266c82031030eae811ca87b0da3dceb8d6071b9bde22c9f3daef0469c3c533cc67a97d8a167cd9fc0389350e5f415f61a79b171ded16
-  languageName: node
-  linkType: hard
-
-"husky@npm:^8.0.2":
-  version: 8.0.2
-  resolution: "husky@npm:8.0.2"
-  bin:
-    husky: lib/bin.js
-  checksum: e101656fcb56163d610488f186448c78b132626aa427094489d886ce9374955a90274912b0f3a34af3326eaa74977883b032e5f701d7aaf4554daa5a7931be43
   languageName: node
   linkType: hard
 
@@ -21508,35 +21455,6 @@ __metadata:
   bin:
     rollup: dist/bin/rollup
   checksum: c34dc78317aa0a153010061e5954225b3e18f4013feb9c0476f6878dc3485ac765c28b7849441e4a2ab69c337892bc66399fb7d4b239b94f4758adfdb1f99440
-  languageName: node
-  linkType: hard
-
-"rome@npm:^11.0.0":
-  version: 11.0.0
-  resolution: "rome@npm:11.0.0"
-  dependencies:
-    "@rometools/cli-darwin-arm64": 11.0.0
-    "@rometools/cli-darwin-x64": 11.0.0
-    "@rometools/cli-linux-arm64": 11.0.0
-    "@rometools/cli-linux-x64": 11.0.0
-    "@rometools/cli-win32-arm64": 11.0.0
-    "@rometools/cli-win32-x64": 11.0.0
-  dependenciesMeta:
-    "@rometools/cli-darwin-arm64":
-      optional: true
-    "@rometools/cli-darwin-x64":
-      optional: true
-    "@rometools/cli-linux-arm64":
-      optional: true
-    "@rometools/cli-linux-x64":
-      optional: true
-    "@rometools/cli-win32-arm64":
-      optional: true
-    "@rometools/cli-win32-x64":
-      optional: true
-  bin:
-    rome: bin/rome
-  checksum: 3c92a47c78a66c62f94b6a3a72ead92a20c23326d2d73785ce88c03897b60b8114c285a636acc24bd11039381ded48f8c58c6cc5c4cc46ce7eed092c90d9a054
   languageName: node
   linkType: hard
 
