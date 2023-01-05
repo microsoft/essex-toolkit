@@ -11,24 +11,25 @@ import type {
 } from '../../index.js'
 import type { ENTITY_TYPE } from '../types/types.js'
 
+export type LoadEntitiesCallback = (
+	params: ILoadParams,
+	entity: ENTITY_TYPE,
+) => Promise<IHierarchyDataResponse | undefined>
+
 export class EntityDataProvider {
-	private _entities: IEntityDetail[] = [] // all entities currently loaded
-	private _displayEntities: IEntityDetail[] = [] // entities actually visible on screen
-	private _filteredIds: Set<EntityId> = new Set([])
+	// all entities currently loaded
+	private _entities: IEntityDetail[] = []
+	// entities actually visible on screen
+	private _displayEntities: IEntityDetail[] = []
+	private _filteredIds = new Set<EntityId>()
 	private _entityType: ENTITY_TYPE
 	private _size?: number
-	private _loadEntitiesFromProvider?: (
-		params: ILoadParams,
-		entity: ENTITY_TYPE,
-	) => Promise<IHierarchyDataResponse | undefined>
+	private _loadEntitiesFromProvider?: LoadEntitiesCallback
 
 	constructor(
 		entityType: ENTITY_TYPE,
 		size: number,
-		handleLoading?: (
-			params: ILoadParams,
-			entity: ENTITY_TYPE,
-		) => Promise<IHierarchyDataResponse | undefined>,
+		handleLoading?: LoadEntitiesCallback,
 	) {
 		this._size = size === -1 ? undefined : size
 		this._entityType = entityType
@@ -40,7 +41,7 @@ export class EntityDataProvider {
 	}
 
 	private clearFilteredMap(): void {
-		this._filteredIds = new Set([])
+		this._filteredIds.clear()
 	}
 
 	public clear(): void {
@@ -49,7 +50,6 @@ export class EntityDataProvider {
 		this.clearEntities()
 	}
 
-	// #region Getters/Setters
 	public set size(s: number | undefined) {
 		this._size = s === undefined || s === -1 ? undefined : s
 	}
@@ -74,25 +74,12 @@ export class EntityDataProvider {
 		this._displayEntities = display
 	}
 
-	public set loadEntitiesFromProvider(
-		handleLoading: (
-			params: ILoadParams,
-			entity: ENTITY_TYPE,
-		) => Promise<IHierarchyDataResponse | undefined>,
-	) {
-		this._loadEntitiesFromProvider = handleLoading
+	public set loadEntitiesFromProvider(value: LoadEntitiesCallback) {
+		this._loadEntitiesFromProvider = value
 	}
-	// #endregion
 
 	private getFilterEntitiesFromCache(): IEntityDetail[] {
-		// get cached filtered IDS from Set
-		const currentEntities = this._entities
-		return currentEntities.reduce((acc, d) => {
-			if (this._filteredIds.has(d.id)) {
-				acc.push(d)
-			}
-			return acc
-		}, [] as IEntityDetail[])
+		return this._entities.filter(e => this._filteredIds.has(e.id))
 	}
 
 	private async loadItemsAsync(
