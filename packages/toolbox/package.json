@@ -1,6 +1,6 @@
 {
   "name": "@essex/toolbox",
-  "version": "3.0.10",
+  "version": "3.0.11",
   "description": "A set of general purpose utils",
   "type": "module",
   "main": "src/index.ts",
