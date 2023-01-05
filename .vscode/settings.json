@@ -5,7 +5,6 @@
   },
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
   "eslint.nodePath": ".yarn/sdks",
   "javascript.preferences.importModuleSpecifier": "relative",
   "javascript.preferences.importModuleSpecifierEnding": "js",
@@ -22,7 +21,6 @@
     ".yarnrc.yml": "yarn.lock, .pnp.cjs, .pnp.loader.mjs",
     ".eslintrc": ".eslintignore",
     ".gitignore": ".gitattributes",
-    ".prettierrc": ".prettierignore",
     "README.md": "SECURITY.md, SUPPORT.md, CODE_OF_CONDUCT.md, LICENSE"
   }
 }

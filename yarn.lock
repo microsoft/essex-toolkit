@@ -2381,13 +2381,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex/prettier-config@npm:^18.0.5":
-  version: 18.0.5
-  resolution: "@essex/prettier-config@npm:18.0.5"
-  checksum: 80c92335b9ce6451243d495bb6aecf8af7e98e74feda5afd621212a57513d7eb68f7af9f071bf15d0c69c6901677e20c9588544cc6ab496e6aadb0f00e0d9034
-  languageName: node
-  linkType: hard
-
 "@essex/react-animate-height@npm:^2.1.4":
   version: 2.1.4
   resolution: "@essex/react-animate-height@npm:2.1.4"
@@ -11746,7 +11739,6 @@ __metadata:
   resolution: "essex-toolkit@workspace:."
   dependencies:
     "@essex/eslint-config": ^20.4.0
-    "@essex/prettier-config": ^18.0.5
     "@essex/scripts": ^22.2.1
     "@storybook/addons": ^6.5.15
     "@storybook/theming": ^6.5.15
@@ -11760,7 +11752,6 @@ __metadata:
     jest-util: ^29.3.1
     lint-staged: ^13.1.0
     npm-run-all: ^4.1.5
-    prettier: ^2.8.1
     react: ^18.2.0
     react-is: ^18.2.0
     regenerator-runtime: ^0.13.11
