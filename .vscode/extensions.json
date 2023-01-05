@@ -2,6 +2,7 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "arcanis.vscode-zipfs",
-    "silvenon.mdx"
+    "silvenon.mdx",
+    "rome.rome"
   ]
 }
