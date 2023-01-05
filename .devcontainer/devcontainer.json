@@ -4,7 +4,9 @@
   "extensions": [
     "dbaeumer.vscode-eslint",
     "arcanis.vscode-zipfs",
-    "silvenon.mdx"
+    "silvenon.mdx",
+    "esbenp.prettier-vscode",
+    "rome.rome"
   ],
   "service": "workspace",
 
