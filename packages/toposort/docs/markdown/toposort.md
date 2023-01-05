@@ -6,7 +6,8 @@
 
 ## Functions
 
-| Function                                   | Description           |
-| ------------------------------------------ | --------------------- |
-| [array(nodes, edges)](./toposort.array.md) |                       |
-| [toposort(edges)](./toposort.toposort.md)  | Toposort an edge list |
+|  Function | Description |
+|  --- | --- |
+|  [array(nodes, edges)](./toposort.array.md) |  |
+|  [toposort(edges)](./toposort.toposort.md) | Toposort an edge list |
+

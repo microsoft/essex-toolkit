@@ -1,0 +1,1432 @@
+{
+  "metadata": {
+    "toolPackage": "@microsoft/api-extractor",
+    "toolVersion": "7.29.2",
+    "schemaVersion": 1009,
+    "oldestForwardsCompatibleVersion": 1001,
+    "tsdocConfig": {
+      "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
+      "noStandardTags": true,
+      "tagDefinitions": [
+        {
+          "tagName": "@alpha",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@beta",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@defaultValue",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@decorator",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@deprecated",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@eventProperty",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@example",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@experimental",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@inheritDoc",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@internal",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@label",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@link",
+          "syntaxKind": "inline",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@override",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@packageDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@param",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@privateRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@public",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@readonly",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@remarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@returns",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@sealed",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@see",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@throws",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@typeParam",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@virtual",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@betaDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@internalRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@preapproved",
+          "syntaxKind": "modifier"
+        }
+      ],
+      "supportForTags": {
+        "@alpha": true,
+        "@beta": true,
+        "@defaultValue": true,
+        "@decorator": true,
+        "@deprecated": true,
+        "@eventProperty": true,
+        "@example": true,
+        "@experimental": true,
+        "@inheritDoc": true,
+        "@internal": true,
+        "@label": true,
+        "@link": true,
+        "@override": true,
+        "@packageDocumentation": true,
+        "@param": true,
+        "@privateRemarks": true,
+        "@public": true,
+        "@readonly": true,
+        "@remarks": true,
+        "@returns": true,
+        "@sealed": true,
+        "@see": true,
+        "@throws": true,
+        "@typeParam": true,
+        "@virtual": true,
+        "@betaDocumentation": true,
+        "@internalRemarks": true,
+        "@preapproved": true
+      },
+      "reportUnsupportedHtmlElements": false
+    }
+  },
+  "kind": "Package",
+  "canonicalReference": "@essex/toolbox!",
+  "docComment": "",
+  "name": "@essex/toolbox",
+  "preserveMemberOrder": false,
+  "members": [
+    {
+      "kind": "EntryPoint",
+      "canonicalReference": "@essex/toolbox!",
+      "name": "",
+      "preserveMemberOrder": false,
+      "members": [
+        {
+          "kind": "Interface",
+          "canonicalReference": "@essex/toolbox!Bin:interface",
+          "docComment": "/**\n * The Bin holds an array of values that match the bounding criteria, along with an additional pair of properties indicating that bounding.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface Bin extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Array",
+              "canonicalReference": "!Array:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<number>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Bin",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/toolbox!Bin#x0:member",
+              "docComment": "/**\n * Minimum _computed_ value for the bin\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "x0: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "x0",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/toolbox!Bin#x1:member",
+              "docComment": "/**\n * Maximum _computed_ value for the bin\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "x1: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "x1",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 3
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@essex/toolbox!binarySearch:function(1)",
+          "docComment": "/**\n * Performs a binary search on the given array\n *\n * @param array - The array of numbers to search\n *\n * @param item - The item to look for\n *\n * @returns index of found item\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function binarySearch<T = "
+            },
+            {
+              "kind": "Content",
+              "text": "number"
+            },
+            {
+              "kind": "Content",
+              "text": ">(array: "
+            },
+            {
+              "kind": "Content",
+              "text": "T[]"
+            },
+            {
+              "kind": "Content",
+              "text": ", item: "
+            },
+            {
+              "kind": "Content",
+              "text": "T"
+            },
+            {
+              "kind": "Content",
+              "text": ", compare?: "
+            },
+            {
+              "kind": "Content",
+              "text": "typeof "
+            },
+            {
+              "kind": "Reference",
+              "text": "DEFAULT_COMPARE",
+              "canonicalReference": "@essex/toolbox!DEFAULT_COMPARE:function"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "number"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 10,
+            "endIndex": 11
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "array",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "item",
+              "parameterTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "compare",
+              "parameterTypeTokenRange": {
+                "startIndex": 7,
+                "endIndex": 9
+              },
+              "isOptional": true
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "name": "binarySearch"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@essex/toolbox!DEFAULT_COMPARE:function(1)",
+          "docComment": "/**\n * Performs numerical comparison\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function DEFAULT_COMPARE<T>(item1: "
+            },
+            {
+              "kind": "Content",
+              "text": "T"
+            },
+            {
+              "kind": "Content",
+              "text": ", item2: "
+            },
+            {
+              "kind": "Content",
+              "text": "T"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "number"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "item1",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "item2",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": false
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "DEFAULT_COMPARE"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@essex/toolbox!deferred:function(1)",
+          "docComment": "/**\n * Represents a deferred object, which can be resolved /*\n *\n * /** Creates a new deferred promise\n *\n * @returns Promise\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function deferred<T>(): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Deferred",
+              "canonicalReference": "@essex/toolbox!Deferred:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "deferred"
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@essex/toolbox!Deferred:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface Deferred<PromiseType> "
+            }
+          ],
+          "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "PromiseType",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "Deferred",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/toolbox!Deferred#promise:member",
+              "docComment": "/**\n * Returns a promise for this deferred\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "promise: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<PromiseType>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "promise",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "@essex/toolbox!Deferred#reject:member(1)",
+              "docComment": "/**\n * Rejects the deferred\n *\n * @param args - The args to reject the deferred with\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "reject(...args: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "any[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<PromiseType>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "args",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "name": "reject"
+            },
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "@essex/toolbox!Deferred#resolve:member(1)",
+              "docComment": "/**\n * Resolves the deferred\n *\n * @param args - The args to resolve the deferred with\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "resolve(...args: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "any[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<PromiseType>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "args",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "name": "resolve"
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@essex/toolbox!delay:function(1)",
+          "docComment": "/**\n * Returns a promise that will resolve after the given delay, useful for async/await i.e. await delay(100) execute()\n *\n * @param myDelay - The delay to use\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function delay(myDelay: "
+            },
+            {
+              "kind": "Content",
+              "text": "number"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Promise",
+              "canonicalReference": "!Promise:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<any>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 5
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "myDelay",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "delay"
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@essex/toolbox!Dictionary:type",
+          "docComment": "/**\n * An alias to HashMap\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type Dictionary<Value> = "
+            },
+            {
+              "kind": "Reference",
+              "text": "HashMap",
+              "canonicalReference": "@essex/toolbox!HashMap:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<Value>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Dictionary",
+          "typeParameters": [
+            {
+              "typeParameterName": "Value",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          }
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@essex/toolbox!EventEmitter:class",
+          "docComment": "/**\n * A mixin that adds support for event emitting\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class EventEmitter "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "EventEmitter",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "@essex/toolbox!EventEmitter#emit:member(1)",
+              "docComment": "/**\n * Raises the given event\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "emit(name: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", ...args: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "any[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "name",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "args",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "name": "emit"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@essex/toolbox!EventEmitter#off:member(1)",
+              "docComment": "/**\n * Removes an event listener for the given event\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "off(key: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", handler?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Handler",
+                  "canonicalReference": "@essex/toolbox!~Handler:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "key",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "handler",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "name": "off"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@essex/toolbox!EventEmitter#on:member(1)",
+              "docComment": "/**\n * Adds an event listener for the given event\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "on(key: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", handler?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Handler",
+                  "canonicalReference": "@essex/toolbox!~Handler:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DestroyObject",
+                  "canonicalReference": "@essex/toolbox!~DestroyObject:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "key",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "handler",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "name": "on"
+            }
+          ],
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@essex/toolbox!eventEmitter:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "eventEmitter: "
+            },
+            {
+              "kind": "Content",
+              "text": "() => "
+            },
+            {
+              "kind": "Reference",
+              "text": "EventEmitter",
+              "canonicalReference": "@essex/toolbox!EventEmitter:class"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "eventEmitter",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          }
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@essex/toolbox!flatMap:function(1)",
+          "docComment": "/**\n * Flattens a multi dimensional array\n *\n * @param arr - The multi-dimensional array\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function flatMap(arr: "
+            },
+            {
+              "kind": "Content",
+              "text": "any[][]"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "any[]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 4
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "arr",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "flatMap"
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@essex/toolbox!HashMap:interface",
+          "docComment": "/**\n * A interface describing a hashmap\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface HashMap<Value = "
+            },
+            {
+              "kind": "Content",
+              "text": "any"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
+            }
+          ],
+          "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "Value",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "name": "HashMap",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "IndexSignature",
+              "canonicalReference": "@essex/toolbox!HashMap:index(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "[key: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "Value"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "key",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ]
+            },
+            {
+              "kind": "IndexSignature",
+              "canonicalReference": "@essex/toolbox!HashMap:index(2)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "[key: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "Value"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 2,
+              "parameters": [
+                {
+                  "parameterName": "key",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ]
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@essex/toolbox!Histogram:type",
+          "docComment": "/**\n * A Histogram is just an array of Bins. This follows the d3 format, so these outputs can be used as drop-ins to any code that expects a d3-style histogram.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type Histogram = "
+            },
+            {
+              "kind": "Reference",
+              "text": "Array",
+              "canonicalReference": "!Array:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Bin",
+              "canonicalReference": "@essex/toolbox!Bin:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Histogram",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@essex/toolbox!histogram:var",
+          "docComment": "/**\n * Creates a histogram from an array of objects. The histogram will be populated with numeric values. If your input data is not numeric, supply an accessor function. By default, a standard equal-interval histogram will be created. If the quantize parameter is set, it will instead use quantiles (i.e., equal-length bins). If you are quantizing, you can also set a smooth parameter to indicate that breaks in the data should try to minimize variance.\n *\n * Note on quantiles: the bin count and length are ideals, but not guaranteed. The way the quantiles are calculated, a precise number of bins can't be guaranteed unless you will accept empty bins. For example, if your dataset is [1,1,1,1,1,2,2], you will always only get back two bins. Depending on the data distribution, we also may not be able to assure each bin is the same length as the others. Using the same example dataset, here we would have one bin with 5 items, and the other with 2. We _could_ split them evenly and put some of the 1s in the 2 bin, but that seems less preferable.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "histogram: "
+            },
+            {
+              "kind": "Content",
+              "text": "(data: any[], bins: number, accessor?: (d: any) => any, quantize?: boolean, smooth?: boolean) => "
+            },
+            {
+              "kind": "Reference",
+              "text": "Histogram",
+              "canonicalReference": "@essex/toolbox!Histogram:type"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "histogram",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@essex/toolbox!interpolate:var",
+          "docComment": "/**\n * Interpolates a data list, filling in the specified multiple. This returns a list of numberic values. The input does not have to be numeric, but if it isn't an accessor function should be supplied. Note that this just performs linear interpolation\n *\n * @param data - Array of objects to compute interpolated values for\n *\n * @param multiple - Multiplier, e.g., 2 means to \"double\" the length of the array by puttting a value between each value\n *\n * @param accessor - Accessor function to return a numeric property value, if the input data is not numeric\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "interpolate: "
+            },
+            {
+              "kind": "Content",
+              "text": "(data: any[], multiple: number, accessor?: (d: any) => any) => number[]"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "interpolate",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@essex/toolbox!parseRgbFromCssColor:function(1)",
+          "docComment": "/**\n * Creates RGB color object from HEX color string\n *\n * @param color - HEX color string\n *\n * @returns rgb color object \\{r:number, g: number, b:number\\}\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function parseRgbFromCssColor(color: "
+            },
+            {
+              "kind": "Content",
+              "text": "string"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "RGB",
+              "canonicalReference": "@essex/toolbox!~RGB:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 4
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "color",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "parseRgbFromCssColor"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@essex/toolbox!throttle:function(1)",
+          "docComment": "/**\n * Debounces function based on options provided\n *\n * @param func - function to throttle\n *\n * @param wait - time in milliseconds\n *\n * @param options - optional object param to control timing, ex. \\{trailing: false, leading: true\\}\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function throttle(func: "
+            },
+            {
+              "kind": "Content",
+              "text": "(...args: any[]) => any"
+            },
+            {
+              "kind": "Content",
+              "text": ", wait?: "
+            },
+            {
+              "kind": "Content",
+              "text": "number"
+            },
+            {
+              "kind": "Content",
+              "text": ", options?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ThrottleOptions",
+              "canonicalReference": "@essex/toolbox!ThrottleOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "any"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 7,
+            "endIndex": 8
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "func",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "wait",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": true
+            },
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "throttle"
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@essex/toolbox!ThrottleOptions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ThrottleOptions "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ThrottleOptions",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/toolbox!ThrottleOptions#leading:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "leading: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "leading",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/toolbox!ThrottleOptions#trailing:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "trailing: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "trailing",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        }
+      ]
+    }
+  ]
+}

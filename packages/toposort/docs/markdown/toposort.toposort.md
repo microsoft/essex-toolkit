@@ -9,19 +9,18 @@ Toposort an edge list
 <b>Signature:</b>
 
 ```typescript
-export default function toposort<T = string>(
-  edges: ReadonlyArray<[T, T | undefined]>
-): T[];
+export default function toposort<T = string>(edges: ReadonlyArray<[T, T | undefined]>): T[];
 ```
 
 ## Parameters
 
-| Parameter | Type                                       | Description   |
-| --------- | ------------------------------------------ | ------------- |
-| edges     | ReadonlyArray&lt;\[T, T \| undefined\]&gt; | the edge list |
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  edges | ReadonlyArray&lt;\[T, T \| undefined\]&gt; | the edge list |
 
 <b>Returns:</b>
 
 T\[\]
 
 the topologically sorted node array
+

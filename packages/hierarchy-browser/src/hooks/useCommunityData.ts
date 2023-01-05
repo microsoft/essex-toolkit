@@ -102,7 +102,7 @@ export function useCommunityData(
 		isLoading,
 		loadMore,
 		moreToLoad,
-		isOpen,
+		isOpen ?? false,
 		toggleOpen,
 		filterProps,
 	]

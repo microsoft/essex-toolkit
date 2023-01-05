@@ -1,0 +1,1377 @@
+{
+  "metadata": {
+    "toolPackage": "@microsoft/api-extractor",
+    "toolVersion": "7.29.2",
+    "schemaVersion": 1009,
+    "oldestForwardsCompatibleVersion": 1001,
+    "tsdocConfig": {
+      "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
+      "noStandardTags": true,
+      "tagDefinitions": [
+        {
+          "tagName": "@alpha",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@beta",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@defaultValue",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@decorator",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@deprecated",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@eventProperty",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@example",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@experimental",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@inheritDoc",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@internal",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@label",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@link",
+          "syntaxKind": "inline",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@override",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@packageDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@param",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@privateRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@public",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@readonly",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@remarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@returns",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@sealed",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@see",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@throws",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@typeParam",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@virtual",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@betaDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@internalRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@preapproved",
+          "syntaxKind": "modifier"
+        }
+      ],
+      "supportForTags": {
+        "@alpha": true,
+        "@beta": true,
+        "@defaultValue": true,
+        "@decorator": true,
+        "@deprecated": true,
+        "@eventProperty": true,
+        "@example": true,
+        "@experimental": true,
+        "@inheritDoc": true,
+        "@internal": true,
+        "@label": true,
+        "@link": true,
+        "@override": true,
+        "@packageDocumentation": true,
+        "@param": true,
+        "@privateRemarks": true,
+        "@public": true,
+        "@readonly": true,
+        "@remarks": true,
+        "@returns": true,
+        "@sealed": true,
+        "@see": true,
+        "@throws": true,
+        "@typeParam": true,
+        "@virtual": true,
+        "@betaDocumentation": true,
+        "@internalRemarks": true,
+        "@preapproved": true
+      },
+      "reportUnsupportedHtmlElements": false
+    }
+  },
+  "kind": "Package",
+  "canonicalReference": "@essex/hooks!",
+  "docComment": "",
+  "name": "@essex/hooks",
+  "preserveMemberOrder": false,
+  "members": [
+    {
+      "kind": "EntryPoint",
+      "canonicalReference": "@essex/hooks!",
+      "name": "",
+      "preserveMemberOrder": false,
+      "members": [
+        {
+          "kind": "Interface",
+          "canonicalReference": "@essex/hooks!Consent:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface Consent "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Consent",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/hooks!Consent#Advertising:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Advertising: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "Advertising",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/hooks!Consent#Analytics:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Analytics: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "Analytics",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/hooks!Consent#Required:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Required: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "Required",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/hooks!Consent#SocialMedia:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SocialMedia: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "SocialMedia",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@essex/hooks!ConsentOptions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ConsentOptions "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ConsentOptions",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/hooks!ConsentOptions#elementId:member",
+              "docComment": "/**\n * default: 'cookie-consent'\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "elementId?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "elementId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/hooks!ConsentOptions#onChange:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "onChange?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(c: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Consent",
+                  "canonicalReference": "@essex/hooks!Consent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ") => void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "onChange",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/hooks!ConsentOptions#theme:member",
+              "docComment": "/**\n * Default: 'dark'\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "theme?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "theme",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@essex/hooks!Destroyable:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface Destroyable "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Destroyable",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "@essex/hooks!Destroyable#destroy:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "destroy(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "any"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "destroy"
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@essex/hooks!Dimensions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface Dimensions "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Dimensions",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/hooks!Dimensions#height:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "height: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "height",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/hooks!Dimensions#width:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "width: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "width",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@essex/hooks!DynamicData:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type DynamicData<T> = "
+            },
+            {
+              "kind": "Content",
+              "text": "T | "
+            },
+            {
+              "kind": "Reference",
+              "text": "AsyncIterable",
+              "canonicalReference": "!AsyncIterable:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DynamicData",
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 4
+          }
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@essex/hooks!useDestroyable:function(1)",
+          "docComment": "/**\n * A hook for using a destroyable thing, so when the value changes the previous value is destroyed\n *\n * @param initialValue - The initial value\n *\n * @returns The current value as well as a setter for the new value\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useDestroyable<T extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Partial",
+              "canonicalReference": "!Partial:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Destroyable",
+              "canonicalReference": "@essex/hooks!Destroyable:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ">(initialValue?: "
+            },
+            {
+              "kind": "Content",
+              "text": "T"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "[T, (state: T) => any]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 8,
+            "endIndex": 9
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "initialValue",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "isOptional": true
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "useDestroyable"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@essex/hooks!useDimensions:function(1)",
+          "docComment": "/**\n * A hook for getting the dimensions of the given element. This hook also updates when the given element resizes. NOTE: ResizeObserver must be defined in the target runtime. BYO polyfill if it is not provided by default\n *\n * @param ref - A ref to the element to measure\n *\n * @returns The dimensions for the element.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useDimensions(ref: "
+            },
+            {
+              "kind": "Reference",
+              "text": "MutableRefObject",
+              "canonicalReference": "@types/react!~React.MutableRefObject:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "HTMLElement",
+              "canonicalReference": "!HTMLElement:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | null>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Dimensions",
+              "canonicalReference": "@essex/hooks!Dimensions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 6,
+            "endIndex": 8
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "ref",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "useDimensions"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@essex/hooks!useDynamicData:function(1)",
+          "docComment": "/**\n * Hook which allows for the use of a dynamic data source\n *\n * @param values - The raw set of values, or an iterator to get the values\n *\n * @param map - An optional mapping function which takes a list of values and transforms them\n *\n * @param deps - The optional list of dependencies to use when updating the values\n *\n * @returns The last value from the iterator\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useDynamicData<InputType, OutputType = "
+            },
+            {
+              "kind": "Content",
+              "text": "InputType"
+            },
+            {
+              "kind": "Content",
+              "text": ">(values?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "DynamicData",
+              "canonicalReference": "@essex/hooks!DynamicData:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<InputType>"
+            },
+            {
+              "kind": "Content",
+              "text": ", map?: "
+            },
+            {
+              "kind": "Content",
+              "text": "(values: InputType) => OutputType"
+            },
+            {
+              "kind": "Content",
+              "text": ", deps?: "
+            },
+            {
+              "kind": "Content",
+              "text": "any[]"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "OutputType | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 10,
+            "endIndex": 11
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "values",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "isOptional": true
+            },
+            {
+              "parameterName": "map",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "isOptional": true
+            },
+            {
+              "parameterName": "deps",
+              "parameterTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 9
+              },
+              "isOptional": true
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "InputType",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            },
+            {
+              "typeParameterName": "OutputType",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "name": "useDynamicData"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@essex/hooks!useEventListener:function(1)",
+          "docComment": "/**\n * Adds various listeners to the given element and cleans them up when done\n *\n * @param listenerMap - The listeners\n *\n * @param element - The element to attach the listeners to\n *\n * @param deps - The optional list of dependencies\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useEventListener(listenerMap: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ListenerMap",
+              "canonicalReference": "@essex/hooks!~ListenerMap:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", element: "
+            },
+            {
+              "kind": "Reference",
+              "text": "HTMLElement",
+              "canonicalReference": "!HTMLElement:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "Window",
+              "canonicalReference": "!Window:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | null | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ", ...deps: "
+            },
+            {
+              "kind": "Content",
+              "text": "any[]"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "void"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 10,
+            "endIndex": 11
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "listenerMap",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "element",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 7
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "deps",
+              "parameterTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 9
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "useEventListener"
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@essex/hooks!useInterval:var",
+          "docComment": "/**\n * Creates an interval with the specified delay, and clears it on unmount.\n *\n * @param callback - function to run on interval\n *\n * @param delay - ms delay to run callback at\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "useInterval: "
+            },
+            {
+              "kind": "Content",
+              "text": "(callback: () => void, delay: number) => void"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "useInterval",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@essex/hooks!useLongRunning:function(1)",
+          "docComment": "/**\n * A hook which invokes a long running task, and provides a loading flag\n *\n * @param execute - The long running task\n *\n * @param delay - The delay before running the long running task (this gives react time to render a loading bar before executing the task)\n *\n * @param deps - The optional list of dependencies\n *\n * @returns A loading flag and the output of the long running task\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useLongRunning<T>(execute: "
+            },
+            {
+              "kind": "Content",
+              "text": "() => T"
+            },
+            {
+              "kind": "Content",
+              "text": ", delay?: "
+            },
+            {
+              "kind": "Content",
+              "text": "number"
+            },
+            {
+              "kind": "Content",
+              "text": ", deps?: "
+            },
+            {
+              "kind": "Content",
+              "text": "unknown[]"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "[boolean, T | undefined]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 7,
+            "endIndex": 8
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "execute",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "delay",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": true
+            },
+            {
+              "parameterName": "deps",
+              "parameterTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "isOptional": true
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "useLongRunning"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@essex/hooks!useMicrosoftConsentBanner:function(1)",
+          "docComment": "/**\n * Uses the Microsoft cookie consent banner. The banner code should be loaded from CDN using a script tag. <script src=\"https://wcpstatic.microsoft.com/mscc/lib/v2/wcp-consent.js\"></script> You should also include a div for the cookie banner to render into: e.g. <div id=\"cookie-banner\" />\n *\n * @param options - The consent banner options. (optional) options.theme; \"light\" | \"dark\", default \"dark\") options.elementId; default = \"cookie-banner\" options.onChange; (consent: Consent) =\\> void; default=noop\n *\n * @returns [current consent; manageConsent function (to be used in footer)]\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useMicrosoftConsentBanner({ theme, elementId, onChange, }?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ConsentOptions",
+              "canonicalReference": "@essex/hooks!ConsentOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "["
+            },
+            {
+              "kind": "Reference",
+              "text": "Consent",
+              "canonicalReference": "@essex/hooks!Consent:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", () => void]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "{ theme, elementId, onChange, }",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "useMicrosoftConsentBanner"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@essex/hooks!useMousePosition:function(1)",
+          "docComment": "/**\n * Gets the current mouse position on the given element\n *\n * @param ref - The ref to the element\n *\n * @param debouceTime - The amount of time to wait between state updates\n *\n * @returns The current mouse position\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useMousePosition(ref: "
+            },
+            {
+              "kind": "Reference",
+              "text": "MutableRefObject",
+              "canonicalReference": "@types/react!~React.MutableRefObject:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "HTMLElement",
+              "canonicalReference": "!HTMLElement:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | null>"
+            },
+            {
+              "kind": "Content",
+              "text": ", debouceTime?: "
+            },
+            {
+              "kind": "Content",
+              "text": "number"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Position",
+              "canonicalReference": "@essex/hooks!~Position:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 8,
+            "endIndex": 9
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "ref",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "debouceTime",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "useMousePosition"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@essex/hooks!useScrollListener:function(1)",
+          "docComment": "/**\n * Adds a scroll listener to the given element\n *\n * @param listener - The listener\n *\n * @param element - The element to listen for scroll\n *\n * @param deps - The list of optional deps\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useScrollListener(listener: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Scrollistener",
+              "canonicalReference": "@essex/hooks!~Scrollistener:type"
+            },
+            {
+              "kind": "Content",
+              "text": ", element?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "HTMLElement",
+              "canonicalReference": "!HTMLElement:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "Window",
+              "canonicalReference": "!Window:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | null"
+            },
+            {
+              "kind": "Content",
+              "text": ", deps?: "
+            },
+            {
+              "kind": "Content",
+              "text": "any[]"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "void"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 10,
+            "endIndex": 11
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "listener",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "element",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 7
+              },
+              "isOptional": true
+            },
+            {
+              "parameterName": "deps",
+              "parameterTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 9
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "useScrollListener"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@essex/hooks!useSelectionHandler:function(1)",
+          "docComment": "/**\n * Provides basic selection handling,\n *\n * @param equal - A object equality function\n *\n * @param singleSelect - If it should operate in single select mode\n *\n * @returns The list of selected objects and a handler for adding new selections\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useSelectionHandler<T>(equal: "
+            },
+            {
+              "kind": "Reference",
+              "text": "isEqual",
+              "canonicalReference": "@essex/hooks!~isEqual:type"
+            },
+            {
+              "kind": "Content",
+              "text": ", singleSelect: "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "[T[], "
+            },
+            {
+              "kind": "Reference",
+              "text": "ClickHandler",
+              "canonicalReference": "@essex/hooks!~ClickHandler:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 8
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "equal",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "singleSelect",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": false
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "useSelectionHandler"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@essex/hooks!useToggle:function(1)",
+          "docComment": "/**\n * A hook for a toggleable state\n *\n * @param defaultValue - The default value for the toggle\n *\n * @returns The current toggle state as well as a function that can be called to toggle the state\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useToggle(defaultValue?: "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "[boolean | undefined, () => void]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 4
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "defaultValue",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "useToggle"
+        }
+      ]
+    }
+  ]
+}

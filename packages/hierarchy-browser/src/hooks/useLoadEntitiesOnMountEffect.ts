@@ -12,7 +12,7 @@ export function useLoadEntitiesOnMountEffect(
 		params?: ILoadParams,
 		init?: boolean,
 	) => void,
-	isOpen: boolean,
+	isOpen: boolean | undefined,
 	entitiesLoaded: boolean,
 	size = 0,
 ): void {

@@ -6,6 +6,7 @@
 
 ## Packages
 
-| Package                          | Description |
-| -------------------------------- | ----------- |
-| [@essex/toposort](./toposort.md) |             |
+|  Package | Description |
+|  --- | --- |
+|  [@essex/toposort](./toposort.md) |  |
+
