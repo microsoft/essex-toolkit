@@ -12,7 +12,7 @@
     "bundle": "build-storybook --quiet",
     "start:storybook": "yarn start",
     "bundle:storybook": "yarn bundle",
-    "lint": "essex lint --fix"
+    "lint": "essex lint --fix --noFormat"
   },
   "dependencies": {
     "@essex/boolean-expression-component": "workspace:^",

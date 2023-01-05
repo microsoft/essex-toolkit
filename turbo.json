@@ -18,8 +18,11 @@
 			"outputs": ["storybook_static/**"]
 		},
 		"ci": {
-			"dependsOn": ["build", "lint", "test", "bundle"],
+			"dependsOn": ["build", "lint", "//#romeci", "test", "bundle"],
 			"outputs": ["dist/**", "docs/**", "storybook_static/**"]
+		},
+		"//#romeci": {
+			"cache": false	
 		},
 		"clean": {
 			"cache": false

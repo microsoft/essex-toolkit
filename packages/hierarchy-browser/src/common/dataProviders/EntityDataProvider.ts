@@ -79,7 +79,7 @@ export class EntityDataProvider {
 	}
 
 	private getFilterEntitiesFromCache(): IEntityDetail[] {
-		return this._entities.filter(e => this._filteredIds.has(e.id))
+		return this._entities.filter((e) => this._filteredIds.has(e.id))
 	}
 
 	private async loadItemsAsync(
@@ -92,7 +92,7 @@ export class EntityDataProvider {
 			)
 			if (nextNodes?.error || nextNodes?.data) {
 				if (!nextNodes.error && nextNodes.data) {
-					const data = nextNodes.data.filter(d => d)
+					const data = nextNodes.data.filter((d) => d)
 					return data
 				}
 				throw nextNodes.error
@@ -110,7 +110,7 @@ export class EntityDataProvider {
 		if (data) {
 			if (filtered) {
 				//store ids in map
-				this._filteredIds = new Set(data.map(d => d.id))
+				this._filteredIds = new Set(data.map((d) => d.id))
 			} else {
 				this.addToEntitiesArray(data)
 			}

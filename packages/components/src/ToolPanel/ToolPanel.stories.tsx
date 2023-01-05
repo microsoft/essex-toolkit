@@ -23,7 +23,7 @@ const Template = (args: ToolPanelProps) => {
 			<ToolPanel {...args}>
 				{new Array(10).fill({}).map((a, i) => (
 					<div
-						key={i}
+						key={`item-${i}`}
 						style={{
 							height: 100,
 							border: '1px solid #bbb',

@@ -106,7 +106,7 @@ export const ThematicLineup = ({
 
 			const builder = lineupBuilder(data)
 
-			columns.forEach(config => {
+			columns.forEach((config) => {
 				const conf = {
 					...configDefaults,
 					...config,

@@ -104,7 +104,7 @@ const CommunityEdgeList: React.FC<ICommunityEdgeListProps> = memo(
 					{sortedEdges.map((edge, i) => {
 						const onEdgeClick = () => handleEdgeClick(edge)
 						return (
-							<TableRow key={i}>
+							<TableRow key={`edge-${i}`}>
 								<TableCell
 									style={{
 										...getBackgroundStyle(edge, i),

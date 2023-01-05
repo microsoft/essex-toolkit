@@ -27,8 +27,8 @@ export class EventEmitter {
 		if (!this.listeners.has(key)) {
 			this.listeners.set(key, [])
 		}
-		const listeners = this.listeners.get(key)!
-		if (handler) {
+		const listeners = this.listeners.get(key)
+		if (listeners && handler) {
 			listeners.push(handler)
 			return {
 				destroy: () => {
@@ -45,7 +45,7 @@ export class EventEmitter {
 		if (handler) {
 			const { namespace, event } = this.getNamespaceAndEvent(key)
 			if (namespace && !event) {
-				Object.keys(this.listeners).forEach(otherKey => {
+				Object.keys(this.listeners).forEach((otherKey) => {
 					const { namespace: otherNamespace } =
 						this.getNamespaceAndEvent(otherKey)
 					if (otherNamespace === namespace) {
@@ -69,12 +69,11 @@ export class EventEmitter {
 	 */
 	public emit(name: string, ...args: any[]): void {
 		const keys = [...this.listeners.keys()]
-		keys.forEach(otherKey => {
+		keys.forEach((otherKey) => {
 			const { event } = this.getNamespaceAndEvent(otherKey)
-			if (event === name) {
-				this.listeners.get(otherKey)!.forEach(l => {
-					l.apply(this, args)
-				})
+			const handlers = this.listeners.get(otherKey)
+			if (handlers && event === name) {
+				handlers.forEach((l) => l.apply(this, args))
 			}
 		})
 	}

@@ -22,7 +22,7 @@
   "scripts": {
     "clean": "essex clean dist lib",
     "build": "essex build --mode dual --skipExportCheck --docs",
-    "lint": "essex lint --fix",
+    "lint": "essex lint --fix --noFormat",
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "devDependencies": {

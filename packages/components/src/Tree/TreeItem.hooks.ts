@@ -121,7 +121,7 @@ export function useMenuButtonProps(
 ) {
 	const [open, setOpen] = useState<boolean>(false)
 	const onMenuClick = useCallback(
-		args => {
+		(args) => {
 			setOpen(true)
 			props?.onMenuClick?.(args)
 		},

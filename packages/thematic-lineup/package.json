@@ -15,7 +15,7 @@
   "scripts": {
     "build": "essex build --skipExportCheck --docs",
     "clean": "essex clean",
-    "lint": "essex lint --fix",
+    "lint": "essex lint --fix --noFormat",
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "devDependencies": {
