@@ -38,7 +38,7 @@ export const CommunityTable: React.FC<ICommunityTableProps> = memo(
 	}: ICommunityTableProps) {
 		const isSelected = useCallback(
 			(entity: IEntityDetail): boolean | undefined =>
-				selections && selections.includes(entity.id),
+				selections?.includes(entity.id),
 			[selections],
 		)
 		const attrKeys: string[] = useMemo(() => {

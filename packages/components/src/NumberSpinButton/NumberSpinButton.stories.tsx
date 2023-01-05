@@ -22,7 +22,7 @@ const Template: ComponentStory<typeof NumberSpinButton> = (
 	args: NumberSpinButtonProps,
 ) => {
 	const [value, setValue] = useState(10)
-	const handleChange = useCallback(n => setValue(n), [setValue])
+	const handleChange = useCallback((n) => setValue(n), [setValue])
 	return <NumberSpinButton {...args} value={value} onChange={handleChange} />
 }
 

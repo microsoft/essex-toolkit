@@ -1,36 +1,35 @@
 {
-	"name": "@essex/msal-interactor",
-	"version": "4.0.8",
-	"type": "module",
-	"main": "src/index.ts",
-	"publishConfig": {
-		"main": "dist/index.js",
-		"types": "dist/index.d.ts"
-	},
-	"sideEffects": false,
-	"repository": "https://github.com/microsoft/essex-toolkit",
-	"author": "Chris Trevino <chtrevin@microsoft.com>",
-	"contributors": [
-		"Chris Trevino <chtrevin@microsoft.com>",
-		"Derek Worthen <deworthe@microsoft.com>"
-	],
-	"license": "MIT",
-	"scripts": {
-		"build": "essex build --docs",
-		"clean": "essex clean",
-		"lint": "essex lint",
-		"lint_fix": "essex lint --fix",
-		"release": "yarn npm publish --tolerate-republish --access public"
-	},
-	"devDependencies": {
-		"@azure/msal-browser": "^2.28.3",
-		"@essex/scripts": "^22.0.7",
-		"@types/debug": "^4.1.7"
-	},
-	"dependencies": {
-		"debug": "^4.3.4"
-	},
-	"peerDependencies": {
-		"@azure/msal-browser": "> 2"
-	}
+  "name": "@essex/msal-interactor",
+  "version": "4.0.8",
+  "type": "module",
+  "main": "src/index.ts",
+  "publishConfig": {
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts"
+  },
+  "sideEffects": false,
+  "repository": "https://github.com/microsoft/essex-toolkit",
+  "author": "Chris Trevino <chtrevin@microsoft.com>",
+  "contributors": [
+    "Chris Trevino <chtrevin@microsoft.com>",
+    "Derek Worthen <deworthe@microsoft.com>"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "essex build --docs",
+    "clean": "essex clean",
+    "lint": "essex lint --fix --noFormat",
+    "release": "yarn npm publish --tolerate-republish --access public"
+  },
+  "devDependencies": {
+    "@azure/msal-browser": "^2.32.1",
+    "@essex/scripts": "^22.2.1",
+    "@types/debug": "^4.1.7"
+  },
+  "dependencies": {
+    "debug": "^4.3.4"
+  },
+  "peerDependencies": {
+    "@azure/msal-browser": "> 2"
+  }
 }

@@ -25,7 +25,7 @@ export const ButtonChoiceGroup: React.FC<IChoiceGroupProps> = memo(
 		const buttonOptionStyles = useButtonOptionStyles()
 		const buttonOptions = useMemo(
 			(): IChoiceGroupOption[] | undefined =>
-				options?.map(option =>
+				options?.map((option) =>
 					merge(
 						{
 							styles: buttonOptionStyles,

@@ -113,7 +113,7 @@ export const HistogramSelect = ({
 	useEffect(() => {
 		const outerElements = chartElements.current
 		if (outerElements) {
-			outerElements.onBrushEnd = event => {
+			outerElements.onBrushEnd = (event) => {
 				const elements = chartElements.current
 				if (elements) {
 					const brushSelection = elements.brushSelection
@@ -235,14 +235,12 @@ export const HistogramSelect = ({
 				.attr('x', 1)
 				.attr(
 					'transform',
-					d =>
-						'translate(' +
-						elements.xScale(d.x0 as number) +
-						',' +
-						elements.yScale(d.length) +
-						')',
+					(d) =>
+						`translate(${elements.xScale(d.x0 as number)},${elements.yScale(
+							d.length,
+						)})`,
 				)
-				.attr('width', d =>
+				.attr('width', (d) =>
 					Math.max(
 						0,
 						elements.xScale(d.x1 as number) ||
@@ -252,9 +250,9 @@ export const HistogramSelect = ({
 				)
 				.attr(
 					'height',
-					d => elements.vpHeight - (elements.yScale(d.length) || 0),
+					(d) => elements.vpHeight - (elements.yScale(d.length) || 0),
 				)
-				.style('fill', d => {
+				.style('fill', (d) => {
 					const selectionStart =
 						selectedRange[0] !== undefined ? selectedRange[0] : minDataValue
 					const selectionEnd =

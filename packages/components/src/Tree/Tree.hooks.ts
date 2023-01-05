@@ -20,7 +20,7 @@ export function useExpansion(): Expansion {
 		() => ({
 			is: (key: string) => expandMap[key],
 			on: (key: string) =>
-				setExpandMap(prev => ({
+				setExpandMap((prev) => ({
 					...prev,
 					[key]: !prev[key],
 				})),
@@ -47,7 +47,7 @@ export function useTreeItemGroups(
 			{
 				key: rkey,
 			},
-		].map(group => ({
+		].map((group) => ({
 			...group,
 			items: makeDetailedItems(
 				collected.get(group.key) || [],
@@ -81,14 +81,14 @@ function makeDetailedItems(
 	onItemClick?: (item: TreeItem) => void,
 	onItemExpandClick?: (item: TreeItem) => void,
 ): TreeItem[] {
-	return items.map(item => {
+	return items.map((item) => {
 		const { children, onClick, onExpand, selected, expanded, ...rest } = item
 		const base: TreeItem = {
 			...rest,
 			depth,
 			selected: selected || item.key === selectedKey,
 			expanded: expanded || expansion.is(item.key),
-			onExpand: itm => {
+			onExpand: (itm) => {
 				expansion.on(itm.key)
 				if (onExpand) {
 					onExpand(itm)
@@ -98,7 +98,7 @@ function makeDetailedItems(
 			},
 			onClick:
 				onClick || onItemClick
-					? itm => {
+					? (itm) => {
 							if (onClick) {
 								onClick(itm)
 							} else if (onItemClick) {

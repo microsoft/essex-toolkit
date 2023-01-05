@@ -31,16 +31,15 @@ export const ColumnarMenuList: React.FC<ColumnarMenuListProps> = memo(
 
 		return (
 			<div style={styles.menu}>
-				{buttons &&
-					buttons.map(b => (
-						<>
-							{verifySeparator(b.data?.topDivider)}
-							{defaultMenuItemRenderer(b as any)}
-							{verifySeparator(b.data?.bottomDivider)}
-						</>
-					))}
+				{buttons?.map((b) => (
+					<>
+						{verifySeparator(b.data?.topDivider)}
+						{defaultMenuItemRenderer(b as any)}
+						{verifySeparator(b.data?.bottomDivider)}
+					</>
+				))}
 				<div style={styles.options}>
-					{formatted.map(item => {
+					{formatted.map((item) => {
 						const { key } = item
 						return (
 							<div style={styles.column} key={`menu-group-${key}`}>
@@ -48,7 +47,7 @@ export const ColumnarMenuList: React.FC<ColumnarMenuListProps> = memo(
 								{item.itemType === ContextualMenuItemType.Section ? (
 									<>
 										{verifySeparator(item.sectionProps?.topDivider)}
-										{item.sectionProps?.items.map(subitem =>
+										{item.sectionProps?.items.map((subitem) =>
 											defaultMenuItemRenderer(subitem as any),
 										)}
 										{verifySeparator(item.sectionProps?.bottomDivider)}

@@ -41,9 +41,10 @@ export function useLoadMoreEntitiesHandler(
 			//pagenumber baked in with react-infinte-scroller
 			const initialOffset = entities ? entities.length : 0
 			const offset =
-				params && params.offset !== undefined ? params.offset : initialOffset
-			const loadCount =
-				params && params.loadCount ? params.loadCount : DEFAULT_LOAD_COUNT
+				params?.offset !== undefined ? params.offset : initialOffset
+			const loadCount = params?.loadCount
+				? params.loadCount
+				: DEFAULT_LOAD_COUNT
 			if (!moreToLoad) {
 				return getEntities()
 			}
@@ -60,7 +61,7 @@ export function useLoadMoreEntitiesHandler(
 						params?.type,
 						params?.max,
 					)
-					.then(nodes => {
+					.then((nodes) => {
 						if (nodes && nodes.length > 0) {
 							const current = entities ? entities : []
 							const all = [...current, ...nodes]
@@ -74,7 +75,7 @@ export function useLoadMoreEntitiesHandler(
 						}
 						return []
 					})
-					.catch(err => {
+					.catch((err) => {
 						console.warn('error', err)
 						setMoreToLoad(false)
 						handleEntitiesLoaded([], err)

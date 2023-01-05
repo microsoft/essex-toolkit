@@ -153,12 +153,12 @@ const TREE_ITEMS: TreeItem[] = [
 	},
 ]
 
-const containerStyle = {
+const containerStyle: React.CSSProperties = {
 	display: 'flex',
 	gap: 20,
 }
 
-const boxStyle = {
+const boxStyle: React.CSSProperties = {
 	width: 300,
 	height: 400,
 	border: '1px solid orange',
@@ -176,8 +176,8 @@ const Template: ComponentStory<typeof Tree> = (args: TreeProps) => {
 					<Tree
 						{...args}
 						selectedKey={selected}
-						onItemClick={item => setSelected(item.key)}
-					></Tree>
+						onItemClick={(item) => setSelected(item.key)}
+					/>
 				</div>
 			</div>
 			<div>
@@ -187,11 +187,11 @@ const Template: ComponentStory<typeof Tree> = (args: TreeProps) => {
 						{...args}
 						size={'small'}
 						selectedKey={selected}
-						onItemClick={item => setSelected(item.key)}
-						onItemExpandClick={item => console.log('expand clicked', item)}
-					></Tree>
+						onItemClick={(item) => setSelected(item.key)}
+						onItemExpandClick={(item) => console.log('expand clicked', item)}
+					/>
 				</div>
-				<div></div>
+				<div />
 			</div>
 		</div>
 	)
@@ -270,13 +270,13 @@ ItemProps.args = {
 			key: 'item-1',
 			text: 'Item 1 (selected, onClick)',
 			selected: true,
-			onClick: item => console.log('click override', item),
+			onClick: (item) => console.log('click override', item),
 			children: [
 				{
 					key: 'item-1.1',
 					text: 'Item 1.1 (expanded, onExpand)',
 					expanded: true,
-					onExpand: item => console.log('expand override', item),
+					onExpand: (item) => console.log('expand override', item),
 					children: [
 						{
 							key: 'item-1.1.1 ',
@@ -361,7 +361,7 @@ CustomRenderers.args = {
 					iconName: 'Table',
 				},
 			],
-			onRenderTitle: props => (
+			onRenderTitle: (props) => (
 				<div
 					style={{
 						padding: 4,
@@ -369,7 +369,7 @@ CustomRenderers.args = {
 						border: '1px solid dodgerblue',
 					}}
 				>
-					<>{`${props.item.text} (Custom title)`}</>
+					<>{`${props?.item.text} (Custom title)`}</>
 				</div>
 			),
 		},

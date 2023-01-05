@@ -36,7 +36,7 @@ export function useChoiceGroupProps(
 function useOptions(options?: IChoiceGroupOption[], size: Size = 'medium') {
 	const styles = useOptionStyles(size)
 	return useMemo(
-		() => options?.map(o => merge({ styles }, o)),
+		() => options?.map((o) => merge({ styles }, o)),
 		[options, styles],
 	)
 }

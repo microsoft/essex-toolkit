@@ -53,7 +53,7 @@ const sortIntoGroups = (
 	const grouped = groups.reduce((acc: any, cur: any) => {
 		const { keys } = cur
 		const settings = keys.map((key: any) => {
-			const match = depleting.findIndex(s => s.key === key)
+			const match = depleting.findIndex((s) => s.key === key)
 			return depleting.splice(match, 1)[0]
 		})
 		return [
@@ -92,7 +92,7 @@ export const Settings = ({
 	const parsed = parseSettings(settings, config)
 	const handleChange = useCallback(
 		(key, value) => {
-			onChange && onChange(key, value)
+			onChange?.(key, value)
 		},
 		[onChange],
 	)

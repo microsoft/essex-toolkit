@@ -25,7 +25,7 @@ export function useMousePosition(
 	const [position, setPosition] = useState<Position>({ x: 0, y: 0 })
 	useEventListener(
 		{
-			mousemove: debounce(event => {
+			mousemove: debounce((event) => {
 				setPosition({
 					x: event.offsetX,
 					y: event.offsetY,

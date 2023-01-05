@@ -1,51 +1,50 @@
 {
-	"name": "@essex/thematic-lineup",
-	"version": "2.0.14",
-	"description": "thematic-themed adaption of lineup.js",
-	"type": "module",
-	"main": "src/index.ts",
-	"publishConfig": {
-		"main": "dist/index.js",
-		"types": "dist/index.d.ts"
-	},
-	"sideEffects": false,
-	"repository": "https://github.com/microsoft/essex-toolkit",
-	"author": "Nathan Evans <naevans@microsoft.com>",
-	"license": "MIT",
-	"scripts": {
-		"build": "essex build --skipExportCheck --docs",
-		"clean": "essex clean",
-		"lint": "essex lint",
-		"lint_fix": "essex lint --fix",
-		"release": "yarn npm publish --tolerate-republish --access public"
-	},
-	"devDependencies": {
-		"@essex/scripts": "^22.0.7",
-		"@mdx-js/react": "^1.6.22",
-		"@storybook/addon-docs": "^6.5.14",
-		"@thematic/color": "^4.0.2",
-		"@thematic/core": "^4.0.2",
-		"@thematic/d3": "^2.0.17",
-		"@thematic/fluent": "^5.0.3",
-		"@thematic/react": "^2.1.4",
-		"@types/node": "^18.11.14",
-		"@types/react": "^18.0.26",
-		"@types/react-dom": "^18.0.9",
-		"@types/react-test-renderer": "^18.0.0",
-		"lineupjs": "^4.7.0",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0"
-	},
-	"peerDependencies": {
-		"@thematic/color": ">=0.8.0",
-		"@thematic/core": ">=0.8.0",
-		"@thematic/d3": ">=0.8.0",
-		"@thematic/fluent": ">=0.8.0",
-		"@thematic/react": ">=0.8.0",
-		"@types/node": "*",
-		"lineupjs": ">=3.3.0",
-		"react": ">= 18",
-		"react-dom": ">= 18",
-		"tslib": "*"
-	}
+  "name": "@essex/thematic-lineup",
+  "version": "2.0.14",
+  "description": "thematic-themed adaption of lineup.js",
+  "type": "module",
+  "main": "src/index.ts",
+  "publishConfig": {
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts"
+  },
+  "sideEffects": false,
+  "repository": "https://github.com/microsoft/essex-toolkit",
+  "author": "Nathan Evans <naevans@microsoft.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "essex build --skipExportCheck --docs",
+    "clean": "essex clean",
+    "lint": "essex lint --fix --noFormat",
+    "release": "yarn npm publish --tolerate-republish --access public"
+  },
+  "devDependencies": {
+    "@essex/scripts": "^22.2.1",
+    "@mdx-js/react": "^1.6.22",
+    "@storybook/addon-docs": "^6.5.15",
+    "@thematic/color": "^4.0.2",
+    "@thematic/core": "^4.0.2",
+    "@thematic/d3": "^2.0.17",
+    "@thematic/fluent": "^5.0.3",
+    "@thematic/react": "^2.1.4",
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.10",
+    "@types/react-test-renderer": "^18.0.0",
+    "lineupjs": "^4.7.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "peerDependencies": {
+    "@thematic/color": ">=0.8.0",
+    "@thematic/core": ">=0.8.0",
+    "@thematic/d3": ">=0.8.0",
+    "@thematic/fluent": ">=0.8.0",
+    "@thematic/react": ">=0.8.0",
+    "@types/node": "*",
+    "lineupjs": ">=3.3.0",
+    "react": ">= 18",
+    "react-dom": ">= 18",
+    "tslib": "*"
+  }
 }

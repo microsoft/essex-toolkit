@@ -1,41 +1,40 @@
 {
-	"name": "@essex/boolean-expression-component",
-	"version": "1.0.11",
-	"author": "Chris Trevino <chtrevin@microsoft.com>",
-	"license": "MIT",
-	"type": "module",
-	"main": "src/index.ts",
-	"publishConfig": {
-		"main": "dist/index.js",
-		"types": "dist/index.d.ts"
-	},
-	"sideEffects": false,
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/microsoft/essex-toolkit.git",
-		"directory": "packages/boolean-expression-component"
-	},
-	"scripts": {
-		"build": "essex build --skipExportCheck --docs",
-		"clean": "essex clean",
-		"lint": "essex lint",
-		"lint_fix": "essex lint --fix",
-		"release": "yarn npm publish --tolerate-republish --access public"
-	},
-	"devDependencies": {
-		"@essex/scripts": "^22.0.7",
-		"@fluentui/react": "^8.103.8",
-		"@mdx-js/react": "^1.6.22",
-		"@storybook/addon-docs": "^6.5.14",
-		"@types/react": "^18.0.26",
-		"@types/react-dom": "^18.0.9",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0"
-	},
-	"peerDependencies": {
-		"@fluentui/react": "*",
-		"@types/react": "*",
-		"@types/react-dom": "*",
-		"react": "*"
-	}
+  "name": "@essex/boolean-expression-component",
+  "version": "1.0.11",
+  "author": "Chris Trevino <chtrevin@microsoft.com>",
+  "license": "MIT",
+  "type": "module",
+  "main": "src/index.ts",
+  "publishConfig": {
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts"
+  },
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/essex-toolkit.git",
+    "directory": "packages/boolean-expression-component"
+  },
+  "scripts": {
+    "build": "essex build --skipExportCheck --docs",
+    "clean": "essex clean",
+    "lint": "essex lint --fix --noFormat",
+    "release": "yarn npm publish --tolerate-republish --access public"
+  },
+  "devDependencies": {
+    "@essex/scripts": "^22.2.1",
+    "@fluentui/react": "^8.104.1",
+    "@mdx-js/react": "^1.6.22",
+    "@storybook/addon-docs": "^6.5.15",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "peerDependencies": {
+    "@fluentui/react": "*",
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "react": "*"
+  }
 }

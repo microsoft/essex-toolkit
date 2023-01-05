@@ -118,13 +118,13 @@ export const ClippedGraph = ({
 		const line = data.reduce((acc, cur, idx) => {
 			const x = xScale(idx)
 			const y = yScale(cur)
-			return acc + `L${x},${y}`
+			return `${acc}L${x},${y}`
 		}, '')
 
 		// for the line chart itself, prepend a move to the first position
-		const path = `M${0},${yScale(data[0])}` + line
+		const path = `M${0},${yScale(data[0])}${line}`
 		// for the clip path, instead we want to start and end at zeros for a complete fill
-		const clip = `M${0},${height}` + line + `L${width},${height}`
+		const clip = `M${0},${height}${line}L${width},${height}`
 
 		const clipId = `gradient-clip-${Math.random()}`
 		svg

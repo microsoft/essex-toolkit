@@ -29,7 +29,7 @@ export function useEventListener(
 ): void {
 	useEffect(() => {
 		if (element) {
-			const listeners = Object.keys(listenerMap || {}).map(evt => {
+			const listeners = Object.keys(listenerMap || {}).map((evt) => {
 				const listener = (listenerMap as any)[evt]
 				element.addEventListener(evt, listener)
 

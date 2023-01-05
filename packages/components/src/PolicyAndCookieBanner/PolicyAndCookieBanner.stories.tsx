@@ -66,7 +66,7 @@ Theme.storyName = 'Theming cookie banner'
  */
 export const CookieChanges = Template.bind({})
 CookieChanges.args = {
-	onConsentChange: consents => console.log(consents),
+	onConsentChange: (consents) => console.log(consents),
 }
 CookieChanges.storyName = 'Listen for cookie consent changes'
 

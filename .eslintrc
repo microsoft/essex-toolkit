@@ -1,5 +1,5 @@
 {
-	"extends": "@essex/eslint-config",
+	"extends": "@essex/eslint-config/rome",
 	"rules": {
 		// Rules to re-enable eventually
 		"@typescript-eslint/explicit-function-return-type": "off",

@@ -12,7 +12,7 @@ export function attachDirectiveResolvers<ResolverType>(
 	directiveResolvers: Record<string, ResolverType>,
 ): GraphQLSchema {
 	return mapSchema(schema, {
-		[MapperKind.OBJECT_FIELD]: fieldConfig => {
+		[MapperKind.OBJECT_FIELD]: (fieldConfig) => {
 			const newFieldConfig = { ...fieldConfig }
 
 			const directives = getDirectives(schema, fieldConfig)

@@ -21,7 +21,7 @@ export function useMenuProps(
 ) {
 	const renderColumnarMenu: IRenderFunction<IContextualMenuListProps> =
 		useCallback(
-			menuProps =>
+			(menuProps) =>
 				menuProps ? (
 					<ColumnarMenuList {...menuProps} {...menuListProps} />
 				) : null,

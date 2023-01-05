@@ -31,7 +31,7 @@ export const ChipGroup: React.FC<{
 }) {
 	const chips = useMemo(
 		() =>
-			filters.map(f => (
+			filters.map((f) => (
 				/* TODO: restore onHover coloring */
 				<FilterChip
 					key={f.id}

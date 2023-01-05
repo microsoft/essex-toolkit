@@ -18,7 +18,7 @@ export function useContainerStyle(isOpen: boolean): React.CSSProperties {
 				border: `1px solid ${theme.application().faint().hex()}`,
 				flex: isOpen ? 1 : 'revert',
 				WebkitFlex: isOpen ? 1 : 'revert',
-			} as React.CSSProperties),
+			}) as React.CSSProperties,
 		[isOpen, theme],
 	)
 	return getTheme

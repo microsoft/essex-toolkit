@@ -24,7 +24,7 @@ export function useLoadMoreCommunitiesHandler(
 		}
 		dataProvider
 			.getAdjacentCommunities(offset, DEFAULT_LOAD_COUNT)
-			.then(moreCommunities => {
+			.then((moreCommunities) => {
 				if (moreCommunities && moreCommunities.length > 0) {
 					if (moreCommunities.length < DEFAULT_LOAD_COUNT) {
 						setMoreToLoad(false)
@@ -34,7 +34,7 @@ export function useLoadMoreCommunitiesHandler(
 					setMoreToLoad(false)
 				}
 			})
-			.catch(err => {
+			.catch((err) => {
 				setMoreToLoad(false)
 				handleEntitiesLoaded([], err)
 			})

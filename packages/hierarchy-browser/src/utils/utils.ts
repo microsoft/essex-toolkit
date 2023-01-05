@@ -27,7 +27,7 @@ interface IFlattenedEntities {
 export function flattenJSONObjects(
 	entities: IEntityDetail[],
 ): IFlattenedEntities[] {
-	return entities.map(d => {
+	return entities.map((d) => {
 		if (d.attrs) {
 			return Object.assign({}, { id: d.id, ...d.attrs })
 		}
@@ -39,11 +39,11 @@ export function convertJSONToCSV(objArray: IFlattenedEntities[]): string {
 	return objArray.reduce((str, item) => {
 		const keys = Object.keys(item)
 		let line = ''
-		keys.forEach(key => {
+		keys.forEach((key) => {
 			if (line !== '') line += ','
 			line += item[key]
 		})
-		str += line + '\r\n'
+		str += `${line}\r\n`
 		return str
 	}, '')
 }
@@ -65,7 +65,7 @@ export function exportCSVFile(items: IEntityDetail[], fileTitle: string): void {
 	const datastring = convertJSONToCSV(flatEntities)
 	const headerstring = convertHeaderToString(headers)
 	const csv = headerstring + datastring
-	const exportedFilename = fileTitle + '.csv'
+	const exportedFilename = `${fileTitle}.csv`
 	const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
 	const link = document.createElement('a')
 	if (link.download !== undefined) {

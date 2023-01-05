@@ -382,7 +382,7 @@ export const Fluent8 = () => {
 							<Nav {...navProps} {...mediumNavProps} />
 						</div>
 						<div style={control}>
-							<Nav {...navProps} {...smallNavProps}></Nav>
+							<Nav {...navProps} {...smallNavProps} />
 						</div>
 					</div>
 				</div>

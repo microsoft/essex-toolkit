@@ -121,15 +121,15 @@ export function useMenuButtonProps(
 ) {
 	const [open, setOpen] = useState<boolean>(false)
 	const onMenuClick = useCallback(
-		args => {
+		(args) => {
 			setOpen(true)
-			props?.onMenuClick && props.onMenuClick(args)
+			props?.onMenuClick?.(args)
 		},
 		[setOpen, props],
 	)
 	const onAfterMenuDismiss = useCallback(() => {
 		setOpen(false)
-		props?.onAfterMenuDismiss && props?.onAfterMenuDismiss()
+		props?.onAfterMenuDismiss?.()
 	}, [setOpen, props])
 	const shown = hovered || open || props?.alwaysVisible
 	const buttonStyles = useMenuButtonStyles(size)

@@ -36,7 +36,7 @@ export const Tree: React.FC<TreeProps> = memo(function Tree({
 	)
 	return (
 		<div style={_styles.root}>
-			{treeGroups.map(group => {
+			{treeGroups.map((group) => {
 				return (
 					<div style={_styles.group} key={`tree-group-${group.key}`}>
 						<ul style={_styles.list}>
@@ -46,7 +46,7 @@ export const Tree: React.FC<TreeProps> = memo(function Tree({
 								size,
 								onRenderGroupHeader,
 							})}
-							{group.items.map(item => (
+							{group.items.map((item) => (
 								<TreeItem
 									key={item.key}
 									item={item}
@@ -82,11 +82,11 @@ const TreeGroupHeader: React.FC<TreeGroupProps> = memo(function TreeGroupHeader(
 	)
 })
 
-const defaultGroupHeaderRenderer: IRenderFunction<TreeGroupProps> = props => {
+const defaultGroupHeaderRenderer: IRenderFunction<TreeGroupProps> = (props) => {
 	return props ? <TreeGroupHeader {...props} /> : null
 }
 
-const groupHeaderRenderer: IRenderFunction<TreeGroupProps> = props => {
+const groupHeaderRenderer: IRenderFunction<TreeGroupProps> = (props) => {
 	return props?.onRenderGroupHeader
 		? props.onRenderGroupHeader(props, defaultGroupHeaderRenderer)
 		: defaultGroupHeaderRenderer(props)

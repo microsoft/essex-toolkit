@@ -41,7 +41,7 @@ const Template: ComponentStory<typeof MultiDropdown> = (
 	const [selectedKeys, setSelectedKeys] = useState<string[] | number[]>(['one'])
 	const onChange = useCallback(
 		(_event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
-			setSelectedKeys(prev => {
+			setSelectedKeys((prev) => {
 				return option?.selected
 					? [...prev, option?.key]
 					: prev.filter((d: string | number) => d !== option?.key)
@@ -55,7 +55,7 @@ const Template: ComponentStory<typeof MultiDropdown> = (
 				HTMLAnchorElement | HTMLButtonElement | HTMLElement
 			>,
 			options?: IDropdownOption[],
-		) => setSelectedKeys(options?.map(opt => opt.key as string) || []),
+		) => setSelectedKeys(options?.map((opt) => opt.key as string) || []),
 		[setSelectedKeys],
 	)
 	return (

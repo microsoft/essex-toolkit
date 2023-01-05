@@ -18,14 +18,17 @@ interface EventNameSpace {
  * A mixin that adds support for event emitting
  */
 export class EventEmitter {
-	private listeners: { [key: string]: Handler[] } = {}
+	private listeners = new Map<string, Handler[]>()
 
 	/**
 	 * Adds an event listener for the given event
 	 */
 	public on(key: string, handler?: Handler): DestroyObject | undefined {
-		const listeners = (this.listeners[key] = this.listeners[key] || [])
-		if (handler) {
+		if (!this.listeners.has(key)) {
+			this.listeners.set(key, [])
+		}
+		const listeners = this.listeners.get(key)
+		if (listeners && handler) {
 			listeners.push(handler)
 			return {
 				destroy: () => {
@@ -42,15 +45,15 @@ export class EventEmitter {
 		if (handler) {
 			const { namespace, event } = this.getNamespaceAndEvent(key)
 			if (namespace && !event) {
-				Object.keys(this.listeners).forEach(otherKey => {
+				Object.keys(this.listeners).forEach((otherKey) => {
 					const { namespace: otherNamespace } =
 						this.getNamespaceAndEvent(otherKey)
 					if (otherNamespace === namespace) {
-						delete this.listeners[otherKey]
+						this.listeners.delete(otherKey)
 					}
 				})
 			} else {
-				const listeners = this.listeners[key]
+				const listeners = this.listeners.get(key)
 				if (listeners) {
 					const idx = listeners.indexOf(handler)
 					if (idx >= 0) {
@@ -65,12 +68,12 @@ export class EventEmitter {
 	 * Raises the given event
 	 */
 	public emit(name: string, ...args: any[]): void {
-		Object.keys(this.listeners).forEach(otherKey => {
+		const keys = [...this.listeners.keys()]
+		keys.forEach((otherKey) => {
 			const { event } = this.getNamespaceAndEvent(otherKey)
-			if (event === name) {
-				this.listeners[otherKey].forEach(l => {
-					l.apply(this, args)
-				})
+			const handlers = this.listeners.get(otherKey)
+			if (handlers && event === name) {
+				handlers.forEach((l) => l.apply(this, args))
 			}
 		})
 	}

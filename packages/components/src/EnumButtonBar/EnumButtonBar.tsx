@@ -41,7 +41,7 @@ export function EnumButtonBar<E>({
 	}, [enumeration, selected])
 
 	const handleChange = useCallback(
-		(s: string | number) => onChange && onChange(s),
+		(s: string | number) => onChange?.(s),
 		[onChange],
 	)
 

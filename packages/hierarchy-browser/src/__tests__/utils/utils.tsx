@@ -59,7 +59,7 @@ export function innerSearch(
 	container: JoinData[][],
 ): JoinData[][] {
 	if (parents.length > 0) {
-		parents.forEach(d => {
+		parents.forEach((d) => {
 			const values = clusterIDMap[`${d}`]
 			const p = values.reduce((acc, d: JoinData) => {
 				if (d.parentCluster) {
@@ -83,7 +83,7 @@ export const loadRemoteData = async (
 	const parsedData = CSVToArray(data, ',')
 	const header = parsedData[0]
 	const sliced = parsedData.slice(1)
-	const mappedValues: any[] = sliced.map(arr => {
+	const mappedValues: any[] = sliced.map((arr) => {
 		const obj = header.reduce((accum, colName, index) => {
 			let value: string | number = arr[index]
 			value = isNaN(+value) ? value : +value
@@ -99,15 +99,7 @@ export function CSVToArray(strData: string, strDelimiter: string): string[][] {
 	strDelimiter = strDelimiter || ','
 	const objPattern = new RegExp(
 		// Delimiters.
-		'(\\' +
-			strDelimiter +
-			'|\\r?\\n|\\r|^)' +
-			// Quoted fields.
-			'(?:"([^"]*(?:""[^"]*)*)"|' +
-			// Standard fields.
-			'([^"\\' +
-			strDelimiter +
-			'\\r\\n]*))',
+		`(\\${strDelimiter}|\\r?\\n|\\r|^)(?:"([^"]*(?:""[^"]*)*)"|([^"\\${strDelimiter}\\r\\n]*))`,
 		'gi',
 	)
 

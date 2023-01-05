@@ -99,7 +99,7 @@ Header.args = {
 			<div>Header</div>
 			<Toggle
 				styles={{ root: { margin: 0 } }}
-				onClick={e => e.stopPropagation()}
+				onClick={(e) => e.stopPropagation()}
 			/>
 		</div>
 	),
@@ -117,7 +117,7 @@ export const Controlled: ComponentStory<typeof CollapsiblePanel> = (
 ) => {
 	const [expanded, setExpanded] = useState<boolean>(false)
 	const onHeaderClick = useCallback(
-		() => setExpanded(prev => !prev),
+		() => setExpanded((prev) => !prev),
 		[setExpanded],
 	)
 	return (

@@ -1,9 +1,9 @@
 {
-	"recommendations": [
-		"dbaeumer.vscode-eslint",
-		"esbenp.prettier-vscode",
-		"editorconfig.editorconfig",
-		"arcanis.vscode-zipfs",
-		"silvenon.mdx"
-	]
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "arcanis.vscode-zipfs",
+    "silvenon.mdx",
+    "rome.rome"
+  ]
 }

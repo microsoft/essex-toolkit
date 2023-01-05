@@ -158,7 +158,7 @@ export class CommunityDataProvider {
 			filtered: this._filterEntitiesFlag,
 		}
 		try {
-			return this.loadNeighborsAsync(params).then(res => res || [])
+			return this.loadNeighborsAsync(params).then((res) => res || [])
 		} catch (err) {
 			console.warn(err)
 			throw Error(

@@ -85,7 +85,7 @@ export const TreeItem: React.FC<TreeItemProps> = memo(function TreeItem(props) {
 })
 
 // if we're in narrow mode, use a standard tooltip to display the item text on hover
-const TooltipWrapper: React.FC<PropsWithChildren<TreeItemProps>> = props => {
+const TooltipWrapper: React.FC<PropsWithChildren<TreeItemProps>> = (props) => {
 	const { narrow, item, children } = props
 	return (
 		<>
@@ -153,7 +153,7 @@ const TreeItemTitle: React.FC<TreeItemProps> = memo(function TreeItemTitle(
 		size,
 	)
 	const handleClick = useCallback(() => {
-		item.onClick && item.onClick(item)
+		item.onClick?.(item)
 	}, [item])
 	return (
 		<DefaultButton {..._contentButtonProps} onClick={handleClick}>
@@ -177,38 +177,37 @@ const TreeItemContent: React.FC<TreeItemProps> = memo(function TreeItemTitle(
 
 	return (
 		<>
-			{item.children &&
-				item.children.map(child => (
-					<TreeItem
-						key={child.key}
-						item={child}
-						styles={styles}
-						expandButtonProps={expandButtonProps}
-						contentButtonProps={contentButtonProps}
-						menuButtonProps={menuButtonProps}
-						size={size}
-						narrow={narrow}
-					/>
-				))}
+			{item.children?.map((child) => (
+				<TreeItem
+					key={child.key}
+					item={child}
+					styles={styles}
+					expandButtonProps={expandButtonProps}
+					contentButtonProps={contentButtonProps}
+					menuButtonProps={menuButtonProps}
+					size={size}
+					narrow={narrow}
+				/>
+			))}
 		</>
 	)
 })
 
-const defaultTitleRenderer: IRenderFunction<TreeItemProps> = props => {
+const defaultTitleRenderer: IRenderFunction<TreeItemProps> = (props) => {
 	return props ? <TreeItemTitle {...props} /> : null
 }
 
-const titleRenderer: IRenderFunction<TreeItemProps> = props => {
+const titleRenderer: IRenderFunction<TreeItemProps> = (props) => {
 	return props?.item.onRenderTitle
 		? props.item.onRenderTitle(props, defaultTitleRenderer)
 		: defaultTitleRenderer(props)
 }
 
-const defaultContentRenderer: IRenderFunction<TreeItemProps> = props => {
+const defaultContentRenderer: IRenderFunction<TreeItemProps> = (props) => {
 	return props ? <TreeItemContent {...props} /> : null
 }
 
-const contentRenderer: IRenderFunction<TreeItemProps> = props => {
+const contentRenderer: IRenderFunction<TreeItemProps> = (props) => {
 	return props?.item.onRenderContent
 		? props.item.onRenderContent(props, defaultContentRenderer)
 		: defaultContentRenderer(props)

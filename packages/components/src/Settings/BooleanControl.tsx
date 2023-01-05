@@ -19,7 +19,7 @@ export const BooleanControl = ({
 	const { key, value, type, label, control } = config
 	const handleChange = useCallback(
 		(evt, checked) => {
-			onChange && onChange(key, checked)
+			onChange?.(key, checked)
 		},
 		[key, onChange],
 	)

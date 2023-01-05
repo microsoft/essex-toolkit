@@ -19,13 +19,13 @@ export function useFormattedItems(
 ): IContextualMenuItem[] {
 	return useMemo(() => {
 		return items
-			.filter(i => !i?.data?.button)
-			.map(item =>
+			.filter((i) => !i?.data?.button)
+			.map((item) =>
 				merge({}, item, {
 					itemProps: { styles },
 					sectionProps: item.sectionProps
 						? {
-								items: item.sectionProps.items.map(subitem =>
+								items: item.sectionProps.items.map((subitem) =>
 									merge({}, subitem, {
 										itemProps: { styles },
 									}),
@@ -45,7 +45,7 @@ export function useButtonItems(
 	styles?: IContextualMenuItemStyles,
 ): IContextualMenuItem[] | undefined {
 	return useMemo(() => {
-		return items.filter(item => {
+		return items.filter((item) => {
 			if (item?.data?.button) {
 				item.itemProps = { styles }
 				return item

@@ -29,7 +29,7 @@ export function useStaticEntities({
 	const getNeighbors = useCallback(
 		(communityId: string) => {
 			if (edges && allEntities) {
-				const selected = edges.filter(d => `${d.neighbor}` === communityId)
+				const selected = edges.filter((d) => `${d.neighbor}` === communityId)
 				const parents = selected.reduce((acc, e: NeighborLocalEntity) => {
 					acc[e.cid] = acc[e.cid] ? acc[e.cid] + 1 : 1
 					return acc

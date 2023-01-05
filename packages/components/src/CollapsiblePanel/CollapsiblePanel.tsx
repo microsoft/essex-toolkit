@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import AnimateHeight from '@essex/react-animate-height'
 import { IconButton } from '@fluentui/react'
 import type { PropsWithChildren } from 'react'

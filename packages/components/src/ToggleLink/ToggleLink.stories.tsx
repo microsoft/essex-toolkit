@@ -20,7 +20,7 @@ export default meta
 
 const Template: ComponentStory<typeof ToggleLink> = (args: ToggleLinkProps) => {
 	const [expanded, setExpanded] = useState<boolean>(false)
-	const handleChange = useCallback(toggled => setExpanded(toggled), [])
+	const handleChange = useCallback((toggled) => setExpanded(toggled), [])
 	return (
 		<div>
 			This is a ToggleLink: <ToggleLink {...args} onChange={handleChange} />
