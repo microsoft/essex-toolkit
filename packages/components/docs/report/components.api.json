@@ -3403,6 +3403,42 @@
         },
         {
           "kind": "Variable",
+          "canonicalReference": "@essex/components!ReadOnlyTextField:var",
+          "docComment": "/**\n * This is a standard TextField, with default styles overridden to provide some consistent \"read only look\" that visually indicates the field can't be edited without looking fully disabled.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "ReadOnlyTextField: "
+            },
+            {
+              "kind": "Reference",
+              "text": "React.FC",
+              "canonicalReference": "@types/react!~React.FC:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "ITextFieldProps",
+              "canonicalReference": "@fluentui/react!ITextFieldProps:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "ReadOnlyTextField",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          }
+        },
+        {
+          "kind": "Variable",
           "canonicalReference": "@essex/components!SearchBox:var",
           "docComment": "/**\n * Extends the idea of a SearchBox to include the Search button alongside the text field. Note that this is a compound TextField + PrimaryButton. We may want to switch the the Fluent SearchBox field, which includes autocomplete capability.\n */\n",
           "excerptTokens": [

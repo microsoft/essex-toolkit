@@ -349,6 +349,11 @@ export type PolicyLinkProps = {
     divider?: boolean;
 };
 
+// Warning: (ae-missing-release-tag) "ReadOnlyTextField" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const ReadOnlyTextField: React.FC<ITextFieldProps>;
+
 // Warning: (ae-missing-release-tag) "SearchBox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public

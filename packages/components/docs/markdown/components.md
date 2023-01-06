@@ -79,6 +79,7 @@
 |  [MultiDropdown](./components.multidropdown.md) | Dropdown wrapper to manage multi-select with a select all/none helper. |
 |  [NumberSpinButton](./components.numberspinbutton.md) | NumberSpinButton creates a thematic styled SpinButton from Fluent |
 |  [PolicyAndCookieBanner](./components.policyandcookiebanner.md) |  |
+|  [ReadOnlyTextField](./components.readonlytextfield.md) | This is a standard TextField, with default styles overridden to provide some consistent "read only look" that visually indicates the field can't be edited without looking fully disabled. |
 |  [SearchBox](./components.searchbox.md) | Extends the idea of a SearchBox to include the Search button alongside the text field. Note that this is a compound TextField + PrimaryButton. We may want to switch the the Fluent SearchBox field, which includes autocomplete capability. |
 |  [Settings](./components.settings.md) | A zero-config settings panel that parses a supplied object and generates a list of Fluent UI controls based on the data types. A config object can be supplied that maps specific object fields to more detailed control config, such as changing between a Toggle or Checkbox. In addition, it will invoke a onChange handler for any setting, supplying the changed setting's key and new value. Note that this could be used in an entirely declarative/serializable manner if desired. |
 |  [ToggleLink](./components.togglelink.md) | Presents a hyperlink that toggles between two messages, like a toggle button. |
