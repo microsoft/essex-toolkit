@@ -21,7 +21,7 @@ const containerStyles: CSSProperties = {
 	padding: '10px',
 }
 
-const defaultLinks: Array<PolicyLinkDetails> = [
+export const defaultBannerLinks: Array<PolicyLinkDetails> = [
 	{
 		name: 'Privacy & Cookies',
 		href: ' https://go.microsoft.com/fwlink/?LinkId=521839',
@@ -56,7 +56,7 @@ export const PolicyAndCookieBanner: FC<PolicyAndCookieBannerProps> = memo(
 		onError,
 		className,
 		styles,
-		links = defaultLinks,
+		links = defaultBannerLinks,
 	}) {
 		const divStyles: CSSProperties = useMemo(() => {
 			return {

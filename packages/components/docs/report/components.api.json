@@ -1813,6 +1813,42 @@
         },
         {
           "kind": "Variable",
+          "canonicalReference": "@essex/components!defaultBannerLinks:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "defaultBannerLinks: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Array",
+              "canonicalReference": "!Array:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "PolicyLinkDetails",
+              "canonicalReference": "@essex/components!PolicyLinkDetails:type"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "defaultBannerLinks",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          }
+        },
+        {
+          "kind": "Variable",
           "canonicalReference": "@essex/components!DialogConfirm:var",
           "docComment": "",
           "excerptTokens": [
