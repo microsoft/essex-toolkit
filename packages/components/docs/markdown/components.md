@@ -72,6 +72,7 @@
 |  [ColumnarMenu](./components.columnarmenu.md) | Dropdown button menu that supports grouped items (using sectionProps) in a columnar layout. This is a hybrid control that uses a button to create the dropdown menu, but overrides the menu renderer to lay out any item sections as columns instead of a vertical stack. |
 |  [ColumnarMenuList](./components.columnarmenulist.md) | This component replaces the default ContextualMenuList rendering with a columnar layout of the sections instead of vertical stacks. Note that items should be sorted into sections with sectionProps, though options buttons do not need to be in a section and will all be coalesced at the top. |
 |  [ControlledHistogramFilter](./components.controlledhistogramfilter.md) | ControlledHistogramFilter displays a histogram that contains a D3 brush and basic numberical filtering with thematic theming |
+|  [defaultBannerLinks](./components.defaultbannerlinks.md) |  |
 |  [DialogConfirm](./components.dialogconfirm.md) |  |
 |  [EnumDropdown](./components.enumdropdown.md) | Dropdown wrapper to list out aggregation operations. |
 |  [Expando](./components.expando.md) | Toggle link with a chevron and show/hide of children. |

@@ -5,7 +5,10 @@
 
 import type { ComponentStory } from '@storybook/react'
 
-import { defaultBannerLinks, PolicyAndCookieBanner } from './PolicyAndCookieBanner.js'
+import {
+	defaultBannerLinks,
+	PolicyAndCookieBanner,
+} from './PolicyAndCookieBanner.js'
 import type { PolicyAndCookieBannerProps } from './PolicyAndCookieBanner.types.js'
 
 const meta = {

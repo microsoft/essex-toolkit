@@ -182,6 +182,11 @@ export type CookieConsentManager = {
     manageConsent(): void;
 };
 
+// Warning: (ae-missing-release-tag) "defaultBannerLinks" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const defaultBannerLinks: Array<PolicyLinkDetails>;
+
 // Warning: (ae-missing-release-tag) "DialogConfirm" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
