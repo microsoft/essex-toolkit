@@ -166,7 +166,7 @@ const boxStyle: React.CSSProperties = {
 }
 
 const Template: ComponentStory<typeof Tree> = (args: TreeProps) => {
-	const [selected, setSelected] = useState<string | undefined>()
+	const [selected, setSelected] = useState<string | undefined>(args.selectedKey)
 
 	return (
 		<div style={containerStyle}>
@@ -177,6 +177,7 @@ const Template: ComponentStory<typeof Tree> = (args: TreeProps) => {
 						{...args}
 						selectedKey={selected}
 						onItemClick={(item) => setSelected(item.key)}
+						onItemExpandClick={(item) => console.log('expand clicked', item)}
 					/>
 				</div>
 			</div>
@@ -262,30 +263,60 @@ Customized.args = {
 	},
 }
 
-export const ItemProps = Template.bind({})
+export const NestedSelections = Template.bind({})
 // add in a few custom click, selection, etc. props to test full item overrides
-ItemProps.args = {
+NestedSelections.args = {
+	selectedKey: 'item-1.1.1',
 	items: [
 		{
 			key: 'item-1',
-			text: 'Item 1 (selected, onClick)',
-			selected: true,
-			onClick: (item) => console.log('click override', item),
+			text: 'Item 1 (default expands to selected child)',
 			children: [
 				{
 					key: 'item-1.1',
-					text: 'Item 1.1 (expanded, onExpand)',
-					expanded: true,
-					onExpand: (item) => console.log('expand override', item),
+					text: 'Item 1.1',
 					children: [
 						{
-							key: 'item-1.1.1 ',
-							text: 'Item 1.1.1 (selected)',
-							selected: true,
+							key: 'item-1.1.1',
+							text: 'Item 1.1.1 (default selectedKey)',
+							children: [
+								{
+									key: 'item-1.1.1.1',
+									text: 'Item 1.1.1.1',
+								},
+							],
 						},
 					],
 				},
 			],
+		},
+		{
+			key: 'item-2',
+			text: 'Item 2 (default expands to expanded child)',
+			children: [
+				{
+					key: 'item-2.1',
+					text: 'Item 2.1',
+					children: [
+						{
+							key: 'item-2.1.1',
+							text: 'Item 2.1.1 (static expanded prop)',
+							expanded: true,
+							children: [
+								{
+									key: 'item-2.1.1.1',
+									text: 'Item 2.1.1.1',
+								},
+							],
+						},
+					],
+				},
+			],
+		},
+		{
+			key: 'item-3',
+			text: 'Item 3 (onClick override)',
+			onClick: (item) => console.log('click override', item),
 		},
 	],
 }
@@ -326,10 +357,10 @@ CustomRenderers.args = {
 	onRenderGroupHeader: (props, defaultRenderer) => {
 		return (
 			<>
-				{props.group.key === 'group-1' ? (
+				{props?.group.key === 'group-1' ? (
 					<div style={groupStyle}>{`${props.group.text} (custom)`}</div>
 				) : (
-					defaultRenderer(props)
+					defaultRenderer?.(props)
 				)}
 			</>
 		)
