@@ -5,7 +5,7 @@
 
 import type { ComponentStory } from '@storybook/react'
 
-import { PolicyAndCookieBanner } from './PolicyAndCookieBanner.js'
+import { defaultBannerLinks, PolicyAndCookieBanner } from './PolicyAndCookieBanner.js'
 import type { PolicyAndCookieBannerProps } from './PolicyAndCookieBanner.types.js'
 
 const meta = {
@@ -98,4 +98,10 @@ export const CustomLinks = Template.bind({})
 CustomLinks.args = {
 	links: [{ name: 'Bing', href: 'https://bing.com' }],
 }
-CustomLinks.storyName = 'Custom links'
+CustomLinks.storyName = 'Custom links (overrride)'
+
+export const AdditionalLinks = Template.bind({})
+AdditionalLinks.args = {
+	links: [...defaultBannerLinks, { name: 'Bing', href: 'https://bing.com' }],
+}
+AdditionalLinks.storyName = 'Additional links'
