@@ -14,12 +14,13 @@ interface Expansion {
 	is: (key: string) => boolean
 	on: (key: string) => void
 }
-export function useExpansion(): Expansion {
-	const [expandMap, setExpandMap] = useState<Record<string, boolean>>({})
+export function useExpansion(items: TreeItem[], selectedKey?: string): Expansion {
+	const defaultExpansion = useMemo(() => forceExpansionToSelected(items, selectedKey), [items, selectedKey])
+	const [expandMap, setExpandMap] = useState<Record<string, boolean>>(defaultExpansion)
 	return useMemo(
 		() => ({
 			is: (key: string) => expandMap[key],
-			on: (key: string) =>
+			on: (key: string) => 
 				setExpandMap((prev) => ({
 					...prev,
 					[key]: !prev[key],
@@ -39,7 +40,7 @@ export function useTreeItemGroups(
 	onItemClick?: (item: TreeItem) => void,
 	onItemExpandClick?: (item: TreeItem) => void,
 ): TreeItemGroup[] {
-	const expansion = useExpansion()
+	const expansion = useExpansion(items, selectedKey)
 	return useMemo(() => {
 		const collected = collectItemsByGroup(items)
 		return [
@@ -119,4 +120,33 @@ function makeDetailedItems(
 		}
 		return base
 	})
+}
+
+
+// Construct a default expansion map by rolling up an expand for any parents of selected or expanded children to the top of the tree.
+// This is only used to initialize the expansion, so that user interactions are not overridden.
+function forceExpansionToSelected(items: TreeItem[], selectedKey?: string): Record<string, boolean> {
+	const collect = (children: TreeItem[], parentKey?: string): string[] => {
+		return children.map(child => {
+			if (child.children) {
+				const childKeys = collect(child.children, child.key)
+				if (childKeys && childKeys.length > 0) {
+					return [child.key, ...childKeys]
+				}
+			}
+			if (child.expanded) {
+				return [child.key]
+			}
+			// if a child is selected, we actually want the _parent_ to be expanded, not the child itself
+			if (child.selected || child.key === selectedKey) {
+				return [parentKey]
+			}
+			return []
+		})
+		.flatMap(key => key) as string[]
+	}
+	return collect(items).reduce((acc, cur) => {
+		acc[cur] = true
+		return acc
+	}, {} as Record<string, boolean>)
 }
