@@ -20,7 +20,7 @@ export function useExpansion(items: TreeItem[], selectedKey?: string): Expansion
 	return useMemo(
 		() => ({
 			is: (key: string) => expandMap[key],
-			on: (key: string) => 
+			on: (key: string) =>
 				setExpandMap((prev) => ({
 					...prev,
 					[key]: !prev[key],
@@ -130,7 +130,7 @@ function forceExpansionToSelected(items: TreeItem[], selectedKey?: string): Reco
 		return children.map(child => {
 			if (child.children) {
 				const childKeys = collect(child.children, child.key)
-				if (childKeys && childKeys.length > 0) {
+				if (childKeys.length > 0) {
 					return [child.key, ...childKeys]
 				}
 			}
