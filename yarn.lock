@@ -2122,6 +2122,8 @@ __metadata:
   dependencies:
     "@essex/scripts": ^23.0.2
     "@fluentui/react": ^8.104.5
+    "@mdx-js/react": ^2.2.1
+    "@storybook/addon-docs": ^6.5.15
     "@types/prop-types": ^15.7.5
     "@types/react": ^18.0.26
     "@types/react-dom": ^18.0.10
@@ -2142,7 +2144,8 @@ __metadata:
   dependencies:
     "@essex/scripts": ^23.0.2
     "@essex/tsconfig-base": ^1.0.2
-    "@mdx-js/react": ^1.6.22
+    "@mdx-js/react": ^2.2.1
+    "@storybook/addon-docs": ^6.5.15
     "@thematic/core": ^4.0.3
     "@thematic/d3": ^2.0.18
     "@thematic/react": ^2.1.5
@@ -2180,6 +2183,8 @@ __metadata:
     "@fluentui/react": ^8.104.5
     "@fluentui/theme": ^2.6.21
     "@fluentui/utilities": ^8.13.5
+    "@mdx-js/react": ^2.2.1
+    "@storybook/addon-docs": ^6.5.15
     "@thematic/color": ^4.0.3
     "@thematic/core": ^4.0.3
     "@thematic/d3": ^2.0.18
@@ -2318,6 +2323,8 @@ __metadata:
     "@essex/scripts": ^23.0.2
     "@fluentui/font-icons-mdl2": ^8.5.6
     "@fluentui/react": ^8.104.5
+    "@mdx-js/react": ^2.2.1
+    "@storybook/addon-docs": ^6.5.15
     "@thematic/core": ^4.0.3
     "@thematic/fluent": ^5.0.4
     "@thematic/react": ^2.1.5
@@ -2550,6 +2557,8 @@ __metadata:
     "@essex/scripts": ^23.0.2
     "@fluentui/font-icons-mdl2": ^8.5.6
     "@fluentui/react": ^8.104.5
+    "@mdx-js/react": ^2.2.1
+    "@storybook/addon-docs": ^6.5.15
     "@thematic/color": ^4.0.3
     "@thematic/core": ^4.0.3
     "@thematic/d3": ^2.0.18
@@ -3413,6 +3422,18 @@ __metadata:
   peerDependencies:
     react: ^16.13.1 || ^17.0.0
   checksum: bc84bd514bc127f898819a0c6f1a6915d9541011bd8aefa1fcc1c9bea8939f31051409e546bdec92babfa5b56092a16d05ef6d318304ac029299df5181dc94c8
+  languageName: node
+  linkType: hard
+
+"@mdx-js/react@npm:^2.2.1":
+  version: 2.2.1
+  resolution: "@mdx-js/react@npm:2.2.1"
+  dependencies:
+    "@types/mdx": ^2.0.0
+    "@types/react": ">=16"
+  peerDependencies:
+    react: ">=16"
+  checksum: 4462dad1d7d658bda1c2eabc3960fb843fdbcb5788ce5f863b674752e4db1b7048b5587aa85661283b5196e4641385e6b594205c2482202446ecb5f5433c975b
   languageName: node
   linkType: hard
 
@@ -6083,6 +6104,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/mdx@npm:^2.0.0":
+  version: 2.0.3
+  resolution: "@types/mdx@npm:2.0.3"
+  checksum: 41deb51c29535913af01d25f0e1414cfb5a6948d0e60e77e4aca895694de48bf0ac69c5a81fe2d9617d726cb253001ef82a65b683d5ef51987d15aa1931d086b
+  languageName: node
+  linkType: hard
+
 "@types/mime@npm:*":
   version: 3.0.1
   resolution: "@types/mime@npm:3.0.1"
@@ -6250,7 +6278,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.0.26":
+"@types/react@npm:*, @types/react@npm:>=16, @types/react@npm:^18.0.26":
   version: 18.0.26
   resolution: "@types/react@npm:18.0.26"
   dependencies:
@@ -11389,7 +11417,6 @@ __metadata:
     "@fluentui/font-icons-mdl2": ^8.5.6
     "@fluentui/react": ^8.104.5
     "@fluentui/utilities": ^8.13.5
-    "@mdx-js/react": ^1.6.22
     "@storybook/addon-a11y": ^6.5.15
     "@storybook/addon-docs": ^6.5.15
     "@storybook/addon-essentials": ^6.5.15

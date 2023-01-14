@@ -43,7 +43,8 @@
   "devDependencies": {
     "@essex/scripts": "^23.0.2",
     "@essex/tsconfig-base": "^1.0.2",
-    "@mdx-js/react": "^1.6.22",
+    "@mdx-js/react": "^2.2.1",
+    "@storybook/addon-docs": "^6.5.15",
     "@thematic/core": "^4.0.3",
     "@thematic/d3": "^2.0.18",
     "@thematic/react": "^2.1.5",
