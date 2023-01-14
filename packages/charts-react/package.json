@@ -29,7 +29,8 @@
   "scripts": {
     "clean": "essex clean dist docs",
     "build": "essex build --docs",
-    "lint": "essex lint --fix --noFormat",
+    "fix": "essex fix --formatter none",
+    "check": "essex check --formatter none",
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "dependencies": {
@@ -40,14 +41,12 @@
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {
-    "@essex/scripts": "^22.2.1",
+    "@essex/scripts": "^23.0.1",
     "@essex/tsconfig-base": "^1.0.2",
     "@mdx-js/react": "^1.6.22",
-    "@storybook/addon-docs": "^6.5.15",
-    "@storybook/react": "^6.5.15",
-    "@thematic/core": "^4.0.2",
-    "@thematic/d3": "^2.0.17",
-    "@thematic/react": "^2.1.4",
+    "@thematic/core": "^4.0.3",
+    "@thematic/d3": "^2.0.18",
+    "@thematic/react": "^2.1.5",
     "@types/d3-format": "^3.0.1",
     "@types/d3-scale": "^4.0.2",
     "@types/d3-selection": "^3.0.3",

@@ -22,11 +22,12 @@
   "scripts": {
     "clean": "essex clean dist lib",
     "build": "essex build --mode dual --skipExportCheck --docs",
-    "lint": "essex lint --fix --noFormat",
+    "fix": "essex fix --formatter none",
+    "check": "essex check --formatter none",
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "devDependencies": {
-    "@essex/scripts": "^22.2.1",
+    "@essex/scripts": "^23.0.1",
     "@graphql-tools/utils": "^8.13.1",
     "@tsconfig/node14": "^1.0.3",
     "@types/pino": "^7.0.5",

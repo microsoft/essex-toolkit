@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import AnimateHeight from '@essex/react-animate-height'
+import AnimateHeight from 'react-animate-height'
 import { IconButton } from '@fluentui/react'
 import type { PropsWithChildren } from 'react'
 

@@ -18,7 +18,7 @@ export const BooleanControl = ({
 }: ControlProps): JSX.Element => {
 	const { key, value, type, label, control } = config
 	const handleChange = useCallback(
-		(evt, checked) => {
+		(_evt: unknown, checked?: boolean | undefined) => {
 			onChange?.(key, checked)
 		},
 		[key, onChange],
