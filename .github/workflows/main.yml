@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [16.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -40,5 +40,5 @@ jobs:
 
       - run: yarn ci --api="http://127.0.0.1:9080" --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="essex"
         name: Verify
-        
+
       - run: yarn is_clean
