@@ -13,7 +13,7 @@
   "license": "MIT",
   "scripts": {
     "build": "essex build --docs",
-    "clean": "essex clean",
+    "clean": "essex clean docs",
     "test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
     "fix": "essex fix --formatter none",
     "check": "essex check --formatter none",

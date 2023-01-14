@@ -16,7 +16,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "clean": "essex clean",
+    "clean": "essex clean docs",
     "build": "essex build --docs",
     "fix": "essex fix --formatter none",
     "check": "essex check --formatter none",

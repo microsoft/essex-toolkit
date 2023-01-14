@@ -17,7 +17,7 @@
   },
   "scripts": {
     "build": "essex build --skipExportCheck --docs",
-    "clean": "essex clean",
+    "clean": "essex clean docs",
     "fix": "essex fix --formatter none",
     "check": "essex check --formatter none",
     "release": "yarn npm publish --tolerate-republish --access public"

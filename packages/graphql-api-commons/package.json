@@ -20,7 +20,7 @@
     "directory": "packages/graphql-api-commons"
   },
   "scripts": {
-    "clean": "essex clean dist lib",
+    "clean": "essex clean dist lib docs",
     "build": "essex build --mode dual --skipExportCheck --docs",
     "fix": "essex fix --formatter none",
     "check": "essex check --formatter none",

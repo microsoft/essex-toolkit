@@ -7,7 +7,7 @@
   "author": "Nathan Evans <naevans@microsoft.com>",
   "license": "MIT",
   "scripts": {
-    "clean": "essex clean",
+    "clean": "essex clean docs",
     "start": "start-storybook -s ./public",
     "bundle": "build-storybook --quiet",
     "start:storybook": "yarn start",

@@ -13,7 +13,7 @@
   "author": "David Tittsworth <datittsw@microsoft.com>",
   "license": "MIT",
   "scripts": {
-    "clean": "essex clean",
+    "clean": "essex clean docs",
     "build": "essex build --docs",
     "test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
     "fix": "essex fix --formatter none",
