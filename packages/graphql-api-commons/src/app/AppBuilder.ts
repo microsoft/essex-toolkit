@@ -3,8 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/consistent-type-imports */
-import { ApolloServerPluginLandingPageDisabled } from 'apollo-server-core'
-import { ApolloServer } from 'apollo-server-fastify'
+import { ApolloServer } from '@apollo/server'
+import { startStandaloneServer } from '@apollo/server/standalone'
+import { ApolloServerPluginLandingPageDisabled } from '@apollo/server/plugin/disabled'
 import type { FastifyInstance, FastifyRequest } from 'fastify'
 import fastify from 'fastify'
 import { GraphQLSchema } from 'graphql'
@@ -14,6 +15,7 @@ import { inject, singleton } from 'tsyringe'
 import type { IBaseConfiguration } from '../configuration/index.js'
 import { BaseInjectorNames } from '../injectors.js'
 import type { IBuiltAppContext, IRequestAppContext } from './index.js'
+import { IncomingMessage } from 'http'
 
 export type PreRunCb = (app: FastifyInstance) => Promise<void>
 
@@ -24,7 +26,7 @@ export interface RequestContextProvider<
 > {
 	apply(
 		ctx: IRequestAppContext<Configuration, Components, RequestContext>,
-		request: FastifyRequest,
+		request: IncomingMessage,
 	): Promise<Partial<RequestContext>>
 }
 
@@ -59,25 +61,27 @@ export class AppBuilder<
 			schema: this._schema,
 			plugins: this.config.serverPlayground
 				? undefined
-				: [ApolloServerPluginLandingPageDisabled],
+				: [ApolloServerPluginLandingPageDisabled()],
 			logger: this._logger,
 			introspection: this.config.serverIntrospection,
-			context: async ({ request }: { request: FastifyRequest }) => {
-				const ctx = { ...this._appContext, request: {} as RequestContext }
-				for (const rcp of this._requestContextProviders) {
-					const result = await rcp.apply(ctx, request)
-					ctx.request = { ...ctx.request, ...result }
-				}
-				return ctx
-			},
-			debug: false,
 		})
 	}
 
 	public async start(preRun?: PreRunCb): Promise<void> {
 		const app = fastify({ logger: this._logger })
-
+		const { url } = await startStandaloneServer(this._apolloServer, {
+			context: async ({ req }) => {
+				const ctx = { ...this._appContext, request: {} as RequestContext }
+				for (const rcp of this._requestContextProviders) {
+					const result = await rcp.apply(ctx, req)
+					ctx.request = { ...ctx.request, ...result }
+				}
+				return ctx
+			},
+			listen: { port: 4000 },
+		})
 		await this._apolloServer.start()
+
 		app.setErrorHandler(async (error, request, reply) => {
 			if (error.validation) {
 				void reply
@@ -91,11 +95,6 @@ export class AppBuilder<
 		})
 		/* eslint-disable  @essex/adjacent-await */
 		await preRun?.(app)
-		await app.register(
-			this._apolloServer.createHandler({
-				cors: true,
-			}),
-		)
 		await app.listen({
 			port: this.config.serverPort,
 		})

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-apply(ctx: IRequestAppContext<Configuration, Components, RequestContext>, request: FastifyRequest): Promise<Partial<RequestContext>>;
+apply(ctx: IRequestAppContext<Configuration, Components, RequestContext>, request: IncomingMessage): Promise<Partial<RequestContext>>;
 ```
 
 ## Parameters
@@ -15,7 +15,7 @@ apply(ctx: IRequestAppContext<Configuration, Components, RequestContext>, reques
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  ctx | [IRequestAppContext](./graphql-api-commons.irequestappcontext.md)<!-- -->&lt;Configuration, Components, RequestContext&gt; |  |
-|  request | FastifyRequest |  |
+|  request | IncomingMessage |  |
 
 <b>Returns:</b>
 

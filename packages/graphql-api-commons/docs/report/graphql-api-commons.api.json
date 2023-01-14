@@ -1201,8 +1201,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "FastifyRequest",
-                  "canonicalReference": "fastify!FastifyRequest:interface"
+                  "text": "IncomingMessage",
+                  "canonicalReference": "!\"\\\"http\\\"\".IncomingMessage:class"
                 },
                 {
                   "kind": "Content",
@@ -1936,8 +1936,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "FastifyRequest",
-                  "canonicalReference": "fastify!FastifyRequest:interface"
+                  "text": "IncomingMessage",
+                  "canonicalReference": "!\"\\\"http\\\"\".IncomingMessage:class"
                 },
                 {
                   "kind": "Content",

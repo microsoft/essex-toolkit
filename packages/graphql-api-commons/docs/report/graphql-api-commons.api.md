@@ -4,10 +4,12 @@
 
 ```ts
 
+/// <reference types="node" />
+
 import type { DependencyContainer } from 'tsyringe';
 import type { FastifyInstance } from 'fastify';
-import type { FastifyRequest } from 'fastify';
 import { GraphQLSchema } from 'graphql';
+import { IncomingMessage } from 'http';
 import { Logger } from 'pino';
 
 // Warning: (ae-missing-release-tag) "AppBuilder" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -86,7 +88,7 @@ export class IdentityRequestContextProvider<Configuration extends IBaseConfigura
 }, RequestContext extends IdentityRequestContext<Identity>, Identity> implements RequestContextProvider<Configuration, Components, RequestContext> {
     constructor(headerName?: string, headerTransformer?: Transformer<string | null>);
     // (undocumented)
-    apply(ctx: IRequestAppContext<Configuration, Components, RequestContext>, request: FastifyRequest): Promise<Partial<RequestContext>>;
+    apply(ctx: IRequestAppContext<Configuration, Components, RequestContext>, request: IncomingMessage): Promise<Partial<RequestContext>>;
 }
 
 // Warning: (ae-missing-release-tag) "IRequestAppContext" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -144,7 +146,7 @@ export function registerSchema(schema: GraphQLSchema, ctx?: DependencyContainer)
 // @public (undocumented)
 export interface RequestContextProvider<Configuration extends IBaseConfiguration, Components, RequestContext> {
     // (undocumented)
-    apply(ctx: IRequestAppContext<Configuration, Components, RequestContext>, request: FastifyRequest): Promise<Partial<RequestContext>>;
+    apply(ctx: IRequestAppContext<Configuration, Components, RequestContext>, request: IncomingMessage): Promise<Partial<RequestContext>>;
 }
 
 // Warning: (ae-missing-release-tag) "Server" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

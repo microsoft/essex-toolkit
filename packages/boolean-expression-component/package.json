@@ -23,7 +23,7 @@
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "devDependencies": {
-    "@essex/scripts": "^23.0.1",
+    "@essex/scripts": "^23.0.2",
     "@fluentui/react": "^8.104.5",
     "@types/prop-types": "^15.7.5",
     "@types/react": "^18.0.26",

@@ -38,7 +38,7 @@
     "react-if": "^4.1.4"
   },
   "devDependencies": {
-    "@essex/scripts": "^23.0.1",
+    "@essex/scripts": "^23.0.2",
     "@fluentui/font-icons-mdl2": "^8.5.6",
     "@fluentui/react": "^8.104.5",
     "@fluentui/theme": "^2.6.21",
