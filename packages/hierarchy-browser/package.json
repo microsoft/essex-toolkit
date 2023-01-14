@@ -62,5 +62,46 @@
     "react": ">=18",
     "react-is": ">=  17",
     "regenerator-runtime": "*"
+  },
+  "peerDependenciesMeta": {
+    "@fluentui/react": {
+      "optional": false
+    },
+    "@thematic/core": {
+      "optional": false
+    },
+    "@thematic/fluent": {
+      "optional": true
+    },
+    "@thematic/react": {
+      "optional": false
+    },
+    "@types/d3-array": {
+      "optional": true
+    },
+    "@types/d3-scale": {
+      "optional": true
+    },
+    "@types/d3-selection": {
+      "optional": true
+    },
+    "@types/prop-types": {
+      "optional": true
+    },
+    "@types/react": {
+      "optional": true
+    },
+    "@types/react-infinite-scroller": {
+      "optional": true
+    },
+    "react": {
+      "optional": false
+    },
+    "react-is": {
+      "optional": true
+    },
+    "regenerator-runtime": {
+      "optional": true
+    }
   }
 }

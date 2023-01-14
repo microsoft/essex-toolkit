@@ -74,5 +74,43 @@
     "@types/react": ">= 18",
     "react": ">= 18",
     "react-dom": ">= 18"
+  },
+  "peerDependenciesMeta": {
+    "@fluentui/react": {
+      "optional": true
+    },
+    "@thematic/color": {
+      "optional": false
+    },
+    "@thematic/core": {
+      "optional": false
+    },
+    "@thematic/d3": {
+      "optional": false
+    },
+    "@thematic/fluent": {
+      "optional": true
+    },
+    "@thematic/react": {
+      "optional": false
+    },
+    "@types/d3": {
+      "optional": true
+    },
+    "@types/d3-axis": {
+      "optional": true
+    },
+    "@types/node": {
+      "optional": true
+    },
+    "@types/react": {
+      "optional": true
+    },
+    "react": {
+      "optional": false
+    },
+    "react-dom": {
+      "optional": true
+    }
   }
 }

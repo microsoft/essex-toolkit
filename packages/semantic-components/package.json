@@ -42,5 +42,10 @@
   },
   "peerDependencies": {
     "@types/react-dom": "*"
+  },
+  "peerDependenciesMeta": {
+    "@types/react-dom": {
+      "optional": true
+    }
   }
 }

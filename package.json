@@ -62,6 +62,14 @@
     "@types/react-is": "^17.0.3",
     "react-is": "^18.1.0"
   },
+  "peerDependenciesMeta": {
+    "@types/react-is": {
+      "optional": true
+    },
+    "react-is": {
+      "optional": true
+    }
+  },
   "workspaces": [
     "packages/*"
   ],

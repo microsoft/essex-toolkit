@@ -44,6 +44,24 @@
     "@types/node": "*",
     "@types/react": "*",
     "@types/react-dom": "*",
-    "react": ">= 18"
+    "react": ">= 18",
+    "react-dom": "^18.2.0"
+  },
+  "peerDependenciesMeta": {
+    "@type/node": {
+      "optional": true
+    },
+    "@types/react": {
+      "optional": true
+    },
+    "@types/react-dom": {
+      "optional": true
+    },
+    "react": {
+      "optional": false
+    },
+    "react-dom": {
+      "optional": true
+    }
   }
 }

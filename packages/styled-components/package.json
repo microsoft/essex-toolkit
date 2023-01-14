@@ -28,5 +28,10 @@
   },
   "peerDependencies": {
     "styled-components": ">= 5"
+  },
+  "peerDependenciesMeta": {
+    "styled-components": {
+      "optional": false
+    }
   }
 }

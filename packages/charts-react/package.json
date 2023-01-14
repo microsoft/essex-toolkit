@@ -64,5 +64,19 @@
     "@thematic/d3": "^1.3.0",
     "@thematic/react": "^1.3.0",
     "react": ">= 18"
+  },
+  "peerDependenciesMeta": {
+    "@thematic/core": {
+      "optional": false
+    },
+    "@thematic/d3": {
+      "optional": false
+    },
+    "@thematic/react": {
+      "optional": false
+    },
+    "react": {
+      "optional": false
+    }
   }
 }
