@@ -4,18 +4,18 @@
  */
 /* eslint-disable @typescript-eslint/consistent-type-imports */
 import { ApolloServer } from '@apollo/server'
-import { startStandaloneServer } from '@apollo/server/standalone'
 import { ApolloServerPluginLandingPageDisabled } from '@apollo/server/plugin/disabled'
+import { startStandaloneServer } from '@apollo/server/standalone'
 import type { FastifyInstance, FastifyRequest } from 'fastify'
 import fastify from 'fastify'
 import { GraphQLSchema } from 'graphql'
+import { IncomingMessage } from 'http'
 import { Logger } from 'pino'
 import { inject, singleton } from 'tsyringe'
 
 import type { IBaseConfiguration } from '../configuration/index.js'
 import { BaseInjectorNames } from '../injectors.js'
 import type { IBuiltAppContext, IRequestAppContext } from './index.js'
-import { IncomingMessage } from 'http'
 
 export type PreRunCb = (app: FastifyInstance) => Promise<void>
 

@@ -13,12 +13,16 @@
 			"dependsOn": [],
 			"outputs": []
 		},
+		"fix": {
+			"dependsOn": [],
+			"outputs": []
+		},
 		"bundle": {
 			"dependsOn": [],
 			"outputs": ["storybook_static/**"]
 		},
 		"ci": {
-			"dependsOn": ["build", "lint", "test", "bundle"],
+			"dependsOn": ["build", "check", "test", "bundle"],
 			"outputs": ["dist/**", "docs/**", "storybook_static/**"]
 		},
 		"clean": {

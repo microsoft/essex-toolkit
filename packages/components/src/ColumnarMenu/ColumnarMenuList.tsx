@@ -43,7 +43,9 @@ export const ColumnarMenuList: React.FC<ColumnarMenuListProps> = memo(
 						const { key } = item
 						return (
 							<div style={styles.column} key={`menu-group-${key}`}>
-								<div style={styles.header}>{item.sectionProps?.title as string}</div>
+								<div style={styles.header}>
+									{item.sectionProps?.title as string}
+								</div>
 								{item.itemType === ContextualMenuItemType.Section ? (
 									<>
 										{verifySeparator(item.sectionProps?.topDivider)}
