@@ -33,6 +33,7 @@
     "clean": "turbo run clean --parallel",
     "test": "turbo run test",
     "check": "run-s _check_packages _rome_ci",
+    "check-deps": "turbo run check-deps",
     "fix": "run-s _fix_packages _rome_fix",
     "format": "rome format . --write",
     "start": "turbo run start --parallel",
@@ -44,7 +45,7 @@
   },
   "devDependencies": {
     "@essex/eslint-config": "^20.5.0",
-    "@essex/scripts": "^23.0.4",
+    "@essex/scripts": "^23.1.1",
     "@types/jest": "^29.2.5",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.26",

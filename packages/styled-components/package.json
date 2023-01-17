@@ -14,10 +14,11 @@
     "build": "essex build --docs",
     "fix": "essex fix --formatter none",
     "check": "essex check --formatter none",
+    "check-deps": "essex check-deps",
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "devDependencies": {
-    "@essex/scripts": "^23.0.4",
+    "@essex/scripts": "^23.1.1",
     "@essex/tsconfig-base": "^1.0.2",
     "@types/styled-components": "^5.1.26",
     "react": "^18.2.0",

@@ -31,6 +31,7 @@
     "build": "essex build --docs",
     "fix": "essex fix --formatter none",
     "check": "essex check --formatter none",
+    "check-deps": "essex check-deps",
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "dependencies": {
@@ -41,7 +42,7 @@
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {
-    "@essex/scripts": "^23.0.4",
+    "@essex/scripts": "^23.1.1",
     "@essex/tsconfig-base": "^1.0.2",
     "@mdx-js/react": "^2.2.1",
     "@storybook/addon-docs": "^6.5.15",

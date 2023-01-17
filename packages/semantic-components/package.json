@@ -17,11 +17,12 @@
     "test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
     "fix": "essex fix --formatter none",
     "check": "essex check --formatter none",
+    "check-deps": "essex check-deps",
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "devDependencies": {
     "@essex/jest-config": "^21.0.19",
-    "@essex/scripts": "^23.0.4",
+    "@essex/scripts": "^23.1.1",
     "@essex/tsconfig-base": "^1.0.2",
     "@testing-library/react": "^13.4.0",
     "@types/react": "^18.0.26",
