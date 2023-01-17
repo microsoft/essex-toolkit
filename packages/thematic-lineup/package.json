@@ -24,7 +24,7 @@
     "tslib": "^2.4.1"
   },
   "devDependencies": {
-    "@essex/scripts": "^23.1.1",
+    "@essex/scripts": "^23.1.4",
     "@mdx-js/react": "^2.2.1",
     "@storybook/addon-docs": "^6.5.15",
     "@thematic/color": "^4.0.3",

@@ -35,25 +35,22 @@
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "dependencies": {
-    "d3-format": "^3.1.0",
     "d3-scale": "^4.0.2",
     "d3-selection": "^3.0.0",
     "d3-shape": "^3.1.0",
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {
-    "@essex/scripts": "^23.1.1",
+    "@essex/scripts": "^23.1.4",
     "@essex/tsconfig-base": "^1.0.2",
     "@mdx-js/react": "^2.2.1",
     "@storybook/addon-docs": "^6.5.15",
     "@thematic/core": "^4.0.3",
     "@thematic/d3": "^2.0.18",
     "@thematic/react": "^2.1.5",
-    "@types/d3-format": "^3.0.1",
     "@types/d3-scale": "^4.0.2",
     "@types/d3-selection": "^3.0.3",
     "@types/d3-shape": "^3.1.0",
-    "@types/lodash": "^4.14.191",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.26",

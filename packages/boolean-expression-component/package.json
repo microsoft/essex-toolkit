@@ -24,14 +24,12 @@
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "devDependencies": {
-    "@essex/scripts": "^23.1.1",
+    "@essex/scripts": "^23.1.4",
     "@fluentui/react": "^8.104.5",
     "@mdx-js/react": "^2.2.1",
     "@storybook/addon-docs": "^6.5.15",
-    "@types/prop-types": "^15.7.5",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
-    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
