@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@apollo/server": "^4.3.0",
-    "@essex/scripts": "^23.0.3",
+    "@essex/scripts": "^23.0.4",
     "@graphql-tools/utils": "^9.1.4",
     "@tsconfig/node14": "^1.0.3",
     "fastify": "^4.11.0",

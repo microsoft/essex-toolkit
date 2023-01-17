@@ -23,7 +23,7 @@
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "devDependencies": {
-    "@essex/scripts": "^23.0.3",
+    "@essex/scripts": "^23.0.4",
     "@essex/tsconfig-base": "^1.0.2"
   }
 }
