@@ -2230,14 +2230,14 @@ __metadata:
     react-dom: ^18.2.0
     react-if: ^4.1.4
   peerDependencies:
-    "@fluentui/react": ">= 7.114.2"
-    "@thematic/color": ">= 0.8.0"
-    "@thematic/core": ">= 0.8.0"
-    "@thematic/d3": ">= 0.8.0"
-    "@thematic/fluent": ">= 0.8.0"
-    "@thematic/react": ">= 0.8.0"
+    "@fluentui/react": ">= 8"
+    "@thematic/color": ">= 4"
+    "@thematic/core": ">= 4"
+    "@thematic/d3": ">= 2"
+    "@thematic/fluent": ">= 5"
+    "@thematic/react": ">= 2"
     "@types/d3": "*"
-    "@types/d3-axis": ^2.0.0
+    "@types/d3-axis": ">= 3"
     "@types/node": "*"
     "@types/react": ">= 18"
     react: ">= 18"
