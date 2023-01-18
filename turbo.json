@@ -9,7 +9,15 @@
 			"dependsOn": [],
 			"outputs": []
 		},
-		"lint": {
+		"check": {
+			"dependsOn": [],
+			"outputs": []
+		},
+		"check-deps": {
+			"dependsOn": [],
+			"outputs": []
+		},
+		"fix": {
 			"dependsOn": [],
 			"outputs": []
 		},
@@ -18,11 +26,8 @@
 			"outputs": ["storybook_static/**"]
 		},
 		"ci": {
-			"dependsOn": ["build", "lint", "//#romeci", "test", "bundle"],
+			"dependsOn": ["build", "check", "test", "check-deps", "bundle"],
 			"outputs": ["dist/**", "docs/**", "storybook_static/**"]
-		},
-		"//#romeci": {
-			"cache": false	
 		},
 		"clean": {
 			"cache": false

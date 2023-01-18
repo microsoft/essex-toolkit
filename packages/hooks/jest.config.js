@@ -4,4 +4,5 @@
  */
 import { configure } from '@essex/jest-config'
 const config = configure({})
+config.testEnvironment = 'jsdom'
 export default config

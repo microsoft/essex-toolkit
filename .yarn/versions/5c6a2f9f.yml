@@ -1,0 +1,14 @@
+releases:
+  "@essex/boolean-expression-component": patch
+  "@essex/charts-react": patch
+  "@essex/components": patch
+  "@essex/graphql-api-commons": patch
+  "@essex/hierarchy-browser": patch
+  "@essex/hooks": patch
+  "@essex/msal-interactor": patch
+  "@essex/semantic-components": patch
+  "@essex/styled-components": patch
+  "@essex/thematic-lineup": patch
+  "@essex/toolbox": patch
+  "@essex/toposort": patch
+  essex-toolkit-stories: patch

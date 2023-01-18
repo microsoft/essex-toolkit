@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { FastifyRequest } from 'fastify'
+import type { IncomingMessage } from 'http'
 
 import type {
 	IAuthenticator,
@@ -43,7 +44,7 @@ export class IdentityRequestContextProvider<
 
 	public async apply(
 		ctx: IRequestAppContext<Configuration, Components, RequestContext>,
-		request: FastifyRequest,
+		request: IncomingMessage,
 	): Promise<Partial<RequestContext>> {
 		const { authenticator } = ctx.components
 		const token = this._headerTransformer(

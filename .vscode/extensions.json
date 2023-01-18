@@ -3,7 +3,6 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "arcanis.vscode-zipfs",
-    "silvenon.mdx",
     "rome.rome"
   ]
 }

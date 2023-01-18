@@ -91,7 +91,7 @@ export const Settings = ({
 }: SettingsProps): JSX.Element => {
 	const parsed = parseSettings(settings, config)
 	const handleChange = useCallback(
-		(key, value) => {
+		(key: string, value: any) => {
 			onChange?.(key, value)
 		},
 		[onChange],

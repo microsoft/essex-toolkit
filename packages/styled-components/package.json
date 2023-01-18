@@ -10,19 +10,29 @@
   },
   "sideEffects": false,
   "scripts": {
-    "clean": "essex clean",
+    "clean": "essex clean docs",
     "build": "essex build --docs",
-    "lint": "essex lint --fix --noFormat",
+    "fix": "essex fix --formatter none",
+    "check": "essex check --formatter none",
+    "check-deps": "essex check-deps",
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "devDependencies": {
-    "@essex/scripts": "^22.2.1",
+    "@essex/scripts": "^23.1.4",
     "@essex/tsconfig-base": "^1.0.2",
     "@types/styled-components": "^5.1.26",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
     "styled-components": "^5.3.6",
     "typescript": "^4.9.4"
   },
   "peerDependencies": {
     "styled-components": ">= 5"
+  },
+  "peerDependenciesMeta": {
+    "styled-components": {
+      "optional": false
+    }
   }
 }

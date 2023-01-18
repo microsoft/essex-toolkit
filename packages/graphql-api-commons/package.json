@@ -20,43 +20,39 @@
     "directory": "packages/graphql-api-commons"
   },
   "scripts": {
-    "clean": "essex clean dist lib",
+    "clean": "essex clean dist lib docs",
     "build": "essex build --mode dual --skipExportCheck --docs",
-    "lint": "essex lint --fix --noFormat",
-    "release": "yarn npm publish --tolerate-republish --access public"
+    "fix": "essex fix --formatter none",
+    "check": "essex check --formatter none",
+    "check-deps": "essex check-deps",
+    "release": "echo #add integration test / demo server before release # yarn npm publish --tolerate-republish --access public"
   },
   "devDependencies": {
-    "@essex/scripts": "^22.2.1",
-    "@graphql-tools/utils": "^8.13.1",
+    "@apollo/server": "^4.3.0",
+    "@essex/scripts": "^23.1.4",
+    "@graphql-tools/utils": "^9.1.4",
     "@tsconfig/node14": "^1.0.3",
-    "@types/pino": "^7.0.5",
-    "apollo-server-core": "^3.11.1",
-    "apollo-server-fastify": "^3.11.1",
-    "fastify": "^3.29.4",
+    "fastify": "^4.11.0",
     "graphql": "^16.6.0",
     "tsyringe": "^4.7.0",
     "typescript": "^4.9.4"
   },
   "dependencies": {
-    "pino": "^7.11.0",
-    "pino-pretty": "^7.6.1"
+    "pino": "^8.8.0",
+    "pino-pretty": "^9.1.1"
   },
   "peerDependencies": {
+    "@apollo/server": ">= 4",
     "@graphql-tools/utils": ">= 8.2.2",
-    "apollo-server-core": ">= 3.3.0",
-    "apollo-server-fastify": ">= 3.3.0",
     "fastify": ">= 3.21.0",
     "graphql": ">= 15.5.3",
     "tsyringe": ">= 4.6.0"
   },
   "peerDependenciesMeta": {
+    "@apollo/server": {
+      "optional": false
+    },
     "@graphql-tools/utils": {
-      "optional": false
-    },
-    "apollo-server-core": {
-      "optional": false
-    },
-    "apollo-server-fastify": {
       "optional": false
     },
     "fastify": {
