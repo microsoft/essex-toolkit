@@ -1,6 +1,6 @@
 {
   "name": "@essex/components",
-  "version": "3.6.4",
+  "version": "3.6.5",
   "description": "A set of visual components that include built-in thematic",
   "type": "module",
   "main": "src/index.ts",
@@ -45,8 +45,10 @@
     "@thematic/core": "^4.0.3",
     "@thematic/d3": "^2.0.18",
     "@thematic/react": "^2.1.5",
-    "@types/d3": "^7.4.0",
+    "@types/d3-array": "^3.0.4",
     "@types/d3-axis": "^3.0.1",
+    "@types/d3-scale": "^4.0.3",
+    "@types/d3-selection": "^3.0.4",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.26",
@@ -59,8 +61,10 @@
     "@thematic/core": ">= 4",
     "@thematic/d3": ">= 2",
     "@thematic/react": ">= 2",
-    "@types/d3": "*",
+    "@types/d3-array": ">= 3",
     "@types/d3-axis": ">= 3",
+    "@types/d3-scale": ">= 4",
+    "@types/d3-selection": ">= 3",
     "@types/node": "*",
     "@types/react": ">= 18",
     "react": ">= 18",
@@ -68,21 +72,27 @@
   },
   "peerDependenciesMeta": {
     "@fluentui/react": {
-      "optional": true
+      "optional": false
     },
     "@thematic/core": {
-      "optional": true
+      "optional": false
     },
     "@thematic/d3": {
-      "optional": true
+      "optional": false
     },
     "@thematic/react": {
-      "optional": true
+      "optional": false
     },
-    "@types/d3": {
+    "@types/d3-array": {
       "optional": true
     },
     "@types/d3-axis": {
+      "optional": true
+    },
+    "@types/d3-scale": {
+      "optional": true
+    },
+    "@types/d3-selection": {
       "optional": true
     },
     "@types/node": {
