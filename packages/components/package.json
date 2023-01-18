@@ -1,6 +1,6 @@
 {
   "name": "@essex/components",
-  "version": "3.6.2",
+  "version": "3.6.3",
   "description": "A set of visual components that include built-in thematic",
   "type": "module",
   "main": "src/index.ts",
@@ -42,7 +42,6 @@
     "@fluentui/react": "^8.104.5",
     "@mdx-js/react": "^2.2.1",
     "@storybook/addon-docs": "^6.5.15",
-    "@thematic/color": "^4.0.3",
     "@thematic/core": "^4.0.3",
     "@thematic/d3": "^2.0.18",
     "@thematic/fluent": "^5.0.4",
@@ -58,7 +57,6 @@
   },
   "peerDependencies": {
     "@fluentui/react": ">= 8",
-    "@thematic/color": ">= 4",
     "@thematic/core": ">= 4",
     "@thematic/d3": ">= 2",
     "@thematic/fluent": ">= 5",
@@ -73,9 +71,6 @@
   "peerDependenciesMeta": {
     "@fluentui/react": {
       "optional": true
-    },
-    "@thematic/color": {
-      "optional": false
     },
     "@thematic/core": {
       "optional": false

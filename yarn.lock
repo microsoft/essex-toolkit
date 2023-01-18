@@ -2204,7 +2204,6 @@ __metadata:
     "@fluentui/utilities": ^8.13.5
     "@mdx-js/react": ^2.2.1
     "@storybook/addon-docs": ^6.5.15
-    "@thematic/color": ^4.0.3
     "@thematic/core": ^4.0.3
     "@thematic/d3": ^2.0.18
     "@thematic/fluent": ^5.0.4
@@ -2231,7 +2230,6 @@ __metadata:
     react-if: ^4.1.4
   peerDependencies:
     "@fluentui/react": ">= 8"
-    "@thematic/color": ">= 4"
     "@thematic/core": ">= 4"
     "@thematic/d3": ">= 2"
     "@thematic/fluent": ">= 5"
@@ -2245,8 +2243,6 @@ __metadata:
   peerDependenciesMeta:
     "@fluentui/react":
       optional: true
-    "@thematic/color":
-      optional: false
     "@thematic/core":
       optional: false
     "@thematic/d3":
