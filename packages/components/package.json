@@ -1,6 +1,6 @@
 {
   "name": "@essex/components",
-  "version": "3.6.3",
+  "version": "3.6.4",
   "description": "A set of visual components that include built-in thematic",
   "type": "module",
   "main": "src/index.ts",
@@ -44,7 +44,6 @@
     "@storybook/addon-docs": "^6.5.15",
     "@thematic/core": "^4.0.3",
     "@thematic/d3": "^2.0.18",
-    "@thematic/fluent": "^5.0.4",
     "@thematic/react": "^2.1.5",
     "@types/d3": "^7.4.0",
     "@types/d3-axis": "^3.0.1",
@@ -59,7 +58,6 @@
     "@fluentui/react": ">= 8",
     "@thematic/core": ">= 4",
     "@thematic/d3": ">= 2",
-    "@thematic/fluent": ">= 5",
     "@thematic/react": ">= 2",
     "@types/d3": "*",
     "@types/d3-axis": ">= 3",
@@ -73,16 +71,13 @@
       "optional": true
     },
     "@thematic/core": {
-      "optional": false
+      "optional": true
     },
     "@thematic/d3": {
-      "optional": false
-    },
-    "@thematic/fluent": {
       "optional": true
     },
     "@thematic/react": {
-      "optional": false
+      "optional": true
     },
     "@types/d3": {
       "optional": true

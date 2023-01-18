@@ -2202,7 +2202,6 @@ __metadata:
     "@storybook/addon-docs": ^6.5.15
     "@thematic/core": ^4.0.3
     "@thematic/d3": ^2.0.18
-    "@thematic/fluent": ^5.0.4
     "@thematic/react": ^2.1.5
     "@types/d3": ^7.4.0
     "@types/d3-array": ^3.0.3
@@ -2228,7 +2227,6 @@ __metadata:
     "@fluentui/react": ">= 8"
     "@thematic/core": ">= 4"
     "@thematic/d3": ">= 2"
-    "@thematic/fluent": ">= 5"
     "@thematic/react": ">= 2"
     "@types/d3": "*"
     "@types/d3-axis": ">= 3"
@@ -2240,13 +2238,11 @@ __metadata:
     "@fluentui/react":
       optional: true
     "@thematic/core":
-      optional: false
+      optional: true
     "@thematic/d3":
-      optional: false
-    "@thematic/fluent":
       optional: true
     "@thematic/react":
-      optional: false
+      optional: true
     "@types/d3":
       optional: true
     "@types/d3-axis":
