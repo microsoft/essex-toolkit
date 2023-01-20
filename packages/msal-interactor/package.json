@@ -1,6 +1,6 @@
 {
   "name": "@essex/msal-interactor",
-  "version": "4.0.10",
+  "version": "4.0.11",
   "type": "module",
   "main": "src/index.ts",
   "publishConfig": {

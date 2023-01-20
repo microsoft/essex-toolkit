@@ -1,6 +1,6 @@
 {
   "name": "@essex/toposort",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "An esm-variant of the 'toposort' package",
   "type": "module",
   "main": "src/index.ts",
