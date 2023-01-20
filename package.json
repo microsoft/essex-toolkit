@@ -37,7 +37,7 @@
     "fix": "run-s _fix_packages rome_fix",
     "format": "rome format . --write",
     "start": "turbo run start --parallel",
-    "ci": "run-s _ci_packages _rome_ci",
+    "ci": "run-s _ci_packages rome_ci",
     "stories": "yarn start:storybook",
     "is_clean": "essex git-is-clean",
     "release": "run-s clean _version_cut _ci_force _release_packages",
