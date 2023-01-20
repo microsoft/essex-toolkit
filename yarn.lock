@@ -2195,6 +2195,7 @@ __metadata:
   resolution: "@essex/components@workspace:packages/components"
   dependencies:
     "@essex/scripts": ^23.1.4
+    "@essex/styled-components": "workspace:^"
     "@essex/toolbox": "workspace:^"
     "@fluentui/react": ^8.104.5
     "@fluentui/utilities": ^8.13.5
@@ -2218,10 +2219,12 @@ __metadata:
     d3-scale: ^4.0.2
     d3-selection: ^3.0.0
     lodash-es: ^4.17.21
+    markdown-to-jsx: ^7.1.8
     react: ^18.2.0
     react-animate-height: ^3.1.0
     react-dom: ^18.2.0
     react-if: ^4.1.4
+    styled-components: ^5.3.6
   peerDependencies:
     "@fluentui/react": ">= 8"
     "@thematic/core": ">= 4"
@@ -2235,6 +2238,7 @@ __metadata:
     "@types/react": ">= 18"
     react: ">= 18"
     react-dom: ">= 18"
+    styled-components: ">= 5"
   peerDependenciesMeta:
     "@fluentui/react":
       optional: false
@@ -2259,6 +2263,8 @@ __metadata:
     react:
       optional: false
     react-dom:
+      optional: true
+    styled-components:
       optional: true
   languageName: unknown
   linkType: soft
@@ -2599,7 +2605,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex/styled-components@workspace:packages/styled-components":
+"@essex/styled-components@workspace:^, @essex/styled-components@workspace:packages/styled-components":
   version: 0.0.0-use.local
   resolution: "@essex/styled-components@workspace:packages/styled-components"
   dependencies:
@@ -16222,6 +16228,15 @@ __metadata:
   version: 1.0.4
   resolution: "markdown-escapes@npm:1.0.4"
   checksum: 6833a93d72d3f70a500658872312c6fa8015c20cc835a85ae6901fa232683fbc6ed7118ebe920fea7c80039a560f339c026597d96eee0e9de602a36921804997
+  languageName: node
+  linkType: hard
+
+"markdown-to-jsx@npm:^7.1.8":
+  version: 7.1.8
+  resolution: "markdown-to-jsx@npm:7.1.8"
+  peerDependencies:
+    react: ">= 0.14.0"
+  checksum: 4823f90e8bd6734b9a4ad206d217c55358268974e219e0edf3c64407336a14116921cad8c577c54b4bf0349412751ab25f3b6265c8b5a99207a5f6e364716636
   languageName: node
   linkType: hard
 
