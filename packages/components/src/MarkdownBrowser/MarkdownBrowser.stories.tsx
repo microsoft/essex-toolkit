@@ -36,6 +36,8 @@ Link to [groupby](./groupby.md) and [fill](./fill.md) to support all-in-one data
 | --- | ------ |
 | 1   | 25     |
 | 2   | 30     |
+
+[no header](./noheader.md)
 `,
 	groupby: `
 # groupby
@@ -56,6 +58,28 @@ Creates a new output column and fills it with a fixed value.
 | 1   |
 | 2   |
 | 3   |
+
+\`fill column='output' with value='hi'\`:
+
+| id  | output |
+| --- | ------ |
+| 1   | hi     |
+| 2   | hi     |
+| 3   | hi     |
+
+`,
+noheader: `
+This content has no header so we can see how the alignment works with the navigation buttons
+
+## Example
+
+| id  |
+| --- |
+| 1   |
+| 2   |
+| 3   |
+
+Here is a [missing link](./missing.md).
 
 \`fill column='output' with value='hi'\`:
 

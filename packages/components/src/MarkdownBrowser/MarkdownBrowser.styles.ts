@@ -9,16 +9,13 @@ import Markdown from 'markdown-to-jsx'
 import { useMemo } from 'react'
 
 export const Container = styled.div`
-	position: relative;
     overflow-y: auto;
     height: 100%;
     width: 100%;
 `
 
 export const Navigation = styled.div`
-	position: absolute;
-	top: 0;
-	right: 0;
+    float: right;
 `
 
 export const MarkdownContainer = styled(Markdown)`
