@@ -4,11 +4,16 @@
  */
 import type { IButtonProps } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useIconButtonStyles } from './MarkdownBrowser.styles.js'
 
-export function useHistory(home: string) {
+export function useHistory(home: string): {
+	current: string,
+	goHome?: () => void,
+	goBack?: () => void,
+	goForward: (to: string) => void,
+} {
 	const [stack, setStack] = useState<string[]>([home])
 	// reset the stack and go to the original
 	const goHome = useCallback(() => setStack([home]), [home])
@@ -29,8 +34,8 @@ export function useHistory(home: string) {
 }
 
 export function useLinkNavigation(
-	container: any,
-	goForward: any,
+	container: React.MutableRefObject<HTMLDivElement | null>,
+	goForward: (to: string) => void,
 	current: string,
 ) {
 	const onLinkClick = useCallback(
@@ -69,7 +74,7 @@ export function useIconButtonProps(
 	iconName: string,
 	onClick?: any,
 	overrides?: IButtonProps,
-) {
+): IButtonProps {
 	const styles = useIconButtonStyles()
 	return useMemo(() => {
 		return merge(
