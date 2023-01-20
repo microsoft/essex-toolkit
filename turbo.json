@@ -13,6 +13,10 @@
 			"dependsOn": [],
 			"outputs": ["coverage/**/*"]
 		},
+		"ci": {
+			"dependsOn": ["build", "check", "test", "check-deps", "bundle"],
+			"outputs": []
+		},
 		"check": {
 			"dependsOn": [],
 			"outputs": []
@@ -21,15 +25,10 @@
 			"dependsOn": [],
 			"outputs": []
 		},
-		"fix": {
-			"dependsOn": [],
-			"outputs": []
-		},
-		"ci": {
-			"dependsOn": ["build", "check", "test", "check-deps", "bundle"],
-			"outputs": []
-		},
 		"clean": {
+			"cache": false
+		},
+		"fix": {
 			"cache": false
 		},
 		"release": {
