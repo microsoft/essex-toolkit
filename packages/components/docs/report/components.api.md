@@ -279,6 +279,34 @@ export interface FilterTextboxProps {
 // @public (undocumented)
 export function getEnumDropdownOptions<E = Record<string, string>>(enumeration: E, labels?: Record<string, string>): IDropdownOption[];
 
+// Warning: (ae-missing-release-tag) "MarkdownBrowser" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const MarkdownBrowser: React.FC<MarkdownBrowserProps>;
+
+// Warning: (ae-missing-release-tag) "MarkdownBrowserProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface MarkdownBrowserProps {
+    // (undocumented)
+    backButtonProps?: IButtonProps;
+    content: Record<string, string>;
+    home: string;
+    // (undocumented)
+    homeButtonProps?: IButtonProps;
+    // (undocumented)
+    styles?: MarkdownBrowserStyles;
+}
+
+// Warning: (ae-missing-release-tag) "MarkdownBrowserStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface MarkdownBrowserStyles {
+    markdown?: CSSProperties;
+    navigation?: CSSProperties;
+    root?: CSSProperties;
+}
+
 // Warning: (ae-missing-release-tag) "MultiDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public

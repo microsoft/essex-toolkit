@@ -45,6 +45,8 @@
 |  [ExpandoProps](./components.expandoprops.md) |  |
 |  [ExpandoStyles](./components.expandostyles.md) |  |
 |  [FilterTextboxProps](./components.filtertextboxprops.md) |  |
+|  [MarkdownBrowserProps](./components.markdownbrowserprops.md) |  |
+|  [MarkdownBrowserStyles](./components.markdownbrowserstyles.md) |  |
 |  [MultiDropdownProps](./components.multidropdownprops.md) |  |
 |  [NumberSpinButtonProps](./components.numberspinbuttonprops.md) |  |
 |  [SearchBoxProps](./components.searchboxprops.md) |  |
@@ -77,6 +79,7 @@
 |  [EnumDropdown](./components.enumdropdown.md) | Dropdown wrapper to list out aggregation operations. |
 |  [Expando](./components.expando.md) | Toggle link with a chevron and show/hide of children. |
 |  [FilterTextbox](./components.filtertextbox.md) | This component presents a compound textbox filter that includes an inline toggle button to switch between inclusion and exclusion of the filter text. To use this component, ensure that Fluent is bootstrapped to include loaded icons See https://developer.microsoft.com/en-us/fluentui\#/styles/web/icons |
+|  [MarkdownBrowser](./components.markdownbrowser.md) | <p>A component for rendering markdown that supports relative navigation. If you have a collection of markdown files (e.g., documentation), this component will render the content, but intercept link clicks to load relative content in the same pane.</p><p>External links will open in a new tab/window.</p> |
 |  [MultiDropdown](./components.multidropdown.md) | Dropdown wrapper to manage multi-select with a select all/none helper. |
 |  [NumberSpinButton](./components.numberspinbutton.md) | NumberSpinButton creates a thematic styled SpinButton from Fluent |
 |  [PolicyAndCookieBanner](./components.policyandcookiebanner.md) |  |
