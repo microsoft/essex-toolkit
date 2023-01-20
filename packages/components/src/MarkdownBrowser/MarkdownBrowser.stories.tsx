@@ -68,7 +68,7 @@ Creates a new output column and fills it with a fixed value.
 | 3   | hi     |
 
 `,
-noheader: `
+	noheader: `
 This content has no header so we can see how the alignment works with the navigation buttons
 
 ## Example

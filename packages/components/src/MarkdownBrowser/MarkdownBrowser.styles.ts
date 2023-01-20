@@ -20,32 +20,35 @@ export const Navigation = styled.div`
 
 export const MarkdownContainer = styled(Markdown)`
     *:first-child {
-    margin-top: 0;
+        margin-top: 0;
     }
-h1 {
-    text-transform: uppercase;
-    color: ${({ theme }: { theme: ITheme }) => theme.palette.neutralTertiary};
-}
-
-h2 {
-    color: ${({ theme }: { theme: ITheme }) => theme.palette.neutralTertiary};
-}
-
-table {
-    border-collapse: collapse;
-
-    th {
-        font-weight: bold;
+    
+    h1 {
+        text-transform: uppercase;
+        color: ${({ theme }: { theme: ITheme }) =>
+					theme.palette.neutralTertiary};
     }
 
-    td,
-    th {
-        border: 1px solid ${({ theme }: { theme: ITheme }) =>
-					theme.palette.neutralTertiaryAlt};
-        padding: 5px;
-        text-align: center;
+    h2 {
+        color: ${({ theme }: { theme: ITheme }) =>
+					theme.palette.neutralTertiary};
     }
-}
+
+    table {
+        border-collapse: collapse;
+
+        th {
+            font-weight: bold;
+        }
+
+        td,
+        th {
+            border: 1px solid ${({ theme }: { theme: ITheme }) =>
+							theme.palette.neutralTertiaryAlt};
+            padding: 5px;
+            text-align: center;
+        }
+    }
 `
 
 export function useIconButtonStyles() {
