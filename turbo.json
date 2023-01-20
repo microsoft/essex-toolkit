@@ -5,9 +5,13 @@
 			"dependsOn": [],
 			"outputs": ["dist/**/*", "docs/**/*"]
 		},
+		"bundle": {
+			"dependsOn": [],
+			"outputs": ["storybook_static/**/*"]
+		},
 		"test": {
 			"dependsOn": [],
-			"outputs": []
+			"outputs": ["coverage/**/*"]
 		},
 		"check": {
 			"dependsOn": [],
@@ -21,13 +25,9 @@
 			"dependsOn": [],
 			"outputs": []
 		},
-		"bundle": {
-			"dependsOn": [],
-			"outputs": ["storybook_static/**"]
-		},
 		"ci": {
 			"dependsOn": ["build", "check", "test", "check-deps", "bundle"],
-			"outputs": ["dist/**/*", "docs/**/*", "storybook_static/**/*"]
+			"outputs": []
 		},
 		"clean": {
 			"cache": false
