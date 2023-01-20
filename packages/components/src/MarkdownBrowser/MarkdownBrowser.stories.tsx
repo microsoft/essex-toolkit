@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import styled  from '@essex/styled-components'
 import type { ComponentStory } from '@storybook/react'
 
 import { MarkdownBrowser } from './MarkdownBrowser.js'
@@ -41,6 +42,8 @@ Link to [groupby](./groupby.md) and [fill](./fill.md) to support all-in-one data
 # groupby
 
 Groups table rows using keys from a specified column list. Note that this is an underlying index on a table that isn't necessarily visible, but will apply when performing operations that are sensitive to grouping. See [aggregate](./aggregate.md) for examples of \`groupby\`.
+
+Here is a [missing link](./missing.md).
 `,
 'fill': `
 # fill
@@ -65,6 +68,7 @@ Creates a new output column and fills it with a fixed value.
 
 `
 }
+
 const Template: ComponentStory<typeof MarkdownBrowser> = (
 	args: MarkdownBrowserProps,
 ) => {
@@ -77,12 +81,32 @@ const Template: ComponentStory<typeof MarkdownBrowser> = (
 				border: '1px solid orange',
 			}}
 		>
-			<MarkdownBrowser {...args} content={content}/>
+			<MarkdownBrowser {...args} content={content} home={'aggregate'}/>
 		</div>
 	)
 }
 
 export const Primary = Template.bind({})
-Primary.args = {
-	selectedKey: 'aggregate'
+
+export const Customized = Template.bind({})
+Customized.args = {
+	styles: {
+		root: {
+			border: '1px solid dodgerblue',
+			padding: 20
+		},
+		markdown: {
+			fontFamily: 'monospace',
+		}
+	},
+	homeButtonProps: {
+		iconProps: {
+			iconName: 'RedEye'
+		}
+	},
+	backButtonProps: {
+		iconProps: {
+			iconName: 'Undo'
+		}
+	}
 }

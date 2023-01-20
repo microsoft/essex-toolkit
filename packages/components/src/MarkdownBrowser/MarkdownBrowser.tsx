@@ -3,46 +3,54 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { IconButton } from '@fluentui/react'
-import Markdown from 'markdown-to-jsx'
 import { memo, useRef } from 'react'
 
 import {
     useHistory,
-	useIndexed,
-    useLinkNavigation,
-} from './MarkdownBrowser.hooks.js'
-import { Container, Navigation, useIconButtonProps } from './MarkdownBrowser.styles.js'
+    useIconButtonProps,
+    useLinkNavigation} from './MarkdownBrowser.hooks.js'
+import { Container, MarkdownContainer,Navigation } from './MarkdownBrowser.styles.js'
 import type { MarkdownBrowserProps } from './MarkdownBrowser.types.js'
 
 /**
- * A component for rendering markdown.
+ * A component for rendering markdown that supports relative navigation.
+ * If you have a collection of markdown files (e.g., documentation),
+ * this component will render the content, but intercept link clicks to
+ * load relative content in the same pane.
+ * 
+ * External links will open in a new tab/window.
  */
 export const MarkdownBrowser: React.FC<MarkdownBrowserProps> = memo(function MarkdownBrowser({
-	selectedKey,
+	home,
 	content,
+    styles = {},
+    backButtonProps,
+    homeButtonProps
 }) {
 	const container = useRef<HTMLDivElement>(null)
-	const index = useIndexed(content)
     const {
         current,
         goHome,
         goBack,
         goForward
-    } = useHistory(selectedKey)
+    } = useHistory(home)
     
     useLinkNavigation(container, goForward, current)
 
-    const md = index(current)
-    
-    const backProps = useIconButtonProps('Back', goBack)
-    const homeProps = useIconButtonProps('Home', goHome)
+    // fallback to empty string - markdown component will fail if content is undefined
+    const md = content[current] || ''
+
+    const backProps = useIconButtonProps('Back', goBack, backButtonProps)
+    const homeProps = useIconButtonProps('Home', goHome, homeButtonProps)
 	return (
-		<Container ref={container}>
-			<Navigation>
+		<Container ref={container} style={styles.root}>
+			<Navigation style={styles.navigation}>
 					<IconButton {...backProps} />
 					<IconButton {...homeProps} />
 			</Navigation>
-			<Markdown>{md}</Markdown>
+			<MarkdownContainer style={styles.markdown}>
+                {md}
+            </MarkdownContainer>
 		</Container>
 	)
 })
