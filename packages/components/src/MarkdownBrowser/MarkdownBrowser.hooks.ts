@@ -4,7 +4,7 @@
  */
 import type { IButtonProps } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
-import { useCallback,useEffect, useMemo, useState  } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useIconButtonStyles } from './MarkdownBrowser.styles.js'
 
@@ -12,21 +12,27 @@ export function useHistory(home: string) {
 	const [stack, setStack] = useState<string[]>([home])
 	// reset the stack and go to the original
 	const goHome = useCallback(() => setStack([home]), [home])
-	const goBack = useCallback(() => setStack((prev) => 
-		prev.length > 1 ? prev.slice(0, -1) : prev
-	), [])
-	const goForward = useCallback((to: string) => setStack((prev) => 
-		[...prev, to]
-	), [])
+	const goBack = useCallback(
+		() => setStack((prev) => (prev.length > 1 ? prev.slice(0, -1) : prev)),
+		[],
+	)
+	const goForward = useCallback(
+		(to: string) => setStack((prev) => [...prev, to]),
+		[],
+	)
 	return {
 		current: stack[stack.length - 1],
 		goHome: stack.length > 1 ? goHome : undefined,
 		goBack: stack.length > 1 ? goBack : undefined,
-		goForward
+		goForward,
 	}
 }
 
-export function useLinkNavigation(container: any, goForward: any, current: string) {
+export function useLinkNavigation(
+	container: any,
+	goForward: any,
+	current: string,
+) {
 	const onLinkClick = useCallback(
 		(url: string) => {
 			// if the link is not relative, open in a new window
@@ -59,18 +65,24 @@ export function useLinkNavigation(container: any, goForward: any, current: strin
 	}, [onLinkClick, container, current])
 }
 
-
-export function useIconButtonProps(iconName: string, onClick?: any, overrides?: IButtonProps) {
-    const styles = useIconButtonStyles()
-    return useMemo(() => {
-        return merge({
-            disabled: !onClick,
-            styles,
-            iconProps: {
-                iconName
-            },
-            ariaLabel: iconName,
-            onClick,
-        }, overrides)
-    }, [styles, iconName, onClick, overrides])
+export function useIconButtonProps(
+	iconName: string,
+	onClick?: any,
+	overrides?: IButtonProps,
+) {
+	const styles = useIconButtonStyles()
+	return useMemo(() => {
+		return merge(
+			{
+				disabled: !onClick,
+				styles,
+				iconProps: {
+					iconName,
+				},
+				ariaLabel: iconName,
+				onClick,
+			},
+			overrides,
+		)
+	}, [styles, iconName, onClick, overrides])
 }

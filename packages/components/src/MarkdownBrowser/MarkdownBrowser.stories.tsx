@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import styled  from '@essex/styled-components'
+import styled from '@essex/styled-components'
 import type { ComponentStory } from '@storybook/react'
 
 import { MarkdownBrowser } from './MarkdownBrowser.js'
@@ -11,12 +11,11 @@ import type { MarkdownBrowserProps } from './MarkdownBrowser.types.js'
 const meta = {
 	title: '@essex:components/MarkdownBrowser',
 	component: MarkdownBrowser,
-	
 }
 export default meta
 
 const content = {
-	'aggregate':`
+	aggregate: `
 # aggregate
 
 Link to [groupby](./groupby.md) and [fill](./fill.md) to support all-in-one data aggregations.
@@ -38,14 +37,14 @@ Link to [groupby](./groupby.md) and [fill](./fill.md) to support all-in-one data
 | 1   | 25     |
 | 2   | 30     |
 `,
-	'groupby': `
+	groupby: `
 # groupby
 
 Groups table rows using keys from a specified column list. Note that this is an underlying index on a table that isn't necessarily visible, but will apply when performing operations that are sensitive to grouping. See [aggregate](./aggregate.md) for examples of \`groupby\`.
 
 Here is a [missing link](./missing.md).
 `,
-'fill': `
+	fill: `
 # fill
 
 Creates a new output column and fills it with a fixed value.
@@ -66,7 +65,7 @@ Creates a new output column and fills it with a fixed value.
 | 2   | hi     |
 | 3   | hi     |
 
-`
+`,
 }
 
 const Template: ComponentStory<typeof MarkdownBrowser> = (
@@ -81,7 +80,7 @@ const Template: ComponentStory<typeof MarkdownBrowser> = (
 				border: '1px solid orange',
 			}}
 		>
-			<MarkdownBrowser {...args} content={content} home={'aggregate'}/>
+			<MarkdownBrowser {...args} content={content} home={'aggregate'} />
 		</div>
 	)
 }
@@ -93,20 +92,20 @@ Customized.args = {
 	styles: {
 		root: {
 			border: '1px solid dodgerblue',
-			padding: 20
+			padding: 20,
 		},
 		markdown: {
 			fontFamily: 'monospace',
-		}
+		},
 	},
 	homeButtonProps: {
 		iconProps: {
-			iconName: 'RedEye'
-		}
+			iconName: 'RedEye',
+		},
 	},
 	backButtonProps: {
 		iconProps: {
-			iconName: 'Undo'
-		}
-	}
+			iconName: 'Undo',
+		},
+	},
 }
