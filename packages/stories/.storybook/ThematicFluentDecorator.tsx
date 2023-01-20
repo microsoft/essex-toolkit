@@ -2,7 +2,7 @@ import { useState, useCallback, useMemo } from 'react'
 import { initializeIcons, Toggle } from '@fluentui/react'
 import { loadById } from '@thematic/core'
 import { ApplicationStyles } from '@thematic/react'
-import { ThematicFluentProvider } from '@thematic/fluent'
+import { loadFluentTheme, ThematicFluentProvider } from '@thematic/fluent'
 import { StoryFnReactReturnType } from '@storybook/react/dist/ts3.9/client/preview/types'
 import styled, { ThemeProvider } from 'styled-components'
 
@@ -24,7 +24,10 @@ export const ThematicFluentDecorator = (
 			}),
 		[dark],
 	)
-
+	const fluentTheme = useMemo(
+		() => loadFluentTheme(thematicTheme),
+		[thematicTheme],
+	)
 	const handleDarkChange = useCallback((e, v) => {
 		setDark(v)
 	}, [])
@@ -37,7 +40,7 @@ export const ThematicFluentDecorator = (
 			</style>
 			<ApplicationStyles />
 			<Toggle label="Dark mode" checked={dark} onChange={handleDarkChange} />
-			<ThemeProvider theme={thematicTheme}>
+			<ThemeProvider theme={fluentTheme}>
 				<Container>{storyFn(undefined, undefined)}</Container>
 			</ThemeProvider>
 		</ThematicFluentProvider>
