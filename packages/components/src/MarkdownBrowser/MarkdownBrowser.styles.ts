@@ -19,8 +19,10 @@ export const Navigation = styled.div`
 `
 
 export const MarkdownContainer = styled(Markdown)`
-h1 {
+    *:first-child {
     margin-top: 0;
+    }
+h1 {
     text-transform: uppercase;
     color: ${({ theme }: { theme: ITheme }) => theme.palette.neutralTertiary};
 }
