@@ -3,7 +3,7 @@
 	"pipeline": {
 		"build": {
 			"dependsOn": [],
-			"outputs": ["dist/**", "docs/**"]
+			"outputs": ["dist/**/*", "docs/**/*"]
 		},
 		"test": {
 			"dependsOn": [],
@@ -27,7 +27,7 @@
 		},
 		"ci": {
 			"dependsOn": ["build", "check", "test", "check-deps", "bundle"],
-			"outputs": ["dist/**", "docs/**", "storybook_static/**"]
+			"outputs": ["dist/**/*", "docs/**/*", "storybook_static/**/*"]
 		},
 		"clean": {
 			"cache": false
