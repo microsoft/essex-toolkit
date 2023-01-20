@@ -4,15 +4,16 @@
  */
 import type { IButtonProps } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import type React from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useIconButtonStyles } from './MarkdownBrowser.styles.js'
 
 export function useHistory(home: string): {
-	current: string,
-	goHome?: () => void,
-	goBack?: () => void,
-	goForward: (to: string) => void,
+	current: string
+	goHome?: () => void
+	goBack?: () => void
+	goForward: (to: string) => void
 } {
 	const [stack, setStack] = useState<string[]>([home])
 	// reset the stack and go to the original
