@@ -27,7 +27,7 @@
 		},
 		"ci": {
 			"dependsOn": ["build", "check", "test", "check-deps", "bundle"],
-			"outputs": []
+			"outputs": ["dist/**/*", "docs/**/*", "storybook_static/**/*", "coverage/**/*"]
 		},
 		"clean": {
 			"cache": false
