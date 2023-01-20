@@ -1,4 +1,16 @@
 {
+  "files": {
+    "ignore": [
+      "dist",
+      "lib",
+      "build",
+      "storybook-static",
+      "coverage",
+      ".turbo",
+      ".pnp.cjs",
+      ".pnp.loader.mjs"
+    ]
+  },
   "linter": {
     "enabled": true,
     "rules": {
@@ -6,16 +18,7 @@
       "suspicious": {
         "noExplicitAny": "off"
       }
-    },
-    "ignore": [
-      "dist",
-      "lib",
-      "build",
-      "storybook-static",
-      ".turbo",
-      ".pnp.cjs",
-      ".pnp.loader.mjs"
-    ]
+    }
   },
   "javascript": {
     "formatter": {
@@ -26,15 +29,6 @@
     }
   },
   "formatter": {
-    "indentStyle": "tab",
-    "ignore": [
-      "dist",
-      "lib",
-      "build",
-      "storybook-static",
-      ".turbo",
-      ".pnp.cjs",
-      ".pnp.loader.mjs"
-    ]
+    "indentStyle": "tab"
   }
 }
