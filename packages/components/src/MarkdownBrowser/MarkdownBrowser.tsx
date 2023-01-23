@@ -39,7 +39,7 @@ export const MarkdownBrowser: React.FC<MarkdownBrowserProps> = memo(
 		useLinkNavigation(container, goForward, current)
 
 		// fallback to empty string - markdown component will fail if content is undefined
-		const md = content[current] || ''
+		const md = current ? content[current] : ''
 
 		const backProps = useIconButtonProps('Back', goBack, backButtonProps)
 		const homeProps = useIconButtonProps('Home', goHome, homeButtonProps)
@@ -49,7 +49,9 @@ export const MarkdownBrowser: React.FC<MarkdownBrowserProps> = memo(
 					{goBack && <IconButton {...backProps} />}
 					{goHome && <IconButton {...homeProps} />}
 				</Navigation>
-				<MarkdownContainer style={styles.markdown}>{md}</MarkdownContainer>
+				{md && (
+					<MarkdownContainer style={styles.markdown}>{md}</MarkdownContainer>
+				)}
 			</Container>
 		)
 	},

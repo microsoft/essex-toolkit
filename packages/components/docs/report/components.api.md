@@ -291,7 +291,7 @@ export interface MarkdownBrowserProps {
     // (undocumented)
     backButtonProps?: IButtonProps;
     content: Record<string, string>;
-    home: string;
+    home?: string;
     // (undocumented)
     homeButtonProps?: IButtonProps;
     // (undocumented)

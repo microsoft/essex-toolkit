@@ -9,15 +9,15 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useIconButtonStyles } from './MarkdownBrowser.styles.js'
 
-export function useHistory(home: string): {
-	current: string
+export function useHistory(home?: string): {
+	current: string | undefined
 	goHome?: () => void
 	goBack?: () => void
 	goForward: (to: string) => void
 } {
-	const [stack, setStack] = useState<string[]>([home])
+	const [stack, setStack] = useState<string[]>([])
 	// reset the stack and go to the original
-	const goHome = useCallback(() => setStack([home]), [home])
+	const goHome = useCallback(() => setStack(home ? [home] : []), [home])
 	const goBack = useCallback(
 		() => setStack((prev) => (prev.length > 1 ? prev.slice(0, -1) : prev)),
 		[],
@@ -26,6 +26,7 @@ export function useHistory(home: string): {
 		(to: string) => setStack((prev) => [...prev, to]),
 		[],
 	)
+	useEffect(() => setStack(home ? [home] : []), [home])
 	return {
 		current: stack[stack.length - 1],
 		goHome: stack.length > 1 ? goHome : undefined,
@@ -37,7 +38,7 @@ export function useHistory(home: string): {
 export function useLinkNavigation(
 	container: React.MutableRefObject<HTMLDivElement | null>,
 	goForward: (to: string) => void,
-	current: string,
+	current: string | undefined,
 ) {
 	const onLinkClick = useCallback(
 		(url: string) => {
