@@ -37,7 +37,7 @@ export interface MarkdownBrowserProps {
 	/**
 	 * Key for the default 'home' content to render.
 	 */
-	home: string
+	home?: string
 	styles?: MarkdownBrowserStyles
 	backButtonProps?: IButtonProps
 	homeButtonProps?: IButtonProps

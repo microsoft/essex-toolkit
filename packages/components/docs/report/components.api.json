@@ -2987,7 +2987,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "home: "
+                  "text": "home?: "
                 },
                 {
                   "kind": "Content",
@@ -2999,7 +2999,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "home",
               "propertyTypeTokenRange": {

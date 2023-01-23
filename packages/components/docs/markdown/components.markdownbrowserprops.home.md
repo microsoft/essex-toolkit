@@ -9,5 +9,5 @@ Key for the default 'home' content to render.
 <b>Signature:</b>
 
 ```typescript
-home: string;
+home?: string;
 ```

@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import styled from '@essex/styled-components'
 import type { ComponentStory } from '@storybook/react'
-
+import { useState } from 'react'
+import { DefaultButton } from '@fluentui/react'
 import { MarkdownBrowser } from './MarkdownBrowser.js'
 import type { MarkdownBrowserProps } from './MarkdownBrowser.types.js'
 
@@ -95,7 +95,19 @@ Here is a [missing link](./missing.md).
 const Template: ComponentStory<typeof MarkdownBrowser> = (
 	args: MarkdownBrowserProps,
 ) => {
+	const [home, setHome] = useState<string | undefined>('aggregate')
+
 	return (
+		<div>
+			<div style={{
+				display: 'flex',
+				gap: 8,
+				marginBottom: 8,
+			}}>
+				<DefaultButton onClick={() => setHome('aggregate')}>aggregate</DefaultButton>
+				<DefaultButton onClick={() => setHome('groupby')}>groupby</DefaultButton>
+				<DefaultButton onClick={() => setHome(undefined)}>clear</DefaultButton>
+			</div>
 		<div
 			style={{
 				width: 600,
@@ -104,7 +116,8 @@ const Template: ComponentStory<typeof MarkdownBrowser> = (
 				border: '1px solid orange',
 			}}
 		>
-			<MarkdownBrowser {...args} content={content} home={'aggregate'} />
+			<MarkdownBrowser {...args} content={content} home={home} />
+		</div>
 		</div>
 	)
 }
