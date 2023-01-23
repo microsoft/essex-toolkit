@@ -7,5 +7,5 @@ const { configure } = require('@essex/storybook-config/main')
 
 module.exports = configure({
 	staticDirs: [path.join(__dirname, '../public')],
-	transpileMatch: [/@essex\/storybook-config/]
+	transpileMatch: [/@essex\/storybook-config/],
 })
