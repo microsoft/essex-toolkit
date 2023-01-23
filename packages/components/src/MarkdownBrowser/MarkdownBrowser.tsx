@@ -49,7 +49,9 @@ export const MarkdownBrowser: React.FC<MarkdownBrowserProps> = memo(
 					{goBack && <IconButton {...backProps} />}
 					{goHome && <IconButton {...homeProps} />}
 				</Navigation>
-				{md && <MarkdownContainer style={styles.markdown}>{md}</MarkdownContainer>}
+				{md && (
+					<MarkdownContainer style={styles.markdown}>{md}</MarkdownContainer>
+				)}
 			</Container>
 		)
 	},
