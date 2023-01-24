@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Icon, IconButton, Link } from '@fluentui/react'
-import type { PropsWithChildren} from 'react';
+import type { PropsWithChildren } from 'react'
 import { memo, useMemo, useRef } from 'react'
 
 import {
