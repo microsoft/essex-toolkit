@@ -2,12 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IconButton } from '@fluentui/react'
-import { memo, useRef } from 'react'
+import { Icon, IconButton } from '@fluentui/react'
+import { memo, PropsWithChildren, useRef } from 'react'
 
 import {
+	isExternalLink,
 	useHistory,
 	useIconButtonProps,
+	useLinkIconProps,
 	useLinkNavigation,
 } from './MarkdownBrowser.hooks.js'
 import {
@@ -50,9 +52,31 @@ export const MarkdownBrowser: React.FC<MarkdownBrowserProps> = memo(
 					{goHome && <IconButton {...homeProps} />}
 				</Navigation>
 				{md && (
-					<MarkdownContainer style={styles.markdown}>{md}</MarkdownContainer>
+					<MarkdownContainer options={options} style={styles.markdown}>
+						{md}
+					</MarkdownContainer>
 				)}
 			</Container>
 		)
 	},
 )
+
+const Link = (props: PropsWithChildren<any>) => {
+	const { children, href, ...rest } = props
+	const isExternal = isExternalLink(href)
+	const iconProps = useLinkIconProps(href)
+	return (
+		<a href={href} {...rest}>
+			{children}
+			{isExternal && <Icon {...iconProps} />}
+		</a>
+	)
+}
+
+const options = {
+	overrides: {
+		a: {
+			component: Link,
+		},
+	},
+}

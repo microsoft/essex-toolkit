@@ -39,6 +39,8 @@ Link to [groupby](./groupby.md) and [fill](./fill.md) to support all-in-one data
 | 2   | 30     |
 
 [no header](./noheader.md)
+
+We can also link to [external](https://en.wikipedia.org/wiki/Markdown) content.
 `,
 	groupby: `
 # groupby

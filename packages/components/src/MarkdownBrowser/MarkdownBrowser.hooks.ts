@@ -43,7 +43,7 @@ export function useLinkNavigation(
 	const onLinkClick = useCallback(
 		(url: string) => {
 			// if the link is not relative, open in a new window
-			if (!url.includes(window.location.origin)) {
+			if (isExternalLink(url)) {
 				return window.open(url, '_blank')
 			}
 			// otherwise, navigate to the relative link
@@ -92,4 +92,40 @@ export function useIconButtonProps(
 			overrides,
 		)
 	}, [styles, iconName, onClick, overrides])
+}
+
+/**
+ * Construct the props for an icon
+ * specific to external links.
+ * @param url
+ */
+export function useLinkIconProps(url: string) {
+	return useMemo(
+		() => ({
+			styles: {
+				root: {
+					marginLeft: 2,
+					fontSize: '0.8em',
+					width: '0.8em',
+					height: '0.8em',
+				},
+			},
+			iconName: 'NavigateExternalInline',
+			// we have to provide separate click handling for the icon
+			onClick: () => window.open(url, '_blank'),
+		}),
+		[url],
+	)
+}
+
+/**
+ * Relative paths should either include the origin or have no protocol.
+ * @param url 
+ * @returns 
+ */
+export function isExternalLink(url: string) {
+	if (url.includes(':')) {
+		return !url.includes(window.location.origin)
+	}
+	return false
 }
