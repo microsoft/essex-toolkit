@@ -1,0 +1,16 @@
+releases:
+  "@essex/components": patch
+  essex-toolkit-stories: patch
+
+declined:
+  - "@essex/boolean-expression-component"
+  - "@essex/charts-react"
+  - "@essex/graphql-api-commons"
+  - "@essex/hierarchy-browser"
+  - "@essex/hooks"
+  - "@essex/msal-interactor"
+  - "@essex/semantic-components"
+  - "@essex/styled-components"
+  - "@essex/thematic-lineup"
+  - "@essex/toolbox"
+  - "@essex/toposort"
