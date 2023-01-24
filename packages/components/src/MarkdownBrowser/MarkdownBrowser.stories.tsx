@@ -31,17 +31,13 @@ Link to [groupby](./groupby.md) and [fill](./fill.md) to support all-in-one data
 | 2   | 11    |
 | 2   | 18    |
 
-\`aggregate column['value'] with function='sum', groupby=column['id'], t_column='output'\`:
-
-| id  | output |
-| --- | ------ |
-| 1   | 25     |
-| 2   | 30     |
-
 [no header](./noheader.md)
 
 We can also link to [external](https://en.wikipedia.org/wiki/Markdown) content.
+
+And we can handle [nested relative content](./nested/content.md)
 `,
+
 	groupby: `
 # groupby
 
@@ -49,6 +45,7 @@ Groups table rows using keys from a specified column list. Note that this is an 
 
 Here is a [missing link](./missing.md).
 `,
+
 	fill: `
 # fill
 
@@ -71,6 +68,7 @@ Creates a new output column and fills it with a fixed value.
 | 3   | hi     |
 
 `,
+
 	noheader: `
 This content has no header so we can see how the alignment works with the navigation buttons
 
@@ -93,6 +91,29 @@ Here is a [missing link](./missing.md).
 | 3   | hi     |
 
 `,
+
+	'nested.content': `
+This is a nested content file.
+
+Link to [sibling](./sibling.md).
+
+Link back to [aggregate](../aggregate.md)`,
+
+	'nested.sibling': `
+This is a nested sibling content file.
+
+Link to [nested](./content.md).
+
+Link to [deeply nested](./child/leveltwo.md).
+
+Link back to [aggregate](../aggregate.md)`,
+
+	'nested.child.leveltwo': `
+This is a deeply nested content file for relative parent folder testing.
+
+Link to [nested parent](../content.md).
+
+Link back up to [aggregate](../../aggregate.md)`,
 }
 
 const Template: ComponentStory<typeof MarkdownBrowser> = (

@@ -35,41 +35,36 @@ export function useHistory(home?: string): {
 	}
 }
 
+/**
+ * Override link click behavior to intercept relative links.
+ * @param container
+ * @param goForward
+ * @param current
+ */
 export function useLinkNavigation(
-	container: React.MutableRefObject<HTMLDivElement | null>,
+	parent: string,
+	href: string,
 	goForward: (to: string) => void,
-	current: string | undefined,
 ) {
-	const onLinkClick = useCallback(
-		(url: string) => {
+	return useCallback(
+		(
+			event: React.MouseEvent<
+				HTMLAnchorElement | HTMLButtonElement | HTMLElement
+			>,
+		) => {
+			event.preventDefault()
 			// if the link is not relative, open in a new window
-			if (isExternalLink(url)) {
-				return window.open(url, '_blank')
+			if (isExternalLink(href)) {
+				return window.open(href, '_blank')
 			}
 			// otherwise, navigate to the relative link
-			// TODO: this only supports last path segment
-			// we could potentially provide better support for nested documentation paths
-			const name = url.split('/').pop()?.replace(/.md/, '')
+			const name = parseRelativePath(href, parent)
 			if (name) {
 				goForward(name)
 			}
 		},
-		[goForward],
+		[parent, href, goForward],
 	)
-	// override link click behavior to intercept relative links
-	// note the inclusion of the current value in the deps to trigger re-attachment of handlers
-	// because refs don't trigger re-renders
-	useEffect(() => {
-		if (container?.current) {
-			const links = container.current.querySelectorAll('a')
-			links.forEach((link: any) => {
-				link.addEventListener('click', (e: any) => {
-					e.preventDefault()
-					onLinkClick((e.target as HTMLAnchorElement).href)
-				})
-			})
-		}
-	}, [onLinkClick, container, current])
 }
 
 export function useIconButtonProps(
@@ -118,10 +113,40 @@ export function useLinkIconProps(url: string) {
 	)
 }
 
+// We have to do a little housekeeping on the paths to navigate relative content
+// The content must use "." to separate paths in order to be JS-compliant,
+// we want to look for nested paths and align them with the parent
+// to ensure the entire structure remains intact as a key into the content index
+function parseRelativePath(path: string, parent: string) {
+	const relative = path.replace(window.location.origin, '').replace(/.md/, '')
+	const parts = relative.split('/')
+	const parentParts = parent.split(/\./g)
+
+	// sibling, push it into the same "folder"
+	if (parts[0] === '.') {
+		return [
+			...parentParts.slice(0, parentParts.length - 1),
+			...parts.slice(1),
+		].join('.')
+	}
+
+	// if it's nested deeper, slice out the correct number of levels
+	const levels = parts.filter((p) => p === '..').length
+	if (levels > 0) {
+		return [
+			...parentParts.slice(0, parentParts.length - (levels + 1)),
+			...parts.slice(levels),
+		].join('.')
+	}
+
+	// fallback for unaccounted for path structures
+	return relative.replace(/\//g, '.')
+}
+
 /**
  * Relative paths should either include the origin or have no protocol.
- * @param url 
- * @returns 
+ * @param url
+ * @returns
  */
 export function isExternalLink(url: string) {
 	if (url.includes(':')) {

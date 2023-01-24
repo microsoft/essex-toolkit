@@ -2,8 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Icon, IconButton } from '@fluentui/react'
-import { memo, PropsWithChildren, useRef } from 'react'
+import { Icon, IconButton, Link } from '@fluentui/react'
+import type { PropsWithChildren} from 'react';
+import { memo, useMemo, useRef } from 'react'
 
 import {
 	isExternalLink,
@@ -38,8 +39,7 @@ export const MarkdownBrowser: React.FC<MarkdownBrowserProps> = memo(
 		const container = useRef<HTMLDivElement>(null)
 		const { current, goHome, goBack, goForward } = useHistory(home)
 
-		useLinkNavigation(container, goForward, current)
-
+		const options = useMarkdownOptions(current, goForward)
 		// fallback to empty string - markdown component will fail if content is undefined
 		const md = current ? content[current] : ''
 
@@ -61,22 +61,32 @@ export const MarkdownBrowser: React.FC<MarkdownBrowserProps> = memo(
 	},
 )
 
-const Link = (props: PropsWithChildren<any>) => {
-	const { children, href, ...rest } = props
+const A = (props: PropsWithChildren<any>) => {
+	const { children, href, current, goForward, ...rest } = props
 	const isExternal = isExternalLink(href)
 	const iconProps = useLinkIconProps(href)
+	const onClick = useLinkNavigation(current, href, goForward)
 	return (
-		<a href={href} {...rest}>
+		<Link href={href} onClick={onClick} {...rest}>
 			{children}
 			{isExternal && <Icon {...iconProps} />}
-		</a>
+		</Link>
 	)
 }
 
-const options = {
-	overrides: {
-		a: {
-			component: Link,
-		},
-	},
+function useMarkdownOptions(current: string | undefined, goForward: any) {
+	return useMemo(
+		() => ({
+			overrides: {
+				a: {
+					component: A,
+					props: {
+						current,
+						goForward,
+					},
+				},
+			},
+		}),
+		[current, goForward],
+	)
 }
