@@ -24,7 +24,7 @@
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "devDependencies": {
-    "@essex/scripts": "^24.0.1",
+    "@essex/scripts": "^24.0.2",
     "@fluentui/react": "^8.104.6",
     "@mdx-js/react": "^1.6.22",
     "@storybook/addon-docs": "^6.5.15",
