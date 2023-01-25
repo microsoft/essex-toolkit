@@ -90,9 +90,19 @@ function makeDetailedItems(
 	onItemExpandClick?: (item: TreeItem) => void,
 ): TreeItem[] {
 	return items.map((item) => {
-		const { children, onClick, onExpand, selected, expanded, ...rest } = item
-		const itemSelected =
-			item.key === selectedKey || selectedKey?.includes(item.key.concat('/'))
+		const {
+			children,
+			onClick,
+			onExpand,
+			selected: itemSelected,
+			expanded,
+			...rest
+		} = item
+		const selected =
+			itemSelected ||
+			item.key === selectedKey ||
+			selectedKey?.startsWith(`${item.key}/`)
+
 		const base: TreeItem = {
 			...rest,
 			depth,
