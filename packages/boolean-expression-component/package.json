@@ -1,6 +1,6 @@
 {
   "name": "@essex/boolean-expression-component",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "author": "Chris Trevino <chtrevin@microsoft.com>",
   "license": "MIT",
   "type": "module",
