@@ -209,7 +209,7 @@ const TemplateRouteKey: ComponentStory<typeof Tree> = (args: TreeProps) => {
 					<Tree
 						{...args}
 						selectedKey={selected}
-						onItemClick={(item) => setSelected(item.key+'/x/z')}
+						onItemClick={(item) => setSelected(`${item.key}/x/z`)}
 						onItemExpandClick={(item) => console.log('expand clicked', item)}
 					/>
 				</div>
