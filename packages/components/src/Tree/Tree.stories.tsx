@@ -198,6 +198,44 @@ const Template: ComponentStory<typeof Tree> = (args: TreeProps) => {
 	)
 }
 
+
+const TemplateRouteKey: ComponentStory<typeof Tree> = (args: TreeProps) => {
+	const [selected, setSelected] = useState<string | undefined>(args.selectedKey)
+	return (
+		<div style={containerStyle}>
+			<div>
+				Medium size (default)
+				<div style={boxStyle}>
+					<Tree
+						{...args}
+						selectedKey={selected}
+						onItemClick={(item) => setSelected(item.key+'/x/z')}
+						onItemExpandClick={(item) => console.log('expand clicked', item)}
+					/>
+				</div>
+			</div>
+			<div>
+				Small size
+				<div style={boxStyle}>
+					<Tree
+						{...args}
+						size={'small'}
+						selectedKey={selected}
+						onItemClick={(item) => setSelected(item.key)}
+						onItemExpandClick={(item) => console.log('expand clicked', item)}
+					/>
+				</div>
+				<div />
+			</div>
+		</div>
+	)
+}
+
+export const Routes = TemplateRouteKey.bind({})
+Routes.args = {
+	items: TREE_ITEMS,
+}
+
 export const Primary = Template.bind({})
 Primary.args = {
 	items: TREE_ITEMS,
