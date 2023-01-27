@@ -62,7 +62,11 @@ export const TreeItem: React.FC<TreeItemProps> = memo(function TreeItem(props) {
 	const Indicator = narrow ? DepthIndicator : HiearchyIndicator
 	return (
 		<TooltipWrapper {...props}>
-			<li className="essex-tree-item" style={_styles.listItem} key={`tree-item-li-${item.key}`}>
+			<li
+				className="essex-tree-item"
+				style={_styles.listItem}
+				key={`tree-item-li-${item.key}`}
+			>
 				<div
 					style={listItemContentStyles}
 					onMouseEnter={onMouseEnter}
