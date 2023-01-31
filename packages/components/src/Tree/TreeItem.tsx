@@ -62,7 +62,11 @@ export const TreeItem: React.FC<TreeItemProps> = memo(function TreeItem(props) {
 	const Indicator = narrow ? DepthIndicator : HiearchyIndicator
 	return (
 		<TooltipWrapper {...props}>
-			<li style={_styles.listItem} key={`tree-item-li-${item.key}`}>
+			<li
+				data-testid="essex-tree-item"
+				style={_styles.listItem}
+				key={`tree-item-li-${item.key}`}
+			>
 				<div
 					style={listItemContentStyles}
 					onMouseEnter={onMouseEnter}
@@ -72,7 +76,7 @@ export const TreeItem: React.FC<TreeItemProps> = memo(function TreeItem(props) {
 					<div style={_styles.flexContainer}>
 						<Indicator {...props} styles={_styles} />
 						{item.children && !narrow && <IconButton {..._expandButtonProps} />}
-						{titleRenderer(props)}
+						<div className="title">{renderTitle(props)}</div>
 						{item.menuItems && <IconButton {..._menuButtonProps} />}
 					</div>
 				</div>
@@ -197,7 +201,7 @@ const defaultTitleRenderer: IRenderFunction<TreeItemProps> = (props) => {
 	return props ? <TreeItemTitle {...props} /> : null
 }
 
-const titleRenderer: IRenderFunction<TreeItemProps> = (props) => {
+const renderTitle: IRenderFunction<TreeItemProps> = (props) => {
 	return props?.item.onRenderTitle
 		? props.item.onRenderTitle(props, defaultTitleRenderer)
 		: defaultTitleRenderer(props)

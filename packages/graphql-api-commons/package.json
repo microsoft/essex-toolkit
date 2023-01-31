@@ -35,7 +35,7 @@
     "fastify": "^4.12.0",
     "graphql": "^16.6.0",
     "tsyringe": "^4.7.0",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.5"
   },
   "dependencies": {
     "pino": "^8.8.0",
