@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { DefaultButton } from '@fluentui/react';
-import type { StoryFn } from '@storybook/react';
 import { useState } from 'react';
 
 import { MarkdownBrowser } from './MarkdownBrowser.js';
@@ -116,8 +115,7 @@ Link to [nested parent](../content.md).
 Link back up to [aggregate](../../aggregate.md)`,
 };
 
-export const Primary = {
-  render: (args: MarkdownBrowserProps) => {
+const PrimaryComponent: React.FC<MarkdownBrowserProps> = (args: MarkdownBrowserProps) => {
     const [home, setHome] = useState<string | undefined>('aggregate');
 
     return (
@@ -145,40 +143,44 @@ export const Primary = {
         </div>
       </div>
     );
-  },
+  }
+
+const CustomizedComponent: React.FC<MarkdownBrowserProps> = (args) => {
+  const [home, setHome] = useState<string | undefined>('aggregate');
+
+  return (
+    <div>
+      <div
+        style={{
+          display: 'flex',
+          gap: 8,
+          marginBottom: 8,
+        }}
+      >
+        <DefaultButton onClick={() => setHome('aggregate')}>aggregate</DefaultButton>
+        <DefaultButton onClick={() => setHome('groupby')}>groupby</DefaultButton>
+        <DefaultButton onClick={() => setHome(undefined)}>clear</DefaultButton>
+      </div>
+      <div
+        style={{
+          width: 600,
+          height: 400,
+          padding: 12,
+          border: '1px solid orange',
+        }}
+      >
+        <MarkdownBrowser {...args} content={content} home={home} />
+      </div>
+    </div>
+  );
+}
+
+export const Primary = {
+  render: (args: MarkdownBrowserProps) => <PrimaryComponent {...args} />
 };
 
 export const Customized = {
-  render: (args: MarkdownBrowserProps) => {
-    const [home, setHome] = useState<string | undefined>('aggregate');
-
-    return (
-      <div>
-        <div
-          style={{
-            display: 'flex',
-            gap: 8,
-            marginBottom: 8,
-          }}
-        >
-          <DefaultButton onClick={() => setHome('aggregate')}>aggregate</DefaultButton>
-          <DefaultButton onClick={() => setHome('groupby')}>groupby</DefaultButton>
-          <DefaultButton onClick={() => setHome(undefined)}>clear</DefaultButton>
-        </div>
-        <div
-          style={{
-            width: 600,
-            height: 400,
-            padding: 12,
-            border: '1px solid orange',
-          }}
-        >
-          <MarkdownBrowser {...args} content={content} home={home} />
-        </div>
-      </div>
-    );
-  },
-
+  render: (args: MarkdownBrowserProps) => <CustomizedComponent {...args} />,
   args: {
     styles: {
       root: {

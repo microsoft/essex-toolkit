@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Toggle } from '@fluentui/react';
-import type { StoryObj, StoryFn } from '@storybook/react';
+import type { StoryObj } from '@storybook/react'
 import { useCallback, useState } from 'react';
 
 import { CollapsiblePanel } from './CollapsiblePanel.js';
@@ -135,17 +135,18 @@ export const IconClick = {
   name: 'Icon/header separate click',
 };
 
-export const Controlled: StoryObj<typeof CollapsiblePanel> = {
-  render: (args: CollapsiblePanelProps) => {
-    const [expanded, setExpanded] = useState<boolean>(false);
-    const onHeaderClick = useCallback(() => setExpanded((prev) => !prev), [setExpanded]);
-    return (
-      <CollapsiblePanel {...args} expanded={expanded} onIconClick={onHeaderClick}>
-        <Lorem />
-      </CollapsiblePanel>
-    );
-  },
+const ControlledComponent: React.FC<CollapsiblePanelProps> = (args) => {
+  const [expanded, setExpanded] = useState<boolean>(false);
+  const onHeaderClick = useCallback(() => setExpanded((prev) => !prev), [setExpanded]);
+  return (
+    <CollapsiblePanel {...args} expanded={expanded} onIconClick={onHeaderClick}>
+      <Lorem />
+    </CollapsiblePanel>
+  );
+}
 
+export const Controlled: StoryObj<typeof CollapsiblePanel> = {
+  render: (args: CollapsiblePanelProps) => <ControlledComponent {...args} />,
   name: 'Controlled expand/collapse',
 };
 

@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useTheme } from '@fluentui/react';
-import type { StoryFn } from '@storybook/react';
 import { useCallback, useState } from 'react';
 
 import type { EnumButtonBarProps } from './EnumButtonBar.js';
@@ -22,32 +21,32 @@ enum Stuff {
   CamelCase = 'camelcase',
 }
 
-export const Primary = {
-  render: (args: EnumButtonBarProps<Stuff>) => {
-    const theme = useTheme();
-    const [selected, setSelected] = useState<Stuff | undefined>(Stuff.First);
-    const onChange = useCallback((opt) => setSelected(opt), [setSelected]);
-    console.log(selected);
-    return (
-      <EnumButtonBar
-        {...args}
-        onChange={onChange}
-        styles={{
-          root: {
-            border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
-            padding: 0,
-          },
-        }}
-        selected={selected}
-      />
-    );
-  },
+const PrimaryComponent: React.FC<EnumButtonBarProps<Stuff>> = (args) => {
+  const theme = useTheme();
+  const [selected, setSelected] = useState<Stuff | undefined>(Stuff.First);
+  const onChange = useCallback((opt: any) => setSelected(opt), [setSelected]);
+  console.log(selected);
+  return (
+    <EnumButtonBar
+      {...args}
+      onChange={onChange}
+      styles={{
+        root: {
+          border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
+          padding: 0,
+        },
+      }}
+      selected={selected}
+    />
+  );
+}
 
+export const Primary = {
+  render: (args: EnumButtonBarProps<Stuff>) => <PrimaryComponent {...args} />,
   args: {
     enumeration: Stuff,
     iconOnly: true,
     iconNames: ['Document', 'Database', 'LightningBolt', 'Code'],
   },
-
   name: 'EnumButtonBar',
 };

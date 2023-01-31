@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { StoryFn } from '@storybook/react';
 import { useCallback, useState } from 'react';
 
 import type { NumberSpinButtonProps } from './NumberSpinButton.js';
@@ -18,12 +17,13 @@ const meta = {
 };
 export default meta;
 
-export const Primary = {
-  render: (args: NumberSpinButtonProps) => {
-    const [value, setValue] = useState(10);
-    const handleChange = useCallback((n) => setValue(n), [setValue]);
-    return <NumberSpinButton {...args} value={value} onChange={handleChange} />;
-  },
+const PrimaryComponent: React.FC<NumberSpinButtonProps> = (args) => {
+  const [value, setValue] = useState(10);
+  const handleChange = useCallback((n) => setValue(n), [setValue]);
+  return <NumberSpinButton {...args} value={value} onChange={handleChange} />;
+}
 
+export const Primary = {
+  render: () => <PrimaryComponent />,
   name: 'NumberSpinButton',
 };

@@ -165,117 +165,252 @@ const boxStyle: React.CSSProperties = {
   overflowY: 'scroll',
 };
 
-export const Routes = {
-  render: (args: TreeProps) => {
-    const [selected, setSelected] = useState<string | undefined>(args.selectedKey);
-    return (
-      <div style={containerStyle}>
-        <div>
-          Medium size (default)
-          <div style={boxStyle}>
-            <Tree
-              {...args}
-              selectedKey={selected}
-              onItemClick={(item) => setSelected(`${item.key}/x/z`)}
-              onItemExpandClick={(item) => console.log('expand clicked', item)}
-            />
-          </div>
-        </div>
-        <div>
-          Small size
-          <div style={boxStyle}>
-            <Tree
-              {...args}
-              size={'small'}
-              selectedKey={selected}
-              onItemClick={(item) => setSelected(item.key)}
-              onItemExpandClick={(item) => console.log('expand clicked', item)}
-            />
-          </div>
-          <div />
+const RoutesTree: React.FC<TreeProps> = (args) => {
+  const [selected, setSelected] = useState<string | undefined>(args.selectedKey);
+  return (
+    <div style={containerStyle}>
+      <div>
+        Medium size (default)
+        <div style={boxStyle}>
+          <Tree
+            {...args}
+            selectedKey={selected}
+            onItemClick={(item) => setSelected(`${item.key}/x/z`)}
+            onItemExpandClick={(item) => console.log('expand clicked', item)}
+          />
         </div>
       </div>
-    );
-  },
+      <div>
+        Small size
+        <div style={boxStyle}>
+          <Tree
+            {...args}
+            size={'small'}
+            selectedKey={selected}
+            onItemClick={(item) => setSelected(item.key)}
+            onItemExpandClick={(item) => console.log('expand clicked', item)}
+          />
+        </div>
+        <div />
+      </div>
+    </div>
+  );
+}
 
+const PrimaryTree: React.FC<TreeProps> = (args) => {
+  const [selected, setSelected] = useState<string | undefined>(args.selectedKey);
+
+  return (
+    <div style={containerStyle}>
+      <div>
+        Medium size (default)
+        <div style={boxStyle}>
+          <Tree
+            {...args}
+            selectedKey={selected}
+            onItemClick={(item) => setSelected(item.key)}
+            onItemExpandClick={(item) => console.log('expand clicked', item)}
+          />
+        </div>
+      </div>
+      <div>
+        Small size
+        <div style={boxStyle}>
+          <Tree
+            {...args}
+            size={'small'}
+            selectedKey={selected}
+            onItemClick={(item) => setSelected(item.key)}
+            onItemExpandClick={(item) => console.log('expand clicked', item)}
+          />
+        </div>
+        <div />
+      </div>
+    </div>
+  );
+}
+
+const CustomizedTree: React.FC<TreeProps> = (args) => {
+  const [selected, setSelected] = useState<string | undefined>(args.selectedKey);
+
+  return (
+    <div style={containerStyle}>
+      <div>
+        Medium size (default)
+        <div style={boxStyle}>
+          <Tree
+            {...args}
+            selectedKey={selected}
+            onItemClick={(item) => setSelected(item.key)}
+            onItemExpandClick={(item) => console.log('expand clicked', item)}
+          />
+        </div>
+      </div>
+      <div>
+        Small size
+        <div style={boxStyle}>
+          <Tree
+            {...args}
+            size={'small'}
+            selectedKey={selected}
+            onItemClick={(item) => setSelected(item.key)}
+            onItemExpandClick={(item) => console.log('expand clicked', item)}
+          />
+        </div>
+        <div />
+      </div>
+    </div>
+  );
+}
+
+const NestedSelectionsTree: React.FC<TreeProps> = (args) =>  {
+  const [selected, setSelected] = useState<string | undefined>(args.selectedKey);
+
+  return (
+    <div style={containerStyle}>
+      <div>
+        Medium size (default)
+        <div style={boxStyle}>
+          <Tree
+            {...args}
+            selectedKey={selected}
+            onItemClick={(item) => setSelected(item.key)}
+            onItemExpandClick={(item) => console.log('expand clicked', item)}
+          />
+        </div>
+      </div>
+      <div>
+        Small size
+        <div style={boxStyle}>
+          <Tree
+            {...args}
+            size={'small'}
+            selectedKey={selected}
+            onItemClick={(item) => setSelected(item.key)}
+            onItemExpandClick={(item) => console.log('expand clicked', item)}
+          />
+        </div>
+        <div />
+      </div>
+    </div>
+  );
+}
+
+const NarrowTree: React.FC<TreeProps> = (args) => {
+  const [selected, setSelected] = useState<string | undefined>(args.selectedKey);
+
+  return (
+    <div style={containerStyle}>
+      <div>
+        Medium size (default)
+        <div style={boxStyle}>
+          <Tree
+            {...args}
+            selectedKey={selected}
+            onItemClick={(item) => setSelected(item.key)}
+            onItemExpandClick={(item) => console.log('expand clicked', item)}
+          />
+        </div>
+      </div>
+      <div>
+        Small size
+        <div style={boxStyle}>
+          <Tree
+            {...args}
+            size={'small'}
+            selectedKey={selected}
+            onItemClick={(item) => setSelected(item.key)}
+            onItemExpandClick={(item) => console.log('expand clicked', item)}
+          />
+        </div>
+        <div />
+      </div>
+    </div>
+  );
+}
+
+const GroupedTree: React.FC<TreeProps> = (args) => {
+  const [selected, setSelected] = useState<string | undefined>(args.selectedKey);
+
+  return (
+    <div style={containerStyle}>
+      <div>
+        Medium size (default)
+        <div style={boxStyle}>
+          <Tree
+            {...args}
+            selectedKey={selected}
+            onItemClick={(item) => setSelected(item.key)}
+            onItemExpandClick={(item) => console.log('expand clicked', item)}
+          />
+        </div>
+      </div>
+      <div>
+        Small size
+        <div style={boxStyle}>
+          <Tree
+            {...args}
+            size={'small'}
+            selectedKey={selected}
+            onItemClick={(item) => setSelected(item.key)}
+            onItemExpandClick={(item) => console.log('expand clicked', item)}
+          />
+        </div>
+        <div />
+      </div>
+    </div>
+  );
+}
+
+const CustomRenderersTree: React.FC<TreeProps> = (args) => {
+  const [selected, setSelected] = useState<string | undefined>(args.selectedKey);
+
+  return (
+    <div style={containerStyle}>
+      <div>
+        Medium size (default)
+        <div style={boxStyle}>
+          <Tree
+            {...args}
+            selectedKey={selected}
+            onItemClick={(item) => setSelected(item.key)}
+            onItemExpandClick={(item) => console.log('expand clicked', item)}
+          />
+        </div>
+      </div>
+      <div>
+        Small size
+        <div style={boxStyle}>
+          <Tree
+            {...args}
+            size={'small'}
+            selectedKey={selected}
+            onItemClick={(item) => setSelected(item.key)}
+            onItemExpandClick={(item) => console.log('expand clicked', item)}
+          />
+        </div>
+        <div />
+      </div>
+    </div>
+  );
+}
+
+export const Routes = {
+  render: (args: TreeProps) => <RoutesTree {...args} />,
   args: {
     items: TREE_ITEMS,
   },
 };
 
 export const Primary = {
-  render: (args: TreeProps) => {
-    const [selected, setSelected] = useState<string | undefined>(args.selectedKey);
-
-    return (
-      <div style={containerStyle}>
-        <div>
-          Medium size (default)
-          <div style={boxStyle}>
-            <Tree
-              {...args}
-              selectedKey={selected}
-              onItemClick={(item) => setSelected(item.key)}
-              onItemExpandClick={(item) => console.log('expand clicked', item)}
-            />
-          </div>
-        </div>
-        <div>
-          Small size
-          <div style={boxStyle}>
-            <Tree
-              {...args}
-              size={'small'}
-              selectedKey={selected}
-              onItemClick={(item) => setSelected(item.key)}
-              onItemExpandClick={(item) => console.log('expand clicked', item)}
-            />
-          </div>
-          <div />
-        </div>
-      </div>
-    );
-  },
-
+  render: (args: TreeProps) => <PrimaryTree {...args}/>,
   args: {
     items: TREE_ITEMS,
   },
 };
 
 export const Customized = {
-  render: (args: TreeProps) => {
-    const [selected, setSelected] = useState<string | undefined>(args.selectedKey);
-
-    return (
-      <div style={containerStyle}>
-        <div>
-          Medium size (default)
-          <div style={boxStyle}>
-            <Tree
-              {...args}
-              selectedKey={selected}
-              onItemClick={(item) => setSelected(item.key)}
-              onItemExpandClick={(item) => console.log('expand clicked', item)}
-            />
-          </div>
-        </div>
-        <div>
-          Small size
-          <div style={boxStyle}>
-            <Tree
-              {...args}
-              size={'small'}
-              selectedKey={selected}
-              onItemClick={(item) => setSelected(item.key)}
-              onItemExpandClick={(item) => console.log('expand clicked', item)}
-            />
-          </div>
-          <div />
-        </div>
-      </div>
-    );
-  },
-
+  render: (args: TreeProps) => <CustomizedTree {...args} />,
   args: {
     items: TREE_ITEMS,
     styles: {
@@ -337,39 +472,7 @@ export const Customized = {
 };
 
 export const NestedSelections = {
-  render: (args: TreeProps) => {
-    const [selected, setSelected] = useState<string | undefined>(args.selectedKey);
-
-    return (
-      <div style={containerStyle}>
-        <div>
-          Medium size (default)
-          <div style={boxStyle}>
-            <Tree
-              {...args}
-              selectedKey={selected}
-              onItemClick={(item) => setSelected(item.key)}
-              onItemExpandClick={(item) => console.log('expand clicked', item)}
-            />
-          </div>
-        </div>
-        <div>
-          Small size
-          <div style={boxStyle}>
-            <Tree
-              {...args}
-              size={'small'}
-              selectedKey={selected}
-              onItemClick={(item) => setSelected(item.key)}
-              onItemExpandClick={(item) => console.log('expand clicked', item)}
-            />
-          </div>
-          <div />
-        </div>
-      </div>
-    );
-  },
-
+  render: (args: TreeProps) => <NestedSelectionsTree {...args} />,
   args: {
     selectedKey: 'item-1.1.1',
     items: [
@@ -421,46 +524,14 @@ export const NestedSelections = {
       {
         key: 'item-3',
         text: 'Item 3 (onClick override)',
-        onClick: (item) => console.log('click override', item),
+        onClick: (item: any) => console.log('click override', item),
       },
     ],
   },
 };
 
 export const Narrow = {
-  render: (args: TreeProps) => {
-    const [selected, setSelected] = useState<string | undefined>(args.selectedKey);
-
-    return (
-      <div style={containerStyle}>
-        <div>
-          Medium size (default)
-          <div style={boxStyle}>
-            <Tree
-              {...args}
-              selectedKey={selected}
-              onItemClick={(item) => setSelected(item.key)}
-              onItemExpandClick={(item) => console.log('expand clicked', item)}
-            />
-          </div>
-        </div>
-        <div>
-          Small size
-          <div style={boxStyle}>
-            <Tree
-              {...args}
-              size={'small'}
-              selectedKey={selected}
-              onItemClick={(item) => setSelected(item.key)}
-              onItemExpandClick={(item) => console.log('expand clicked', item)}
-            />
-          </div>
-          <div />
-        </div>
-      </div>
-    );
-  },
-
+  render: (args: TreeProps) => <NarrowTree {...args} />,
   args: {
     narrow: true,
     items: TREE_ITEMS,
@@ -474,39 +545,7 @@ export const Narrow = {
 };
 
 export const Grouped = {
-  render: (args: TreeProps) => {
-    const [selected, setSelected] = useState<string | undefined>(args.selectedKey);
-
-    return (
-      <div style={containerStyle}>
-        <div>
-          Medium size (default)
-          <div style={boxStyle}>
-            <Tree
-              {...args}
-              selectedKey={selected}
-              onItemClick={(item) => setSelected(item.key)}
-              onItemExpandClick={(item) => console.log('expand clicked', item)}
-            />
-          </div>
-        </div>
-        <div>
-          Small size
-          <div style={boxStyle}>
-            <Tree
-              {...args}
-              size={'small'}
-              selectedKey={selected}
-              onItemClick={(item) => setSelected(item.key)}
-              onItemExpandClick={(item) => console.log('expand clicked', item)}
-            />
-          </div>
-          <div />
-        </div>
-      </div>
-    );
-  },
-
+  render: (args: TreeProps) => <GroupedTree {...args} />,
   args: {
     items: TREE_ITEMS.map((item, index) => ({
       ...item,
@@ -526,41 +565,9 @@ export const Grouped = {
 };
 
 export const CustomRenderers = {
-  render: (args: TreeProps) => {
-    const [selected, setSelected] = useState<string | undefined>(args.selectedKey);
-
-    return (
-      <div style={containerStyle}>
-        <div>
-          Medium size (default)
-          <div style={boxStyle}>
-            <Tree
-              {...args}
-              selectedKey={selected}
-              onItemClick={(item) => setSelected(item.key)}
-              onItemExpandClick={(item) => console.log('expand clicked', item)}
-            />
-          </div>
-        </div>
-        <div>
-          Small size
-          <div style={boxStyle}>
-            <Tree
-              {...args}
-              size={'small'}
-              selectedKey={selected}
-              onItemClick={(item) => setSelected(item.key)}
-              onItemExpandClick={(item) => console.log('expand clicked', item)}
-            />
-          </div>
-          <div />
-        </div>
-      </div>
-    );
-  },
-
+  render: (args: TreeProps) => <CustomRenderersTree {...args} />,
   args: {
-    onRenderGroupHeader: (props, defaultRenderer) => {
+    onRenderGroupHeader: (props: any, defaultRenderer: any) => {
       return (
         <>
           {props?.group.key === 'group-1' ? (
@@ -598,7 +605,7 @@ export const CustomRenderers = {
             iconName: 'Table',
           },
         ],
-        onRenderTitle: (props) => (
+        onRenderTitle: (props: any) => (
           <div
             style={{
               padding: 4,
@@ -614,7 +621,7 @@ export const CustomRenderers = {
         key: 'item-3',
         text: 'Item 3',
         expanded: true,
-        onRenderContent: (props, defaultRenderer) => {
+        onRenderContent: (props: any, defaultRenderer: any) => {
           const depth = (props?.item.depth || 0) + 1;
           return (
             <div>
