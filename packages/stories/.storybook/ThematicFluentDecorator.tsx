@@ -14,9 +14,7 @@ initializeIcons()
  * ThematicFluentDecorator configures both Thematic and the Fluent wrapper
  * @param storyFn
  */
-export const ThematicFluentDecorator = (
-	storyFn: any,
-) => {
+export const ThematicFluentDecorator = (storyFn: any) => {
 	const [dark, setDark] = useState(false)
 	// load a non-standard theme, so it is obvious that it isn't the default
 	// this helps identify problems with theme application in Fluent, which looks a lot like our default essex theme

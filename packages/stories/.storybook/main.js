@@ -6,6 +6,26 @@
 import ResolveTypescriptPlugin from 'resolve-typescript-plugin'
 const path = require('path')
 
+const SWC_CONFIG = {
+	sourceMaps: true,
+	jsc: {
+		target: 'es2021',
+		parser: {
+			syntax: 'typescript',
+			tsx: true,
+			decorators: true,
+			dynamicImport: true,
+			importAssertions: true,
+		},
+		experimental: {
+			keepImportAssertions: true,
+		},
+		transform: {
+			react: { runtime: 'automatic', useBuiltins: true },
+		},
+	},
+}
+
 module.exports = {
 	stories: ['../../*/src/**/*.stories.@(mdx|js|jsx|ts|tsx)'],
 	staticDirs: [path.join(__dirname, '../public')],
@@ -19,14 +39,14 @@ module.exports = {
 		options: {},
 	},
 	typescript: {
-    reactDocgen: 'react-docgen-typescript',
-    reactDocgenTypescriptOptions: {
-      compilerOptions: {
-        allowSyntheticDefaultImports: false,
-        esModuleInterop: false,
-      },
-    },
-  },
+		reactDocgen: 'react-docgen-typescript',
+		reactDocgenTypescriptOptions: {
+			compilerOptions: {
+				allowSyntheticDefaultImports: false,
+				esModuleInterop: false,
+			},
+		},
+	},
 	webpackFinal(config) {
 		config.resolve.plugins = [
 			...(config.resolve.plugins ?? []),
@@ -38,25 +58,7 @@ module.exports = {
 		config.module.rules.splice(2, 1, {
 			test: /\.(cjs|mjs|jsx?|cts|mts|tsx?)$/,
 			loader: require.resolve('swc-loader'),
-			options: {
-				sourceMaps: true,
-				jsc: {
-					target: 'es2021',
-					parser: {
-							syntax: 'typescript',
-							tsx: true,
-							decorators: true,
-							dynamicImport: true,
-							importAssertions: true,
-					},
-					experimental: {
-							keepImportAssertions: true,
-					},
-					transform: {
-							react: { runtime: 'automatic', useBuiltins: true },
-					}
-				},
-			},
+			options: SWC_CONFIG,
 			include: babelRule.include,
 			exclude: babelRule.exclude,
 		})
