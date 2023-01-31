@@ -2,54 +2,55 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ComponentStory } from '@storybook/react'
+import type { StoryFn } from '@storybook/react';
 
-import { Expando } from './Expando.js'
-import type { ExpandoProps } from './Expando.types.js'
+import { Expando } from './Expando.js';
+import type { ExpandoProps } from './Expando.types.js';
 
 const meta = {
-	title: '@essex:components/Expando',
-	component: Expando,
-	args: {
-		label: 'More...',
-		defaultExpanded: false,
-	},
-}
-export default meta
+  title: '@essex:components/Expando',
+  component: Expando,
+  args: {
+    label: 'More...',
+    defaultExpanded: false,
+  },
+};
+export default meta;
 
-const Template: ComponentStory<typeof Expando> = (args: ExpandoProps) => (
-	<Expando {...args}>Here is the child content!</Expando>
-)
+export const Primary = {
+  render: (args: ExpandoProps) => <Expando {...args}>Here is the child content!</Expando>,
+};
 
-export const Primary = Template.bind({})
+export const Customized = {
+  render: (args: ExpandoProps) => <Expando {...args}>Here is the child content!</Expando>,
 
-export const Customized = Template.bind({})
-Customized.args = {
-	styles: {
-		root: {
-			border: '1px solid orange',
-			background: 'aliceblue',
-		},
-		content: {
-			background: 'coral',
-			padding: 8,
-		},
-	},
-	iconButtonProps: {
-		iconProps: {
-			iconName: 'RedEye',
-			styles: {
-				root: {
-					fontSize: 12,
-				},
-			},
-		},
-	},
-	linkProps: {
-		styles: {
-			root: {
-				color: 'dodgerblue',
-			},
-		},
-	},
-}
+  args: {
+    styles: {
+      root: {
+        border: '1px solid orange',
+        background: 'aliceblue',
+      },
+      content: {
+        background: 'coral',
+        padding: 8,
+      },
+    },
+    iconButtonProps: {
+      iconProps: {
+        iconName: 'RedEye',
+        styles: {
+          root: {
+            fontSize: 12,
+          },
+        },
+      },
+    },
+    linkProps: {
+      styles: {
+        root: {
+          color: 'dodgerblue',
+        },
+      },
+    },
+  },
+};
