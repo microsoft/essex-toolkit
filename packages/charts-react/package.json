@@ -31,7 +31,7 @@
     "build": "essex build --docs",
     "fix": "essex fix --formatter none",
     "check": "essex check --formatter none",
-    "check-deps": "essex check-deps",
+    "check-deps": "essex check-deps --ignore @storybook/addon-essentials,react-dom",
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "dependencies": {
