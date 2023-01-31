@@ -35,7 +35,7 @@ export const Tree: React.FC<TreeProps> = memo(function Tree({
 		onItemExpandClick,
 	)
 	return (
-		<div className="essex-tree" style={_styles.root}>
+		<div data-testid="essex-tree" style={_styles.root}>
 			{treeGroups.map((group) => {
 				return (
 					<div style={_styles.group} key={`tree-group-${group.key}`}>

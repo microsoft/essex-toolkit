@@ -63,7 +63,7 @@ export const TreeItem: React.FC<TreeItemProps> = memo(function TreeItem(props) {
 	return (
 		<TooltipWrapper {...props}>
 			<li
-				className="essex-tree-item"
+				data-testid="essex-tree-item"
 				style={_styles.listItem}
 				key={`tree-item-li-${item.key}`}
 			>
