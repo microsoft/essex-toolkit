@@ -2,4 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import '@essex/storybook-config/lib/preview.js'
+import { ThematicFluentDecorator } from './ThematicFluentDecorator.js'
+
+export const decorators = [ThematicFluentDecorator]
