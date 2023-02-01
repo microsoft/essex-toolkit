@@ -4,7 +4,7 @@
  */
 import type { IContextualMenuItem } from '@fluentui/react'
 import { ContextualMenuItemType } from '@fluentui/react'
-import type { ComponentStory } from '@storybook/react'
+import type { StoryFn } from '@storybook/react'
 
 import { ColumnarMenu } from './ColumnarMenu.js'
 import type { ColumnarMenuProps } from './ColumnarMenu.types.js'
@@ -70,82 +70,138 @@ const meta = {
 }
 export default meta
 
-const Template: ComponentStory<typeof ColumnarMenu> = (
-	args: ColumnarMenuProps,
-) => {
-	return (
-		<div
-			style={{
-				width: 200,
-				height: 100,
-				padding: 12,
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'center',
-				border: '1px solid orange',
-			}}
-		>
-			<ColumnarMenu {...args} />
-		</div>
-	)
+export const Primary = {
+	render: (args: ColumnarMenuProps) => {
+		return (
+			<div
+				style={{
+					width: 200,
+					height: 100,
+					padding: 12,
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					border: '1px solid orange',
+				}}
+			>
+				<ColumnarMenu {...args} />
+			</div>
+		)
+	},
+
+	args: {
+		text: 'Electronics and furniture list',
+	},
 }
 
-export const Primary = Template.bind({})
-Primary.args = {
-	text: 'Electronics and furniture list',
-}
+export const Customized = {
+	render: (args: ColumnarMenuProps) => {
+		return (
+			<div
+				style={{
+					width: 200,
+					height: 100,
+					padding: 12,
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					border: '1px solid orange',
+				}}
+			>
+				<ColumnarMenu {...args} />
+			</div>
+		)
+	},
 
-export const Customized = Template.bind({})
-Customized.args = {
-	text: 'Furniture',
-	buttonProps: {
+	args: {
+		text: 'Furniture',
+		buttonProps: {
+			styles: {
+				root: {
+					width: 120,
+				},
+			},
+		},
 		styles: {
 			root: {
-				width: 120,
+				background: 'aliceblue',
 			},
 		},
-	},
-	styles: {
-		root: {
-			background: 'aliceblue',
-		},
-	},
-	menuListProps: {
-		styles: {
-			header: {
-				color: 'dodgerblue',
-			},
-			column: {
-				border: '1px dotted coral',
-			},
-			item: {
-				root: {
-					color: 'green',
+		menuListProps: {
+			styles: {
+				header: {
+					color: 'dodgerblue',
+				},
+				column: {
+					border: '1px dotted coral',
+				},
+				item: {
+					root: {
+						color: 'green',
+					},
 				},
 			},
 		},
 	},
 }
 
-export const Overflow = Template.bind({})
-Overflow.args = {
-	// demonstrates ellipsis text overflow
-	text: 'ElectronicsAndFurnitureList.csv',
+export const Overflow = {
+	render: (args: ColumnarMenuProps) => {
+		return (
+			<div
+				style={{
+					width: 200,
+					height: 100,
+					padding: 12,
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					border: '1px solid orange',
+				}}
+			>
+				<ColumnarMenu {...args} />
+			</div>
+		)
+	},
+
+	args: {
+		// demonstrates ellipsis text overflow
+		text: 'ElectronicsAndFurnitureList.csv',
+	},
 }
 
-export const WithButtons = Template.bind({})
-WithButtons.args = {
-	text: 'Allows reset',
-	items: [
-		{
-			key: 'reset-button',
-			text: 'Reset',
-			data: {
-				button: true,
-				bottomDivider: true,
+export const WithButtons = {
+	render: (args: ColumnarMenuProps) => {
+		return (
+			<div
+				style={{
+					width: 200,
+					height: 100,
+					padding: 12,
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					border: '1px solid orange',
+				}}
+			>
+				<ColumnarMenu {...args} />
+			</div>
+		)
+	},
+
+	args: {
+		text: 'Allows reset',
+		items: [
+			{
+				key: 'reset-button',
+				text: 'Reset',
+				data: {
+					button: true,
+					bottomDivider: true,
+				},
+				onClick: () => alert('Reset clicked'),
 			},
-			onClick: () => alert('Reset clicked'),
-		},
-		...items,
-	],
+			...items,
+		],
+	},
 }

@@ -21,7 +21,7 @@ const meta = {
 export default meta
 const DEFAULT_SELECTIONS = ['4_100']
 
-export const HierarchyBrowserAsync = () => {
+const AsyncComponent: React.FC = () => {
 	const [
 		selectedOption,
 		onChange,
@@ -74,9 +74,7 @@ export const HierarchyBrowserAsync = () => {
 	)
 }
 
-HierarchyBrowserAsync.storyName = 'Async'
-
-export const HierarchyBrowserSynchronous = () => {
+const SyncComponent: React.FC = () => {
 	const [selectedOption, setSelectedOption] = useState<string>(
 		`${selectedClusterID}`,
 	)
@@ -115,4 +113,12 @@ export const HierarchyBrowserSynchronous = () => {
 	)
 }
 
-HierarchyBrowserSynchronous.storyName = 'Synchronous'
+export const HierarchyBrowserAsync = {
+	render: () => <AsyncComponent />,
+	name: 'Async',
+}
+
+export const HierarchyBrowserSynchronous = {
+	render: () => <SyncComponent />,
+	name: 'Synchronous',
+}

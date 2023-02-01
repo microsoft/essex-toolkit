@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ComponentStory } from '@storybook/react'
+import type { StoryFn } from '@storybook/react'
 
 import type { ClippedGraphProps } from './ClippedGraph.js'
 import { ClippedGraph } from './ClippedGraph.js'
@@ -23,20 +23,18 @@ const meta = {
 
 export default meta
 
-const Template: ComponentStory<typeof ClippedGraph> = (
-	args: ClippedGraphProps,
-) => <ClippedGraph {...args} />
+export const Primary = {}
 
-export const Primary = Template.bind({})
-
-export const ClippedGradient = Template.bind({})
-ClippedGradient.args = {
-	clipped: true,
-	gradient: true,
+export const ClippedGradient = {
+	args: {
+		clipped: true,
+		gradient: true,
+	},
 }
 
-export const ClippedHorizon = Template.bind({})
-ClippedHorizon.args = {
-	clipped: true,
-	horizon: true,
+export const ClippedHorizon = {
+	args: {
+		clipped: true,
+		horizon: true,
+	},
 }

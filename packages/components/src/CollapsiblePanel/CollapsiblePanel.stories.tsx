@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Toggle } from '@fluentui/react'
-import type { ComponentStory } from '@storybook/react'
+import type { StoryObj } from '@storybook/react'
 import { useCallback, useState } from 'react'
 
 import { CollapsiblePanel } from './CollapsiblePanel.js'
@@ -36,85 +36,110 @@ const Lorem = () => (
 	</div>
 )
 
-const Template: ComponentStory<typeof CollapsiblePanel> = (
-	args: CollapsiblePanelProps,
-) => {
-	return (
-		<CollapsiblePanel {...args}>
-			<Lorem />
-		</CollapsiblePanel>
-	)
+export const Primary = {
+	render: (args: CollapsiblePanelProps) => {
+		return (
+			<CollapsiblePanel {...args}>
+				<Lorem />
+			</CollapsiblePanel>
+		)
+	},
 }
 
-export const Primary = Template.bind({})
-
-export const Customized = Template.bind({})
-Customized.args = {
-	defaultExpanded: true,
-	styles: {
-		root: {
-			width: 300,
-		},
-		header: {
-			backgroundColor: 'aliceblue',
-			padding: '0.5rem',
-			textTransform: 'uppercase' as const,
-			fontWeight: 500,
-			fontSize: ' 1.5rem',
-		},
-		title: {
-			fontFamily: 'monospace',
-		},
-		content: {
-			border: 'none',
-			backgroundColor: 'purple',
-			color: 'white',
-			padding: 10,
-			borderRadius: '0 0 0.5rem 0.5rem',
-		},
+export const Customized = {
+	render: (args: CollapsiblePanelProps) => {
+		return (
+			<CollapsiblePanel {...args}>
+				<Lorem />
+			</CollapsiblePanel>
+		)
 	},
-	buttonProps: {
-		iconProps: {
-			iconName: 'RedEye',
-			styles: {
-				root: {
-					color: 'orange',
+
+	args: {
+		defaultExpanded: true,
+		styles: {
+			root: {
+				width: 300,
+			},
+			header: {
+				backgroundColor: 'aliceblue',
+				padding: '0.5rem',
+				textTransform: 'uppercase' as const,
+				fontWeight: 500,
+				fontSize: ' 1.5rem',
+			},
+			title: {
+				fontFamily: 'monospace',
+			},
+			content: {
+				border: 'none',
+				backgroundColor: 'purple',
+				color: 'white',
+				padding: 10,
+				borderRadius: '0 0 0.5rem 0.5rem',
+			},
+		},
+		buttonProps: {
+			iconProps: {
+				iconName: 'RedEye',
+				styles: {
+					root: {
+						color: 'orange',
+					},
 				},
 			},
 		},
+		duration: 2000,
 	},
-	duration: 2000,
 }
 
-export const Header = Template.bind({})
-Header.args = {
-	onRenderHeader: () => (
-		<div
-			style={{
-				display: 'flex',
-				alignItems: 'center',
-				gap: 8,
-			}}
-		>
-			<div>Header</div>
-			<Toggle
-				styles={{ root: { margin: 0 } }}
-				onClick={(e) => e.stopPropagation()}
-			/>
-		</div>
-	),
-}
-Header.storyName = 'Custom onRenderHeader'
+export const Header = {
+	render: (args: CollapsiblePanelProps) => {
+		return (
+			<CollapsiblePanel {...args}>
+				<Lorem />
+			</CollapsiblePanel>
+		)
+	},
 
-export const IconClick = Template.bind({})
-IconClick.args = {
-	onHeaderClick: () => alert('header clicked'),
-}
-IconClick.storyName = 'Icon/header separate click'
+	args: {
+		onRenderHeader: () => (
+			<div
+				style={{
+					display: 'flex',
+					alignItems: 'center',
+					gap: 8,
+				}}
+			>
+				<div>Header</div>
+				<Toggle
+					styles={{ root: { margin: 0 } }}
+					onClick={(e) => e.stopPropagation()}
+				/>
+			</div>
+		),
+	},
 
-export const Controlled: ComponentStory<typeof CollapsiblePanel> = (
-	args: CollapsiblePanelProps,
-) => {
+	name: 'Custom onRenderHeader',
+}
+
+export const IconClick = {
+	render: (args: CollapsiblePanelProps) => {
+		return (
+			<CollapsiblePanel {...args}>
+				<Lorem />
+			</CollapsiblePanel>
+		)
+	},
+
+	args: {
+		onHeaderClick: () => alert('header clicked'),
+	},
+
+	name: 'Icon/header separate click',
+}
+
+const ControlledComponent: React.FC<CollapsiblePanelProps> = (args) => {
 	const [expanded, setExpanded] = useState<boolean>(false)
 	const onHeaderClick = useCallback(
 		() => setExpanded((prev) => !prev),
@@ -126,24 +151,39 @@ export const Controlled: ComponentStory<typeof CollapsiblePanel> = (
 		</CollapsiblePanel>
 	)
 }
-Controlled.storyName = 'Controlled expand/collapse'
 
-export const NoIcon = Template.bind({})
-NoIcon.args = {
-	hideIcon: true,
+export const Controlled: StoryObj<typeof CollapsiblePanel> = {
+	render: (args: CollapsiblePanelProps) => <ControlledComponent {...args} />,
+	name: 'Controlled expand/collapse',
 }
 
-export const CollapsiblePanelContainerStory = () => {
-	return (
-		<CollapsiblePanelContainer>
-			<CollapsiblePanel title="First">
+export const NoIcon = {
+	render: (args: CollapsiblePanelProps) => {
+		return (
+			<CollapsiblePanel {...args}>
 				<Lorem />
 			</CollapsiblePanel>
-			<CollapsiblePanel title="Second">
-				<Lorem />
-			</CollapsiblePanel>
-		</CollapsiblePanelContainer>
-	)
+		)
+	},
+
+	args: {
+		hideIcon: true,
+	},
 }
 
-CollapsiblePanelContainerStory.storyName = 'Container with multiple children'
+export const CollapsiblePanelContainerStory = {
+	render: () => {
+		return (
+			<CollapsiblePanelContainer>
+				<CollapsiblePanel title="First">
+					<Lorem />
+				</CollapsiblePanel>
+				<CollapsiblePanel title="Second">
+					<Lorem />
+				</CollapsiblePanel>
+			</CollapsiblePanelContainer>
+		)
+	},
+
+	name: 'Container with multiple children',
+}

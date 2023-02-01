@@ -52,13 +52,10 @@ const config = [
 	},
 ]
 
-/**
- * ThematicLineupStory displays a LineUp instance, while also applying default thematic styles and data colors.
- * Use it for a React-style JSX wrapper around LineUp that has more potential flexibility than the very
- * config-limited version exposed by the LineUp project.
- * This allows arbitrary column configs via JSON, and a set of global filters if desired.
- */
-export const ThematicLineupStory = () => (
-	<ThematicLineup data={data} columns={config} width={600} height={300} />
-)
-ThematicLineupStory.storyName = 'ThematicLineup'
+export const ThematicLineupStory = {
+	render: () => (
+		<ThematicLineup data={data} columns={config} width={600} height={300} />
+	),
+
+	name: 'ThematicLineup',
+}

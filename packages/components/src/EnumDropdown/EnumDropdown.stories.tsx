@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ComponentStory } from '@storybook/react'
+import type { StoryFn } from '@storybook/react'
 
 import { EnumDropdown } from './EnumDropdown.js'
 import type { EnumDropdownProps } from './EnumDropdown.types.js'
@@ -23,9 +23,6 @@ const meta = {
 }
 export default meta
 
-const Template: ComponentStory<typeof EnumDropdown> = (
-	args: EnumDropdownProps,
-) => <EnumDropdown {...args} />
-
-export const Primary = Template.bind({})
-Primary.storyName = 'EnumDropdown'
+export const Primary = {
+	name: 'EnumDropdown',
+}

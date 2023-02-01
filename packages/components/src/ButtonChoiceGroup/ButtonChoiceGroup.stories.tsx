@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { IChoiceGroupOption, IChoiceGroupProps } from '@fluentui/react'
-import type { ComponentStory } from '@storybook/react'
+import type { StoryFn } from '@storybook/react'
 
 import { ButtonChoiceGroup } from './ButtonChoiceGroup.js'
 
@@ -46,21 +46,18 @@ const meta = {
 
 export default meta
 
-const Template: ComponentStory<typeof ButtonChoiceGroup> = (
-	args: IChoiceGroupProps,
-) => <ButtonChoiceGroup {...args} />
+export const Primary = {}
 
-export const Primary = Template.bind({})
-
-export const Customized = Template.bind({})
-Customized.args = {
-	styles: {
-		root: {
-			border: '1px solid orange',
-			padding: 8,
-		},
-		flexContainer: {
-			border: '1px solid dodgerblue',
+export const Customized = {
+	args: {
+		styles: {
+			root: {
+				border: '1px solid orange',
+				padding: 8,
+			},
+			flexContainer: {
+				border: '1px solid dodgerblue',
+			},
 		},
 	},
 }

@@ -20,16 +20,10 @@ const basicSettings = {
 	showEdges: true,
 }
 
-/**
- * BasicSettingsStory is a zero-config settings panel that simply parses a supplied object
- * and generates a list of Fluent UI controls based on the data types.
- * Shows a basic object parsed into settings and rendered into
- * the default control set
- */
-export const BasicSettingsStory = () => {
+const BasicSettingsComponent: React.FC = () => {
 	const [settings, setSettings] = useState(basicSettings)
 	const handleChange = useCallback(
-		(key, value) => {
+		(key: any, value: any) => {
 			const changed = {
 				...settings,
 				[`${key}`]: value,
@@ -44,31 +38,23 @@ export const BasicSettingsStory = () => {
 				This example shows a basic object parsed into settings and rendered into
 				the default control set.
 				<pre>{`
-{
-	title: 'Graph',
-	algorithm: 'Louvain',
-	nodeLimit: 10000,
-	showEdges: true
-}
-`}</pre>
+  {
+      title: 'Graph',
+      algorithm: 'Louvain',
+      nodeLimit: 10000,
+      showEdges: true
+  }
+  `}</pre>
 			</MessageBar>
 			<Settings settings={settings} onChange={handleChange} />
 		</>
 	)
 }
 
-BasicSettingsStory.storyName = 'Basic Settings'
-
-/**
- * AdvancedSettingsStory is a zero-config settings panel that simply parses a supplied object
- * and generates a list of Fluent UI controls based on the data types.
- * Shows a dynamic object parsed into settings and rendered into
- * the default control set
- */
-export const AdvancedSettingsStory = () => {
+const AdvancedSettingsComponent: React.FC = () => {
 	const [settings, setSettings] = useState(basicSettings)
 	const handleChange = useCallback(
-		(key, value) => {
+		(key: any, value: any) => {
 			const changed = {
 				...settings,
 				[`${key}`]: value,
@@ -107,12 +93,20 @@ export const AdvancedSettingsStory = () => {
 	)
 }
 
-AdvancedSettingsStory.storyName = 'Advanced Settings'
+export const BasicSettingsStory = {
+	render: () => <BasicSettingsComponent />,
+	name: 'Basic Settings',
+}
 
-const GroupedPanel = () => {
+export const AdvancedSettingsStory = {
+	render: () => <AdvancedSettingsComponent />,
+	name: 'Advanced Settings',
+}
+
+const GroupedPanel: React.FC = () => {
 	const [settings, setSettings] = useState(basicSettings)
 	const handleChange = useCallback(
-		(key, value) => {
+		(key: any, value: any) => {
 			const changed = {
 				...settings,
 				[`${key}`]: value,
@@ -139,29 +133,7 @@ const GroupedPanel = () => {
 	)
 }
 
-/**
- * GroupedSettingsStory shows settings within groups, which automatically get a
- * separator and optional label
- */
-export const GroupedSettingsStory = () => {
-	return (
-		<>
-			<MessageBar>
-				This example shows settings within groups, which automatically get a
-				separator and optional label. Any ungrouped settings are placed at the
-				top (&quot;Title&quot; in this example).
-			</MessageBar>
-			<GroupedPanel />
-		</>
-	)
-}
-
-GroupedSettingsStory.storyName = 'Grouped Settings'
-
-/**
- * ContextSettingsStory shows the settings panel in a dropdown context menu.
- */
-export const ContextSettingsStory = () => {
+const ContextSettingComponent: React.FC = () => {
 	const renderPanel = useCallback(
 		() => (
 			<div style={{ margin: 10 }}>
@@ -190,4 +162,24 @@ export const ContextSettingsStory = () => {
 	)
 }
 
-ContextSettingsStory.storyName = 'Context Menu Settings'
+export const GroupedSettingsStory = {
+	render: () => {
+		return (
+			<>
+				<MessageBar>
+					This example shows settings within groups, which automatically get a
+					separator and optional label. Any ungrouped settings are placed at the
+					top (&quot;Title&quot; in this example).
+				</MessageBar>
+				<GroupedPanel />
+			</>
+		)
+	},
+
+	name: 'Grouped Settings',
+}
+
+export const ContextSettingsStory = {
+	render: () => <ContextSettingComponent />,
+	name: 'Context Menu Settings',
+}

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ComponentStory } from '@storybook/react'
+import type { StoryFn } from '@storybook/react'
 import { useCallback, useState } from 'react'
 
 import type { ToggleLinkProps } from './ToggleLink.js'
@@ -18,7 +18,7 @@ const meta = {
 
 export default meta
 
-const Template: ComponentStory<typeof ToggleLink> = (args: ToggleLinkProps) => {
+const Template: StoryFn<typeof ToggleLink> = (args: ToggleLinkProps) => {
 	const [expanded, setExpanded] = useState<boolean>(false)
 	const handleChange = useCallback((toggled) => setExpanded(toggled), [])
 	return (

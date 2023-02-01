@@ -2,10 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-const path = require('path')
-const { configure } = require('@essex/storybook-config/main')
+import { configure } from '@essex/storybook-config/main'
+import path from 'path'
 
-module.exports = configure({
+export default configure({
 	staticDirs: [path.join(__dirname, '../public')],
-	transpileMatch: [/@essex\/storybook-config/],
 })

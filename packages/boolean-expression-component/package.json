@@ -20,14 +20,15 @@
     "clean": "essex clean docs",
     "fix": "essex fix --formatter none",
     "check": "essex check --formatter none",
-    "check-deps": "essex check-deps",
+    "check-deps": "essex check-deps --ignore @storybook/addon-essentials",
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "devDependencies": {
-    "@essex/scripts": "^24.0.2",
+    "@essex/scripts": "^24.0.3",
     "@fluentui/react": "^8.105.0",
     "@mdx-js/react": "^1.6.22",
-    "@storybook/addon-docs": "^6.5.16",
+    "@storybook/addon-docs": "^7.0.0-beta.38",
+    "@storybook/addon-essentials": "^7.0.0-beta.38",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "react": "^18.2.0",

@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ComponentStory } from '@storybook/react'
 import { useState } from 'react'
 
 import type { ControlledHistogramFilterProps } from './ControlledHistogramFilter.js'
@@ -23,13 +22,7 @@ const meta = {
 }
 export default meta
 
-/**
- * ControlledHistogramFilter meta shows basic capabilities
- * of brushing and menu filter for thematic themed D3 histogram
- */
-const Template: ComponentStory<typeof ControlledHistogramFilter> = (
-	args: ControlledHistogramFilterProps,
-) => {
+const PrimaryComponent: React.FC<ControlledHistogramFilterProps> = (args) => {
 	const [selectedRange, setSelectedRange] = useState<
 		[number | undefined, number | undefined]
 	>([undefined, undefined])
@@ -47,5 +40,9 @@ const Template: ComponentStory<typeof ControlledHistogramFilter> = (
 	)
 }
 
-export const Primary = Template.bind({})
-Primary.storyName = 'ControlledHistogramFilter'
+export const Primary = {
+	render: (args: ControlledHistogramFilterProps) => (
+		<PrimaryComponent {...args} />
+	),
+	name: 'ControlledHistogramFilter',
+}
