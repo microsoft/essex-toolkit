@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@essex/jest-config": "^21.0.20",
-    "@essex/scripts": "^24.0.2",
+    "@essex/scripts": "^24.0.3",
     "@essex/tsconfig-base": "^1.0.2",
     "@testing-library/react": "^13.4.0",
     "@types/react": "^18.0.27",

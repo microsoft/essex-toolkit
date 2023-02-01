@@ -14,7 +14,7 @@
 			"outputs": ["coverage/**/*"]
 		},
 		"ci": {
-			"dependsOn": ["build", "check", "test", "check-deps", "bundle"],
+			"dependsOn": ["check", "test", "check-deps", "build"],
 			"outputs": []
 		},
 		"check": {
