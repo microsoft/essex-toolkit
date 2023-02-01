@@ -2,10 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { configure } from '@essex/storybook-config/main'
-const path = require('path')
+import path from 'path'
 
-module.exports = configure({
+export default configure({
 	staticDirs: [path.join(__dirname, '../public')],
 })
