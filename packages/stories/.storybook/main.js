@@ -6,5 +6,6 @@ import { configure } from '@essex/storybook-config/main'
 import path from 'path'
 
 export default configure({
+	stories: ['../about.mdx', '../../*/src/**/*.stories.@(mdx|js|jsx|ts|tsx)'],
 	staticDirs: [path.join(__dirname, '../public')],
 })

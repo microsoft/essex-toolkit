@@ -3848,7 +3848,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-a11y@npm:^7.0.0-beta.38":
+"@storybook/addon-a11y@npm:7.0.0-beta.38":
   version: 7.0.0-beta.38
   resolution: "@storybook/addon-a11y@npm:7.0.0-beta.38"
   dependencies:
@@ -3997,7 +3997,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-essentials@npm:^7.0.0-beta.38":
+"@storybook/addon-essentials@npm:7.0.0-beta.38, @storybook/addon-essentials@npm:^7.0.0-beta.38":
   version: 7.0.0-beta.38
   resolution: "@storybook/addon-essentials@npm:7.0.0-beta.38"
   dependencies:
@@ -4033,7 +4033,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-interactions@npm:^7.0.0-beta.38":
+"@storybook/addon-interactions@npm:7.0.0-beta.38":
   version: 7.0.0-beta.38
   resolution: "@storybook/addon-interactions@npm:7.0.0-beta.38"
   dependencies:
@@ -4062,7 +4062,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-links@npm:^7.0.0-beta.38":
+"@storybook/addon-links@npm:7.0.0-beta.38":
   version: 7.0.0-beta.38
   resolution: "@storybook/addon-links@npm:7.0.0-beta.38"
   dependencies:
@@ -4181,7 +4181,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addons@npm:7.0.0-beta.38, @storybook/addons@npm:^7.0.0-beta.38":
+"@storybook/addons@npm:7.0.0-beta.38":
   version: 7.0.0-beta.38
   resolution: "@storybook/addons@npm:7.0.0-beta.38"
   dependencies:
@@ -4399,7 +4399,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/client-api@npm:7.0.0-beta.38, @storybook/client-api@npm:^7.0.0-beta.38":
+"@storybook/client-api@npm:7.0.0-beta.38":
   version: 7.0.0-beta.38
   resolution: "@storybook/client-api@npm:7.0.0-beta.38"
   dependencies:
@@ -4499,7 +4499,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/core-events@npm:7.0.0-beta.38, @storybook/core-events@npm:^7.0.0-beta.38":
+"@storybook/core-events@npm:7.0.0-beta.38":
   version: 7.0.0-beta.38
   resolution: "@storybook/core-events@npm:7.0.0-beta.38"
   checksum: c08528b2506a5a112d201445c627ca66552ca207e32708a5dc622b85814e43c31f975f6c9bc890df391932e5e4045f32887094c8d83bc9439f0d4080e3ee039d
@@ -4787,7 +4787,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-webpack5@npm:^7.0.0-beta.38":
+"@storybook/react-webpack5@npm:7.0.0-beta.38":
   version: 7.0.0-beta.38
   resolution: "@storybook/react-webpack5@npm:7.0.0-beta.38"
   dependencies:
@@ -4808,7 +4808,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react@npm:7.0.0-beta.38, @storybook/react@npm:^7.0.0-beta.38":
+"@storybook/react@npm:7.0.0-beta.38":
   version: 7.0.0-beta.38
   resolution: "@storybook/react@npm:7.0.0-beta.38"
   dependencies:
@@ -10190,16 +10190,17 @@ __metadata:
     "@fluentui/font-icons-mdl2": ^8.5.7
     "@fluentui/react": ^8.105.0
     "@fluentui/utilities": ^8.13.5
-    "@storybook/addon-a11y": ^7.0.0-beta.38
-    "@storybook/addon-docs": ^7.0.0-beta.38
-    "@storybook/addon-essentials": ^7.0.0-beta.38
-    "@storybook/addon-interactions": ^7.0.0-beta.38
-    "@storybook/addon-links": ^7.0.0-beta.38
-    "@storybook/addons": ^7.0.0-beta.38
-    "@storybook/client-api": ^7.0.0-beta.38
-    "@storybook/core-events": ^7.0.0-beta.38
-    "@storybook/react": ^7.0.0-beta.38
-    "@storybook/react-webpack5": ^7.0.0-beta.38
+    "@storybook/addon-a11y": 7.0.0-beta.38
+    "@storybook/addon-docs": 7.0.0-beta.38
+    "@storybook/addon-essentials": 7.0.0-beta.38
+    "@storybook/addon-interactions": 7.0.0-beta.38
+    "@storybook/addon-links": 7.0.0-beta.38
+    "@storybook/addons": 7.0.0-beta.38
+    "@storybook/client-api": 7.0.0-beta.38
+    "@storybook/core-events": 7.0.0-beta.38
+    "@storybook/react": 7.0.0-beta.38
+    "@storybook/react-webpack5": 7.0.0-beta.38
+    "@storybook/theming": 7.0.0-beta.38
     "@thematic/core": ^4.0.4
     "@thematic/fluent": ^5.0.5
     "@thematic/react": ^2.1.6
@@ -10216,7 +10217,7 @@ __metadata:
     react-dom: ^18.2.0
     react-is: ^18.2.0
     require-from-string: ^2.0.2
-    storybook: ^7.0.0-beta.38
+    storybook: 7.0.0-beta.38
     styled-components: ^5.3.6
     typescript: ^4.9.5
     webpack: ^5.75.0
@@ -17749,7 +17750,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook@npm:^7.0.0-beta.38":
+"storybook@npm:7.0.0-beta.38, storybook@npm:^7.0.0-beta.38":
   version: 7.0.0-beta.38
   resolution: "storybook@npm:7.0.0-beta.38"
   dependencies:
