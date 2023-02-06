@@ -1,0 +1,5 @@
+releases:
+  "@essex/boolean-expression-component": patch
+  "@essex/components": patch
+  "@essex/hierarchy-browser": patch
+  essex-toolkit-stories: patch
