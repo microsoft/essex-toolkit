@@ -679,7 +679,7 @@ export const CustomRenderers = {
 							{defaultRenderer?.(props)}
 						</div>
 					)
-				}
+				},
 			},
 		],
 	},
