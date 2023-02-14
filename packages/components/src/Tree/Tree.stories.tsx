@@ -653,6 +653,34 @@ export const CustomRenderers = {
 					},
 				],
 			},
+			{
+				key: 'item-4',
+				text: 'Item 4 (no children, but custom renderer)',
+				onRenderContent: (props: any, defaultRenderer: any) => {
+					const depth = (props?.item.depth || 0) + 1
+					return (
+						<div>
+							<div
+								style={{
+									display: 'flex',
+									flexDirection: 'column',
+									gap: 4,
+									padding: 4,
+									paddingLeft: depth * 12 + 32,
+								}}
+							>
+								<div style={fieldStyle}>
+									<div>Add codebook</div>
+								</div>
+								<div style={fieldStyle}>
+									<div>Add workflow</div>
+								</div>
+							</div>
+							{defaultRenderer?.(props)}
+						</div>
+					)
+				}
+			},
 		],
 	},
 }
