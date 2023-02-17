@@ -78,7 +78,7 @@ export const TreeItem: React.FC<TreeItemProps> = memo(function TreeItem(props) {
 						{(item.children || item.onRenderContent) && !narrow && (
 							<IconButton {..._expandButtonProps} />
 						)}
-						<div className="title">{renderTitle(props)}</div>
+						{renderTitle(props)}
 						{item.menuItems && <IconButton {..._menuButtonProps} />}
 					</div>
 				</div>
