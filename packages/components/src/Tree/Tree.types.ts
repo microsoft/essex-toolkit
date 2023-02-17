@@ -53,9 +53,9 @@ export interface TreeStyles {
 	 */
 	depthTicks?: CSSProperties
 	/**
-	 * Style for the selected item indicator (pill on the left)
+	 * Style for the selected item indicator pill on the left
 	 */
-	indicator?: CSSProperties
+	pill?: CSSProperties
 }
 
 export interface ExpandIconButtonProps extends IButtonProps {
