@@ -564,25 +564,25 @@ export const Grouped = {
 	},
 }
 
-
 const customTitleRenderer = (props: any, defaultRenderer: any) => {
 	const item = props?.item
 	return (
-	// rome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-<div
-		onClick={() => item.onClick?.(item)}
-		style={{
-			cursor: 'pointer',
-			width: '100%',
-			marginTop: 2,
-			padding: 4,
-			background: 'aliceblue',
-			border: '1px solid dodgerblue',
-		}}
-	>
-		<>{`${props?.item.text} (Custom title)`}</>
-	</div>
-)}
+		// rome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+		<div
+			onClick={() => item.onClick?.(item)}
+			style={{
+				cursor: 'pointer',
+				width: '100%',
+				marginTop: 2,
+				padding: 4,
+				background: 'aliceblue',
+				border: '1px solid dodgerblue',
+			}}
+		>
+			<>{`${props?.item.text} (Custom title)`}</>
+		</div>
+	)
+}
 
 export const CustomRenderers = {
 	render: (args: TreeProps) => <CustomRenderersTree {...args} />,
