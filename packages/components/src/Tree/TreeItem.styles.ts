@@ -89,7 +89,7 @@ export function useTreeItemStyles(
 				height: DEPTH_TICK_HEIGHT,
 				background: theme.palette.neutralSecondaryAlt,
 			},
-			indicator: {
+			pill: {
 				marginLeft: 2,
 				marginRight: 2,
 				width: MEDIUM_INDICATOR_WIDTH,

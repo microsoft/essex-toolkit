@@ -568,7 +568,8 @@ export const Grouped = {
 const customTitleRenderer = (props: any, defaultRenderer: any) => {
 	const item = props?.item
 	return (
-	<div
+	// rome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+<div
 		onClick={() => item.onClick?.(item)}
 		style={{
 			cursor: 'pointer',

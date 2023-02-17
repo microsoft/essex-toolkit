@@ -72,7 +72,7 @@ export const TreeItem: React.FC<TreeItemProps> = memo(function TreeItem(props) {
 					onMouseEnter={onMouseEnter}
 					onMouseLeave={onMouseLeave}
 				>
-					<div style={_styles.indicator} />
+					<div style={_styles.pill} />
 					<div style={_styles.flexContainer}>
 						<Indicator {...props} styles={_styles} />
 						{(item.children || item.onRenderContent) && !narrow && (
