@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { StoryFn } from '@storybook/react'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { Tree } from '../Tree/Tree.js'
 import type { TreeItem, TreeProps } from '../Tree/Tree.types.js'
@@ -564,6 +564,25 @@ export const Grouped = {
 	},
 }
 
+
+const customTitleRenderer = (props: any, defaultRenderer: any) => {
+	const item = props?.item
+	return (
+	<div
+		onClick={() => item.onClick?.(item)}
+		style={{
+			cursor: 'pointer',
+			width: '100%',
+			marginTop: 2,
+			padding: 4,
+			background: 'aliceblue',
+			border: '1px solid dodgerblue',
+		}}
+	>
+		<>{`${props?.item.text} (Custom title)`}</>
+	</div>
+)}
+
 export const CustomRenderers = {
 	render: (args: TreeProps) => <CustomRenderersTree {...args} />,
 	args: {
@@ -603,19 +622,10 @@ export const CustomRenderers = {
 						key: 'item-2.1',
 						text: 'Item 2.1',
 						iconName: 'Table',
+						onRenderTitle: customTitleRenderer,
 					},
 				],
-				onRenderTitle: (props: any) => (
-					<div
-						style={{
-							padding: 4,
-							background: 'aliceblue',
-							border: '1px solid dodgerblue',
-						}}
-					>
-						<>{`${props?.item.text} (Custom title)`}</>
-					</div>
-				),
+				onRenderTitle: customTitleRenderer,
 			},
 			{
 				key: 'item-3',
