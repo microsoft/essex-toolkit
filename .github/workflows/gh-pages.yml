@@ -33,13 +33,7 @@ jobs:
       - run: yarn install
         name: Install dependencies
 
-      - name: TurboRepo local server
-        uses: felixmosh/turborepo-gh-artifacts@v1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          server-token: ${{ secrets.TURBO_SERVER_TOKEN }}
-
-      - run: yarn bundle:storybook  --api="http://127.0.0.1:9080" --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="essex"
+      - run: yarn bundle:storybook
         name: bundle storybook
 
       - name: Deploy to GitHub Pages
