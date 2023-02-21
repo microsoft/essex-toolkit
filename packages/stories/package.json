@@ -11,7 +11,7 @@
     "start": "storybook dev",
     "build": "storybook build",
     "start:storybook": "yarn start",
-    "bundle:storybook": "yarn bundle",
+    "bundle:storybook": "yarn build",
     "fix": "essex fix --formatter none",
     "check": "essex check --formatter none"
   },
