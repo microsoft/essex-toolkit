@@ -26,7 +26,7 @@ const item = {
 	fontSize: SMALL_FONT_SIZE,
 	height: SMALL_INPUT_HEIGHT,
 	minHeight: SMALL_INPUT_HEIGHT,
-	lineHeight: 16,
+	lineHeight: SMALL_INPUT_HEIGHT,
 }
 
 function useStyles(
@@ -52,11 +52,13 @@ function useStyles(
 				title: {
 					...item,
 					paddingTop: 3,
+					lineHeight: 16
 				},
 				caretDown: {
 					...item,
 					fontSize: 10,
 					paddingTop: 3,
+					lineHeight: 16
 				},
 				caretDownWrapper: {
 					...item,
