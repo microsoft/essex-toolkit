@@ -2,14 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { INavProps } from '@fluentui/react';
-import { 	ActionButton,
+import type { INavProps } from '@fluentui/react'
+import {
+	ActionButton,
 	Checkbox,
 	ChoiceGroup,
 	ColorPicker,
 	DefaultButton,
 	Dropdown,
-DropdownMenuItemType ,
+	DropdownMenuItemType,
 	IconButton,
 	Label,
 	Nav,
@@ -298,12 +299,24 @@ export const Fluent8 = () => {
 							label="Label"
 							placeholder={'Placeholder'}
 							options={[
-								{ key: 'header1', text: 'First section', itemType: DropdownMenuItemType.Header },
+								{
+									key: 'header1',
+									text: 'First section',
+									itemType: DropdownMenuItemType.Header,
+								},
 								{ key: 'first', text: 'First' },
 								{ key: 'second', text: 'Second' },
-								{ key: 'divider', text: '-', itemType: DropdownMenuItemType.Divider },
+								{
+									key: 'divider',
+									text: '-',
+									itemType: DropdownMenuItemType.Divider,
+								},
 								{ key: 'third', text: 'Third' },
-								{ key: 'header2', text: 'New section', itemType: DropdownMenuItemType.Header },
+								{
+									key: 'header2',
+									text: 'New section',
+									itemType: DropdownMenuItemType.Header,
+								},
 								{ key: 'fourth', text: 'Fourth' },
 							]}
 							{...mediumDropdownProps}
@@ -314,12 +327,24 @@ export const Fluent8 = () => {
 							label="Label"
 							placeholder={'Placeholder'}
 							options={[
-								{ key: 'header1', text: 'First section', itemType: DropdownMenuItemType.Header },
+								{
+									key: 'header1',
+									text: 'First section',
+									itemType: DropdownMenuItemType.Header,
+								},
 								{ key: 'first', text: 'First' },
 								{ key: 'second', text: 'Second' },
-								{ key: 'divider', text: '-', itemType: DropdownMenuItemType.Divider },
+								{
+									key: 'divider',
+									text: '-',
+									itemType: DropdownMenuItemType.Divider,
+								},
 								{ key: 'third', text: 'Third' },
-								{ key: 'header2', text: 'New section', itemType: DropdownMenuItemType.Header },
+								{
+									key: 'header2',
+									text: 'New section',
+									itemType: DropdownMenuItemType.Header,
+								},
 								{ key: 'fourth', text: 'Fourth' },
 							]}
 							{...smallDropdownProps}

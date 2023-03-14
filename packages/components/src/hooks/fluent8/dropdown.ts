@@ -52,13 +52,13 @@ function useStyles(
 				title: {
 					...item,
 					paddingTop: 3,
-					lineHeight: 16
+					lineHeight: 16,
 				},
 				caretDown: {
 					...item,
 					fontSize: 10,
 					paddingTop: 3,
-					lineHeight: 16
+					lineHeight: 16,
 				},
 				caretDownWrapper: {
 					...item,
