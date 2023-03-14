@@ -10,6 +10,7 @@ import {
 	ColorPicker,
 	DefaultButton,
 	Dropdown,
+	DropdownMenuItemType,
 	IconButton,
 	Label,
 	Nav,
@@ -298,8 +299,25 @@ export const Fluent8 = () => {
 							label="Label"
 							placeholder={'Placeholder'}
 							options={[
+								{
+									key: 'header1',
+									text: 'First section',
+									itemType: DropdownMenuItemType.Header,
+								},
 								{ key: 'first', text: 'First' },
 								{ key: 'second', text: 'Second' },
+								{
+									key: 'divider',
+									text: '-',
+									itemType: DropdownMenuItemType.Divider,
+								},
+								{ key: 'third', text: 'Third' },
+								{
+									key: 'header2',
+									text: 'New section',
+									itemType: DropdownMenuItemType.Header,
+								},
+								{ key: 'fourth', text: 'Fourth' },
 							]}
 							{...mediumDropdownProps}
 						/>
@@ -309,8 +327,25 @@ export const Fluent8 = () => {
 							label="Label"
 							placeholder={'Placeholder'}
 							options={[
+								{
+									key: 'header1',
+									text: 'First section',
+									itemType: DropdownMenuItemType.Header,
+								},
 								{ key: 'first', text: 'First' },
 								{ key: 'second', text: 'Second' },
+								{
+									key: 'divider',
+									text: '-',
+									itemType: DropdownMenuItemType.Divider,
+								},
+								{ key: 'third', text: 'Third' },
+								{
+									key: 'header2',
+									text: 'New section',
+									itemType: DropdownMenuItemType.Header,
+								},
+								{ key: 'fourth', text: 'Fourth' },
 							]}
 							{...smallDropdownProps}
 						/>
