@@ -2,7 +2,6 @@ releases:
   "@essex/boolean-expression-component": patch
   "@essex/charts-react": patch
   "@essex/components": patch
-  "@essex/graphql-api-commons": patch
   "@essex/hierarchy-browser": patch
   "@essex/hooks": patch
   "@essex/msal-interactor": patch
