@@ -2644,6 +2644,9 @@ __metadata:
     styled-components: ^5.3.9
     typescript: ^5.0.2
   peerDependencies:
+    react: ">= 18"
+    react-dom: ">= 18"
+    react-is: ">= 18"
     styled-components: ">= 5"
   peerDependenciesMeta:
     styled-components:

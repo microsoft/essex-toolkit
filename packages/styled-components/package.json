@@ -1,7 +1,7 @@
 {
   "name": "@essex/styled-components",
   "description": "ESM export support for styled-components",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "type": "module",
   "main": "src/index.ts",
   "publishConfig": {
@@ -28,6 +28,9 @@
     "typescript": "^5.0.2"
   },
   "peerDependencies": {
+    "react": ">= 18",
+    "react-dom": ">= 18",
+    "react-is": ">= 18",
     "styled-components": ">= 5"
   },
   "peerDependenciesMeta": {
