@@ -24,17 +24,17 @@
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@essex/scripts": "^24.0.3",
+    "@essex/scripts": "^24.0.4",
     "@mdx-js/react": "^1.6.22",
-    "@storybook/addon-docs": "^7.0.0-beta.38",
-    "@storybook/addon-essentials": "^7.0.0-beta.38",
+    "@storybook/addon-docs": "^7.0.0-rc.8",
+    "@storybook/addon-essentials": "^7.0.0-rc.8",
     "@thematic/color": "^4.0.4",
     "@thematic/core": "^4.0.4",
     "@thematic/d3": "^2.0.19",
     "@thematic/react": "^2.1.6",
-    "@types/node": "^18.11.18",
-    "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
+    "@types/node": "^18.15.10",
+    "@types/react": "^18.0.29",
+    "@types/react-dom": "^18.0.11",
     "lineupjs": "^4.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

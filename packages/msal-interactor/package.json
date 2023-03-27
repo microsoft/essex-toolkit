@@ -24,8 +24,8 @@
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "devDependencies": {
-    "@azure/msal-browser": "^2.32.2",
-    "@essex/scripts": "^24.0.3",
+    "@azure/msal-browser": "^2.34.0",
+    "@essex/scripts": "^24.0.4",
     "@types/debug": "^4.1.7"
   },
   "dependencies": {
