@@ -1,6 +1,6 @@
 {
   "name": "@essex/hooks",
-  "version": "4.0.19",
+  "version": "4.0.20",
   "description": "A set of hooks for use with react",
   "type": "module",
   "main": "src/index.ts",
