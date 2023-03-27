@@ -4,8 +4,6 @@
 
 ```ts
 
-/// <reference types="react" />
-
 import { Color } from '@thematic/color';
 
 // Warning: (ae-forgotten-export) The symbol "LineUp" needs to be exported by the entry point index.d.ts

@@ -1492,7 +1492,7 @@
             {
               "kind": "Reference",
               "text": "JSX.Element",
-              "canonicalReference": "@types/react!~__global.JSX.Element:interface"
+              "canonicalReference": "@types/react!~__global.JSX~Element:interface"
             }
           ],
           "isReadonly": true,
