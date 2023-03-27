@@ -6,7 +6,7 @@
 import { ApolloServer } from '@apollo/server'
 import { ApolloServerPluginLandingPageDisabled } from '@apollo/server/plugin/disabled'
 import { startStandaloneServer } from '@apollo/server/standalone'
-import type { FastifyInstance, FastifyRequest } from 'fastify'
+import type { FastifyInstance } from 'fastify'
 import fastify from 'fastify'
 import { GraphQLSchema } from 'graphql'
 import { IncomingMessage } from 'http'
