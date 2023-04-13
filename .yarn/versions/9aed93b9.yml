@@ -9,5 +9,5 @@ releases:
   "@essex/styled-components": patch
   "@essex/thematic-lineup": patch
   "@essex/toolbox": patch
-  "@essex/toposort": patch
+  "@essex/toposort": major
   essex-toolkit-stories: patch

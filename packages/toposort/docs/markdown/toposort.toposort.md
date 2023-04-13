@@ -9,7 +9,7 @@ Toposort an edge list
 <b>Signature:</b>
 
 ```typescript
-export default function toposort<T = string>(edges: ReadonlyArray<[T, T | undefined]>): T[];
+export declare function toposort<T = string>(edges: ReadonlyArray<[T, T | undefined]>): T[];
 ```
 
 ## Parameters

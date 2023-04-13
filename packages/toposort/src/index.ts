@@ -9,7 +9,7 @@
  * @param edges - the edge list
  * @returns the topologically sorted node array
  */
-export default function toposort<T = string>(
+export function toposort<T = string>(
 	edges: ReadonlyArray<[T, T | undefined]>,
 ): T[] {
 	return array(uniqueNodes(edges), edges)
@@ -35,7 +35,7 @@ export function array<T = string>(
 
 	// check for unknown nodes
 	edges.forEach(([from, to]) => {
-		const hasFrom = nodesHash.has(from)		
+		const hasFrom = nodesHash.has(from)
 		const hasTo = to ? nodesHash.has(to) : true
 		if (!(hasFrom && hasTo)) {
 			throw new Error(

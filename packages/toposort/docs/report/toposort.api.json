@@ -270,7 +270,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export default function toposort<T = "
+              "text": "export declare function toposort<T = "
             },
             {
               "kind": "Content",
