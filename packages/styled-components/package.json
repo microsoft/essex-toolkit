@@ -1,7 +1,7 @@
 {
   "name": "@essex/styled-components",
   "description": "ESM export support for styled-components",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "type": "module",
   "main": "src/index.ts",
   "publishConfig": {
