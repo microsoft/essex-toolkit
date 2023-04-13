@@ -8,8 +8,12 @@
       "coverage",
       ".turbo",
       ".pnp.cjs",
-      ".pnp.loader.mjs"
+      ".pnp.loader.mjs",
+      ".devcontainer/"
     ]
+  },
+  "organizeImports": {
+    "enabled": true
   },
   "linter": {
     "enabled": true,

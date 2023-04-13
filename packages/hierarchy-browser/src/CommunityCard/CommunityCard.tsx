@@ -6,8 +6,9 @@ import { Spinner } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import type { CommunityDataProvider } from '../common/dataProviders/index.js'
 import { EmptyEntityList } from '../EntityItem/EmptyEntityList.js'
+import { ScrollArea } from '../ScollArea/index.js'
+import type { CommunityDataProvider } from '../common/dataProviders/index.js'
 import { useContainerStyle } from '../hooks/theme.js'
 import { useCommunityData } from '../hooks/useCommunityData.js'
 import { useCommunitySizePercent } from '../hooks/useCommunitySizePercent.js'
@@ -18,7 +19,6 @@ import type {
 	IOnSelectionChange,
 	ISettings,
 } from '../index.js'
-import { ScrollArea } from '../ScollArea/index.js'
 import { AdjacentCommunities } from './AdjacentCommunities/index.js'
 import { CommunityOverview } from './CommunityOverview.js'
 import { CommunityTable } from './CommunityTable.js'

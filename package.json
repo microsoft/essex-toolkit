@@ -28,7 +28,7 @@
     "_fix_packages": "turbo run fix",
     "_ci_packages": "turbo run ci",
     "rome_ci": "rome ci .",
-    "rome_fix": "rome check . --apply-suggested",
+    "rome_fix": "rome check . --apply-unsafe",
     "build": "turbo run build --force",
     "clean": "turbo run clean --parallel",
     "test": "turbo run test",

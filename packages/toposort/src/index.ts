@@ -34,8 +34,10 @@ export function array<T = string>(
 	const nodesHash = makeNodesHash(nodes)
 
 	// check for unknown nodes
-	edges.forEach(function (edge) {
-		if (!(nodesHash.has(edge[0]!) && nodesHash.has(edge[1]!))) {
+	edges.forEach(([from, to]) => {
+		const hasFrom = nodesHash.has(from)		
+		const hasTo = to ? nodesHash.has(to) : true
+		if (!(hasFrom && hasTo)) {
 			throw new Error(
 				'Unknown node. There is an unknown node in the supplied edges.',
 			)
@@ -43,7 +45,11 @@ export function array<T = string>(
 	})
 
 	while (i--) {
-		if (!visited[i]) visit(nodes[i]!, i, new Set())
+		const node = nodes[i]
+		const isVisited = visited[i]
+		if (node != null && !isVisited) {
+			visit(node, i, new Set())
+		}
 	}
 
 	return sorted
@@ -76,8 +82,8 @@ export function array<T = string>(
 		if ((i = outgoing.length)) {
 			predecessors.add(node)
 			do {
-				const child = outgoing[--i]!
-				visit(child, nodesHash.get(child)!, predecessors)
+				const child = outgoing[--i] as T
+				visit(child, nodesHash.get(child) as number, predecessors)
 			} while (i)
 			predecessors.delete(node)
 		}
@@ -89,9 +95,11 @@ export function array<T = string>(
 function uniqueNodes<T>(arr: ReadonlyArray<[T, T | undefined]>): T[] {
 	const res = new Set<T>()
 	for (let i = 0, len = arr.length; i < len; i++) {
-		const edge = arr[i]!
-		res.add(edge[0]!)
-		res.add(edge[1]!)
+		const [from, to] = arr[i] as [T, T | undefined]
+		res.add(from)
+		if (to != null) {
+			res.add(to)
+		}
 	}
 	return Array.from(res)
 }
@@ -101,10 +109,16 @@ function makeOutgoingEdges<T>(
 ): Map<T, Set<T>> {
 	const edges = new Map<T, Set<T>>()
 	for (let i = 0, len = arr.length; i < len; i++) {
-		const edge = arr[i]!
-		if (!edges.has(edge[0]!)) edges.set(edge[0]!, new Set())
-		if (!edges.has(edge[1]!)) edges.set(edge[1]!, new Set())
-		edges.get(edge[0]!)!.add(edge[1]!)
+		const [from, to] = arr[i] as [T, T | undefined]
+		if (!edges.has(from)) {
+			edges.set(from, new Set())
+		}
+		if (to != null && !edges.has(to)) {
+			edges.set(to, new Set())
+		}
+		if (to != null) {
+			edges.get(from)?.add(to)
+		}
 	}
 	return edges
 }
@@ -112,7 +126,7 @@ function makeOutgoingEdges<T>(
 function makeNodesHash<T>(arr: ReadonlyArray<T>): Map<T, number> {
 	const res = new Map<T, number>()
 	for (let i = 0, len = arr.length; i < len; i++) {
-		res.set(arr[i]!, i)
+		res.set(arr[i] as T, i)
 	}
 	return res
 }

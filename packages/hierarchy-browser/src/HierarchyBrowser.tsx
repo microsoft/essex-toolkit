@@ -11,9 +11,9 @@ import {
 } from 'react'
 import styled from 'styled-components'
 
+import { CommunityCard } from './CommunityCard/CommunityCard.js'
 import { useEntityProvider } from './common/dataProviders/hooks/useEntityProvider.js'
 import type { ICardOrder, IDataProvidersCache } from './common/types/types.js'
-import { CommunityCard } from './CommunityCard/CommunityCard.js'
 import {
 	useCommunityLevelCalculator,
 	useCommunitySizeCalculator,

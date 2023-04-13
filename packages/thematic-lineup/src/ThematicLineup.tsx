@@ -9,6 +9,7 @@ import { useThematic } from '@thematic/react'
 import { builder as lineupBuilder } from 'lineupjs'
 import { useEffect, useMemo, useRef, useState } from 'react'
 
+import { ThematicLineupStyles } from './ThematicLineupStyles.js'
 import type { Filter } from './filters.js'
 import { applyFilters } from './filters.js'
 import type { ColumnConfig } from './lineup.js'
@@ -17,7 +18,6 @@ import {
 	nameToLabel,
 	selectColumnBuilder,
 } from './lineup.js'
-import { ThematicLineupStyles } from './ThematicLineupStyles.js'
 
 type LineUp = any
 

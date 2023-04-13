@@ -11,8 +11,8 @@ type LineUp = any
  * TODO: round out the other data types supported by LineUp.
  */
 export enum FilterType {
-	Text,
-	Number,
+	Text = 0,
+	Number = 1,
 }
 
 /**

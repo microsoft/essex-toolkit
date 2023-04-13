@@ -7,7 +7,6 @@ import { useCallback } from 'react'
 
 import { BooleanControl } from './BooleanControl.js'
 import { NumberControl } from './NumberControl.js'
-import { parseSettings } from './reader.js'
 import type {
 	ParsedSettingConfig,
 	SettingsGroup,
@@ -16,6 +15,7 @@ import type {
 	SortedSettingsGrouped,
 } from './Settings.types.js'
 import { TextControl } from './TextControl.js'
+import { parseSettings } from './reader.js'
 
 // chooses the top-level control type and renders it as a row
 const renderControl = (

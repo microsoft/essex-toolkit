@@ -6,8 +6,8 @@
 import type { StoryFn } from '@storybook/react'
 
 import {
-	defaultBannerLinks,
 	PolicyAndCookieBanner,
+	defaultBannerLinks,
 } from './PolicyAndCookieBanner.js'
 import type { PolicyAndCookieBannerProps } from './PolicyAndCookieBanner.types.js'
 
