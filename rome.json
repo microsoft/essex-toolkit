@@ -1,34 +1,31 @@
 {
-  "files": {
-    "ignore": [
-      "dist",
-      "lib",
-      "build",
-      "storybook-static",
-      "coverage",
-      ".turbo",
-      ".pnp.cjs",
-      ".pnp.loader.mjs"
-    ]
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "suspicious": {
-        "noExplicitAny": "off"
-      }
-    }
-  },
-  "javascript": {
-    "formatter": {
-      "semicolons": "asNeeded",
-      "quoteStyle": "single",
-      "trailingComma": "all",
-      "quoteProperties": "asNeeded"
-    }
-  },
-  "formatter": {
-    "indentStyle": "tab"
-  }
+	"files": {
+		"ignore": [
+			"dist", "lib", "build", "docs", "storybook-static", "coverage", ".turbo",
+			".pnp.cjs", ".pnp.loader.mjs", ".devcontainer/"
+		]
+	},
+	"organizeImports": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"suspicious": {
+				"noExplicitAny": "off"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"semicolons": "asNeeded",
+			"quoteStyle": "single",
+			"trailingComma": "all",
+			"quoteProperties": "asNeeded"
+		}
+	},
+	"formatter": {
+		"indentStyle": "tab"
+	}
 }

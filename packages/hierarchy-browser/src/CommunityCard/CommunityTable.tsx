@@ -6,8 +6,8 @@ import { Text } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { textStyle } from '../common/styles/index.js'
 import { EntityItem } from '../EntityItem/EntityItem.js'
+import { textStyle } from '../common/styles/index.js'
 import { useTableStyles } from '../hooks/useStyles.js'
 import type {
 	CommunityId,
