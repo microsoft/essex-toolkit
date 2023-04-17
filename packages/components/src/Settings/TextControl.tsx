@@ -30,7 +30,7 @@ export const TextControl = ({
 		[key, onChange],
 	)
 	switch (control) {
-		case ControlType.textbox:
+		case ControlType.Textbox:
 			return (
 				<TextField
 					key={`textfield-${key}`}
@@ -39,7 +39,7 @@ export const TextControl = ({
 					onChange={handleTextChange}
 				/>
 			)
-		case ControlType.dropdown:
+		case ControlType.Dropdown:
 			if (!params?.options) {
 				throw new Error('Dropdown control type requires list of options')
 			}
@@ -55,7 +55,7 @@ export const TextControl = ({
 					onChange={handleOptionChange}
 				/>
 			)
-		case ControlType.radio:
+		case ControlType.Radio:
 			if (!params?.options) {
 				throw new Error('Radio control type requires list of options')
 			}

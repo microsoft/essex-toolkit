@@ -3,14 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Separator } from '@fluentui/react'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 
 import { BooleanControl } from './BooleanControl.js'
 import { NumberControl } from './NumberControl.js'
 import { useGrouped, useParsedSettings } from './Settings.hooks.js'
+import { containerStyle, groupContainerStyle } from './Settings.styles.js'
 import type { ParsedSettingConfig, SettingsProps } from './Settings.types.js'
 import { TextControl } from './TextControl.js'
-import { containerStyle } from './Settings.styles.js'
 
 /**
  * A zero-config settings panel that parses a supplied object
@@ -28,25 +28,24 @@ export const Settings = ({
 }: SettingsProps): JSX.Element => {
 	const parsed = useParsedSettings(settings, config)
 	const handleChange = useCallback(
-		(key: string, value: any) => {
-			onChange?.(key, value)
-		},
+		(key: string, value: any) => onChange?.(key, value),
 		[onChange],
 	)
 	const grouped = useGrouped(parsed, groups)
-	const groupings = grouped.map((group, i) => {
+	const groupings = useMemo(() => grouped.map((group, i) => {
 		const controls = group.settings.map((entry: any) =>
 			renderControl(entry, handleChange),
 		)
 		return (
-			<div key={`settings-group-${i}`} style={containerStyle}>
+			<div key={`settings-group-${i}`}>
 				{group.separator ? <Separator>{group.label}</Separator> : null}
-				{controls}
+				<div style={groupContainerStyle}>
+					{controls}
+				</div>
 			</div>
 		)
-	})
-
-	return <div>{groupings}</div>
+	}), [grouped, handleChange])
+	return <div style={containerStyle}>{groupings}</div>
 }
 
 // chooses the top-level control type and renders it as a row
@@ -54,7 +53,7 @@ const renderControl = (
 	config: ParsedSettingConfig,
 	onChange: (key: any, value: any) => void,
 ): JSX.Element | null => {
-	const { key, type } = config
+	const { type } = config
 	let Control
 	switch (type) {
 		case 'string':

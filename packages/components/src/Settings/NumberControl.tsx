@@ -26,7 +26,7 @@ export const NumberControl = ({
 		[key, onChange],
 	)
 	switch (control) {
-		case ControlType.spinner:
+		case ControlType.Spinner:
 			return (
 				<NumberSpinButton
 					key={`spinner-${key}`}
@@ -39,7 +39,7 @@ export const NumberControl = ({
 					onChange={handleChange}
 				/>
 			)
-		case ControlType.slider:
+		case ControlType.Slider:
 			return (
 				<Slider
 					key={`slider-${key}`}

@@ -24,7 +24,7 @@ export const BooleanControl = ({
 		[key, onChange],
 	)
 	switch (control) {
-		case ControlType.toggle:
+		case ControlType.Toggle:
 			return (
 				<Toggle
 					key={`toggle-${key}`}
@@ -39,7 +39,7 @@ export const BooleanControl = ({
 					inlineLabel
 				/>
 			)
-		case ControlType.checkbox:
+		case ControlType.Checkbox:
 			return (
 				<Checkbox
 					key={`checkbox-${key}`}

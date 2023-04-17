@@ -1,17 +1,18 @@
-/*!
- * Copyright (c) Microsoft. All rights reserved.
- * Licensed under the MIT license. See LICENSE file in the project.
- */
-import { useMemo } from 'react'
 import type {
     ControlParams,
 	ParsedSettingConfig,
 	SettingConfig,
+	SettingsConfig,
 	SettingsGroup,
 	SortedSettings,
 	SortedSettingsGrouped,
 } from './Settings.types.js'
 import { ControlType } from './Settings.types.js'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import { useMemo } from 'react'
 
 
 
@@ -20,7 +21,7 @@ import { ControlType } from './Settings.types.js'
  * Returned block is ready-to-render settings configs.
  */
 export function useParsedSettings(
-	settings: any,
+	settings?: any,
 	config?: { [key: string]: SettingConfig },
 ) {
 	return useMemo(() => parseSettings(settings, config), [settings, config])
@@ -55,27 +56,26 @@ const selectDefaultControl = (type: string, params?: ControlParams): string | un
 		case 'string':
             if (params?.options) {
                 if (params.options.length < 4) {
-                    return ControlType.radio
+                    return ControlType.Radio
                 }
-                return ControlType.dropdown
+                return ControlType.Dropdown
             }
-			return ControlType.textbox
+			return ControlType.Textbox
 		case 'number':
-			return ControlType.spinner
+			return ControlType.Spinner
 		case 'boolean':
-			return ControlType.toggle
+			return ControlType.Toggle
 	}
 }
 
-type SettingsConfig = Record<string, SettingConfig>
 /**
  * Parses a plain object into a config object suitable for the settings renderer.
  * If specific field config is supplied, this will be overlayed, otherwise defaults will be used.
  * @param settings
  */
 const parseSettings = (
-	settings: any,
-	config?: { [key: string]: SettingConfig },
+	settings: any = {},
+	config: SettingsConfig = {},
 ): ParsedSettingConfig[] => {
     // start by creating a combined basic config using passed config first for order, and then adding in
     // any unaccounted for settings values

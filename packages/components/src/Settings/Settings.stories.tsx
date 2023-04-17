@@ -27,13 +27,12 @@ const SettingsComponent: React.FC<SettingsProps> = (props) => {
 	const [internal, setSettings] = useState(settings)
 	const handleChange = useCallback(
 		(key: any, value: any) => {
-			const changed = {
-				...settings,
+			setSettings((prev: any) => ({
+				...prev,
 				[`${key}`]: value,
-			}
-			setSettings(changed)
+			}))
 		},
-		[settings],
+		[],
 	)
 	return <div style={{border: '1px solid orange', padding: 8, marginTop: 8}}><Settings settings={internal} onChange={handleChange} {...rest} /></div>
 }
@@ -94,7 +93,7 @@ const AdvancedSettingsComponent: React.FC = () => {
 	)
 }
 
-const DefaultSettingsComponent: React.FC = () => {
+const MixedSettingsComponent: React.FC = () => {
 	return (
 		<>
 			<MessageBar>
@@ -122,6 +121,31 @@ const DefaultSettingsComponent: React.FC = () => {
 		</>
 	)
 }
+
+
+const DefaultSettingsComponent: React.FC = () => {
+	return (
+		<>
+			<MessageBar>
+				This example only uses config with defaultValues and no pre-defined settings object.
+			</MessageBar>
+			<SettingsComponent
+				config={
+					{
+						fourItemDropdown: {
+							defaultValue: 'Nodes',
+							params: { options: ['None', 'Graph', 'Nodes', 'Edges'] },
+						},
+						twoItemRadio: {
+							defaultValue: 'Leiden',
+							params: { options: ['Louvain', 'Leiden'] },
+						},
+					} as any
+				}
+			/>
+		</>
+	)
+}
 export const BasicSettingsStory = {
 	render: () => <BasicSettingsComponent />,
 	name: 'Basic Settings',
@@ -132,9 +156,14 @@ export const AdvancedSettingsStory = {
 	name: 'Advanced Settings',
 }
 
+export const MixedSettingsStory = {
+	render: () => <MixedSettingsComponent />,
+	name: 'Mixed set + config values',
+}
+
 export const DefaultSettingsStory = {
 	render: () => <DefaultSettingsComponent />,
-	name: 'Default Values',
+	name: 'Defaults from config only',
 }
 
 const GroupedPanel: React.FC = () => {

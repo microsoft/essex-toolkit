@@ -29,7 +29,7 @@ export * from './PolicyAndCookieBanner/index.js'
 export * from './ReadOnlyTextField/ReadOnlyTextField.js'
 export * from './SearchBox/SearchBox.js'
 export * from './Settings/Settings.js'
-export type { SettingsGroup, SettingsProps } from './Settings/Settings.types.js'
+export type { SettingsProps, SettingsConfig, SettingConfig, ControlParams, ControlType, SettingsGroup,  } from './Settings/Settings.types.js'
 export * from './ToggleLink/ToggleLink.js'
 export * from './ToolPanel/ToolPanel.js'
 export type {
