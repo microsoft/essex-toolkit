@@ -1,5 +1,11 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import { useMemo } from 'react'
+
 import type {
-    ControlParams,
+	ControlParams,
 	ParsedSettingConfig,
 	SettingConfig,
 	SettingsConfig,
@@ -8,13 +14,6 @@ import type {
 	SortedSettingsGrouped,
 } from './Settings.types.js'
 import { ControlType } from './Settings.types.js'
-/*!
- * Copyright (c) Microsoft. All rights reserved.
- * Licensed under the MIT license. See LICENSE file in the project.
- */
-import { useMemo } from 'react'
-
-
 
 /**
  * Sorts through settings to determine control type, etc. for each one.
@@ -51,15 +50,18 @@ const keyToLabel = (str: string): string => {
 		.join(' ')
 }
 
-const selectDefaultControl = (type: string, params?: ControlParams): string | undefined => {
+const selectDefaultControl = (
+	type: string,
+	params?: ControlParams,
+): string | undefined => {
 	switch (type) {
 		case 'string':
-            if (params?.options) {
-                if (params.options.length < 4) {
-                    return ControlType.Radio
-                }
-                return ControlType.Dropdown
-            }
+			if (params?.options) {
+				if (params.options.length < 4) {
+					return ControlType.Radio
+				}
+				return ControlType.Dropdown
+			}
 			return ControlType.Textbox
 		case 'number':
 			return ControlType.Spinner
@@ -77,33 +79,36 @@ const parseSettings = (
 	settings: any = {},
 	config: SettingsConfig = {},
 ): ParsedSettingConfig[] => {
-    // start by creating a combined basic config using passed config first for order, and then adding in
-    // any unaccounted for settings values
-    const combined = Object.entries(settings).reduce((acc, cur) => {
-        const [key, value] = cur
-        if (!acc[key]) {
-            acc[key] = {
-            defaultValue: value
-        }
-    }
-        return acc
-    }, {...config} as SettingsConfig)
-    const parsed = Object.entries(combined).reduce((acc: any, cur) => {
-        const [key, conf] = cur
-        const setting = settings[key]
-        const value = setting || conf.defaultValue
-        const type = typeof value
-        const entry = {
-            key,
-            value: value,
-            type,
-            control: conf.control || selectDefaultControl(type, conf.params),
-            params: conf.params || {},
-            label: keyToLabel(key)
-        }
-        return [...acc, entry]
-    }, [])
-    return parsed
+	// start by creating a combined basic config using passed config first for order, and then adding in
+	// any unaccounted for settings values
+	const combined = Object.entries(settings).reduce(
+		(acc, cur) => {
+			const [key, value] = cur
+			if (!acc[key]) {
+				acc[key] = {
+					defaultValue: value,
+				}
+			}
+			return acc
+		},
+		{ ...config } as SettingsConfig,
+	)
+	const parsed = Object.entries(combined).reduce((acc: any, cur) => {
+		const [key, conf] = cur
+		const setting = settings[key]
+		const value = setting || conf.defaultValue
+		const type = typeof value
+		const entry = {
+			key,
+			value: value,
+			type,
+			control: conf.control || selectDefaultControl(type, conf.params),
+			params: conf.params || {},
+			label: keyToLabel(key),
+		}
+		return [...acc, entry]
+	}, [])
+	return parsed
 }
 
 const sortIntoGroups = (

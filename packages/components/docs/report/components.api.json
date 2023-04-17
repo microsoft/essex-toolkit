@@ -1648,6 +1648,294 @@
           "extendsTokenRanges": []
         },
         {
+          "kind": "Interface",
+          "canonicalReference": "@essex/components!ControlParams:interface",
+          "docComment": "/**\n * These are optional params to supply detailed config for controls that allow it. This could potentially support a wide range of options, but if so should be more strongly typed.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ControlParams "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ControlParams",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/components!ControlParams#max:member",
+              "docComment": "/**\n * Max numeric range, e.g., for slider or spinner\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "max?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "max",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/components!ControlParams#min:member",
+              "docComment": "/**\n * Min numeric range, e.g., for slider or spinner\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "min?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "min",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/components!ControlParams#options:member",
+              "docComment": "/**\n * List of selectable options, e.g., for dropdown or radio.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "options?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "options",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/components!ControlParams#step:member",
+              "docComment": "/**\n * Numeric step increment, e.g., for slider or spinner\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "step?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "step",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Enum",
+          "canonicalReference": "@essex/components!ControlType:enum",
+          "docComment": "/**\n * Type of control you'd like rendered for a setting. This uses traditional names but maps to controls available in the Fluent control set. E.g., 'textbox' is a Textfield.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare enum ControlType "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ControlType",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/components!ControlType.Checkbox:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Checkbox = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"checkbox\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Checkbox"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/components!ControlType.Dropdown:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Dropdown = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"dropdown\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Dropdown"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/components!ControlType.Radio:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Radio = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"radio\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Radio"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/components!ControlType.Slider:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Slider = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"slider\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Slider"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/components!ControlType.Spinner:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Spinner = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"spinner\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Spinner"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/components!ControlType.Textbox:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Textbox = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"textbox\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Textbox"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/components!ControlType.Toggle:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Toggle = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"toggle\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Toggle"
+            }
+          ]
+        },
+        {
           "kind": "TypeAlias",
           "canonicalReference": "@essex/components!CookieConsent:type",
           "docComment": "/**\n * Record of approved and blocked cookie types.\n *\n * Record<\"Required\" | \"Analytics\" | \"SocialMedia\" | \"Advertising\", boolean>\n *\n * @public\n */\n",
@@ -3959,6 +4247,133 @@
           "extendsTokenRanges": []
         },
         {
+          "kind": "Interface",
+          "canonicalReference": "@essex/components!SettingConfig:interface",
+          "docComment": "/**\n * Config options for a particular setting, to override default control behaviors.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface SettingConfig "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "SettingConfig",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/components!SettingConfig#control:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "control?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ControlType",
+                  "canonicalReference": "@essex/components!ControlType:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "control",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/components!SettingConfig#defaultValue:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "defaultValue?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "any"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "defaultValue",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/components!SettingConfig#label:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "label?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "label",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/components!SettingConfig#params:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "params?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ControlParams",
+                  "canonicalReference": "@essex/components!ControlParams:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "params",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
           "kind": "Variable",
           "canonicalReference": "@essex/components!Settings:var",
           "docComment": "/**\n * A zero-config settings panel that parses a supplied object and generates a list of Fluent UI controls based on the data types. A config object can be supplied that maps specific object fields to more detailed control config, such as changing between a Toggle or Checkbox. In addition, it will invoke a onChange handler for any setting, supplying the changed setting's key and new value. Note that this could be used in an entirely declarative/serializable manner if desired.\n */\n",
@@ -3990,6 +4405,45 @@
           "releaseTag": "Public",
           "name": "Settings",
           "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          }
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@essex/components!SettingsConfig:type",
+          "docComment": "/**\n * Map of specific configs for settings. Settings that do not have a config will be auto-configured.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type SettingsConfig = "
+            },
+            {
+              "kind": "Reference",
+              "text": "Record",
+              "canonicalReference": "!Record:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<string, "
+            },
+            {
+              "kind": "Reference",
+              "text": "SettingConfig",
+              "canonicalReference": "@essex/components!SettingConfig:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "SettingsConfig",
+          "typeTokenRange": {
             "startIndex": 1,
             "endIndex": 5
           }
@@ -4169,11 +4623,11 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@essex/components!SettingsProps#settings:member",
-              "docComment": "/**\n * Required object to render into a settings panel. This can be basically anything, but should be flat at the moment, as complex/nest objects are not supported.\n */\n",
+              "docComment": "/**\n * Settings object to render into a settings panel. This can be basically anything, but should be flat at the moment, as complex/nested objects are not supported. Note that this can be undefined if a config is supplied.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "settings: "
+                  "text": "settings?: "
                 },
                 {
                   "kind": "Content",
@@ -4185,7 +4639,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "settings",
               "propertyTypeTokenRange": {

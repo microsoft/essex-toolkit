@@ -25,16 +25,17 @@ const basicSettings = {
 const SettingsComponent: React.FC<SettingsProps> = (props) => {
 	const { settings, ...rest } = props
 	const [internal, setSettings] = useState(settings)
-	const handleChange = useCallback(
-		(key: any, value: any) => {
-			setSettings((prev: any) => ({
-				...prev,
-				[`${key}`]: value,
-			}))
-		},
-		[],
+	const handleChange = useCallback((key: any, value: any) => {
+		setSettings((prev: any) => ({
+			...prev,
+			[`${key}`]: value,
+		}))
+	}, [])
+	return (
+		<div style={{ border: '1px solid orange', padding: 8, marginTop: 8 }}>
+			<Settings settings={internal} onChange={handleChange} {...rest} />
+		</div>
 	)
-	return <div style={{border: '1px solid orange', padding: 8, marginTop: 8}}><Settings settings={internal} onChange={handleChange} {...rest} /></div>
 }
 
 const BasicSettingsComponent: React.FC = () => {
@@ -122,12 +123,12 @@ const MixedSettingsComponent: React.FC = () => {
 	)
 }
 
-
 const DefaultSettingsComponent: React.FC = () => {
 	return (
 		<>
 			<MessageBar>
-				This example only uses config with defaultValues and no pre-defined settings object.
+				This example only uses config with defaultValues and no pre-defined
+				settings object.
 			</MessageBar>
 			<SettingsComponent
 				config={

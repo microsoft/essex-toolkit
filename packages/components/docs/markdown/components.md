@@ -8,6 +8,7 @@
 
 |  Enumeration | Description |
 |  --- | --- |
+|  [ControlType](./components.controltype.md) | Type of control you'd like rendered for a setting. This uses traditional names but maps to controls available in the Fluent control set. E.g., 'textbox' is a Textfield. |
 |  [CookieConsentCategories](./components.cookieconsentcategories.md) |  |
 
 ## Functions
@@ -40,6 +41,7 @@
 |  [CollapsiblePanelStyles](./components.collapsiblepanelstyles.md) |  |
 |  [ColumnarMenuProps](./components.columnarmenuprops.md) |  |
 |  [ControlledHistogramFilterProps](./components.controlledhistogramfilterprops.md) |  |
+|  [ControlParams](./components.controlparams.md) | These are optional params to supply detailed config for controls that allow it. This could potentially support a wide range of options, but if so should be more strongly typed. |
 |  [EnumButtonBarProps](./components.enumbuttonbarprops.md) |  |
 |  [EnumDropdownProps](./components.enumdropdownprops.md) |  |
 |  [ExpandoProps](./components.expandoprops.md) |  |
@@ -50,6 +52,7 @@
 |  [MultiDropdownProps](./components.multidropdownprops.md) |  |
 |  [NumberSpinButtonProps](./components.numberspinbuttonprops.md) |  |
 |  [SearchBoxProps](./components.searchboxprops.md) |  |
+|  [SettingConfig](./components.settingconfig.md) | Config options for a particular setting, to override default control behaviors. |
 |  [SettingsGroup](./components.settingsgroup.md) | Groupings for settings items. Groups consist of a label and the list of keys of the settings to put in the group. Ungrouped settings will be placed at the top with no group label. |
 |  [SettingsProps](./components.settingsprops.md) |  |
 |  [Sized](./components.sized.md) |  |
@@ -98,5 +101,6 @@
 |  [CookieConsentBannerThemes](./components.cookieconsentbannerthemes.md) | Theme of the cookie consent banner popup that is managed by the wcp script. This sets the theme for the popup only and does not impact the theme of the policy footer or links. The policy footer uses FluentUI so it should pick up the theme from parent FluentUI theme provider. |
 |  [PolicyAndCookieBannerProps](./components.policyandcookiebannerprops.md) | Defaults to { language: navigator.language ?? 'en-US' theme: 'light', onConsentChange: () =<!-- -->&gt; void, links: \[ { name: 'Privacy &amp; Cookies', href: ' https://go.microsoft.com/fwlink/?LinkId=521839', }<!-- -->, { name: 'Terms of Use', href: 'https://go.microsoft.com/fwlink/?LinkID=760869', }<!-- -->, { name: 'Trademarks', href: 'https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/EN-US.aspx', }<!-- -->, { name: 'Contact Us', href: 'https://go.microsoft.com/?linkid=2028325', }<!-- -->, { name: 'Code of Conduct', href: 'https://opensource.microsoft.com/codeofconduct/', }<!-- -->, { name: <code>©️ ${new Date().getFullYear()} Microsoft</code>, href: 'https://www.microsoft.com/en-us/legal/intellectualproperty/copyright', }<!-- -->, \] } |
 |  [PolicyLinkDetails](./components.policylinkdetails.md) |  |
+|  [SettingsConfig](./components.settingsconfig.md) | Map of specific configs for settings. Settings that do not have a config will be auto-configured. |
 |  [Size](./components.size.md) |  |
 

@@ -32,19 +32,21 @@ export const Settings = ({
 		[onChange],
 	)
 	const grouped = useGrouped(parsed, groups)
-	const groupings = useMemo(() => grouped.map((group, i) => {
-		const controls = group.settings.map((entry: any) =>
-			renderControl(entry, handleChange),
-		)
-		return (
-			<div key={`settings-group-${i}`}>
-				{group.separator ? <Separator>{group.label}</Separator> : null}
-				<div style={groupContainerStyle}>
-					{controls}
-				</div>
-			</div>
-		)
-	}), [grouped, handleChange])
+	const groupings = useMemo(
+		() =>
+			grouped.map((group, i) => {
+				const controls = group.settings.map((entry: any) =>
+					renderControl(entry, handleChange),
+				)
+				return (
+					<div key={`settings-group-${i}`}>
+						{group.separator ? <Separator>{group.label}</Separator> : null}
+						<div style={groupContainerStyle}>{controls}</div>
+					</div>
+				)
+			}),
+		[grouped, handleChange],
+	)
 	return <div style={containerStyle}>{groupings}</div>
 }
 

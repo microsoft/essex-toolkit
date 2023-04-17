@@ -4,10 +4,10 @@
 
 ## SettingsProps.settings property
 
-Required object to render into a settings panel. This can be basically anything, but should be flat at the moment, as complex/nest objects are not supported.
+Settings object to render into a settings panel. This can be basically anything, but should be flat at the moment, as complex/nested objects are not supported. Note that this can be undefined if a config is supplied.
 
 <b>Signature:</b>
 
 ```typescript
-settings: any;
+settings?: any;
 ```

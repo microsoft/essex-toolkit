@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-
 export interface SettingsProps {
 	/**
 	 * Settings object to render into a settings panel.

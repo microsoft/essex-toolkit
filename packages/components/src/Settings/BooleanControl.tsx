@@ -30,8 +30,8 @@ export const BooleanControl = ({
 					key={`toggle-${key}`}
 					styles={{
 						root: {
-							marginBottom: 0
-						}
+							marginBottom: 0,
+						},
 					}}
 					label={label}
 					checked={value}
