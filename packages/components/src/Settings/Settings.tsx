@@ -55,7 +55,7 @@ const renderControl = (
 	config: ParsedSettingConfig,
 	onChange: (key: any, value: any) => void,
 ): JSX.Element | null => {
-	const { type } = config
+	const { key, type } = config
 	let Control
 	switch (type) {
 		case 'string':
@@ -71,5 +71,5 @@ const renderControl = (
 			console.warn(`Data type ${type} not supported by settings`)
 			return null
 	}
-	return <Control config={config} onChange={onChange} />
+	return <Control key={`settings-control-${key}`} config={config} onChange={onChange} />
 }

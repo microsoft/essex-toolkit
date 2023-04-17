@@ -18,15 +18,11 @@ export const TextControl = ({
 }: ControlProps): JSX.Element => {
 	const { key, value, type, label, control, params } = config
 	const handleTextChange = useCallback(
-		(_evt: unknown, text?: string | undefined) => {
-			onChange?.(key, text)
-		},
+		(_evt: unknown, text?: string | undefined) => onChange?.(key, text),
 		[key, onChange],
 	)
 	const handleOptionChange = useCallback(
-		(_evt: unknown, option: { text: string | undefined } | undefined) => {
-			onChange?.(key, option?.text)
-		},
+		(_evt: unknown, option: { text: string | undefined } | undefined) => onChange?.(key, option?.text),
 		[key, onChange],
 	)
 	switch (control) {

@@ -20,9 +20,7 @@ export const NumberControl = ({
 }: ControlProps): JSX.Element => {
 	const { key, value, type, label, control, params } = config
 	const handleChange = useCallback(
-		(n?: any) => {
-			onChange?.(key, n)
-		},
+		(n?: any) => onChange?.(key, n),
 		[key, onChange],
 	)
 	switch (control) {
