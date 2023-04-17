@@ -28,6 +28,11 @@ export const BooleanControl = ({
 			return (
 				<Toggle
 					key={`toggle-${key}`}
+					styles={{
+						root: {
+							marginBottom: 0
+						}
+					}}
 					label={label}
 					checked={value}
 					onChange={handleChange}

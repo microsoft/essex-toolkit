@@ -14,7 +14,7 @@ export interface SettingsProps
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [config?](./components.settingsprops.config.md) |  | { \[key: string\]: SettingConfig; } | <i>(Optional)</i> Map of optional config params for individual settings. The key should match the key present in the settings object. |
+|  [config?](./components.settingsprops.config.md) |  | SettingsConfig | <i>(Optional)</i> Map of optional config params for individual settings. The key should match the key present in the settings object. If an item in this config does not exist in the settings, it must use a defaultValue so we can initialize it. |
 |  [groups?](./components.settingsprops.groups.md) |  | [SettingsGroup](./components.settingsgroup.md)<!-- -->\[\] | <i>(Optional)</i> List of optional groups to sort the settings into, with a separator between each. The group is a list of the keys to include, with an optional label for the separator. |
 |  [onChange?](./components.settingsprops.onchange.md) |  | (key: string, value: any) =&gt; void | <i>(Optional)</i> Handler to notify when any of the settings has changed. Callback args will be the key and value that changed. Merging, etc. is up to the consumer. |
 |  [settings](./components.settingsprops.settings.md) |  | any | Required object to render into a settings panel. This can be basically anything, but should be flat at the moment, as complex/nest objects are not supported. |

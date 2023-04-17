@@ -3997,7 +3997,7 @@
         {
           "kind": "Interface",
           "canonicalReference": "@essex/components!SettingsGroup:interface",
-          "docComment": "",
+          "docComment": "/**\n * Groupings for settings items. Groups consist of a label and the list of keys of the settings to put in the group. Ungrouped settings will be placed at the top with no group label.\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -4082,24 +4082,16 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@essex/components!SettingsProps#config:member",
-              "docComment": "/**\n * Map of optional config params for individual settings. The key should match the key present in the settings object.\n */\n",
+              "docComment": "/**\n * Map of optional config params for individual settings. The key should match the key present in the settings object. If an item in this config does not exist in the settings, it must use a defaultValue so we can initialize it.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
                   "text": "config?: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "{\n        [key: string]: "
-                },
-                {
                   "kind": "Reference",
-                  "text": "SettingConfig",
-                  "canonicalReference": "@essex/components!SettingConfig:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n    }"
+                  "text": "SettingsConfig",
+                  "canonicalReference": "@essex/components!SettingsConfig:type"
                 },
                 {
                   "kind": "Content",
@@ -4112,7 +4104,7 @@
               "name": "config",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 4
+                "endIndex": 2
               }
             },
             {

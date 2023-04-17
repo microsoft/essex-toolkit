@@ -410,7 +410,7 @@ export const Settings: ({ settings, config, groups, onChange, }: SettingsProps) 
 
 // Warning: (ae-missing-release-tag) "SettingsGroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface SettingsGroup {
     // (undocumented)
     keys: string[];
@@ -422,9 +422,8 @@ export interface SettingsGroup {
 //
 // @public (undocumented)
 export interface SettingsProps {
-    config?: {
-        [key: string]: SettingConfig;
-    };
+    // Warning: (ae-forgotten-export) The symbol "SettingsConfig" needs to be exported by the entry point index.d.ts
+    config?: SettingsConfig;
     groups?: SettingsGroup[];
     onChange?: (key: string, value: any) => void;
     settings: any;
@@ -658,10 +657,6 @@ export function useToggleProps(props: Partial<IToggleProps>, size?: Size): Parti
 export type WcpConsent = {
     init: (culture: string, placeholderIdOrElement: string | HTMLElement, initCallback?: (err?: Error, siteConsent?: CookieConsentManager) => void, onConsentChanged?: (newConsent: CookieConsent) => void, theme?: CookieConsentBannerThemes, stylesNonce?: string) => void;
 };
-
-// Warnings were encountered during analysis:
-//
-// dist/Settings/Settings.types.d.ts:97:9 - (ae-forgotten-export) The symbol "SettingConfig" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

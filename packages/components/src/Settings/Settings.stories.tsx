@@ -3,9 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { DefaultButton, MessageBar } from '@fluentui/react'
-import { useCallback, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 import { Settings } from './Settings.js'
+import type { SettingsProps } from './Settings.types.js'
 
 const meta = {
 	title: '@essex:components/Settings',
@@ -20,8 +21,10 @@ const basicSettings = {
 	showEdges: true,
 }
 
-const BasicSettingsComponent: React.FC = () => {
-	const [settings, setSettings] = useState(basicSettings)
+// wrap the Settings with an onchange
+const SettingsComponent: React.FC<SettingsProps> = (props) => {
+	const { settings, ...rest } = props
+	const [internal, setSettings] = useState(settings)
 	const handleChange = useCallback(
 		(key: any, value: any) => {
 			const changed = {
@@ -32,6 +35,10 @@ const BasicSettingsComponent: React.FC = () => {
 		},
 		[settings],
 	)
+	return <div style={{border: '1px solid orange', padding: 8, marginTop: 8}}><Settings settings={internal} onChange={handleChange} {...rest} /></div>
+}
+
+const BasicSettingsComponent: React.FC = () => {
 	return (
 		<>
 			<MessageBar>
@@ -46,53 +53,75 @@ const BasicSettingsComponent: React.FC = () => {
   }
   `}</pre>
 			</MessageBar>
-			<Settings settings={settings} onChange={handleChange} />
+			<SettingsComponent settings={basicSettings} />
 		</>
 	)
 }
 
 const AdvancedSettingsComponent: React.FC = () => {
-	const [settings, setSettings] = useState(basicSettings)
-	const handleChange = useCallback(
-		(key: any, value: any) => {
-			const changed = {
-				...settings,
-				[`${key}`]: value,
-			}
-			setSettings(changed)
-		},
-		[settings],
-	)
 	return (
-		<Settings
-			settings={settings}
-			config={
-				{
-					title: {
-						control: 'dropdown',
-						params: { options: ['None', 'Graph', 'Nodes', 'Edges'] },
-					},
-					algorithm: {
-						control: 'radio',
-						params: { options: ['Louvain', 'Leiden'] },
-					},
-					nodeLimit: {
-						control: 'slider',
-						params: {
-							max: 20000,
-							step: 1000,
+		<>
+			<MessageBar>
+				This example shows settings with control types explicitly defined using
+				config.
+			</MessageBar>
+			<SettingsComponent
+				settings={basicSettings}
+				config={
+					{
+						title: {
+							control: 'dropdown',
+							params: { options: ['None', 'Graph', 'Nodes', 'Edges'] },
 						},
-					},
-					showEdges: {
-						control: 'checkbox',
-					},
-				} as any
-			}
-			onChange={handleChange}
-		/>
+						algorithm: {
+							control: 'radio',
+							params: { options: ['Louvain', 'Leiden'] },
+						},
+						nodeLimit: {
+							control: 'slider',
+							params: {
+								max: 20000,
+								step: 1000,
+							},
+						},
+						showEdges: {
+							control: 'checkbox',
+						},
+					} as any
+				}
+			/>
+		</>
 	)
 }
 
+const DefaultSettingsComponent: React.FC = () => {
+	return (
+		<>
+			<MessageBar>
+				This example shows the use of defaultValues for undefined settings, and
+				auto-selecting control types based on options. In this example,
+				&ldquo;greeting&rdquo; is the only defined setting.
+			</MessageBar>
+			<SettingsComponent
+				settings={{
+					greeting: 'Hello and welcome',
+				}}
+				config={
+					{
+						fourItemDropdown: {
+							defaultValue: 'Nodes',
+							params: { options: ['None', 'Graph', 'Nodes', 'Edges'] },
+						},
+						twoItemRadio: {
+							defaultValue: 'Leiden',
+							params: { options: ['Louvain', 'Leiden'] },
+						},
+					} as any
+				}
+			/>
+		</>
+	)
+}
 export const BasicSettingsStory = {
 	render: () => <BasicSettingsComponent />,
 	name: 'Basic Settings',
@@ -103,21 +132,15 @@ export const AdvancedSettingsStory = {
 	name: 'Advanced Settings',
 }
 
+export const DefaultSettingsStory = {
+	render: () => <DefaultSettingsComponent />,
+	name: 'Default Values',
+}
+
 const GroupedPanel: React.FC = () => {
-	const [settings, setSettings] = useState(basicSettings)
-	const handleChange = useCallback(
-		(key: any, value: any) => {
-			const changed = {
-				...settings,
-				[`${key}`]: value,
-			}
-			setSettings(changed)
-		},
-		[settings],
-	)
 	return (
-		<Settings
-			settings={settings}
+		<SettingsComponent
+			settings={basicSettings}
 			groups={[
 				{
 					label: 'Rendering',
@@ -128,7 +151,6 @@ const GroupedPanel: React.FC = () => {
 					keys: ['algorithm'],
 				},
 			]}
-			onChange={handleChange}
 		/>
 	)
 }

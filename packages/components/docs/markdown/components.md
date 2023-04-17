@@ -50,7 +50,7 @@
 |  [MultiDropdownProps](./components.multidropdownprops.md) |  |
 |  [NumberSpinButtonProps](./components.numberspinbuttonprops.md) |  |
 |  [SearchBoxProps](./components.searchboxprops.md) |  |
-|  [SettingsGroup](./components.settingsgroup.md) |  |
+|  [SettingsGroup](./components.settingsgroup.md) | Groupings for settings items. Groups consist of a label and the list of keys of the settings to put in the group. Ungrouped settings will be placed at the top with no group label. |
 |  [SettingsProps](./components.settingsprops.md) |  |
 |  [Sized](./components.sized.md) |  |
 |  [ToggleLinkProps](./components.togglelinkprops.md) |  |

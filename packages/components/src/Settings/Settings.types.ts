@@ -54,12 +54,16 @@ export interface ControlParams {
 export interface SettingConfig {
 	label?: string
 	control?: ControlType
+	defaultValue?: any
 	params?: ControlParams
 }
 
-export interface SettingsI extends SettingConfig {
-	[key: string]: any
-}
+/**
+ * Map of specific configs for settings.
+ * Settings that do not have a config will be auto-configured.
+ */
+export type SettingsConfig = Record<string, SettingConfig>
+
 
 /**
  * Internal full config options for a control.
@@ -76,6 +80,7 @@ export interface SortedSettingsGrouped extends ParsedSettingConfig {
 	separator: boolean
 	settings: any[]
 }
+
 export interface SortedSettings {
 	settings: ParsedSettingConfig[]
 }
@@ -87,6 +92,11 @@ export interface ControlProps {
 	onChange?: (key: string, value: any) => void
 }
 
+/**
+ * Groupings for settings items.
+ * Groups consist of a label and the list of keys of the settings to put in the group.
+ * Ungrouped settings will be placed at the top with no group label.
+ */
 export interface SettingsGroup {
 	keys: string[]
 	label?: string
@@ -102,8 +112,10 @@ export interface SettingsProps {
 	/**
 	 * Map of optional config params for individual settings.
 	 * The key should match the key present in the settings object.
+	 * If an item in this config does not exist in the settings,
+	 * it must use a defaultValue so we can initialize it.
 	 */
-	config?: { [key: string]: SettingConfig }
+	config?: SettingsConfig
 	/**
 	 * List of optional groups to sort the settings into, with a separator between each.
 	 * The group is a list of the keys to include, with an optional label for the separator.
