@@ -22,7 +22,8 @@ export const TextControl = ({
 		[key, onChange],
 	)
 	const handleOptionChange = useCallback(
-		(_evt: unknown, option: { text: string | undefined } | undefined) => onChange?.(key, option?.text),
+		(_evt: unknown, option: { text: string | undefined } | undefined) =>
+			onChange?.(key, option?.text),
 		[key, onChange],
 	)
 	switch (control) {

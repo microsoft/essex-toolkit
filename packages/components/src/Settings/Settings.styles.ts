@@ -15,14 +15,14 @@ export const groupContainerStyle = {
 }
 
 export const toggleStyles = {
-        root: {
-            marginBottom: 0,
-        },
+	root: {
+		marginBottom: 0,
+	},
 }
 
 export const checkboxStyles = {
-    label: {
-        // this is to match the overall label styling of the other controls, which is always bold
-        fontWeight: 'bold',
-    },
+	label: {
+		// this is to match the overall label styling of the other controls, which is always bold
+		fontWeight: 'bold',
+	},
 }

@@ -4,10 +4,10 @@
  */
 import type { IContextualMenuItem } from '@fluentui/react'
 import { ContextualMenuItemType } from '@fluentui/react'
-import type { StoryFn } from '@storybook/react'
 
 import { ColumnarMenu } from './ColumnarMenu.js'
 import type { ColumnarMenuProps } from './ColumnarMenu.types.js'
+import React from 'react'
 
 const items = [
 	{
@@ -52,9 +52,27 @@ const items = [
 	},
 ] as IContextualMenuItem[]
 
+const StoryComponent: React.FC<ColumnarMenuProps> = (args) => {
+	return (
+		<div
+			style={{
+				width: 200,
+				height: 100,
+				padding: 12,
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+				border: '1px solid orange',
+			}}
+		>
+			<ColumnarMenu {...args} />
+		</div>
+	)
+}
+
 const meta = {
 	title: '@essex:components/ColumnarMenu',
-	component: ColumnarMenu,
+	component: StoryComponent,
 	args: {
 		items,
 		buttonStyles: {
@@ -71,48 +89,12 @@ const meta = {
 export default meta
 
 export const Primary = {
-	render: (args: ColumnarMenuProps) => {
-		return (
-			<div
-				style={{
-					width: 200,
-					height: 100,
-					padding: 12,
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-					border: '1px solid orange',
-				}}
-			>
-				<ColumnarMenu {...args} />
-			</div>
-		)
-	},
-
 	args: {
 		text: 'Electronics and furniture list',
 	},
 }
 
 export const Customized = {
-	render: (args: ColumnarMenuProps) => {
-		return (
-			<div
-				style={{
-					width: 200,
-					height: 100,
-					padding: 12,
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-					border: '1px solid orange',
-				}}
-			>
-				<ColumnarMenu {...args} />
-			</div>
-		)
-	},
-
 	args: {
 		text: 'Furniture',
 		buttonProps: {
@@ -146,24 +128,6 @@ export const Customized = {
 }
 
 export const Overflow = {
-	render: (args: ColumnarMenuProps) => {
-		return (
-			<div
-				style={{
-					width: 200,
-					height: 100,
-					padding: 12,
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-					border: '1px solid orange',
-				}}
-			>
-				<ColumnarMenu {...args} />
-			</div>
-		)
-	},
-
 	args: {
 		// demonstrates ellipsis text overflow
 		text: 'ElectronicsAndFurnitureList.csv',
@@ -171,27 +135,18 @@ export const Overflow = {
 }
 
 export const WithButtons = {
-	render: (args: ColumnarMenuProps) => {
-		return (
-			<div
-				style={{
-					width: 200,
-					height: 100,
-					padding: 12,
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-					border: '1px solid orange',
-				}}
-			>
-				<ColumnarMenu {...args} />
-			</div>
-		)
-	},
-
 	args: {
 		text: 'Allows reset',
 		items: [
+			{
+				key: 'select-button',
+				text: 'Select',
+				data: {
+					button: true,
+					bottomDivider: true,
+				},
+				onClick: () => alert('Select clicked'),
+			},
 			{
 				key: 'reset-button',
 				text: 'Reset',

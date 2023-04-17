@@ -71,5 +71,11 @@ const renderControl = (
 			console.warn(`Data type ${type} not supported by settings`)
 			return null
 	}
-	return <Control key={`settings-control-${key}`} config={config} onChange={onChange} />
+	return (
+		<Control
+			key={`settings-control-${key}`}
+			config={config}
+			onChange={onChange}
+		/>
+	)
 }
