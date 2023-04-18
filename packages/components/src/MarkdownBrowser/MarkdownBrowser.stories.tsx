@@ -3,16 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { DefaultButton } from '@fluentui/react'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 import { MarkdownBrowser } from './MarkdownBrowser.js'
 import type { MarkdownBrowserProps } from './MarkdownBrowser.types.js'
-
-const meta = {
-	title: '@essex:components/MarkdownBrowser',
-	component: MarkdownBrowser,
-}
-export default meta
 
 const content = {
 	aggregate: `
@@ -115,9 +109,7 @@ Link to [nested parent](../content.md).
 Link back up to [aggregate](../../aggregate.md)`,
 }
 
-const PrimaryComponent: React.FC<MarkdownBrowserProps> = (
-	args: MarkdownBrowserProps,
-) => {
+const StoryComponent: React.FC<MarkdownBrowserProps> = (args) => {
 	const [home, setHome] = useState<string | undefined>('aggregate')
 
 	return (
@@ -151,46 +143,15 @@ const PrimaryComponent: React.FC<MarkdownBrowserProps> = (
 	)
 }
 
-const CustomizedComponent: React.FC<MarkdownBrowserProps> = (args) => {
-	const [home, setHome] = useState<string | undefined>('aggregate')
-
-	return (
-		<div>
-			<div
-				style={{
-					display: 'flex',
-					gap: 8,
-					marginBottom: 8,
-				}}
-			>
-				<DefaultButton onClick={() => setHome('aggregate')}>
-					aggregate
-				</DefaultButton>
-				<DefaultButton onClick={() => setHome('groupby')}>
-					groupby
-				</DefaultButton>
-				<DefaultButton onClick={() => setHome(undefined)}>clear</DefaultButton>
-			</div>
-			<div
-				style={{
-					width: 600,
-					height: 400,
-					padding: 12,
-					border: '1px solid orange',
-				}}
-			>
-				<MarkdownBrowser {...args} content={content} home={home} />
-			</div>
-		</div>
-	)
+const meta = {
+	title: '@essex:components/MarkdownBrowser',
+	component: StoryComponent,
 }
+export default meta
 
-export const Primary = {
-	render: (args: MarkdownBrowserProps) => <PrimaryComponent {...args} />,
-}
+export const Primary = {}
 
 export const Customized = {
-	render: (args: MarkdownBrowserProps) => <CustomizedComponent {...args} />,
 	args: {
 		styles: {
 			root: {

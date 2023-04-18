@@ -2,9 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { StoryFn } from '@storybook/react'
-
-import type { ClippedGraphProps } from './ClippedGraph.js'
 import { ClippedGraph } from './ClippedGraph.js'
 
 const meta = {

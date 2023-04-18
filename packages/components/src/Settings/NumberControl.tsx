@@ -20,13 +20,11 @@ export const NumberControl = ({
 }: ControlProps): JSX.Element => {
 	const { key, value, type, label, control, params } = config
 	const handleChange = useCallback(
-		(n?: any) => {
-			onChange?.(key, n)
-		},
+		(n?: any) => onChange?.(key, n),
 		[key, onChange],
 	)
 	switch (control) {
-		case ControlType.spinner:
+		case ControlType.Spinner:
 			return (
 				<NumberSpinButton
 					key={`spinner-${key}`}
@@ -39,7 +37,7 @@ export const NumberControl = ({
 					onChange={handleChange}
 				/>
 			)
-		case ControlType.slider:
+		case ControlType.Slider:
 			return (
 				<Slider
 					key={`slider-${key}`}

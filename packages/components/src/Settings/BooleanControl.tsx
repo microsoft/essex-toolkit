@@ -5,6 +5,7 @@
 import { Checkbox, Toggle } from '@fluentui/react'
 import { useCallback } from 'react'
 
+import { checkboxStyles, toggleStyles } from './Settings.styles.js'
 import type { ControlProps } from './Settings.types.js'
 import { ControlType } from './Settings.types.js'
 
@@ -18,32 +19,26 @@ export const BooleanControl = ({
 }: ControlProps): JSX.Element => {
 	const { key, value, type, label, control } = config
 	const handleChange = useCallback(
-		(_evt: unknown, checked?: boolean | undefined) => {
-			onChange?.(key, checked)
-		},
+		(_evt: unknown, checked?: boolean | undefined) => onChange?.(key, checked),
 		[key, onChange],
 	)
 	switch (control) {
-		case ControlType.toggle:
+		case ControlType.Toggle:
 			return (
 				<Toggle
 					key={`toggle-${key}`}
+					styles={toggleStyles}
 					label={label}
 					checked={value}
 					onChange={handleChange}
 					inlineLabel
 				/>
 			)
-		case ControlType.checkbox:
+		case ControlType.Checkbox:
 			return (
 				<Checkbox
 					key={`checkbox-${key}`}
-					styles={{
-						label: {
-							// this is to match the overall label styling of the other controls, which is always bold
-							fontWeight: 'bold',
-						},
-					}}
+					styles={checkboxStyles}
 					label={label}
 					checked={value}
 					onChange={handleChange}

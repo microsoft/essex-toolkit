@@ -158,6 +158,36 @@ export interface ControlledHistogramFilterProps {
     width: number;
 }
 
+// Warning: (ae-missing-release-tag) "ControlParams" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface ControlParams {
+    max?: number;
+    min?: number;
+    options?: string[];
+    step?: number;
+}
+
+// Warning: (ae-missing-release-tag) "ControlType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export enum ControlType {
+    // (undocumented)
+    Checkbox = "checkbox",
+    // (undocumented)
+    Dropdown = "dropdown",
+    // (undocumented)
+    Radio = "radio",
+    // (undocumented)
+    Slider = "slider",
+    // (undocumented)
+    Spinner = "spinner",
+    // (undocumented)
+    Textbox = "textbox",
+    // (undocumented)
+    Toggle = "toggle"
+}
+
 // @public
 export type CookieConsent = Record<CookieConsentCategories, boolean>;
 
@@ -403,14 +433,33 @@ export interface SearchBoxProps {
     placeholder?: string;
 }
 
+// Warning: (ae-missing-release-tag) "SettingConfig" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface SettingConfig {
+    // (undocumented)
+    control?: ControlType;
+    // (undocumented)
+    defaultValue?: any;
+    // (undocumented)
+    label?: string;
+    // (undocumented)
+    params?: ControlParams;
+}
+
 // Warning: (ae-missing-release-tag) "Settings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export const Settings: ({ settings, config, groups, onChange, }: SettingsProps) => JSX.Element;
 
+// Warning: (ae-missing-release-tag) "SettingsConfig" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export type SettingsConfig = Record<string, SettingConfig>;
+
 // Warning: (ae-missing-release-tag) "SettingsGroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface SettingsGroup {
     // (undocumented)
     keys: string[];
@@ -422,12 +471,10 @@ export interface SettingsGroup {
 //
 // @public (undocumented)
 export interface SettingsProps {
-    config?: {
-        [key: string]: SettingConfig;
-    };
+    config?: SettingsConfig;
     groups?: SettingsGroup[];
     onChange?: (key: string, value: any) => void;
-    settings: any;
+    settings?: any;
 }
 
 // Warning: (ae-missing-release-tag) "Size" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -658,10 +705,6 @@ export function useToggleProps(props: Partial<IToggleProps>, size?: Size): Parti
 export type WcpConsent = {
     init: (culture: string, placeholderIdOrElement: string | HTMLElement, initCallback?: (err?: Error, siteConsent?: CookieConsentManager) => void, onConsentChanged?: (newConsent: CookieConsent) => void, theme?: CookieConsentBannerThemes, stylesNonce?: string) => void;
 };
-
-// Warnings were encountered during analysis:
-//
-// dist/Settings/Settings.types.d.ts:97:9 - (ae-forgotten-export) The symbol "SettingConfig" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

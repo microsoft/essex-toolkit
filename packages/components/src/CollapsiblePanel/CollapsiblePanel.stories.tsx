@@ -4,15 +4,23 @@
  */
 import { Toggle } from '@fluentui/react'
 import type { StoryObj } from '@storybook/react'
-import { useCallback, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 import { CollapsiblePanel } from './CollapsiblePanel.js'
 import type { CollapsiblePanelProps } from './CollapsiblePanel.types.js'
 import { CollapsiblePanelContainer } from './CollapsiblePanelContainer.js'
 
+const StoryComponent: React.FC<CollapsiblePanelProps> = (args) => {
+	return (
+		<CollapsiblePanel {...args}>
+			<Lorem />
+		</CollapsiblePanel>
+	)
+}
+
 const meta = {
 	title: '@essex:components/CollapsiblePanel',
-	component: CollapsiblePanel,
+	component: StoryComponent,
 	args: {
 		title: 'Header title',
 	},
@@ -36,25 +44,9 @@ const Lorem = () => (
 	</div>
 )
 
-export const Primary = {
-	render: (args: CollapsiblePanelProps) => {
-		return (
-			<CollapsiblePanel {...args}>
-				<Lorem />
-			</CollapsiblePanel>
-		)
-	},
-}
+export const Primary = {}
 
 export const Customized = {
-	render: (args: CollapsiblePanelProps) => {
-		return (
-			<CollapsiblePanel {...args}>
-				<Lorem />
-			</CollapsiblePanel>
-		)
-	},
-
 	args: {
 		defaultExpanded: true,
 		styles: {
@@ -94,14 +86,6 @@ export const Customized = {
 }
 
 export const Header = {
-	render: (args: CollapsiblePanelProps) => {
-		return (
-			<CollapsiblePanel {...args}>
-				<Lorem />
-			</CollapsiblePanel>
-		)
-	},
-
 	args: {
 		onRenderHeader: () => (
 			<div
@@ -119,23 +103,13 @@ export const Header = {
 			</div>
 		),
 	},
-
 	name: 'Custom onRenderHeader',
 }
 
 export const IconClick = {
-	render: (args: CollapsiblePanelProps) => {
-		return (
-			<CollapsiblePanel {...args}>
-				<Lorem />
-			</CollapsiblePanel>
-		)
-	},
-
 	args: {
 		onHeaderClick: () => alert('header clicked'),
 	},
-
 	name: 'Icon/header separate click',
 }
 
@@ -158,14 +132,6 @@ export const Controlled: StoryObj<typeof CollapsiblePanel> = {
 }
 
 export const NoIcon = {
-	render: (args: CollapsiblePanelProps) => {
-		return (
-			<CollapsiblePanel {...args}>
-				<Lorem />
-			</CollapsiblePanel>
-		)
-	},
-
 	args: {
 		hideIcon: true,
 	},

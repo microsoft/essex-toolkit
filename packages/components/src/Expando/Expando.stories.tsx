@@ -2,14 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { StoryFn } from '@storybook/react'
 
 import { Expando } from './Expando.js'
 import type { ExpandoProps } from './Expando.types.js'
+import React from 'react'
+
+const StoryComponent: React.FC<ExpandoProps> = (args) => {
+	return <Expando {...args}>Here is the child content!</Expando>
+}
 
 const meta = {
 	title: '@essex:components/Expando',
-	component: Expando,
+	component: StoryComponent,
 	args: {
 		label: 'More...',
 		defaultExpanded: false,
@@ -17,17 +21,9 @@ const meta = {
 }
 export default meta
 
-export const Primary = {
-	render: (args: ExpandoProps) => (
-		<Expando {...args}>Here is the child content!</Expando>
-	),
-}
+export const Primary = {}
 
 export const Customized = {
-	render: (args: ExpandoProps) => (
-		<Expando {...args}>Here is the child content!</Expando>
-	),
-
 	args: {
 		styles: {
 			root: {

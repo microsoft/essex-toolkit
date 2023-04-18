@@ -18,19 +18,16 @@ export const TextControl = ({
 }: ControlProps): JSX.Element => {
 	const { key, value, type, label, control, params } = config
 	const handleTextChange = useCallback(
-		(_evt: unknown, text?: string | undefined) => {
-			onChange?.(key, text)
-		},
+		(_evt: unknown, text?: string | undefined) => onChange?.(key, text),
 		[key, onChange],
 	)
 	const handleOptionChange = useCallback(
-		(_evt: unknown, option: { text: string | undefined } | undefined) => {
-			onChange?.(key, option?.text)
-		},
+		(_evt: unknown, option: { text: string | undefined } | undefined) =>
+			onChange?.(key, option?.text),
 		[key, onChange],
 	)
 	switch (control) {
-		case ControlType.textbox:
+		case ControlType.Textbox:
 			return (
 				<TextField
 					key={`textfield-${key}`}
@@ -39,7 +36,7 @@ export const TextControl = ({
 					onChange={handleTextChange}
 				/>
 			)
-		case ControlType.dropdown:
+		case ControlType.Dropdown:
 			if (!params?.options) {
 				throw new Error('Dropdown control type requires list of options')
 			}
@@ -55,7 +52,7 @@ export const TextControl = ({
 					onChange={handleOptionChange}
 				/>
 			)
-		case ControlType.radio:
+		case ControlType.Radio:
 			if (!params?.options) {
 				throw new Error('Radio control type requires list of options')
 			}

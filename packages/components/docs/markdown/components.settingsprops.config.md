@@ -4,12 +4,10 @@
 
 ## SettingsProps.config property
 
-Map of optional config params for individual settings. The key should match the key present in the settings object.
+Map of optional config params for individual settings. The key should match the key present in the settings object. If an item in this config does not exist in the settings, it must use a defaultValue so we can initialize it.
 
 <b>Signature:</b>
 
 ```typescript
-config?: {
-        [key: string]: SettingConfig;
-    };
+config?: SettingsConfig;
 ```
