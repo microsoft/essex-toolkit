@@ -31,6 +31,7 @@ export const Settings = ({
 		(key: string, value: any) => onChange?.(key, value),
 		[onChange],
 	)
+	console.log(parsed)
 	const grouped = useGrouped(parsed, groups)
 	const groupings = useMemo(
 		() =>
@@ -58,18 +59,15 @@ const renderControl = (
 	const { key, type } = config
 	let Control
 	switch (type) {
-		case 'string':
-			Control = TextControl
-			break
 		case 'number':
 			Control = NumberControl
 			break
 		case 'boolean':
 			Control = BooleanControl
 			break
+		// anything else (string/undefined) renders as text
 		default:
-			console.warn(`Data type ${type} not supported by settings`)
-			return null
+			Control = TextControl
 	}
 	return (
 		<Control

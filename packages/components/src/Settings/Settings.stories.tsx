@@ -86,7 +86,7 @@ const AdvancedSettingsComponent: React.FC = () => {
 						},
 						showEdges: {
 							control: 'checkbox',
-						},
+						}
 					} as any
 				}
 			/>
@@ -141,6 +141,7 @@ const DefaultSettingsComponent: React.FC = () => {
 							defaultValue: 'Leiden',
 							params: { options: ['Louvain', 'Leiden'] },
 						},
+						name: {}
 					} as any
 				}
 			/>

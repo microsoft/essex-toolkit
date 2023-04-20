@@ -55,7 +55,11 @@ const selectDefaultControl = (
 	params?: ControlParams,
 ): string | undefined => {
 	switch (type) {
-		case 'string':
+		case 'number':
+			return ControlType.Spinner
+		case 'boolean':
+			return ControlType.Toggle
+		default:
 			if (params?.options) {
 				if (params.options.length < 4) {
 					return ControlType.Radio
@@ -63,10 +67,6 @@ const selectDefaultControl = (
 				return ControlType.Dropdown
 			}
 			return ControlType.Textbox
-		case 'number':
-			return ControlType.Spinner
-		case 'boolean':
-			return ControlType.Toggle
 	}
 }
 
@@ -97,7 +97,7 @@ const parseSettings = (
 		const [key, conf] = cur
 		const setting = settings[key]
 		const value = setting || conf.defaultValue
-		const type = typeof value
+		const type = typeof value || 'string'
 		const entry = {
 			key,
 			value: value,
