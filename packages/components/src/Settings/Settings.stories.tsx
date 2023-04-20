@@ -141,7 +141,16 @@ const DefaultSettingsComponent: React.FC = () => {
 							defaultValue: 'Leiden',
 							params: { options: ['Louvain', 'Leiden'] },
 						},
-						name: {}
+						// empty shows that default of text is displayed
+						name: {},
+						// just a data type allows an undefined value with a specific type
+						age: {
+							type: 'number'
+						},
+						// just a control type
+						month: {
+							control: 'slider'
+						}
 					} as any
 				}
 			/>

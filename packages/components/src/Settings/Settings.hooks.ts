@@ -96,8 +96,8 @@ const parseSettings = (
 	const parsed = Object.entries(combined).reduce((acc: any, cur) => {
 		const [key, conf] = cur
 		const setting = settings[key]
-		const value = setting || conf.defaultValue
-		const type = typeof value || 'string'
+		const value = setting !== undefined ? setting : conf.defaultValue
+		const type = conf.type || typeof value || 'string'
 		const entry = {
 			key,
 			value: value,

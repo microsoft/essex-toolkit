@@ -43,9 +43,26 @@ export type SettingsConfig = Record<string, SettingConfig>
  * to override default control behaviors.
  */
 export interface SettingConfig {
+	/**
+	 * Custom label to use instead of deriving from the setting key.
+	 */
 	label?: string
+	/**
+	 * Explicitly set the data type, overriding typeof.
+	 * Useful when the default value is undefined so type cannot be inferred.
+	 */
+	type?: string
+	/**
+	 * Explicitly set the control to display instead of the default guess.
+	 */
 	control?: ControlType
+	/**
+	 * Default value of the setting.
+	 */
 	defaultValue?: any
+	/**
+	 * Deeper params for controls that may need extra config (e.g., numeric bounds).
+	 */
 	params?: ControlParams
 }
 

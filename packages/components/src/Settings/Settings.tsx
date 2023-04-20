@@ -31,7 +31,6 @@ export const Settings = ({
 		(key: string, value: any) => onChange?.(key, value),
 		[onChange],
 	)
-	console.log(parsed)
 	const grouped = useGrouped(parsed, groups)
 	const groupings = useMemo(
 		() =>
@@ -56,18 +55,14 @@ const renderControl = (
 	config: ParsedSettingConfig,
 	onChange: (key: any, value: any) => void,
 ): JSX.Element | null => {
-	const { key, type } = config
+	const { key, type, control } = config
 	let Control
-	switch (type) {
-		case 'number':
-			Control = NumberControl
-			break
-		case 'boolean':
-			Control = BooleanControl
-			break
-		// anything else (string/undefined) renders as text
-		default:
-			Control = TextControl
+	if (control === 'spinner' || control === 'slider' || type === 'number') {
+		Control = NumberControl
+	} else if (control === 'checkbox' || control === 'toggle' || type === 'boolean') {
+		Control = BooleanControl
+	} else {
+		Control = TextControl
 	}
 	return (
 		<Control
