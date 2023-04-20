@@ -4,6 +4,8 @@
 
 ## SettingConfig.control property
 
+Explicitly set the control to display instead of the default guess.
+
 <b>Signature:</b>
 
 ```typescript

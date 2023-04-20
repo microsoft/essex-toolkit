@@ -4263,7 +4263,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@essex/components!SettingConfig#control:member",
-              "docComment": "",
+              "docComment": "/**\n * Explicitly set the control to display instead of the default guess.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4291,7 +4291,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@essex/components!SettingConfig#defaultValue:member",
-              "docComment": "",
+              "docComment": "/**\n * Default value of the setting.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4318,7 +4318,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@essex/components!SettingConfig#label:member",
-              "docComment": "",
+              "docComment": "/**\n * Custom label to use instead of deriving from the setting key.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4345,7 +4345,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@essex/components!SettingConfig#params:member",
-              "docComment": "",
+              "docComment": "/**\n * Deeper params for controls that may need extra config (e.g., numeric bounds).\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4365,6 +4365,33 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "params",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/components!SettingConfig#type:member",
+              "docComment": "/**\n * Explicitly set the data type, overriding typeof. Useful when the default value is undefined so type cannot be inferred.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "type",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

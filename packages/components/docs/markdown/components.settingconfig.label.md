@@ -4,6 +4,8 @@
 
 ## SettingConfig.label property
 
+Custom label to use instead of deriving from the setting key.
+
 <b>Signature:</b>
 
 ```typescript

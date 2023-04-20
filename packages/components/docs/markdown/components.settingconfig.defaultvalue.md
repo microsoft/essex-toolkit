@@ -4,6 +4,8 @@
 
 ## SettingConfig.defaultValue property
 
+Default value of the setting.
+
 <b>Signature:</b>
 
 ```typescript

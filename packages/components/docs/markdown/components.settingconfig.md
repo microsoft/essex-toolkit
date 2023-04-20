@@ -16,8 +16,9 @@ export interface SettingConfig
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [control?](./components.settingconfig.control.md) |  | [ControlType](./components.controltype.md) | <i>(Optional)</i> |
-|  [defaultValue?](./components.settingconfig.defaultvalue.md) |  | any | <i>(Optional)</i> |
-|  [label?](./components.settingconfig.label.md) |  | string | <i>(Optional)</i> |
-|  [params?](./components.settingconfig.params.md) |  | [ControlParams](./components.controlparams.md) | <i>(Optional)</i> |
+|  [control?](./components.settingconfig.control.md) |  | [ControlType](./components.controltype.md) | <i>(Optional)</i> Explicitly set the control to display instead of the default guess. |
+|  [defaultValue?](./components.settingconfig.defaultvalue.md) |  | any | <i>(Optional)</i> Default value of the setting. |
+|  [label?](./components.settingconfig.label.md) |  | string | <i>(Optional)</i> Custom label to use instead of deriving from the setting key. |
+|  [params?](./components.settingconfig.params.md) |  | [ControlParams](./components.controlparams.md) | <i>(Optional)</i> Deeper params for controls that may need extra config (e.g., numeric bounds). |
+|  [type?](./components.settingconfig.type.md) |  | string | <i>(Optional)</i> Explicitly set the data type, overriding typeof. Useful when the default value is undefined so type cannot be inferred. |
 
