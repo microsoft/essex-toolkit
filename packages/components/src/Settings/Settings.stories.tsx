@@ -6,12 +6,7 @@ import { DefaultButton, MessageBar } from '@fluentui/react'
 import React, { useCallback, useState } from 'react'
 
 import { Settings } from './Settings.js'
-import type { SettingsProps } from './Settings.types.js'
-
-const meta = {
-	title: '@essex:components/Settings',
-}
-export default meta
+import { ControlType, SettingsProps } from './Settings.types.js'
 
 // cover the three basic data types
 const basicSettings = {
@@ -19,7 +14,7 @@ const basicSettings = {
 	algorithm: 'Louvain',
 	nodeLimit: 10000,
 	showEdges: true,
-	metrics: ['centrality', 'weight']
+	metrics: ['centrality', 'weight'],
 }
 
 // wrap the Settings with an onchange
@@ -33,12 +28,19 @@ const SettingsComponent: React.FC<SettingsProps> = (props) => {
 			[`${key}`]: value,
 		}))
 	}, [])
+	console.log('current settings', internal)
 	return (
 		<div style={{ border: '1px solid orange', padding: 8, marginTop: 8 }}>
 			<Settings settings={internal} onChange={handleChange} {...rest} />
 		</div>
 	)
 }
+
+const meta = {
+	title: '@essex:components/Settings',
+	component: SettingsComponent,
+}
+export default meta
 
 const BasicSettingsComponent: React.FC = () => {
 	return (
@@ -156,9 +158,9 @@ const DefaultSettingsComponent: React.FC = () => {
 						metrics: {
 							type: 'array',
 							params: {
-								options: ['centrality', 'weight']
-							}
-						}
+								options: ['centrality', 'weight'],
+							},
+						},
 					} as any
 				}
 			/>
@@ -252,4 +254,84 @@ export const GroupedSettingsStory = {
 export const ContextSettingsStory = {
 	render: () => <ContextSettingComponent />,
 	name: 'Context Menu Settings',
+}
+
+export const TextControlStory = {
+	name: 'TextControl',
+	args: {
+		config: {
+			textbox: {
+				defaultValue: 'text',
+			},
+			dropdown: {
+				defaultValue: 'two',
+				params: {
+					options: ['one', 'two', 'three', 'four', 'five'],
+				},
+			},
+			radio: {
+				defaultValue: 'two',
+				params: {
+					options: ['one', 'two', 'three'],
+				},
+			},
+		},
+	},
+}
+
+export const NumberControlStory = {
+	name: 'NumberControl',
+	args: {
+		config: {
+			spinner: {
+				defaultValue: 1,
+			},
+			slider: {
+				defaultValue: 4,
+				control: ControlType.Slider,
+				params: {
+					min: 1,
+					max: 5,
+				},
+			},
+		},
+	},
+}
+
+export const BooleanControlStory = {
+	name: 'BooleanControl',
+	args: {
+		config: {
+			checkbox: {
+				defaultValue: true,
+				control: ControlType.Checkbox,
+			},
+			toggle: {
+				defaultValue: false,
+			},
+		},
+	},
+}
+
+export const ArrayControlStory = {
+	name: 'ArrayControl',
+	args: {
+		config: {
+			textbox: {
+				defaultValue: ['text'],
+			},
+			dropdown: {
+				defaultValue: ['two'],
+				params: {
+					options: ['one', 'two', 'three', 'four', 'five'],
+				},
+			},
+			radio: {
+				defaultValue: ['two'],
+				params: {
+					options: ['one', 'two', 'three'],
+				},
+			},
+		},
+	},
 }

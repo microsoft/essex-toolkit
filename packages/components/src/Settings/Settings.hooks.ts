@@ -11,10 +11,9 @@ import type {
 	SettingsConfig,
 	SettingsGroup,
 	SortedSettings,
-	SortedSettingsGrouped} from './Settings.types.js';
-import {
- ControlType, 
-	DataType} from './Settings.types.js'
+	SortedSettingsGrouped,
+} from './Settings.types.js'
+import { ControlType, DataType } from './Settings.types.js'
 import { isArray } from 'lodash-es'
 
 /**

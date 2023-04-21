@@ -30,5 +30,5 @@ export const checkboxStyles = {
 export const checkboxesStyle = {
 	display: 'flex',
 	flexDirection: 'column' as const,
-	gap: 8
+	gap: 12,
 }
