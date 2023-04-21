@@ -9,5 +9,5 @@ Explicitly set the data type, overriding typeof. Useful when the default value i
 <b>Signature:</b>
 
 ```typescript
-type?: string;
+type?: DataType;
 ```

@@ -441,7 +441,8 @@ export interface SettingConfig {
     defaultValue?: any;
     label?: string;
     params?: ControlParams;
-    type?: string;
+    // Warning: (ae-forgotten-export) The symbol "DataType" needs to be exported by the entry point index.d.ts
+    type?: DataType;
 }
 
 // Warning: (ae-missing-release-tag) "Settings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

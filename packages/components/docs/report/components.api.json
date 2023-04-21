@@ -4380,8 +4380,9 @@
                   "text": "type?: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string"
+                  "kind": "Reference",
+                  "text": "DataType",
+                  "canonicalReference": "@essex/components!DataType:enum"
                 },
                 {
                   "kind": "Content",
