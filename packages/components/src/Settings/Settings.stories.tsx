@@ -86,7 +86,7 @@ const AdvancedSettingsComponent: React.FC = () => {
 						},
 						showEdges: {
 							control: 'checkbox',
-						}
+						},
 					} as any
 				}
 			/>
@@ -145,12 +145,12 @@ const DefaultSettingsComponent: React.FC = () => {
 						name: {},
 						// just a data type allows an undefined value with a specific type
 						age: {
-							type: 'number'
+							type: 'number',
 						},
 						// just a control type
 						month: {
-							control: 'slider'
-						}
+							control: 'slider',
+						},
 					} as any
 				}
 			/>

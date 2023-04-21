@@ -59,7 +59,11 @@ const renderControl = (
 	let Control
 	if (control === 'spinner' || control === 'slider' || type === 'number') {
 		Control = NumberControl
-	} else if (control === 'checkbox' || control === 'toggle' || type === 'boolean') {
+	} else if (
+		control === 'checkbox' ||
+		control === 'toggle' ||
+		type === 'boolean'
+	) {
 		Control = BooleanControl
 	} else {
 		Control = TextControl
