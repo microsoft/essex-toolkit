@@ -1,3 +1,3 @@
 releases:
-  "@essex/components": patch
+  "@essex/components": minor
   essex-toolkit-stories: patch
