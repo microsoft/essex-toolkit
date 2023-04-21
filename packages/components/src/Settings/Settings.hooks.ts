@@ -4,17 +4,17 @@
  */
 import { useMemo } from 'react'
 
-import {
+import type {
 	ControlParams,
-	DataType,
 	ParsedSettingConfig,
 	SettingConfig,
 	SettingsConfig,
 	SettingsGroup,
 	SortedSettings,
-	SortedSettingsGrouped,
-} from './Settings.types.js'
-import { ControlType } from './Settings.types.js'
+	SortedSettingsGrouped} from './Settings.types.js';
+import {
+ ControlType, 
+	DataType} from './Settings.types.js'
 import { isArray } from 'lodash-es'
 
 /**
@@ -61,6 +61,14 @@ const selectDefaultControl = (
 			return ControlType.Spinner
 		case DataType.Boolean:
 			return ControlType.Toggle
+		case DataType.Array:
+			if (params?.options) {
+				if (params.options.length < 4) {
+					return ControlType.Checkbox
+				}
+				return ControlType.Dropdown
+			}
+			return ControlType.Textbox
 		default:
 			if (params?.options) {
 				if (params.options.length < 4) {
@@ -114,8 +122,9 @@ const parseSettings = (
 }
 
 const guessType = (value: any, conf: SettingConfig): DataType => {
-	if (conf.type !== undefined) {
-		return conf.type
+	const { type, control } = conf
+	if (type !== undefined) {
+		return type
 	}
 	if (isArray(value)) {
 		return DataType.Array
@@ -123,7 +132,17 @@ const guessType = (value: any, conf: SettingConfig): DataType => {
 	if (value !== undefined) {
 		return typeof value as DataType
 	}
-	return DataType.String
+	// if we have no value but the user has indicated a control type, key on that as a fallback
+	switch (control) {
+		case ControlType.Checkbox:
+		case ControlType.Toggle:
+			return DataType.Boolean
+		case ControlType.Spinner:
+		case ControlType.Slider:
+			return DataType.Number
+		default:
+			return DataType.String
+	}
 }
 
 const sortIntoGroups = (

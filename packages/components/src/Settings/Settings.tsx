@@ -5,11 +5,13 @@
 import { Separator } from '@fluentui/react'
 import { useCallback, useMemo } from 'react'
 
+import { ArrayControl } from './ArrayControl.js'
 import { BooleanControl } from './BooleanControl.js'
 import { NumberControl } from './NumberControl.js'
 import { useGrouped, useParsedSettings } from './Settings.hooks.js'
 import { containerStyle, groupContainerStyle } from './Settings.styles.js'
-import { ControlType, DataType, ParsedSettingConfig, SettingsProps } from './Settings.types.js'
+import type { ParsedSettingConfig, SettingsProps } from './Settings.types.js';
+import { ControlType, DataType } from './Settings.types.js'
 import { TextControl } from './TextControl.js'
 
 /**
@@ -57,14 +59,14 @@ const renderControl = (
 ): JSX.Element | null => {
 	const { key, type, control } = config
 	let Control
-	if (control === ControlType.Spinner || control === ControlType.Slider || type === DataType.Number) {
+	if (type === DataType.Number) {
 		Control = NumberControl
 	} else if (
-		control === ControlType.Checkbox ||
-		control === ControlType.Toggle ||
 		type === DataType.Boolean
 	) {
 		Control = BooleanControl
+	} else if (type === DataType.Array) {
+		Control = ArrayControl
 	} else {
 		Control = TextControl
 	}

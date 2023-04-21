@@ -2,29 +2,46 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ChoiceGroup, Dropdown, TextField } from '@fluentui/react'
+import { Checkbox, Dropdown, Label, TextField } from '@fluentui/react'
 import { useCallback } from 'react'
 
+import { checkboxesStyle } from './Settings.styles.js'
 import type { ControlProps } from './Settings.types.js'
 import { ControlType } from './Settings.types.js'
 
 /**
- * TextControl creates either thematic themed TextField, Dropdown, or ChoiceGroup
+ * ArrayControl creates either thematic themed Multi-select Dropdown or a list of Checkboxes
  * as a Fluent component based on config options
  */
-export const TextControl = ({
+export const ArrayControl = ({
 	config,
 	onChange,
 }: ControlProps): JSX.Element => {
 	const { key, value, type, label, control, params } = config
 	const handleTextChange = useCallback(
-		(_evt: unknown, text?: string | undefined) => onChange?.(key, text),
+		(_evt: unknown, text?: string | undefined) => onChange?.(key, text?.split(',')),
 		[key, onChange],
 	)
 	const handleOptionChange = useCallback(
 		(_evt: unknown, option: { text: string | undefined } | undefined) =>
 			onChange?.(key, option?.text),
 		[key, onChange],
+	)
+	const handleCheckChange = useCallback(
+		(val: any, checked?: boolean) => {
+			if (onChange) {
+				if (value) {
+					if (checked) {
+						onChange(key, [...value, val])
+					} else {
+						onChange(key, value.filter((v: any) => v!== val))
+					}	
+				} else {
+					onChange(key, [val])
+				}
+			}
+		},
+		[key, value, onChange],
 	)
 	switch (control) {
 		case ControlType.Textbox:
@@ -44,7 +61,7 @@ export const TextControl = ({
 				<Dropdown
 					key={`dropdown-${key}`}
 					label={label}
-					selectedKey={value}
+					selectedKeys={value}
 					options={params.options.map((opt) => ({
 						key: opt,
 						text: opt,
@@ -52,21 +69,22 @@ export const TextControl = ({
 					onChange={handleOptionChange}
 				/>
 			)
-		case ControlType.Radio:
+		case ControlType.Checkbox:
 			if (!params?.options) {
-				throw new Error('Radio control type requires list of options')
+				throw new Error('Checkbox list control type requires list of options')
 			}
 			return (
-				<ChoiceGroup
-					key={`radio-${key}`}
-					label={label}
-					selectedKey={value}
-					options={params?.options.map((opt) => ({
-						key: opt,
-						text: opt,
-					}))}
-					onChange={handleOptionChange}
-				/>
+				<div style={checkboxesStyle}>
+					<Label>{label}</Label>
+					{params.options.map(opt => (
+					<Checkbox
+					key={`checkbox-${key}-${opt}`}
+					label={opt}
+					checked={!!value?.find((v: any) => v === opt)}
+					onChange={(_e, chk) => handleCheckChange(opt, chk)}
+				/>))}
+				</div>
+				
 			)
 		default:
 			throw new Error(

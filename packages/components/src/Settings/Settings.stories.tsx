@@ -27,6 +27,7 @@ const SettingsComponent: React.FC<SettingsProps> = (props) => {
 	const { settings, ...rest } = props
 	const [internal, setSettings] = useState(settings)
 	const handleChange = useCallback((key: any, value: any) => {
+		console.log(`setting changed: '${key}': '${value}'`)
 		setSettings((prev: any) => ({
 			...prev,
 			[`${key}`]: value,
@@ -152,6 +153,12 @@ const DefaultSettingsComponent: React.FC = () => {
 						month: {
 							control: 'slider',
 						},
+						metrics: {
+							type: 'array',
+							params: {
+								options: ['centrality', 'weight']
+							}
+						}
 					} as any
 				}
 			/>
