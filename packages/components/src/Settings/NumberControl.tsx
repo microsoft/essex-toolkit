@@ -29,7 +29,7 @@ export const NumberControl = ({
 				<NumberSpinButton
 					key={`spinner-${key}`}
 					label={label || ''}
-					value={value}
+					value={value === undefined ? '' : value}
 					labelPosition={Position.top}
 					incrementButtonAriaLabel={`increment ${JSON.stringify(label)}`}
 					decrementButtonAriaLabel={`decrement ${JSON.stringify(label)}`}
@@ -42,7 +42,7 @@ export const NumberControl = ({
 				<Slider
 					key={`slider-${key}`}
 					label={label}
-					value={value}
+					value={value === undefined ? '' : value}
 					{...params}
 					onChange={handleChange}
 				/>

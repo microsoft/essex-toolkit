@@ -13,7 +13,8 @@ import type {
 	SortedSettings,
 	SortedSettingsGrouped,
 } from './Settings.types.js'
-import { ControlType } from './Settings.types.js'
+import { ControlType, DataType } from './Settings.types.js'
+import { isArray } from 'lodash-es'
 
 /**
  * Sorts through settings to determine control type, etc. for each one.
@@ -51,11 +52,23 @@ const keyToLabel = (str: string): string => {
 }
 
 const selectDefaultControl = (
-	type: string,
+	type: DataType,
 	params?: ControlParams,
 ): string | undefined => {
 	switch (type) {
-		case 'string':
+		case DataType.Number:
+			return ControlType.Spinner
+		case DataType.Boolean:
+			return ControlType.Toggle
+		case DataType.Array:
+			if (params?.options) {
+				if (params.options.length < 4) {
+					return ControlType.Checkbox
+				}
+				return ControlType.Dropdown
+			}
+			return ControlType.Textbox
+		default:
 			if (params?.options) {
 				if (params.options.length < 4) {
 					return ControlType.Radio
@@ -63,10 +76,6 @@ const selectDefaultControl = (
 				return ControlType.Dropdown
 			}
 			return ControlType.Textbox
-		case 'number':
-			return ControlType.Spinner
-		case 'boolean':
-			return ControlType.Toggle
 	}
 }
 
@@ -96,8 +105,8 @@ const parseSettings = (
 	const parsed = Object.entries(combined).reduce((acc: any, cur) => {
 		const [key, conf] = cur
 		const setting = settings[key]
-		const value = setting || conf.defaultValue
-		const type = typeof value
+		const value = setting !== undefined ? setting : conf.defaultValue
+		const type = guessType(value, conf)
 		const entry = {
 			key,
 			value: value,
@@ -109,6 +118,30 @@ const parseSettings = (
 		return [...acc, entry]
 	}, [])
 	return parsed
+}
+
+const guessType = (value: any, conf: SettingConfig): DataType => {
+	const { type, control } = conf
+	if (type !== undefined) {
+		return type
+	}
+	if (isArray(value)) {
+		return DataType.Array
+	}
+	if (value !== undefined) {
+		return typeof value as DataType
+	}
+	// if we have no value but the user has indicated a control type, key on that as a fallback
+	switch (control) {
+		case ControlType.Checkbox:
+		case ControlType.Toggle:
+			return DataType.Boolean
+		case ControlType.Spinner:
+		case ControlType.Slider:
+			return DataType.Number
+		default:
+			return DataType.String
+	}
 }
 
 const sortIntoGroups = (

@@ -5,11 +5,13 @@
 import { Separator } from '@fluentui/react'
 import { useCallback, useMemo } from 'react'
 
+import { ArrayControl } from './ArrayControl.js'
 import { BooleanControl } from './BooleanControl.js'
 import { NumberControl } from './NumberControl.js'
 import { useGrouped, useParsedSettings } from './Settings.hooks.js'
 import { containerStyle, groupContainerStyle } from './Settings.styles.js'
 import type { ParsedSettingConfig, SettingsProps } from './Settings.types.js'
+import { ControlType, DataType } from './Settings.types.js'
 import { TextControl } from './TextControl.js'
 
 /**
@@ -55,21 +57,16 @@ const renderControl = (
 	config: ParsedSettingConfig,
 	onChange: (key: any, value: any) => void,
 ): JSX.Element | null => {
-	const { key, type } = config
+	const { key, type, control } = config
 	let Control
-	switch (type) {
-		case 'string':
-			Control = TextControl
-			break
-		case 'number':
-			Control = NumberControl
-			break
-		case 'boolean':
-			Control = BooleanControl
-			break
-		default:
-			console.warn(`Data type ${type} not supported by settings`)
-			return null
+	if (type === DataType.Number) {
+		Control = NumberControl
+	} else if (type === DataType.Boolean) {
+		Control = BooleanControl
+	} else if (type === DataType.Array) {
+		Control = ArrayControl
+	} else {
+		Control = TextControl
 	}
 	return (
 		<Control

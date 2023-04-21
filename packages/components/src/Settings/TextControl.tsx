@@ -44,10 +44,10 @@ export const TextControl = ({
 				<Dropdown
 					key={`dropdown-${key}`}
 					label={label}
+					selectedKey={value}
 					options={params.options.map((opt) => ({
 						key: opt,
 						text: opt,
-						selected: opt === value,
 					}))}
 					onChange={handleOptionChange}
 				/>

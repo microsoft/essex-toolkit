@@ -4,6 +4,8 @@
 
 ## SettingConfig.params property
 
+Deeper params for controls that may need extra config (e.g., numeric bounds).
+
 <b>Signature:</b>
 
 ```typescript

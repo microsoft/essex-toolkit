@@ -43,9 +43,26 @@ export type SettingsConfig = Record<string, SettingConfig>
  * to override default control behaviors.
  */
 export interface SettingConfig {
+	/**
+	 * Custom label to use instead of deriving from the setting key.
+	 */
 	label?: string
+	/**
+	 * Explicitly set the data type, overriding typeof.
+	 * Useful when the default value is undefined so type cannot be inferred.
+	 */
+	type?: DataType
+	/**
+	 * Explicitly set the control to display instead of the default guess.
+	 */
 	control?: ControlType
+	/**
+	 * Default value of the setting.
+	 */
 	defaultValue?: any
+	/**
+	 * Deeper params for controls that may need extra config (e.g., numeric bounds).
+	 */
 	params?: ControlParams
 }
 
@@ -72,6 +89,13 @@ export interface ControlParams {
 	 * List of selectable options, e.g., for dropdown or radio.
 	 */
 	options?: string[]
+}
+
+export enum DataType {
+	String = 'string',
+	Number = 'number',
+	Boolean = 'boolean',
+	Array = 'array',
 }
 
 /**
@@ -109,7 +133,6 @@ export interface SettingsGroup {
 export interface ParsedSettingConfig extends SettingConfig {
 	key: string
 	value: any
-	type: string
 }
 
 export interface SortedSettingsGrouped extends ParsedSettingConfig {
