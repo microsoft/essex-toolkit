@@ -4,17 +4,16 @@
  */
 import {
 	Checkbox,
-	Dropdown,
-	IDropdownOption,
+	type IDropdownOption,
 	Label,
 	TextField,
 } from '@fluentui/react'
 import { useCallback } from 'react'
 
+import { MultiDropdown } from '../MultiDropdown/MultiDropdown.js'
 import { checkboxesStyle } from './Settings.styles.js'
 import type { ControlProps } from './Settings.types.js'
 import { ControlType } from './Settings.types.js'
-import { MultiDropdown } from '../MultiDropdown/MultiDropdown.js'
 
 /**
  * ArrayControl creates either thematic themed Multi-select Dropdown or a list of Checkboxes

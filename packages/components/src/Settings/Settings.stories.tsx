@@ -6,7 +6,7 @@ import { DefaultButton, MessageBar } from '@fluentui/react'
 import React, { useCallback, useState } from 'react'
 
 import { Settings } from './Settings.js'
-import { ControlType, SettingsProps } from './Settings.types.js'
+import { ControlType, DataType, type SettingsProps } from './Settings.types.js'
 
 // cover the three basic data types
 const basicSettings = {
@@ -74,22 +74,22 @@ const AdvancedSettingsComponent: React.FC = () => {
 				config={
 					{
 						title: {
-							control: 'dropdown',
+							control: ControlType.Dropdown,
 							params: { options: ['None', 'Graph', 'Nodes', 'Edges'] },
 						},
 						algorithm: {
-							control: 'radio',
+							control: ControlType.Radio,
 							params: { options: ['Louvain', 'Leiden'] },
 						},
 						nodeLimit: {
-							control: 'slider',
+							control: ControlType.Slider,
 							params: {
 								max: 20000,
 								step: 1000,
 							},
 						},
 						showEdges: {
-							control: 'checkbox',
+							control: ControlType.Checkbox,
 						},
 					} as any
 				}
@@ -149,14 +149,14 @@ const DefaultSettingsComponent: React.FC = () => {
 						name: {},
 						// just a data type allows an undefined value with a specific type
 						age: {
-							type: 'number',
+							type: DataType.Number,
 						},
 						// just a control type
 						month: {
-							control: 'slider',
+							control: ControlType.Slider,
 						},
 						metrics: {
-							type: 'array',
+							type: DataType.Array,
 							params: {
 								options: ['centrality', 'weight'],
 							},
