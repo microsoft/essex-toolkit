@@ -19,6 +19,7 @@ const basicSettings = {
 	algorithm: 'Louvain',
 	nodeLimit: 10000,
 	showEdges: true,
+	metrics: ['centrality', 'weight']
 }
 
 // wrap the Settings with an onchange

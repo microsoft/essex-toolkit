@@ -51,7 +51,7 @@ export interface SettingConfig {
 	 * Explicitly set the data type, overriding typeof.
 	 * Useful when the default value is undefined so type cannot be inferred.
 	 */
-	type?: string
+	type?: DataType
 	/**
 	 * Explicitly set the control to display instead of the default guess.
 	 */
@@ -91,6 +91,13 @@ export interface ControlParams {
 	options?: string[]
 }
 
+export enum DataType {
+	String = 'string',
+	Number = 'number',
+	Boolean = 'boolean',
+	Array = 'array'
+}
+
 /**
  * Type of control you'd like rendered for a setting.
  * This uses traditional names but maps to controls available in the Fluent control set.
@@ -126,7 +133,6 @@ export interface SettingsGroup {
 export interface ParsedSettingConfig extends SettingConfig {
 	key: string
 	value: any
-	type: string
 }
 
 export interface SortedSettingsGrouped extends ParsedSettingConfig {

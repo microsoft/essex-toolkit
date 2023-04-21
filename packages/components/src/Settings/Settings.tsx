@@ -9,7 +9,7 @@ import { BooleanControl } from './BooleanControl.js'
 import { NumberControl } from './NumberControl.js'
 import { useGrouped, useParsedSettings } from './Settings.hooks.js'
 import { containerStyle, groupContainerStyle } from './Settings.styles.js'
-import type { ParsedSettingConfig, SettingsProps } from './Settings.types.js'
+import { ControlType, DataType, ParsedSettingConfig, SettingsProps } from './Settings.types.js'
 import { TextControl } from './TextControl.js'
 
 /**
@@ -57,12 +57,12 @@ const renderControl = (
 ): JSX.Element | null => {
 	const { key, type, control } = config
 	let Control
-	if (control === 'spinner' || control === 'slider' || type === 'number') {
+	if (control === ControlType.Spinner || control === ControlType.Slider || type === DataType.Number) {
 		Control = NumberControl
 	} else if (
-		control === 'checkbox' ||
-		control === 'toggle' ||
-		type === 'boolean'
+		control === ControlType.Checkbox ||
+		control === ControlType.Toggle ||
+		type === DataType.Boolean
 	) {
 		Control = BooleanControl
 	} else {

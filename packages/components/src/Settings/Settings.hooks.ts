@@ -4,8 +4,9 @@
  */
 import { useMemo } from 'react'
 
-import type {
+import {
 	ControlParams,
+	DataType,
 	ParsedSettingConfig,
 	SettingConfig,
 	SettingsConfig,
@@ -14,6 +15,7 @@ import type {
 	SortedSettingsGrouped,
 } from './Settings.types.js'
 import { ControlType } from './Settings.types.js'
+import { isArray } from 'lodash-es'
 
 /**
  * Sorts through settings to determine control type, etc. for each one.
@@ -51,13 +53,13 @@ const keyToLabel = (str: string): string => {
 }
 
 const selectDefaultControl = (
-	type: string,
+	type: DataType,
 	params?: ControlParams,
 ): string | undefined => {
 	switch (type) {
-		case 'number':
+		case DataType.Number:
 			return ControlType.Spinner
-		case 'boolean':
+		case DataType.Boolean:
 			return ControlType.Toggle
 		default:
 			if (params?.options) {
@@ -97,7 +99,7 @@ const parseSettings = (
 		const [key, conf] = cur
 		const setting = settings[key]
 		const value = setting !== undefined ? setting : conf.defaultValue
-		const type = conf.type || typeof value || 'string'
+		const type = guessType(value, conf)
 		const entry = {
 			key,
 			value: value,
@@ -109,6 +111,19 @@ const parseSettings = (
 		return [...acc, entry]
 	}, [])
 	return parsed
+}
+
+const guessType = (value: any, conf: SettingConfig): DataType => {
+	if (conf.type !== undefined) {
+		return conf.type
+	}
+	if (isArray(value)) {
+		return DataType.Array
+	}
+	if (value !== undefined) {
+		return typeof value as DataType
+	}
+	return DataType.String
 }
 
 const sortIntoGroups = (
