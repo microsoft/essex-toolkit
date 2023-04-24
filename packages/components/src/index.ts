@@ -35,6 +35,7 @@ export type {
 	SettingConfig,
 	ControlParams,
 	ControlType,
+	DataType,
 	SettingsGroup,
 } from './Settings/Settings.types.js'
 export * from './ToggleLink/ToggleLink.js'
