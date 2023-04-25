@@ -10,6 +10,7 @@
 |  --- | --- |
 |  [ControlType](./components.controltype.md) | Type of control you'd like rendered for a setting. This uses traditional names but maps to controls available in the Fluent control set. E.g., 'textbox' is a Textfield. |
 |  [CookieConsentCategories](./components.cookieconsentcategories.md) |  |
+|  [DataType](./components.datatype.md) |  |
 
 ## Functions
 

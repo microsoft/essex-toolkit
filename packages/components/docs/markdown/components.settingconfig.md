@@ -20,5 +20,5 @@ export interface SettingConfig
 |  [defaultValue?](./components.settingconfig.defaultvalue.md) |  | any | <i>(Optional)</i> Default value of the setting. |
 |  [label?](./components.settingconfig.label.md) |  | string | <i>(Optional)</i> Custom label to use instead of deriving from the setting key. |
 |  [params?](./components.settingconfig.params.md) |  | [ControlParams](./components.controlparams.md) | <i>(Optional)</i> Deeper params for controls that may need extra config (e.g., numeric bounds). |
-|  [type?](./components.settingconfig.type.md) |  | DataType | <i>(Optional)</i> Explicitly set the data type, overriding typeof. Useful when the default value is undefined so type cannot be inferred. |
+|  [type?](./components.settingconfig.type.md) |  | [DataType](./components.datatype.md) | <i>(Optional)</i> Explicitly set the data type, overriding typeof. Useful when the default value is undefined so type cannot be inferred. |
 

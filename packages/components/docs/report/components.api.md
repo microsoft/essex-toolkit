@@ -212,6 +212,20 @@ export type CookieConsentManager = {
     manageConsent(): void;
 };
 
+// Warning: (ae-missing-release-tag) "DataType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum DataType {
+    // (undocumented)
+    Array = "array",
+    // (undocumented)
+    Boolean = "boolean",
+    // (undocumented)
+    Number = "number",
+    // (undocumented)
+    String = "string"
+}
+
 // Warning: (ae-missing-release-tag) "defaultBannerLinks" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -441,7 +455,6 @@ export interface SettingConfig {
     defaultValue?: any;
     label?: string;
     params?: ControlParams;
-    // Warning: (ae-forgotten-export) The symbol "DataType" needs to be exported by the entry point index.d.ts
     type?: DataType;
 }
 

@@ -2100,6 +2100,106 @@
           ]
         },
         {
+          "kind": "Enum",
+          "canonicalReference": "@essex/components!DataType:enum",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare enum DataType "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DataType",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/components!DataType.Array:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Array = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"array\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Array"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/components!DataType.Boolean:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Boolean = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"boolean\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Boolean"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/components!DataType.Number:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Number = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"number\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Number"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/components!DataType.String:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "String = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"string\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "String"
+            }
+          ]
+        },
+        {
           "kind": "Variable",
           "canonicalReference": "@essex/components!defaultBannerLinks:var",
           "docComment": "",
