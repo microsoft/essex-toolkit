@@ -34,10 +34,9 @@ export type {
 	SettingsConfig,
 	SettingConfig,
 	ControlParams,
-	ControlType,
-	DataType,
 	SettingsGroup,
 } from './Settings/Settings.types.js'
+export { ControlType, DataType } from './Settings/Settings.types.js'
 export * from './ToggleLink/ToggleLink.js'
 export * from './ToolPanel/ToolPanel.js'
 export type {
