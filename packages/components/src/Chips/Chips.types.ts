@@ -4,23 +4,34 @@
  */
 import type { IButtonStyles, IIconStyles } from '@fluentui/react'
 
-export interface Chip {
+export interface ChipItem {
 	key: string
 	text?: string
 	iconName?: string
 	canClose?: boolean
 }
 
-export interface ChipsStyles {
+export interface ChipStyles {
 	root?: React.CSSProperties
-	item?: React.CSSProperties
 	icon?: IIconStyles
 	close?: IButtonStyles
 }
 
+export interface ChipsStyles {
+	root?: React.CSSProperties
+	item?: ChipStyles
+}
+
 export interface ChipsProps {
-	items: Chip[]
+	items: ChipItem[]
 	onClick?: (key: string) => void
 	onClose?: (key: string) => void
+	styles?: ChipsStyles
+}
+
+export interface ChipItemProps {
+	item: ChipItem
+	onClick?: () => void
+	onClose?: () => void
 	styles?: ChipsStyles
 }

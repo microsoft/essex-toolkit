@@ -3,44 +3,32 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { useCloseIconProps } from './Chips.hooks.js'
+import { Chip } from './Chip.js'
 import { useChipsStyles } from './Chips.styles.js'
 import type { ChipsProps } from './Chips.types.js'
-import { Icon, IconButton } from '@fluentui/react'
+import { memo } from 'react'
 
-export function Chips({
+export const Chips: React.FC<ChipsProps> = memo(function Chips({
 	items,
 	styles,
 	onClose,
 	onClick,
-}: ChipsProps): JSX.Element {
+}): JSX.Element {
 	const _styles = useChipsStyles(styles)
-	const closeProps = useCloseIconProps(_styles)
 	return (
 		<div style={_styles.root}>
 			{items.map((item) => {
 				const handleClick = () => onClick?.(item.key)
+				const handleClose = () => onClose?.(item.key)
 				return (
-					<div
+					<Chip
 						key={`chip-${item.key}`}
-						style={_styles.item}
+						item={item}
 						onClick={handleClick}
-						onKeyPress={handleClick}
-					>
-						{item.iconName && (
-							<Icon styles={_styles.icon} iconName={item.iconName} />
-						)}
-						{item.text && <div>{item.text}</div>}
-						{item.canClose && (
-							<IconButton
-								styles={_styles.close}
-								iconProps={closeProps}
-								onClick={() => onClose?.(item.key)}
-							/>
-						)}
-					</div>
+						onClose={handleClose}
+					/>
 				)
 			})}
 		</div>
 	)
-}
+})

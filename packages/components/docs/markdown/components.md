@@ -36,6 +36,11 @@
 
 |  Interface | Description |
 |  --- | --- |
+|  [ChipItem](./components.chipitem.md) |  |
+|  [ChipItemProps](./components.chipitemprops.md) |  |
+|  [ChipsProps](./components.chipsprops.md) |  |
+|  [ChipsStyles](./components.chipsstyles.md) |  |
+|  [ChipStyles](./components.chipstyles.md) |  |
 |  [ClippedGraphProps](./components.clippedgraphprops.md) |  |
 |  [CollapsiblePanelContainerProps](./components.collapsiblepanelcontainerprops.md) | The container that will have multiple CollapsiblePanel as children, passing the last and first params automatically. |
 |  [CollapsiblePanelProps](./components.collapsiblepanelprops.md) | Props for the CollapsiblePanel |
@@ -72,6 +77,8 @@
 |  Variable | Description |
 |  --- | --- |
 |  [ButtonChoiceGroup](./components.buttonchoicegroup.md) | ButtonChoiceGroup is a ChoiceGroup component that renders as buttons instead of radios. |
+|  [Chip](./components.chip.md) |  |
+|  [Chips](./components.chips.md) |  |
 |  [ClippedGraph](./components.clippedgraph.md) | Creates a line chart that handles extreme distributions with a few clipping/wrapping strategies. The "clipped graph" concept was presented by Haihan Lin at VIS2019. https://vdl.sci.utah.edu/publications/2019\_infovis\_clipped\_graphs/ This chart can also produce a horizon plot, or be formatted to look like a sparkline. For examples of these variants, see the visual sandbox: https://visualsandbox.azurewebsites.net/\#/experiments/clipped-graphs |
 |  [CollapsiblePanel](./components.collapsiblepanel.md) | CollapsiblePanel displays a Header and its child that collapse and expands with keyboard arrows, space, enter or onclick showing the 'hidden' rendering |
 |  [CollapsiblePanelContainer](./components.collapsiblepanelcontainer.md) | Receives an array of CollapsiblePanel as children to render it with first and last props calculating it automatically |

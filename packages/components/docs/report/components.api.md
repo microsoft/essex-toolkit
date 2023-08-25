@@ -9,6 +9,7 @@
 import type { CSSProperties } from 'react';
 import type { FC } from 'react';
 import type { IButtonProps } from '@fluentui/react';
+import type { IButtonStyles } from '@fluentui/react';
 import type { ICheckboxProps } from '@fluentui/react';
 import type { IChoiceGroupProps } from '@fluentui/react';
 import type { IColorPickerProps } from '@fluentui/react';
@@ -21,6 +22,7 @@ import type { IContextualMenuProps } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
 import type { IDropdownProps } from '@fluentui/react';
 import type { IIconProps } from '@fluentui/react';
+import type { IIconStyles } from '@fluentui/react';
 import type { ILabelProps } from '@fluentui/react';
 import type { ILinkProps } from '@fluentui/react';
 import type { INavProps } from '@fluentui/react';
@@ -39,6 +41,80 @@ import type { default as React_2 } from 'react';
 //
 // @public
 export const ButtonChoiceGroup: React.FC<IChoiceGroupProps>;
+
+// Warning: (ae-missing-release-tag) "Chip" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const Chip: React.FC<ChipItemProps>;
+
+// Warning: (ae-missing-release-tag) "ChipItem" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ChipItem {
+    // (undocumented)
+    canClose?: boolean;
+    // (undocumented)
+    iconName?: string;
+    // (undocumented)
+    key: string;
+    // (undocumented)
+    text?: string;
+}
+
+// Warning: (ae-missing-release-tag) "ChipItemProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ChipItemProps {
+    // (undocumented)
+    item: ChipItem;
+    // (undocumented)
+    onClick?: () => void;
+    // (undocumented)
+    onClose?: () => void;
+    // (undocumented)
+    styles?: ChipsStyles;
+}
+
+// Warning: (ae-missing-release-tag) "Chips" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const Chips: React.FC<ChipsProps>;
+
+// Warning: (ae-missing-release-tag) "ChipsProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ChipsProps {
+    // (undocumented)
+    items: ChipItem[];
+    // (undocumented)
+    onClick?: (key: string) => void;
+    // (undocumented)
+    onClose?: (key: string) => void;
+    // (undocumented)
+    styles?: ChipsStyles;
+}
+
+// Warning: (ae-missing-release-tag) "ChipsStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ChipsStyles {
+    // (undocumented)
+    item?: ChipStyles;
+    // (undocumented)
+    root?: React.CSSProperties;
+}
+
+// Warning: (ae-missing-release-tag) "ChipStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ChipStyles {
+    // (undocumented)
+    close?: IButtonStyles;
+    // (undocumented)
+    icon?: IIconStyles;
+    // (undocumented)
+    root?: React.CSSProperties;
+}
 
 // Warning: (ae-missing-release-tag) "ClippedGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
