@@ -1,8 +1,9 @@
-import type { ChipStyles } from './Chips.types.js'
 /*!
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { ChipStyles } from './Chips.types.js'
+
 import { useTheme } from '@fluentui/react'
 import { merge } from 'lodash-es'
 import { useMemo } from 'react'

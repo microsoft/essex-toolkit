@@ -1,9 +1,10 @@
-import { useChipStyles } from './Chip.styles.js'
-import type { ChipsStyles } from './Chips.types.js'
 /*!
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { useChipStyles } from './Chip.styles.js'
+import type { ChipsStyles } from './Chips.types.js'
+
 import { useTheme } from '@fluentui/react'
 import { useMemo } from 'react'
 
