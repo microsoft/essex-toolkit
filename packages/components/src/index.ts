@@ -3,6 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './ButtonChoiceGroup/ButtonChoiceGroup.js'
+export * from './Chips/Chips.js'
+export * from './Chips/Chip.js'
+export * from './Chips/Chips.types.js'
 export * from './ClippedGraph/ClippedGraph.js'
 export * from './CollapsiblePanel/CollapsiblePanel.js'
 export * from './CollapsiblePanel/CollapsiblePanel.types.js'
