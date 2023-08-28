@@ -70,9 +70,10 @@ export function useCommunityDownload(
 			event.stopPropagation()
 			setIsLoading(true)
 			console.log(`initiated download of level: ${level} community: ${level}`)
-
 			downloadCommunityMemebers(communityId, size, getEntityCallback, level)
-				.catch((reason: string) => console.error(reason))
+				.catch((reason: string) => {
+					console.error(reason)
+				})
 				.finally(() => setIsLoading(false))
 		},
 		[communityId, setIsLoading, getEntityCallback, level, size],

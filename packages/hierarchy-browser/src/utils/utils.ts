@@ -52,9 +52,7 @@ export function convertJSONToCSV(objArray: IFlattenedEntities[]): string {
 function convertHeaderToString(header: string[]): string {
 	return header.reduce((arg, key, i) => {
 		let str = arg
-		if (str !== '') {
-			str += ','
-		}
+		if (str !== '') str += ','
 		str += key
 		if (i === header.length - 1) {
 			str += '\r\n'

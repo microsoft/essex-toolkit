@@ -2109,6 +2109,7 @@ __metadata:
     "@mdx-js/react": "npm:^1.6.22"
     "@storybook/addon-docs": "npm:^7.3.2"
     "@storybook/addon-essentials": "npm:^7.3.2"
+    "@storybook/react": "npm:^7.3.2"
     "@thematic/core": "npm:^4.0.7"
     "@thematic/d3": "npm:^2.0.22"
     "@thematic/react": "npm:^2.1.9"
@@ -6313,7 +6314,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react@npm:7.3.2":
+"@storybook/react@npm:7.3.2, @storybook/react@npm:^7.3.2":
   version: 7.3.2
   resolution: "@storybook/react@npm:7.3.2"
   dependencies:
