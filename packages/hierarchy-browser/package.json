@@ -14,8 +14,8 @@
   "scripts": {
     "build": "essex build --skipExportCheck --docs",
     "clean": "essex clean docs",
-    "fix": "essex fix --formatter none",
-    "check": "essex check --formatter none",
+    "fix": "essex fix",
+    "check": "essex check",
     "check-deps": "essex check-deps --ignore @storybook/addon-essentials,react-dom",
     "release": "yarn npm publish --tolerate-republish --access public"
   },
@@ -28,7 +28,7 @@
     "styled-components": "^6.0.7"
   },
   "devDependencies": {
-    "@essex/scripts": "^25.0.0",
+    "@essex/scripts": "^26.0.0",
     "@fluentui/react": "^8.111.1",
     "@mdx-js/react": "^1.6.22",
     "@storybook/addon-docs": "^7.3.2",

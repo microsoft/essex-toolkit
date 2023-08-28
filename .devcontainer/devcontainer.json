@@ -5,7 +5,6 @@
     "dbaeumer.vscode-eslint",
     "arcanis.vscode-zipfs",
     "silvenon.mdx",
-    "esbenp.prettier-vscode",
     "rome.rome"
   ],
   "service": "workspace",

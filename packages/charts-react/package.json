@@ -29,8 +29,8 @@
   "scripts": {
     "clean": "essex clean dist docs",
     "build": "essex build --docs",
-    "fix": "essex fix --formatter none",
-    "check": "essex check --formatter none",
+    "fix": "essex fix",
+    "check": "essex check",
     "check-deps": "essex check-deps --ignore @storybook/addon-essentials,react-dom",
     "release": "yarn npm publish --tolerate-republish --access public"
   },
@@ -41,7 +41,7 @@
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {
-    "@essex/scripts": "^25.0.0",
+    "@essex/scripts": "^26.0.0",
     "@essex/tsconfig-base": "^3.0.0",
     "@mdx-js/react": "^1.6.22",
     "@storybook/addon-docs": "^7.3.2",

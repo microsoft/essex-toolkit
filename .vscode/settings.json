@@ -10,7 +10,6 @@
 	"javascript.preferences.importModuleSpecifierEnding": "js",
 	"typescript.preferences.importModuleSpecifier": "relative",
 	"typescript.preferences.importModuleSpecifierEnding": "js",
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"[javascript]": {
 		"editor.defaultFormatter": "rome.rome"
 	},
