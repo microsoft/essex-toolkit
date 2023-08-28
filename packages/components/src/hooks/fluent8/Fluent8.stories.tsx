@@ -147,7 +147,7 @@ export const Fluent8 = () => {
 			<div style={controls}>
 				<div style={pair}>
 					<div style={label}>
-						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/label">
+						<a href='https://developer.microsoft.com/en-us/fluentui#/controls/web/label'>
 							Label
 						</a>
 					</div>
@@ -160,7 +160,7 @@ export const Fluent8 = () => {
 				</div>
 				<div style={pair}>
 					<div style={label}>
-						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/textfield">
+						<a href='https://developer.microsoft.com/en-us/fluentui#/controls/web/textfield'>
 							TextField
 						</a>
 					</div>
@@ -183,7 +183,7 @@ export const Fluent8 = () => {
 				</div>
 				<div style={pair}>
 					<div style={label}>
-						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/button">
+						<a href='https://developer.microsoft.com/en-us/fluentui#/controls/web/button'>
 							DefaultButton
 						</a>
 					</div>
@@ -196,7 +196,7 @@ export const Fluent8 = () => {
 				</div>
 				<div style={pair}>
 					<div style={label}>
-						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/button">
+						<a href='https://developer.microsoft.com/en-us/fluentui#/controls/web/button'>
 							IconButton
 						</a>
 					</div>
@@ -209,7 +209,7 @@ export const Fluent8 = () => {
 				</div>
 				<div style={pair}>
 					<div style={label}>
-						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/button">
+						<a href='https://developer.microsoft.com/en-us/fluentui#/controls/web/button'>
 							IconButton with menuProps
 						</a>
 					</div>
@@ -222,7 +222,7 @@ export const Fluent8 = () => {
 				</div>
 				<div style={pair}>
 					<div style={label}>
-						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/button">
+						<a href='https://developer.microsoft.com/en-us/fluentui#/controls/web/button'>
 							ActionButton
 						</a>
 					</div>
@@ -237,66 +237,66 @@ export const Fluent8 = () => {
 				</div>
 				<div style={pair}>
 					<div style={label}>
-						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/spinbutton">
+						<a href='https://developer.microsoft.com/en-us/fluentui#/controls/web/spinbutton'>
 							SpinButton
 						</a>
 					</div>
 					<div style={control}>
-						<SpinButton label="Label" {...mediumSpinButtonProps} />
+						<SpinButton label='Label' {...mediumSpinButtonProps} />
 					</div>
 					<div style={control}>
-						<SpinButton label="Label" {...smallSpinButtonProps} />
+						<SpinButton label='Label' {...smallSpinButtonProps} />
 					</div>
 				</div>
 
 				<div style={pair}>
 					<div style={label}>
-						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/slider">
+						<a href='https://developer.microsoft.com/en-us/fluentui#/controls/web/slider'>
 							Slider
 						</a>
 					</div>
 					<div style={control}>
-						<Slider label="Label" {...mediumSliderProps} />
+						<Slider label='Label' {...mediumSliderProps} />
 					</div>
 					<div style={control}>
-						<Slider label="Label" {...smallSliderProps} />
+						<Slider label='Label' {...smallSliderProps} />
 					</div>
 				</div>
 				<div style={pair}>
 					<div style={label}>
-						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/toggle">
+						<a href='https://developer.microsoft.com/en-us/fluentui#/controls/web/toggle'>
 							Toggle
 						</a>
 					</div>
 					<div style={control}>
-						<Toggle label="Label" {...mediumToggleProps} />
+						<Toggle label='Label' {...mediumToggleProps} />
 					</div>
 					<div style={control}>
-						<Toggle label="Label" {...smallToggleProps} />
+						<Toggle label='Label' {...smallToggleProps} />
 					</div>
 				</div>
 				<div style={pair}>
 					<div style={label}>
-						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/checkbox">
+						<a href='https://developer.microsoft.com/en-us/fluentui#/controls/web/checkbox'>
 							Checkbox
 						</a>
 					</div>
 					<div style={control}>
-						<Checkbox label="Label" {...mediumCheckboxProps} />
+						<Checkbox label='Label' {...mediumCheckboxProps} />
 					</div>
 					<div style={control}>
-						<Checkbox label="Label" {...smallCheckboxProps} />
+						<Checkbox label='Label' {...smallCheckboxProps} />
 					</div>
 				</div>
 				<div style={pair}>
 					<div style={label}>
-						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/dropdown">
+						<a href='https://developer.microsoft.com/en-us/fluentui#/controls/web/dropdown'>
 							Dropdown
 						</a>
 					</div>
 					<div style={control}>
 						<Dropdown
-							label="Label"
+							label='Label'
 							placeholder={'Placeholder'}
 							options={[
 								{
@@ -324,7 +324,7 @@ export const Fluent8 = () => {
 					</div>
 					<div style={control}>
 						<Dropdown
-							label="Label"
+							label='Label'
 							placeholder={'Placeholder'}
 							options={[
 								{
@@ -353,20 +353,20 @@ export const Fluent8 = () => {
 				</div>
 				<div style={pair}>
 					<div style={label}>
-						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/choicegroup">
+						<a href='https://developer.microsoft.com/en-us/fluentui#/controls/web/choicegroup'>
 							ChoiceGroup
 						</a>
 					</div>
 					<div style={control}>
 						<ChoiceGroup
-							label="Label"
+							label='Label'
 							selectedKey={'first'}
 							{...mediumChoiceGroupProps}
 						/>
 					</div>
 					<div style={control}>
 						<ChoiceGroup
-							label="Label"
+							label='Label'
 							selectedKey={'first'}
 							{...smallChoiceGroupProps}
 						/>
@@ -374,7 +374,7 @@ export const Fluent8 = () => {
 				</div>
 				<div style={pair}>
 					<div style={label}>
-						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/colorpicker">
+						<a href='https://developer.microsoft.com/en-us/fluentui#/controls/web/colorpicker'>
 							ColorPicker
 						</a>
 					</div>
@@ -389,7 +389,7 @@ export const Fluent8 = () => {
 				</div>
 				<div style={pair}>
 					<div style={label}>
-						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/pivot">
+						<a href='https://developer.microsoft.com/en-us/fluentui#/controls/web/pivot'>
 							Pivot
 						</a>
 					</div>
@@ -408,7 +408,7 @@ export const Fluent8 = () => {
 				</div>
 				<div style={pair}>
 					<div style={label}>
-						<a href="https://developer.microsoft.com/en-us/fluentui#/controls/web/nav">
+						<a href='https://developer.microsoft.com/en-us/fluentui#/controls/web/nav'>
 							Nav
 						</a>
 					</div>

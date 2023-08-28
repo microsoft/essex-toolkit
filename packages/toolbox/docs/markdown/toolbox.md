@@ -19,7 +19,7 @@
 |  [deferred()](./toolbox.deferred.md) | <p>Represents a deferred object, which can be resolved /\*</p><p>/\*\* Creates a new deferred promise</p> |
 |  [delay(myDelay)](./toolbox.delay.md) | Returns a promise that will resolve after the given delay, useful for async/await i.e. await delay(100) execute() |
 |  [flatMap(arr)](./toolbox.flatmap.md) | Flattens a multi dimensional array |
-|  [parseRgbFromCssColor(color)](./toolbox.parsergbfromcsscolor.md) | Creates RGB color object from HEX color string |
+|  [parseRgbFromCssColor(colorInput)](./toolbox.parsergbfromcsscolor.md) | Creates RGB color object from HEX color string |
 |  [throttle(func, wait, options)](./toolbox.throttle.md) | Debounces function based on options provided |
 
 ## Interfaces

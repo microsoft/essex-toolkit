@@ -1202,7 +1202,7 @@
             },
             {
               "kind": "Content",
-              "text": ", name: string) => any | undefined"
+              "text": ", name: string) => any"
             }
           ],
           "isReadonly": true,
@@ -1492,7 +1492,7 @@
             {
               "kind": "Reference",
               "text": "JSX.Element",
-              "canonicalReference": "@types/react!~__global.JSX~Element:interface"
+              "canonicalReference": "@types/react!~__global.JSX.Element:interface"
             }
           ],
           "isReadonly": true,

@@ -70,16 +70,10 @@ export function useCommunityDownload(
 			event.stopPropagation()
 			setIsLoading(true)
 			console.log(`initiated download of level: ${level} community: ${level}`)
-			const promise = downloadCommunityMemebers(
-				communityId,
-				size,
-				getEntityCallback,
-				level,
-			)
-			promise.catch((reason: string) => {
-				console.error(reason)
-			})
-			promise.finally(() => setIsLoading(false))
+
+			downloadCommunityMemebers(communityId, size, getEntityCallback, level)
+				.catch((reason: string) => console.error(reason))
+				.finally(() => setIsLoading(false))
 		},
 		[communityId, setIsLoading, getEntityCallback, level, size],
 	)

@@ -41,7 +41,7 @@ export const Selections: React.FC<ISelections> = memo(function Selections({
 			onChange={_onChange}
 			label={label}
 			required={true}
-			className="hierarchy-choice-group"
+			className='hierarchy-choice-group'
 		/>
 	)
 })
@@ -85,13 +85,13 @@ export const ControlGroup: React.FC<IControlGroup> = memo(
 					onChange={onChange}
 				/>
 				<Toggle
-					label="neighbors loaded"
+					label='neighbors loaded'
 					checked={loadState}
 					onChange={handleNeighborsLoaded}
 					styles={ToggleBaseStyle}
 				/>
 				<Toggle
-					label="custom styles"
+					label='custom styles'
 					checked={showCustomStyles}
 					onChange={onStyleChange}
 					styles={ToggleAugmentStyle}

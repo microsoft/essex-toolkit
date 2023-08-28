@@ -9,5 +9,5 @@ find a lineup column using the label, because the id name is not copied to the f
 <b>Signature:</b>
 
 ```typescript
-findColumn: (lineup: LineUp, name: string) => any | undefined
+findColumn: (lineup: LineUp, name: string) => any
 ```

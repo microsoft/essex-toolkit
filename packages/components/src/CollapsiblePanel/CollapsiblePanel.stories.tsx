@@ -141,10 +141,10 @@ export const CollapsiblePanelContainerStory = {
 	render: () => {
 		return (
 			<CollapsiblePanelContainer>
-				<CollapsiblePanel title="First">
+				<CollapsiblePanel title='First'>
 					<Lorem />
 				</CollapsiblePanel>
-				<CollapsiblePanel title="Second">
+				<CollapsiblePanel title='Second'>
 					<Lorem />
 				</CollapsiblePanel>
 			</CollapsiblePanelContainer>

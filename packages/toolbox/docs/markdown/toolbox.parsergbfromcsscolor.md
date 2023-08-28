@@ -9,14 +9,14 @@ Creates RGB color object from HEX color string
 <b>Signature:</b>
 
 ```typescript
-export declare function parseRgbFromCssColor(color: string): RGB;
+export declare function parseRgbFromCssColor(colorInput: string): RGB;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  color | string | HEX color string |
+|  colorInput | string |  |
 
 <b>Returns:</b>
 

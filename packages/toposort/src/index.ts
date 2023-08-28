@@ -79,12 +79,13 @@ export function array<T = string>(
 		const outgoingSet = outgoingEdges.get(node) || new Set<T>()
 		const outgoing = Array.from(outgoingSet)
 
-		if ((i = outgoing.length)) {
+		if (outgoing.length) {
+			let outgoingLen = outgoing.length
 			predecessors.add(node)
 			do {
-				const child = outgoing[--i] as T
+				const child = outgoing[--outgoingLen] as T
 				visit(child, nodesHash.get(child) as number, predecessors)
-			} while (i)
+			} while (outgoingLen)
 			predecessors.delete(node)
 		}
 

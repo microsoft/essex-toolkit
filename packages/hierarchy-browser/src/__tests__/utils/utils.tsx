@@ -87,8 +87,7 @@ export const loadRemoteData = async (
 		const obj = header.reduce((accum, colName, index) => {
 			let value: string | number = arr[index]
 			value = isNaN(+value) ? value : +value
-			accum = { ...accum, [colName]: value }
-			return accum
+			return { ...accum, [colName]: value }
 		}, {} as any)
 		return obj
 	})
@@ -96,20 +95,20 @@ export const loadRemoteData = async (
 }
 
 export function CSVToArray(strData: string, strDelimiter: string): string[][] {
-	strDelimiter = strDelimiter || ','
+	const delimiter = strDelimiter || ','
 	const objPattern = new RegExp(
 		// Delimiters.
-		`(\\${strDelimiter}|\\r?\\n|\\r|^)(?:"([^"]*(?:""[^"]*)*)"|([^"\\${strDelimiter}\\r\\n]*))`,
+		`(\\${delimiter}|\\r?\\n|\\r|^)(?:"([^"]*(?:""[^"]*)*)"|([^"\\${delimiter}\\r\\n]*))`,
 		'gi',
 	)
 
 	const arrData: string[][] = [[]]
-	let arrMatches: any = null
+	const arrMatches = objPattern.exec(strData)
 
-	while ((arrMatches = objPattern.exec(strData))) {
+	if (arrMatches != null) {
 		const strMatchedDelimiter = arrMatches[1]
 
-		if (strMatchedDelimiter.length && strMatchedDelimiter !== strDelimiter) {
+		if (strMatchedDelimiter.length && strMatchedDelimiter !== delimiter) {
 			arrData.push([])
 		}
 

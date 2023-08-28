@@ -117,7 +117,7 @@ const findSort = (lineup: LineUp): FindSortCriteria => {
  * @param lineup - the lineup instance
  * @param name - the column name
  */
-export const findColumn = (lineup: LineUp, name: string): any | undefined => {
+export const findColumn = (lineup: LineUp, name: string): any => {
 	const label = nameToLabel(name)
 	return lineup.data.find((d: any) => d.desc.label === label)
 }
@@ -137,7 +137,6 @@ export const applyFilters = (lineup: LineUp, filters: Filter[]): void => {
 				case FilterType.Number:
 					filter = filterNumber(flt, filter)
 					break
-				case FilterType.Text:
 				default:
 					filter = filterText(flt, filter)
 					break

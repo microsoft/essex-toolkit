@@ -85,13 +85,13 @@ export const PolicyAndCookieBanner: FC<PolicyAndCookieBannerProps> = memo(
 				{consentManager?.isConsentRequired && (
 					<>
 						<PolicyLink
-							name="Manage Cookies"
-							id="MSFTManageCookiesLink"
+							name='Manage Cookies'
+							id='MSFTManageCookiesLink'
 							onClick={() => {
 								consentManager?.manageConsent()
 							}}
 						/>
-						<Text variant="tiny">|</Text>
+						<Text variant='tiny'>|</Text>
 					</>
 				)}
 				{policyLinks}
@@ -110,9 +110,9 @@ const PolicyLink: FC<PolicyLinkProps> = memo(function PolicyLink({
 }) {
 	return (
 		<>
-			{divider && <Text variant="tiny">|</Text>}
-			<Text variant="smallPlus">
-				<Link id={id} href={href} target="_blank" onClick={onClick}>
+			{divider && <Text variant='tiny'>|</Text>}
+			<Text variant='smallPlus'>
+				<Link id={id} href={href} target='_blank' onClick={onClick}>
 					{name}
 				</Link>
 			</Text>

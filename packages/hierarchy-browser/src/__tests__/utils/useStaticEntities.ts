@@ -41,10 +41,10 @@ export function useStaticEntities({
 					const values = searchForChildren(commID)
 					let ids: string[] = []
 					if (values) {
-						const entities = values.reduce((totalEntities, arr) => {
-							totalEntities = totalEntities.concat(arr)
-							return totalEntities
-						}, [] as JoinData[])
+						const entities = values.reduce(
+							(totalEntities, arr) => totalEntities.concat(arr),
+							[] as JoinData[],
+						)
 						ids = entities.map((d: JoinData) => d.nodeId)
 					}
 					return {
@@ -65,8 +65,7 @@ export function useStaticEntities({
 	const neighborData = useMemo(() => {
 		return communities.reduce((acc, d: ICommunityDetail) => {
 			const adjNeighbors = getNeighbors(d.communityId)
-			acc = [...acc, ...adjNeighbors]
-			return acc
+			return [...acc, ...adjNeighbors]
 		}, [] as INeighborCommunityDetail[])
 	}, [getNeighbors, communities])
 

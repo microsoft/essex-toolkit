@@ -862,7 +862,7 @@
             {
               "kind": "Reference",
               "text": "JSX.Element",
-              "canonicalReference": "@types/react!~__global.JSX~Element:interface"
+              "canonicalReference": "@types/react!~__global.JSX.Element:interface"
             }
           ],
           "isReadonly": true,
@@ -2032,7 +2032,7 @@
             {
               "kind": "Reference",
               "text": "JSX.Element",
-              "canonicalReference": "@types/react!~__global.JSX~Element:interface"
+              "canonicalReference": "@types/react!~__global.JSX.Element:interface"
             }
           ],
           "isReadonly": true,
@@ -2916,7 +2916,7 @@
             {
               "kind": "Reference",
               "text": "JSX.Element",
-              "canonicalReference": "@types/react!~__global.JSX~Element:interface"
+              "canonicalReference": "@types/react!~__global.JSX.Element:interface"
             },
             {
               "kind": "Content",
@@ -3655,7 +3655,7 @@
             {
               "kind": "Reference",
               "text": "JSX.Element",
-              "canonicalReference": "@types/react!~__global.JSX~Element:interface"
+              "canonicalReference": "@types/react!~__global.JSX.Element:interface"
             }
           ],
           "isReadonly": true,
@@ -4348,7 +4348,7 @@
             {
               "kind": "Reference",
               "text": "JSX.Element",
-              "canonicalReference": "@types/react!~__global.JSX~Element:interface"
+              "canonicalReference": "@types/react!~__global.JSX.Element:interface"
             }
           ],
           "isReadonly": true,
@@ -4812,7 +4812,7 @@
             {
               "kind": "Reference",
               "text": "JSX.Element",
-              "canonicalReference": "@types/react!~__global.JSX~Element:interface"
+              "canonicalReference": "@types/react!~__global.JSX.Element:interface"
             }
           ],
           "isReadonly": true,
@@ -5155,7 +5155,7 @@
             {
               "kind": "Reference",
               "text": "JSX.Element",
-              "canonicalReference": "@types/react!~__global.JSX~Element:interface"
+              "canonicalReference": "@types/react!~__global.JSX.Element:interface"
             }
           ],
           "isReadonly": true,

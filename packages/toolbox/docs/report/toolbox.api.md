@@ -72,9 +72,9 @@ export function flatMap(arr: any[][]): any[];
 // @public
 export interface HashMap<Value = any> {
     // (undocumented)
-    [key: string]: Value;
+    [stringIdx: string]: Value;
     // (undocumented)
-    [key: number]: Value;
+    [numIdx: number]: Value;
 }
 
 // Warning: (ae-missing-release-tag) "Histogram" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -96,7 +96,7 @@ export const interpolate: (data: any[], multiple: number, accessor?: (d: any) =>
 // Warning: (ae-missing-release-tag) "parseRgbFromCssColor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function parseRgbFromCssColor(color: string): RGB;
+export function parseRgbFromCssColor(colorInput: string): RGB;
 
 // Warning: (ae-missing-release-tag) "throttle" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
