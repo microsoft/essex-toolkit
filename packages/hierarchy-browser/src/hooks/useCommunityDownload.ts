@@ -10,7 +10,7 @@ import type { CommunityId } from '../types/index.js'
 import { exportCSVFile } from '../utils/utils.js'
 import type { IEntityLoadParams } from './useLoadMoreEntitiesHandler.js'
 
-export const downloadCommunityMemebers = async (
+export const downloadCommunityMembers = async (
 	communityId: CommunityId,
 	size: number,
 	getEntityCallback: (
@@ -70,7 +70,7 @@ export function useCommunityDownload(
 			event.stopPropagation()
 			setIsLoading(true)
 			console.log(`initiated download of level: ${level} community: ${level}`)
-			downloadCommunityMemebers(communityId, size, getEntityCallback, level)
+			downloadCommunityMembers(communityId, size, getEntityCallback, level)
 				.catch((reason: string) => {
 					console.error(reason)
 				})
