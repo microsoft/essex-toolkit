@@ -35,7 +35,6 @@ Separator | Divider | TBD
 Slider | Slider | TBD
 SpinButton | ~SpinButton | TBD
 Spinner | Spinner | TBD
-Stack | _removed_ | TBD
 Text | Text | TBD
 TextField | Input | TBD
 Toggle | Switch | TBD

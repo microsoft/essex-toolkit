@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import styled from '@essex/styled-components'
 import type { ITheme } from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
 import Markdown from 'markdown-to-jsx'
 import { useMemo } from 'react'
+import styled from 'styled-components'
 
 export const Container = styled.div`
     overflow-y: auto;
@@ -18,7 +18,7 @@ export const Navigation = styled.div`
     float: right;
 `
 
-export const MarkdownContainer = styled(Markdown)`
+export const MarkdownContainer = styled(Markdown)<{ theme: ITheme }>`
     *:first-child {
         margin-top: 0;
     }

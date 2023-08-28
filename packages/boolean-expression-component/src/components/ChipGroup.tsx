@@ -70,7 +70,7 @@ export const ChipGroup: React.FC<{
 				{chips}
 				{onChipGroupDismissed ? (
 					<CloseButton
-						color="grey"
+						color='grey'
 						onClick={() =>
 							onChipGroupDismissed({ id, filters, label, locked, operation })
 						}

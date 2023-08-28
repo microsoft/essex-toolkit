@@ -238,7 +238,6 @@ export const selectColumnBuilder = (config: ColumnConfig): any => {
 			return buildSetColumn
 		case 'link':
 			return buildLinkColumn
-		case 'string':
 		default:
 			return buildStringColumn
 	}

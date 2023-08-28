@@ -1,8 +1,17 @@
 {
 	"files": {
 		"ignore": [
-			"dist", "lib", "build", "docs", "storybook-static", "coverage", ".turbo",
-			".pnp.cjs", ".pnp.loader.mjs", ".devcontainer/"
+			"dist",
+			"lib",
+			"build",
+			"docs",
+			"storybook-static",
+			"coverage",
+			".turbo",
+			".pnp.cjs",
+			".pnp.loader.mjs",
+			".devcontainer/",
+			".vscode/"
 		]
 	},
 	"organizeImports": {

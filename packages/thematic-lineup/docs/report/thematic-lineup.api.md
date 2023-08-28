@@ -4,6 +4,8 @@
 
 ```ts
 
+/// <reference types="react" />
+
 import { Color } from '@thematic/color';
 
 // Warning: (ae-forgotten-export) The symbol "LineUp" needs to be exported by the entry point index.d.ts
@@ -133,7 +135,7 @@ export enum FilterType {
 // Warning: (ae-missing-release-tag) "findColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const findColumn: (lineup: LineUp, name: string) => any | undefined;
+export const findColumn: (lineup: LineUp, name: string) => any;
 
 // Warning: (ae-missing-release-tag) "LinkColumnConfig" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

@@ -36,7 +36,7 @@ export const TableExpander: React.FC<ITableExpander> = memo(
 						iconProps={{
 							iconName,
 						}}
-						text="Panel Resize"
+						text='Panel Resize'
 						onClick={handleClick}
 					/>
 				</Header>

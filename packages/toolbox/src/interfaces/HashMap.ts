@@ -6,6 +6,6 @@
  * A interface describing a hashmap
  */
 export interface HashMap<Value = any> {
-	[key: string]: Value
-	[key: number]: Value
+	[stringIdx: string]: Value
+	[numIdx: number]: Value
 }

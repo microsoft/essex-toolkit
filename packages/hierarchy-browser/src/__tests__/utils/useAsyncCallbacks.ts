@@ -73,10 +73,7 @@ export function useAsyncCallbacks({
 					const values = searchForChildren(communityId)
 					let count = 0
 					if (values) {
-						count = values.reduce((counter, arr) => {
-							counter = arr.length + counter
-							return counter
-						}, 0 as number)
+						count = values.reduce((counter, arr) => arr.length + counter, 0)
 					}
 					return {
 						communityId,

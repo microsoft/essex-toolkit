@@ -36,7 +36,8 @@ export function flattenJSONObjects(
 }
 
 export function convertJSONToCSV(objArray: IFlattenedEntities[]): string {
-	return objArray.reduce((str, item) => {
+	return objArray.reduce((arg, item) => {
+		let str = arg
 		const keys = Object.keys(item)
 		let line = ''
 		keys.forEach((key) => {
@@ -49,7 +50,8 @@ export function convertJSONToCSV(objArray: IFlattenedEntities[]): string {
 }
 
 function convertHeaderToString(header: string[]): string {
-	return header.reduce((str, key, i) => {
+	return header.reduce((arg, key, i) => {
+		let str = arg
 		if (str !== '') str += ','
 		str += key
 		if (i === header.length - 1) {

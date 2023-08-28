@@ -13,8 +13,8 @@ interface RGB {
  * @returns rgb color object \{r:number, g: number, b:number\}
  */
 
-export function parseRgbFromCssColor(color: string): RGB {
-	color = color.replace('#', '') // strip of leading # if necessary
+export function parseRgbFromCssColor(colorInput: string): RGB {
+	const color = colorInput.replace('#', '') // strip of leading # if necessary
 	const colorNumber = parseInt(color, 16)
 	return {
 		r: colorNumber >> 16,

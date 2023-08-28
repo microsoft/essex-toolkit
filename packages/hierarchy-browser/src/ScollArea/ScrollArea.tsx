@@ -31,7 +31,7 @@ export const ScrollArea: React.FC<IScrollAreaProps> = memo(function ScrollArea({
 			loadMore={loadMore}
 			hasMore={hasMore}
 			useWindow={false}
-			loader={<Spinner key="ei_spinner" label="Loading more records..." />}
+			loader={<Spinner key='ei_spinner' label='Loading more records...' />}
 		>
 			{children}
 		</InfiniteScroll>

@@ -8,16 +8,6 @@ import { useCallback, useState } from 'react'
 import type { ToggleLinkProps } from './ToggleLink.js'
 import { ToggleLink } from './ToggleLink.js'
 
-const meta = {
-	title: '@essex:components/ToggleLink',
-	component: ToggleLink,
-	args: {
-		messages: ['Show more', 'Show less'],
-	},
-}
-
-export default meta
-
 const Template: StoryFn<typeof ToggleLink> = (args: ToggleLinkProps) => {
 	const [expanded, setExpanded] = useState<boolean>(false)
 	const handleChange = useCallback((toggled) => setExpanded(toggled), [])
@@ -37,5 +27,14 @@ const Template: StoryFn<typeof ToggleLink> = (args: ToggleLinkProps) => {
 	)
 }
 
-const Primary = Template.bind({})
-Primary.storyName = 'ToggleLink'
+const meta = {
+	title: '@essex:components/ToggleLink',
+	component: Template,
+	args: {
+		messages: ['Show more', 'Show less'],
+	},
+}
+
+export default meta
+
+export const Primary = {}

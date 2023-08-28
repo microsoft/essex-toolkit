@@ -1061,7 +1061,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "[key: "
+                  "text": "[stringIdx: "
                 },
                 {
                   "kind": "Content",
@@ -1089,7 +1089,7 @@
               "overloadIndex": 1,
               "parameters": [
                 {
-                  "parameterName": "key",
+                  "parameterName": "stringIdx",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
@@ -1105,7 +1105,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "[key: "
+                  "text": "[numIdx: "
                 },
                 {
                   "kind": "Content",
@@ -1133,7 +1133,7 @@
               "overloadIndex": 2,
               "parameters": [
                 {
-                  "parameterName": "key",
+                  "parameterName": "numIdx",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
@@ -1240,7 +1240,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare function parseRgbFromCssColor(color: "
+              "text": "export declare function parseRgbFromCssColor(colorInput: "
             },
             {
               "kind": "Content",
@@ -1268,7 +1268,7 @@
           "overloadIndex": 1,
           "parameters": [
             {
-              "parameterName": "color",
+              "parameterName": "colorInput",
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

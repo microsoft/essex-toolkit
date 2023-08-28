@@ -55,7 +55,7 @@ export const CollapsiblePanel: React.FC<
 					/>
 				)}
 				<div
-					role="button"
+					role='button'
 					tabIndex={onHeaderClick ? 0 : undefined}
 					onKeyDown={handleHeaderKeyDown}
 					onClick={handleHeaderClick}
