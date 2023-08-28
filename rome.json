@@ -10,7 +10,8 @@
 			".turbo",
 			".pnp.cjs",
 			".pnp.loader.mjs",
-			".devcontainer/"
+			".devcontainer/",
+			".vscode/"
 		]
 	},
 	"organizeImports": {
