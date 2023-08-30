@@ -1,4 +1,0 @@
-try{
-var _=__STORYBOOKADDONS__,{addons:r,types:p,mockChannel:O}=__STORYBOOKADDONS__;var C=__STORYBOOKTHEMING__,{CacheProvider:g,ClassNames:b,Global:u,ThemeProvider:S,background:k,color:y,convert:B,create:s,createCache:N,createGlobal:R,createReset:v,css:D,darken:G,ensure:K,ignoreSsrWarning:Y,isPropValid:E,jsx:I,keyframes:M,lighten:P,styled:A,themes:H,typography:j,useTheme:w,withTheme:U}=__STORYBOOKTHEMING__;var a=s({base:"light",fontBase:'"Open Sans", sans-serif',fontCode:"monospace",textColor:"#67747e",textMutedColor:"#67747e",textInverseColor:"#5675aa",inputTextColor:"#67747e",brandTitle:"Essex Toolkit",brandUrl:"https://github.com/microsoft/essex-toolkit",brandTarget:"microsoft.com"});r.setConfig({theme:a});
-}catch(e){ console.error("[Storybook] One of your manager-entries failed: " + import.meta.url, e); }
-//# sourceMappingURL=manager-bundle.mjs.map
