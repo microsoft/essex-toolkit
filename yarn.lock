@@ -2021,6 +2021,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@essex-js-toolkit/hooks@npm:^1.1.2":
+  version: 1.1.5
+  resolution: "@essex-js-toolkit/hooks@npm:1.1.5"
+  dependencies:
+    "@essex-js-toolkit/toolbox": "npm:^1.1.4"
+    resize-observer-polyfill: "npm:^1.5.1"
+  peerDependencies:
+    "@types/node": "*"
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    core-js: "*"
+    react: ">=16.8.0"
+  checksum: d2b7d4449b4855edf8b8b2f331b5491fe6597b55131e7627d52b01160cdd9c7f5be38de9f0f7dbc4c4c33d9b78aa914be5b77c60a7f4d8530c3af4e33f9ab70f
+  languageName: node
+  linkType: hard
+
+"@essex-js-toolkit/toolbox@npm:^1.1.4":
+  version: 1.1.5
+  resolution: "@essex-js-toolkit/toolbox@npm:1.1.5"
+  dependencies:
+    core-js: "npm:^3.14.0"
+  checksum: a2f52e5f82cf723e1376ee3532d3125dd192701321c378023def84b52670fdd322162530964519497b654c0ad3c162138149f7416c8652c83c8286193903625b
+  languageName: node
+  linkType: hard
+
 "@essex/api-extractor-config@npm:^4.0.0":
   version: 4.0.0
   resolution: "@essex/api-extractor-config@npm:4.0.0"
@@ -2102,6 +2127,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@essex/components@workspace:packages/components"
   dependencies:
+    "@essex-js-toolkit/hooks": "npm:^1.1.2"
     "@essex/scripts": "npm:^26.0.0"
     "@essex/toolbox": "workspace:^"
     "@fluentui/react": "npm:^8.111.1"
@@ -2129,6 +2155,7 @@ __metadata:
     d3-selection: "npm:^3.0.0"
     lodash-es: "npm:^4.17.21"
     markdown-to-jsx: "npm:^7.3.2"
+    moment: "npm:^2.29.4"
     react: "npm:^18.2.0"
     react-animate-height: "npm:^3.2.2"
     react-dom: "npm:^18.2.0"
@@ -9697,6 +9724,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"core-js@npm:^3.14.0":
+  version: 3.32.1
+  resolution: "core-js@npm:3.32.1"
+  checksum: 8d76615ef67f2cf8d2af05e4ec8e5663c941a461c97ff3f53eca6b4ab6fb765ef1b88509827b510963044aa122153f25c3073f3de7fcad06cc1b3f6c06a725c3
+  languageName: node
+  linkType: hard
+
 "core-util-is@npm:~1.0.0":
   version: 1.0.3
   resolution: "core-util-is@npm:1.0.3"
@@ -15178,6 +15212,13 @@ __metadata:
   bin:
     mkdirp: bin/cmd.js
   checksum: d71b8dcd4b5af2fe13ecf3bd24070263489404fe216488c5ba7e38ece1f54daf219e72a833a3a2dc404331e870e9f44963a33399589490956bff003a3404d3b2
+  languageName: node
+  linkType: hard
+
+"moment@npm:^2.29.4":
+  version: 2.29.4
+  resolution: "moment@npm:2.29.4"
+  checksum: 157c5af5a0ba8196e577bc67feb583303191d21ba1f7f2af30b3b40d4c63a64d505ba402be2a1454832082fac6be69db1e0d186c3279dae191e6634b0c33705c
   languageName: node
   linkType: hard
 
