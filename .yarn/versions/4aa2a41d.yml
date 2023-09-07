@@ -8,6 +8,7 @@ declined:
   - "@essex/hooks"
   - "@essex/msal-interactor"
   - "@essex/semantic-components"
+  - essex-toolkit-stories
   - "@essex/thematic-lineup"
   - "@essex/toolbox"
   - "@essex/toposort"
