@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { createBarGroup, generate, selectBarGroup } from './SparkBar.utils.js'
-import type { SparkbarProps } from './TimeBrush.types.js'
+import type { GroupedTerm, SparkbarProps } from './TimeBrush.types.js'
 import { SelectionState } from '@thematic/core'
 import { useThematic } from '@thematic/react'
 import React, {
@@ -54,7 +54,7 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 	useLayoutEffect(() => {
 		generate(
 			barGroup,
-			data,
+			data as GroupedTerm[],
 			nodataFn,
 			value,
 			height,
