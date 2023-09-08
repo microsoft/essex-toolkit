@@ -34,7 +34,7 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 	const theme = useThematic()
 	const ref = useRef(null)
 	const handleClick = useCallback(
-		(		d: any) => {
+		(d: any) => {
 			if (onClick) {
 				onClick(d)
 			}
@@ -75,7 +75,7 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 	useLayoutEffect(() => {
 		if (data.length > 0) {
 			const ext = data.reduce<[number, number]>(
-				(acc: number[], cur: any) => {
+				(acc: any, cur: any) => {
 					if (!nodataFn(cur)) {
 						const val = value(cur)
 						return [Math.min(acc[0], val), Math.max(acc[1], val)]

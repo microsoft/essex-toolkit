@@ -17,10 +17,10 @@ export const TermBar: React.FC<TermBarProps> = memo(function TermBar({
 	selectionExtent,
 	markedDate,
 }) {
-	const id = useCallback((d: { term: any; date: any }) => `${d.term}-${d.date}`, [])
-	const accessor = useCallback((d: { count: any }) => d.count, [])
+	const id = useCallback((d: any) => `${d.term}-${d.date}`, [])
+	const accessor = useCallback((d: any) => d.count, [])
 	const selected = useCallback(
-		(		d: { date: number }) => {
+		(d:any) => {
 			if (selectionExtent) {
 				return (
 					d.date.valueOf() >= selectionExtent[0].valueOf() &&
@@ -34,14 +34,14 @@ export const TermBar: React.FC<TermBarProps> = memo(function TermBar({
 	const md = useMemo(() => (markedDate ? moment.utc(markedDate) : null), [
 		markedDate,
 	])
-	const marked = useCallback((d: { date: any }) => !!(md && md.isSame(d.date, 'day')), [md])
-	const nodata = useCallback((d: { count: number }) => d.count < 0, [])
+	const marked = useCallback((d: any) => !!(md && md.isSame(d.date, 'day')), [md])
+	const nodata = useCallback((d: any) => d.count < 0, [])
 	// use an extent if one is provided, otherwise compute from supplied values
 	const domain = useMemo(() => {
 		if (dateExtent) {
 			return dateExtent
 		}
-		const moments = terms.map(t => moment(t.date))
+		const moments = terms.map((t: any) => moment(t.date))
 		const min = moment.min(moments)
 		const max = moment.max(moments)
 		return [min, max]
@@ -53,7 +53,7 @@ export const TermBar: React.FC<TermBarProps> = memo(function TermBar({
 				.range([barWidth / 2, width - barWidth / 2]),
 		[domain, width, barWidth],
 	)
-	const xScale = useMemo(() => (d: { date: any }, i: number) => time(d.date), [time])
+	const xScale = useMemo(() => (d: any, i: number) => time(d.date), [time])
 	return (
 		<Sparkbar
 			data={terms}
