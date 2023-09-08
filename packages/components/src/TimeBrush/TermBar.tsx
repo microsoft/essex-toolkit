@@ -1,3 +1,5 @@
+import { Sparkbar } from './SparkBar.js'
+import type { TermBarProps } from './TimeBrush.types.js'
 /*!
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
@@ -5,8 +7,6 @@
 import { scaleTime } from 'd3-scale'
 import moment from 'moment'
 import React, { memo, useCallback, useMemo } from 'react'
-import type { TermBarProps } from './TimeBrush.types.js'
-import { Sparkbar } from './SparkBar.js'
 
 export const TermBar: React.FC<TermBarProps> = memo(function TermBar({
 	terms,
@@ -20,7 +20,7 @@ export const TermBar: React.FC<TermBarProps> = memo(function TermBar({
 	const id = useCallback((d: any) => `${d.term}-${d.date}`, [])
 	const accessor = useCallback((d: any) => d.count, [])
 	const selected = useCallback(
-		(d:any) => {
+		(d: any) => {
 			if (selectionExtent) {
 				return (
 					d.date.valueOf() >= selectionExtent[0].valueOf() &&
@@ -31,10 +31,11 @@ export const TermBar: React.FC<TermBarProps> = memo(function TermBar({
 		},
 		[selectionExtent],
 	)
-	const md = useMemo(() => (markedDate ? moment.utc(markedDate) : null), [
-		markedDate,
-	])
-	const marked = useCallback((d: any) => !!(md && md.isSame(d.date, 'day')), [md])
+	const md = useMemo(
+		() => (markedDate ? moment.utc(markedDate) : null),
+		[markedDate],
+	)
+	const marked = useCallback((d: any) => !!md?.isSame(d.date, 'day'), [md])
 	const nodata = useCallback((d: any) => d.count < 0, [])
 	// use an extent if one is provided, otherwise compute from supplied values
 	const domain = useMemo(() => {

@@ -16,7 +16,11 @@ export function round(date: Date): Date {
 	return m.toDate()
 }
 
-export function calculateBrush(event: any, scale: any, rounded: boolean): [Date, Date] | null {
+export function calculateBrush(
+	event: any,
+	scale: any,
+	rounded: boolean,
+): [Date, Date] | null {
 	// this is a d3 global that is dynamically updated with the events
 	const { selection } = event
 	if (selection) {

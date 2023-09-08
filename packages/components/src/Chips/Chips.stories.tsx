@@ -37,7 +37,7 @@ const PrimaryComponent: React.FC<ChipsProps> = (args) => {
 		[],
 	)
 	return (
-		<div style={{ display: 'flex', alignItems: 'center'}}>
+		<div style={{ display: 'flex', alignItems: 'center' }}>
 			<Chips
 				{...args}
 				items={items}

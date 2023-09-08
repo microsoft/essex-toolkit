@@ -1,9 +1,10 @@
+import type { SparkbarProps } from './TimeBrush.types.js'
 /*!
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { SelectionState } from '@thematic/core'
-import { rect, line, svg } from '@thematic/d3'
+import { line, rect, svg } from '@thematic/d3'
 import { useThematic } from '@thematic/react'
 import { scaleLinear } from 'd3-scale'
 import { select } from 'd3-selection'
@@ -11,11 +12,10 @@ import React, {
 	memo,
 	useCallback,
 	useLayoutEffect,
+	useMemo,
 	useRef,
 	useState,
-	useMemo,
 } from 'react'
-import type { SparkbarProps } from './TimeBrush.types.js'
 
 export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 	data,
