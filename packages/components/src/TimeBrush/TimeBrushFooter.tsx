@@ -19,7 +19,7 @@ import React, {
 	useMemo,
 } from 'react'
 import { isoDay } from './format.js'
-import { TimeBrushFooterProps } from './TimeBrush.types.js'
+import type { TimeBrushFooterProps } from './TimeBrush.types.js'
 import { calculateBrush, wholeDateRangeSelected } from './utils.js'
 
 export const TimeBrushFooter: React.FC<TimeBrushFooterProps> = memo(function TimeBrushFooter({
