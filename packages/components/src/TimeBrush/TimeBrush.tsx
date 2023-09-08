@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import React, { memo, useCallback, useState, useMemo } from 'react'
-import { useDailyTermCounts } from './TimeBrush.hooks.js'
 import { TermBar } from './TermBar.js'
 import { TimeBrushFooter } from './TimeBrushFooter.js'
 import { TimeBrushProps } from './TimeBrush.types.js'
@@ -14,14 +13,12 @@ const BAR_GAP = 1
 
 export const TimeBrush: React.FC<TimeBrushProps> = memo(
 	function TimeBrush({
-		search,
 		width = 800,
 		height = 24,
 		dateRange,
 		markedDate,
+		elements
 	}) {
-		const [terms] = useDailyTermCounts(search, dateRange)
-		const [query, setQuery] = useState<string>('query')
 		const [from, setFrom] = useState<string>('from')
 		const [to, setTo] = useState<string>('to')
 
@@ -48,12 +45,12 @@ export const TimeBrush: React.FC<TimeBrushProps> = memo(
 				return [new Date(from), new Date(to)]
 			}
 		}, [from, to])
-		
+
 		return (
 			<div>
 				<TermBar
-					terms={terms}
-					width={CHART_WIDTH}
+					terms={elements}
+					width={width}
 					height={height}
 					barWidth={barWidth}
 					dateExtent={dateRange}
@@ -63,7 +60,7 @@ export const TimeBrush: React.FC<TimeBrushProps> = memo(
 				<TimeBrushFooter
 					dateRange={dateRange}
 					brushRange={selectionRange}
-					width={CHART_WIDTH}
+					width={width}
 					height={18}
 					barWidth={barWidth}
 					onBrushEnd={handleBrushEnd}

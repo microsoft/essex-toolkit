@@ -5,18 +5,8 @@
 import { scaleTime } from 'd3-scale'
 import moment from 'moment'
 import React, { memo, useCallback, useMemo } from 'react'
-import { DailyTerm } from './TimeBrush.types.js'
+import { TermBarProps } from './TimeBrush.types.js'
 import { Sparkbar } from './SparkBar.js'
-
-interface TermBarProps {
-	terms: DailyTerm[]
-	width: number
-	height: number
-	barWidth?: number
-	dateExtent?: [Date, Date]
-	selectionExtent?: [Date, Date]
-	markedDate?: Date
-}
 
 export const TermBar: React.FC<TermBarProps> = memo(function TermBar({
 	terms,

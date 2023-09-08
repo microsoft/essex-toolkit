@@ -7,7 +7,7 @@ import { line, svg, text } from '@thematic/d3'
 import { useThematic } from '@thematic/react'
 import { brushX } from 'd3-brush'
 import { scaleTime } from 'd3-scale'
-import { event, select } from 'd3-selection'
+import { select } from 'd3-selection'
 
 import moment from 'moment'
 import React, {
@@ -63,7 +63,7 @@ function round(date: Date): Date {
 	return m.toDate()
 }
 
-function calculateBrush(scale: any, rounded): [Date, Date] | null {
+function calculateBrush(event, scale: any, rounded): [Date, Date] | null {
 	// this is a d3 global that is dynamically updated with the events
 	const { selection } = event
 	if (selection) {
@@ -111,8 +111,8 @@ export const TimeBrushFooter: React.FC<TimeBrushFooterProps> = memo(function Tim
 		[Date, Date] | null
 	>(brushRange)
 
-	const handleBrushEnd = useCallback(() => {
-		let rng = calculateBrush(xScale, roundToDay)
+	const handleBrushEnd = useCallback((event) => {
+		let rng = calculateBrush(event, xScale, roundToDay)
 		if (rng && wholeDateRangeSelected(rng, dateRange)) {
 			// Clear the brush if the whole date range is selected
 			rng = null
@@ -123,8 +123,8 @@ export const TimeBrushFooter: React.FC<TimeBrushFooterProps> = memo(function Tim
 		}
 	}, [xScale, roundToDay, onBrushEnd, dateRange])
 
-	const handleBrushMove = useCallback(() => {
-		const range = calculateBrush(xScale, roundToDay)
+	const handleBrushMove = useCallback((event) => {
+		const range = calculateBrush(event, xScale, roundToDay)
 		setInternalBrushRange(range)
 	}, [xScale, roundToDay])
 
