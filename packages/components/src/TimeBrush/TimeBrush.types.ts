@@ -84,7 +84,7 @@ export interface TimeBrushFooterProps {
 	/**
 	 * Date range that the time brush should cover
 	 */
-	dateRange: [Date, Date]
+	dateRange?: [Date, Date]
 	/**
 	 * Selected brush range
 	 */
