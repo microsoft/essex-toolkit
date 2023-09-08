@@ -17,12 +17,15 @@ import React, {
 	useState,
 } from 'react'
 
+const DEFAULT_BAR_WIDTH = 8
+const DEFAULT_BAR_GAP = 1
+
 export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 	data,
 	width,
 	height,
-	barWidth = 8,
-	barGap = 1,
+	barWidth = DEFAULT_BAR_WIDTH,
+	barGap = DEFAULT_BAR_GAP,
 	id,
 	value,
 	nodata,

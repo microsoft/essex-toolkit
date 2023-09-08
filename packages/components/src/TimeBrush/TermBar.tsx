@@ -8,11 +8,13 @@ import { scaleTime } from 'd3-scale'
 import moment from 'moment'
 import React, { memo, useCallback, useMemo } from 'react'
 
+const DEFAULT_BAR_WIDTH = 4
+
 export const TermBar: React.FC<TermBarProps> = memo(function TermBar({
 	terms,
 	width,
 	height,
-	barWidth = 4,
+	barWidth = DEFAULT_BAR_WIDTH,
 	dateExtent,
 	selectionExtent,
 	markedDate,

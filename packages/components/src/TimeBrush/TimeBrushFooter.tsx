@@ -22,13 +22,15 @@ import React, {
 	useState,
 } from 'react'
 
+const DEFAULT_BAR_WIDTH = 8
+
 export const TimeBrushFooter: React.FC<TimeBrushFooterProps> = memo(
 	function TimeBrushFooter({
 		dateRange,
 		brushRange = null,
 		width,
 		height,
-		barWidth = 8,
+		barWidth = DEFAULT_BAR_WIDTH,
 		onBrushEnd,
 		roundToDay = false,
 	}) {

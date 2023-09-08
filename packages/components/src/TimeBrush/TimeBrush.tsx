@@ -8,13 +8,15 @@ import moment from 'moment'
  */
 import React, { memo, useCallback, useMemo, useState } from 'react'
 
-const CHART_WIDTH = 800
+const DEFAULT_CHART_WIDTH = 800
+const DEFAULT_WIDTH = 800
+const DEFAULT_HEIGHT = 24
 const BAR_GAP = 1
 
 export const TimeBrush: React.FC<TimeBrushProps> = memo(function TimeBrush({
-	width = 800,
-	height = 24,
-	chartWidth = CHART_WIDTH,
+	width = DEFAULT_WIDTH,
+	height = DEFAULT_HEIGHT,
+	chartWidth = DEFAULT_CHART_WIDTH,
 	dateRange,
 	markedDate,
 	elements,
