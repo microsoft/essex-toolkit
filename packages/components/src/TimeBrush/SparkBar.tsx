@@ -2,7 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { createBarGroup, generate, markState, selectAll, selectBarGroup } from './SparkBar.utils.js'
+import {
+	createBarGroup,
+	generate,
+	markState,
+	selectAll,
+	selectBarGroup,
+} from './SparkBar.utils.js'
 import type { GroupedTerm, SparkbarProps } from './TimeBrush.types.js'
 import { SelectionState } from '@thematic/core'
 import { useThematic } from '@thematic/react'

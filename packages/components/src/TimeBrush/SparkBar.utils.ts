@@ -84,26 +84,32 @@ export function selectBarGroup(barGroup: any, handleHover: any, onClick: any) {
 	}
 }
 
-export function selectAll(barGroup: any, onClick: any){
-    const cursor = onClick ? 'pointer' : 'default'
-    if (barGroup) {
-        barGroup.selectAll('.bar').style('cursor', cursor)
-    }
+export function selectAll(barGroup: any, onClick: any) {
+	const cursor = onClick ? 'pointer' : 'default'
+	if (barGroup) {
+		barGroup.selectAll('.bar').style('cursor', cursor)
+	}
 }
 
-export function markState(barGroup: any, getSelectionState: any, marked: any, highlight: any, theme: any){
-    if (barGroup) {
-        barGroup.selectAll('.bar').attr('stroke', (d: any) => {
-            const selectionState = getSelectionState(d)
-            const mark = marked ? marked(d) : false
-            return mark
-                ? highlight
-                : theme
-                        .line({
-                            selectionState,
-                        })
-                        .stroke()
-                        .hex()
-        })
-    }
+export function markState(
+	barGroup: any,
+	getSelectionState: any,
+	marked: any,
+	highlight: any,
+	theme: any,
+) {
+	if (barGroup) {
+		barGroup.selectAll('.bar').attr('stroke', (d: any) => {
+			const selectionState = getSelectionState(d)
+			const mark = marked ? marked(d) : false
+			return mark
+				? highlight
+				: theme
+						.line({
+							selectionState,
+						})
+						.stroke()
+						.hex()
+		})
+	}
 }
