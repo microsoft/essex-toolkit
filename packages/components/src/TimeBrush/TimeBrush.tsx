@@ -6,7 +6,7 @@ import { TermBar } from './TermBar.js'
 import type { TimeBrushProps } from './TimeBrush.types.js'
 import { TimeBrushFooter } from './TimeBrushFooter.js'
 import moment from 'moment'
-import React, { memo, useCallback, useMemo, useState } from 'react'
+import { memo, useCallback, useMemo, useState } from 'react'
 
 const DEFAULT_CHART_WIDTH = 800
 const DEFAULT_WIDTH = 800

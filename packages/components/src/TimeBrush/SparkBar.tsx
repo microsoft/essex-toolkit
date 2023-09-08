@@ -12,7 +12,7 @@ import {
 import type { GroupedTerm, SparkbarProps } from './TimeBrush.types.js'
 import { SelectionState } from '@thematic/core'
 import { useThematic } from '@thematic/react'
-import React, {
+import {
 	memo,
 	useCallback,
 	useLayoutEffect,

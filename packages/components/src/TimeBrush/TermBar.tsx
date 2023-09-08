@@ -6,7 +6,7 @@ import { Sparkbar } from './SparkBar.js'
 import type { TermBarProps } from './TimeBrush.types.js'
 import { scaleTime } from 'd3-scale'
 import moment from 'moment'
-import React, { memo, useCallback, useMemo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 
 const DEFAULT_BAR_WIDTH = 4
 

@@ -3,20 +3,22 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { SelectionState } from '@thematic/core'
-import { line, svg, text } from '@thematic/d3'
 import { useThematic } from '@thematic/react'
 import { brushX } from 'd3-brush'
 import { scaleTime } from 'd3-scale'
 import { select } from 'd3-selection'
-
-import type { TimeBrushFooterProps } from './TimeBrush.types.js'
+import type { GroupedTerm, TimeBrushFooterProps } from './TimeBrush.types.js'
 import {
 	calculateBrush,
+	changePlot,
+	createBarGroup,
+	createPlot,
+	selectAll,
+	selectAllPlot,
 	wholeDateRangeSelected,
 } from './TimeBrushFooter.utils.js'
-import { isoDay } from './format.js'
 import moment from 'moment'
-import React, {
+import {
 	memo,
 	useCallback,
 	useLayoutEffect,
@@ -98,87 +100,21 @@ export const TimeBrushFooter: React.FC<TimeBrushFooterProps> = memo(
 		}, [dateRange])
 
 		useLayoutEffect(() => {
-			select(ref.current).select('svg').remove()
-			const g = select(ref.current)
-				.append('svg')
-				.attr('class', 'BottomTimeBrush-chart')
-				.attr('width', width)
-				.attr('height', height)
-				.call(svg as any, theme.chart())
-				.append('g')
-				.attr('class', 'BottomTimeBrush-plotarea')
-			const bg = g.append('g').attr('class', 'BottomTimeBrush-bars')
+			const g = createPlot(ref, theme, width, height)
 			setPlot(g)
-			setBarGroup(bg)
+			setBarGroup(createBarGroup(g))
 		}, [theme, data, width, height])
 
 		useLayoutEffect(() => {
-			if (data.length > 0) {
-				if (barGroup) {
-					barGroup.selectAll('*').remove()
-					barGroup
-						.selectAll('.bar')
-						.data(data)
-						.enter()
-						.append('line')
-						.attr('class', 'bar')
-						.attr('x1', xScale)
-						.attr('x2', xScale)
-						.attr('y1', 0)
-						.attr('y1', height)
-						.call(
-							line as any,
-							theme.line({ selectionState: SelectionState.NoData }),
-						)
-						.attr('stroke-width', barWidth)
-				}
-			}
+			selectAll(data as GroupedTerm[], barGroup, xScale, height, theme, SelectionState, barWidth)
 		}, [theme, data, barGroup, width, height, barWidth, xScale])
 
 		useLayoutEffect(() => {
-			if (plot) {
-				plot
-					.append('text')
-					.attr('class', 'hover-label')
-					.text(isoDay(dateRange[0]))
-					.attr('transform', `translate(2,${height - 2})`)
-					.call(text as any, theme.text())
-					.attr('font-size', 8)
-				plot
-					.append('text')
-					.attr('class', 'hover-label')
-					.text(isoDay(dateRange[1]))
-					.attr('transform', `translate(${width - 2},${height - 2})`)
-					.call(text as any, theme.text())
-					.attr('font-size', 8)
-					.attr('text-anchor', 'end')
-			}
+			changePlot(plot, dateRange, height, theme, width)
 		}, [theme, data, plot, height, width, dateRange])
 
 		useLayoutEffect(() => {
-			if (plot) {
-				plot.selectAll('.brush-label').remove()
-				if (internalBrushRange) {
-					const [start, end] = internalBrushRange
-					const sx = xScale(start)
-					const ex = xScale(end)
-					plot
-						.append('text')
-						.attr('class', 'brush-label')
-						.text(isoDay(start))
-						.attr('transform', `translate(${sx},${8})`)
-						.call(text as any, theme.text())
-						.attr('font-size', 8)
-						.attr('text-anchor', 'end')
-					plot
-						.append('text')
-						.attr('class', 'brush-label')
-						.text(isoDay(end))
-						.attr('transform', `translate(${ex},${8})`)
-						.call(text as any, theme.text())
-						.attr('font-size', 8)
-				}
-			}
+			selectAllPlot(plot, internalBrushRange, xScale, theme)
 		}, [theme, data, plot, height, width, xScale, internalBrushRange])
 
 		useLayoutEffect(() => {
