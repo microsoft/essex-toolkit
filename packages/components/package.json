@@ -21,7 +21,6 @@
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "dependencies": {
-    "@essex-js-toolkit/hooks": "^1.1.2",
     "@essex/toolbox": "workspace:^",
     "@fluentui/utilities": "^8.13.18",
     "@types/d3-array": "^3.0.3",

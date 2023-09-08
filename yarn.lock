@@ -2021,31 +2021,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex-js-toolkit/hooks@npm:^1.1.2":
-  version: 1.1.5
-  resolution: "@essex-js-toolkit/hooks@npm:1.1.5"
-  dependencies:
-    "@essex-js-toolkit/toolbox": "npm:^1.1.4"
-    resize-observer-polyfill: "npm:^1.5.1"
-  peerDependencies:
-    "@types/node": "*"
-    "@types/react": "*"
-    "@types/react-dom": "*"
-    core-js: "*"
-    react: ">=16.8.0"
-  checksum: d2b7d4449b4855edf8b8b2f331b5491fe6597b55131e7627d52b01160cdd9c7f5be38de9f0f7dbc4c4c33d9b78aa914be5b77c60a7f4d8530c3af4e33f9ab70f
-  languageName: node
-  linkType: hard
-
-"@essex-js-toolkit/toolbox@npm:^1.1.4":
-  version: 1.1.5
-  resolution: "@essex-js-toolkit/toolbox@npm:1.1.5"
-  dependencies:
-    core-js: "npm:^3.14.0"
-  checksum: a2f52e5f82cf723e1376ee3532d3125dd192701321c378023def84b52670fdd322162530964519497b654c0ad3c162138149f7416c8652c83c8286193903625b
-  languageName: node
-  linkType: hard
-
 "@essex/api-extractor-config@npm:^4.0.0":
   version: 4.0.0
   resolution: "@essex/api-extractor-config@npm:4.0.0"
@@ -2127,7 +2102,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@essex/components@workspace:packages/components"
   dependencies:
-    "@essex-js-toolkit/hooks": "npm:^1.1.2"
     "@essex/scripts": "npm:^26.0.0"
     "@essex/toolbox": "workspace:^"
     "@fluentui/react": "npm:^8.111.1"
@@ -9721,13 +9695,6 @@ __metadata:
   version: 3.32.1
   resolution: "core-js-pure@npm:3.32.1"
   checksum: 6ebd41c95cf5da8e032f9c9100360196c5e2af8b0c074a6e151c96e6390329814e87ad737bc44566990928d9af73304252112b6c15d3f43784473d0260bbe0f4
-  languageName: node
-  linkType: hard
-
-"core-js@npm:^3.14.0":
-  version: 3.32.1
-  resolution: "core-js@npm:3.32.1"
-  checksum: 8d76615ef67f2cf8d2af05e4ec8e5663c941a461c97ff3f53eca6b4ab6fb765ef1b88509827b510963044aa122153f25c3073f3de7fcad06cc1b3f6c06a725c3
   languageName: node
   linkType: hard
 

@@ -15,7 +15,7 @@ import React, {
 	useState,
 	useMemo,
 } from 'react'
-import { SparkbarProps } from './TimeBrush.types.js'
+import type { SparkbarProps } from './TimeBrush.types.js'
 
 export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 	data,

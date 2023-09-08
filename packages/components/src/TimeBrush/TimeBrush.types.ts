@@ -1,12 +1,12 @@
-/**
- * Serialized ISO date string for start/end date of a range
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
  */
-export type ISODateRange = [string, string]
-
 export interface TimeBrushProps {
 	elements: GroupedTerm[]
 	width?: number
 	height?: number
+	chartWidth?: number
 	dateRange?: [Date, Date]
 	selectionRange?: [Date, Date]
 	markedDate?: Date

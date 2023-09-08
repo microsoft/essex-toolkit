@@ -5,7 +5,7 @@
 import { scaleTime } from 'd3-scale'
 import moment from 'moment'
 import React, { memo, useCallback, useMemo } from 'react'
-import { TermBarProps } from './TimeBrush.types.js'
+import type { TermBarProps } from './TimeBrush.types.js'
 import { Sparkbar } from './SparkBar.js'
 
 export const TermBar: React.FC<TermBarProps> = memo(function TermBar({

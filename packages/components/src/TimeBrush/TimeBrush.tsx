@@ -5,7 +5,7 @@
 import React, { memo, useCallback, useState, useMemo } from 'react'
 import { TermBar } from './TermBar.js'
 import { TimeBrushFooter } from './TimeBrushFooter.js'
-import { TimeBrushProps } from './TimeBrush.types.js'
+import type { TimeBrushProps } from './TimeBrush.types.js'
 import moment from 'moment'
 
 const CHART_WIDTH = 800
@@ -15,6 +15,7 @@ export const TimeBrush: React.FC<TimeBrushProps> = memo(
 	function TimeBrush({
 		width = 800,
 		height = 24,
+		chartWidth = CHART_WIDTH,
 		dateRange,
 		markedDate,
 		elements
@@ -23,14 +24,14 @@ export const TimeBrush: React.FC<TimeBrushProps> = memo(
 		const [to, setTo] = useState<string>('to')
 
 		const barWidth = useMemo(() => {
-			if (dateRange && CHART_WIDTH) {
+			if (dateRange && chartWidth) {
 				const start = moment.utc(dateRange[0])
 				const stop = moment.utc(dateRange[1])
 				const delta = stop.diff(start, 'days')
-				return (CHART_WIDTH - delta * BAR_GAP) / delta
+				return (chartWidth - delta * BAR_GAP) / delta
 			}
 			return 4
-		}, [CHART_WIDTH, dateRange])
+		}, [chartWidth, dateRange])
 
 		const handleBrushEnd = useCallback(
 			(range: [Date, Date] | null) => {
