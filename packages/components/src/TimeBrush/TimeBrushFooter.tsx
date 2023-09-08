@@ -2,11 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { SelectionState } from '@thematic/core'
-import { useThematic } from '@thematic/react'
-import { brushX } from 'd3-brush'
-import { scaleTime } from 'd3-scale'
-import { select } from 'd3-selection'
 import type { GroupedTerm, TimeBrushFooterProps } from './TimeBrush.types.js'
 import {
 	calculateBrush,
@@ -17,6 +12,11 @@ import {
 	selectAllPlot,
 	wholeDateRangeSelected,
 } from './TimeBrushFooter.utils.js'
+import { SelectionState } from '@thematic/core'
+import { useThematic } from '@thematic/react'
+import { brushX } from 'd3-brush'
+import { scaleTime } from 'd3-scale'
+import { select } from 'd3-selection'
 import moment from 'moment'
 import {
 	memo,
@@ -106,7 +106,15 @@ export const TimeBrushFooter: React.FC<TimeBrushFooterProps> = memo(
 		}, [theme, data, width, height])
 
 		useLayoutEffect(() => {
-			selectAll(data as GroupedTerm[], barGroup, xScale, height, theme, SelectionState, barWidth)
+			selectAll(
+				data as GroupedTerm[],
+				barGroup,
+				xScale,
+				height,
+				theme,
+				SelectionState,
+				barWidth,
+			)
 		}, [theme, data, barGroup, width, height, barWidth, xScale])
 
 		useLayoutEffect(() => {

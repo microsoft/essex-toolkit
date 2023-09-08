@@ -11,6 +11,7 @@ import { memo, useCallback, useMemo, useState } from 'react'
 const DEFAULT_CHART_WIDTH = 800
 const DEFAULT_WIDTH = 800
 const DEFAULT_HEIGHT = 24
+const DEFAULT_BAR_WIDTH = 4
 const BAR_GAP = 1
 
 export const TimeBrush: React.FC<TimeBrushProps> = memo(function TimeBrush({
@@ -31,7 +32,7 @@ export const TimeBrush: React.FC<TimeBrushProps> = memo(function TimeBrush({
 			const delta = stop.diff(start, 'days')
 			return (chartWidth - delta * BAR_GAP) / delta
 		}
-		return 4
+		return DEFAULT_BAR_WIDTH
 	}, [chartWidth, dateRange])
 
 	const handleBrushEnd = useCallback(

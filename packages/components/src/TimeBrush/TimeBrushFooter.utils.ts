@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import moment from 'moment'
-import { select } from 'd3-selection'
-import { line, svg, text } from '@thematic/d3'
-import { GroupedTerm } from './TimeBrush.types.js'
+import type { GroupedTerm } from './TimeBrush.types.js'
 import { isoDay } from './format.js'
+import { line, svg, text } from '@thematic/d3'
+import { select } from 'd3-selection'
+import moment from 'moment'
 
 export function round(date: Date): Date {
 	const m = moment.utc(date)
@@ -46,10 +46,12 @@ export function wholeDateRangeSelected(
 	)
 }
 
-export function createPlot(ref: any,
+export function createPlot(
+	ref: any,
 	theme: any,
 	width: number,
-	height: number): any{
+	height: number,
+): any {
 	select(ref.current).select('svg').remove()
 	const g = select(ref.current)
 		.append('svg')
@@ -62,11 +64,19 @@ export function createPlot(ref: any,
 	return g
 }
 
-export function createBarGroup(g: any): any{
+export function createBarGroup(g: any): any {
 	return g.append('g').attr('class', 'BottomTimeBrush-bars')
 }
 
-export function selectAll(data: GroupedTerm[], barGroup: any, xScale: any, height: number, theme: any, SelectionState: any, barWidth: number){
+export function selectAll(
+	data: GroupedTerm[],
+	barGroup: any,
+	xScale: any,
+	height: number,
+	theme: any,
+	SelectionState: any,
+	barWidth: number,
+) {
 	if (data.length > 0) {
 		if (barGroup) {
 			barGroup.selectAll('*').remove()
@@ -89,7 +99,13 @@ export function selectAll(data: GroupedTerm[], barGroup: any, xScale: any, heigh
 	}
 }
 
-export function changePlot(plot: any, dateRange: [Date, Date], height: number, theme: any, width: number){
+export function changePlot(
+	plot: any,
+	dateRange: [Date, Date],
+	height: number,
+	theme: any,
+	width: number,
+) {
 	if (plot) {
 		plot
 			.append('text')
@@ -109,7 +125,12 @@ export function changePlot(plot: any, dateRange: [Date, Date], height: number, t
 	}
 }
 
-export function selectAllPlot(plot: any, internalBrushRange: [Date, Date] | null, xScale: any, theme: any){
+export function selectAllPlot(
+	plot: any,
+	internalBrushRange: [Date, Date] | null,
+	xScale: any,
+	theme: any,
+) {
 	if (plot) {
 		plot.selectAll('.brush-label').remove()
 		if (internalBrushRange) {
