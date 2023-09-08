@@ -69,7 +69,7 @@ export function createBarGroup(g: any): any {
 }
 
 export function selectAll(
-	data: GroupedTerm[],
+	data: any,
 	barGroup: any,
 	xScale: any,
 	height: number,

@@ -107,7 +107,7 @@ export const TimeBrushFooter: React.FC<TimeBrushFooterProps> = memo(
 
 		useLayoutEffect(() => {
 			selectAll(
-				data as GroupedTerm[],
+				data,
 				barGroup,
 				xScale,
 				height,
