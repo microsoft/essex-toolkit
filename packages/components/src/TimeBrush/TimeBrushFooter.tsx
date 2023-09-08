@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GroupedTerm, TimeBrushFooterProps } from './TimeBrush.types.js'
+import type { TimeBrushFooterProps } from './TimeBrush.types.js'
 import {
 	calculateBrush,
 	changePlot,
@@ -106,15 +106,7 @@ export const TimeBrushFooter: React.FC<TimeBrushFooterProps> = memo(
 		}, [theme, data, width, height])
 
 		useLayoutEffect(() => {
-			selectAll(
-				data,
-				barGroup,
-				xScale,
-				height,
-				theme,
-				SelectionState,
-				barWidth,
-			)
+			selectAll(data, barGroup, xScale, height, theme, SelectionState, barWidth)
 		}, [theme, data, barGroup, width, height, barWidth, xScale])
 
 		useLayoutEffect(() => {
