@@ -10,8 +10,11 @@ import { scaleTime } from 'd3-scale'
 import { select } from 'd3-selection'
 
 import type { TimeBrushFooterProps } from './TimeBrush.types.js'
+import {
+	calculateBrush,
+	wholeDateRangeSelected,
+} from './TimeBrushFooter.utils.js'
 import { isoDay } from './format.js'
-import { calculateBrush, wholeDateRangeSelected } from './utils.js'
 import moment from 'moment'
 import React, {
 	memo,

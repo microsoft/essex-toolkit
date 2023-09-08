@@ -1,8 +1,8 @@
-import { TimeBrush } from './TimeBrush.js'
 /*!
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { TimeBrush } from './TimeBrush.js'
 import type { TimeBrushProps } from './TimeBrush.types.js'
 
 const meta = {

@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { Sparkbar } from './SparkBar.js'
+import type { TermBarProps } from './TimeBrush.types.js'
 import { scaleTime } from 'd3-scale'
 import moment from 'moment'
 import React, { memo, useCallback, useMemo } from 'react'
-import { Sparkbar } from './SparkBar.js'
-import type { TermBarProps } from './TimeBrush.types.js'
 
 const DEFAULT_BAR_WIDTH = 4
 
@@ -56,20 +56,20 @@ export const TermBar: React.FC<TermBarProps> = memo(function TermBar({
 				.range([barWidth / 2, width - barWidth / 2]),
 		[domain, width, barWidth],
 	)
-	
-	const xScale = useMemo(() => (d:any, i: number) => time(d.date), [time])
+
+	const xScale = useMemo(() => (d: any, i: number) => time(d.date), [time])
 	return (
 		<Sparkbar
-		data={terms}
-		width={width}
-		height={height}
-		id={id}
-		value={accessor}
-		xScale={xScale as (input: unknown, i: number) => number}
-		selected={selected}
-		barWidth={barWidth}
-		marked={marked}
-		nodata={nodata}
+			data={terms}
+			width={width}
+			height={height}
+			id={id}
+			value={accessor}
+			xScale={xScale as (input: unknown, i: number) => number}
+			selected={selected}
+			barWidth={barWidth}
+			marked={marked}
+			nodata={nodata}
 		/>
 	)
 })
