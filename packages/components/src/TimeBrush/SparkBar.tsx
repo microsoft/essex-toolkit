@@ -34,7 +34,7 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 	const theme = useThematic()
 	const ref = useRef(null)
 	const handleClick = useCallback(
-		d => {
+		(		d: any) => {
 			if (onClick) {
 				onClick(d)
 			}
@@ -51,7 +51,7 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 		[nodata],
 	)
 	const [hovered, setHovered] = useState<any>(null)
-	const handleHover = useCallback(d => setHovered(d), [])
+	const handleHover = useCallback((d: any) => setHovered(d), [])
 	const [barGroup, setBarGroup] = useState<any>()
 
 	useLayoutEffect(() => {
@@ -75,7 +75,7 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 	useLayoutEffect(() => {
 		if (data.length > 0) {
 			const ext = data.reduce<[number, number]>(
-				(acc, cur) => {
+				(acc: number[], cur: any) => {
 					if (!nodataFn(cur)) {
 						const val = value(cur)
 						return [Math.min(acc[0], val), Math.max(acc[1], val)]
@@ -85,9 +85,9 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 				[Number.MAX_VALUE, Number.MIN_VALUE],
 			)
 			const hScale = scaleLinear().domain(ext).range([0, height])
-			const x = xScale ? xScale : (d, i) => i * (barWidth + barGap)
-			const h = d => (nodataFn(d) ? height : hScale(value(d)))
-			const y = d => height - (h(d) || 0)
+			const x = xScale ? xScale : (d: any, i: any) => i * (barWidth + barGap)
+			const h = (d: any) => (nodataFn(d) ? height : hScale(value(d)))
+			const y = (d: any) => height - (h(d) || 0)
 
 			if (barGroup) {
 				barGroup.selectAll('*').remove()
@@ -122,7 +122,7 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 		if (barGroup) {
 			barGroup
 				.selectAll('.bar')
-				.on('mouseover', d => handleHover(d))
+				.on('mouseover', (d: any) => handleHover(d))
 				.on('mouseout', () => handleHover(null))
 				.on('click', handleClick)
 		}
@@ -139,7 +139,7 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 	const highlight = useMemo(() => theme.scales().nominal(10)(1).hex(), [theme])
 
 	useLayoutEffect(() => {
-		const getSelectionState = d => {
+		const getSelectionState = (d: any) => {
 			if (nodataFn(d)) {
 				return SelectionState.NoData
 			}
@@ -153,7 +153,7 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 			return SelectionState.Normal
 		}
 		if (barGroup) {
-			barGroup.selectAll('.bar').attr('stroke', d => {
+			barGroup.selectAll('.bar').attr('stroke', (d: any) => {
 				const selectionState = getSelectionState(d)
 				const mark = marked ? marked(d) : false
 				return mark

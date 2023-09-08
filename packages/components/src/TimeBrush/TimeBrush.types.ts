@@ -10,10 +10,10 @@ export interface GroupedTerm {
 
 export interface TimeBrushProps {
 	elements: GroupedTerm[]
+	dateRange: [Date, Date]
 	width?: number
 	height?: number
 	chartWidth?: number
-	dateRange?: [Date, Date]
 	selectionRange?: [Date, Date]
 	markedDate?: Date
 }
@@ -84,7 +84,7 @@ export interface TimeBrushFooterProps {
 	/**
 	 * Date range that the time brush should cover
 	 */
-	dateRange?: [Date, Date]
+	dateRange: [Date, Date]
 	/**
 	 * Selected brush range
 	 */

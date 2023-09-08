@@ -48,7 +48,7 @@ export const TimeBrushFooter: React.FC<TimeBrushFooterProps> = memo(function Tim
 		[Date, Date] | null
 	>(brushRange)
 
-	const handleBrushEnd = useCallback((event) => {
+	const handleBrushEnd = useCallback((event: any) => {
 		let rng = calculateBrush(event, xScale, roundToDay)
 		if (rng && wholeDateRangeSelected(rng, dateRange)) {
 			// Clear the brush if the whole date range is selected
@@ -60,7 +60,7 @@ export const TimeBrushFooter: React.FC<TimeBrushFooterProps> = memo(function Tim
 		}
 	}, [xScale, roundToDay, onBrushEnd, dateRange])
 
-	const handleBrushMove = useCallback((event) => {
+	const handleBrushMove = useCallback((event: any) => {
 		const range = calculateBrush(event, xScale, roundToDay)
 		setInternalBrushRange(range)
 	}, [xScale, roundToDay])
