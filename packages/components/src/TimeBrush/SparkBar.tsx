@@ -36,14 +36,6 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 }) {
 	const theme = useThematic()
 	const ref = useRef(null)
-	const handleClick = useCallback(
-		(d: any) => {
-			if (onClick) {
-				onClick(d)
-			}
-		},
-		[onClick],
-	)
 	const nodataFn = useCallback(
 		(d: unknown) => {
 			if (nodata) {
@@ -127,9 +119,9 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 				.selectAll('.bar')
 				.on('mouseover', (d: any) => handleHover(d))
 				.on('mouseout', () => handleHover(null))
-				.on('click', handleClick)
+				.on('click', onClick)
 		}
-	}, [data, barGroup, id, handleClick, handleHover])
+	}, [data, barGroup, id, onClick, handleHover])
 
 	useLayoutEffect(() => {
 		const cursor = onClick ? 'pointer' : 'default'
