@@ -19,71 +19,8 @@ import React, {
 	useMemo,
 } from 'react'
 import { isoDay } from './format.js'
-
-// TODO: unify this with the spark bar - it is just a brushed/labeled variant
-interface TimeBrushFooterProps {
-	/**
-	 * Date range that the time brush should cover
-	 */
-	dateRange: [Date, Date]
-	/**
-	 * Selected brush range
-	 */
-	brushRange?: [Date, Date]
-	/**
-	 * Width of the chart in pixels
-	 */
-	width: number
-	/**
-	 * Height of the chart in pixels
-	 */
-	height: number
-	/**
-	 * Width of each bar on the chart
-	 */
-	barWidth?: number
-
-	onBrushEnd?: (range: [Date, Date] | null) => void
-	/**
-	 * Round the brushing to full days
-	 * (note, a more sophisticated impl could specify a round unit like 'day', 'hour')
-	 */
-	roundToDay?: boolean
-}
-
-function round(date: Date): Date {
-	const m = moment.utc(date)
-	const d = m.date()
-	const h = m.hour()
-	m.hour(0)
-		.minute(0)
-		.second(0)
-		.millisecond(0)
-		.date(h < 12 ? d : d + 1)
-	return m.toDate()
-}
-
-function calculateBrush(event, scale: any, rounded): [Date, Date] | null {
-	// this is a d3 global that is dynamically updated with the events
-	const { selection } = event
-	if (selection) {
-		const start = scale.invert(selection[0])
-		const stop = scale.invert(selection[1])
-		const roundedStart = rounded ? round(start) : start
-		const roundedStop = rounded ? round(stop) : stop
-		return [roundedStart, roundedStop]
-	}
-	return null
-}
-
-function wholeDateRangeSelected(
-	[s1, s2]: [Date, Date],
-	[d1, d2]: [Date, Date],
-): boolean {
-	return (
-		moment(s1).isSame(moment(d1), 'day') && moment(s2).isSame(moment(d2), 'day')
-	)
-}
+import { TimeBrushFooterProps } from './TimeBrush.types.js'
+import { calculateBrush, wholeDateRangeSelected } from './utils.js'
 
 export const TimeBrushFooter: React.FC<TimeBrushFooterProps> = memo(function TimeBrushFooter({
 	dateRange,

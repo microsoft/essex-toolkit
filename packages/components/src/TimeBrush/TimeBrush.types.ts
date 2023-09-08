@@ -2,6 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+export interface GroupedTerm {
+	term: string
+	date: Date
+	count: number
+}
+
 export interface TimeBrushProps {
 	elements: GroupedTerm[]
 	width?: number
@@ -10,12 +16,6 @@ export interface TimeBrushProps {
 	dateRange?: [Date, Date]
 	selectionRange?: [Date, Date]
 	markedDate?: Date
-}
-
-export interface GroupedTerm {
-	term: string
-	date: Date
-	count: number
 }
 
 export interface TermBarProps {
@@ -78,4 +78,34 @@ export interface SparkbarProps {
 	 * Special indicator for a data point to highlight above and beyond normal selection.
 	 */
 	marked?: (d: unknown) => boolean
+}
+
+export interface TimeBrushFooterProps {
+	/**
+	 * Date range that the time brush should cover
+	 */
+	dateRange: [Date, Date]
+	/**
+	 * Selected brush range
+	 */
+	brushRange?: [Date, Date]
+	/**
+	 * Width of the chart in pixels
+	 */
+	width: number
+	/**
+	 * Height of the chart in pixels
+	 */
+	height: number
+	/**
+	 * Width of each bar on the chart
+	 */
+	barWidth?: number
+
+	onBrushEnd?: (range: [Date, Date] | null) => void
+	/**
+	 * Round the brushing to full days
+	 * (note, a more sophisticated impl could specify a round unit like 'day', 'hour')
+	 */
+	roundToDay?: boolean
 }
