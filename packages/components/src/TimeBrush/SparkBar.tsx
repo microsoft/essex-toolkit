@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { createBarGroup, generate, selectBarGroup } from './SparkBar.utils.js'
+import { createBarGroup, generate, markState, selectAll, selectBarGroup } from './SparkBar.utils.js'
 import type { GroupedTerm, SparkbarProps } from './TimeBrush.types.js'
 import { SelectionState } from '@thematic/core'
 import { useThematic } from '@thematic/react'
@@ -81,10 +81,7 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 	}, [data, barGroup, id, onClick, handleHover])
 
 	useLayoutEffect(() => {
-		const cursor = onClick ? 'pointer' : 'default'
-		if (barGroup) {
-			barGroup.selectAll('.bar').style('cursor', cursor)
-		}
+		selectAll(barGroup, onClick)
 	}, [data, barGroup, onClick])
 
 	// generate a complimentary highlight
@@ -104,20 +101,7 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 			}
 			return SelectionState.Normal
 		}
-		if (barGroup) {
-			barGroup.selectAll('.bar').attr('stroke', (d: any) => {
-				const selectionState = getSelectionState(d)
-				const mark = marked ? marked(d) : false
-				return mark
-					? highlight
-					: theme
-							.line({
-								selectionState,
-							})
-							.stroke()
-							.hex()
-			})
-		}
+		markState(barGroup, getSelectionState, marked, highlight, theme)
 	}, [
 		theme,
 		data,
