@@ -1,0 +1,1779 @@
+{
+  "metadata": {
+    "toolPackage": "@microsoft/api-extractor",
+    "toolVersion": "7.29.2",
+    "schemaVersion": 1009,
+    "oldestForwardsCompatibleVersion": 1001,
+    "tsdocConfig": {
+      "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
+      "noStandardTags": true,
+      "tagDefinitions": [
+        {
+          "tagName": "@alpha",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@beta",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@defaultValue",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@decorator",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@deprecated",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@eventProperty",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@example",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@experimental",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@inheritDoc",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@internal",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@label",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@link",
+          "syntaxKind": "inline",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@override",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@packageDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@param",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@privateRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@public",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@readonly",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@remarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@returns",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@sealed",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@see",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@throws",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@typeParam",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@virtual",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@betaDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@internalRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@preapproved",
+          "syntaxKind": "modifier"
+        }
+      ],
+      "supportForTags": {
+        "@alpha": true,
+        "@beta": true,
+        "@defaultValue": true,
+        "@decorator": true,
+        "@deprecated": true,
+        "@eventProperty": true,
+        "@example": true,
+        "@experimental": true,
+        "@inheritDoc": true,
+        "@internal": true,
+        "@label": true,
+        "@link": true,
+        "@override": true,
+        "@packageDocumentation": true,
+        "@param": true,
+        "@privateRemarks": true,
+        "@public": true,
+        "@readonly": true,
+        "@remarks": true,
+        "@returns": true,
+        "@sealed": true,
+        "@see": true,
+        "@throws": true,
+        "@typeParam": true,
+        "@virtual": true,
+        "@betaDocumentation": true,
+        "@internalRemarks": true,
+        "@preapproved": true
+      },
+      "reportUnsupportedHtmlElements": false
+    }
+  },
+  "kind": "Package",
+  "canonicalReference": "@essex/thematic-lineup!",
+  "docComment": "",
+  "name": "@essex/thematic-lineup",
+  "preserveMemberOrder": false,
+  "members": [
+    {
+      "kind": "EntryPoint",
+      "canonicalReference": "@essex/thematic-lineup!",
+      "name": "",
+      "preserveMemberOrder": false,
+      "members": [
+        {
+          "kind": "Variable",
+          "canonicalReference": "@essex/thematic-lineup!applyFilters:var",
+          "docComment": "/**\n * Apply a list of Filters to a LineUp instance.\n *\n * @param lineup - the lineup instance\n *\n * @param filters - the filter array\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "applyFilters: "
+            },
+            {
+              "kind": "Content",
+              "text": "(lineup: "
+            },
+            {
+              "kind": "Reference",
+              "text": "LineUp",
+              "canonicalReference": "@essex/thematic-lineup!~LineUp:type"
+            },
+            {
+              "kind": "Content",
+              "text": ", filters: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Filter",
+              "canonicalReference": "@essex/thematic-lineup!Filter:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "[]) => void"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "applyFilters",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 6
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@essex/thematic-lineup!buildBooleanColumn:var",
+          "docComment": "/**\n * Builds a boolean-based column, which is a variant on categorical. Lineup only provides a subset of builders, so this wraps it with explicit typing.\n *\n * @param config - the column configuration\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "buildBooleanColumn: "
+            },
+            {
+              "kind": "Content",
+              "text": "(config: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnConfig",
+              "canonicalReference": "@essex/thematic-lineup!ColumnConfig:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", data?: any[]) => any"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "buildBooleanColumn",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 4
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@essex/thematic-lineup!buildCategoricalColumn:var",
+          "docComment": "/**\n * Builds a categorical column, computing the unique categories as needed.\n *\n * @param config - the categorical column configuration\n *\n * @param data - the data\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "buildCategoricalColumn: "
+            },
+            {
+              "kind": "Content",
+              "text": "(config: "
+            },
+            {
+              "kind": "Reference",
+              "text": "CategoricalColumnConfig",
+              "canonicalReference": "@essex/thematic-lineup!CategoricalColumnConfig:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", data?: any[]) => any"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "buildCategoricalColumn",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 4
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@essex/thematic-lineup!buildLinkColumn:var",
+          "docComment": "/**\n * Builds a link column, which is a string column where the text is a hyperlink. Note that pattern and params are optional config properties, that if omitted simply results in a plain string.\n *\n * @param config - the link column configuration\n *\n * @param data - the data\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "buildLinkColumn: "
+            },
+            {
+              "kind": "Content",
+              "text": "(config: "
+            },
+            {
+              "kind": "Reference",
+              "text": "LinkColumnConfig",
+              "canonicalReference": "@essex/thematic-lineup!LinkColumnConfig:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", data?: any[]) => any"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "buildLinkColumn",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 4
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@essex/thematic-lineup!buildNumberColumn:var",
+          "docComment": "/**\n * Builds a standard number column, applying supplied domain or computing as needed.\n *\n * @param config - the number column configurationw\n *\n * @param data - the data\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "buildNumberColumn: "
+            },
+            {
+              "kind": "Content",
+              "text": "(config: "
+            },
+            {
+              "kind": "Reference",
+              "text": "NumberColumnConfig",
+              "canonicalReference": "@essex/thematic-lineup!NumberColumnConfig:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", data?: any[]) => any"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "buildNumberColumn",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 4
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@essex/thematic-lineup!buildSetColumn:var",
+          "docComment": "/**\n * Builds a set-style column, which is a form of categorical column. Here we default the renderer to a heatmap.\n *\n * @param config - the set-column configuration\n *\n * @param data - the data\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "buildSetColumn: "
+            },
+            {
+              "kind": "Content",
+              "text": "(config: "
+            },
+            {
+              "kind": "Reference",
+              "text": "SetColumnConfig",
+              "canonicalReference": "@essex/thematic-lineup!SetColumnConfig:type"
+            },
+            {
+              "kind": "Content",
+              "text": ", data?: any[]) => any"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "buildSetColumn",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 4
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@essex/thematic-lineup!buildStringColumn:var",
+          "docComment": "/**\n * Builds a basic string column, which is also the default column type.\n *\n * @param config - the column configuratino\n *\n * @param data - the data\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "buildStringColumn: "
+            },
+            {
+              "kind": "Content",
+              "text": "(config: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnConfig",
+              "canonicalReference": "@essex/thematic-lineup!ColumnConfig:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", data?: any[]) => any"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "buildStringColumn",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 4
+          }
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@essex/thematic-lineup!CategoricalColumnConfig:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface CategoricalColumnConfig extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnConfig",
+              "canonicalReference": "@essex/thematic-lineup!ColumnConfig:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "CategoricalColumnConfig",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!CategoricalColumnConfig#categories:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "categories?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "categories",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!CategoricalColumnConfig#colors:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "colors?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(keys: any[]) => (key: any) => "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Color",
+                  "canonicalReference": "@thematic/color!Color:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "colors",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@essex/thematic-lineup!ColumnConfig:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ColumnConfig "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ColumnConfig",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!ColumnConfig#color:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "color?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "color",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!ColumnConfig#description:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "description?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "description",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!ColumnConfig#frozen:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "frozen?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "frozen",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!ColumnConfig#label:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "label?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "label",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!ColumnConfig#name:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "name: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "name",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!ColumnConfig#renderer:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "renderer?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "renderer",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!ColumnConfig#type:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "type",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!ColumnConfig#width:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "width?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "width",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@essex/thematic-lineup!createNumberColorScale:var",
+          "docComment": "/**\n * Creates a nominal scale for numeric column assignment. This looks through the configs to count up the numeric columns, so that each one can be assigned a unique color from the scale. TODO: the scale function could be much more flexbile like d3 scales (domain/range), this just assumes an auto-incrementing index based on column order\n *\n * @param scaleCreator - Function that returns a scale. The returned scale should accept a number and return a mapped Color.\n *\n * @param configs - List of ColumnConfig object so we can count up the number columns\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "createNumberColorScale: "
+            },
+            {
+              "kind": "Content",
+              "text": "(scaleCreator: (count: number) => (index: number) => "
+            },
+            {
+              "kind": "Reference",
+              "text": "Color",
+              "canonicalReference": "@thematic/color!Color:class"
+            },
+            {
+              "kind": "Content",
+              "text": ", configs: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnConfig",
+              "canonicalReference": "@essex/thematic-lineup!ColumnConfig:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "[]) => (() => string)"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "createNumberColorScale",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 6
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@essex/thematic-lineup!deriveCategories:var",
+          "docComment": "/**\n * Gets unique list of categories for a column. If the data property used for the column is a single value, categoryKey is not required, because it is the same as\n *\n * @param config - the column configuration\n *\n * @param data - the data\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "deriveCategories: "
+            },
+            {
+              "kind": "Content",
+              "text": "(config: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnConfig",
+              "canonicalReference": "@essex/thematic-lineup!ColumnConfig:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", data?: any[]) => string[]"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "deriveCategories",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 4
+          }
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@essex/thematic-lineup!Filter:interface",
+          "docComment": "/**\n * Filter definition.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface Filter "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Filter",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!Filter#operation:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "operation: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FilterOperation",
+                  "canonicalReference": "@essex/thematic-lineup!FilterOperation:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "operation",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!Filter#propertyName:member",
+              "docComment": "/**\n * What property (which translates to a column) to filter.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "propertyName: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "propertyName",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!Filter#type:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FilterType",
+                  "canonicalReference": "@essex/thematic-lineup!FilterType:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "type",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!Filter#value:member",
+              "docComment": "/**\n * The value to filter with.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "value: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "value",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Enum",
+          "canonicalReference": "@essex/thematic-lineup!FilterOperation:enum",
+          "docComment": "/**\n * Filter operation to apply. TODO: complete the impls.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare enum FilterOperation "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "FilterOperation",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/thematic-lineup!FilterOperation.Contains:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Contains = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Contains\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Contains"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/thematic-lineup!FilterOperation.DoesNotContain:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "DoesNotContain = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"DoesNotContain\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "DoesNotContain"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/thematic-lineup!FilterOperation.Equal:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Equal = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Equal\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Equal"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/thematic-lineup!FilterOperation.GreaterThan:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "GreaterThan = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"GreaterThan\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "GreaterThan"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/thematic-lineup!FilterOperation.GreaterThanOrEqual:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "GreaterThanOrEqual = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"GreaterThanOrEqual\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "GreaterThanOrEqual"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/thematic-lineup!FilterOperation.LessThan:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "LessThan = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"LessThan\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "LessThan"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/thematic-lineup!FilterOperation.LessThanOrEqual:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "LessThanOrEqual = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"LessThanOrEqual\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "LessThanOrEqual"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/thematic-lineup!FilterOperation.None:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "None = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"None\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "None"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/thematic-lineup!FilterOperation.NotEqual:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "NotEqual = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"NotEqual\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "NotEqual"
+            }
+          ]
+        },
+        {
+          "kind": "Enum",
+          "canonicalReference": "@essex/thematic-lineup!FilterType:enum",
+          "docComment": "/**\n * Type of filter to apply. TODO: round out the other data types supported by LineUp.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare enum FilterType "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "FilterType",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/thematic-lineup!FilterType.Number:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Number = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "1"
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Number"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@essex/thematic-lineup!FilterType.Text:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Text = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "0"
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Text"
+            }
+          ]
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@essex/thematic-lineup!findColumn:var",
+          "docComment": "/**\n * find a lineup column using the label, because the id name is not copied to the final desc\n *\n * @param lineup - the lineup instance\n *\n * @param name - the column name\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "findColumn: "
+            },
+            {
+              "kind": "Content",
+              "text": "(lineup: "
+            },
+            {
+              "kind": "Reference",
+              "text": "LineUp",
+              "canonicalReference": "@essex/thematic-lineup!~LineUp:type"
+            },
+            {
+              "kind": "Content",
+              "text": ", name: string) => any"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "findColumn",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 4
+          }
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@essex/thematic-lineup!LinkColumnConfig:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface LinkColumnConfig extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnConfig",
+              "canonicalReference": "@essex/thematic-lineup!ColumnConfig:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "LinkColumnConfig",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!LinkColumnConfig#params:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "params?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Record",
+                  "canonicalReference": "!Record:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, any>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "params",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!LinkColumnConfig#pattern:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "pattern?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "pattern",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            }
+          ]
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@essex/thematic-lineup!nameToLabel:var",
+          "docComment": "/**\n * Converts a column name to a label by uppercasing the first letter. This is used here because LineUp does not expose the names to us once the instance is built, so we often have to filter based on the label. Note that this is error-prone, because the label could be hand set by a dev. See https://github.com/lineupjs/lineupjs/blob/23ca83caefc3200156d4a3af5d1f14c59db76657/src/builder/column/ColumnBuilder.ts#L7\n *\n * @param name - the name to convert\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "nameToLabel: "
+            },
+            {
+              "kind": "Content",
+              "text": "(name?: string) => string | undefined"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "nameToLabel",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@essex/thematic-lineup!NumberColumnConfig:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface NumberColumnConfig extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnConfig",
+              "canonicalReference": "@essex/thematic-lineup!ColumnConfig:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "NumberColumnConfig",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!NumberColumnConfig#colorScale:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "colorScale?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "() => string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "colorScale",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!NumberColumnConfig#domain:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "domain?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "[number, number]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "domain",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            }
+          ]
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@essex/thematic-lineup!selectColumnBuilder:var",
+          "docComment": "/**\n * Selects the column builder function based on data type indicated on the config. TODO: support additional LineUp column types\n *\n * @param config - the column configuration\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "selectColumnBuilder: "
+            },
+            {
+              "kind": "Content",
+              "text": "(config: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnConfig",
+              "canonicalReference": "@essex/thematic-lineup!ColumnConfig:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ") => any"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "selectColumnBuilder",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 4
+          }
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@essex/thematic-lineup!SetColumnConfig:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type SetColumnConfig = "
+            },
+            {
+              "kind": "Reference",
+              "text": "CategoricalColumnConfig",
+              "canonicalReference": "@essex/thematic-lineup!CategoricalColumnConfig:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "SetColumnConfig",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@essex/thematic-lineup!ThematicLineup:var",
+          "docComment": "/**\n * This component manages a LineUp instance, while also applying default thematic styles and data colors. Use it for a React-style JSX wrapper around LineUp that has more potential flexibility than the very config-limited version exposed by the LineUp project. This allows arbitrary column configs via JSON, and a set of global filters if desired.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "ThematicLineup: "
+            },
+            {
+              "kind": "Content",
+              "text": "({ data, columns, filters, patternParams, histograms, defaultSortColumn, defaultSortAscending, width, height, }: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ThematicLineupProps",
+              "canonicalReference": "@essex/thematic-lineup!ThematicLineupProps:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ") => "
+            },
+            {
+              "kind": "Reference",
+              "text": "JSX.Element",
+              "canonicalReference": "@types/react!~__global.JSX.Element:interface"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "ThematicLineup",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          }
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@essex/thematic-lineup!ThematicLineupProps:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ThematicLineupProps "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ThematicLineupProps",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!ThematicLineupProps#columns:member",
+              "docComment": "/**\n * Column configs to instantiate the LineUp instance.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "columns: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ColumnConfig",
+                  "canonicalReference": "@essex/thematic-lineup!ColumnConfig:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "columns",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!ThematicLineupProps#data:member",
+              "docComment": "/**\n * List of data rows. This can be of any object type, the columns config should map the properties to columns.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "data: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "any[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "data",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!ThematicLineupProps#defaultSortAscending:member",
+              "docComment": "/**\n * Whether to sort the default column ascending or descending.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "defaultSortAscending?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "defaultSortAscending",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!ThematicLineupProps#defaultSortColumn:member",
+              "docComment": "/**\n * Default column to sort by.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "defaultSortColumn?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "defaultSortColumn",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!ThematicLineupProps#filters:member",
+              "docComment": "/**\n * List of applied filters for the LineUp instance. This is different than LineUp's built-in filtering, allowing us to inject global overrides from external filter interfaces.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "filters?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Filter",
+                  "canonicalReference": "@essex/thematic-lineup!Filter:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "filters",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!ThematicLineupProps#height:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "height?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "height",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!ThematicLineupProps#histograms:member",
+              "docComment": "/**\n * Whether to show the summary header histograms or not.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "histograms?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "histograms",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!ThematicLineupProps#patternParams:member",
+              "docComment": "/**\n * If link columns exist, they contain a pattern property that needs template replacement. Some values are auto-replaced by LineUp, but for custom params, we need to supply a map. See, e.g., https://lineup.js.org/master/docs/interfaces/_model_linkcolumn_.ilinkdesc.html#pattern\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "patternParams?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "any"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "patternParams",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/thematic-lineup!ThematicLineupProps#width:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "width?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "width",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        }
+      ]
+    }
+  ]
+}
