@@ -2129,6 +2129,7 @@ __metadata:
     d3-selection: "npm:^3.0.0"
     lodash-es: "npm:^4.17.21"
     markdown-to-jsx: "npm:^7.3.2"
+    moment: "npm:^2.29.4"
     react: "npm:^18.2.0"
     react-animate-height: "npm:^3.2.2"
     react-dom: "npm:^18.2.0"
@@ -15178,6 +15179,13 @@ __metadata:
   bin:
     mkdirp: bin/cmd.js
   checksum: d71b8dcd4b5af2fe13ecf3bd24070263489404fe216488c5ba7e38ece1f54daf219e72a833a3a2dc404331e870e9f44963a33399589490956bff003a3404d3b2
+  languageName: node
+  linkType: hard
+
+"moment@npm:^2.29.4":
+  version: 2.29.4
+  resolution: "moment@npm:2.29.4"
+  checksum: 157c5af5a0ba8196e577bc67feb583303191d21ba1f7f2af30b3b40d4c63a64d505ba402be2a1454832082fac6be69db1e0d186c3279dae191e6634b0c33705c
   languageName: node
   linkType: hard
 
