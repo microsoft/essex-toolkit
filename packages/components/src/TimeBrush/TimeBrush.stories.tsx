@@ -14,7 +14,7 @@ export default meta
 const PrimaryComponent: React.FC<TimeBrushProps> = (args) => {
 	return (
 		<div style={{ display: 'flex', alignItems: 'center' }}>
-			<TimeBrush {...args} search={''} />
+			<TimeBrush {...args}/>
 		</div>
 	)
 }
