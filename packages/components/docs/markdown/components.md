@@ -53,6 +53,7 @@
 |  [ExpandoProps](./components.expandoprops.md) |  |
 |  [ExpandoStyles](./components.expandostyles.md) |  |
 |  [FilterTextboxProps](./components.filtertextboxprops.md) |  |
+|  [GroupedTerm](./components.groupedterm.md) |  |
 |  [MarkdownBrowserProps](./components.markdownbrowserprops.md) |  |
 |  [MarkdownBrowserStyles](./components.markdownbrowserstyles.md) |  |
 |  [MultiDropdownProps](./components.multidropdownprops.md) |  |
@@ -62,6 +63,10 @@
 |  [SettingsGroup](./components.settingsgroup.md) | Groupings for settings items. Groups consist of a label and the list of keys of the settings to put in the group. Ungrouped settings will be placed at the top with no group label. |
 |  [SettingsProps](./components.settingsprops.md) |  |
 |  [Sized](./components.sized.md) |  |
+|  [SparkbarProps](./components.sparkbarprops.md) |  |
+|  [TermBarProps](./components.termbarprops.md) |  |
+|  [TimeBrushFooterProps](./components.timebrushfooterprops.md) |  |
+|  [TimeBrushProps](./components.timebrushprops.md) |  |
 |  [ToggleLinkProps](./components.togglelinkprops.md) |  |
 |  [ToolPanelProps](./components.toolpanelprops.md) |  |
 |  [ToolPanelStyles](./components.toolpanelstyles.md) |  |
@@ -97,6 +102,7 @@
 |  [ReadOnlyTextField](./components.readonlytextfield.md) | This is a standard TextField, with default styles overridden to provide some consistent "read only look" that visually indicates the field can't be edited without looking fully disabled. |
 |  [SearchBox](./components.searchbox.md) | Extends the idea of a SearchBox to include the Search button alongside the text field. Note that this is a compound TextField + PrimaryButton. We may want to switch the the Fluent SearchBox field, which includes autocomplete capability. |
 |  [Settings](./components.settings.md) | A zero-config settings panel that parses a supplied object and generates a list of Fluent UI controls based on the data types. A config object can be supplied that maps specific object fields to more detailed control config, such as changing between a Toggle or Checkbox. In addition, it will invoke a onChange handler for any setting, supplying the changed setting's key and new value. Note that this could be used in an entirely declarative/serializable manner if desired. |
+|  [TimeBrush](./components.timebrush.md) |  |
 |  [ToggleLink](./components.togglelink.md) | Presents a hyperlink that toggles between two messages, like a toggle button. |
 |  [ToolPanel](./components.toolpanel.md) |  |
 |  [Tree](./components.tree.md) |  |

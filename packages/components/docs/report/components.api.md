@@ -399,6 +399,18 @@ export interface FilterTextboxProps {
 // @public (undocumented)
 export function getEnumDropdownOptions<E = Record<string, string>>(enumeration: E, labels?: Record<string, string>): IDropdownOption[];
 
+// Warning: (ae-missing-release-tag) "GroupedTerm" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface GroupedTerm {
+    // (undocumented)
+    count: number;
+    // (undocumented)
+    date: Date;
+    // (undocumented)
+    term: string;
+}
+
 // Warning: (ae-missing-release-tag) "MarkdownBrowser" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -575,6 +587,83 @@ export type Size = 'small' | 'medium';
 export interface Sized {
     // (undocumented)
     size?: Size;
+}
+
+// Warning: (ae-missing-release-tag) "SparkbarProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface SparkbarProps {
+    barGap?: number;
+    barWidth?: number;
+    data: unknown[];
+    height: number;
+    id: (d: unknown) => string;
+    marked?: (d: unknown) => boolean;
+    nodata?: (d: unknown) => boolean;
+    onClick?: (d: unknown) => void;
+    selected?: (d: unknown) => boolean;
+    value: (d: unknown) => number;
+    width: number;
+    xScale?: (d: unknown, i: number) => number;
+}
+
+// Warning: (ae-missing-release-tag) "TermBarProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TermBarProps {
+    // (undocumented)
+    barWidth?: number;
+    // (undocumented)
+    dateExtent?: [Date, Date];
+    // (undocumented)
+    height: number;
+    // (undocumented)
+    markedDate?: Date;
+    // (undocumented)
+    selectionExtent?: [Date, Date];
+    // (undocumented)
+    terms: GroupedTerm[];
+    // (undocumented)
+    width: number;
+}
+
+// Warning: (ae-missing-release-tag) "TimeBrush" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const TimeBrush: React.FC<TimeBrushProps>;
+
+// Warning: (ae-missing-release-tag) "TimeBrushFooterProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TimeBrushFooterProps {
+    barWidth?: number;
+    brushRange?: [Date, Date];
+    dateRange: [Date, Date];
+    height: number;
+    // (undocumented)
+    onBrushEnd?: (range: [Date, Date] | null) => void;
+    roundToDay?: boolean;
+    width: number;
+}
+
+// Warning: (ae-missing-release-tag) "TimeBrushProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TimeBrushProps {
+    // (undocumented)
+    chartWidth?: number;
+    // (undocumented)
+    dateRange: [Date, Date];
+    // (undocumented)
+    elements: GroupedTerm[];
+    // (undocumented)
+    height?: number;
+    // (undocumented)
+    markedDate?: Date;
+    // (undocumented)
+    selectionRange?: [Date, Date];
+    // (undocumented)
+    width?: number;
 }
 
 // Warning: (ae-missing-release-tag) "ToggleLink" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
