@@ -21,9 +21,13 @@ export const TimeBrush: React.FC<TimeBrushProps> = memo(function TimeBrush({
 	dateRange,
 	markedDate,
 	elements,
+	from,
+	to,
+	onChangeFrom,
+	onChangeTo
 }) {
-	const [from, setFrom] = useState<string>('from')
-	const [to, setTo] = useState<string>('to')
+	//const [from, setFrom] = useState<string>('from')
+	//const [to, setTo] = useState<string>('to')
 
 	const barWidth = useMemo(() => {
 		if (dateRange && chartWidth) {
@@ -37,10 +41,10 @@ export const TimeBrush: React.FC<TimeBrushProps> = memo(function TimeBrush({
 
 	const handleBrushEnd = useCallback(
 		(range: [Date, Date] | null) => {
-			setFrom(range?.[0]?.toISOString() ?? '')
-			setTo(range?.[1]?.toISOString() ?? '')
+			onChangeFrom(range?.[0]?.toISOString() ?? '')
+			onChangeTo(range?.[1]?.toISOString() ?? '')
 		},
-		[setFrom, setTo],
+		[onChangeFrom, onChangeTo],
 	)
 
 	const selectionRange: [Date, Date] | undefined = useMemo(() => {

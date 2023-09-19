@@ -4,6 +4,7 @@
  */
 import { TimeBrush } from './TimeBrush.js'
 import type { TimeBrushProps } from './TimeBrush.types.js'
+import { useState } from 'react'
 
 const meta = {
 	title: '@essex:components/TimeBrush',
@@ -12,9 +13,12 @@ const meta = {
 export default meta
 
 const PrimaryComponent: React.FC<TimeBrushProps> = (args) => {
+	const [from, setFrom] = useState<string>('from')
+	const [to, setTo] = useState<string>('to')
+
 	return (
 		<div style={{ display: 'flex', alignItems: 'center' }}>
-			<TimeBrush {...args}/>
+			<TimeBrush {...args} from={from} onChangeFrom={setFrom} to={to} onChangeTo={setTo}/>
 		</div>
 	)
 }
