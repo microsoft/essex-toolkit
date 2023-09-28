@@ -6,7 +6,7 @@ import { TermBar } from './TermBar.js'
 import type { TimeBrushProps } from './TimeBrush.types.js'
 import { TimeBrushFooter } from './TimeBrushFooter.js'
 import moment from 'moment'
-import { memo, useCallback, useMemo, useState } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 
 const DEFAULT_CHART_WIDTH = 800
 const DEFAULT_WIDTH = 800
@@ -23,12 +23,8 @@ export const TimeBrush: React.FC<TimeBrushProps> = memo(function TimeBrush({
 	elements,
 	from,
 	to,
-	onChangeFrom,
-	onChangeTo
+	onChange,
 }) {
-	//const [from, setFrom] = useState<string>('from')
-	//const [to, setTo] = useState<string>('to')
-
 	const barWidth = useMemo(() => {
 		if (dateRange && chartWidth) {
 			const start = moment.utc(dateRange[0])
@@ -41,10 +37,9 @@ export const TimeBrush: React.FC<TimeBrushProps> = memo(function TimeBrush({
 
 	const handleBrushEnd = useCallback(
 		(range: [Date, Date] | null) => {
-			onChangeFrom(range?.[0]?.toISOString() ?? '')
-			onChangeTo(range?.[1]?.toISOString() ?? '')
+			onChange(range?.[0]?.toISOString() ?? '', range?.[1]?.toISOString() ?? '')
 		},
-		[onChangeFrom, onChangeTo],
+		[onChange],
 	)
 
 	const selectionRange: [Date, Date] | undefined = useMemo(() => {

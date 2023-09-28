@@ -4,7 +4,7 @@
  */
 import { TimeBrush } from './TimeBrush.js'
 import type { TimeBrushProps } from './TimeBrush.types.js'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 const meta = {
 	title: '@essex:components/TimeBrush',
@@ -16,9 +16,19 @@ const PrimaryComponent: React.FC<TimeBrushProps> = (args) => {
 	const [from, setFrom] = useState<string>('from')
 	const [to, setTo] = useState<string>('to')
 
+	const handleOnChange = useCallback((from: string, to: string) => {
+		setFrom(from)
+		setTo(to)
+	}, [setFrom, setTo])
+
 	return (
 		<div style={{ display: 'flex', alignItems: 'center' }}>
-			<TimeBrush {...args} from={from} onChangeFrom={setFrom} to={to} onChangeTo={setTo}/>
+			<TimeBrush
+				{...args}
+				from={from}
+				to={to}
+				onChange={handleOnChange}
+			/>
 		</div>
 	)
 }
