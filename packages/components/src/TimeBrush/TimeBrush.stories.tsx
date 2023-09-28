@@ -16,19 +16,17 @@ const PrimaryComponent: React.FC<TimeBrushProps> = (args) => {
 	const [from, setFrom] = useState<string>('from')
 	const [to, setTo] = useState<string>('to')
 
-	const handleOnChange = useCallback((from: string, to: string) => {
-		setFrom(from)
-		setTo(to)
-	}, [setFrom, setTo])
+	const handleOnChange = useCallback(
+		(from: string, to: string) => {
+			setFrom(from)
+			setTo(to)
+		},
+		[setFrom, setTo],
+	)
 
 	return (
 		<div style={{ display: 'flex', alignItems: 'center' }}>
-			<TimeBrush
-				{...args}
-				from={from}
-				to={to}
-				onChange={handleOnChange}
-			/>
+			<TimeBrush {...args} from={from} to={to} onChange={handleOnChange} />
 		</div>
 	)
 }
