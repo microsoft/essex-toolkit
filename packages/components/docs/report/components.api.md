@@ -657,11 +657,17 @@ export interface TimeBrushProps {
     // (undocumented)
     elements: GroupedTerm[];
     // (undocumented)
+    from: string;
+    // (undocumented)
     height?: number;
     // (undocumented)
     markedDate?: Date;
     // (undocumented)
+    onChange: (from: string, to: string) => void;
+    // (undocumented)
     selectionRange?: [Date, Date];
+    // (undocumented)
+    to: string;
     // (undocumented)
     width?: number;
 }

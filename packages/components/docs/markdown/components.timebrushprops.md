@@ -17,8 +17,11 @@ export interface TimeBrushProps
 |  [chartWidth?](./components.timebrushprops.chartwidth.md) |  | number | <i>(Optional)</i> |
 |  [dateRange](./components.timebrushprops.daterange.md) |  | \[Date, Date\] |  |
 |  [elements](./components.timebrushprops.elements.md) |  | [GroupedTerm](./components.groupedterm.md)<!-- -->\[\] |  |
+|  [from](./components.timebrushprops.from.md) |  | string |  |
 |  [height?](./components.timebrushprops.height.md) |  | number | <i>(Optional)</i> |
 |  [markedDate?](./components.timebrushprops.markeddate.md) |  | Date | <i>(Optional)</i> |
+|  [onChange](./components.timebrushprops.onchange.md) |  | (from: string, to: string) =&gt; void |  |
 |  [selectionRange?](./components.timebrushprops.selectionrange.md) |  | \[Date, Date\] | <i>(Optional)</i> |
+|  [to](./components.timebrushprops.to.md) |  | string |  |
 |  [width?](./components.timebrushprops.width.md) |  | number | <i>(Optional)</i> |
 
