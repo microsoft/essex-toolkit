@@ -32,190 +32,190 @@ const PrimaryComponent: React.FC<TimeBrushProps> = (args) => {
 }
 
 const defaultItems2 = [
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-01T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 161
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-02T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 133
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-03T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 101
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-04T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 108
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-05T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 124
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-06T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 182
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-07T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 152
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-08T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 180
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-09T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 142
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-10T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 116
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-11T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 128
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-12T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 115
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-13T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 102
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-14T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 131
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-15T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 124
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-16T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 122
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-17T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 88
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-18T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 84
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-19T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 124
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-20T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 122
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-21T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 102
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-22T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 139
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-23T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 107
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-24T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 79
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-25T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 84
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-26T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 101
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-27T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 93
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-28T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 119
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-29T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 114
-    },
-    {
-        __typename: "DatesHistogramBar",
-        date: new Date("2023-06-30T00:00:00"),
-        term: "DocumentCreateDate",
-        count: 98
-    }
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-01T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 161,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-02T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 133,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-03T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 101,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-04T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 108,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-05T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 124,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-06T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 182,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-07T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 152,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-08T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 180,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-09T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 142,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-10T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 116,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-11T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 128,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-12T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 115,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-13T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 102,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-14T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 131,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-15T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 124,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-16T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 122,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-17T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 88,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-18T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 84,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-19T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 124,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-20T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 122,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-21T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 102,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-22T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 139,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-23T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 107,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-24T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 79,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-25T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 84,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-26T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 101,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-27T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 93,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-28T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 119,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-29T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 114,
+	},
+	{
+		__typename: 'DatesHistogramBar',
+		date: new Date('2023-06-30T00:00:00'),
+		term: 'DocumentCreateDate',
+		count: 98,
+	},
 ]
 
-const startDate = new Date("2023-06-01T00:00:00")
-const endDate = new Date("2023-06-30T00:00:00")
+const startDate = new Date('2023-06-01T00:00:00')
+const endDate = new Date('2023-06-30T00:00:00')
 
 const defaultRange2 = [startDate, endDate]
 
@@ -1113,19 +1113,18 @@ const defaultRange = [
 ]
 
 const defaultItems3 = [
-    {
-        date: "2014-01-23T00:00:00",
-        term: "DocumentCreateDate",
-        count: 4063,
-        __typename: "DatesHistogramBar"
-    }
+	{
+		date: '2014-01-23T00:00:00',
+		term: 'DocumentCreateDate',
+		count: 4063,
+		__typename: 'DatesHistogramBar',
+	},
 ]
 
 const defaultRange3 = [
 	new Date('2014-01-23T00:00:00'),
 	new Date('2014-01-23T00:00:00'),
 ]
-
 
 export const Primary = {
 	render: (args: TimeBrushProps) => <PrimaryComponent {...args} />,

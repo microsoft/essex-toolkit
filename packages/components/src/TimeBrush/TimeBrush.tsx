@@ -47,7 +47,7 @@ export const TimeBrush: React.FC<TimeBrushProps> = memo(function TimeBrush({
 			return [new Date(from), new Date(to)]
 		}
 	}, [from, to])
-	
+
 	return (
 		<div>
 			<TermBar
