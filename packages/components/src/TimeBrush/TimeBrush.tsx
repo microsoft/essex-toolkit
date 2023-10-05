@@ -33,7 +33,7 @@ export const TimeBrush: React.FC<TimeBrushProps> = memo(function TimeBrush({
 			return (chartWidth - delta * BAR_GAP) / delta
 		}
 		return DEFAULT_BAR_WIDTH
-	}, [chartWidth, dateRange])
+	}, [dateRange, chartWidth])
 
 	const handleBrushEnd = useCallback(
 		(range: [Date, Date] | null) => {
@@ -47,7 +47,7 @@ export const TimeBrush: React.FC<TimeBrushProps> = memo(function TimeBrush({
 			return [new Date(from), new Date(to)]
 		}
 	}, [from, to])
-
+	
 	return (
 		<div>
 			<TermBar

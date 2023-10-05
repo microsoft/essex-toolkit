@@ -55,7 +55,7 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 
 	useLayoutEffect(() => {
 		setBarGroup(createBarGroup(ref, theme, width, height))
-	}, [theme, data, width, height])
+	}, [theme, width, height])
 
 	useLayoutEffect(() => {
 		generate(
