@@ -16,9 +16,9 @@ export interface TimeBrushProps {
 	chartWidth?: number
 	selectionRange?: [Date, Date]
 	markedDate?: Date
-	from: Date
-	to: Date
-	onChange: (from: Date, to: Date) => void
+	from: string
+	to: string
+	onChange: (from: string, to: string) => void
 }
 
 export interface TermBarProps {

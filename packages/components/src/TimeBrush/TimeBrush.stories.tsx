@@ -13,8 +13,8 @@ const meta = {
 export default meta
 
 const PrimaryComponent: React.FC<TimeBrushProps> = (args) => {
-	const [from, setFrom] = useState<Date>(new Date())
-	const [to, setTo] = useState<Date>(new Date())
+	const [from, setFrom] = useState<string>('from')
+	const [to, setTo] = useState<string>('to')
 
 	const handleOnChange = useCallback(
 		(from: Date, to: Date) => {
