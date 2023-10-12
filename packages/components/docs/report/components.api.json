@@ -6586,7 +6586,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "from: "
+                  "text": "from?: "
                 },
                 {
                   "kind": "Content",
@@ -6598,7 +6598,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "from",
               "propertyTypeTokenRange": {
@@ -6740,7 +6740,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "to: "
+                  "text": "to?: "
                 },
                 {
                   "kind": "Content",
@@ -6752,7 +6752,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "to",
               "propertyTypeTokenRange": {

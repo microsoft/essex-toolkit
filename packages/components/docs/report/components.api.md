@@ -657,7 +657,7 @@ export interface TimeBrushProps {
     // (undocumented)
     elements: GroupedTerm[];
     // (undocumented)
-    from: string;
+    from?: string;
     // (undocumented)
     height?: number;
     // (undocumented)
@@ -667,7 +667,7 @@ export interface TimeBrushProps {
     // (undocumented)
     selectionRange?: [Date, Date];
     // (undocumented)
-    to: string;
+    to?: string;
     // (undocumented)
     width?: number;
 }
