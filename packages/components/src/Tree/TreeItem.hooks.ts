@@ -45,6 +45,7 @@ export function useExpandIconButtonProps(
 							: props?.expandIconName || 'ChevronRight',
 						onClick: () => item.onExpand?.(item),
 						styles: iconStyles,
+						ariaLabel: item.expanded ? `Collapse ${item.text}` : `Expand ${item.text}`,
 					},
 					styles: buttonStyles,
 				},
@@ -90,6 +91,7 @@ export function useItemHoverInteraction(item: TreeItem, styles: TreeStyles) {
 	const onMouseLeave = useCallback(() => setHovered(false), [setHovered])
 	const listItemContentStyles = useMemo(
 		() => ({
+			margin: 0,
 			background: hovered
 				? theme.palette.neutralLighterAlt
 				: item.selected
@@ -142,6 +144,7 @@ export function useMenuButtonProps(
 					items: item.menuItems,
 					styles: menuItemsStyles,
 				},
+				ariaLabel: `Open context menu for ${item.text}`
 			}
 			// layer in the base, user customization, and our logic
 			return merge(base, props, {
