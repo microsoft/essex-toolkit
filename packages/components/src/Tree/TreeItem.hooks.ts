@@ -45,7 +45,9 @@ export function useExpandIconButtonProps(
 							: props?.expandIconName || 'ChevronRight',
 						onClick: () => item.onExpand?.(item),
 						styles: iconStyles,
-						ariaLabel: item.expanded ? `Collapse ${item.text}` : `Expand ${item.text}`,
+						ariaLabel: item.expanded
+							? `Collapse ${item.text}`
+							: `Expand ${item.text}`,
 					},
 					styles: buttonStyles,
 				},
@@ -144,7 +146,7 @@ export function useMenuButtonProps(
 					items: item.menuItems,
 					styles: menuItemsStyles,
 				},
-				ariaLabel: `Open context menu for ${item.text}`
+				ariaLabel: `Open context menu for ${item.text}`,
 			}
 			// layer in the base, user customization, and our logic
 			return merge(base, props, {
