@@ -74,9 +74,9 @@ const TreeGroupHeader: React.FC<TreeGroupProps> = memo(function TreeGroupHeader(
 	return (
 		<>
 			{group.text && (
-				<div style={_styles.groupHeader} title={group.text}>
+				<li style={_styles.groupHeader} title={group.text}>
 					{group.text}
-				</div>
+				</li>
 			)}
 		</>
 	)
