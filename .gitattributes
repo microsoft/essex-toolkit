@@ -15,5 +15,6 @@
 .prettierignore text eol=lf
 .npmignore text eol=lf
 yarn.lock text eol=lf
+packages/*/docs/** linguist-generated=true
 CODEOWNERS text eol=lf
 LICENSE text eol=lf
