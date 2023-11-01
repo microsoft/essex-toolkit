@@ -8,7 +8,6 @@ import { TimeBrushFooter } from './TimeBrushFooter.js'
 import moment from 'moment'
 import { memo, useCallback, useMemo } from 'react'
 
-const DEFAULT_CHART_WIDTH = 800
 const DEFAULT_WIDTH = 800
 const DEFAULT_HEIGHT = 24
 const DEFAULT_BAR_WIDTH = 4
@@ -17,7 +16,6 @@ const BAR_GAP = 1
 export const TimeBrush: React.FC<TimeBrushProps> = memo(function TimeBrush({
 	width = DEFAULT_WIDTH,
 	height = DEFAULT_HEIGHT,
-	chartWidth = DEFAULT_CHART_WIDTH,
 	dateRange,
 	markedDate,
 	elements,
@@ -26,14 +24,14 @@ export const TimeBrush: React.FC<TimeBrushProps> = memo(function TimeBrush({
 	onChange,
 }) {
 	const barWidth = useMemo(() => {
-		if (dateRange && chartWidth) {
+		if (dateRange && width) {
 			const start = moment.utc(dateRange[0])
 			const stop = moment.utc(dateRange[1])
 			const delta = stop.diff(start, 'days')
-			return (chartWidth - delta * BAR_GAP) / delta
+			return (width - delta * BAR_GAP) / delta
 		}
 		return DEFAULT_BAR_WIDTH
-	}, [dateRange, chartWidth])
+	}, [dateRange, width])
 
 	const handleBrushEnd = useCallback(
 		(range: [Date, Date] | null) => {
