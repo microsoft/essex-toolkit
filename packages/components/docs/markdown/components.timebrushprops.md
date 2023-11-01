@@ -14,7 +14,6 @@ export interface TimeBrushProps
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [chartWidth?](./components.timebrushprops.chartwidth.md) |  | number | <i>(Optional)</i> |
 |  [dateRange](./components.timebrushprops.daterange.md) |  | \[Date, Date\] |  |
 |  [elements](./components.timebrushprops.elements.md) |  | [GroupedTerm](./components.groupedterm.md)<!-- -->\[\] |  |
 |  [from?](./components.timebrushprops.from.md) |  | string | <i>(Optional)</i> |

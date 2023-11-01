@@ -651,8 +651,6 @@ export interface TimeBrushFooterProps {
 // @public (undocumented)
 export interface TimeBrushProps {
     // (undocumented)
-    chartWidth?: number;
-    // (undocumented)
     dateRange: [Date, Date];
     // (undocumented)
     elements: GroupedTerm[];
