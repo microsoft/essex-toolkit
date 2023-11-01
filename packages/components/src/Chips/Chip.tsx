@@ -26,6 +26,7 @@ export const Chip: React.FC<ChipItemProps> = memo(function Chip({
 					styles={_styles.close}
 					iconProps={closeProps}
 					onClick={onClose}
+					ariaLabel={item.text || item.iconName}
 				/>
 			)}
 		</div>

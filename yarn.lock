@@ -2098,7 +2098,76 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex/components@npm:^3.6.16, @essex/components@workspace:^, @essex/components@workspace:packages/components":
+"@essex/components@npm:^3.6.16":
+  version: 3.10.0
+  resolution: "@essex/components@npm:3.10.0"
+  dependencies:
+    "@essex/toolbox": "npm:^3.0.18"
+    "@fluentui/utilities": "npm:^8.13.18"
+    "@types/d3-array": "npm:^3.0.3"
+    "@types/d3-axis": "npm:^3.0.1"
+    "@types/d3-brush": "npm:^3.0.1"
+    "@types/d3-scale": "npm:^4.0.2"
+    "@types/d3-selection": "npm:^3.0.3"
+    d3-array: "npm:^3.2.1"
+    d3-axis: "npm:^3.0.0"
+    d3-brush: "npm:^3.0.0"
+    d3-scale: "npm:^4.0.2"
+    d3-selection: "npm:^3.0.0"
+    lodash-es: "npm:^4.17.21"
+    markdown-to-jsx: "npm:^7.3.2"
+    moment: "npm:^2.29.4"
+    react-animate-height: "npm:^3.2.2"
+    react-if: "npm:^4.1.5"
+  peerDependencies:
+    "@fluentui/react": ">= 8"
+    "@thematic/core": ">= 4"
+    "@thematic/d3": ">= 2"
+    "@thematic/react": ">= 2"
+    "@types/d3-array": ">= 3"
+    "@types/d3-axis": ">= 3"
+    "@types/d3-scale": ">= 4"
+    "@types/d3-selection": ">= 3"
+    "@types/node": "*"
+    "@types/react": ">= 18"
+    react: ">= 18"
+    react-dom: ">= 18"
+    react-is: ">= 18"
+    styled-components: ">= 5"
+  peerDependenciesMeta:
+    "@fluentui/react":
+      optional: false
+    "@thematic/core":
+      optional: false
+    "@thematic/d3":
+      optional: false
+    "@thematic/react":
+      optional: false
+    "@types/d3-array":
+      optional: true
+    "@types/d3-axis":
+      optional: true
+    "@types/d3-scale":
+      optional: true
+    "@types/d3-selection":
+      optional: true
+    "@types/node":
+      optional: true
+    "@types/react":
+      optional: true
+    react:
+      optional: false
+    react-dom:
+      optional: true
+    react-is:
+      optional: false
+    styled-components:
+      optional: true
+  checksum: 73e2b5997cc5cc3bab70b937312b6b75018d63a9cf8dbcf8120d46336c40da4c98f9654fa50c00d6a360f3360f77100bdd2d07d2e75043c8690f91044310d867
+  languageName: node
+  linkType: hard
+
+"@essex/components@workspace:^, @essex/components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "@essex/components@workspace:packages/components"
   dependencies:
@@ -2573,7 +2642,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex/toolbox@workspace:^, @essex/toolbox@workspace:packages/toolbox":
+"@essex/toolbox@npm:^3.0.18, @essex/toolbox@workspace:^, @essex/toolbox@workspace:packages/toolbox":
   version: 0.0.0-use.local
   resolution: "@essex/toolbox@workspace:packages/toolbox"
   dependencies:

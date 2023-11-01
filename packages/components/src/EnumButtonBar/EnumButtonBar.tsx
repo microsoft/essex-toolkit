@@ -57,6 +57,7 @@ export function EnumButtonBar<E>({
 					iconProps: iconNames ? { iconName: iconNames[i] } : undefined,
 					iconOnly,
 					onClick: () => handleChange(key),
+					ariaLabel: text,
 				}
 			}),
 		[enumeration, handleChange, iconNames, iconOnly, selectedKey],
