@@ -31,7 +31,7 @@ const PrimaryComponent: React.FC<TimeBrushProps> = (args) => {
 	)
 }
 
-const defaultItems2 = [
+const defaultItems = [
 	{
 		__typename: 'DatesHistogramBar',
 		date: new Date('2023-06-01T00:00:00'),
@@ -217,14 +217,14 @@ const defaultItems2 = [
 const startDate = new Date('2023-06-01T00:00:00')
 const endDate = new Date('2023-06-30T00:00:00')
 
-const defaultRange2 = [startDate, endDate]
+const defaultRange = [startDate, endDate]
 
 export const Primary = {
 	render: (args: TimeBrushProps) => <PrimaryComponent {...args} />,
 	args: {
 		width: 460,
 		height: 25,
-		dateRange: defaultRange2,
-		elements: defaultItems2,
+		dateRange: defaultRange,
+		elements: defaultItems,
 	},
 }
