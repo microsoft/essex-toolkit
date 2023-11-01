@@ -6477,33 +6477,6 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@essex/components!TimeBrushProps#chartWidth:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "chartWidth?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "number"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "chartWidth",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
               "canonicalReference": "@essex/components!TimeBrushProps#dateRange:member",
               "docComment": "",
               "excerptTokens": [
@@ -6586,7 +6559,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "from: "
+                  "text": "from?: "
                 },
                 {
                   "kind": "Content",
@@ -6598,7 +6571,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "from",
               "propertyTypeTokenRange": {
@@ -6740,7 +6713,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "to: "
+                  "text": "to?: "
                 },
                 {
                   "kind": "Content",
@@ -6752,7 +6725,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "to",
               "propertyTypeTokenRange": {
