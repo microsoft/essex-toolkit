@@ -16,6 +16,7 @@ export interface TimeBrushProps
 |  --- | --- | --- | --- |
 |  [dateRange](./components.timebrushprops.daterange.md) |  | \[Date, Date\] |  |
 |  [elements](./components.timebrushprops.elements.md) |  | [GroupedTerm](./components.groupedterm.md)<!-- -->\[\] |  |
+|  [footerWidth?](./components.timebrushprops.footerwidth.md) |  | number | <i>(Optional)</i> |
 |  [from?](./components.timebrushprops.from.md) |  | string | <i>(Optional)</i> |
 |  [height?](./components.timebrushprops.height.md) |  | number | <i>(Optional)</i> |
 |  [markedDate?](./components.timebrushprops.markeddate.md) |  | Date | <i>(Optional)</i> |

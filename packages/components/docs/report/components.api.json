@@ -6554,6 +6554,33 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@essex/components!TimeBrushProps#footerWidth:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "footerWidth?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "footerWidth",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@essex/components!TimeBrushProps#from:member",
               "docComment": "",
               "excerptTokens": [
