@@ -12,10 +12,12 @@ const DEFAULT_WIDTH = 800
 const DEFAULT_HEIGHT = 24
 const DEFAULT_BAR_WIDTH = 4
 const BAR_GAP = 1
+const DEFAULT_FOOTER_WIDTH = 18
 
 export const TimeBrush: React.FC<TimeBrushProps> = memo(function TimeBrush({
 	width = DEFAULT_WIDTH,
 	height = DEFAULT_HEIGHT,
+	footerWidth = DEFAULT_FOOTER_WIDTH,
 	dateRange,
 	markedDate,
 	elements,
@@ -61,7 +63,7 @@ export const TimeBrush: React.FC<TimeBrushProps> = memo(function TimeBrush({
 				dateRange={dateRange}
 				brushRange={selectionRange}
 				width={width}
-				height={18}
+				height={footerWidth}
 				barWidth={barWidth}
 				onBrushEnd={handleBrushEnd}
 				roundToDay={true}
