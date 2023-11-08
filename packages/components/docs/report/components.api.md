@@ -655,6 +655,8 @@ export interface TimeBrushProps {
     // (undocumented)
     elements: GroupedTerm[];
     // (undocumented)
+    footerWidth?: number;
+    // (undocumented)
     from?: string;
     // (undocumented)
     height?: number;
