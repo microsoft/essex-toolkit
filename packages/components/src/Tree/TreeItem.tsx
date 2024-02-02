@@ -67,7 +67,7 @@ export const TreeItem: React.FC<TreeItemProps> = memo(function TreeItem(props) {
 				style={_styles.listItem}
 				key={`tree-item-li-${item.key}`}
 			>
-				<p
+				<div
 					style={listItemContentStyles}
 					onMouseEnter={onMouseEnter}
 					onMouseLeave={onMouseLeave}
@@ -81,7 +81,7 @@ export const TreeItem: React.FC<TreeItemProps> = memo(function TreeItem(props) {
 						{renderTitle(props)}
 						{item.menuItems && <IconButton {..._menuButtonProps} />}
 					</div>
-				</p>
+				</div>
 				{(item.expanded || narrow) && (
 					<ul style={_styles.list}>{contentRenderer(props)}</ul>
 				)}
