@@ -4,7 +4,6 @@
  */
 import { Footer } from './Footer.js'
 import type { FooterProps } from './Footer.types.js'
-import { useTheme } from '@fluentui/react'
 import { useCallback } from 'react'
 
 const meta = {
