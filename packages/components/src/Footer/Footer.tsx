@@ -50,13 +50,17 @@ export const Footer: FC<FooterProps> = memo(function Footer({
 	const footerLinks = useMemo(() => {
 		return links.map(({ name, href, onClick, hide }, i) => {
 			console.log(onClick)
-			return (hide === false || hide === undefined) ? (
-				<Link key={name} divider={i !== 0} style={style} href={href} onClick={onClick}>
+			return hide === false || hide === undefined ? (
+				<Link
+					key={name}
+					divider={i !== 0}
+					style={style}
+					href={href}
+					onClick={onClick}
+				>
 					{name}
 				</Link>
-			) : (
-			null
-			)
+			) : null
 		})
 	}, [links, style])
 
@@ -82,7 +86,7 @@ const Link: FC<
 	style,
 	onClick,
 }) {
-	return (href == null || href === '') ? (
+	return href == null || href === '' ? (
 		<>
 			{divider && <Text variant='tiny'>|</Text>}
 			<LinkDiv style={style} className={className} id={id} onClick={onClick}>

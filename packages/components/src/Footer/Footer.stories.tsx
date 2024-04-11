@@ -15,7 +15,7 @@ export default meta
 
 const PrimaryComponent: React.FC<FooterProps> = (args) => {
 	const testFunction = useCallback(() => {
-		alert("Test call")
+		alert('Test call')
 	}, [])
 
 	return (
