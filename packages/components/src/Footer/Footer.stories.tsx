@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useMicrosoftConsentBanner } from './../../../hooks/src/useMicrosoftConsentBanner.js'
 import { Footer } from './Footer.js'
 import type { FooterProps } from './Footer.types.js'
 import { useTheme } from '@fluentui/react'
+import { useCallback } from 'react'
 
 const meta = {
 	title: '@essex:components/Footer',
@@ -15,14 +15,9 @@ const meta = {
 export default meta
 
 const PrimaryComponent: React.FC<FooterProps> = (args) => {
-	const theme = useTheme()
-	const CONSENT_CONF = {
-		theme: theme.isInverted ? 'dark' : 'light',
-		elementId: 'cookie-banner',
-		onChange: (c: any) => console.log('consent changed', c),
-	}
-
-	const [, manageConsent] = useMicrosoftConsentBanner(CONSENT_CONF)
+	const testFunction = useCallback(() => {
+		alert("Test call")
+	}, [])
 
 	return (
 		<div style={{ display: 'flex', alignItems: 'center' }}>
@@ -39,8 +34,8 @@ const PrimaryComponent: React.FC<FooterProps> = (args) => {
 					},
 					{
 						name: 'Manage Cookies',
-						onClick: { manageConsent },
-						hide: true,
+						onClick: testFunction,
+						hide: false,
 					},
 					{
 						name: 'Terms of Use',
