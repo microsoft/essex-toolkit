@@ -7,9 +7,9 @@ import type { FC } from 'react'
 import { memo, useMemo } from 'react'
 
 import { Container, LinkA, LinkDiv } from './Footer.styles.js'
-import type { FooterLinkDetails, FooterProps } from './Footer.types.js'
+import type { FooterLinkProps, FooterProps } from './Footer.types.js'
 
-export const defaultFooterLinks: Array<FooterLinkDetails> = [
+export const defaultFooterLinks: Array<FooterLinkProps> = [
 	{
 		name: 'Privacy & Cookies',
 		href: ' https://go.microsoft.com/fwlink/?LinkId=521839',
@@ -48,11 +48,13 @@ export const Footer: FC<FooterProps> = memo(function Footer({
 	)
 
 	const footerLinks = useMemo(() => {
-		return links.map(({ name, href }, i) => {
-			return (
-				<Link key={name} divider={i !== 0} style={style} href={href}>
+		return links.map(({ name, href, onClick, hide }, i) => {
+			return (hide === false || hide === undefined) ? (
+				<Link key={name} divider={i !== 0} style={style} href={href} onClick={onClick}>
 					{name}
 				</Link>
+			) : (
+			null
 			)
 		})
 	}, [links, style])
@@ -74,13 +76,12 @@ const Link: FC<
 	id,
 	className,
 	divider,
-	hide,
 	children,
 	href,
 	style,
 	onClick,
 }) {
-	return (href == null || href === '') && (hide == null || hide === false) ? (
+	return (href == null || href === '') ? (
 		<>
 			{divider && <Text variant='tiny'>|</Text>}
 			<LinkDiv style={style} className={className} id={id} onClick={onClick}>

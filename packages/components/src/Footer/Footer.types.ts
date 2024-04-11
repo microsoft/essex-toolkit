@@ -6,7 +6,7 @@
 /**
  * @public
  */
-export type FooterLinkDetails = { name: string; href: string }
+export type FooterLinkDetails = { name: string; href: string; hide: boolean }
 
 /**
  * Defaults to {
