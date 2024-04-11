@@ -2884,8 +2884,8 @@
             },
             {
               "kind": "Reference",
-              "text": "FooterLinkDetails",
-              "canonicalReference": "@essex/components!FooterLinkDetails:type"
+              "text": "FooterLinkProps",
+              "canonicalReference": "@essex/components!FooterLinkProps:type"
             },
             {
               "kind": "Content",
@@ -3874,7 +3874,7 @@
             },
             {
               "kind": "Content",
-              "text": "{\n    name: string;\n    href: string;\n}"
+              "text": "{\n    name: string;\n    href: string;\n    hide: boolean;\n}"
             },
             {
               "kind": "Content",

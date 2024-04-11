@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-defaultFooterLinks: Array<FooterLinkDetails>
+defaultFooterLinks: Array<FooterLinkProps>
 ```

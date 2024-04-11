@@ -307,10 +307,11 @@ export enum DataType {
 // @public (undocumented)
 export const defaultBannerLinks: Array<PolicyLinkDetails>;
 
+// Warning: (ae-incompatible-release-tags) The symbol "defaultFooterLinks" is marked as @public, but its signature references "FooterLinkProps" which is marked as @internal
 // Warning: (ae-missing-release-tag) "defaultFooterLinks" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const defaultFooterLinks: Array<FooterLinkDetails>;
+export const defaultFooterLinks: Array<FooterLinkProps>;
 
 // Warning: (ae-missing-release-tag) "DialogConfirm" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -408,6 +409,7 @@ export const Footer: FC<FooterProps>;
 export type FooterLinkDetails = {
     name: string;
     href: string;
+    hide: boolean;
 };
 
 // Warning: (ae-internal-missing-underscore) The name "FooterLinkProps" should be prefixed with an underscore because the declaration is marked as @internal
@@ -923,7 +925,7 @@ export type WcpConsent = {
 
 // Warnings were encountered during analysis:
 //
-// dist/Footer/Footer.types.d.ts:47:5 - (ae-incompatible-release-tags) The symbol "links" is marked as @public, but its signature references "FooterLinkProps" which is marked as @internal
+// dist/Footer/Footer.types.d.ts:48:5 - (ae-incompatible-release-tags) The symbol "links" is marked as @public, but its signature references "FooterLinkProps" which is marked as @internal
 
 // (No @packageDocumentation comment for this package)
 

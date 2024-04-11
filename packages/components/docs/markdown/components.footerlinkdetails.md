@@ -11,5 +11,6 @@
 export type FooterLinkDetails = {
     name: string;
     href: string;
+    hide: boolean;
 };
 ```
