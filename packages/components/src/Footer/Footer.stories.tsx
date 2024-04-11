@@ -1,4 +1,3 @@
-import { useMicrosoftConsentBanner } from './../../../hooks/src/useMicrosoftConsentBanner.js'
 /*!
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
@@ -6,6 +5,7 @@ import { useMicrosoftConsentBanner } from './../../../hooks/src/useMicrosoftCons
 import { Footer } from './Footer.js'
 import type { FooterProps } from './Footer.types.js'
 import { useTheme } from '@fluentui/react'
+import { useMicrosoftConsentBanner } from './../../../hooks/src/useMicrosoftConsentBanner.js'
 
 const meta = {
 	title: '@essex:components/Footer',
