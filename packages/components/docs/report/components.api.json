@@ -2866,42 +2866,6 @@
         },
         {
           "kind": "Variable",
-          "canonicalReference": "@essex/components!defaultFooterLinks:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "defaultFooterLinks: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Array",
-              "canonicalReference": "!Array:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "FooterLinkProps",
-              "canonicalReference": "@essex/components!FooterLinkProps:type"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "defaultFooterLinks",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Variable",
           "canonicalReference": "@essex/components!DialogConfirm:var",
           "docComment": "",
           "excerptTokens": [
@@ -3826,110 +3790,6 @@
             }
           ],
           "extendsTokenRanges": []
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@essex/components!Footer:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "Footer: "
-            },
-            {
-              "kind": "Reference",
-              "text": "FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "FooterProps",
-              "canonicalReference": "@essex/components!FooterProps:type"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "Footer",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "TypeAlias",
-          "canonicalReference": "@essex/components!FooterLinkDetails:type",
-          "docComment": "/**\n * @public\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export type FooterLinkDetails = "
-            },
-            {
-              "kind": "Content",
-              "text": "{\n    name: string;\n    href: string;\n    hide: boolean;\n}"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "FooterLinkDetails",
-          "typeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 2
-          }
-        },
-        {
-          "kind": "TypeAlias",
-          "canonicalReference": "@essex/components!FooterProps:type",
-          "docComment": "/**\n * Defaults to { language: navigator.language ?? 'en-US' onConsentChange: () => void, links: [ { name: 'Privacy & Cookies', href: ' https://go.microsoft.com/fwlink/?LinkId=521839', }, { name: 'Terms of Use', href: 'https://go.microsoft.com/fwlink/?LinkID=206977', }, { name: 'Trademarks', href: 'https://www.microsoft.com/trademarks', }, { name: 'Consumer Health Privacy', href: 'https://go.microsoft.com/fwlink/?LinkId=2259814', }, { name: 'Github', href: 'https://github.com/microsoft/datashaper', }, { name: `©️ ${new Date().getFullYear()} Microsoft`, href: 'https://www.microsoft.com', }, ] }\n *\n * @public\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export type FooterProps = "
-            },
-            {
-              "kind": "Content",
-              "text": "{\n    links?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Array",
-              "canonicalReference": "!Array:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "FooterLinkProps",
-              "canonicalReference": "@essex/components!FooterLinkProps:type"
-            },
-            {
-              "kind": "Content",
-              "text": ">;\n}"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "FooterProps",
-          "typeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 6
-          }
         },
         {
           "kind": "Function",
@@ -4976,7 +4836,7 @@
             },
             {
               "kind": "Content",
-              "text": "{\n    name: string;\n    href: string;\n}"
+              "text": "{\n    name: string;\n    href?: string;\n    onClick?: () => void;\n    hide?: boolean;\n}"
             },
             {
               "kind": "Content",

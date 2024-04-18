@@ -307,12 +307,6 @@ export enum DataType {
 // @public (undocumented)
 export const defaultBannerLinks: Array<PolicyLinkDetails>;
 
-// Warning: (ae-incompatible-release-tags) The symbol "defaultFooterLinks" is marked as @public, but its signature references "FooterLinkProps" which is marked as @internal
-// Warning: (ae-missing-release-tag) "defaultFooterLinks" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const defaultFooterLinks: Array<FooterLinkProps>;
-
 // Warning: (ae-missing-release-tag) "DialogConfirm" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -399,35 +393,6 @@ export interface FilterTextboxProps {
     label?: string;
     onFilter?: (text: string, exclude: boolean) => any;
 }
-
-// Warning: (ae-missing-release-tag) "Footer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const Footer: FC<FooterProps>;
-
-// @public (undocumented)
-export type FooterLinkDetails = {
-    name: string;
-    href: string;
-    hide: boolean;
-};
-
-// Warning: (ae-internal-missing-underscore) The name "FooterLinkProps" should be prefixed with an underscore because the declaration is marked as @internal
-//
-// @internal (undocumented)
-export type FooterLinkProps = {
-    name: string;
-    id?: string;
-    href?: string;
-    onClick?: () => void;
-    divider?: boolean;
-    hide?: boolean;
-};
-
-// @public
-export type FooterProps = {
-    links?: Array<FooterLinkProps>;
-};
 
 // Warning: (ae-missing-release-tag) "getEnumDropdownOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -535,7 +500,9 @@ export type PolicyAndCookieBannerProps = {
 // @public (undocumented)
 export type PolicyLinkDetails = {
     name: string;
-    href: string;
+    href?: string;
+    onClick?: () => void;
+    hide?: boolean;
 };
 
 // Warning: (ae-internal-missing-underscore) The name "PolicyLinkProps" should be prefixed with an underscore because the declaration is marked as @internal
@@ -922,10 +889,6 @@ export function useToggleProps(props: Partial<IToggleProps>, size?: Size): Parti
 export type WcpConsent = {
     init: (culture: string, placeholderIdOrElement: string | HTMLElement, initCallback?: (err?: Error, siteConsent?: CookieConsentManager) => void, onConsentChanged?: (newConsent: CookieConsent) => void, theme?: CookieConsentBannerThemes, stylesNonce?: string) => void;
 };
-
-// Warnings were encountered during analysis:
-//
-// dist/Footer/Footer.types.d.ts:48:5 - (ae-incompatible-release-tags) The symbol "links" is marked as @public, but its signature references "FooterLinkProps" which is marked as @internal
 
 // (No @packageDocumentation comment for this package)
 
