@@ -86,7 +86,7 @@ export type WcpConsent = {
 /**
  * @public
  */
-export type PolicyLinkDetails = { name: string; href: string }
+export type PolicyLinkDetails = { name: string; href?: string; onClick?: () => void; hide?: boolean }
 
 /**
  * Defaults to {

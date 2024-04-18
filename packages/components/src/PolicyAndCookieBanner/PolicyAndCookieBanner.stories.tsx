@@ -2,9 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
-import type { StoryFn } from '@storybook/react'
-
 import {
 	PolicyAndCookieBanner,
 	defaultBannerLinks,
@@ -87,4 +84,28 @@ export const AdditionalLinks = {
 	},
 
 	name: 'Additional links',
+}
+
+export const ExtendedItemsCustomization = {
+	render: (args: PolicyAndCookieBannerProps) => (
+		<PolicyAndCookieBanner {...args} />
+	),
+
+	args: {
+		links: [...defaultBannerLinks, { name: 'Clickable', onClick: () => {alert("Testing props")}},],
+	},
+
+	name: 'Extended Items Customization',
+}
+
+export const HideShowItemsCustomization = {
+	render: (args: PolicyAndCookieBannerProps) => (
+		<PolicyAndCookieBanner {...args} />
+	),
+
+	args: {
+		links: [...defaultBannerLinks, { name: 'Hide item', href: '', hide: true}, { name: 'Show item', href: ''},],
+	},
+
+	name: 'Hide/Show Items Customization',
 }

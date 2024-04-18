@@ -5,6 +5,7 @@
 import { Link, Text } from '@fluentui/react'
 import type { CSSProperties, FC } from 'react'
 import { memo, useMemo } from 'react'
+import { useTheme } from '@fluentui/react'
 
 import { useLoadMSFTCookieScript } from './PolicyAndCookieBanner.hooks.js'
 import type {
@@ -12,6 +13,7 @@ import type {
 	PolicyLinkDetails,
 	PolicyLinkProps,
 } from './PolicyAndCookieBanner.types.js'
+import { Container } from './PolicyAndCookieBanner.styles.js'
 
 const containerStyles: CSSProperties = {
 	display: 'flex',
@@ -51,13 +53,13 @@ export const defaultBannerLinks: Array<PolicyLinkDetails> = [
 export const PolicyAndCookieBanner: FC<PolicyAndCookieBannerProps> = memo(
 	function CookieConsentProvider({
 		language = navigator.language ?? 'en-US',
-		theme = 'light',
 		onConsentChange = () => undefined,
 		onError,
 		className,
 		styles,
 		links = defaultBannerLinks,
 	}) {
+		const theme = useTheme()
 		const divStyles: CSSProperties = useMemo(() => {
 			return {
 				...containerStyles,
@@ -66,22 +68,22 @@ export const PolicyAndCookieBanner: FC<PolicyAndCookieBannerProps> = memo(
 		}, [styles])
 
 		const policyLinks = useMemo(() => {
-			return links.map(({ name, href }, i) => {
-				return (
-					<PolicyLink key={name} divider={i !== 0} name={name} href={href} />
-				)
+			return links.map(({ name, href, onClick, hide }, i) => {
+				return hide === false || hide === undefined ? (
+					<PolicyLink key={name} divider={i !== 0} name={name} href={href} onClick={onClick}/>
+				) : null
 			})
 		}, [links])
 
 		const consentManager = useLoadMSFTCookieScript({
 			language,
-			theme,
+			theme: theme.isInverted ? 'dark' : 'light',
 			onConsentChange,
 			onError,
 		})
 
 		return (
-			<div className={className} style={divStyles}>
+			<Container className={className} style={divStyles}>
 				{consentManager?.isConsentRequired && (
 					<>
 						<PolicyLink
@@ -95,7 +97,7 @@ export const PolicyAndCookieBanner: FC<PolicyAndCookieBannerProps> = memo(
 					</>
 				)}
 				{policyLinks}
-			</div>
+			</Container>
 		)
 	},
 )
@@ -108,11 +110,20 @@ const PolicyLink: FC<PolicyLinkProps> = memo(function PolicyLink({
 	divider = false,
 	id,
 }) {
-	return (
+	return href == null || href === '' ? (
 		<>
 			{divider && <Text variant='tiny'>|</Text>}
 			<Text variant='smallPlus'>
-				<Link id={id} href={href} target='_blank' onClick={onClick}>
+				<Link id={id} target='_blank' onClick={onClick}>
+					{name}
+				</Link>
+			</Text>
+		</>
+	) : (
+		<>
+			{divider && <Text variant='tiny'>|</Text>}
+			<Text variant='smallPlus'>
+				<Link id={id} href={href} target='_blank'>
 					{name}
 				</Link>
 			</Text>
