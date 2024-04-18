@@ -92,7 +92,15 @@ export const ExtendedItemsCustomization = {
 	),
 
 	args: {
-		links: [...defaultBannerLinks, { name: 'Clickable', onClick: () => {alert("Testing props")}},],
+		links: [
+			...defaultBannerLinks,
+			{
+				name: 'Clickable',
+				onClick: () => {
+					alert('Testing props')
+				},
+			},
+		],
 	},
 
 	name: 'Extended Items Customization',
@@ -104,7 +112,11 @@ export const HideShowItemsCustomization = {
 	),
 
 	args: {
-		links: [...defaultBannerLinks, { name: 'Hide item', href: '', hide: true}, { name: 'Show item', href: ''},],
+		links: [
+			...defaultBannerLinks,
+			{ name: 'Hide item', href: '', hide: true },
+			{ name: 'Show item', href: '' },
+		],
 	},
 
 	name: 'Hide/Show Items Customization',

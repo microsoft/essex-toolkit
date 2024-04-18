@@ -2,18 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Link, Text } from '@fluentui/react'
+import { Link, Text, useTheme } from '@fluentui/react'
+import {  } from '@fluentui/react'
 import type { CSSProperties, FC } from 'react'
 import { memo, useMemo } from 'react'
-import { useTheme } from '@fluentui/react'
 
 import { useLoadMSFTCookieScript } from './PolicyAndCookieBanner.hooks.js'
+import { Container } from './PolicyAndCookieBanner.styles.js'
 import type {
 	PolicyAndCookieBannerProps,
 	PolicyLinkDetails,
 	PolicyLinkProps,
 } from './PolicyAndCookieBanner.types.js'
-import { Container } from './PolicyAndCookieBanner.styles.js'
 
 const containerStyles: CSSProperties = {
 	display: 'flex',
@@ -70,7 +70,13 @@ export const PolicyAndCookieBanner: FC<PolicyAndCookieBannerProps> = memo(
 		const policyLinks = useMemo(() => {
 			return links.map(({ name, href, onClick, hide }, i) => {
 				return hide === false || hide === undefined ? (
-					<PolicyLink key={name} divider={i !== 0} name={name} href={href} onClick={onClick}/>
+					<PolicyLink
+						key={name}
+						divider={i !== 0}
+						name={name}
+						href={href}
+						onClick={onClick}
+					/>
 				) : null
 			})
 		}, [links])
