@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Link, Text, useTheme } from '@fluentui/react'
-import {  } from '@fluentui/react'
 import type { CSSProperties, FC } from 'react'
 import { memo, useMemo } from 'react'
 
