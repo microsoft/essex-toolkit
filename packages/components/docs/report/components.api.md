@@ -500,7 +500,9 @@ export type PolicyAndCookieBannerProps = {
 // @public (undocumented)
 export type PolicyLinkDetails = {
     name: string;
-    href: string;
+    href?: string;
+    onClick?: () => void;
+    hide?: boolean;
 };
 
 // Warning: (ae-internal-missing-underscore) The name "PolicyLinkProps" should be prefixed with an underscore because the declaration is marked as @internal

@@ -4836,7 +4836,7 @@
             },
             {
               "kind": "Content",
-              "text": "{\n    name: string;\n    href: string;\n}"
+              "text": "{\n    name: string;\n    href?: string;\n    onClick?: () => void;\n    hide?: boolean;\n}"
             },
             {
               "kind": "Content",

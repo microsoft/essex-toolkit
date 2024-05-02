@@ -10,6 +10,8 @@
 ```typescript
 export type PolicyLinkDetails = {
     name: string;
-    href: string;
+    href?: string;
+    onClick?: () => void;
+    hide?: boolean;
 };
 ```
