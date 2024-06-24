@@ -1,6 +1,7 @@
 {
 	"files": {
 		"ignore": [
+			"package.json",
 			"dist",
 			"lib",
 			"build",
