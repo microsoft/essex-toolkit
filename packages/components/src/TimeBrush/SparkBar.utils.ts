@@ -2,10 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GroupedTerm } from './TimeBrush.types.js'
+
 import { line, rect, svg } from '@thematic/d3'
 import { scaleLinear } from 'd3-scale'
 import { select } from 'd3-selection'
+import type { GroupedTerm } from './TimeBrush.types.js'
 
 export function createBarGroup(
 	ref: any,

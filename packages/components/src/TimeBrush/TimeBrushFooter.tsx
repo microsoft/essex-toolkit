@@ -2,16 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TimeBrushFooterProps } from './TimeBrush.types.js'
-import {
-	calculateBrush,
-	changePlot,
-	createBarGroup,
-	createPlot,
-	selectAll,
-	selectAllPlot,
-	wholeDateRangeSelected,
-} from './TimeBrushFooter.utils.js'
+
 import { SelectionState } from '@thematic/core'
 import { useThematic } from '@thematic/react'
 import { brushX } from 'd3-brush'
@@ -26,6 +17,16 @@ import {
 	useRef,
 	useState,
 } from 'react'
+import type { TimeBrushFooterProps } from './TimeBrush.types.js'
+import {
+	calculateBrush,
+	changePlot,
+	createBarGroup,
+	createPlot,
+	selectAll,
+	selectAllPlot,
+	wholeDateRangeSelected,
+} from './TimeBrushFooter.utils.js'
 
 const DEFAULT_BAR_WIDTH = 8
 

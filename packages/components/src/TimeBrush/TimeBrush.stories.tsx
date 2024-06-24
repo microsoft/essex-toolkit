@@ -2,9 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+
+import { useCallback, useState } from 'react'
 import { TimeBrush } from './TimeBrush.js'
 import type { TimeBrushProps } from './TimeBrush.types.js'
-import { useCallback, useState } from 'react'
 
 const meta = {
 	title: '@essex:components/TimeBrush',

@@ -2,11 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GroupedTerm } from './TimeBrush.types.js'
-import { isoDay } from './format.js'
+
 import { line, svg, text } from '@thematic/d3'
 import { select } from 'd3-selection'
 import moment from 'moment'
+import type { GroupedTerm } from './TimeBrush.types.js'
+import { isoDay } from './format.js'
 
 export function round(date: Date): Date {
 	const m = moment.utc(date)

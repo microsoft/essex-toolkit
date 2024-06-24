@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import { memo } from 'react'
 import { Chip } from './Chip.js'
 import { useChipsStyles } from './Chips.styles.js'
 import type { ChipsProps } from './Chips.types.js'
-import { memo } from 'react'
 
 export const Chips: React.FC<ChipsProps> = memo(function Chips({
 	items,

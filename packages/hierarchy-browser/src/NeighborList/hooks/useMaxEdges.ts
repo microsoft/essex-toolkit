@@ -23,6 +23,6 @@ export function useMaxEdges(
 					},
 					[0, 0],
 				)
-			: [NaN, NaN]
+			: [Number.NaN, Number.NaN]
 	}, [edges])
 }

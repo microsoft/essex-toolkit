@@ -2,11 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Sparkbar } from './SparkBar.js'
-import type { TermBarProps } from './TimeBrush.types.js'
+
 import { scaleTime } from 'd3-scale'
 import moment from 'moment'
 import { memo, useCallback, useMemo } from 'react'
+import { Sparkbar } from './SparkBar.js'
+import type { TermBarProps } from './TimeBrush.types.js'
 
 const DEFAULT_BAR_WIDTH = 4
 

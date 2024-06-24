@@ -2,11 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+
+import moment from 'moment'
+import { memo, useCallback, useMemo } from 'react'
 import { TermBar } from './TermBar.js'
 import type { TimeBrushProps } from './TimeBrush.types.js'
 import { TimeBrushFooter } from './TimeBrushFooter.js'
-import moment from 'moment'
-import { memo, useCallback, useMemo } from 'react'
 
 const DEFAULT_WIDTH = 800
 const DEFAULT_HEIGHT = 24

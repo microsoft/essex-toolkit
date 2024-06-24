@@ -55,7 +55,7 @@ export function array<T = string>(
 
 	function visit(node: T, i: number, predecessors: Set<T>) {
 		if (predecessors.has(node)) {
-			let nodeRep
+			let nodeRep: string
 			try {
 				nodeRep = `, node was:${JSON.stringify(node)}`
 			} catch (e) {

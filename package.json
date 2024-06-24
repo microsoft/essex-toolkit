@@ -27,7 +27,7 @@
 		"_check_packages": "turbo run check",
 		"_ci_packages": "turbo run ci",
 		"check": "biome ci .",
-		"fix": "biome check --apply-unsafe .",
+		"fix": "biome check --write --unsafe .",
 		"format": "biome format . --write",
 		"build": "turbo run build --force",
 		"clean": "turbo run clean --parallel",

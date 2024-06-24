@@ -151,24 +151,22 @@ function forceExpansionToSelected(
 	selectedKey?: string,
 ): Record<string, boolean> {
 	const collect = (children: TreeItem[], parentKey?: string): string[] => {
-		return children
-			.map((child) => {
-				if (child.children) {
-					const childKeys = collect(child.children, child.key)
-					if (childKeys.length > 0) {
-						return [child.key, ...childKeys]
-					}
+		return children.flatMap((child) => {
+			if (child.children) {
+				const childKeys = collect(child.children, child.key)
+				if (childKeys.length > 0) {
+					return [child.key, ...childKeys]
 				}
-				if (child.expanded) {
-					return [child.key]
-				}
-				// if a child is selected, we actually want the _parent_ to be expanded, not the child itself
-				if (child.selected || child.key === selectedKey) {
-					return [parentKey]
-				}
-				return []
-			})
-			.flatMap((key) => key) as string[]
+			}
+			if (child.expanded) {
+				return [child.key]
+			}
+			// if a child is selected, we actually want the _parent_ to be expanded, not the child itself
+			if (child.selected || child.key === selectedKey) {
+				return [parentKey]
+			}
+			return []
+		}) as string[]
 	}
 	return collect(items).reduce(
 		(acc, cur) => {

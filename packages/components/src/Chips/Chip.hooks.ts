@@ -2,8 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ChipStyles } from './Chips.types.js'
+
 import type { IIconProps } from '@fluentui/react'
+import type { ChipStyles } from './Chips.types.js'
 
 import { useMemo } from 'react'
 

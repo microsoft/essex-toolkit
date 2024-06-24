@@ -2,8 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useMemo } from 'react'
 
+import { isArray } from 'lodash-es'
+import { useMemo } from 'react'
 import type {
 	ControlParams,
 	ParsedSettingConfig,
@@ -14,7 +15,6 @@ import type {
 	SortedSettingsGrouped,
 } from './Settings.types.js'
 import { ControlType, DataType } from './Settings.types.js'
-import { isArray } from 'lodash-es'
 
 /**
  * Sorts through settings to determine control type, etc. for each one.

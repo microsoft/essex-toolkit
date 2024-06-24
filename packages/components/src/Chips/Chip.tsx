@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import { Icon, IconButton } from '@fluentui/react'
+import { memo } from 'react'
 import { useCloseIconProps } from './Chip.hooks.js'
 import { useChipStyles } from './Chip.styles.js'
 import type { ChipItemProps } from './Chips.types.js'
-import { Icon, IconButton } from '@fluentui/react'
-import { memo } from 'react'
 
 export const Chip: React.FC<ChipItemProps> = memo(function Chip({
 	item,
