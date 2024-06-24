@@ -4,8 +4,6 @@
 
 ```ts
 
-/// <reference types="react" />
-
 // Warning: (ae-missing-release-tag) "Sparkbar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public

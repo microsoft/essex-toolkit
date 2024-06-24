@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 
 const NONE: unknown[] = []

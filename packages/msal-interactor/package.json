@@ -18,18 +18,16 @@
   "scripts": {
     "build": "essex build --docs",
     "clean": "essex clean docs",
-    "fix": "essex fix",
-    "check": "essex check",
     "check-deps": "essex check-deps",
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "devDependencies": {
     "@azure/msal-browser": "^2.38.2",
-    "@essex/scripts": "^26.0.0",
-    "@types/debug": "^4.1.8"
+    "@essex/scripts": "^27.0.0",
+    "@types/debug": "^4.1.12"
   },
   "dependencies": {
-    "debug": "^4.3.4"
+    "debug": "^4.3.5"
   },
   "peerDependencies": {
     "@azure/msal-browser": "> 2"

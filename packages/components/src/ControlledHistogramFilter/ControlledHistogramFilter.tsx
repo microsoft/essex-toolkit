@@ -149,7 +149,6 @@ export const ControlledHistogramFilter = ({
 									items: [
 										{
 											key: 'bins',
-											// eslint-disable-next-line react/display-name
 											onRender: () => (
 												<div style={{ marginLeft: 8 }}>
 													<NumberSpinButton
@@ -174,7 +173,6 @@ export const ControlledHistogramFilter = ({
 									items: [
 										{
 											key: 'minRange',
-											// eslint-disable-next-line react/display-name
 											onRender: () => (
 												<div style={{ margin: 10 }}>
 													<TextField
@@ -187,7 +185,6 @@ export const ControlledHistogramFilter = ({
 										},
 										{
 											key: 'maxRange',
-											// eslint-disable-next-line react/display-name
 											onRender: () => (
 												<div style={{ margin: 10 }}>
 													<TextField
@@ -200,7 +197,6 @@ export const ControlledHistogramFilter = ({
 										},
 										{
 											key: 'clear',
-											// eslint-disable-next-line react/display-name
 											onRender: () => (
 												<Link onClick={clearFilter} style={{ margin: 10 }}>
 													Clear Filter

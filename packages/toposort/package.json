@@ -18,13 +18,11 @@
   "scripts": {
     "clean": "essex clean docs",
     "build": "essex build --docs",
-    "fix": "essex fix",
-    "check": "essex check",
     "check-deps": "essex check-deps",
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "devDependencies": {
-    "@essex/scripts": "^26.0.0",
-    "@essex/tsconfig-base": "^3.0.0"
+    "@essex/scripts": "^27.0.0",
+    "@essex/tsconfig-base": "^3.1.1"
   }
 }

@@ -4,8 +4,6 @@
 
 ```ts
 
-/// <reference types="react" />
-
 import type { CSSProperties } from 'react';
 import type { ReactNode } from 'react';
 

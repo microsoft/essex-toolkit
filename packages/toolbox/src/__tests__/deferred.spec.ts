@@ -62,7 +62,6 @@ describe('deferred', () => {
 							reject('This promise should not have been resolved')
 						},
 						(args) => {
-							/* eslint-disable-next-line jest/no-conditional-expect */
 							expect(args).toEqual(expectedArgs)
 							resolve()
 						},

@@ -27,7 +27,6 @@ export function registerSchema(
 }
 
 export function registerRequestContextProviders(
-	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 	providers: RequestContextProvider<any, unknown, unknown>[],
 	ctx: DependencyContainer = container,
 ): void {

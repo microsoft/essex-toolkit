@@ -11,7 +11,6 @@
 
 import { Color } from '@thematic/color'
 
-/* eslint-disable @typescript-eslint/no-var-requires */
 const {
 	buildColumn: bc,
 	buildStringColumn: bsc,

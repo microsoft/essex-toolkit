@@ -28,7 +28,6 @@ export function useDynamicData<InputType, OutputType = InputType>(
 		let done = false
 		if (values) {
 			if (typeof (values as any)[Symbol.asyncIterator] === 'function') {
-				/* eslint-disable-next-line @typescript-eslint/no-misused-promises */
 				setTimeout(async () => {
 					for await (const value of values as any as AsyncIterable<InputType>) {
 						if (!done) {
@@ -48,7 +47,6 @@ export function useDynamicData<InputType, OutputType = InputType>(
 		return () => {
 			done = true
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [values, ...deps])
 	const memod = useMemo<OutputType | undefined>(() => {
 		if (map) {

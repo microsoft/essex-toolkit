@@ -109,7 +109,6 @@ export function useMicrosoftConsentBanner({
 				console.error('error initalizing consent', err)
 			}
 		},
-		/* eslint-disable-next-line react-hooks/exhaustive-deps */
 		[theme],
 	)
 

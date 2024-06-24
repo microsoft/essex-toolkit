@@ -16,14 +16,12 @@
     "clean": "essex clean docs",
     "build": "essex build --docs",
     "test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand --coverage",
-    "fix": "essex fix",
-    "check": "essex check",
     "check-deps": "essex check-deps",
     "release": "yarn npm publish --tolerate-republish --access public"
   },
   "devDependencies": {
-    "@essex/jest-config": "^22.0.0",
-    "@essex/scripts": "^26.0.0",
-    "jest": "^29.6.4"
+    "@essex/jest-config": "^22.1.1",
+    "@essex/scripts": "^27.0.0",
+    "jest": "^29.7.0"
   }
 }

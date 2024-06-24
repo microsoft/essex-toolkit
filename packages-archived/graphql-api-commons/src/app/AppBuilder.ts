@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-/* eslint-disable @typescript-eslint/consistent-type-imports, @essex/adjacent-await */
 import { ApolloServer } from '@apollo/server'
 import { ApolloServerPluginLandingPageDisabled } from '@apollo/server/plugin/disabled'
 import { startStandaloneServer } from '@apollo/server/standalone'
@@ -93,7 +92,6 @@ export class AppBuilder<
 					.send({ messsage: error.message })
 			}
 		})
-		/* eslint-disable  @essex/adjacent-await */
 		await preRun?.(app)
 		await app.listen({
 			port: this.config.serverPort,

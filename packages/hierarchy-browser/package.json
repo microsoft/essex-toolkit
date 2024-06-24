@@ -14,8 +14,6 @@
   "scripts": {
     "build": "essex build --skipExportCheck --docs",
     "clean": "essex clean docs",
-    "fix": "essex fix",
-    "check": "essex check",
     "check-deps": "essex check-deps --ignore @storybook/addon-essentials,react-dom",
     "release": "yarn npm publish --tolerate-republish --access public"
   },
@@ -25,11 +23,11 @@
     "d3-scale": "^4.0.2",
     "d3-selection": "^3.0.0",
     "react-infinite-scroller": "^1.2.6",
-    "styled-components": "^6.0.7"
+    "styled-components": "^6.1.11"
   },
   "devDependencies": {
-    "@essex/scripts": "^26.0.0",
-    "@fluentui/react": "^8.111.1",
+    "@essex/scripts": "^27.0.0",
+    "@fluentui/react": "^8.118.9",
     "@mdx-js/react": "^1.6.22",
     "@storybook/addon-docs": "^7.3.2",
     "@storybook/addon-essentials": "^7.3.2",
@@ -39,12 +37,12 @@
     "@types/d3-array": "^3.0.3",
     "@types/d3-scale": "^4.0.2",
     "@types/d3-selection": "^3.0.3",
-    "@types/react": "^18.2.21",
-    "@types/react-dom": "^18.2.7",
-    "@types/react-infinite-scroller": "^1.2.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-is": "^18.2.0"
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/react-infinite-scroller": "^1.2.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-is": "^18.3.1"
   },
   "peerDependencies": {
     "@fluentui/react": ">=7.146.1",

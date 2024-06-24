@@ -8,7 +8,6 @@ import { act, render } from '@testing-library/react'
 
 import { useDestroyable } from '../useDestroyable.js'
 
-/* eslint @typescript-eslint/no-unused-vars:0 */
 const DestroyableTest = ({ destroyable }: any) => {
 	const [usedDestroyable, setDestroyable] = useDestroyable()
 	if (usedDestroyable !== destroyable) {
@@ -17,14 +16,12 @@ const DestroyableTest = ({ destroyable }: any) => {
 	return null
 }
 
-/* eslint-disable jest/no-disabled-tests, jest/expect-expect */
-
 test.skip('Setting an undefined destroyable does not cause a crash', () => {
 	act(() => {
 		render(<DestroyableTest destroyable={undefined} />)
 	})
 })
-/* eslint-disable jest/no-disabled-tests */
+
 test.skip('Setting a destroyable to undefined causes the original destroyable to be destroyed', async () => {
 	return new Promise<void>((resolve, reject) => {
 		act(() => {
@@ -42,7 +39,7 @@ test.skip('Setting a destroyable to undefined causes the original destroyable to
 		})
 	})
 })
-/* eslint-disable jest/no-disabled-tests */
+
 test.skip('Setting a destroyable to a different destroyable causes the original destroyable to be destroyed', async () => {
 	return new Promise<void>((resolve, reject) => {
 		act(() => {
