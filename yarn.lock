@@ -3240,9 +3240,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/boolean-expression-component@workspace:^, @essex/boolean-expression-component@workspace:packages/boolean-expression-component":
+"@essex/boolean-expression-component@workspace:^, @essex/boolean-expression-component@workspace:javascript/boolean-expression-component":
   version: 0.0.0-use.local
-  resolution: "@essex/boolean-expression-component@workspace:packages/boolean-expression-component"
+  resolution: "@essex/boolean-expression-component@workspace:javascript/boolean-expression-component"
   dependencies:
     "@essex/scripts": "npm:^27.0.0"
     "@fluentui/react": "npm:^8.118.9"
@@ -3270,9 +3270,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex/charts-react@workspace:packages/charts-react":
+"@essex/charts-react@workspace:javascript/charts-react":
   version: 0.0.0-use.local
-  resolution: "@essex/charts-react@workspace:packages/charts-react"
+  resolution: "@essex/charts-react@workspace:javascript/charts-react"
   dependencies:
     "@essex/scripts": "npm:^27.0.0"
     "@essex/tsconfig-base": "npm:^3.1.1"
@@ -3379,9 +3379,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/components@workspace:^, @essex/components@workspace:packages/components":
+"@essex/components@workspace:^, @essex/components@workspace:javascript/components":
   version: 0.0.0-use.local
-  resolution: "@essex/components@workspace:packages/components"
+  resolution: "@essex/components@workspace:javascript/components"
   dependencies:
     "@essex/scripts": "npm:^27.0.0"
     "@essex/toolbox": "workspace:^"
@@ -3464,9 +3464,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex/hierarchy-browser@workspace:^, @essex/hierarchy-browser@workspace:packages/hierarchy-browser":
+"@essex/hierarchy-browser@workspace:^, @essex/hierarchy-browser@workspace:javascript/hierarchy-browser":
   version: 0.0.0-use.local
-  resolution: "@essex/hierarchy-browser@workspace:packages/hierarchy-browser"
+  resolution: "@essex/hierarchy-browser@workspace:javascript/hierarchy-browser"
   dependencies:
     "@essex/hooks": "workspace:^"
     "@essex/scripts": "npm:^27.0.0"
@@ -3535,9 +3535,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex/hooks@workspace:^, @essex/hooks@workspace:packages/hooks":
+"@essex/hooks@workspace:^, @essex/hooks@workspace:javascript/hooks":
   version: 0.0.0-use.local
-  resolution: "@essex/hooks@workspace:packages/hooks"
+  resolution: "@essex/hooks@workspace:javascript/hooks"
   dependencies:
     "@essex/jest-config": "npm:^22.1.1"
     "@essex/scripts": "npm:^27.0.0"
@@ -3592,9 +3592,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/msal-interactor@workspace:packages/msal-interactor":
+"@essex/msal-interactor@workspace:javascript/msal-interactor":
   version: 0.0.0-use.local
-  resolution: "@essex/msal-interactor@workspace:packages/msal-interactor"
+  resolution: "@essex/msal-interactor@workspace:javascript/msal-interactor"
   dependencies:
     "@azure/msal-browser": "npm:^2.38.2"
     "@essex/scripts": "npm:^27.0.0"
@@ -3664,9 +3664,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/semantic-components@workspace:packages/semantic-components":
+"@essex/semantic-components@workspace:javascript/semantic-components":
   version: 0.0.0-use.local
-  resolution: "@essex/semantic-components@workspace:packages/semantic-components"
+  resolution: "@essex/semantic-components@workspace:javascript/semantic-components"
   dependencies:
     "@essex/jest-config": "npm:^22.1.1"
     "@essex/scripts": "npm:^27.0.0"
@@ -3744,9 +3744,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/thematic-lineup@workspace:^, @essex/thematic-lineup@workspace:packages/thematic-lineup":
+"@essex/thematic-lineup@workspace:^, @essex/thematic-lineup@workspace:javascript/thematic-lineup":
   version: 0.0.0-use.local
-  resolution: "@essex/thematic-lineup@workspace:packages/thematic-lineup"
+  resolution: "@essex/thematic-lineup@workspace:javascript/thematic-lineup"
   dependencies:
     "@essex/scripts": "npm:^27.0.0"
     "@mdx-js/react": "npm:^1.6.22"
@@ -3788,9 +3788,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex/toolbox@npm:^3.0.18, @essex/toolbox@workspace:^, @essex/toolbox@workspace:packages/toolbox":
+"@essex/toolbox@npm:^3.0.18, @essex/toolbox@workspace:^, @essex/toolbox@workspace:javascript/toolbox":
   version: 0.0.0-use.local
-  resolution: "@essex/toolbox@workspace:packages/toolbox"
+  resolution: "@essex/toolbox@workspace:javascript/toolbox"
   dependencies:
     "@essex/jest-config": "npm:^22.1.1"
     "@essex/scripts": "npm:^27.0.0"
@@ -3798,9 +3798,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@essex/toposort@workspace:packages/toposort":
+"@essex/toposort@workspace:javascript/toposort":
   version: 0.0.0-use.local
-  resolution: "@essex/toposort@workspace:packages/toposort"
+  resolution: "@essex/toposort@workspace:javascript/toposort"
   dependencies:
     "@essex/scripts": "npm:^27.0.0"
     "@essex/tsconfig-base": "npm:^3.1.1"
@@ -13013,9 +13013,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"essex-toolkit-stories@workspace:packages/stories":
+"essex-toolkit-stories@workspace:javascript/stories":
   version: 0.0.0-use.local
-  resolution: "essex-toolkit-stories@workspace:packages/stories"
+  resolution: "essex-toolkit-stories@workspace:javascript/stories"
   dependencies:
     "@essex/boolean-expression-component": "workspace:^"
     "@essex/components": "workspace:^"
