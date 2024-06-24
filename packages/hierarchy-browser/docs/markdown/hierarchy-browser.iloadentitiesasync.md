@@ -2,10 +2,12 @@
 
 [Home](./index.md) &gt; [@essex/hierarchy-browser](./hierarchy-browser.md) &gt; [ILoadEntitiesAsync](./hierarchy-browser.iloadentitiesasync.md)
 
-## ILoadEntitiesAsync interface
+## ILoadEntitiesAsync type
 
 <b>Signature:</b>
 
 ```typescript
-export interface ILoadEntitiesAsync 
+export type ILoadEntitiesAsync = (params: ILoadParams) => Promise<IHierarchyDataResponse>;
 ```
+<b>References:</b> [ILoadParams](./hierarchy-browser.iloadparams.md)<!-- -->, [IHierarchyDataResponse](./hierarchy-browser.ihierarchydataresponse.md)
+

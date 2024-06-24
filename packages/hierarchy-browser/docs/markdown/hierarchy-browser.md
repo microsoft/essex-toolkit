@@ -15,12 +15,8 @@
 |  [IHierarchyDataProvider](./hierarchy-browser.ihierarchydataprovider.md) |  |
 |  [IHierarchyDataResponse](./hierarchy-browser.ihierarchydataresponse.md) |  |
 |  [IHierarchyNeighborResponse](./hierarchy-browser.ihierarchyneighborresponse.md) |  |
-|  [ILoadEntitiesAsync](./hierarchy-browser.iloadentitiesasync.md) |  |
-|  [ILoadNeighborCommunities](./hierarchy-browser.iloadneighborcommunities.md) |  |
-|  [ILoadNeighborCommunitiesAsync](./hierarchy-browser.iloadneighborcommunitiesasync.md) |  |
 |  [ILoadParams](./hierarchy-browser.iloadparams.md) |  |
 |  [INeighborCommunityDetail](./hierarchy-browser.ineighborcommunitydetail.md) |  |
-|  [IOnSelectionChange](./hierarchy-browser.ionselectionchange.md) |  |
 |  [ISettings](./hierarchy-browser.isettings.md) |  |
 |  [IStyles](./hierarchy-browser.istyles.md) |  |
 |  [ITableSettings](./hierarchy-browser.itablesettings.md) |  |
@@ -37,4 +33,8 @@
 |  --- | --- |
 |  [CommunityId](./hierarchy-browser.communityid.md) |  |
 |  [EntityId](./hierarchy-browser.entityid.md) |  |
+|  [ILoadEntitiesAsync](./hierarchy-browser.iloadentitiesasync.md) |  |
+|  [ILoadNeighborCommunities](./hierarchy-browser.iloadneighborcommunities.md) |  |
+|  [ILoadNeighborCommunitiesAsync](./hierarchy-browser.iloadneighborcommunitiesasync.md) |  |
+|  [IOnSelectionChange](./hierarchy-browser.ionselectionchange.md) |  |
 

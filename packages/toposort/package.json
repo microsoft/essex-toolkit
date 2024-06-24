@@ -11,7 +11,9 @@
 	"sideEffects": false,
 	"repository": "https://github.com/microsoft/essex-toolkit",
 	"author": "Marcel Klehr <mklehr@gmx.net>",
-	"contributors": ["Chris Trevino <chtrevin@microsoft.com>"],
+	"contributors": [
+		"Chris Trevino <chtrevin@microsoft.com>"
+	],
 	"license": "MIT",
 	"scripts": {
 		"clean": "essex clean docs",

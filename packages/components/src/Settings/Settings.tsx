@@ -11,7 +11,7 @@ import { NumberControl } from './NumberControl.js'
 import { useGrouped, useParsedSettings } from './Settings.hooks.js'
 import { containerStyle, groupContainerStyle } from './Settings.styles.js'
 import type { ParsedSettingConfig, SettingsProps } from './Settings.types.js'
-import { ControlType, DataType } from './Settings.types.js'
+import { ControlType, DataType, type ControlProps } from './Settings.types.js'
 import { TextControl } from './TextControl.js'
 
 /**
@@ -58,7 +58,7 @@ const renderControl = (
 	onChange: (key: any, value: any) => void,
 ): JSX.Element | null => {
 	const { key, type, control } = config
-	let Control: JSX.Element
+	let Control: (props: ControlProps) => JSX.Element
 	if (type === DataType.Number) {
 		Control = NumberControl
 	} else if (type === DataType.Boolean) {

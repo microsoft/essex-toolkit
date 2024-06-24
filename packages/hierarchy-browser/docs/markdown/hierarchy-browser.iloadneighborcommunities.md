@@ -2,10 +2,12 @@
 
 [Home](./index.md) &gt; [@essex/hierarchy-browser](./hierarchy-browser.md) &gt; [ILoadNeighborCommunities](./hierarchy-browser.iloadneighborcommunities.md)
 
-## ILoadNeighborCommunities interface
+## ILoadNeighborCommunities type
 
 <b>Signature:</b>
 
 ```typescript
-export interface ILoadNeighborCommunities 
+export type ILoadNeighborCommunities = (params: ILoadParams, communityId: CommunityId) => Promise<IHierarchyNeighborResponse>;
 ```
+<b>References:</b> [ILoadParams](./hierarchy-browser.iloadparams.md)<!-- -->, [CommunityId](./hierarchy-browser.communityid.md)<!-- -->, [IHierarchyNeighborResponse](./hierarchy-browser.ihierarchyneighborresponse.md)
+

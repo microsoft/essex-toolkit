@@ -2,10 +2,12 @@
 
 [Home](./index.md) &gt; [@essex/hierarchy-browser](./hierarchy-browser.md) &gt; [IOnSelectionChange](./hierarchy-browser.ionselectionchange.md)
 
-## IOnSelectionChange interface
+## IOnSelectionChange type
 
 <b>Signature:</b>
 
 ```typescript
-export interface IOnSelectionChange 
+export type IOnSelectionChange = (communityIds: CommunityId[]) => void;
 ```
+<b>References:</b> [CommunityId](./hierarchy-browser.communityid.md)
+

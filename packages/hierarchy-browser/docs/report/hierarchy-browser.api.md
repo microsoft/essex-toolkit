@@ -4,8 +4,6 @@
 
 ```ts
 
-/// <reference types="react" />
-
 import type { IButtonStyles } from '@fluentui/react';
 import type { ITextProps } from '@fluentui/react';
 
@@ -114,26 +112,17 @@ export interface IHierarchyNeighborResponse {
 // Warning: (ae-missing-release-tag) "ILoadEntitiesAsync" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ILoadEntitiesAsync {
-    // (undocumented)
-    (params: ILoadParams): Promise<IHierarchyDataResponse>;
-}
+export type ILoadEntitiesAsync = (params: ILoadParams) => Promise<IHierarchyDataResponse>;
 
 // Warning: (ae-missing-release-tag) "ILoadNeighborCommunities" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ILoadNeighborCommunities {
-    // (undocumented)
-    (params: ILoadParams, communityId: CommunityId): Promise<IHierarchyNeighborResponse>;
-}
+export type ILoadNeighborCommunities = (params: ILoadParams, communityId: CommunityId) => Promise<IHierarchyNeighborResponse>;
 
 // Warning: (ae-missing-release-tag) "ILoadNeighborCommunitiesAsync" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ILoadNeighborCommunitiesAsync {
-    // (undocumented)
-    (params: ILoadParams): Promise<IHierarchyNeighborResponse>;
-}
+export type ILoadNeighborCommunitiesAsync = (params: ILoadParams) => Promise<IHierarchyNeighborResponse>;
 
 // Warning: (ae-missing-release-tag) "ILoadParams" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -164,10 +153,7 @@ export interface INeighborCommunityDetail extends ICommunityDetail {
 // Warning: (ae-missing-release-tag) "IOnSelectionChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface IOnSelectionChange {
-    // (undocumented)
-    (communityIds: CommunityId[]): void;
-}
+export type IOnSelectionChange = (communityIds: CommunityId[]) => void;
 
 // Warning: (ae-missing-release-tag) "ISettings" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
