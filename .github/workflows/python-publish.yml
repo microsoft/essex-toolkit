@@ -33,12 +33,12 @@ jobs:
 
       - name: Install dependencies
         shell: bash
-        working-directory: ./python/datashaper
+        working-directory: ./python/reactivedatafdlow
         run: poetry install
 
       - name: Build Distributable
         shell: bash
-        working-directory: ./python/datashaper
+        working-directory: ./python/reactivedatafdlow
         run: poetry build
 
       - name: Publish package distributions to PyPI
