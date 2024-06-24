@@ -43,5 +43,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
           branch: gh-pages
-          folder: packages/stories/storybook-static
+          folder: javascript/stories/storybook-static
           clean: true
