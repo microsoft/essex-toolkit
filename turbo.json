@@ -10,7 +10,7 @@
 			"outputs": ["storybook_static/**/*"]
 		},
 		"test": {
-			"dependsOn": [],
+			"dependsOn": ["build"],
 			"outputs": ["coverage/**/*"]
 		},
 		"ci": {
@@ -18,8 +18,8 @@
 			"outputs": []
 		},
 		"check-deps": {
-			"dependsOn": [],
-			"outputs": []
+			"dependsOn": ["build"],
+			"cache": false
 		},
 		"clean": {
 			"cache": false
