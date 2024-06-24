@@ -1,20 +1,24 @@
 # Node Artifacts
 node_modules
-packages/*/src/**/*.js
-packages/*/lib/
-packages/*/dist/
-packages/*/storybook-static/
-packages/*/docsTemp/
+javascript/*/src/**/*.js
+javascript/*/lib/
+javascript/*/dist/
+javascript/*/storybook-static/
+javascript/*/docsTemp/
 .swc/
 .turbo/
 
 # Test Output
 coverage/
+.coverage
+coverage.xml
+htmlcov/
 licenses.txt
 
 # Random
 .DS_Store
 *.log*
+.env
 
 # https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
 .yarn/*
@@ -24,3 +28,8 @@ licenses.txt
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+
+# Python Artifacts
+__pycache__/
+output/
+

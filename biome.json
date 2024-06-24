@@ -13,7 +13,8 @@
 			".pnp.loader.mjs",
 			".devcontainer/",
 			".vscode/",
-			"archived/"
+			"archived/",
+			"python/"
 		]
 	},
 	"organizeImports": {
