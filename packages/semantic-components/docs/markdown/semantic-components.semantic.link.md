@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-link: (d?: HP<HTMLLinkElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLLinkElement>>>
+link: (d?: HP<HTMLLinkElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLLinkElement>>>
 ```

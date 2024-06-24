@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-slot: (d?: HP<HTMLSlotElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLSlotElement>>>
+slot: (d?: HP<HTMLSlotElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLSlotElement>>>
 ```

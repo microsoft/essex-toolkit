@@ -35,7 +35,7 @@ export const Tree: React.FC<TreeProps> = memo(function Tree({
 		onItemExpandClick,
 	)
 	return (
-		<div data-testid='essex-tree' style={_styles.root}>
+		<div data-testid="essex-tree" style={_styles.root}>
 			{treeGroups.map((group) => {
 				return (
 					<div style={_styles.group} key={`tree-group-${group.key}`}>
@@ -66,21 +66,21 @@ export const Tree: React.FC<TreeProps> = memo(function Tree({
 	)
 })
 
-const TreeGroupHeader: React.FC<TreeGroupProps> = memo(function TreeGroupHeader(
-	props,
-) {
-	const { group, styles, size } = props
-	const _styles = useTreeStyles(styles, size)
-	return (
-		<>
-			{group.text && (
-				<li style={_styles.groupHeader} title={group.text}>
-					{group.text}
-				</li>
-			)}
-		</>
-	)
-})
+const TreeGroupHeader: React.FC<TreeGroupProps> = memo(
+	function TreeGroupHeader(props) {
+		const { group, styles, size } = props
+		const _styles = useTreeStyles(styles, size)
+		return (
+			<>
+				{group.text && (
+					<li style={_styles.groupHeader} title={group.text}>
+						{group.text}
+					</li>
+				)}
+			</>
+		)
+	},
+)
 
 const defaultGroupHeaderRenderer: IRenderFunction<TreeGroupProps> = (props) => {
 	return props ? <TreeGroupHeader {...props} /> : null

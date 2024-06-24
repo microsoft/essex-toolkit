@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-meta: (d?: HP<HTMLMetaElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLMetaElement>>>
+meta: (d?: HP<HTMLMetaElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLMetaElement>>>
 ```

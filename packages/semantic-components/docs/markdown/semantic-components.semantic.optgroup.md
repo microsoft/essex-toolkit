@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-optgroup: (d?: HP<HTMLOptGroupElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLOptGroupElement>>>
+optgroup: (d?: HP<HTMLOptGroupElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLOptGroupElement>>>
 ```

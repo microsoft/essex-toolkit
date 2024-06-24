@@ -286,7 +286,7 @@ export function useMenuItemsStyles(size: Size = 'medium') {
 							},
 						},
 					},
-			  }
+				}
 			: {}
 	}, [size])
 }

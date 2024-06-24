@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-span: (d?: HP<HTMLSpanElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLSpanElement>>>
+span: (d?: HP<HTMLSpanElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLSpanElement>>>
 ```

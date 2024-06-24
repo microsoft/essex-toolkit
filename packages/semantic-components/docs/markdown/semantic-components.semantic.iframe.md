@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-iframe: (d?: HP<HTMLIFrameElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLIFrameElement>>>
+iframe: (d?: HP<HTMLIFrameElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLIFrameElement>>>
 ```

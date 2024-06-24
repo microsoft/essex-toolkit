@@ -42,19 +42,19 @@ export const NumberSpinButton = ({
 	)
 	const handleIncrement = useCallback(
 		(v: string) => {
-			handleChange(parseFloat(v) + step)
+			handleChange(Number.parseFloat(v) + step)
 		},
 		[handleChange, step],
 	)
 	const handleDecrement = useCallback(
 		(v: string) => {
-			handleChange(parseFloat(v) - step)
+			handleChange(Number.parseFloat(v) - step)
 		},
 		[handleChange, step],
 	)
 	const handleValidate = useCallback(
 		(v: string) => {
-			handleChange(parseFloat(v))
+			handleChange(Number.parseFloat(v))
 		},
 		[handleChange],
 	)

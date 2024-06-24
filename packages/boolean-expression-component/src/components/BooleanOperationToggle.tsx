@@ -62,7 +62,7 @@ const Button: FC<ColorProps> = memo(function Button({
 			className={className}
 			style={{ ...ButtonStyle, color, border: `1px solid ${color}`, ...style }}
 			onClick={onClick}
-			type='button'
+			type="button"
 		>
 			{children}
 		</button>

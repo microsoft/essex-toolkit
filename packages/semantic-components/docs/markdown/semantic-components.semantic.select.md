@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-select: (d?: HP<HTMLSelectElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLSelectElement>>>
+select: (d?: HP<HTMLSelectElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLSelectElement>>>
 ```

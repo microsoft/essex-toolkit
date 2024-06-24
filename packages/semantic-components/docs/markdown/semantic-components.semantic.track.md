@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-track: (d?: HP<HTMLTrackElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLTrackElement>>>
+track: (d?: HP<HTMLTrackElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLTrackElement>>>
 ```

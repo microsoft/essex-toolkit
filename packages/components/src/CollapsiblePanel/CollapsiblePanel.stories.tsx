@@ -4,7 +4,7 @@
  */
 import { Toggle } from '@fluentui/react'
 import type { StoryObj } from '@storybook/react'
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { CollapsiblePanel } from './CollapsiblePanel.js'
 import type { CollapsiblePanelProps } from './CollapsiblePanel.types.js'
@@ -141,10 +141,10 @@ export const CollapsiblePanelContainerStory = {
 	render: () => {
 		return (
 			<CollapsiblePanelContainer>
-				<CollapsiblePanel title='First'>
+				<CollapsiblePanel title="First">
 					<Lorem />
 				</CollapsiblePanel>
-				<CollapsiblePanel title='Second'>
+				<CollapsiblePanel title="Second">
 					<Lorem />
 				</CollapsiblePanel>
 			</CollapsiblePanelContainer>

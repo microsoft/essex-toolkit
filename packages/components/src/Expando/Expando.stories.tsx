@@ -5,7 +5,6 @@
 
 import { Expando } from './Expando.js'
 import type { ExpandoProps } from './Expando.types.js'
-import React from 'react'
 
 const StoryComponent: React.FC<ExpandoProps> = (args) => {
 	return <Expando {...args}>Here is the child content!</Expando>

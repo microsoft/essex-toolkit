@@ -45,24 +45,20 @@ export interface ILoadParams {
 	filtered: boolean
 }
 
-export interface ILoadEntitiesAsync {
-	(params: ILoadParams): Promise<IHierarchyDataResponse>
-}
+export type ILoadEntitiesAsync = (
+	params: ILoadParams,
+) => Promise<IHierarchyDataResponse>
 
-export interface ILoadNeighborCommunitiesAsync {
-	(params: ILoadParams): Promise<IHierarchyNeighborResponse>
-}
+export type ILoadNeighborCommunitiesAsync = (
+	params: ILoadParams,
+) => Promise<IHierarchyNeighborResponse>
 
-export interface ILoadNeighborCommunities {
-	(
-		params: ILoadParams,
-		communityId: CommunityId,
-	): Promise<IHierarchyNeighborResponse>
-}
+export type ILoadNeighborCommunities = (
+	params: ILoadParams,
+	communityId: CommunityId,
+) => Promise<IHierarchyNeighborResponse>
 
-export interface IOnSelectionChange {
-	(communityIds: CommunityId[]): void
-}
+export type IOnSelectionChange = (communityIds: CommunityId[]) => void
 
 // === CUSTOM STYLES
 export interface ICardOverviewSettings {

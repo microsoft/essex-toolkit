@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-dl: (d?: HP<HTMLDListElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLDListElement>>>
+dl: (d?: HP<HTMLDListElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLDListElement>>>
 ```

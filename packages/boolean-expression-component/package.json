@@ -1,55 +1,55 @@
 {
-  "name": "@essex/boolean-expression-component",
-  "version": "1.0.19",
-  "author": "Chris Trevino <chtrevin@microsoft.com>",
-  "license": "MIT",
-  "type": "module",
-  "main": "src/index.ts",
-  "publishConfig": {
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts"
-  },
-  "sideEffects": false,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/microsoft/essex-toolkit.git",
-    "directory": "packages/boolean-expression-component"
-  },
-  "scripts": {
-    "build": "essex build --skipExportCheck --docs",
-    "clean": "essex clean docs",
-    "check-deps": "essex check-deps --ignore @storybook/addon-essentials",
-    "release": "yarn npm publish --tolerate-republish --access public"
-  },
-  "devDependencies": {
-    "@essex/scripts": "^27.0.0",
-    "@fluentui/react": "^8.118.9",
-    "@mdx-js/react": "^1.6.22",
-    "@storybook/addon-docs": "^7.3.2",
-    "@storybook/addon-essentials": "^7.3.2",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
-  },
-  "peerDependencies": {
-    "@fluentui/react": "*",
-    "@types/react": "*",
-    "@types/react-dom": "*",
-    "react": "*"
-  },
-  "peerDependenciesMeta": {
-    "@fluentui/react": {
-      "optional": false
-    },
-    "@types/react": {
-      "optional": true
-    },
-    "@types/react-dom": {
-      "optional": true
-    },
-    "react": {
-      "optional": false
-    }
-  }
+	"name": "@essex/boolean-expression-component",
+	"version": "1.0.19",
+	"author": "Chris Trevino <chtrevin@microsoft.com>",
+	"license": "MIT",
+	"type": "module",
+	"main": "src/index.ts",
+	"publishConfig": {
+		"main": "dist/index.js",
+		"types": "dist/index.d.ts"
+	},
+	"sideEffects": false,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/microsoft/essex-toolkit.git",
+		"directory": "packages/boolean-expression-component"
+	},
+	"scripts": {
+		"build": "essex build --skipExportCheck --docs",
+		"clean": "essex clean docs",
+		"check-deps": "essex check-deps --ignore @storybook/addon-essentials",
+		"release": "yarn npm publish --tolerate-republish --access public"
+	},
+	"devDependencies": {
+		"@essex/scripts": "^27.0.0",
+		"@fluentui/react": "^8.118.9",
+		"@mdx-js/react": "^1.6.22",
+		"@storybook/addon-docs": "^7.3.2",
+		"@storybook/addon-essentials": "^7.3.2",
+		"@types/react": "^18.3.3",
+		"@types/react-dom": "^18.3.0",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1"
+	},
+	"peerDependencies": {
+		"@fluentui/react": "*",
+		"@types/react": "*",
+		"@types/react-dom": "*",
+		"react": "*"
+	},
+	"peerDependenciesMeta": {
+		"@fluentui/react": {
+			"optional": false
+		},
+		"@types/react": {
+			"optional": true
+		},
+		"@types/react-dom": {
+			"optional": true
+		},
+		"react": {
+			"optional": false
+		}
+	}
 }

@@ -57,7 +57,7 @@ export const EntityItem: React.FC<IEntityItemProps> = ({
 								''
 							)}{' '}
 						</TableItem>
-				  ))
+					))
 				: null}
 		</TableRow>
 	)

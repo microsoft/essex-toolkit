@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-webview: (d?: HP<HTMLWebViewElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLWebViewElement>>>
+webview: (d?: HP<HTMLWebViewElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLWebViewElement>>>
 ```

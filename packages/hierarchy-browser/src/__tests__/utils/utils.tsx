@@ -61,12 +61,15 @@ export function innerSearch(
 	if (parents.length > 0) {
 		parents.forEach((d) => {
 			const values = clusterIDMap[`${d}`]
-			const p = values.reduce((acc, d: JoinData) => {
-				if (d.parentCluster) {
-					acc.add(`${d.parentCluster}`)
-				}
-				return acc
-			}, new Set([]) as Set<string>)
+			const p = values.reduce(
+				(acc, d: JoinData) => {
+					if (d.parentCluster) {
+						acc.add(`${d.parentCluster}`)
+					}
+					return acc
+				},
+				new Set([]) as Set<string>,
+			)
 			container.push(values)
 			innerSearch(Array.from(p), clusterIDMap, container)
 		})
@@ -86,7 +89,7 @@ export const loadRemoteData = async (
 	const mappedValues: any[] = sliced.map((arr) => {
 		const obj = header.reduce((accum, colName, index) => {
 			let value: string | number = arr[index]
-			value = isNaN(+value) ? value : +value
+			value = Number.isNaN(+value) ? value : +value
 			return { ...accum, [colName]: value }
 		}, {} as any)
 		return obj
@@ -114,7 +117,7 @@ export function CSVToArray(strData: string, strDelimiter: string): string[][] {
 
 		let strMatchedValue = ''
 		if (arrMatches[2]) {
-			strMatchedValue = arrMatches[2].replace(new RegExp('""', 'g'), '"')
+			strMatchedValue = arrMatches[2].replace(/""/g, '"')
 		} else {
 			strMatchedValue = arrMatches[3]
 		}

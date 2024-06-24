@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-img: (d?: HP<HTMLImageElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLImageElement>>>
+img: (d?: HP<HTMLImageElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLImageElement>>>
 ```

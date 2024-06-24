@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-audio: (d?: HP<HTMLAudioElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLAudioElement>>>
+audio: (d?: HP<HTMLAudioElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLAudioElement>>>
 ```

@@ -4,8 +4,6 @@
 
 ```ts
 
-/// <reference types="react" />
-
 import { FunctionComponent } from 'react';
 
 // Warning: (ae-missing-release-tag) "Defaulted" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -38,237 +36,237 @@ namespace semantic {
     var // Warning: (ae-forgotten-export) The symbol "HP" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
-    a: (d?: HP<HTMLAnchorElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLAnchorElement>>>;
+    a: (d?: HP<HTMLAnchorElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLAnchorElement>>>;
     var // (undocumented)
-    abbr: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    abbr: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    address: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    address: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    area: (d?: HP<HTMLAreaElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLAreaElement>>>;
+    area: (d?: HP<HTMLAreaElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLAreaElement>>>;
     var // (undocumented)
-    article: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    article: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    aside: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    aside: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    audio: (d?: HP<HTMLAudioElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLAudioElement>>>;
+    audio: (d?: HP<HTMLAudioElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLAudioElement>>>;
     var // (undocumented)
-    b: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    b: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    base: (d?: HP<HTMLBaseElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLBaseElement>>>;
+    base: (d?: HP<HTMLBaseElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLBaseElement>>>;
     var // (undocumented)
-    bdi: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    bdi: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    bdo: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    bdo: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    big: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    big: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    blockquote: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    blockquote: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    body: (d?: HP<HTMLBodyElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLBodyElement>>>;
+    body: (d?: HP<HTMLBodyElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLBodyElement>>>;
     var // (undocumented)
-    br: (d?: HP<HTMLBRElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLBRElement>>>;
+    br: (d?: HP<HTMLBRElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLBRElement>>>;
     var // (undocumented)
-    button: (d?: HP<HTMLButtonElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLButtonElement>>>;
+    button: (d?: HP<HTMLButtonElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLButtonElement>>>;
     var // (undocumented)
-    canvas: (d?: HP<HTMLCanvasElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLCanvasElement>>>;
+    canvas: (d?: HP<HTMLCanvasElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLCanvasElement>>>;
     var // (undocumented)
-    caption: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    caption: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    cite: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    cite: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    code: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    code: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    col: (d?: HP<HTMLTableColElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLTableColElement>>>;
+    col: (d?: HP<HTMLTableColElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLTableColElement>>>;
     var // (undocumented)
-    colgroup: (d?: HP<HTMLTableColElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLTableColElement>>>;
+    colgroup: (d?: HP<HTMLTableColElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLTableColElement>>>;
     var // (undocumented)
-    data: (d?: HP<HTMLDataElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLDataElement>>>;
+    data: (d?: HP<HTMLDataElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLDataElement>>>;
     var // (undocumented)
-    datalist: (d?: HP<HTMLDataListElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLDataListElement>>>;
+    datalist: (d?: HP<HTMLDataListElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLDataListElement>>>;
     var // (undocumented)
-    dd: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    dd: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    del: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    del: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    details: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    details: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    dfn: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    dfn: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    dialog: (d?: HP<HTMLDialogElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLDialogElement>>>;
+    dialog: (d?: HP<HTMLDialogElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLDialogElement>>>;
     var // (undocumented)
-    div: (d?: HP<HTMLDivElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLDivElement>>>;
+    div: (d?: HP<HTMLDivElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLDivElement>>>;
     var // (undocumented)
-    dl: (d?: HP<HTMLDListElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLDListElement>>>;
+    dl: (d?: HP<HTMLDListElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLDListElement>>>;
     var // (undocumented)
-    dt: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    dt: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    em: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    em: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    embed: (d?: HP<HTMLEmbedElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLEmbedElement>>>;
+    embed: (d?: HP<HTMLEmbedElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLEmbedElement>>>;
     var // (undocumented)
-    fieldset: (d?: HP<HTMLFieldSetElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLFieldSetElement>>>;
+    fieldset: (d?: HP<HTMLFieldSetElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLFieldSetElement>>>;
     var // (undocumented)
-    figcaption: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    figcaption: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    figure: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    figure: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    footer: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    footer: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    form: (d?: HP<HTMLFormElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLFormElement>>>;
+    form: (d?: HP<HTMLFormElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLFormElement>>>;
     var // (undocumented)
-    h1: (d?: HP<HTMLHeadingElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLHeadingElement>>>;
+    h1: (d?: HP<HTMLHeadingElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLHeadingElement>>>;
     var // (undocumented)
-    h2: (d?: HP<HTMLHeadingElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLHeadingElement>>>;
+    h2: (d?: HP<HTMLHeadingElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLHeadingElement>>>;
     var // (undocumented)
-    h3: (d?: HP<HTMLHeadingElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLHeadingElement>>>;
+    h3: (d?: HP<HTMLHeadingElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLHeadingElement>>>;
     var // (undocumented)
-    h4: (d?: HP<HTMLHeadingElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLHeadingElement>>>;
+    h4: (d?: HP<HTMLHeadingElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLHeadingElement>>>;
     var // (undocumented)
-    h5: (d?: HP<HTMLHeadingElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLHeadingElement>>>;
+    h5: (d?: HP<HTMLHeadingElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLHeadingElement>>>;
     var // (undocumented)
-    h6: (d?: HP<HTMLHeadingElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLHeadingElement>>>;
+    h6: (d?: HP<HTMLHeadingElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLHeadingElement>>>;
     var // (undocumented)
-    head: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    head: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    header: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    header: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    hgroup: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    hgroup: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    hr: (d?: HP<HTMLHRElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLHRElement>>>;
+    hr: (d?: HP<HTMLHRElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLHRElement>>>;
     var // (undocumented)
-    html: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    html: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    i: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    i: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    iframe: (d?: HP<HTMLIFrameElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLIFrameElement>>>;
+    iframe: (d?: HP<HTMLIFrameElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLIFrameElement>>>;
     var // (undocumented)
-    img: (d?: HP<HTMLImageElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLImageElement>>>;
+    img: (d?: HP<HTMLImageElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLImageElement>>>;
     var // (undocumented)
-    input: (d?: HP<HTMLInputElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLInputElement>>>;
+    input: (d?: HP<HTMLInputElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLInputElement>>>;
     var // (undocumented)
-    ins: (d?: HP<HTMLModElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLModElement>>>;
+    ins: (d?: HP<HTMLModElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLModElement>>>;
     var // (undocumented)
-    kbd: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    kbd: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    keygen: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    keygen: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    label: (d?: HP<HTMLLabelElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLLabelElement>>>;
+    label: (d?: HP<HTMLLabelElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLLabelElement>>>;
     var // (undocumented)
-    legend: (d?: HP<HTMLLegendElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLLegendElement>>>;
+    legend: (d?: HP<HTMLLegendElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLLegendElement>>>;
     var // (undocumented)
-    li: (d?: HP<HTMLLIElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLLIElement>>>;
+    li: (d?: HP<HTMLLIElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLLIElement>>>;
     var // (undocumented)
-    link: (d?: HP<HTMLLinkElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLLinkElement>>>;
+    link: (d?: HP<HTMLLinkElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLLinkElement>>>;
     var // (undocumented)
-    main: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    main: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    map: (d?: HP<HTMLMapElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLMapElement>>>;
+    map: (d?: HP<HTMLMapElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLMapElement>>>;
     var // (undocumented)
-    mark: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    mark: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    menu: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    menu: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    menuitem: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    menuitem: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    meta: (d?: HP<HTMLMetaElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLMetaElement>>>;
+    meta: (d?: HP<HTMLMetaElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLMetaElement>>>;
     var // (undocumented)
-    meter: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    meter: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    nav: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    nav: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    noscript: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    noscript: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    object: (d?: HP<HTMLObjectElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLObjectElement>>>;
+    object: (d?: HP<HTMLObjectElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLObjectElement>>>;
     var // (undocumented)
-    ol: (d?: HP<HTMLOListElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLOListElement>>>;
+    ol: (d?: HP<HTMLOListElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLOListElement>>>;
     var // (undocumented)
-    optgroup: (d?: HP<HTMLOptGroupElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLOptGroupElement>>>;
+    optgroup: (d?: HP<HTMLOptGroupElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLOptGroupElement>>>;
     var // (undocumented)
-    option: (d?: HP<HTMLOptionElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLOptionElement>>>;
+    option: (d?: HP<HTMLOptionElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLOptionElement>>>;
     var // (undocumented)
-    output: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    output: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    p: (d?: HP<HTMLParagraphElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLParagraphElement>>>;
+    p: (d?: HP<HTMLParagraphElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLParagraphElement>>>;
     var // (undocumented)
-    param: (d?: HP<HTMLParamElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLParamElement>>>;
+    param: (d?: HP<HTMLParamElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLParamElement>>>;
     var // (undocumented)
-    picture: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    picture: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    pre: (d?: HP<HTMLPreElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLPreElement>>>;
+    pre: (d?: HP<HTMLPreElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLPreElement>>>;
     var // (undocumented)
-    progress: (d?: HP<HTMLProgressElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLProgressElement>>>;
+    progress: (d?: HP<HTMLProgressElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLProgressElement>>>;
     var // (undocumented)
-    q: (d?: HP<HTMLQuoteElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLQuoteElement>>>;
+    q: (d?: HP<HTMLQuoteElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLQuoteElement>>>;
     var // (undocumented)
-    rp: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    rp: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    rt: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    rt: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    ruby: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    ruby: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    s: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    s: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    samp: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    samp: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    slot: (d?: HP<HTMLSlotElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLSlotElement>>>;
+    slot: (d?: HP<HTMLSlotElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLSlotElement>>>;
     var // (undocumented)
-    script: (d?: HP<HTMLScriptElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLScriptElement>>>;
+    script: (d?: HP<HTMLScriptElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLScriptElement>>>;
     var // (undocumented)
-    section: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    section: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    select: (d?: HP<HTMLSelectElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLSelectElement>>>;
+    select: (d?: HP<HTMLSelectElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLSelectElement>>>;
     var // (undocumented)
-    small: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    small: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    source: (d?: HP<HTMLSourceElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLSourceElement>>>;
+    source: (d?: HP<HTMLSourceElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLSourceElement>>>;
     var // (undocumented)
-    span: (d?: HP<HTMLSpanElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLSpanElement>>>;
+    span: (d?: HP<HTMLSpanElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLSpanElement>>>;
     var // (undocumented)
-    strong: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    strong: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    style: (d?: HP<HTMLStyleElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLStyleElement>>>;
+    style: (d?: HP<HTMLStyleElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLStyleElement>>>;
     var // (undocumented)
-    sub: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    sub: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    summary: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    summary: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    sup: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    sup: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    table: (d?: HP<HTMLTableElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLTableElement>>>;
+    table: (d?: HP<HTMLTableElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLTableElement>>>;
     var // (undocumented)
-    template: (d?: HP<HTMLTemplateElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLTemplateElement>>>;
+    template: (d?: HP<HTMLTemplateElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLTemplateElement>>>;
     var // (undocumented)
-    tbody: (d?: HP<HTMLTableSectionElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLTableSectionElement>>>;
+    tbody: (d?: HP<HTMLTableSectionElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLTableSectionElement>>>;
     var // (undocumented)
-    td: (d?: HP<HTMLTableDataCellElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLTableDataCellElement>>>;
+    td: (d?: HP<HTMLTableDataCellElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLTableDataCellElement>>>;
     var // (undocumented)
-    textarea: (d?: HP<HTMLTextAreaElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLTextAreaElement>>>;
+    textarea: (d?: HP<HTMLTextAreaElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLTextAreaElement>>>;
     var // (undocumented)
-    tfoot: (d?: HP<HTMLTableSectionElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLTableSectionElement>>>;
+    tfoot: (d?: HP<HTMLTableSectionElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLTableSectionElement>>>;
     var // (undocumented)
-    th: (d?: HP<HTMLTableHeaderCellElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLTableHeaderCellElement>>>;
+    th: (d?: HP<HTMLTableHeaderCellElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLTableHeaderCellElement>>>;
     var // (undocumented)
-    thead: (d?: HP<HTMLTableSectionElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLTableSectionElement>>>;
+    thead: (d?: HP<HTMLTableSectionElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLTableSectionElement>>>;
     var // (undocumented)
-    time: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    time: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    title: (d?: HP<HTMLTitleElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLTitleElement>>>;
+    title: (d?: HP<HTMLTitleElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLTitleElement>>>;
     var // (undocumented)
-    tr: (d?: HP<HTMLTableRowElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLTableRowElement>>>;
+    tr: (d?: HP<HTMLTableRowElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLTableRowElement>>>;
     var // (undocumented)
-    track: (d?: HP<HTMLTrackElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLTrackElement>>>;
+    track: (d?: HP<HTMLTrackElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLTrackElement>>>;
     var // (undocumented)
-    u: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    u: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    ul: (d?: HP<HTMLUListElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLUListElement>>>;
+    ul: (d?: HP<HTMLUListElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLUListElement>>>;
     var // (undocumented)
-    _a: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    _a: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    video: (d?: HP<HTMLVideoElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLVideoElement>>>;
+    video: (d?: HP<HTMLVideoElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLVideoElement>>>;
     var // (undocumented)
-    wbr: (d?: HP<HTMLElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
+    wbr: (d?: HP) => FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>;
     var // (undocumented)
-    webview: (d?: HP<HTMLWebViewElement> | undefined) => FunctionComponent<Defaulted<unknown, HP<HTMLWebViewElement>>>;
+    webview: (d?: HP<HTMLWebViewElement>) => FunctionComponent<Defaulted<unknown, HP<HTMLWebViewElement>>>;
         { _a as var };
 }
 export default semantic;

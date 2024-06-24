@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-video: (d?: HP<HTMLVideoElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLVideoElement>>>
+video: (d?: HP<HTMLVideoElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLVideoElement>>>
 ```

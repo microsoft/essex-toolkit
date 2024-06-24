@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-map: (d?: HP<HTMLMapElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLMapElement>>>
+map: (d?: HP<HTMLMapElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLMapElement>>>
 ```

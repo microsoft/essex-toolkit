@@ -63,54 +63,51 @@ export function useMicrosoftConsentBanner({
 		manageConsent: NOOP,
 	})
 
-	useEffect(
-		() => {
-			try {
-				const element = document.getElementById(elementId)
-				if (!element) {
-					throw new Error(
-						`Could not find element with id ${elementId}. You should include an element in your HTML for the cookie-banner to render into, e.g. 
+	useEffect(() => {
+		try {
+			const element = document.getElementById(elementId)
+			if (!element) {
+				throw new Error(
+					`Could not find element with id ${elementId}. You should include an element in your HTML for the cookie-banner to render into, e.g. 
 						
 					<body>
 						...
 						<div id="${elementId}" />
 					</body>`,
-					)
-				}
-				if (!WcpConsent) {
-					throw new Error(`WcpConsent banner not initialized. You should include the WCP Consent script in your HTML header. e.g.
+				)
+			}
+			if (!WcpConsent) {
+				throw new Error(`WcpConsent banner not initialized. You should include the WCP Consent script in your HTML header. e.g.
 
 				<head>
 					...
 					<script src="https://wcpstatic.microsoft.com/mscc/lib/v2/wcp-consent.js"></script>
 				</head>
 				`)
-				}
-				WcpConsent.init(
-					navigator.language,
-					element,
-					function initializeConsentManagement(
-						err: Error,
-						consentUtil: ConsentUtil,
-					) {
-						if (err) {
-							console.error('error initalizing WcpConsent', err)
-						} else {
-							setConsentUtil(consentUtil)
-						}
-					},
-					function onConsentChanged(consent: Consent) {
-						setConsent(consent)
-						onChange(consent)
-					},
-					theme,
-				)
-			} catch (err) {
-				console.error('error initalizing consent', err)
 			}
-		},
-		[theme],
-	)
+			WcpConsent.init(
+				navigator.language,
+				element,
+				function initializeConsentManagement(
+					err: Error,
+					consentUtil: ConsentUtil,
+				) {
+					if (err) {
+						console.error('error initalizing WcpConsent', err)
+					} else {
+						setConsentUtil(consentUtil)
+					}
+				},
+				function onConsentChanged(consent: Consent) {
+					setConsent(consent)
+					onChange(consent)
+				},
+				theme,
+			)
+		} catch (err) {
+			console.error('error initalizing consent', err)
+		}
+	}, [theme])
 
 	const manageConsent = useCallback(
 		() => consentUtil.manageConsent(),

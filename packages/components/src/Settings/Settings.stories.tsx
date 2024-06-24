@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { DefaultButton, MessageBar } from '@fluentui/react'
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { Settings } from './Settings.js'
 import { ControlType, DataType, type SettingsProps } from './Settings.types.js'

@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-menuitem: (d?: HP<HTMLElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>
+menuitem: (d?: HP) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>
 ```

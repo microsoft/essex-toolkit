@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-embed: (d?: HP<HTMLEmbedElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLEmbedElement>>>
+embed: (d?: HP<HTMLEmbedElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLEmbedElement>>>
 ```

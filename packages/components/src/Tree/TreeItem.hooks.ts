@@ -97,8 +97,8 @@ export function useItemHoverInteraction(item: TreeItem, styles: TreeStyles) {
 			background: hovered
 				? theme.palette.neutralLighterAlt
 				: item.selected
-				? theme.palette.neutralLighter
-				: 'unset',
+					? theme.palette.neutralLighter
+					: 'unset',
 			...styles.listItemContent,
 		}),
 		[theme, styles, item, hovered],

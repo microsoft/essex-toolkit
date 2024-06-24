@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-canvas: (d?: HP<HTMLCanvasElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLCanvasElement>>>
+canvas: (d?: HP<HTMLCanvasElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLCanvasElement>>>
 ```

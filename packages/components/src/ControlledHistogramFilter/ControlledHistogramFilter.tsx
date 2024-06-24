@@ -67,8 +67,8 @@ export const ControlledHistogramFilter = ({
 
 	// apply or clear filter ranges when the menu closes
 	const onMenuClose = (menu?: IContextualMenuProps) => {
-		const minV = menuMin === '' ? undefined : parseFloat(menuMin)
-		const maxV = menuMax === '' ? undefined : parseFloat(menuMax)
+		const minV = menuMin === '' ? undefined : Number.parseFloat(menuMin)
+		const maxV = menuMax === '' ? undefined : Number.parseFloat(menuMax)
 		if (minV !== minValue || maxV !== maxValue) {
 			if (onChange) onChange([minV, maxV])
 		}
@@ -81,7 +81,7 @@ export const ControlledHistogramFilter = ({
 			return true
 		} else {
 			try {
-				parseFloat(value)
+				Number.parseFloat(value)
 				return true
 			} catch (err) {
 				return false
@@ -152,7 +152,7 @@ export const ControlledHistogramFilter = ({
 											onRender: () => (
 												<div style={{ marginLeft: 8 }}>
 													<NumberSpinButton
-														label='bins'
+														label="bins"
 														value={bins}
 														max={100}
 														min={5}
@@ -176,7 +176,7 @@ export const ControlledHistogramFilter = ({
 											onRender: () => (
 												<div style={{ margin: 10 }}>
 													<TextField
-														label='min value'
+														label="min value"
 														value={menuMin.toString()}
 														onChange={handleMinRange}
 													/>
@@ -188,7 +188,7 @@ export const ControlledHistogramFilter = ({
 											onRender: () => (
 												<div style={{ margin: 10 }}>
 													<TextField
-														label='max value'
+														label="max value"
 														value={menuMax.toString()}
 														onChange={handleMaxRange}
 													/>

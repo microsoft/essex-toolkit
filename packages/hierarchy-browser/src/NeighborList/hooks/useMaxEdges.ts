@@ -22,7 +22,7 @@ export function useMaxEdges(
 						return prev
 					},
 					[0, 0],
-			  )
+				)
 			: [NaN, NaN]
 	}, [edges])
 }

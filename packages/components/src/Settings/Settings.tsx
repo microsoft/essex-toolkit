@@ -58,7 +58,7 @@ const renderControl = (
 	onChange: (key: any, value: any) => void,
 ): JSX.Element | null => {
 	const { key, type, control } = config
-	let Control
+	let Control: JSX.Element
 	if (type === DataType.Number) {
 		Control = NumberControl
 	} else if (type === DataType.Boolean) {

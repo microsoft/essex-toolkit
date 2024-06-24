@@ -1,77 +1,77 @@
 {
-  "name": "@essex/charts-react",
-  "version": "1.1.12",
-  "type": "module",
-  "main": "src/index.ts",
-  "publishConfig": {
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts"
-  },
-  "sideEffects": false,
-  "author": "Nathan Evans <naevans@microsoft.com>",
-  "license": "MIT",
-  "contributors": [
-    "Nathan Evans <naevans@microsoft.com>",
-    "Dayenne Souza <ddesouza@microsoft.com>",
-    "Andres Morales <andresmor@microsoft.com>",
-    "Monica Carvajal <mcarvajal@microsoft.com>",
-    "Chris Trevino <chris.trevino@microsoft.com>",
-    "Derek Worthen <deworthe@microsoft.com>",
-    "Gaudy Blanco <gaudyb@microsoft.com>"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/microsoft/essex-toolkit"
-  },
-  "bugs": {
-    "url": "https://github.com/microsoft/essex-toolkit/issues"
-  },
-  "scripts": {
-    "clean": "essex clean dist docs",
-    "build": "essex build --docs",
-    "check-deps": "essex check-deps --ignore @storybook/addon-essentials,react-dom",
-    "release": "yarn npm publish --tolerate-republish --access public"
-  },
-  "dependencies": {
-    "d3-scale": "^4.0.2",
-    "d3-selection": "^3.0.0",
-    "d3-shape": "^3.1.0",
-    "lodash-es": "^4.17.21"
-  },
-  "devDependencies": {
-    "@essex/scripts": "^27.0.0",
-    "@essex/tsconfig-base": "^3.1.1",
-    "@mdx-js/react": "^1.6.22",
-    "@storybook/addon-docs": "^7.3.2",
-    "@storybook/addon-essentials": "^7.3.2",
-    "@thematic/d3": "^2.0.22",
-    "@thematic/react": "^2.1.9",
-    "@types/d3-scale": "^4.0.2",
-    "@types/d3-selection": "^3.0.3",
-    "@types/d3-shape": "^3.1.0",
-    "@types/lodash-es": "^4.17.12",
-    "@types/node": "^20.14.8",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "typescript": "^5.5.2"
-  },
-  "peerDependencies": {
-    "@thematic/d3": ">= 2",
-    "@thematic/react": ">= 2",
-    "@types/react-dom": "*",
-    "react": ">= 18"
-  },
-  "peerDependenciesMeta": {
-    "@thematic/d3": {
-      "optional": false
-    },
-    "@thematic/react": {
-      "optional": false
-    },
-    "react": {
-      "optional": false
-    }
-  }
+	"name": "@essex/charts-react",
+	"version": "1.1.12",
+	"type": "module",
+	"main": "src/index.ts",
+	"publishConfig": {
+		"main": "dist/index.js",
+		"types": "dist/index.d.ts"
+	},
+	"sideEffects": false,
+	"author": "Nathan Evans <naevans@microsoft.com>",
+	"license": "MIT",
+	"contributors": [
+		"Nathan Evans <naevans@microsoft.com>",
+		"Dayenne Souza <ddesouza@microsoft.com>",
+		"Andres Morales <andresmor@microsoft.com>",
+		"Monica Carvajal <mcarvajal@microsoft.com>",
+		"Chris Trevino <chris.trevino@microsoft.com>",
+		"Derek Worthen <deworthe@microsoft.com>",
+		"Gaudy Blanco <gaudyb@microsoft.com>"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/microsoft/essex-toolkit"
+	},
+	"bugs": {
+		"url": "https://github.com/microsoft/essex-toolkit/issues"
+	},
+	"scripts": {
+		"clean": "essex clean dist docs",
+		"build": "essex build --docs",
+		"check-deps": "essex check-deps --ignore @storybook/addon-essentials,react-dom",
+		"release": "yarn npm publish --tolerate-republish --access public"
+	},
+	"dependencies": {
+		"d3-scale": "^4.0.2",
+		"d3-selection": "^3.0.0",
+		"d3-shape": "^3.1.0",
+		"lodash-es": "^4.17.21"
+	},
+	"devDependencies": {
+		"@essex/scripts": "^27.0.0",
+		"@essex/tsconfig-base": "^3.1.1",
+		"@mdx-js/react": "^1.6.22",
+		"@storybook/addon-docs": "^7.3.2",
+		"@storybook/addon-essentials": "^7.3.2",
+		"@thematic/d3": "^2.0.22",
+		"@thematic/react": "^2.1.9",
+		"@types/d3-scale": "^4.0.2",
+		"@types/d3-selection": "^3.0.3",
+		"@types/d3-shape": "^3.1.0",
+		"@types/lodash-es": "^4.17.12",
+		"@types/node": "^20.14.8",
+		"@types/react": "^18.3.3",
+		"@types/react-dom": "^18.3.0",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"typescript": "^5.5.2"
+	},
+	"peerDependencies": {
+		"@thematic/d3": ">= 2",
+		"@thematic/react": ">= 2",
+		"@types/react-dom": "*",
+		"react": ">= 18"
+	},
+	"peerDependenciesMeta": {
+		"@thematic/d3": {
+			"optional": false
+		},
+		"@thematic/react": {
+			"optional": false
+		},
+		"react": {
+			"optional": false
+		}
+	}
 }

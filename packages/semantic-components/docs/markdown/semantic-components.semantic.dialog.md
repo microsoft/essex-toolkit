@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-dialog: (d?: HP<HTMLDialogElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLDialogElement>>>
+dialog: (d?: HP<HTMLDialogElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLDialogElement>>>
 ```

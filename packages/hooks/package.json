@@ -1,64 +1,64 @@
 {
-  "name": "@essex/hooks",
-  "version": "4.0.22",
-  "description": "A set of hooks for use with react",
-  "type": "module",
-  "main": "src/index.ts",
-  "publishConfig": {
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts"
-  },
-  "sideEffects": false,
-  "repository": "https://github.com/microsoft/essex-toolkit",
-  "author": "David Tittsworth <datittsw@microsoft.com>",
-  "license": "MIT",
-  "scripts": {
-    "build": "essex build --skipExportCheck --docs",
-    "clean": "essex clean docs",
-    "test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand --coverage",
-    "check-deps": "essex check-deps",
-    "release": "yarn npm publish --tolerate-republish --access public"
-  },
-  "dependencies": {
-    "@essex/toolbox": "workspace:^",
-    "lodash-es": "^4.17.21"
-  },
-  "devDependencies": {
-    "@essex/jest-config": "^22.1.1",
-    "@essex/scripts": "^27.0.0",
-    "@testing-library/react": "^14.3.1",
-    "@types/jest": "^29.5.12",
-    "@types/lodash-es": "^4.17.12",
-    "@types/node": "^20.14.8",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
-  },
-  "peerDependencies": {
-    "@types/node": "*",
-    "@types/react": "*",
-    "@types/react-dom": "*",
-    "react": ">= 18",
-    "react-dom": "^18.2.0"
-  },
-  "peerDependenciesMeta": {
-    "@type/node": {
-      "optional": true
-    },
-    "@types/react": {
-      "optional": true
-    },
-    "@types/react-dom": {
-      "optional": true
-    },
-    "react": {
-      "optional": false
-    },
-    "react-dom": {
-      "optional": true
-    }
-  }
+	"name": "@essex/hooks",
+	"version": "4.0.22",
+	"description": "A set of hooks for use with react",
+	"type": "module",
+	"main": "src/index.ts",
+	"publishConfig": {
+		"main": "dist/index.js",
+		"types": "dist/index.d.ts"
+	},
+	"sideEffects": false,
+	"repository": "https://github.com/microsoft/essex-toolkit",
+	"author": "David Tittsworth <datittsw@microsoft.com>",
+	"license": "MIT",
+	"scripts": {
+		"build": "essex build --skipExportCheck --docs",
+		"clean": "essex clean docs",
+		"test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand --coverage",
+		"check-deps": "essex check-deps",
+		"release": "yarn npm publish --tolerate-republish --access public"
+	},
+	"dependencies": {
+		"@essex/toolbox": "workspace:^",
+		"lodash-es": "^4.17.21"
+	},
+	"devDependencies": {
+		"@essex/jest-config": "^22.1.1",
+		"@essex/scripts": "^27.0.0",
+		"@testing-library/react": "^14.3.1",
+		"@types/jest": "^29.5.12",
+		"@types/lodash-es": "^4.17.12",
+		"@types/node": "^20.14.8",
+		"@types/react": "^18.3.3",
+		"@types/react-dom": "^18.3.0",
+		"jest": "^29.7.0",
+		"jest-environment-jsdom": "^29.7.0",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1"
+	},
+	"peerDependencies": {
+		"@types/node": "*",
+		"@types/react": "*",
+		"@types/react-dom": "*",
+		"react": ">= 18",
+		"react-dom": "^18.2.0"
+	},
+	"peerDependenciesMeta": {
+		"@type/node": {
+			"optional": true
+		},
+		"@types/react": {
+			"optional": true
+		},
+		"@types/react-dom": {
+			"optional": true
+		},
+		"react": {
+			"optional": false
+		},
+		"react-dom": {
+			"optional": true
+		}
+	}
 }

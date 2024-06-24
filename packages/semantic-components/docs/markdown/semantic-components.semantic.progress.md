@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-progress: (d?: HP<HTMLProgressElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLProgressElement>>>
+progress: (d?: HP<HTMLProgressElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLProgressElement>>>
 ```

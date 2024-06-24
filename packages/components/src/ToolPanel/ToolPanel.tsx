@@ -32,7 +32,7 @@ export const ToolPanel: React.FC<React.PropsWithChildren<ToolPanelProps>> =
 						<IconButton
 							iconProps={closeProps}
 							onClick={onDismiss}
-							ariaLabel='Close'
+							ariaLabel="Close"
 						/>
 					)}
 				</div>

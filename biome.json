@@ -11,7 +11,8 @@
 			".pnp.cjs",
 			".pnp.loader.mjs",
 			".devcontainer/",
-			".vscode/"
+			".vscode/",
+			"packages-archived/"
 		]
 	},
 	"organizeImports": {
@@ -21,8 +22,21 @@
 		"enabled": true,
 		"rules": {
 			"recommended": true,
+			"correctness": {
+				"useExhaustiveDependencies": "off"
+			},
+			"complexity": {
+				"noForEach": "off"
+			},
 			"suspicious": {
-				"noExplicitAny": "off"
+				"noExplicitAny": "off",
+				"noArrayIndexKey": "off"
+			},
+			"performance": {
+				"noAccumulatingSpread": "off"
+			},
+			"style": {
+				"noUselessElse": "off"
 			}
 		}
 	},
@@ -30,7 +44,7 @@
 		"formatter": {
 			"semicolons": "asNeeded",
 			"quoteStyle": "single",
-			"trailingComma": "all",
+			"trailingCommas": "all",
 			"quoteProperties": "asNeeded"
 		}
 	},

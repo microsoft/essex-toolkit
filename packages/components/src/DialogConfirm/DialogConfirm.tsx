@@ -29,8 +29,8 @@ export const DialogConfirm: React.FC<{
 			onDismiss={toggle}
 		>
 			<DialogFooter>
-				<PrimaryButton onClick={onConfirm} text='Yes' />
-				<DefaultButton onClick={toggle} text='No' />
+				<PrimaryButton onClick={onConfirm} text="Yes" />
+				<DefaultButton onClick={toggle} text="No" />
 			</DialogFooter>
 		</Dialog>
 	)

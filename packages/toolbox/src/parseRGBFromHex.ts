@@ -15,7 +15,7 @@ interface RGB {
 
 export function parseRgbFromCssColor(colorInput: string): RGB {
 	const color = colorInput.replace('#', '') // strip of leading # if necessary
-	const colorNumber = parseInt(color, 16)
+	const colorNumber = Number.parseInt(color, 16)
 	return {
 		r: colorNumber >> 16,
 		g: (colorNumber >> 8) & 255,

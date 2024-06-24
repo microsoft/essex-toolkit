@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-legend: (d?: HP<HTMLLegendElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLLegendElement>>>
+legend: (d?: HP<HTMLLegendElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLLegendElement>>>
 ```

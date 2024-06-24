@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-datalist: (d?: HP<HTMLDataListElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLDataListElement>>>
+datalist: (d?: HP<HTMLDataListElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLDataListElement>>>
 ```

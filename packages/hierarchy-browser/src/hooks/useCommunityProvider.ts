@@ -11,9 +11,7 @@ import type {
 	IDataProvidersCache,
 } from '../common/types/types.js'
 
-interface SetCache {
-	(state: IDataProvidersCache): IDataProvidersCache
-}
+type SetCache = (state: IDataProvidersCache) => IDataProvidersCache
 
 interface ICommunityProviderHook {
 	communities: ICommunity[]

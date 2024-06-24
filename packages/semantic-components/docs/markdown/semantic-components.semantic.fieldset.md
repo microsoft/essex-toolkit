@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-fieldset: (d?: HP<HTMLFieldSetElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLFieldSetElement>>>
+fieldset: (d?: HP<HTMLFieldSetElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLFieldSetElement>>>
 ```

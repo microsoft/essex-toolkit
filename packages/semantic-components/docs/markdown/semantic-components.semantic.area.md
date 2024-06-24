@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-area: (d?: HP<HTMLAreaElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLAreaElement>>>
+area: (d?: HP<HTMLAreaElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLAreaElement>>>
 ```

@@ -33,7 +33,7 @@ export function throttle(
 		? options
 		: { leading: false, trailing: false }
 
-	const later = function (): void {
+	const later = () => {
 		previous = currentOptions.leading === false ? 0 : Date.now()
 		timeout = null
 		result = func.apply(context, lastArgs)

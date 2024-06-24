@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-pre: (d?: HP<HTMLPreElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLPreElement>>>
+pre: (d?: HP<HTMLPreElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLPreElement>>>
 ```

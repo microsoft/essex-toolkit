@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { DefaultButton } from '@fluentui/react'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { MarkdownBrowser } from './MarkdownBrowser.js'
 import type { MarkdownBrowserProps } from './MarkdownBrowser.types.js'

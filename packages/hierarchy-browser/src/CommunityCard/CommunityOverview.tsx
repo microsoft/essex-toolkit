@@ -108,7 +108,7 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 					</GridItem1>
 					{neighborSize && neighborSize > 0 ? (
 						<GridItem2>
-							<TooltipHost content='Number of neighboring (connected) communities.  Members of neighboring communities may be related, but are less tightly connected that those within the community.'>
+							<TooltipHost content="Number of neighboring (connected) communities.  Members of neighboring communities may be related, but are less tightly connected that those within the community.">
 								<Divider
 									className={'cardoverview-subheader'}
 									style={subheaderStyle}
@@ -153,9 +153,9 @@ export const CommunityOverview: React.FC<ICommunityOverviewProps> = memo(
 								</TooltipHost>
 							) : null}
 							{showExport ? (
-								<TooltipHost content='Download community as .csv file.'>
+								<TooltipHost content="Download community as .csv file.">
 									{downloadInProgress ? (
-										<Spinner label='' style={SPINNER_STYLE} />
+										<Spinner label="" style={SPINNER_STYLE} />
 									) : (
 										<IconButton
 											styles={buttonStyle}

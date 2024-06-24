@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-figcaption: (d?: HP<HTMLElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>
+figcaption: (d?: HP) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>
 ```

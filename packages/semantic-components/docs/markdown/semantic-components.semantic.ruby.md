@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-ruby: (d?: HP<HTMLElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>
+ruby: (d?: HP) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>
 ```

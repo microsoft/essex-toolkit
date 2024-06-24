@@ -396,7 +396,7 @@ export const Grouped = {
 const customTitleRenderer = (props: any, defaultRenderer: any) => {
 	const item = props?.item
 	return (
-		// rome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+		// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 		<div
 			onClick={() => item.onClick?.(item)}
 			style={{
@@ -408,7 +408,7 @@ const customTitleRenderer = (props: any, defaultRenderer: any) => {
 				border: '1px solid dodgerblue',
 			}}
 		>
-			<>{`${props?.item.text} (Custom title)`}</>
+			{`${props?.item.text} (Custom title)`}
 		</div>
 	)
 }

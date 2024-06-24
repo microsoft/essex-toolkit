@@ -31,7 +31,7 @@ describe('Semantic Components', () => {
 	})
 
 	it('can override the id of a component', () => {
-		render(<SemanticDiv id='def' />)
+		render(<SemanticDiv id="def" />)
 		let found = document.querySelector('#abc')
 		expect(found).toBeNull()
 		found = document.querySelector('#def')
@@ -42,7 +42,7 @@ describe('Semantic Components', () => {
 	it('can render a decorated custom component', () => {
 		render(
 			<SemanticDiv>
-				<SemanticA id='def' />
+				<SemanticA id="def" />
 			</SemanticDiv>,
 		)
 
@@ -52,7 +52,7 @@ describe('Semantic Components', () => {
 	it('can augment the classnames of a component', () => {
 		render(
 			<SemanticDiv>
-				<SemanticA id='def' className='c' />
+				<SemanticA id="def" className="c" />
 			</SemanticDiv>,
 		)
 		expect(document.querySelectorAll('.my-class')).toHaveLength(1)

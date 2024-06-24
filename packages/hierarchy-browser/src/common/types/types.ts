@@ -37,13 +37,11 @@ export interface ICardOrder {
 	[id: string]: number
 }
 
-export interface ICommunitiesAsyncHook {
-	(
-		params: ILoadParams,
-		neighbors: INeighborCommunityDetail[],
-		type?: ENTITY_TYPE,
-	): Promise<IHierarchyDataResponse>
-}
+export type ICommunitiesAsyncHook = (
+	params: ILoadParams,
+	neighbors: INeighborCommunityDetail[],
+	type?: ENTITY_TYPE,
+) => Promise<IHierarchyDataResponse>
 
 export interface IEntityCounter {
 	current: EntityId[]

@@ -71,13 +71,16 @@ export function useTreeItemGroups(
 
 // sort items into groups, establishing a default group if none are provided
 function collectItemsByGroup(items: TreeItem[]): Map<string, TreeItem[]> {
-	return items.reduce((acc, cur) => {
-		const group = cur.group || rkey
-		const g = acc.get(group) || []
-		g.push(cur)
-		acc.set(group, g)
-		return acc
-	}, new Map<string, TreeItem[]>([[rkey, []]]))
+	return items.reduce(
+		(acc, cur) => {
+			const group = cur.group || rkey
+			const g = acc.get(group) || []
+			g.push(cur)
+			acc.set(group, g)
+			return acc
+		},
+		new Map<string, TreeItem[]>([[rkey, []]]),
+	)
 }
 
 // enrich each item recursively using top-level data
@@ -124,7 +127,7 @@ function makeDetailedItems(
 							} else if (onItemClick) {
 								onItemClick(itm)
 							}
-					  }
+						}
 					: undefined,
 		}
 		if (children) {
@@ -167,8 +170,11 @@ function forceExpansionToSelected(
 			})
 			.flatMap((key) => key) as string[]
 	}
-	return collect(items).reduce((acc, cur) => {
-		acc[cur] = true
-		return acc
-	}, {} as Record<string, boolean>)
+	return collect(items).reduce(
+		(acc, cur) => {
+			acc[cur] = true
+			return acc
+		},
+		{} as Record<string, boolean>,
+	)
 }

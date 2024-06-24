@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-label: (d?: HP<HTMLLabelElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLLabelElement>>>
+label: (d?: HP<HTMLLabelElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLLabelElement>>>
 ```

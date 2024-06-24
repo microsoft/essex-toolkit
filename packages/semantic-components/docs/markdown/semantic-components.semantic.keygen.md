@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-keygen: (d?: HP<HTMLElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>
+keygen: (d?: HP) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>
 ```

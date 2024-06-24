@@ -25,7 +25,7 @@ describe('deferred', () => {
 		it('should return a promise that does not have the resolve function on it', () => {
 			const instance = deferred()
 			const promise = instance.promise
-			expect((promise as any)['resolve']).toBeUndefined()
+			expect((promise as any).resolve).toBeUndefined()
 		})
 	})
 	describe('resolve', () => {

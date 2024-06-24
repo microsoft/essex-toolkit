@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-blockquote: (d?: HP<HTMLElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>
+blockquote: (d?: HP) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLElement>>>
 ```

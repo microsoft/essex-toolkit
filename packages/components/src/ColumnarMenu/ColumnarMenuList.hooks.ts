@@ -30,7 +30,7 @@ export function useFormattedItems(
 										itemProps: { styles },
 									}),
 								),
-						  }
+							}
 						: undefined,
 				}),
 			)

@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-div: (d?: HP<HTMLDivElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLDivElement>>>
+div: (d?: HP<HTMLDivElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLDivElement>>>
 ```

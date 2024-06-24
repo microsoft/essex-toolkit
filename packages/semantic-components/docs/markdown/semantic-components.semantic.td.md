@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-td: (d?: HP<HTMLTableDataCellElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLTableDataCellElement>>>
+td: (d?: HP<HTMLTableDataCellElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLTableDataCellElement>>>
 ```

@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-a: (d?: HP<HTMLAnchorElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLAnchorElement>>>
+a: (d?: HP<HTMLAnchorElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLAnchorElement>>>
 ```

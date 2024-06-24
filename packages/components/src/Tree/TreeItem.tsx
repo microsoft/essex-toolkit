@@ -63,7 +63,7 @@ export const TreeItem: React.FC<TreeItemProps> = memo(function TreeItem(props) {
 	return (
 		<TooltipWrapper {...props}>
 			<li
-				data-testid='essex-tree-item'
+				data-testid="essex-tree-item"
 				style={_styles.listItem}
 				key={`tree-item-li-${item.key}`}
 			>
@@ -132,72 +132,75 @@ const HiearchyIndicator: React.FC<TreeItemProps> = memo(
 
 // draws a series of fixed-width pips to indicate depth
 // this is for narrow mode, when increasing indent loses visible content quickly
-const DepthIndicator: React.FC<TreeItemProps> = memo(function DepthIndicator(
-	props,
-) {
-	const { item, size, styles } = props
-	const boxStyle = useDepthTicksBoxStyle(size)
-	const ticks = useMemo(
-		() =>
-			new Array((item.depth || 0) + 1)
-				.fill(1)
-				.map((_, i) => (
-					<div key={`depth-tick-${item.key}-${i}`} style={styles?.depthTicks} />
-				)),
-		[item, styles],
-	)
-	return <div style={boxStyle}>{ticks}</div>
-})
+const DepthIndicator: React.FC<TreeItemProps> = memo(
+	function DepthIndicator(props) {
+		const { item, size, styles } = props
+		const boxStyle = useDepthTicksBoxStyle(size)
+		const ticks = useMemo(
+			() =>
+				new Array((item.depth || 0) + 1)
+					.fill(1)
+					.map((_, i) => (
+						<div
+							key={`depth-tick-${item.key}-${i}`}
+							style={styles?.depthTicks}
+						/>
+					)),
+			[item, styles],
+		)
+		return <div style={boxStyle}>{ticks}</div>
+	},
+)
 
-const TreeItemTitle: React.FC<TreeItemProps> = memo(function TreeItemTitle(
-	props,
-) {
-	const { item, contentButtonProps, size } = props
-	const _contentButtonProps = useContentButtonProps(
-		item,
-		contentButtonProps,
-		size,
-	)
-	const handleClick = useCallback(() => {
-		item.onClick?.(item)
-	}, [item])
-	return (
-		<DefaultButton {..._contentButtonProps} onClick={handleClick}>
-			{item.text}
-		</DefaultButton>
-	)
-})
+const TreeItemTitle: React.FC<TreeItemProps> = memo(
+	function TreeItemTitle(props) {
+		const { item, contentButtonProps, size } = props
+		const _contentButtonProps = useContentButtonProps(
+			item,
+			contentButtonProps,
+			size,
+		)
+		const handleClick = useCallback(() => {
+			item.onClick?.(item)
+		}, [item])
+		return (
+			<DefaultButton {..._contentButtonProps} onClick={handleClick}>
+				{item.text}
+			</DefaultButton>
+		)
+	},
+)
 
-const TreeItemContent: React.FC<TreeItemProps> = memo(function TreeItemTitle(
-	props,
-) {
-	const {
-		item,
-		styles,
-		expandButtonProps,
-		contentButtonProps,
-		menuButtonProps,
-		size,
-		narrow,
-	} = props
+const TreeItemContent: React.FC<TreeItemProps> = memo(
+	function TreeItemTitle(props) {
+		const {
+			item,
+			styles,
+			expandButtonProps,
+			contentButtonProps,
+			menuButtonProps,
+			size,
+			narrow,
+		} = props
 
-	return (
-		<>
-			{item.children?.map((child) => (
-				<TreeItem
-					key={child.key}
-					item={child}
-					styles={styles}
-					expandButtonProps={expandButtonProps}
-					contentButtonProps={contentButtonProps}
-					menuButtonProps={menuButtonProps}
-					size={size}
-					narrow={narrow}
-				/>
-			))}
-		</>
-	)
-})
+		return (
+			<>
+				{item.children?.map((child) => (
+					<TreeItem
+						key={child.key}
+						item={child}
+						styles={styles}
+						expandButtonProps={expandButtonProps}
+						contentButtonProps={contentButtonProps}
+						menuButtonProps={menuButtonProps}
+						size={size}
+						narrow={narrow}
+					/>
+				))}
+			</>
+		)
+	},
+)
 
 const defaultTitleRenderer: IRenderFunction<TreeItemProps> = (props) => {
 	return props ? <TreeItemTitle {...props} /> : null

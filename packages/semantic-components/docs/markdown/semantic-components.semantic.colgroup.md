@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-colgroup: (d?: HP<HTMLTableColElement> | undefined) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLTableColElement>>>
+colgroup: (d?: HP<HTMLTableColElement>) => import("react").FunctionComponent<Defaulted<unknown, HP<HTMLTableColElement>>>
 ```

@@ -7,7 +7,6 @@ import { ContextualMenuItemType } from '@fluentui/react'
 
 import { ColumnarMenu } from './ColumnarMenu.js'
 import type { ColumnarMenuProps } from './ColumnarMenu.types.js'
-import React from 'react'
 
 const items = [
 	{

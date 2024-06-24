@@ -62,10 +62,13 @@ export function useAsyncCallbacks({
 				const selected = edges.filter(
 					(d) => `${d.neighbor}` === params.communityId,
 				)
-				const parents = selected.reduce((acc, e: NeighborLocalEntity) => {
-					acc[e.cid] = acc[e.cid] ? acc[e.cid] + 1 : 1
-					return acc
-				}, {} as { [key: string]: number })
+				const parents = selected.reduce(
+					(acc, e: NeighborLocalEntity) => {
+						acc[e.cid] = acc[e.cid] ? acc[e.cid] + 1 : 1
+						return acc
+					},
+					{} as { [key: string]: number },
+				)
 				const data = Object.keys(parents).map((key: string) => {
 					const connections = parents[key]
 					const edgeCommunityId = params.communityId
