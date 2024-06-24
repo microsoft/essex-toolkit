@@ -1,63 +1,56 @@
 {
-  "name": "essex-toolkit",
-  "description": "A set of packages for developers",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/microsoft/essex-toolkit.git"
-  },
-  "author": "David Tittsworth <datittsw@microsoft.com>",
-  "contributors": [
-    "David Tittsworth <datittsw@microsoft.com>",
-    "Nathan Evans <naevans@microsoft.com>",
-    "Chris Trevino <chtrevin@microsoft.com>",
-    "Amber Hoak <amhoak@microsoft.com>",
-    "Eric Kimbrel <lekimbrel@gmail.com>",
-    "Derek Worthen <deworthe@microsoft.com>",
-    "Dayenne Souza <ddesouza@microsoft.com>"
-  ],
-  "license": "MIT",
-  "private": true,
-  "engines": {
-    "node": ">= 12.0"
-  },
-  "scripts": {
-    "_release_packages": "turbo run release --parallel",
-    "_ci_force": "turbo run ci --force --no-cache",
-    "_version_cut": "yarn version apply --all",
-    "_check_packages": "turbo run check",
-    "_fix_packages": "turbo run fix",
-    "_ci_packages": "turbo run ci",
-    "rome_ci": "rome ci .",
-    "rome_fix": "rome check . --apply-unsafe",
-    "build": "turbo run build --force",
-    "clean": "turbo run clean --parallel",
-    "test": "turbo run test",
-    "check": "run-s _check_packages rome_ci",
-    "check-deps": "turbo run check-deps",
-    "fix": "run-s _fix_packages rome_fix",
-    "format": "rome format . --write",
-    "start": "turbo run start --parallel",
-    "ci": "run-s _ci_packages rome_ci",
-    "stories": "yarn start:storybook",
-    "is_clean": "essex git-is-clean",
-    "release": "run-s clean _version_cut _ci_force _release_packages",
-    "update_sdks": "yarn dlx @yarnpkg/sdks vscode"
-  },
-  "devDependencies": {
-    "@essex/eslint-config": "^21.0.1",
-    "@essex/scripts": "^26.0.0",
-    "@types/jest": "^29.5.4",
-    "@types/node": "^20.5.7",
-    "@types/react": "^18.2.21",
-    "eslint": "^8.48.0",
-    "lint-staged": "^14.0.1",
-    "npm-run-all": "^4.1.5",
-    "rome": "^12.1.3",
-    "turbo": "1.10.13",
-    "typescript": "^5.2.2"
-  },
-  "workspaces": [
-    "packages/*"
-  ],
-  "packageManager": "yarn@4.0.1"
+	"name": "essex-toolkit",
+	"description": "A set of packages for developers",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/microsoft/essex-toolkit.git"
+	},
+	"author": "David Tittsworth <datittsw@microsoft.com>",
+	"contributors": [
+		"David Tittsworth <datittsw@microsoft.com>",
+		"Nathan Evans <naevans@microsoft.com>",
+		"Chris Trevino <chtrevin@microsoft.com>",
+		"Amber Hoak <amhoak@microsoft.com>",
+		"Eric Kimbrel <lekimbrel@gmail.com>",
+		"Derek Worthen <deworthe@microsoft.com>",
+		"Dayenne Souza <ddesouza@microsoft.com>"
+	],
+	"license": "MIT",
+	"private": true,
+	"engines": {
+		"node": ">= 18.0"
+	},
+	"scripts": {
+		"_release_packages": "turbo run release --parallel",
+		"_ci_force": "turbo run ci --force --no-cache",
+		"_version_cut": "yarn version apply --all",
+		"_check_packages": "turbo run check",
+		"check": "biome ci .",
+		"fix": "biome check --write --unsafe .",
+		"format": "biome format . --write",
+		"build": "turbo run build --force",
+		"clean": "turbo run clean --parallel",
+		"test": "turbo run test",
+		"check-deps": "turbo run check-deps",
+		"start": "turbo run start --parallel",
+		"ci": "run-s check test",
+		"stories": "yarn start:storybook",
+		"is_clean": "essex git-is-clean",
+		"release": "run-s clean _version_cut _ci_force _release_packages",
+		"update_sdks": "yarn dlx @yarnpkg/sdks vscode"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.8.2",
+		"@essex/scripts": "^27.0.0",
+		"@types/jest": "^29.5.12",
+		"@types/node": "^20.14.8",
+		"@types/react": "^18.3.3",
+		"npm-run-all": "^4.1.5",
+		"turbo": "2.0.4",
+		"typescript": "^5.5.2"
+	},
+	"workspaces": [
+		"javascript/*"
+	],
+	"packageManager": "yarn@4.3.1"
 }

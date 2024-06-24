@@ -5,22 +5,24 @@
   },
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "eslint.nodePath": ".yarn/sdks",
   "javascript.preferences.importModuleSpecifier": "relative",
   "javascript.preferences.importModuleSpecifierEnding": "js",
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.importModuleSpecifierEnding": "js",
   "[javascript]": {
-    "editor.defaultFormatter": "rome.rome"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[javascriptreact]": {
-    "editor.defaultFormatter": "rome.rome"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "rome.rome"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "rome.rome"
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
   },
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
@@ -30,7 +32,6 @@
     "*.jsx": "${capture}.js",
     "package.json": ".npmignore, turbo.json, tsconfig.json, tsconfig.*.json, jest.config.js, rome.json",
     ".yarnrc.yml": "yarn.lock, .pnp.cjs, .pnp.loader.mjs",
-    ".eslintrc": ".eslintignore",
     ".gitignore": ".gitattributes",
     "README.md": "SECURITY.md, SUPPORT.md, CODE_OF_CONDUCT.md, LICENSE"
   }

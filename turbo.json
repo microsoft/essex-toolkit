@@ -1,6 +1,6 @@
 {
 	"$schema": "https://turborepo.org/schema.json",
-	"pipeline": {
+	"tasks": {
 		"build": {
 			"dependsOn": [],
 			"outputs": ["dist/**/*", "docs/**/*"]
@@ -14,11 +14,7 @@
 			"outputs": ["coverage/**/*"]
 		},
 		"ci": {
-			"dependsOn": ["check", "test", "check-deps", "build"],
-			"outputs": []
-		},
-		"check": {
-			"dependsOn": [],
+			"dependsOn": ["test", "check-deps", "build"],
 			"outputs": []
 		},
 		"check-deps": {
@@ -26,9 +22,6 @@
 			"outputs": []
 		},
 		"clean": {
-			"cache": false
-		},
-		"fix": {
 			"cache": false
 		},
 		"release": {

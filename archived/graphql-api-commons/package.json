@@ -1,0 +1,66 @@
+{
+  "name": "@essex/graphql-api-commons",
+  "version": "1.1.7",
+  "main": "src/index.ts",
+  "publishConfig": {
+    "main": "dist/cjs/index.js",
+    "types": "dist/types/index.d.ts",
+    "exports": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.mjs",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
+  "files": [
+    "dist/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/essex-toolkit.git",
+    "directory": "packages/graphql-api-commons"
+  },
+  "scripts": {
+    "clean": "essex clean dist lib docs",
+    "build": "essex build --mode dual --skipExportCheck --docs",
+            "check-deps": "essex check-deps",
+    "release": "echo #add integration test / demo server before release # yarn npm publish --tolerate-republish --access public"
+  },
+  "devDependencies": {
+    "@apollo/server": "^4.5.0",
+    "@essex/scripts": "^24.0.4",
+    "@graphql-tools/utils": "^9.2.1",
+    "@tsconfig/node14": "^1.0.3",
+    "fastify": "^4.15.0",
+    "graphql": "^16.6.0",
+    "tsyringe": "^4.7.0",
+    "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "pino": "^8.11.0",
+    "pino-pretty": "^9.4.0"
+  },
+  "peerDependencies": {
+    "@apollo/server": ">= 4",
+    "@graphql-tools/utils": ">= 8.2.2",
+    "fastify": ">= 3.21.0",
+    "graphql": ">= 15.5.3",
+    "tsyringe": ">= 4.6.0"
+  },
+  "peerDependenciesMeta": {
+    "@apollo/server": {
+      "optional": false
+    },
+    "@graphql-tools/utils": {
+      "optional": false
+    },
+    "fastify": {
+      "optional": false
+    },
+    "graphql": {
+      "optional": false
+    },
+    "tsyringe": {
+      "optional": false
+    }
+  }
+}

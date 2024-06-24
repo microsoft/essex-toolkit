@@ -1,0 +1,55 @@
+{
+	"files": {
+		"ignore": [
+			"package.json",
+			"dist",
+			"lib",
+			"build",
+			"docs",
+			"storybook-static",
+			"coverage",
+			".turbo",
+			".pnp.cjs",
+			".pnp.loader.mjs",
+			".devcontainer/",
+			".vscode/",
+			"archived/"
+		]
+	},
+	"organizeImports": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"correctness": {
+				"useExhaustiveDependencies": "off"
+			},
+			"complexity": {
+				"noForEach": "off"
+			},
+			"suspicious": {
+				"noExplicitAny": "off",
+				"noArrayIndexKey": "off"
+			},
+			"performance": {
+				"noAccumulatingSpread": "off"
+			},
+			"style": {
+				"noUselessElse": "off"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"semicolons": "asNeeded",
+			"quoteStyle": "single",
+			"trailingCommas": "all",
+			"quoteProperties": "asNeeded"
+		}
+	},
+	"formatter": {
+		"indentStyle": "tab"
+	}
+}
