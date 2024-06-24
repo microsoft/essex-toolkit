@@ -4836,7 +4836,7 @@
             },
             {
               "kind": "Content",
-              "text": "{\n    name: string;\n    href: string;\n}"
+              "text": "{\n    name: string;\n    href?: string;\n    onClick?: () => void;\n    hide?: boolean;\n}"
             },
             {
               "kind": "Content",
@@ -6550,6 +6550,33 @@
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@essex/components!TimeBrushProps#footerWidth:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "footerWidth?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "footerWidth",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
               }
             },
             {
