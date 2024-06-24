@@ -125,17 +125,12 @@ export function useTreeItemStyles(
 
 // enforce transparency with a mixin for all button styles,
 // so we can control hover/selection styling at the list item level
-const transparentBackgroundButtonStyles = [
-	'root',
-	'rootFocused',
-	'rootHovered',
-	'rootPressed',
-].reduce((acc, cur) => {
-	acc[cur as keyof IButtonStyles] = {
-		background: 'transparent',
-	}
-	return acc
-}, {} as IButtonStyles)
+const transparentBackgroundButtonStyles: IButtonStyles = {
+	root: { background: 'transparent' },
+	rootFocused: { background: 'transparent' },
+	rootHovered: { background: 'transparent' },
+	rootPressed: { background: 'transparent' },
+}
 
 // styles for the IconButton
 export function useExpandIconButtonStyles(size: Size = 'medium') {
