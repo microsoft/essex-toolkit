@@ -32,4 +32,5 @@ licenses.txt
 # Python Artifacts
 __pycache__/
 output/
+python/*/dist/
 
