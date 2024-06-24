@@ -1,0 +1,50 @@
+name: Python-Publish-CI
+on:
+  push:
+      branches: [main]
+
+env:
+  POETRY_VERSION: 1.8.3
+  PYTHON_VERSION: 3.11
+
+jobs:
+  publish:
+    name: Upload reactivedataflow to PyPI
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/reactivedataflow
+    permissions:
+        id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
+    
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: '${{ env.PYTHON_VERSION }}'
+
+      - name: Install Poetry ${{ env.POETRY_VERSION }}
+        uses: abatilo/actions-poetry@v2.1.6
+        with:
+          poetry-version: '${{ env.POETRY_VERSION }}'
+
+      - name: Install dependencies
+        shell: bash
+        working-directory: ./python/datashaper
+        run: poetry install
+
+      - name: Build Distributable
+        shell: bash
+        working-directory: ./python/datashaper
+        run: poetry build
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: python/reactivedataflow/dist
+          skip-existing: true
+          verbose: true
+      
