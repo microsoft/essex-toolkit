@@ -16,6 +16,7 @@ from reactivedataflow.ports import (
     ArrayInputPort,
     ConfigPort,
     InputPort,
+    NamedInputsPort,
     OutputPort,
 )
 from reactivedataflow.registry import Registry
@@ -43,7 +44,7 @@ def test_configure_and_reconfigure():
     assert node.output_value() == "World"
 
 
-def test_execution_node_with_named_inputs():
+def test_execution_node_with_raw_input():
     registry = Registry()
 
     @verb(
@@ -67,6 +68,64 @@ def test_execution_node_with_named_inputs():
         output = o
 
     node.output().subscribe(on_output)
+    node.attach({
+        "input_1": rx.of("Hello"),
+        "input_2": rx.of("World"),
+    })
+    assert output == "Hello World"
+
+
+def test_execution_node_with_named_inputs():
+    registry = Registry()
+
+    @verb(
+        "execute",
+        ports=[NamedInputsPort(parameter="inputs")],
+        registry=registry,
+    )
+    def execute(inputs: dict[str, str]) -> str:
+        return inputs.get("input_1", "") + " " + inputs.get("input_2", "")
+
+    wrapped_fn = registry.get("execute").fn
+
+    output: str | None = None
+    node = ExecutionNode("a", wrapped_fn)
+
+    def on_output(o: str):
+        nonlocal output
+        output = o
+
+    node.output().subscribe(on_output)
+    assert output == " "
+    node.attach({
+        "input_1": rx.of("Hello"),
+        "input_2": rx.of("World"),
+    })
+    assert output == "Hello World"
+
+
+def test_execution_node_with_named_required_inputs():
+    registry = Registry()
+
+    @verb(
+        "execute",
+        ports=[NamedInputsPort(parameter="inputs", required=["input_1", "input_2"])],
+        registry=registry,
+    )
+    def execute(inputs: dict[str, str]) -> str:
+        return inputs["input_1"] + " " + inputs["input_2"]
+
+    wrapped_fn = registry.get("execute").fn
+
+    output: str | None = None
+    node = ExecutionNode("a", wrapped_fn)
+
+    def on_output(o: str):
+        nonlocal output
+        output = o
+
+    node.output().subscribe(on_output)
+    assert output is None
     node.attach({
         "input_1": rx.of("Hello"),
         "input_2": rx.of("World"),
