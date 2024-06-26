@@ -23,7 +23,14 @@ from .nodes import (
     VerbInput,
     VerbOutput,
 )
-from .ports import ArrayInputPort, ConfigPort, InputPort, OutputPort, Ports
+from .ports import (
+    ArrayInputPort,
+    ConfigPort,
+    InputPort,
+    NamedInputsPort,
+    OutputPort,
+    Ports,
+)
 from .registry import Registry
 
 # Public API
@@ -48,6 +55,7 @@ __all__ = [
     "InputNode",
     "InputNodeModel",
     "InputPort",
+    "NamedInputsPort",
     "Node",
     "OutputMode",
     "OutputPort",

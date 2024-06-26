@@ -23,6 +23,21 @@ class ArrayInputPort(BaseModel, extra="allow"):
     )
 
 
+class NamedInputsPort(BaseModel, extra="allow"):
+    """Specification for injecting all named inputs as a single dictionary."""
+
+    type: dict[str, str] | None = Field(
+        default=None, description="The type of the port."
+    )
+    required: list[str] = Field(
+        default_factory=list, description="What named inputs are required."
+    )
+    parameter: str | None = Field(
+        default=None,
+        description="The name of the parameter on the implementing function.",
+    )
+
+
 class InputPort(BaseModel, extra="allow"):
     """Specification for a named input port."""
 
@@ -62,7 +77,7 @@ class ConfigPort(BaseModel, extra="allow"):
     )
 
 
-Port = InputPort | ArrayInputPort | ConfigPort | OutputPort
+Port = InputPort | ArrayInputPort | NamedInputsPort | ConfigPort | OutputPort
 
 
 class Ports:
@@ -110,3 +125,8 @@ class Ports:
     def array_input(self) -> ArrayInputPort | None:
         """Return the array input port."""
         return next((p for p in self._ports if isinstance(p, ArrayInputPort)), None)
+
+    @property
+    def named_inputs(self) -> NamedInputsPort | None:
+        """Return the named inputs port."""
+        return next((p for p in self._ports if isinstance(p, NamedInputsPort)), None)

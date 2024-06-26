@@ -5,6 +5,8 @@ from reactivedataflow import (
     ArrayInputPort,
     ConfigPort,
     InputPort,
+    NamedInputsPort,
+    Ports,
     VerbInput,
     connect_input,
 )
@@ -12,10 +14,10 @@ from reactivedataflow import (
 
 def test_named_input_mapping():
     @connect_input(
-        ports=[
+        ports=Ports([
             InputPort(name="input_1", parameter="a"),
             InputPort(name="input_2", parameter="b"),
-        ]
+        ])
     )
     def stub(a: int, b: int) -> int:
         return a + b
@@ -26,10 +28,10 @@ def test_named_input_mapping():
 
 def test_input_with_default_parameter_names():
     @connect_input(
-        ports=[
+        ports=Ports([
             InputPort(name="a"),
             InputPort(name="b"),
-        ]
+        ])
     )
     def stub(a: int, b: int) -> int:
         return a + b
@@ -39,7 +41,7 @@ def test_input_with_default_parameter_names():
 
 
 def test_input_dict_mapping():
-    @connect_input(dict_parameter="inputs")
+    @connect_input(Ports([NamedInputsPort(parameter="inputs", required=["a", "b"])]))
     def stub(inputs: dict[str, int]) -> int:
         return sum(inputs.values())
 
@@ -49,10 +51,10 @@ def test_input_dict_mapping():
 
 def test_config_parameters_mapping():
     @connect_input(
-        ports=[
+        ports=Ports([
             ConfigPort(name="in_1", parameter="a"),
             ConfigPort(name="in_2", parameter="b"),
-        ]
+        ])
     )
     def stub(a: str, b: str) -> str:
         return f"{a} {b}"
@@ -62,7 +64,7 @@ def test_config_parameters_mapping():
 
 
 def test_array_parameter_mapping():
-    @connect_input(ports=[ArrayInputPort(parameter="values")])
+    @connect_input(ports=Ports([ArrayInputPort(parameter="values")]))
     def stub(values: list[int]) -> int:
         return sum(values)
 

@@ -108,13 +108,17 @@ def _wrap_verb_fn(
         array_inputs_parameter: str | None = (
             spec.ports.array_input and spec.ports.array_input.parameter
         )
+        dict_inputs_parameter: str | None = (
+            spec.ports.named_inputs and spec.ports.named_inputs.parameter
+        )
         is_input_connection_required = (
             len(input_parameter_map) > 0
             or len(config_parameter_map) > 0
             or array_inputs_parameter
+            or dict_inputs_parameter
         )
         if is_input_connection_required:
-            push(connect_input(ports=spec.ports.ports))
+            push(connect_input(ports=spec.ports))
 
     if len(fire_conditions) > 0:
         push(firing_conditions_decorator(*fire_conditions))
@@ -133,6 +137,8 @@ def _infer_firing_conditions(
 
     if spec.ports.array_input and spec.ports.array_input.required:
         firing_conditions.append(array_input_values_are_defined())
+    if spec.ports.named_inputs and spec.ports.named_inputs.required:
+        required_inputs.extend(spec.ports.named_inputs.required)
 
     if len(required_inputs) > 0:
         firing_conditions.append(require_inputs(*required_inputs))
