@@ -41,6 +41,14 @@ class Edge(BaseModel):
     )
 
 
+class Output(BaseModel):
+    """Output model."""
+
+    name: str = Field(..., description="The unique name of the output.")
+    node: str = Field(..., description="Node identifier.")
+    port: str = Field(default=default_output, description="Port identifier.")
+
+
 class Graph(BaseModel):
     """Graph Model."""
 
@@ -52,4 +60,7 @@ class Graph(BaseModel):
     )
     edges: list[Edge] = Field(
         default_factory=list, description="List of edges in the graph."
+    )
+    outputs: list[Output] = Field(
+        default_factory=list, description="List of output nodes in the graph."
     )

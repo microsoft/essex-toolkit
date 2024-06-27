@@ -6,11 +6,10 @@ from typing import Any
 import networkx as nx
 import reactivex as rx
 
-from reactivedataflow.errors import NodeIdAlreadyExistsError
-
 from .constants import default_output
+from .errors import NodeIdAlreadyExistsError, OutputAlreadyDefinedError
 from .execution_graph import ExecutionGraph
-from .model import Graph
+from .model import Graph, Output
 from .nodes import ExecutionNode, InputNode, Node
 from .registry import Registry
 
@@ -19,14 +18,35 @@ class GraphBuilder:
     """GraphBuilder class."""
 
     _graph: nx.DiGraph
+    _outputs: dict[str, Output]
 
     def __init__(self):
         """Initialize the GraphBuilder."""
         self._graph = nx.DiGraph()
+        self._outputs = {}
 
     def add_input(self, nid: str) -> "GraphBuilder":
         """Add an input node to the graph."""
         self._graph.add_node(nid, input=True)
+        return self
+
+    def add_output(
+        self, name: str, node: str | None = None, port: str = default_output
+    ) -> "GraphBuilder":
+        """
+        Add an output to the graph.
+
+        ---
+        name: The unique name of the output.
+        node: The node identifier, if None, then the name is the node identifier.
+        port: The node output port.
+        """
+        if node is None:
+            node = name
+        if name in self._outputs:
+            raise OutputAlreadyDefinedError(name)
+
+        self._outputs[name] = Output(name=name, node=node, port=port)
         return self
 
     def add_node(
@@ -75,6 +95,8 @@ class GraphBuilder:
                 to_node=edge.to_node,
                 to_port=edge.to_port,
             )
+        for output in model.outputs:
+            self.add_output(output.name, output.node, output.port)
         return self
 
     def build(
@@ -152,4 +174,4 @@ class GraphBuilder:
                 array_in = array_inputs.get(nid)
                 node.attach(named_inputs=named_in, array_inputs=array_in)
 
-        return ExecutionGraph(nodes)
+        return ExecutionGraph(nodes, self._outputs)

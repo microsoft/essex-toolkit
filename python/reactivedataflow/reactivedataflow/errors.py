@@ -2,6 +2,21 @@
 """reactivedataflow Error Types."""
 
 
+class OutputAlreadyDefinedError(ValueError):
+    """Output already defined error."""
+
+    def __init__(self, name: str):
+        """Initialize the OutputAlreadyDefinedError."""
+        super().__init__(f"Output '{name}' is already defined.")
+
+
+class OutputNotDefinedError(ValueError):
+    """An exception for output not defined."""
+
+    def __init__(self, output_name: str):
+        super().__init__(f"Output '{output_name}' is not defined.")
+
+
 class OutputNamesMissingInTupleOutputModeError(ValueError):
     """An exception for missing output names in tuple output mode."""
 
@@ -35,13 +50,6 @@ class NodeIdAlreadyExistsError(ValueError):
 
     def __init__(self, nid: str):
         super().__init__(f"Node {nid} already exists.")
-
-
-class OutputNotDefinedError(ValueError):
-    """An exception for output not defined."""
-
-    def __init__(self, nid: str, output_name: str):
-        super().__init__(f"Output {output_name} not defined for node {nid}.")
 
 
 class PortNamesMustBeUniqueError(ValueError):

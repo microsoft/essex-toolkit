@@ -42,11 +42,11 @@ class InputNode(Node):
     def output(self, name: str = default_output) -> rx.Observable[Any]:
         """Get the observable of a given output."""
         if name != default_output:
-            raise OutputNotDefinedError(self.id, name)
+            raise OutputNotDefinedError(name)
         return self._values
 
     def output_value(self, name: str = default_output) -> Any:
         """Get the observable of a given output."""
         if name != default_output:
-            raise OutputNotDefinedError(self.id, name)
+            raise OutputNotDefinedError(name)
         return self._values.value
