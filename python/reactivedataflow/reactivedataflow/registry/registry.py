@@ -23,10 +23,18 @@ class Registry:
     _verb_fns: dict[str, VerbFunction]
     _verb_constructor: VerbConstructor
 
-    def __init__(self, _verb_constructor: VerbConstructor = verb_constructor):
-        self._verbs = {}
+    def __init__(
+        self,
+        verb_constructor: VerbConstructor = verb_constructor,
+        verbs: dict[str, Registration] | None = None,
+    ):
+        self._verbs = verbs or {}
         self._verb_fns = {}
-        self._verb_constructor = _verb_constructor
+        self._verb_constructor = verb_constructor
+
+    def clone(self) -> "Registry":
+        """Create a new, duplicate registry with the registrations of the current registry."""
+        return Registry(self._verb_constructor, self._verbs.copy())
 
     def register(
         self,

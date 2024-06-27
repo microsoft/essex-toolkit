@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 import pytest
 
 from reactivedataflow import OutputMode, VerbInput, VerbOutput, verb
-from reactivedataflow.errors import VerbAlreadyRegisteredError
+from reactivedataflow.errors import VerbAlreadyRegisteredError, VerbNotFoundError
 from reactivedataflow.registry import Registry
 
 if TYPE_CHECKING:
@@ -61,3 +61,21 @@ def test_static_registry_instance():
     registry = Registry.get_instance()
     registry2 = Registry.get_instance()
     assert registry == registry2
+
+def test_child():
+    registry = Registry()
+    @verb(name="test_fn", registry=registry, output_mode=OutputMode.Raw)
+    def test_fn(inputs: VerbInput) -> VerbOutput:
+        return VerbOutput(no_output=True)
+
+    clone = registry.clone()
+    assert clone.get("test_fn") == registry.get("test_fn")
+    
+    @verb(name="test_fn2", registry=clone, output_mode=OutputMode.Raw)
+    def test_fn2(inputs: VerbInput) -> VerbOutput:
+        return VerbOutput(no_output=True)
+    
+    assert clone.get("test_fn2") is not None
+    with pytest.raises(VerbNotFoundError):
+        registry.get("test_fn2")
+    
