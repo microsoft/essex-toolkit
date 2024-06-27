@@ -2,6 +2,35 @@
 """reactivedataflow Error Types."""
 
 
+class NodeAlreadyDefinedError(ValueError):
+    """An exception for adding a node that already exists."""
+
+    def __init__(self, nid: str):
+        super().__init__(f"Node {nid} already defined.")
+
+
+class NodeNotFoundError(KeyError):
+    """An exception for unknown node."""
+
+    def __init__(self, nid: str):
+        super().__init__(f"Node {nid} not found.")
+
+
+class OutputAlreadyDefinedError(ValueError):
+    """Output already defined error."""
+
+    def __init__(self, name: str):
+        """Initialize the OutputAlreadyDefinedError."""
+        super().__init__(f"Output '{name}' is already defined.")
+
+
+class OutputNotFoundError(ValueError):
+    """An exception for output not defined."""
+
+    def __init__(self, output_name: str):
+        super().__init__(f"Output '{output_name}' not found.")
+
+
 class OutputNamesMissingInTupleOutputModeError(ValueError):
     """An exception for missing output names in tuple output mode."""
 
@@ -23,25 +52,11 @@ class VerbNotFoundError(KeyError):
         super().__init__(f"Unknown verb: {name}")
 
 
-class VerbAlreadyRegisteredError(ValueError):
-    """An exception for already registered verb."""
+class VerbAlreadyDefinedError(ValueError):
+    """An exception for already defined verb."""
 
     def __init__(self, name: str):
-        super().__init__(f"Verb {name} already registered.")
-
-
-class NodeIdAlreadyExistsError(ValueError):
-    """An exception for adding a node that already exists."""
-
-    def __init__(self, nid: str):
-        super().__init__(f"Node {nid} already exists.")
-
-
-class OutputNotDefinedError(ValueError):
-    """An exception for output not defined."""
-
-    def __init__(self, nid: str, output_name: str):
-        super().__init__(f"Output {output_name} not defined for node {nid}.")
+        super().__init__(f"Verb {name} already defined.")
 
 
 class PortNamesMustBeUniqueError(ValueError):

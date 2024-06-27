@@ -8,14 +8,13 @@ from pydantic import BaseModel, Field
 from .constants import default_output
 
 
-class Input(BaseModel):
-    """NodeInput model."""
+class InputNode(BaseModel):
+    """Input Node Model."""
 
-    node: str = Field(..., description="Node identifier.")
-    port: str = Field(default=default_output, description="Port identifier.")
+    id: str = Field(..., description="Node identifier.")
 
 
-class ProcessingNode(BaseModel):
+class Node(BaseModel):
     """Processing Node Model."""
 
     id: str = Field(..., description="Node identifier.")
@@ -23,24 +22,45 @@ class ProcessingNode(BaseModel):
     config: dict[str, Any] = Field(
         default_factory=dict, description="Configuration parameters."
     )
-    input: dict[str, Input] = Field(default_factory=dict, description="Input ports.")
-    array_input: list[Input] = Field(
-        default_factory=list, description="Array input ports."
+
+
+class Edge(BaseModel):
+    """Edge Model."""
+
+    from_node: str = Field(..., description="Source node identifier.")
+    from_port: str = Field(
+        default=default_output, description="Source port identifier."
+    )
+    to_node: str = Field(..., description="Destination node identifier.")
+    to_port: str | None = Field(
+        default=None,
+        description="""
+        Destination port identifier.
+        If this is None, then this input will be used as an array input.
+    """,
     )
 
 
-class InputNode(BaseModel):
-    """Input Node Model."""
+class Output(BaseModel):
+    """Output model."""
 
-    id: str = Field(..., description="Node identifier.")
+    name: str = Field(..., description="The unique name of the output.")
+    node: str = Field(..., description="Node identifier.")
+    port: str = Field(default=default_output, description="Port identifier.")
 
 
 class Graph(BaseModel):
     """Graph Model."""
 
     inputs: list[InputNode] = Field(
-        ..., description="List of input nodes in the graph."
+        default_factory=list, description="List of input nodes in the graph."
     )
-    nodes: list[ProcessingNode] = Field(
-        ..., description="List of processing nodes in the graph."
+    nodes: list[Node] = Field(
+        default_factory=list, description="List of processing nodes in the graph."
+    )
+    edges: list[Edge] = Field(
+        default_factory=list, description="List of edges in the graph."
+    )
+    outputs: list[Output] = Field(
+        default_factory=list, description="List of output nodes in the graph."
     )

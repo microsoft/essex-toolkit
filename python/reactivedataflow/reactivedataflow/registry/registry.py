@@ -4,7 +4,7 @@
 from collections.abc import Callable
 from typing import ClassVar
 
-from reactivedataflow.errors import VerbAlreadyRegisteredError, VerbNotFoundError
+from reactivedataflow.errors import VerbAlreadyDefinedError, VerbNotFoundError
 from reactivedataflow.nodes import (
     VerbFunction,
 )
@@ -44,7 +44,7 @@ class Registry:
     ) -> None:
         """Register a verb."""
         if name in self._verbs and not override:
-            raise VerbAlreadyRegisteredError(name)
+            raise VerbAlreadyDefinedError(name)
         self._verbs[name] = registration
 
     def get(self, name: str) -> Registration:

@@ -19,7 +19,7 @@ from .decorators import (
     verb,
 )
 from .execution_graph import ExecutionGraph
-from .graph_assembler import GraphAssembler
+from .graph_builder import GraphBuilder
 from .nodes import (
     EmitMode,
     ExecutionNode,
@@ -49,7 +49,7 @@ __all__ = [
     "EmitMode",
     "ExecutionGraph",
     "ExecutionNode",
-    "GraphAssembler",
+    "GraphBuilder",
     "Input",
     "InputMode",
     "InputNode",
