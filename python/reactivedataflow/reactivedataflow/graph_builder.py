@@ -7,7 +7,11 @@ import networkx as nx
 import reactivex as rx
 
 from .constants import default_output
-from .errors import NodeIdAlreadyExistsError, OutputAlreadyDefinedError
+from .errors import (
+    NodeAlreadyDefinedError,
+    NodeNotFoundError,
+    OutputAlreadyDefinedError,
+)
 from .execution_graph import ExecutionGraph
 from .model import Graph, Output
 from .nodes import ExecutionNode, InputNode, Node
@@ -58,7 +62,7 @@ class GraphBuilder:
     ) -> "GraphBuilder":
         """Add a node to the graph."""
         if self._graph.has_node(nid) and not override:
-            raise NodeIdAlreadyExistsError(nid)
+            raise NodeAlreadyDefinedError(nid)
         self._graph.add_node(nid, verb=verb, config=config)
         return self
 
@@ -75,6 +79,10 @@ class GraphBuilder:
         If from_port is None, then the default output port will be used.
         If to_port is None, then this input will be used as an array input.
         """
+        if not self._graph.has_node(from_node):
+            raise NodeNotFoundError(from_node)
+        if not self._graph.has_node(to_node):
+            raise NodeNotFoundError(to_node)
         self._graph.add_edge(from_node, to_node, from_port=from_port, to_port=to_port)
         return self
 
@@ -82,6 +90,8 @@ class GraphBuilder:
         """Load a graph model."""
         for node in model.inputs:
             self.add_input(node.id)
+        for output in model.outputs:
+            self.add_output(output.name, output.node, output.port)
         for node in model.nodes:
             self.add_node(
                 node.id,
@@ -95,8 +105,6 @@ class GraphBuilder:
                 to_node=edge.to_node,
                 to_port=edge.to_port,
             )
-        for output in model.outputs:
-            self.add_output(output.name, output.node, output.port)
         return self
 
     def build(

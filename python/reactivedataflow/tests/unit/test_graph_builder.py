@@ -8,7 +8,7 @@ from reactivedataflow import (
     GraphBuilder,
     Registry,
 )
-from reactivedataflow.errors import NodeIdAlreadyExistsError, OutputNotDefinedError
+from reactivedataflow.errors import NodeAlreadyDefinedError, OutputNotFoundError
 from reactivedataflow.model import Edge, Graph, InputNode, Node, Output
 
 from .define_math_ops import define_math_ops
@@ -19,7 +19,7 @@ def test_double_add_node_raises_error():
     define_math_ops(registry)
 
     assembler = GraphBuilder().add_node("c1", "constant", config={"value": 1})
-    with pytest.raises(NodeIdAlreadyExistsError):
+    with pytest.raises(NodeAlreadyDefinedError):
         assembler.add_node("c1", "constant", config={"value": 2})
     assembler.add_node("c1", "constant", config={"value": 2}, override=True)
     assembler.add_output("c1")
@@ -93,9 +93,9 @@ def test_input_node():
     subject = rx.subject.BehaviorSubject(1)
     graph = assembler.build(registry=registry, inputs={"i": subject})
 
-    with pytest.raises(OutputNotDefinedError):
+    with pytest.raises(OutputNotFoundError):
         graph.output_value("fail_1")
-    with pytest.raises(OutputNotDefinedError):
+    with pytest.raises(OutputNotFoundError):
         graph.output("fail_1")
 
     outsub = graph.output("i")
@@ -157,30 +157,33 @@ def test_graph_assembler_from_schema():
     assembler.load(
         Graph(
             inputs=[
-                InputNode(id="i1"),
+                InputNode(id="input"),
             ],
             nodes=[
                 Node(id="c3", verb="constant", config={"value": 3}),
                 Node(id="c5", verb="constant", config={"value": 5}),
-                Node(id="n1", verb="add"),
-                Node(id="n2", verb="add"),
-                Node(id="n3", verb="multiply"),
+                Node(id="first_add", verb="add"),
+                Node(id="second_add", verb="add"),
+                Node(id="product", verb="multiply"),
             ],
             edges=[
                 # First sum inputs: 1 + 3 = 4
-                Edge(from_node="i1", to_node="n1"),
-                Edge(from_node="c3", to_node="n1"),
+                Edge(from_node="input", to_node="first_add"),
+                Edge(from_node="c3", to_node="first_add"),
                 # Second sum inputs: 5 + 3 = 8
-                Edge(from_node="c3", to_node="n2"),
-                Edge(from_node="c5", to_node="n2"),
+                Edge(from_node="c3", to_node="second_add"),
+                Edge(from_node="c5", to_node="second_add"),
                 # Multiply the sums: 4 * 8 = 32
-                Edge(from_node="n1", to_node="n3", to_port="a"),
-                Edge(from_node="n2", to_node="n3", to_port="b"),
+                Edge(from_node="first_add", to_node="product", to_port="a"),
+                Edge(from_node="second_add", to_node="product", to_port="b"),
             ],
-            outputs=[Output(name="result", node="n3")],
+            outputs=[Output(name="result", node="product")],
         )
     )
 
     # Build the graph
-    graph = assembler.build(registry=registry, inputs={"i1": rx.just(1)})
+    input_stream = rx.subject.BehaviorSubject(1)
+    graph = assembler.build(registry=registry, inputs={"input": input_stream})
     assert graph.output_value("result") == 32
+    input_stream.on_next(2)
+    assert graph.output_value("result") == 40

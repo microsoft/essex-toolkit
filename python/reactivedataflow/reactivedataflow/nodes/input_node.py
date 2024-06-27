@@ -6,7 +6,7 @@ from typing import Any
 import reactivex as rx
 
 from reactivedataflow.constants import default_output
-from reactivedataflow.errors import OutputNotDefinedError
+from reactivedataflow.errors import OutputNotFoundError
 
 from .node import Node
 
@@ -42,11 +42,11 @@ class InputNode(Node):
     def output(self, name: str = default_output) -> rx.Observable[Any]:
         """Get the observable of a given output."""
         if name != default_output:
-            raise OutputNotDefinedError(name)
+            raise OutputNotFoundError(name)
         return self._values
 
     def output_value(self, name: str = default_output) -> Any:
         """Get the observable of a given output."""
         if name != default_output:
-            raise OutputNotDefinedError(name)
+            raise OutputNotFoundError(name)
         return self._values.value

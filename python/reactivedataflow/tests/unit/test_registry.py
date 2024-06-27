@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 import pytest
 
 from reactivedataflow import OutputMode, VerbInput, VerbOutput, verb
-from reactivedataflow.errors import VerbAlreadyRegisteredError, VerbNotFoundError
+from reactivedataflow.errors import VerbAlreadyDefinedError, VerbNotFoundError
 from reactivedataflow.registry import Registry
 
 if TYPE_CHECKING:
@@ -25,7 +25,7 @@ def test_throws_on_double_register():
         def test_fn2(inputs: VerbInput) -> VerbOutput:
             return VerbOutput(no_output=True)
 
-    with pytest.raises(VerbAlreadyRegisteredError):
+    with pytest.raises(VerbAlreadyDefinedError):
         double_register()
 
 

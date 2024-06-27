@@ -5,7 +5,7 @@ from typing import Any
 
 import reactivex as rx
 
-from .errors import OutputNotDefinedError
+from .errors import OutputNotFoundError
 from .model import Output
 from .nodes.execution_node import Node
 
@@ -29,7 +29,7 @@ class ExecutionGraph:
         """Read the output of a node."""
         output = self._outputs.get(name)
         if output is None:
-            raise OutputNotDefinedError(name)
+            raise OutputNotFoundError(name)
         node = self._nodes[output.node]
         return node.output(output.port)
 
@@ -37,6 +37,6 @@ class ExecutionGraph:
         """Read the output of a node."""
         output = self._outputs.get(name)
         if output is None:
-            raise OutputNotDefinedError(name)
+            raise OutputNotFoundError(name)
         node = self._nodes[output.node]
         return node.output_value(output.port)
