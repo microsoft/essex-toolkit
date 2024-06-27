@@ -10,7 +10,7 @@ from reactivedataflow.nodes import EmitMode
 from reactivedataflow.utils.equality import IsEqualCheck
 
 
-class ArrayInputPort(BaseModel, extra="allow"):
+class ArrayInput(BaseModel, extra="allow"):
     """Specification for an array-based input port."""
 
     type: str | None = Field(default=None, description="The type of the port.")
@@ -23,7 +23,7 @@ class ArrayInputPort(BaseModel, extra="allow"):
     )
 
 
-class NamedInputsPort(BaseModel, extra="allow"):
+class NamedInputs(BaseModel, extra="allow"):
     """Specification for injecting all named inputs as a single dictionary."""
 
     type: dict[str, str] | None = Field(
@@ -38,7 +38,7 @@ class NamedInputsPort(BaseModel, extra="allow"):
     )
 
 
-class InputPort(BaseModel, extra="allow"):
+class Input(BaseModel, extra="allow"):
     """Specification for a named input port."""
 
     name: str = Field(..., description="The name of the port.")
@@ -52,7 +52,7 @@ class InputPort(BaseModel, extra="allow"):
     )
 
 
-class OutputPort(BaseModel, extra="allow"):
+class Output(BaseModel, extra="allow"):
     """Specification for an output port."""
 
     name: str = Field(..., description="The name of the port.")
@@ -65,7 +65,7 @@ class OutputPort(BaseModel, extra="allow"):
     )
 
 
-class ConfigPort(BaseModel, extra="allow"):
+class Config(BaseModel, extra="allow"):
     """Specification for a configuration field of an verb function."""
 
     name: str = Field(..., description="The name of the port.")
@@ -77,56 +77,58 @@ class ConfigPort(BaseModel, extra="allow"):
     )
 
 
-Port = InputPort | ArrayInputPort | NamedInputsPort | ConfigPort | OutputPort
+Binding = Input | ArrayInput | NamedInputs | Config | Output
 
 
-class Ports:
-    """PortMapper class."""
+class Bindings:
+    """Node Binding Managemer class.
 
-    _ports: list[Port]
+    Node bindings are used to map processing-graph inputs, outputs, and configuration values into the appropriate
+    function parameters. This class is used to manage the bindings for a node.
+    """
 
-    def __init__(self, ports: list[Port]):
-        self._ports = ports
+    _bindings: list[Binding]
+
+    def __init__(self, ports: list[Binding]):
+        self._bindings = ports
         self._validate()
 
     def _validate(self):
         """Validate the ports."""
-        input_names = [port.name for port in self.ports if isinstance(port, InputPort)]
+        input_names = [port.name for port in self.bindings if isinstance(port, Input)]
         if len(input_names) != len(set(input_names)):
             raise PortNamesMustBeUniqueError
 
-        config_names = [
-            port.name for port in self.ports if isinstance(port, ConfigPort)
-        ]
+        config_names = [port.name for port in self.bindings if isinstance(port, Config)]
         if len(config_names) != len(set(config_names)):
             raise PortNamesMustBeUniqueError
 
     @property
-    def ports(self) -> list[Port]:
-        """Return the ports."""
-        return self._ports
+    def bindings(self) -> list[Binding]:
+        """Return the bindings."""
+        return self._bindings
 
     @property
-    def config(self) -> list[ConfigPort]:
-        """Return the configuration ports."""
-        return [port for port in self.ports if isinstance(port, ConfigPort)]
+    def config(self) -> list[Config]:
+        """Return the configuration bindings."""
+        return [port for port in self.bindings if isinstance(port, Config)]
 
     @property
-    def input(self) -> list[InputPort]:
-        """Return the input ports."""
-        return [port for port in self.ports if isinstance(port, InputPort)]
+    def input(self) -> list[Input]:
+        """Return the input bindings."""
+        return [port for port in self.bindings if isinstance(port, Input)]
 
     @property
-    def outputs(self) -> list[OutputPort]:
-        """Return the output ports."""
-        return [port for port in self._ports if isinstance(port, OutputPort)]
+    def outputs(self) -> list[Output]:
+        """Return the output bindings."""
+        return [port for port in self._bindings if isinstance(port, Output)]
 
     @property
-    def array_input(self) -> ArrayInputPort | None:
+    def array_input(self) -> ArrayInput | None:
         """Return the array input port."""
-        return next((p for p in self._ports if isinstance(p, ArrayInputPort)), None)
+        return next((p for p in self._bindings if isinstance(p, ArrayInput)), None)
 
     @property
-    def named_inputs(self) -> NamedInputsPort | None:
+    def named_inputs(self) -> NamedInputs | None:
         """Return the named inputs port."""
-        return next((p for p in self._ports if isinstance(p, NamedInputsPort)), None)
+        return next((p for p in self._bindings if isinstance(p, NamedInputs)), None)
