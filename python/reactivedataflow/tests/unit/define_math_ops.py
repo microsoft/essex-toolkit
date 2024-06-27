@@ -2,10 +2,12 @@
 """reactivedataflow Graph Assembler Tests."""
 
 from reactivedataflow import (
+    ArrayInput,
+    Config,
+    Input,
     Registry,
     verb,
 )
-from reactivedataflow.bindings import ArrayInput, Config, Input
 from reactivedataflow.conditions import (
     array_input_not_empty,
 )
