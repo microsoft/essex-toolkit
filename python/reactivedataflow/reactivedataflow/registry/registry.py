@@ -1,24 +1,18 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """reactivedataflow Verb Registry."""
 
-from dataclasses import dataclass
+from collections.abc import Callable
 from typing import ClassVar
 
 from reactivedataflow.errors import VerbAlreadyRegisteredError, VerbNotFoundError
+from reactivedataflow.nodes import (
+    VerbFunction,
+)
 
-from .bindings import Bindings
-from .nodes import VerbFunction
+from .registration import Registration
+from .verb_constructor import verb_constructor
 
-
-@dataclass
-class Registration:
-    """Registration of an verb function."""
-
-    fn: VerbFunction
-    """The verb function."""
-
-    ports: Bindings
-    """The ports of the verb function."""
+VerbConstructor = Callable[[Registration], VerbFunction]
 
 
 class Registry:
@@ -26,9 +20,13 @@ class Registry:
 
     _instance: ClassVar["Registry | None"] = None
     _verbs: dict[str, Registration]
+    _verb_fns: dict[str, VerbFunction]
+    _verb_constructor: VerbConstructor
 
-    def __init__(self):
+    def __init__(self, _verb_constructor: VerbConstructor = verb_constructor):
         self._verbs = {}
+        self._verb_fns = {}
+        self._verb_constructor = _verb_constructor
 
     def register(
         self,
@@ -47,6 +45,14 @@ class Registry:
         if result is None:
             raise VerbNotFoundError(name)
         return result
+
+    def get_verb_function(self, name: str) -> VerbFunction:
+        """Get a built verb function."""
+        if self._verb_fns.get(name) is None:
+            registration = self.get(name)
+            verb_fn = self._verb_constructor(registration)
+            self._verb_fns[name] = verb_fn
+        return self._verb_fns[name]
 
     @staticmethod
     def get_instance() -> "Registry":

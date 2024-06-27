@@ -2,12 +2,12 @@
 """The reactivedataflow Library."""
 
 from .bindings import (
-    ArrayInputBinding,
+    ArrayInput,
     Bindings,
-    ConfigBinding,
-    InputBinding,
-    NamedInputsBinding,
-    OutputBinding,
+    Config,
+    Input,
+    NamedInputs,
+    Output,
 )
 from .decorators import (
     apply_decorators,
@@ -43,19 +43,19 @@ from .registry import Registry
 # - reactivedataflow.conditions - this contains a listing of emit and fire condition functions for users of the library.
 # - recativedataflow.model - this contains the Pydantic model for graph assembly.
 __all__ = [
-    "ArrayInputBinding",
+    "ArrayInput",
     "Bindings",
-    "ConfigBinding",
+    "Config",
     "EmitMode",
     "ExecutionGraph",
     "ExecutionNode",
     "GraphAssembler",
-    "InputBinding",
+    "Input",
     "InputMode",
     "InputNode",
-    "NamedInputsBinding",
+    "NamedInputs",
     "Node",
-    "OutputBinding",
+    "Output",
     "OutputMode",
     "Registry",
     "VerbInput",

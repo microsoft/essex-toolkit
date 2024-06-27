@@ -12,11 +12,11 @@ from reactivedataflow import (
     verb,
 )
 from reactivedataflow.bindings import (
-    ArrayInputBinding,
-    ConfigBinding,
-    InputBinding,
-    NamedInputsBinding,
-    OutputBinding,
+    ArrayInput,
+    Config,
+    Input,
+    NamedInputs,
+    Output,
 )
 from reactivedataflow.nodes import InputMode
 from reactivedataflow.registry import Registry
@@ -27,14 +27,14 @@ def test_configure_and_reconfigure():
 
     @verb(
         "execute",
-        bindings=[ConfigBinding(name="value", required=True)],
+        bindings=[Config(name="value", required=True)],
         input_mode=InputMode.Raw,
         registry=registry,
     )
     def execute(inputs: VerbInput) -> Any:
         return inputs.config.get("value")
 
-    wrapped_fn = registry.get("execute").fn
+    wrapped_fn = registry.get_verb_function("execute")
     node = ExecutionNode("a", wrapped_fn, config={"value": "Hello"})
     assert node.config.get("value") == "Hello"
     assert node.output_value() == "Hello"
@@ -58,7 +58,7 @@ def test_execution_node_with_raw_input():
             + inputs.named_inputs.get("input_2", "")
         )
 
-    wrapped_fn = registry.get("execute").fn
+    wrapped_fn = registry.get_verb_function("execute")
 
     output: str | None = None
     node = ExecutionNode("a", wrapped_fn)
@@ -80,13 +80,13 @@ def test_execution_node_with_named_inputs():
 
     @verb(
         "execute",
-        bindings=[NamedInputsBinding(parameter="inputs")],
+        bindings=[NamedInputs(parameter="inputs")],
         registry=registry,
     )
     def execute(inputs: dict[str, str]) -> str:
         return inputs.get("input_1", "") + " " + inputs.get("input_2", "")
 
-    wrapped_fn = registry.get("execute").fn
+    wrapped_fn = registry.get_verb_function("execute")
 
     output: str | None = None
     node = ExecutionNode("a", wrapped_fn)
@@ -109,15 +109,13 @@ def test_execution_node_with_named_required_inputs():
 
     @verb(
         "execute",
-        bindings=[
-            NamedInputsBinding(parameter="inputs", required=["input_1", "input_2"])
-        ],
+        bindings=[NamedInputs(parameter="inputs", required=["input_1", "input_2"])],
         registry=registry,
     )
     def execute(inputs: dict[str, str]) -> str:
         return inputs["input_1"] + " " + inputs["input_2"]
 
-    wrapped_fn = registry.get("execute").fn
+    wrapped_fn = registry.get_verb_function("execute")
 
     output: str | None = None
     node = ExecutionNode("a", wrapped_fn)
@@ -141,8 +139,8 @@ def test_execution_node_with_required_inputs():
     @verb(
         "execute_with_required_inputs",
         bindings=[
-            InputBinding(name="input_1", required=True),
-            InputBinding(name="input_2", required=True),
+            Input(name="input_1", required=True),
+            Input(name="input_2", required=True),
         ],
         input_mode=InputMode.Raw,
         registry=registry,
@@ -151,7 +149,7 @@ def test_execution_node_with_required_inputs():
         return inputs.named_inputs["input_1"] + " " + inputs.named_inputs["input_2"]
 
     output: str | None = None
-    fn = registry.get("execute_with_required_inputs").fn
+    fn = registry.get_verb_function("execute_with_required_inputs")
     node = ExecutionNode("a", fn)
     assert node.id == "a"
 
@@ -173,8 +171,8 @@ def test_execution_node_with_required_config():
     @verb(
         "execute_with_required_config",
         bindings=[
-            ConfigBinding(name="conf_1", required=True),
-            ConfigBinding(name="conf_2", required=True),
+            Config(name="conf_1", required=True),
+            Config(name="conf_2", required=True),
         ],
         input_mode=InputMode.Raw,
         registry=registry,
@@ -183,7 +181,7 @@ def test_execution_node_with_required_config():
         return inputs.config["conf_1"] + " " + inputs.config["conf_2"]
 
     output: str | None = None
-    fn = registry.get("execute_with_required_config").fn
+    fn = registry.get_verb_function("execute_with_required_config")
     node = ExecutionNode("a", fn)
     assert node.id == "a"
 
@@ -205,9 +203,9 @@ def test_execution_node_with_required_config_and_inputs():
     @verb(
         "execute_with_required_config",
         bindings=[
-            InputBinding(name="input_1", required=True),
-            ConfigBinding(name="conf_1", required=True),
-            ConfigBinding(name="conf_2", required=True),
+            Input(name="input_1", required=True),
+            Config(name="conf_1", required=True),
+            Config(name="conf_2", required=True),
         ],
         input_mode=InputMode.Raw,
         registry=registry,
@@ -220,7 +218,7 @@ def test_execution_node_with_required_config_and_inputs():
         ])
 
     output: str | None = None
-    fn = registry.get("execute_with_required_config").fn
+    fn = registry.get_verb_function("execute_with_required_config")
     node = ExecutionNode("a", fn)
     assert node.id == "a"
 
@@ -246,8 +244,8 @@ def test_execution_node_with_optional_inputs():
     @verb(
         "execute_with_optional_inputs",
         bindings=[
-            InputBinding(name="input_1", parameter="x"),
-            InputBinding(name="input_2", parameter="y"),
+            Input(name="input_1", parameter="x"),
+            Input(name="input_2", parameter="y"),
         ],
         registry=registry,
     )
@@ -256,7 +254,7 @@ def test_execution_node_with_optional_inputs():
         y = y or ""
         return f"{x} {y}"
 
-    wrapped_fn = registry.get("execute_with_optional_inputs").fn
+    wrapped_fn = registry.get_verb_function("execute_with_optional_inputs")
 
     output: str | None = None
     node = ExecutionNode("a", wrapped_fn)
@@ -278,10 +276,10 @@ def test_execution_node_with_multiple_outputs():
     @verb(
         "execute_with_two_outputs",
         bindings=[
-            InputBinding(name="input_1", parameter="x"),
-            InputBinding(name="input_2", parameter="y"),
-            OutputBinding(name="output_1"),
-            OutputBinding(name="output_2"),
+            Input(name="input_1", parameter="x"),
+            Input(name="input_2", parameter="y"),
+            Output(name="output_1"),
+            Output(name="output_2"),
         ],
         output_names=["output_1", "output_2"],
         output_mode=OutputMode.Tuple,
@@ -292,7 +290,7 @@ def test_execution_node_with_multiple_outputs():
         output_2 = f"{y} {x}"
         return output_1, output_2
 
-    wrapped_fn = registry.get("execute_with_two_outputs").fn
+    wrapped_fn = registry.get_verb_function("execute_with_two_outputs")
 
     node = ExecutionNode("a", wrapped_fn)
     output_1: str | None = None
@@ -321,7 +319,7 @@ def test_execution_node_with_array_inputs():
 
     @verb(
         "execute_with_array_inputs",
-        bindings=[ArrayInputBinding(parameter="values")],
+        bindings=[ArrayInput(parameter="values")],
         registry=registry,
     )
     def execute_with_array_inputs(values: list[int]) -> int:
@@ -329,7 +327,7 @@ def test_execution_node_with_array_inputs():
             return 0
         return sum(values)
 
-    wrapped_fn = registry.get("execute_with_array_inputs").fn
+    wrapped_fn = registry.get_verb_function("execute_with_array_inputs")
     node = ExecutionNode("a", wrapped_fn)
     output: str | None = None
 

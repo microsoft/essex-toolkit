@@ -2,11 +2,11 @@
 """reactivedataflow Inputs Decorator Tests."""
 
 from reactivedataflow import (
-    ArrayInputBinding,
+    ArrayInput,
     Bindings,
-    ConfigBinding,
-    InputBinding,
-    NamedInputsBinding,
+    Config,
+    Input,
+    NamedInputs,
     VerbInput,
     connect_input,
 )
@@ -14,9 +14,9 @@ from reactivedataflow import (
 
 def test_named_input_mapping():
     @connect_input(
-        ports=Bindings([
-            InputBinding(name="input_1", parameter="a"),
-            InputBinding(name="input_2", parameter="b"),
+        bindings=Bindings([
+            Input(name="input_1", parameter="a"),
+            Input(name="input_2", parameter="b"),
         ])
     )
     def stub(a: int, b: int) -> int:
@@ -28,9 +28,9 @@ def test_named_input_mapping():
 
 def test_input_with_default_parameter_names():
     @connect_input(
-        ports=Bindings([
-            InputBinding(name="a"),
-            InputBinding(name="b"),
+        bindings=Bindings([
+            Input(name="a"),
+            Input(name="b"),
         ])
     )
     def stub(a: int, b: int) -> int:
@@ -41,9 +41,7 @@ def test_input_with_default_parameter_names():
 
 
 def test_input_dict_mapping():
-    @connect_input(
-        Bindings([NamedInputsBinding(parameter="inputs", required=["a", "b"])])
-    )
+    @connect_input(Bindings([NamedInputs(parameter="inputs", required=["a", "b"])]))
     def stub(inputs: dict[str, int]) -> int:
         return sum(inputs.values())
 
@@ -53,9 +51,9 @@ def test_input_dict_mapping():
 
 def test_config_parameters_mapping():
     @connect_input(
-        ports=Bindings([
-            ConfigBinding(name="in_1", parameter="a"),
-            ConfigBinding(name="in_2", parameter="b"),
+        bindings=Bindings([
+            Config(name="in_1", parameter="a"),
+            Config(name="in_2", parameter="b"),
         ])
     )
     def stub(a: str, b: str) -> str:
@@ -66,7 +64,7 @@ def test_config_parameters_mapping():
 
 
 def test_array_parameter_mapping():
-    @connect_input(ports=Bindings([ArrayInputBinding(parameter="values")]))
+    @connect_input(bindings=Bindings([ArrayInput(parameter="values")]))
     def stub(values: list[int]) -> int:
         return sum(values)
 

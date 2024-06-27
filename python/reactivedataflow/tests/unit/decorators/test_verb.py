@@ -6,7 +6,7 @@ import asyncio
 import pytest
 
 from reactivedataflow import (
-    InputBinding,
+    Input,
     OutputMode,
     Registry,
     VerbInput,
@@ -51,7 +51,7 @@ def test_async_verb():
         await asyncio.sleep(0.001)
         return VerbOutput(outputs={default_output: result})
 
-    decorated_fn = registry.get("test_fn").fn
+    decorated_fn = registry.get_verb_function("test_fn")
 
     result = decorated_fn(VerbInput(named_inputs={}))
     assert result.outputs[default_output] == 200
@@ -72,15 +72,15 @@ def test_verb_with_custom_decorators():
         name="test_fn",
         registry=registry,
         bindings=[
-            InputBinding(name="a", required=True),
-            InputBinding(name="b", required=True),
+            Input(name="a", required=True),
+            Input(name="b", required=True),
         ],
         adapters=[custom_decorator],
     )
     def test_fn(a: int, b: int):
         return a + b
 
-    decorated_fn = registry.get("test_fn").fn
+    decorated_fn = registry.get_verb_function("test_fn")
 
     assert test_fn(1, 2) == 3
     decorated_output = decorated_fn(VerbInput(named_inputs={"a": 1, "b": 2}))
@@ -98,15 +98,15 @@ def test_verb_with_fire_conditions():
         name="test_fn",
         registry=registry,
         bindings=[
-            InputBinding(name="a", required=True),
-            InputBinding(name="b", required=True),
+            Input(name="a", required=True),
+            Input(name="b", required=True),
         ],
         fire_conditions=[condition],
     )
     def test_fn(a: int, b: int) -> int:
         return a + b
 
-    wrapped_fn = registry.get("test_fn").fn
+    wrapped_fn = registry.get_verb_function("test_fn")
 
     result = wrapped_fn(VerbInput(named_inputs={"a": 1, "b": 2}))
     assert result.no_output
@@ -126,8 +126,8 @@ def test_verb_with_emit_conditions():
     @verb(
         name="test_fn",
         bindings=[
-            InputBinding(name="a", required=True),
-            InputBinding(name="b", required=True),
+            Input(name="a", required=True),
+            Input(name="b", required=True),
         ],
         emit_conditions=[condition],
         registry=registry,
@@ -135,7 +135,7 @@ def test_verb_with_emit_conditions():
     def test_fn(a: int, b: int) -> int:
         return a + b
 
-    wrapped_fn = registry.get("test_fn").fn
+    wrapped_fn = registry.get_verb_function("test_fn")
 
     result = wrapped_fn(VerbInput(named_inputs={"a": 1, "b": 2}))
     assert result.no_output

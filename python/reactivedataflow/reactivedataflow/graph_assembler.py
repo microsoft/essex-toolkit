@@ -96,7 +96,7 @@ class GraphAssembler:
                     nodes[nid] = InputNode(nid)
                     continue
 
-                verb = registry.get(node["verb"]).fn
+                verb = registry.get_verb_function(node["verb"])
                 node_final_config = {**config, **node_config}
                 execution_node = ExecutionNode(nid, verb, node_final_config)
                 nodes[nid] = execution_node

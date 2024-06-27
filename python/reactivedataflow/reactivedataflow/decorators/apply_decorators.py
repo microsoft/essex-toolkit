@@ -5,12 +5,11 @@ from collections.abc import Callable
 from functools import reduce
 from typing import Any
 
-Decorator = Callable[[Callable[..., Any]], Callable[..., Any]]
+AnyFn = Callable[..., Any]
+Decorator = Callable[[AnyFn], AnyFn]
 
 
-def apply_decorators(
-    fn: Callable[..., Any], decorators: list[Decorator]
-) -> Callable[..., Any]:
+def apply_decorators(fn: AnyFn, decorators: list[Decorator]) -> AnyFn:
     """
     Apply a series of decorators to a function reference.
 

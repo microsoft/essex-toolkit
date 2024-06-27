@@ -4,21 +4,21 @@
 import pytest
 
 from reactivedataflow.bindings import (
-    ArrayInputBinding,
+    ArrayInput,
     Bindings,
-    ConfigBinding,
-    InputBinding,
-    OutputBinding,
+    Config,
+    Input,
+    Output,
 )
 from reactivedataflow.errors import PortNamesMustBeUniqueError
 
 
 def test_port_map_can_separate_port_types() -> None:
     ports = Bindings([
-        InputBinding(name="value", type="str"),
-        ConfigBinding(name="value", type="str"),
-        OutputBinding(name="output", type="str"),
-        ArrayInputBinding(type="str"),
+        Input(name="value", type="str"),
+        Config(name="value", type="str"),
+        Output(name="output", type="str"),
+        ArrayInput(type="str"),
     ])
     assert len(ports.input) == 1
     assert len(ports.config) == 1
@@ -29,14 +29,14 @@ def test_port_map_can_separate_port_types() -> None:
 def test_port_map_throws_on_duplicate_input_ports() -> None:
     with pytest.raises(PortNamesMustBeUniqueError):
         Bindings([
-            InputBinding(name="input", type="str"),
-            InputBinding(name="input", type="str"),
+            Input(name="input", type="str"),
+            Input(name="input", type="str"),
         ])
 
 
 def test_port_map_throws_on_duplicate_config_ports() -> None:
     with pytest.raises(PortNamesMustBeUniqueError):
         Bindings([
-            ConfigBinding(name="input", type="str"),
-            ConfigBinding(name="input", type="str"),
+            Config(name="input", type="str"),
+            Config(name="input", type="str"),
         ])

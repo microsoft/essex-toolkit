@@ -1,7 +1,7 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """reactivedataflow Decorators."""
 
-from .apply_decorators import apply_decorators
+from .apply_decorators import AnyFn, Decorator, apply_decorators
 from .connect_input import connect_input
 from .connect_output import connect_output
 from .emit_conditions import emit_conditions
@@ -10,6 +10,8 @@ from .handle_async_output import handle_async_output
 from .verb import verb
 
 __all__ = [
+    "AnyFn",
+    "Decorator",
     "apply_decorators",
     "connect_input",
     "connect_output",

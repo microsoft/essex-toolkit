@@ -10,7 +10,7 @@ from reactivedataflow.nodes import EmitMode
 from reactivedataflow.utils.equality import IsEqualCheck
 
 
-class ArrayInputBinding(BaseModel, extra="allow"):
+class ArrayInput(BaseModel, extra="allow"):
     """Specification for an array-based input port."""
 
     type: str | None = Field(default=None, description="The type of the port.")
@@ -23,7 +23,7 @@ class ArrayInputBinding(BaseModel, extra="allow"):
     )
 
 
-class NamedInputsBinding(BaseModel, extra="allow"):
+class NamedInputs(BaseModel, extra="allow"):
     """Specification for injecting all named inputs as a single dictionary."""
 
     type: dict[str, str] | None = Field(
@@ -38,7 +38,7 @@ class NamedInputsBinding(BaseModel, extra="allow"):
     )
 
 
-class InputBinding(BaseModel, extra="allow"):
+class Input(BaseModel, extra="allow"):
     """Specification for a named input port."""
 
     name: str = Field(..., description="The name of the port.")
@@ -52,7 +52,7 @@ class InputBinding(BaseModel, extra="allow"):
     )
 
 
-class OutputBinding(BaseModel, extra="allow"):
+class Output(BaseModel, extra="allow"):
     """Specification for an output port."""
 
     name: str = Field(..., description="The name of the port.")
@@ -65,7 +65,7 @@ class OutputBinding(BaseModel, extra="allow"):
     )
 
 
-class ConfigBinding(BaseModel, extra="allow"):
+class Config(BaseModel, extra="allow"):
     """Specification for a configuration field of an verb function."""
 
     name: str = Field(..., description="The name of the port.")
@@ -77,13 +77,7 @@ class ConfigBinding(BaseModel, extra="allow"):
     )
 
 
-Binding = (
-    InputBinding
-    | ArrayInputBinding
-    | NamedInputsBinding
-    | ConfigBinding
-    | OutputBinding
-)
+Binding = Input | ArrayInput | NamedInputs | Config | Output
 
 
 class Bindings:
@@ -101,48 +95,40 @@ class Bindings:
 
     def _validate(self):
         """Validate the ports."""
-        input_names = [
-            port.name for port in self.ports if isinstance(port, InputBinding)
-        ]
+        input_names = [port.name for port in self.bindings if isinstance(port, Input)]
         if len(input_names) != len(set(input_names)):
             raise PortNamesMustBeUniqueError
 
-        config_names = [
-            port.name for port in self.ports if isinstance(port, ConfigBinding)
-        ]
+        config_names = [port.name for port in self.bindings if isinstance(port, Config)]
         if len(config_names) != len(set(config_names)):
             raise PortNamesMustBeUniqueError
 
     @property
-    def ports(self) -> list[Binding]:
-        """Return the ports."""
+    def bindings(self) -> list[Binding]:
+        """Return the bindings."""
         return self._bindings
 
     @property
-    def config(self) -> list[ConfigBinding]:
-        """Return the configuration ports."""
-        return [port for port in self.ports if isinstance(port, ConfigBinding)]
+    def config(self) -> list[Config]:
+        """Return the configuration bindings."""
+        return [port for port in self.bindings if isinstance(port, Config)]
 
     @property
-    def input(self) -> list[InputBinding]:
-        """Return the input ports."""
-        return [port for port in self.ports if isinstance(port, InputBinding)]
+    def input(self) -> list[Input]:
+        """Return the input bindings."""
+        return [port for port in self.bindings if isinstance(port, Input)]
 
     @property
-    def outputs(self) -> list[OutputBinding]:
-        """Return the output ports."""
-        return [port for port in self._bindings if isinstance(port, OutputBinding)]
+    def outputs(self) -> list[Output]:
+        """Return the output bindings."""
+        return [port for port in self._bindings if isinstance(port, Output)]
 
     @property
-    def array_input(self) -> ArrayInputBinding | None:
+    def array_input(self) -> ArrayInput | None:
         """Return the array input port."""
-        return next(
-            (p for p in self._bindings if isinstance(p, ArrayInputBinding)), None
-        )
+        return next((p for p in self._bindings if isinstance(p, ArrayInput)), None)
 
     @property
-    def named_inputs(self) -> NamedInputsBinding | None:
+    def named_inputs(self) -> NamedInputs | None:
         """Return the named inputs port."""
-        return next(
-            (p for p in self._bindings if isinstance(p, NamedInputsBinding)), None
-        )
+        return next((p for p in self._bindings if isinstance(p, NamedInputs)), None)
