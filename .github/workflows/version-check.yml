@@ -1,17 +1,5 @@
 name: Version Check
-on:
-  push:
-      branches: [main]
-  pull_request:
-    paths:
-      - "javascript/**/*"
-      - "**/*.ts"
-      - "**/*.tsx"
-      - "**/*.js"
-      - "**/*.mjs"
-      - "**/*.cjs"
-      - "**/*.json"
-      - "yarn.lock"
+on: [push, pull_request]
 env:
   DEFAULT_NODE_VERSION: 18
 jobs:
