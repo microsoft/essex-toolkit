@@ -177,9 +177,7 @@ def test_graph_assembler_from_schema():
                 Edge(from_node="n1", to_node="n3", to_port="a"),
                 Edge(from_node="n2", to_node="n3", to_port="b"),
             ],
-            outputs=[
-                Output(name="result", node="n3")
-            ]
+            outputs=[Output(name="result", node="n3")],
         )
     )
 

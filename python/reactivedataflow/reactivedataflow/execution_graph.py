@@ -5,9 +5,9 @@ from typing import Any
 
 import reactivex as rx
 
+from .errors import OutputNotDefinedError
 from .model import Output
 from .nodes.execution_node import Node
-from .errors import OutputNotDefinedError
 
 
 class ExecutionGraph:
