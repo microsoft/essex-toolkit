@@ -8,7 +8,12 @@ from reactivedataflow import (
     GraphBuilder,
     Registry,
 )
-from reactivedataflow.errors import NodeAlreadyDefinedError, OutputNotFoundError
+from reactivedataflow.errors import (
+    NodeAlreadyDefinedError,
+    NodeNotFoundError,
+    OutputAlreadyDefinedError,
+    OutputNotFoundError,
+)
 from reactivedataflow.model import Edge, Graph, InputNode, Node, Output
 
 from .define_math_ops import define_math_ops
@@ -38,6 +43,21 @@ def test_input_bind():
         .build(registry=registry, inputs={"i1": rx.just(1)})
     )
     assert graph.output_value("i1") == 1
+
+
+def test_throws_on_redundant_output():
+    builder = GraphBuilder().add_input("i1").add_output("i1")
+    with pytest.raises(OutputAlreadyDefinedError):
+        builder.add_output("i1")
+
+
+def test_throws_on_add_edge_with_unknown_nodes():
+    builder = GraphBuilder()
+    builder.add_node("n1", "add")
+    with pytest.raises(NodeNotFoundError):
+        builder.add_edge(from_node="n1", to_node="n2")
+    with pytest.raises(NodeNotFoundError):
+        builder.add_edge(from_node="n2", to_node="n1")
 
 
 def test_simple_graph():
