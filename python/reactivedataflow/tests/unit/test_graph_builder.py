@@ -184,6 +184,11 @@ def test_graph_assembler_from_schema():
     # Build the graph
     input_stream = rx.subject.BehaviorSubject(1)
     graph = assembler.build(registry=registry, inputs={"input": input_stream})
+
+    with pytest.raises(OutputNotFoundError):
+        graph.output_value("fail_1")
+    with pytest.raises(OutputNotFoundError):
+        graph.output("fail_1")
     assert graph.output_value("result") == 32
     input_stream.on_next(2)
     assert graph.output_value("result") == 40
