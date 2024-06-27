@@ -8,14 +8,14 @@ from pydantic import BaseModel, Field
 from .constants import default_output
 
 
-class InputModel(BaseModel):
+class Input(BaseModel):
     """NodeInput model."""
 
     node: str = Field(..., description="Node identifier.")
     port: str = Field(default=default_output, description="Port identifier.")
 
 
-class VerbNodeModel(BaseModel):
+class ProcessingNode(BaseModel):
     """Processing Node Model."""
 
     id: str = Field(..., description="Node identifier.")
@@ -23,26 +23,24 @@ class VerbNodeModel(BaseModel):
     config: dict[str, Any] = Field(
         default_factory=dict, description="Configuration parameters."
     )
-    input: dict[str, InputModel] = Field(
-        default_factory=dict, description="Input ports."
-    )
-    array_input: list[InputModel] = Field(
+    input: dict[str, Input] = Field(default_factory=dict, description="Input ports.")
+    array_input: list[Input] = Field(
         default_factory=list, description="Array input ports."
     )
 
 
-class InputNodeModel(BaseModel):
+class InputNode(BaseModel):
     """Input Node Model."""
 
     id: str = Field(..., description="Node identifier.")
 
 
-class GraphModel(BaseModel):
+class Graph(BaseModel):
     """Graph Model."""
 
-    inputs: list[InputNodeModel] = Field(
+    inputs: list[InputNode] = Field(
         ..., description="List of input nodes in the graph."
     )
-    nodes: list[VerbNodeModel] = Field(
+    nodes: list[ProcessingNode] = Field(
         ..., description="List of processing nodes in the graph."
     )

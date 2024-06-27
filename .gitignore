@@ -34,3 +34,4 @@ __pycache__/
 output/
 python/*/dist/
 
+tests/integration

@@ -12,7 +12,6 @@ from .decorators import (
 )
 from .execution_graph import ExecutionGraph
 from .graph_assembler import GraphAssembler
-from .graph_model import GraphModel, InputModel, InputNodeModel, VerbNodeModel
 from .nodes import (
     EmitMode,
     ExecutionNode,
@@ -42,6 +41,7 @@ from .registry import Registry
 # - reactivedataflow.errors - this contains custom error types emitted by the library.
 # - reactivedataflow.types - this contains non-constructable type definitions for users of the library.
 # - reactivedataflow.conditions - this contains a listing of emit and fire condition functions for users of the library.
+# - recativedataflow.model - this contains the Pydantic model for graph assembly.
 __all__ = [
     "ArrayInputPort",
     "ConfigPort",
@@ -49,11 +49,8 @@ __all__ = [
     "ExecutionGraph",
     "ExecutionNode",
     "GraphAssembler",
-    "GraphModel",
     "InputMode",
-    "InputModel",
     "InputNode",
-    "InputNodeModel",
     "InputPort",
     "NamedInputsPort",
     "Node",
@@ -62,7 +59,6 @@ __all__ = [
     "Ports",
     "Registry",
     "VerbInput",
-    "VerbNodeModel",
     "VerbOutput",
     "apply_decorators",
     "connect_input",
