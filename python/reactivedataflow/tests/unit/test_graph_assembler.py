@@ -6,11 +6,7 @@ import reactivex as rx
 
 from reactivedataflow import (
     GraphAssembler,
-    GraphModel,
-    InputModel,
-    InputNodeModel,
     Registry,
-    VerbNodeModel,
     verb,
 )
 from reactivedataflow.conditions import (
@@ -18,6 +14,12 @@ from reactivedataflow.conditions import (
 )
 from reactivedataflow.constants import default_output
 from reactivedataflow.errors import NodeIdAlreadyExistsError, OutputNotDefinedError
+from reactivedataflow.model import (
+    Graph,
+    Input,
+    InputNode,
+    ProcessingNode,
+)
 from reactivedataflow.ports import ArrayInputPort, ConfigPort, InputPort
 
 
@@ -94,8 +96,8 @@ def test_math_op_graph():
         "n1",
         "add",
         array_inputs=[
-            InputModel(node="c1", port=default_output),
-            InputModel(node="c3"),
+            Input(node="c1", port=default_output),
+            Input(node="c3"),
         ],
     )
 
@@ -165,16 +167,16 @@ def test_graph_assembler():
         "n1",
         "add",
         array_inputs=[
-            InputModel(node="c1"),
-            InputModel(node="c3"),
+            Input(node="c1"),
+            Input(node="c3"),
         ],
     )
     assembler.add_node(
         "n2",
         "add",
         array_inputs=[
-            InputModel(node="c5"),
-            InputModel(node="c3"),
+            Input(node="c5"),
+            Input(node="c3"),
         ],
     )
 
@@ -182,8 +184,8 @@ def test_graph_assembler():
         "n3",
         "multiply",
         named_inputs={
-            "a": InputModel(node="n1"),
-            "b": InputModel(node="n2"),
+            "a": Input(node="n1"),
+            "b": Input(node="n2"),
         },
     )
 
@@ -204,35 +206,35 @@ def test_graph_assembler_from_schema():
 
     assembler = GraphAssembler()
     assembler.load(
-        GraphModel(
+        Graph(
             inputs=[
-                InputNodeModel(id="i1"),
+                InputNode(id="i1"),
             ],
             nodes=[
-                VerbNodeModel(id="c3", verb="constant", config={"value": 3}),
-                VerbNodeModel(id="c5", verb="constant", config={"value": 5}),
-                VerbNodeModel(
+                ProcessingNode(id="c3", verb="constant", config={"value": 3}),
+                ProcessingNode(id="c5", verb="constant", config={"value": 5}),
+                ProcessingNode(
                     id="n1",
                     verb="add",
                     array_input=[
-                        InputModel(node="i1"),
-                        InputModel(node="c3"),
+                        Input(node="i1"),
+                        Input(node="c3"),
                     ],
                 ),
-                VerbNodeModel(
+                ProcessingNode(
                     id="n2",
                     verb="add",
                     array_input=[
-                        InputModel(node="c5"),
-                        InputModel(node="c3"),
+                        Input(node="c5"),
+                        Input(node="c3"),
                     ],
                 ),
-                VerbNodeModel(
+                ProcessingNode(
                     id="n3",
                     verb="multiply",
                     input={
-                        "a": InputModel(node="n1"),
-                        "b": InputModel(node="n2"),
+                        "a": Input(node="n1"),
+                        "b": Input(node="n2"),
                     },
                 ),
             ],

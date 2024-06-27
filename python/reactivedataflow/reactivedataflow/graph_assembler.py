@@ -9,7 +9,7 @@ import reactivex as rx
 from reactivedataflow.errors import NodeIdAlreadyExistsError
 
 from .execution_graph import ExecutionGraph
-from .graph_model import GraphModel, InputModel
+from .model import Graph, Input
 from .nodes import ExecutionNode, InputNode, Node
 from .registry import Registry
 
@@ -32,8 +32,8 @@ class GraphAssembler:
         nid: str,
         verb: str,
         config: dict[str, Any] | None = None,
-        named_inputs: dict[str, InputModel] | None = None,
-        array_inputs: list[InputModel] | None = None,
+        named_inputs: dict[str, Input] | None = None,
+        array_inputs: list[Input] | None = None,
         override: bool = False,
     ) -> None:
         """Add a node to the graph."""
@@ -63,7 +63,7 @@ class GraphAssembler:
         """Add an edge to the graph."""
         self._graph.add_edge(from_node, to_node, from_port=from_port, to_port=to_port)
 
-    def load(self, model: GraphModel) -> None:
+    def load(self, model: Graph) -> None:
         """Load a graph model."""
         for node in model.inputs:
             self.add_input(node.id)
