@@ -3,22 +3,22 @@
 
 import pytest
 
-from reactivedataflow.errors import PortNamesMustBeUniqueError
-from reactivedataflow.ports import (
-    ArrayInputPort,
-    ConfigPort,
-    InputPort,
-    OutputPort,
-    Ports,
+from reactivedataflow.bindings import (
+    ArrayInputBinding,
+    Bindings,
+    ConfigBinding,
+    InputBinding,
+    OutputBinding,
 )
+from reactivedataflow.errors import PortNamesMustBeUniqueError
 
 
 def test_port_map_can_separate_port_types() -> None:
-    ports = Ports([
-        InputPort(name="value", type="str"),
-        ConfigPort(name="value", type="str"),
-        OutputPort(name="output", type="str"),
-        ArrayInputPort(type="str"),
+    ports = Bindings([
+        InputBinding(name="value", type="str"),
+        ConfigBinding(name="value", type="str"),
+        OutputBinding(name="output", type="str"),
+        ArrayInputBinding(type="str"),
     ])
     assert len(ports.input) == 1
     assert len(ports.config) == 1
@@ -28,15 +28,15 @@ def test_port_map_can_separate_port_types() -> None:
 
 def test_port_map_throws_on_duplicate_input_ports() -> None:
     with pytest.raises(PortNamesMustBeUniqueError):
-        Ports([
-            InputPort(name="input", type="str"),
-            InputPort(name="input", type="str"),
+        Bindings([
+            InputBinding(name="input", type="str"),
+            InputBinding(name="input", type="str"),
         ])
 
 
 def test_port_map_throws_on_duplicate_config_ports() -> None:
     with pytest.raises(PortNamesMustBeUniqueError):
-        Ports([
-            ConfigPort(name="input", type="str"),
-            ConfigPort(name="input", type="str"),
+        Bindings([
+            ConfigBinding(name="input", type="str"),
+            ConfigBinding(name="input", type="str"),
         ])

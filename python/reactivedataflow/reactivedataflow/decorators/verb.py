@@ -5,6 +5,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any, ParamSpec
 
+from reactivedataflow.bindings import Binding, Bindings, ConfigBinding, InputBinding
 from reactivedataflow.conditions import (
     array_input_values_are_defined,
     output_changed,
@@ -19,7 +20,6 @@ from reactivedataflow.nodes import (
     OutputMode,
     VerbFunction,
 )
-from reactivedataflow.ports import ConfigPort, InputPort, Port, Ports
 from reactivedataflow.registry import Registration, Registry
 
 from .apply_decorators import apply_decorators
@@ -36,7 +36,7 @@ P = ParamSpec("P")
 class VerbSpecification:
     """A container class for verb specifications and augmentation."""
 
-    ports: Ports
+    ports: Bindings
     adapters: list[Callable[[Callable[..., Any]], Callable[..., Any]]]
     fire_conditions: list[FireCondition]
     emit_conditions: list[EmitCondition]
@@ -51,7 +51,7 @@ def verb(
     adapters: list[Callable[[Callable[..., Any]], Callable[..., Any]]] | None = None,
     fire_conditions: list[FireCondition] | None = None,
     emit_conditions: list[EmitCondition] | None = None,
-    ports: list[Port] | None = None,
+    bindings: list[Binding] | None = None,
     registry: Registry | None = None,
     input_mode: InputMode | None = None,
     output_mode: OutputMode | None = None,
@@ -62,7 +62,7 @@ def verb(
     """Register an verb function with the given name."""
     registry = registry or Registry.get_instance()
     spec = VerbSpecification(
-        ports=Ports(ports or []),
+        ports=Bindings(bindings or []),
         fire_conditions=fire_conditions or [],
         emit_conditions=emit_conditions or [],
         adapters=adapters or [],
@@ -167,7 +167,7 @@ def _infer_emit_conditions(
 
 
 def _input_parameter_map(
-    inputs: list[InputPort],
+    inputs: list[InputBinding],
 ) -> dict[str, str]:
     result: dict[str, str] = {}
     for port in inputs:
@@ -176,7 +176,7 @@ def _input_parameter_map(
 
 
 def _config_parameter_map(
-    config: list[ConfigPort],
+    config: list[ConfigBinding],
 ) -> dict[str, str]:
     result: dict[str, str] = {}
     for port in config:

@@ -6,8 +6,8 @@ from typing import ClassVar
 
 from reactivedataflow.errors import VerbAlreadyRegisteredError, VerbNotFoundError
 
+from .bindings import Bindings
 from .nodes import VerbFunction
-from .ports import Ports
 
 
 @dataclass
@@ -17,7 +17,7 @@ class Registration:
     fn: VerbFunction
     """The verb function."""
 
-    ports: Ports
+    ports: Bindings
     """The ports of the verb function."""
 
 

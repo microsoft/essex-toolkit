@@ -4,15 +4,15 @@
 from collections.abc import Callable
 from typing import Any, ParamSpec, TypeVar, cast
 
+from reactivedataflow.bindings import Bindings
 from reactivedataflow.nodes import VerbInput
-from reactivedataflow.ports import Ports
 
 T = TypeVar("T")
 P = ParamSpec("P")
 
 
 def connect_input(
-    ports: Ports,
+    ports: Bindings,
 ) -> Callable[[Callable[P, T]], Callable[[VerbInput], T]]:
     """Decorate an execution function with input conditions.
 

@@ -10,7 +10,7 @@ from reactivedataflow.nodes import EmitMode
 from reactivedataflow.utils.equality import IsEqualCheck
 
 
-class ArrayInputPort(BaseModel, extra="allow"):
+class ArrayInputBinding(BaseModel, extra="allow"):
     """Specification for an array-based input port."""
 
     type: str | None = Field(default=None, description="The type of the port.")
@@ -23,7 +23,7 @@ class ArrayInputPort(BaseModel, extra="allow"):
     )
 
 
-class NamedInputsPort(BaseModel, extra="allow"):
+class NamedInputsBinding(BaseModel, extra="allow"):
     """Specification for injecting all named inputs as a single dictionary."""
 
     type: dict[str, str] | None = Field(
@@ -38,7 +38,7 @@ class NamedInputsPort(BaseModel, extra="allow"):
     )
 
 
-class InputPort(BaseModel, extra="allow"):
+class InputBinding(BaseModel, extra="allow"):
     """Specification for a named input port."""
 
     name: str = Field(..., description="The name of the port.")
@@ -52,7 +52,7 @@ class InputPort(BaseModel, extra="allow"):
     )
 
 
-class OutputPort(BaseModel, extra="allow"):
+class OutputBinding(BaseModel, extra="allow"):
     """Specification for an output port."""
 
     name: str = Field(..., description="The name of the port.")
@@ -65,7 +65,7 @@ class OutputPort(BaseModel, extra="allow"):
     )
 
 
-class ConfigPort(BaseModel, extra="allow"):
+class ConfigBinding(BaseModel, extra="allow"):
     """Specification for a configuration field of an verb function."""
 
     name: str = Field(..., description="The name of the port.")
@@ -77,56 +77,72 @@ class ConfigPort(BaseModel, extra="allow"):
     )
 
 
-Port = InputPort | ArrayInputPort | NamedInputsPort | ConfigPort | OutputPort
+Binding = (
+    InputBinding
+    | ArrayInputBinding
+    | NamedInputsBinding
+    | ConfigBinding
+    | OutputBinding
+)
 
 
-class Ports:
-    """PortMapper class."""
+class Bindings:
+    """Node Binding Managemer class.
 
-    _ports: list[Port]
+    Node bindings are used to map processing-graph inputs, outputs, and configuration values into the appropriate
+    function parameters. This class is used to manage the bindings for a node.
+    """
 
-    def __init__(self, ports: list[Port]):
-        self._ports = ports
+    _bindings: list[Binding]
+
+    def __init__(self, ports: list[Binding]):
+        self._bindings = ports
         self._validate()
 
     def _validate(self):
         """Validate the ports."""
-        input_names = [port.name for port in self.ports if isinstance(port, InputPort)]
+        input_names = [
+            port.name for port in self.ports if isinstance(port, InputBinding)
+        ]
         if len(input_names) != len(set(input_names)):
             raise PortNamesMustBeUniqueError
 
         config_names = [
-            port.name for port in self.ports if isinstance(port, ConfigPort)
+            port.name for port in self.ports if isinstance(port, ConfigBinding)
         ]
         if len(config_names) != len(set(config_names)):
             raise PortNamesMustBeUniqueError
 
     @property
-    def ports(self) -> list[Port]:
+    def ports(self) -> list[Binding]:
         """Return the ports."""
-        return self._ports
+        return self._bindings
 
     @property
-    def config(self) -> list[ConfigPort]:
+    def config(self) -> list[ConfigBinding]:
         """Return the configuration ports."""
-        return [port for port in self.ports if isinstance(port, ConfigPort)]
+        return [port for port in self.ports if isinstance(port, ConfigBinding)]
 
     @property
-    def input(self) -> list[InputPort]:
+    def input(self) -> list[InputBinding]:
         """Return the input ports."""
-        return [port for port in self.ports if isinstance(port, InputPort)]
+        return [port for port in self.ports if isinstance(port, InputBinding)]
 
     @property
-    def outputs(self) -> list[OutputPort]:
+    def outputs(self) -> list[OutputBinding]:
         """Return the output ports."""
-        return [port for port in self._ports if isinstance(port, OutputPort)]
+        return [port for port in self._bindings if isinstance(port, OutputBinding)]
 
     @property
-    def array_input(self) -> ArrayInputPort | None:
+    def array_input(self) -> ArrayInputBinding | None:
         """Return the array input port."""
-        return next((p for p in self._ports if isinstance(p, ArrayInputPort)), None)
+        return next(
+            (p for p in self._bindings if isinstance(p, ArrayInputBinding)), None
+        )
 
     @property
-    def named_inputs(self) -> NamedInputsPort | None:
+    def named_inputs(self) -> NamedInputsBinding | None:
         """Return the named inputs port."""
-        return next((p for p in self._ports if isinstance(p, NamedInputsPort)), None)
+        return next(
+            (p for p in self._bindings if isinstance(p, NamedInputsBinding)), None
+        )

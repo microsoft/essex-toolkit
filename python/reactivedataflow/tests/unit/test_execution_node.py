@@ -11,14 +11,14 @@ from reactivedataflow import (
     VerbInput,
     verb,
 )
-from reactivedataflow.nodes import InputMode
-from reactivedataflow.ports import (
-    ArrayInputPort,
-    ConfigPort,
-    InputPort,
-    NamedInputsPort,
-    OutputPort,
+from reactivedataflow.bindings import (
+    ArrayInputBinding,
+    ConfigBinding,
+    InputBinding,
+    NamedInputsBinding,
+    OutputBinding,
 )
+from reactivedataflow.nodes import InputMode
 from reactivedataflow.registry import Registry
 
 
@@ -27,7 +27,7 @@ def test_configure_and_reconfigure():
 
     @verb(
         "execute",
-        ports=[ConfigPort(name="value", required=True)],
+        bindings=[ConfigBinding(name="value", required=True)],
         input_mode=InputMode.Raw,
         registry=registry,
     )
@@ -80,7 +80,7 @@ def test_execution_node_with_named_inputs():
 
     @verb(
         "execute",
-        ports=[NamedInputsPort(parameter="inputs")],
+        bindings=[NamedInputsBinding(parameter="inputs")],
         registry=registry,
     )
     def execute(inputs: dict[str, str]) -> str:
@@ -109,7 +109,9 @@ def test_execution_node_with_named_required_inputs():
 
     @verb(
         "execute",
-        ports=[NamedInputsPort(parameter="inputs", required=["input_1", "input_2"])],
+        bindings=[
+            NamedInputsBinding(parameter="inputs", required=["input_1", "input_2"])
+        ],
         registry=registry,
     )
     def execute(inputs: dict[str, str]) -> str:
@@ -138,9 +140,9 @@ def test_execution_node_with_required_inputs():
 
     @verb(
         "execute_with_required_inputs",
-        ports=[
-            InputPort(name="input_1", required=True),
-            InputPort(name="input_2", required=True),
+        bindings=[
+            InputBinding(name="input_1", required=True),
+            InputBinding(name="input_2", required=True),
         ],
         input_mode=InputMode.Raw,
         registry=registry,
@@ -170,9 +172,9 @@ def test_execution_node_with_required_config():
 
     @verb(
         "execute_with_required_config",
-        ports=[
-            ConfigPort(name="conf_1", required=True),
-            ConfigPort(name="conf_2", required=True),
+        bindings=[
+            ConfigBinding(name="conf_1", required=True),
+            ConfigBinding(name="conf_2", required=True),
         ],
         input_mode=InputMode.Raw,
         registry=registry,
@@ -202,10 +204,10 @@ def test_execution_node_with_required_config_and_inputs():
 
     @verb(
         "execute_with_required_config",
-        ports=[
-            InputPort(name="input_1", required=True),
-            ConfigPort(name="conf_1", required=True),
-            ConfigPort(name="conf_2", required=True),
+        bindings=[
+            InputBinding(name="input_1", required=True),
+            ConfigBinding(name="conf_1", required=True),
+            ConfigBinding(name="conf_2", required=True),
         ],
         input_mode=InputMode.Raw,
         registry=registry,
@@ -243,9 +245,9 @@ def test_execution_node_with_optional_inputs():
 
     @verb(
         "execute_with_optional_inputs",
-        ports=[
-            InputPort(name="input_1", parameter="x"),
-            InputPort(name="input_2", parameter="y"),
+        bindings=[
+            InputBinding(name="input_1", parameter="x"),
+            InputBinding(name="input_2", parameter="y"),
         ],
         registry=registry,
     )
@@ -275,11 +277,11 @@ def test_execution_node_with_multiple_outputs():
 
     @verb(
         "execute_with_two_outputs",
-        ports=[
-            InputPort(name="input_1", parameter="x"),
-            InputPort(name="input_2", parameter="y"),
-            OutputPort(name="output_1"),
-            OutputPort(name="output_2"),
+        bindings=[
+            InputBinding(name="input_1", parameter="x"),
+            InputBinding(name="input_2", parameter="y"),
+            OutputBinding(name="output_1"),
+            OutputBinding(name="output_2"),
         ],
         output_names=["output_1", "output_2"],
         output_mode=OutputMode.Tuple,
@@ -319,7 +321,7 @@ def test_execution_node_with_array_inputs():
 
     @verb(
         "execute_with_array_inputs",
-        ports=[ArrayInputPort(parameter="values")],
+        bindings=[ArrayInputBinding(parameter="values")],
         registry=registry,
     )
     def execute_with_array_inputs(values: list[int]) -> int:

@@ -9,6 +9,7 @@ from reactivedataflow import (
     Registry,
     verb,
 )
+from reactivedataflow.bindings import ArrayInputBinding, ConfigBinding, InputBinding
 from reactivedataflow.conditions import (
     array_input_not_empty,
 )
@@ -20,14 +21,13 @@ from reactivedataflow.model import (
     InputNode,
     ProcessingNode,
 )
-from reactivedataflow.ports import ArrayInputPort, ConfigPort, InputPort
 
 
 def define_math_ops(registry: Registry):
     @verb(
         name="add",
         registry=registry,
-        ports=[ArrayInputPort(required=True, parameter="values")],
+        bindings=[ArrayInputBinding(required=True, parameter="values")],
         fire_conditions=[array_input_not_empty()],
     )
     def add(values: list[int]) -> int:
@@ -36,9 +36,9 @@ def define_math_ops(registry: Registry):
     @verb(
         name="multiply",
         registry=registry,
-        ports=[
-            InputPort(name="a", required=True),
-            InputPort(name="b", required=True),
+        bindings=[
+            InputBinding(name="a", required=True),
+            InputBinding(name="b", required=True),
         ],
     )
     def multiply(a: int, b: int) -> int:
@@ -47,7 +47,7 @@ def define_math_ops(registry: Registry):
     @verb(
         name="constant",
         registry=registry,
-        ports=[ConfigPort(name="value", required=True)],
+        bindings=[ConfigBinding(name="value", required=True)],
     )
     def constant(value: int) -> int:
         return value

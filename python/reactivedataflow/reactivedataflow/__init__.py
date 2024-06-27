@@ -1,6 +1,14 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """The reactivedataflow Library."""
 
+from .bindings import (
+    ArrayInputBinding,
+    Bindings,
+    ConfigBinding,
+    InputBinding,
+    NamedInputsBinding,
+    OutputBinding,
+)
 from .decorators import (
     apply_decorators,
     connect_input,
@@ -22,14 +30,6 @@ from .nodes import (
     VerbInput,
     VerbOutput,
 )
-from .ports import (
-    ArrayInputPort,
-    ConfigPort,
-    InputPort,
-    NamedInputsPort,
-    OutputPort,
-    Ports,
-)
 from .registry import Registry
 
 # Public API
@@ -43,20 +43,20 @@ from .registry import Registry
 # - reactivedataflow.conditions - this contains a listing of emit and fire condition functions for users of the library.
 # - recativedataflow.model - this contains the Pydantic model for graph assembly.
 __all__ = [
-    "ArrayInputPort",
-    "ConfigPort",
+    "ArrayInputBinding",
+    "Bindings",
+    "ConfigBinding",
     "EmitMode",
     "ExecutionGraph",
     "ExecutionNode",
     "GraphAssembler",
+    "InputBinding",
     "InputMode",
     "InputNode",
-    "InputPort",
-    "NamedInputsPort",
+    "NamedInputsBinding",
     "Node",
+    "OutputBinding",
     "OutputMode",
-    "OutputPort",
-    "Ports",
     "Registry",
     "VerbInput",
     "VerbOutput",

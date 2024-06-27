@@ -6,7 +6,7 @@ import asyncio
 import pytest
 
 from reactivedataflow import (
-    InputPort,
+    InputBinding,
     OutputMode,
     Registry,
     VerbInput,
@@ -71,9 +71,9 @@ def test_verb_with_custom_decorators():
     @verb(
         name="test_fn",
         registry=registry,
-        ports=[
-            InputPort(name="a", required=True),
-            InputPort(name="b", required=True),
+        bindings=[
+            InputBinding(name="a", required=True),
+            InputBinding(name="b", required=True),
         ],
         adapters=[custom_decorator],
     )
@@ -97,9 +97,9 @@ def test_verb_with_fire_conditions():
     @verb(
         name="test_fn",
         registry=registry,
-        ports=[
-            InputPort(name="a", required=True),
-            InputPort(name="b", required=True),
+        bindings=[
+            InputBinding(name="a", required=True),
+            InputBinding(name="b", required=True),
         ],
         fire_conditions=[condition],
     )
@@ -125,9 +125,9 @@ def test_verb_with_emit_conditions():
 
     @verb(
         name="test_fn",
-        ports=[
-            InputPort(name="a", required=True),
-            InputPort(name="b", required=True),
+        bindings=[
+            InputBinding(name="a", required=True),
+            InputBinding(name="b", required=True),
         ],
         emit_conditions=[condition],
         registry=registry,
