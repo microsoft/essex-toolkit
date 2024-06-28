@@ -2,6 +2,14 @@
 """reactivedataflow Error Types."""
 
 
+class GraphHasCyclesError(ValueError):
+    """An exception for a cycle detected in the graph."""
+
+    def __init__(self):
+        """Initialize the CycleDetectedError."""
+        super().__init__("Cycle detected in the graph.")
+
+
 class RequiredNodeInputNotFoundError(ValueError):
     """An exception for required input not found."""
 
