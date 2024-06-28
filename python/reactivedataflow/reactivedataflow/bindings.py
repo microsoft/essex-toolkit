@@ -11,9 +11,11 @@ from reactivedataflow.utils.equality import IsEqualCheck
 
 
 class ArrayInput(BaseModel, extra="allow"):
-    """Specification for an array-based input port."""
+    """Specification for an array-based input binding."""
 
-    type: str | None = Field(default=None, description="The type of the port.")
+    type: str | None = Field(
+        default=None, description="The item-type of the array input port."
+    )
     required: bool = Field(
         default=False, description="Whether the input port is required."
     )
@@ -81,7 +83,7 @@ Binding = Input | ArrayInput | NamedInputs | Config | Output
 
 
 class Bindings:
-    """Node Binding Managemer class.
+    """Node Binding Manager class.
 
     Node bindings are used to map processing-graph inputs, outputs, and configuration values into the appropriate
     function parameters. This class is used to manage the bindings for a node.
@@ -89,8 +91,13 @@ class Bindings:
 
     _bindings: list[Binding]
 
-    def __init__(self, ports: list[Binding]):
-        self._bindings = ports
+    def __init__(self, bindings: list[Binding]):
+        """Initialize the Bindings object.
+
+        Args:
+            bindings: The list of bindings for the node.
+        """
+        self._bindings = bindings
         self._validate()
 
     def _validate(self):
@@ -111,24 +118,24 @@ class Bindings:
     @property
     def config(self) -> list[Config]:
         """Return the configuration bindings."""
-        return [port for port in self.bindings if isinstance(port, Config)]
+        return [b for b in self.bindings if isinstance(b, Config)]
 
     @property
     def input(self) -> list[Input]:
         """Return the input bindings."""
-        return [port for port in self.bindings if isinstance(port, Input)]
+        return [b for b in self.bindings if isinstance(b, Input)]
 
     @property
     def outputs(self) -> list[Output]:
         """Return the output bindings."""
-        return [port for port in self._bindings if isinstance(port, Output)]
+        return [b for b in self._bindings if isinstance(b, Output)]
 
     @property
     def array_input(self) -> ArrayInput | None:
-        """Return the array input port."""
+        """Return the array input binding."""
         return next((p for p in self._bindings if isinstance(p, ArrayInput)), None)
 
     @property
     def named_inputs(self) -> NamedInputs | None:
-        """Return the named inputs port."""
+        """Return the named inputs binding."""
         return next((p for p in self._bindings if isinstance(p, NamedInputs)), None)

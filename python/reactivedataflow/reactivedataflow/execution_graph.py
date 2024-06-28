@@ -17,6 +17,12 @@ class ExecutionGraph:
     _outputs: dict[str, Output]
 
     def __init__(self, nodes: dict[str, Node], outputs: dict[str, Output]):
+        """Initialize the execution graph.
+
+        Args:
+            nodes: The nodes in the graph.
+            outputs: The outputs of the graph.
+        """
         self._nodes = nodes
         self._outputs = outputs
 
@@ -30,7 +36,7 @@ class ExecutionGraph:
         output = self._outputs.get(name)
         if output is None:
             raise OutputNotFoundError(name)
-        node = self._nodes[output.node]
+        node = self._nodes[output.node or output.name]
         return node.output(output.port)
 
     def output_value(self, name: str) -> rx.Observable[Any]:
@@ -38,5 +44,5 @@ class ExecutionGraph:
         output = self._outputs.get(name)
         if output is None:
             raise OutputNotFoundError(name)
-        node = self._nodes[output.node]
+        node = self._nodes[output.node or output.name]
         return node.output_value(output.port)

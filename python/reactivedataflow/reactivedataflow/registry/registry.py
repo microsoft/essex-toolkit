@@ -28,6 +28,12 @@ class Registry:
         verb_constructor: VerbConstructor = verb_constructor,
         verbs: dict[str, Registration] | None = None,
     ):
+        """Initialize the registry.
+
+        Args:
+            verb_constructor: The constructor function for creating verb-functions from Registrations.
+            verbs: The initial set of verbs to register.
+        """
         self._verbs = verbs or {}
         self._verb_fns = {}
         self._verb_constructor = verb_constructor

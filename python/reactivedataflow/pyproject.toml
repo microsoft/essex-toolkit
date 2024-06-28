@@ -130,7 +130,7 @@ ignore = [
 "*.ipynb" = ["T201"]
 
 [tool.ruff.lint.pydocstyle]
-convention = "numpy"
+convention = "google"
 
 [tool.pytest.ini_options]
 log_cli = true

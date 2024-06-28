@@ -38,7 +38,9 @@ class ExecutionNode(Node):
         """Initialize the ExecutionNode.
 
         Args:
+            nid (str): The node identifier.
             fn (VerbFunction): The execution logic for the function. The input is a dictionary of input names to their latest values.
+            config (dict[str, Any], optional): The configuration for the node. Defaults to None.
         """
         self._id = nid
         self._fn = fn
