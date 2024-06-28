@@ -1,5 +1,5 @@
 # Copyright (c) 2024 Microsoft Corporation.
-"""reactivedataflow Graph Assembler Tests."""
+"""reactivedataflow Graph Builder Tests."""
 
 import pytest
 import reactivex as rx
@@ -9,26 +9,96 @@ from reactivedataflow import (
     Registry,
 )
 from reactivedataflow.errors import (
+    InputNotFoundError,
     NodeAlreadyDefinedError,
     NodeNotFoundError,
     OutputAlreadyDefinedError,
     OutputNotFoundError,
+    RequiredNodeConfigNotFoundError,
+    RequiredNodeInputNotFoundError,
+    RequiredNodeArrayInputNotFoundError,
 )
 from reactivedataflow.model import Edge, Graph, InputNode, Node, Output
 
 from .define_math_ops import define_math_ops
 
 
+def test_missing_input_raises_error():
+    builder = GraphBuilder()
+    builder.add_input("i1")
+
+    with pytest.raises(InputNotFoundError):
+        builder.build()
+
+
+def test_missing_node_input_raises_error():
+    registry = Registry()
+    define_math_ops(registry)
+
+    builder = GraphBuilder()
+    builder.add_node("n", "multiply")
+
+    with pytest.raises(RequiredNodeInputNotFoundError):
+        builder.build(registry=registry)
+
+    builder.add_node("const1", "constant", config={"value": 1})
+    builder.add_edge(from_node="const1", to_node="n", to_port="a")
+
+    with pytest.raises(RequiredNodeInputNotFoundError):
+        builder.build(registry=registry)
+
+    builder.add_node("const2", "constant", config={"value": 2})
+    builder.add_edge(from_node="const2", to_node="n", to_port="b")
+    builder.add_output("n")
+
+    graph = builder.build(registry=registry)
+    assert graph.output_value("n") == 2
+
+def test_missing_array_input_raises_error():
+    registry = Registry()
+    define_math_ops(registry)
+
+    builder = GraphBuilder()
+    builder.add_node("const1", "constant", config={"value": 1})
+    builder.add_node("n", "add")
+    builder.add_output("n")
+
+    with pytest.raises(RequiredNodeArrayInputNotFoundError):
+        builder.build(registry=registry)
+
+    builder.add_edge(from_node="const1", to_node="n")
+    graph = builder.build(registry=registry)
+    assert graph.output_value("n") == 1
+
+
+def test_missing_node_config_raises_error():
+    registry = Registry()
+    define_math_ops(registry)
+
+    builder = GraphBuilder()
+    builder.add_node("n", "constant")
+
+    with pytest.raises(RequiredNodeConfigNotFoundError):
+        builder.build(registry=registry)
+
+    builder = GraphBuilder()
+    builder.add_node("n", "constant", config={"value": 1})
+    builder.add_output("n")
+
+    graph = builder.build(registry=registry)
+    assert graph.output_value("n") == 1
+
+
 def test_double_add_node_raises_error():
     registry = Registry()
     define_math_ops(registry)
 
-    assembler = GraphBuilder().add_node("c1", "constant", config={"value": 1})
+    builder = GraphBuilder().add_node("c1", "constant", config={"value": 1})
     with pytest.raises(NodeAlreadyDefinedError):
-        assembler.add_node("c1", "constant", config={"value": 2})
-    assembler.add_node("c1", "constant", config={"value": 2}, override=True)
-    assembler.add_output("c1")
-    graph = assembler.build(registry=registry)
+        builder.add_node("c1", "constant", config={"value": 2})
+    builder.add_node("c1", "constant", config={"value": 2}, override=True)
+    builder.add_output("c1")
+    graph = builder.build(registry=registry)
 
     assert graph.output_value("c1") == 2
 
@@ -107,11 +177,11 @@ def test_math_op_graph():
 
 def test_input_node():
     registry = Registry()
-    assembler = GraphBuilder()
-    assembler.add_input("i").add_output("i").add_output("fail_1", "i", "x")
+    builder = GraphBuilder()
+    builder.add_input("i").add_output("i").add_output("fail_1", "i", "x")
 
     subject = rx.subject.BehaviorSubject(1)
-    graph = assembler.build(registry=registry, inputs={"i": subject})
+    graph = builder.build(registry=registry, inputs={"i": subject})
 
     with pytest.raises(OutputNotFoundError):
         graph.output_value("fail_1")
@@ -136,7 +206,7 @@ def test_input_node():
     graph.dispose()
 
 
-def test_graph_assembler():
+def test_graph_builder():
     registry = Registry()
     define_math_ops(registry)
 
@@ -169,12 +239,12 @@ def test_graph_assembler():
     graph.dispose()
 
 
-def test_graph_assembler_from_schema():
+def test_graph_builder_from_schema():
     registry = Registry()
     define_math_ops(registry)
 
-    assembler = GraphBuilder()
-    assembler.load(
+    builder = GraphBuilder()
+    builder.load(
         Graph(
             inputs=[
                 InputNode(id="input"),
@@ -203,7 +273,7 @@ def test_graph_assembler_from_schema():
 
     # Build the graph
     input_stream = rx.subject.BehaviorSubject(1)
-    graph = assembler.build(registry=registry, inputs={"input": input_stream})
+    graph = builder.build(registry=registry, inputs={"input": input_stream})
 
     with pytest.raises(OutputNotFoundError):
         graph.output_value("fail_1")

@@ -8,9 +8,13 @@ import reactivex as rx
 
 from .constants import default_output
 from .errors import (
+    InputNotFoundError,
     NodeAlreadyDefinedError,
     NodeNotFoundError,
     OutputAlreadyDefinedError,
+    RequiredNodeConfigNotFoundError,
+    RequiredNodeInputNotFoundError,
+    RequiredNodeArrayInputNotFoundError,
 )
 from .execution_graph import ExecutionGraph
 from .model import Graph, Output
@@ -191,17 +195,48 @@ class GraphBuilder:
                     array_inputs[to_node].append(input_source)
             return named_inputs, array_inputs
 
+        def bind_inputs(
+            nodes: dict[str, Node],
+            named_inputs: dict[str, dict[str, rx.Observable[Any]]],
+            array_inputs: dict[str, list[rx.Observable[Any]]],
+        ):
+            for nid in self._graph.nodes:
+                node = nodes[nid]
+                if isinstance(node, InputNode):
+                    node.attach(inputs[nid])
+                if isinstance(node, ExecutionNode):
+                    named_in = named_inputs.get(nid)
+                    array_in = array_inputs.get(nid)
+                    node.attach(named_inputs=named_in, array_inputs=array_in)
+
+        def validate_inputs():
+            for nid in self._graph.nodes:
+                node = self._graph.nodes[nid]
+                if node.get("input") and nid not in inputs:
+                    raise InputNotFoundError(nid)
+
         nodes = build_nodes()
+        validate_inputs()
         named_inputs, array_inputs = build_node_inputs(nodes)
 
-        # Bind the Inputs
+        bind_inputs(nodes, named_inputs, array_inputs)
+
+        # Validate the graph
         for nid in self._graph.nodes:
-            node = nodes[nid]
-            if isinstance(node, InputNode):
-                node.attach(inputs[nid])
-            if isinstance(node, ExecutionNode):
-                named_in = named_inputs.get(nid)
-                array_in = array_inputs.get(nid)
-                node.attach(named_inputs=named_in, array_inputs=array_in)
+            node = self._graph.nodes[nid]
+
+            if not node.get("input"):
+                # This is not an input node, validate the inputs and config
+                bindings = registry.get(node["verb"]).bindings
+                execution_node = nodes[nid]
+                if isinstance(execution_node, ExecutionNode):
+                    if bindings.array_input and bindings.array_input.required and not execution_node.has_array_input():
+                        raise RequiredNodeArrayInputNotFoundError(nid)
+                    for required_input in bindings.required_input_names:
+                        if not execution_node.has_input(required_input):
+                            raise RequiredNodeInputNotFoundError(nid, required_input)
+                    for required_config in bindings.required_config_names:
+                        if not execution_node.has_config(required_config):
+                            raise RequiredNodeConfigNotFoundError(nid, required_config)
 
         return ExecutionGraph(nodes, self._outputs)

@@ -139,3 +139,13 @@ class Bindings:
     def named_inputs(self) -> NamedInputs | None:
         """Return the named inputs binding."""
         return next((p for p in self._bindings if isinstance(p, NamedInputs)), None)
+
+    @property
+    def required_input_names(self) -> set[str]:
+        """Return the required named inputs."""
+        return {p.name for p in self.input if p.required}
+
+    @property
+    def required_config_names(self) -> set[str]:
+        """Return the required named inputs."""
+        return {p.name for p in self.config if p.required}

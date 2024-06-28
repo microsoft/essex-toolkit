@@ -2,6 +2,29 @@
 """reactivedataflow Error Types."""
 
 
+class RequiredNodeInputNotFoundError(ValueError):
+    """An exception for required input not found."""
+
+    def __init__(self, nid: str, input_name: str):
+        """Initialize the RequiredNodeInputNotFoundError."""
+        super().__init__(f"Node {nid} is missing required input '{input_name}'.")
+
+class RequiredNodeArrayInputNotFoundError(ValueError):
+    """An exception for required array input not found."""
+
+    def __init__(self, nid: str):
+        """Initialize the RequiredNodeInputNotFoundError."""
+        super().__init__(f"Node {nid} is missing required array input.")
+
+
+class RequiredNodeConfigNotFoundError(ValueError):
+    """An exception for required input not found."""
+
+    def __init__(self, nid: str, config_key: str):
+        """Initialize the RequiredNodeInputNotFoundError."""
+        super().__init__(f"Node {nid} is missing required config '{config_key}'.")
+
+
 class NodeAlreadyDefinedError(ValueError):
     """An exception for adding a node that already exists."""
 
@@ -24,6 +47,14 @@ class OutputAlreadyDefinedError(ValueError):
     def __init__(self, name: str):
         """Initialize the OutputAlreadyDefinedError."""
         super().__init__(f"Output '{name}' is already defined.")
+
+
+class InputNotFoundError(ValueError):
+    """An exception for input not defined."""
+
+    def __init__(self, input_name: str):
+        """Initialize the InputNotFoundError."""
+        super().__init__(f"Input '{input_name}' not found.")
 
 
 class OutputNotFoundError(ValueError):

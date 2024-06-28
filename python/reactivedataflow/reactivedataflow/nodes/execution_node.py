@@ -93,6 +93,18 @@ class ExecutionNode(Node):
                 subscription.dispose()
             self._subscriptions = []
 
+    def has_input(self, name: str) -> bool:
+        """Check if the node has a given input."""
+        return name in self._named_inputs
+
+    def has_config(self, name: str) -> bool:
+        """Check if the node has a given config."""
+        return name in self._config
+
+    def has_array_input(self) -> bool:
+        """Check if the node has a given array input."""
+        return len(self._array_inputs) > 0
+
     def attach(
         self,
         named_inputs: dict[str, rx.Observable[Any]] | None = None,
