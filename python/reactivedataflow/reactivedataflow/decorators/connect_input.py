@@ -17,7 +17,7 @@ def connect_input(
     """Decorate an execution function with input conditions.
 
     Args:
-        required (list[str] | None): The list of required input names. Defaults to None. If present, the function will only execute if all required inputs are present.
+        bindings (Bindings): The input bindings for the function.
     """
 
     def wrap_fn(

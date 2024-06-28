@@ -10,9 +10,12 @@ Decorator = Callable[[AnyFn], AnyFn]
 
 
 def apply_decorators(fn: AnyFn, decorators: list[Decorator]) -> AnyFn:
-    """
-    Apply a series of decorators to a function reference.
+    """Apply a series of decorators to a function reference.
 
     This is useful for splitting apart verb registration from the verb implementation.
+
+    Args:
+        fn: The function to decorate.
+        decorators: The decorators to apply. These will be applied in reverse order so that they can be copied/pasted from a decorated function.
     """
     return reduce(lambda x, y: y(x), reversed(decorators), fn)

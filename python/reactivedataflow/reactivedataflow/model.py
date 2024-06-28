@@ -45,7 +45,7 @@ class Output(BaseModel):
     """Output model."""
 
     name: str = Field(..., description="The unique name of the output.")
-    node: str = Field(..., description="Node identifier.")
+    node: str | None = Field(default=None, description="Node identifier.")
     port: str = Field(default=default_output, description="Port identifier.")
 
 

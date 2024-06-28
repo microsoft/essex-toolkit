@@ -38,7 +38,9 @@ class ExecutionNode(Node):
         """Initialize the ExecutionNode.
 
         Args:
+            nid (str): The node identifier.
             fn (VerbFunction): The execution logic for the function. The input is a dictionary of input names to their latest values.
+            config (dict[str, Any], optional): The configuration for the node. Defaults to None.
         """
         self._id = nid
         self._fn = fn
@@ -90,6 +92,18 @@ class ExecutionNode(Node):
             for subscription in self._subscriptions:
                 subscription.dispose()
             self._subscriptions = []
+
+    def has_input(self, name: str) -> bool:
+        """Check if the node has a given input."""
+        return name in self._named_inputs
+
+    def has_config(self, name: str) -> bool:
+        """Check if the node has a given config."""
+        return name in self._config
+
+    def num_array_inputs(self) -> int:
+        """Get the number of array inputs."""
+        return len(self._array_inputs)
 
     def attach(
         self,

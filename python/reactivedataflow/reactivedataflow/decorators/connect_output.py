@@ -25,7 +25,8 @@ def connect_output(
     """Decorate an execution function with output conditions.
 
     Args:
-        default_output (bool): The default output of the function.
+        mode (OutputMode, optional): The output mode. Defaults to OutputMode.Value.
+        output_names (list[str] | None, optional): The output names. Defaults to None.
     """
     if mode == OutputMode.Tuple and output_names is None:
         raise OutputNamesMissingInTupleOutputModeError
