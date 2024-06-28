@@ -143,7 +143,11 @@ class Bindings:
     @property
     def required_input_names(self) -> set[str]:
         """Return the required named inputs."""
-        return {p.name for p in self.input if p.required}
+        result = {p.name for p in self.input if p.required}
+        if self.named_inputs:
+            result.update(self.named_inputs.required)
+        return result
+
 
     @property
     def required_config_names(self) -> set[str]:

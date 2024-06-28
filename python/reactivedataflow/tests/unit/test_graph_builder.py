@@ -7,6 +7,7 @@ import reactivex as rx
 from reactivedataflow import (
     GraphBuilder,
     Registry,
+    verb,NamedInputs
 )
 from reactivedataflow.errors import (
     InputNotFoundError,
@@ -67,6 +68,31 @@ def test_missing_array_input_raises_error():
         builder.build(registry=registry)
 
     builder.add_edge(from_node="const1", to_node="n")
+    graph = builder.build(registry=registry)
+    assert graph.output_value("n") == 1
+
+
+def test_missing_dict_input_raises_error():
+    registry = Registry()
+    define_math_ops(registry)
+    @verb(
+        name="add_dict",
+        registry=registry,
+        bindings=[
+            NamedInputs(required=["a"], parameter="values")
+        ])
+    def add(values: dict[str, int]) -> int:
+        return sum(values.values())
+
+    builder = GraphBuilder()
+    builder.add_node("const1", "constant", config={"value": 1})
+    builder.add_node("n", "add_dict")
+    builder.add_output("n")
+
+    with pytest.raises(RequiredNodeInputNotFoundError):
+        builder.build(registry=registry)
+
+    builder.add_edge(from_node="const1", to_node="n", to_port="a")
     graph = builder.build(registry=registry)
     assert graph.output_value("n") == 1
 
