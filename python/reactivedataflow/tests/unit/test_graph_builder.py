@@ -4,20 +4,16 @@
 import pytest
 import reactivex as rx
 
-from reactivedataflow import (
-    GraphBuilder,
-    Registry,
-    verb,NamedInputs
-)
+from reactivedataflow import GraphBuilder, NamedInputs, Registry, verb
 from reactivedataflow.errors import (
     InputNotFoundError,
     NodeAlreadyDefinedError,
     NodeNotFoundError,
     OutputAlreadyDefinedError,
     OutputNotFoundError,
+    RequiredNodeArrayInputNotFoundError,
     RequiredNodeConfigNotFoundError,
     RequiredNodeInputNotFoundError,
-    RequiredNodeArrayInputNotFoundError,
 )
 from reactivedataflow.model import Edge, Graph, InputNode, Node, Output
 
@@ -55,6 +51,7 @@ def test_missing_node_input_raises_error():
     graph = builder.build(registry=registry)
     assert graph.output_value("n") == 2
 
+
 def test_missing_array_input_raises_error():
     registry = Registry()
     define_math_ops(registry)
@@ -75,12 +72,12 @@ def test_missing_array_input_raises_error():
 def test_missing_dict_input_raises_error():
     registry = Registry()
     define_math_ops(registry)
+
     @verb(
         name="add_dict",
         registry=registry,
-        bindings=[
-            NamedInputs(required=["a"], parameter="values")
-        ])
+        bindings=[NamedInputs(required=["a"], parameter="values")],
+    )
     def add(values: dict[str, int]) -> int:
         return sum(values.values())
 

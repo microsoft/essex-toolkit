@@ -12,9 +12,9 @@ from .errors import (
     NodeAlreadyDefinedError,
     NodeNotFoundError,
     OutputAlreadyDefinedError,
+    RequiredNodeArrayInputNotFoundError,
     RequiredNodeConfigNotFoundError,
     RequiredNodeInputNotFoundError,
-    RequiredNodeArrayInputNotFoundError,
 )
 from .execution_graph import ExecutionGraph
 from .model import Graph, Output
@@ -230,7 +230,13 @@ class GraphBuilder:
                 bindings = registry.get(node["verb"]).bindings
                 execution_node = nodes[nid]
                 if isinstance(execution_node, ExecutionNode):
-                    if bindings.array_input and bindings.array_input.required and not execution_node.has_array_input():
+                    array_input = bindings.array_input
+
+                    if (
+                        array_input
+                        and array_input.required
+                        and execution_node.num_array_inputs() < array_input.required
+                    ):
                         raise RequiredNodeArrayInputNotFoundError(nid)
                     for required_input in bindings.required_input_names:
                         if not execution_node.has_input(required_input):

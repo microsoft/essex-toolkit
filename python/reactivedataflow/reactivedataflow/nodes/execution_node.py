@@ -101,9 +101,9 @@ class ExecutionNode(Node):
         """Check if the node has a given config."""
         return name in self._config
 
-    def has_array_input(self) -> bool:
-        """Check if the node has a given array input."""
-        return len(self._array_inputs) > 0
+    def num_array_inputs(self) -> int:
+        """Get the number of array inputs."""
+        return len(self._array_inputs)
 
     def attach(
         self,

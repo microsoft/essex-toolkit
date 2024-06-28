@@ -9,6 +9,7 @@ class RequiredNodeInputNotFoundError(ValueError):
         """Initialize the RequiredNodeInputNotFoundError."""
         super().__init__(f"Node {nid} is missing required input '{input_name}'.")
 
+
 class RequiredNodeArrayInputNotFoundError(ValueError):
     """An exception for required array input not found."""
 

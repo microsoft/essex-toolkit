@@ -16,8 +16,8 @@ class ArrayInput(BaseModel, extra="allow"):
     type: str | None = Field(
         default=None, description="The item-type of the array input port."
     )
-    required: bool = Field(
-        default=False, description="Whether the input port is required."
+    required: int | None = Field(
+        default=None, description="The minimum number of array inputs required."
     )
     parameter: str | None = Field(
         default=None,
@@ -147,7 +147,6 @@ class Bindings:
         if self.named_inputs:
             result.update(self.named_inputs.required)
         return result
-
 
     @property
     def required_config_names(self) -> set[str]:
