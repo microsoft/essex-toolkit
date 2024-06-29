@@ -4,13 +4,13 @@
 from collections.abc import Callable
 from typing import Any, ParamSpec
 
-from reactivedataflow.bindings import Binding, Bindings
 from reactivedataflow.nodes import (
     EmitCondition,
     FireCondition,
     InputMode,
     OutputMode,
 )
+from reactivedataflow.ports import PortBinding, Ports
 from reactivedataflow.registry import Registration, Registry
 
 from .apply_decorators import Decorator
@@ -23,7 +23,7 @@ def verb(
     adapters: list[Decorator] | None = None,
     fire_conditions: list[FireCondition] | None = None,
     emit_conditions: list[EmitCondition] | None = None,
-    bindings: list[Binding] | None = None,
+    ports: list[PortBinding] | None = None,
     registry: Registry | None = None,
     input_mode: InputMode | None = None,
     output_mode: OutputMode | None = None,
@@ -40,7 +40,7 @@ def verb(
         adapters (list[Decorator] | None): A list of decorators to apply to the verb before any other decoration.
         fire_conditions (list[FireCondition] | None): A list of fire conditions.
         emit_conditions (list[EmitCondition] | None): A list of emit conditions.
-        bindings (list[Binding] | None): A list of verb bindings, which are used to inject config, input, and map output values.
+        ports (list[PortBinding] | None): A list of port bindings, which are used to inject config, input, and map output values.
         registry (Registry | None): The registry to register the verb with. If None, then the default registry will be used.
         input_mode (InputMode | None): The input mode of the verb. If raw, then the function is expected to adhere to the VerbFunction interface.
         output_mode (OutputMode | None): The output mode of the verb, either a single-value or tuple.
@@ -55,8 +55,8 @@ def verb(
     def wrap_fn(verb: Callable[P, Any]) -> Callable[P, Any]:
         registration = Registration(
             fn=verb,
-            bindings=Bindings(
-                bindings or [],
+            bindings=Ports(
+                ports or [],
                 include_default_output if include_default_output is not None else True,
             ),
             fire_conditions=fire_conditions or [],

@@ -4,7 +4,6 @@
 from collections.abc import Callable
 from dataclasses import dataclass
 
-from reactivedataflow.bindings import Bindings
 from reactivedataflow.decorators import Decorator
 from reactivedataflow.nodes import (
     EmitCondition,
@@ -12,6 +11,7 @@ from reactivedataflow.nodes import (
     InputMode,
     OutputMode,
 )
+from reactivedataflow.ports import Ports
 
 
 @dataclass
@@ -21,7 +21,7 @@ class Registration:
     fn: Callable
     """The verb function."""
 
-    bindings: Bindings
+    bindings: Ports
     """The ports of the verb function."""
 
     adapters: list[Decorator]

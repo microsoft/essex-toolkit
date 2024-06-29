@@ -17,7 +17,7 @@ def define_math_ops(registry: Registry) -> None:
     @verb(
         name="add",
         registry=registry,
-        bindings=[ArrayInput(required=True, parameter="values")],
+        ports=[ArrayInput(required=True, parameter="values")],
         fire_conditions=[array_input_not_empty()],
     )
     def add(values: list[int]) -> int:
@@ -26,7 +26,7 @@ def define_math_ops(registry: Registry) -> None:
     @verb(
         name="multiply",
         registry=registry,
-        bindings=[
+        ports=[
             Input(name="a", required=True),
             Input(name="b", required=True),
         ],
@@ -37,7 +37,7 @@ def define_math_ops(registry: Registry) -> None:
     @verb(
         name="constant",
         registry=registry,
-        bindings=[Config(name="value", required=True)],
+        ports=[Config(name="value", required=True)],
     )
     def constant(value: int) -> int:
         return value

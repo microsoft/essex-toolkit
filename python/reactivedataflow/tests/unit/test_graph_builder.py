@@ -80,7 +80,7 @@ def test_missing_dict_input_raises_error():
     @verb(
         name="add_dict",
         registry=registry,
-        bindings=[NamedInputs(required=["a"], parameter="values")],
+        ports=[NamedInputs(required=["a"], parameter="values")],
     )
     def add(values: dict[str, int]) -> int:
         return sum(values.values())
@@ -333,7 +333,7 @@ def test_strict_mode():
         name="add_strict",
         registry=registry,
         strict=True,
-        bindings=[
+        ports=[
             Input(name="a", required=True),
             Input(name="b", required=True),
         ],
@@ -345,7 +345,7 @@ def test_strict_mode():
         name="constant_strict",
         registry=registry,
         strict=True,
-        bindings=[Config(name="value", required=True)],
+        ports=[Config(name="value", required=True)],
     )
     def constant_strict(value: int) -> int:
         return value

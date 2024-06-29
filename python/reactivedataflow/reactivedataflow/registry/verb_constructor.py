@@ -1,7 +1,6 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """reactivedataflow Verb Registry."""
 
-from reactivedataflow.bindings import Config, Input
 from reactivedataflow.conditions import (
     array_input_values_are_defined,
     output_changed,
@@ -26,6 +25,7 @@ from reactivedataflow.nodes import (
     OutputMode,
     VerbFunction,
 )
+from reactivedataflow.ports import Config, Input
 
 from .registry import Registration
 

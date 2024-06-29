@@ -3,18 +3,18 @@
 
 import pytest
 
-from reactivedataflow.bindings import (
+from reactivedataflow.errors import PortNamesMustBeUniqueError
+from reactivedataflow.ports import (
     ArrayInput,
-    Bindings,
     Config,
     Input,
     Output,
+    Ports,
 )
-from reactivedataflow.errors import PortNamesMustBeUniqueError
 
 
 def test_port_map_can_separate_port_types() -> None:
-    ports = Bindings([
+    ports = Ports([
         Input(name="value", type="str"),
         Config(name="value", type="str"),
         Output(name="output", type="str"),
@@ -28,7 +28,7 @@ def test_port_map_can_separate_port_types() -> None:
 
 def test_port_map_throws_on_duplicate_input_ports() -> None:
     with pytest.raises(PortNamesMustBeUniqueError):
-        Bindings([
+        Ports([
             Input(name="input", type="str"),
             Input(name="input", type="str"),
         ])
@@ -36,7 +36,7 @@ def test_port_map_throws_on_duplicate_input_ports() -> None:
 
 def test_port_map_throws_on_duplicate_config_ports() -> None:
     with pytest.raises(PortNamesMustBeUniqueError):
-        Bindings([
+        Ports([
             Config(name="input", type="str"),
             Config(name="input", type="str"),
         ])
