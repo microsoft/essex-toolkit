@@ -247,6 +247,21 @@ def test_input_node():
     graph.dispose()
 
 
+def test_multiple_edges_on_different_ports():
+    registry = Registry()
+    define_math_ops(registry)
+    graph = (
+        GraphBuilder()
+        .add_node("c1", "constant", config={"value": 2})
+        .add_node("m1", "multiply")
+        .add_edge("c1", "m1", to_port="a")
+        .add_edge("c1", "m1", to_port="b")
+        .add_output("result", "m1")
+        .build(registry=registry)
+    )
+    assert graph.output_value("result") == 4
+
+
 def test_graph_builder():
     registry = Registry()
     define_math_ops(registry)

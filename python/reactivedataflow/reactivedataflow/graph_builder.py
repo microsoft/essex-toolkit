@@ -104,7 +104,12 @@ class GraphBuilder:
         if not self._graph.has_node(to_node):
             raise NodeNotFoundError(to_node)
 
-        self._graph.add_edge(from_node, to_node, from_port=from_port, to_port=to_port)
+        port_connection = {"from_port": from_port, "to_port": to_port}
+        if self._graph.has_edge(from_node, to_node):
+            edge = self._graph.get_edge_data(from_node, to_node)
+            edge["ports"].append(port_connection)
+        else:
+            self._graph.add_edge(from_node, to_node, ports=[port_connection])
 
         return self
 
@@ -186,26 +191,28 @@ class GraphBuilder:
             for edge in self._graph.edges(data=True):
                 # Unpack the edge details
                 from_node, to_node, data = edge
-                from_port = data.get("from_port") or default_output
-                to_port = data.get("to_port")
+                ports = data.get("ports", [])
+                for port_connection in ports:
+                    from_port = port_connection.get("from_port") or default_output
+                    to_port = port_connection.get("to_port")
 
-                # Find the appropriate observable the "from" side of the edge represents.
-                input_source = (
-                    inputs[from_node]
-                    if from_node in inputs
-                    else nodes[from_node].output(from_port)
-                )
+                    # Find the appropriate observable the "from" side of the edge represents.
+                    input_source = (
+                        inputs[from_node]
+                        if from_node in inputs
+                        else nodes[from_node].output(from_port)
+                    )
 
-                if to_port:
-                    # to_port is defined, this is a named input
-                    if to_node not in named_inputs:
-                        named_inputs[to_node] = {}
-                    named_inputs[to_node][to_port] = input_source
-                else:
-                    # to_port is not defined, this is an array input
-                    if to_node not in array_inputs:
-                        array_inputs[to_node] = []
-                    array_inputs[to_node].append(input_source)
+                    if to_port:
+                        # to_port is defined, this is a named input
+                        if to_node not in named_inputs:
+                            named_inputs[to_node] = {}
+                        named_inputs[to_node][to_port] = input_source
+                    else:
+                        # to_port is not defined, this is an array input
+                        if to_node not in array_inputs:
+                            array_inputs[to_node] = []
+                        array_inputs[to_node].append(input_source)
             return named_inputs, array_inputs
 
         def bind_inputs(
