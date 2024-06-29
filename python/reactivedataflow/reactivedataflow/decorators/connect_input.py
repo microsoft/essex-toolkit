@@ -12,12 +12,12 @@ P = ParamSpec("P")
 
 
 def connect_input(
-    bindings: Ports,
+    ports: Ports,
 ) -> Callable[[Callable[P, T]], Callable[[VerbInput], T]]:
     """Decorate an execution function with input conditions.
 
     Args:
-        bindings (Bindings): The input bindings for the function.
+        ports (Ports): The ports for the function.
     """
 
     def wrap_fn(
@@ -27,7 +27,7 @@ def connect_input(
             fn_kwargs = {**kwargs}
 
             # Inject named-input Dictionary
-            named_inputs_port = bindings.named_inputs
+            named_inputs_port = ports.named_inputs
             if (
                 named_inputs_port is not None
                 and named_inputs_port.parameter is not None
@@ -35,19 +35,18 @@ def connect_input(
                 fn_kwargs[named_inputs_port.parameter] = inputs.named_inputs
 
             # Inject array input
-            array_port = bindings.array_input
+            array_port = ports.array_input
             if array_port is not None and array_port.parameter is not None:
                 fn_kwargs[array_port.parameter] = inputs.array_inputs
 
             # Inject named parameters
             fn_kwargs.update({
                 p.parameter or p.name: inputs.named_inputs.get(p.name)
-                for p in bindings.input
+                for p in ports.input
             })
             # Inject configuration values
             fn_kwargs.update({
-                p.parameter or p.name: inputs.config.get(p.name)
-                for p in bindings.config
+                p.parameter or p.name: inputs.config.get(p.name) for p in ports.config
             })
 
             return cast(Any, fn)(*args, **fn_kwargs)

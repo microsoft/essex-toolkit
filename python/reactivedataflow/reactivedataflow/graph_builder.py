@@ -167,7 +167,7 @@ class GraphBuilder:
                 node_global_config = {
                     key: value
                     for key, value in config.items()
-                    if key in registration.bindings.config_names
+                    if key in registration.ports.config_names
                 }
                 node_config = {**node_global_config, **node_config}
 
@@ -246,7 +246,7 @@ class GraphBuilder:
 
             # Validate the inputs and config
             registration = registry.get(node["verb"])
-            bindings = registration.bindings
+            bindings = registration.ports
             execution_node = nodes[nid]
 
             if isinstance(execution_node, ExecutionNode):

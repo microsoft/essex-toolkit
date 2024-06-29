@@ -21,7 +21,7 @@ class Registration:
     fn: Callable
     """The verb function."""
 
-    bindings: Ports
+    ports: Ports
     """The ports of the verb function."""
 
     adapters: list[Decorator]

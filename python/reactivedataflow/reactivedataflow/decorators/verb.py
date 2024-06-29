@@ -55,7 +55,7 @@ def verb(
     def wrap_fn(verb: Callable[P, Any]) -> Callable[P, Any]:
         registration = Registration(
             fn=verb,
-            bindings=Ports(
+            ports=Ports(
                 ports or [],
                 include_default_output if include_default_output is not None else True,
             ),

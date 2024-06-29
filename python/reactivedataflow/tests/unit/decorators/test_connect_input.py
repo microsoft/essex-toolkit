@@ -14,7 +14,7 @@ from reactivedataflow import (
 
 def test_named_input_mapping():
     @connect_input(
-        bindings=Ports([
+        ports=Ports([
             Input(name="input_1", parameter="a"),
             Input(name="input_2", parameter="b"),
         ])
@@ -28,7 +28,7 @@ def test_named_input_mapping():
 
 def test_input_with_default_parameter_names():
     @connect_input(
-        bindings=Ports([
+        ports=Ports([
             Input(name="a"),
             Input(name="b"),
         ])
@@ -51,7 +51,7 @@ def test_input_dict_mapping():
 
 def test_config_parameters_mapping():
     @connect_input(
-        bindings=Ports([
+        ports=Ports([
             Config(name="in_1", parameter="a"),
             Config(name="in_2", parameter="b"),
         ])
@@ -64,7 +64,7 @@ def test_config_parameters_mapping():
 
 
 def test_array_parameter_mapping():
-    @connect_input(bindings=Ports([ArrayInput(parameter="values")]))
+    @connect_input(ports=Ports([ArrayInput(parameter="values")]))
     def stub(values: list[int]) -> int:
         return sum(values)
 
