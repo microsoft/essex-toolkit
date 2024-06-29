@@ -154,17 +154,24 @@ class GraphBuilder:
             nodes: dict[str, Node] = {}
             for nid in self._graph.nodes:
                 node = self._graph.nodes[nid]
-                node_config = node.get("config", {}) or {}
-
                 # Check the `input` flag in the nx graph to determine if this is an input node.
                 if node.get("input"):
                     nodes[nid] = InputNode(nid)
                     continue
 
+                registration = registry.get(node["verb"])
+                node_config = node.get("config", {}) or {}
+
                 # Set up an execution node
                 verb = registry.get_verb_function(node["verb"])
-                node_final_config = {**config, **node_config}
-                execution_node = ExecutionNode(nid, verb, node_final_config)
+                node_global_config = {
+                    key: value
+                    for key, value in config.items()
+                    if key in registration.bindings.config_names
+                }
+                node_config = {**node_global_config, **node_config}
+
+                execution_node = ExecutionNode(nid, verb, node_config)
                 nodes[nid] = execution_node
             return nodes
 

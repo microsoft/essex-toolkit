@@ -350,11 +350,18 @@ def test_strict_mode():
     def constant_strict(value: int) -> int:
         return value
 
+    # Global Config values aren't strictly checked
+    builder = GraphBuilder()
+    builder.add_node("c1", "constant_strict", config={"value": 1})
+    builder.build(config={"hey": "there"}, registry=registry)
+
+    # Pass in a bad config value to a node
     builder = GraphBuilder()
     builder.add_node("c1", "constant_strict", config={"value": 1, "UNKNOWN": 3})
     with pytest.raises(NodeConfigNotDefinedError):
         builder.build(registry=registry)
 
+    # Pass in a bad input port value
     builder = GraphBuilder()
     builder.add_node("c1", "constant_strict", config={"value": 1})
     builder.add_node("c2", "constant_strict", config={"value": 2})
@@ -366,6 +373,7 @@ def test_strict_mode():
     with pytest.raises(NodeInputNotDefinedError):
         builder.build(registry=registry)
 
+    # Wire in a bad output port
     builder = GraphBuilder()
     builder.add_node("c1", "constant_strict", config={"value": 1})
     builder.add_node("c2", "constant_strict", config={"value": 2})
