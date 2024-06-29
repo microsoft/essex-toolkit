@@ -6,6 +6,7 @@ import reactivex as rx
 
 from reactivedataflow import GraphBuilder, NamedInputs, Registry, verb
 from reactivedataflow.errors import (
+    GraphHasCyclesError,
     InputNotFoundError,
     NodeAlreadyDefinedError,
     NodeNotFoundError,
@@ -110,6 +111,20 @@ def test_missing_node_config_raises_error():
 
     graph = builder.build(registry=registry)
     assert graph.output_value("n") == 1
+
+
+def test_cyclic_graph_raises_error():
+    registry = Registry()
+    define_math_ops(registry)
+
+    builder = GraphBuilder()
+    builder.add_node("n1", "add")
+    builder.add_node("n2", "add")
+    builder.add_edge(from_node="n1", to_node="n2")
+    builder.add_edge(from_node="n2", to_node="n1")
+
+    with pytest.raises(GraphHasCyclesError):
+        builder.build(registry=registry)
 
 
 def test_double_add_node_raises_error():
