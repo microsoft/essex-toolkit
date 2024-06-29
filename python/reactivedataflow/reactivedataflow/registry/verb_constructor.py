@@ -1,7 +1,6 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """reactivedataflow Verb Registry."""
 
-from reactivedataflow.bindings import Config, Input
 from reactivedataflow.conditions import (
     array_input_values_are_defined,
     output_changed,
@@ -26,6 +25,7 @@ from reactivedataflow.nodes import (
     OutputMode,
     VerbFunction,
 )
+from reactivedataflow.ports import Config, Input
 
 from .registry import Registration
 
@@ -57,15 +57,14 @@ def verb_constructor(
         )
 
     if registration.input_mode == InputMode.PortMapped:
-        input_parameter_map = _input_parameter_map(registration.bindings.input)
-        config_parameter_map = _config_parameter_map(registration.bindings.config)
+        input_parameter_map = _input_parameter_map(registration.ports.input)
+        config_parameter_map = _config_parameter_map(registration.ports.config)
         array_inputs_parameter: str | None = (
-            registration.bindings.array_input
-            and registration.bindings.array_input.parameter
+            registration.ports.array_input and registration.ports.array_input.parameter
         )
         dict_inputs_parameter: str | None = (
-            registration.bindings.named_inputs
-            and registration.bindings.named_inputs.parameter
+            registration.ports.named_inputs
+            and registration.ports.named_inputs.parameter
         )
         is_input_connection_required = (
             len(input_parameter_map) > 0
@@ -74,7 +73,7 @@ def verb_constructor(
             or dict_inputs_parameter
         )
         if is_input_connection_required:
-            push(connect_input(bindings=registration.bindings))
+            push(connect_input(ports=registration.ports))
 
     if len(fire_conditions) > 0:
         push(firing_conditions_decorator(*fire_conditions))
@@ -89,19 +88,16 @@ def _infer_firing_conditions(
 ) -> list[FireCondition]:
     firing_conditions = []
     required_inputs: list[str] = [
-        p.name for p in registration.bindings.input if p.required
+        p.name for p in registration.ports.input if p.required
     ]
     required_config: list[str] = [
-        p.name for p in registration.bindings.config if p.required
+        p.name for p in registration.ports.config if p.required
     ]
 
-    if registration.bindings.array_input and registration.bindings.array_input.required:
+    if registration.ports.array_input and registration.ports.array_input.required:
         firing_conditions.append(array_input_values_are_defined())
-    if (
-        registration.bindings.named_inputs
-        and registration.bindings.named_inputs.required
-    ):
-        required_inputs.extend(registration.bindings.named_inputs.required)
+    if registration.ports.named_inputs and registration.ports.named_inputs.required:
+        required_inputs.extend(registration.ports.named_inputs.required)
 
     if len(required_inputs) > 0:
         firing_conditions.append(require_inputs(*required_inputs))
@@ -117,9 +113,7 @@ def _infer_emit_conditions(
     result: list[EmitCondition] = []
 
     # Create a composite emit condition. Any output that emits a changed value will allow an emit.
-    ports = [
-        p for p in registration.bindings.outputs if p.emits_on == EmitMode.OnChange
-    ]
+    ports = [p for p in registration.ports.outputs if p.emits_on == EmitMode.OnChange]
     if len(ports) > 0:
         change_checks = [output_changed(p.name) for p in ports]
 

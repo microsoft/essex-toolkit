@@ -82,20 +82,20 @@ class Config(BaseModel, extra="allow"):
     )
 
 
-Binding = Input | ArrayInput | NamedInputs | Config | Output
+PortBinding = Input | ArrayInput | NamedInputs | Config | Output
 
 
-class Bindings:
-    """Node Binding Manager class.
+class Ports:
+    """Node Ports Manager class.
 
     Node bindings are used to map processing-graph inputs, outputs, and configuration values into the appropriate
     function parameters. This class is used to manage the bindings for a node.
     """
 
-    _bindings: list[Binding]
+    _bindings: list[PortBinding]
     _has_default_output: bool
 
-    def __init__(self, bindings: list[Binding], has_default_output: bool = False):
+    def __init__(self, bindings: list[PortBinding], has_default_output: bool = False):
         """Initialize the Bindings object.
 
         Args:
@@ -117,7 +117,7 @@ class Bindings:
             raise PortNamesMustBeUniqueError
 
     @property
-    def bindings(self) -> list[Binding]:
+    def bindings(self) -> list[PortBinding]:
         """Return the bindings."""
         return self._bindings
 

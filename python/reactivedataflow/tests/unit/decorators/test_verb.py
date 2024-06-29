@@ -71,7 +71,7 @@ def test_verb_with_custom_decorators():
     @verb(
         name="test_fn",
         registry=registry,
-        bindings=[
+        ports=[
             Input(name="a", required=True),
             Input(name="b", required=True),
         ],
@@ -97,7 +97,7 @@ def test_verb_with_fire_conditions():
     @verb(
         name="test_fn",
         registry=registry,
-        bindings=[
+        ports=[
             Input(name="a", required=True),
             Input(name="b", required=True),
         ],
@@ -125,7 +125,7 @@ def test_verb_with_emit_conditions():
 
     @verb(
         name="test_fn",
-        bindings=[
+        ports=[
             Input(name="a", required=True),
             Input(name="b", required=True),
         ],
