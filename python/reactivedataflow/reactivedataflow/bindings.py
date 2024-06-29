@@ -1,6 +1,7 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """reactivedataflow PortMapper class."""
 
+from functools import cached_property
 from typing import Any
 
 from pydantic import BaseModel, Field
@@ -120,42 +121,42 @@ class Bindings:
         """Return the bindings."""
         return self._bindings
 
-    @property
+    @cached_property
     def config(self) -> list[Config]:
         """Return the configuration bindings."""
         return [b for b in self.bindings if isinstance(b, Config)]
 
-    @property
+    @cached_property
     def input(self) -> list[Input]:
         """Return the input bindings."""
         return [b for b in self.bindings if isinstance(b, Input)]
 
-    @property
+    @cached_property
     def outputs(self) -> list[Output]:
         """Return the output bindings."""
         return [b for b in self._bindings if isinstance(b, Output)]
 
-    @property
+    @cached_property
     def array_input(self) -> ArrayInput | None:
         """Return the array input binding."""
         return next((p for p in self._bindings if isinstance(p, ArrayInput)), None)
 
-    @property
+    @cached_property
     def named_inputs(self) -> NamedInputs | None:
         """Return the named inputs binding."""
         return next((p for p in self._bindings if isinstance(p, NamedInputs)), None)
 
-    @property
+    @cached_property
     def input_names(self) -> set[str]:
         """Return the names of the inputs."""
         return {p.name for p in self.input}
 
-    @property
+    @cached_property
     def config_names(self) -> set[str]:
         """Return the names of the config."""
         return {p.name for p in self.config}
 
-    @property
+    @cached_property
     def output_names(self) -> set[str]:
         """Return the names of the outputs."""
         result = {p.name for p in self.outputs}
@@ -163,7 +164,7 @@ class Bindings:
             result.add(default_output)
         return result
 
-    @property
+    @cached_property
     def required_input_names(self) -> set[str]:
         """Return the required named inputs."""
         result = {p.name for p in self.input if p.required}
@@ -171,7 +172,7 @@ class Bindings:
             result.update(self.named_inputs.required)
         return result
 
-    @property
+    @cached_property
     def required_config_names(self) -> set[str]:
         """Return the required named inputs."""
         return {p.name for p in self.config if p.required}
