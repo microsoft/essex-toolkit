@@ -2,6 +2,30 @@
 """reactivedataflow Error Types."""
 
 
+class NodeInputNotDefinedError(ValueError):
+    """An exception for input not defined."""
+
+    def __init__(self, input_name: str):
+        """Initialize the NodeInputNotDefinedError."""
+        super().__init__(f"Input '{input_name}' not defined in verb definition.")
+
+
+class NodeConfigNotDefinedError(ValueError):
+    """An exception for config not defined."""
+
+    def __init__(self, config_key: str):
+        """Initialize the NodeConfigNotDefinedError."""
+        super().__init__(f"Config '{config_key}' not defined in verb definition.")
+
+
+class NodeOutputNotDefinedError(ValueError):
+    """An exception for output not defined."""
+
+    def __init__(self, output_name: str):
+        """Initialize the NodeOutputNotDefinedError."""
+        super().__init__(f"Output '{output_name}' not defined in verb definition.")
+
+
 class GraphHasCyclesError(ValueError):
     """An exception for a cycle detected in the graph."""
 

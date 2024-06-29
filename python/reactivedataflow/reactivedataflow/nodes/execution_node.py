@@ -93,14 +93,22 @@ class ExecutionNode(Node):
                 subscription.dispose()
             self._subscriptions = []
 
-    def has_input(self, name: str) -> bool:
-        """Check if the node has a given input."""
-        return name in self._named_inputs
+    @property
+    def input_names(self) -> set[str]:
+        """Get the names of the inputs."""
+        return set(self._named_inputs.keys())
 
-    def has_config(self, name: str) -> bool:
-        """Check if the node has a given config."""
-        return name in self._config
+    @property
+    def config_names(self) -> set[str]:
+        """Get the names of the config."""
+        return set(self._config.keys())
 
+    @property
+    def output_names(self) -> set[str]:
+        """Get the names of the outputs."""
+        return set(self._outputs.keys())
+
+    @property
     def num_array_inputs(self) -> int:
         """Get the number of array inputs."""
         return len(self._array_inputs)
