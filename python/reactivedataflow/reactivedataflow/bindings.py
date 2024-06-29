@@ -9,6 +9,8 @@ from reactivedataflow.errors import PortNamesMustBeUniqueError
 from reactivedataflow.nodes import EmitMode
 from reactivedataflow.utils.equality import IsEqualCheck
 
+from .constants import default_output
+
 
 class ArrayInput(BaseModel, extra="allow"):
     """Specification for an array-based input binding."""
@@ -90,14 +92,17 @@ class Bindings:
     """
 
     _bindings: list[Binding]
+    _has_default_output: bool
 
-    def __init__(self, bindings: list[Binding]):
+    def __init__(self, bindings: list[Binding], has_default_output: bool = False):
         """Initialize the Bindings object.
 
         Args:
             bindings: The list of bindings for the node.
+            has_default_output: Whether to include a default output port.
         """
         self._bindings = bindings
+        self._has_default_output = has_default_output
         self._validate()
 
     def _validate(self):
@@ -139,6 +144,24 @@ class Bindings:
     def named_inputs(self) -> NamedInputs | None:
         """Return the named inputs binding."""
         return next((p for p in self._bindings if isinstance(p, NamedInputs)), None)
+
+    @property
+    def input_names(self) -> set[str]:
+        """Return the names of the inputs."""
+        return {p.name for p in self.input}
+
+    @property
+    def config_names(self) -> set[str]:
+        """Return the names of the config."""
+        return {p.name for p in self.config}
+
+    @property
+    def output_names(self) -> set[str]:
+        """Return the names of the outputs."""
+        result = {p.name for p in self.outputs}
+        if self._has_default_output:
+            result.add(default_output)
+        return result
 
     @property
     def required_input_names(self) -> set[str]:

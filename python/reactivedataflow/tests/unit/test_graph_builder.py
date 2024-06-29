@@ -4,12 +4,15 @@
 import pytest
 import reactivex as rx
 
-from reactivedataflow import GraphBuilder, NamedInputs, Registry, verb
+from reactivedataflow import Config, GraphBuilder, Input, NamedInputs, Registry, verb
 from reactivedataflow.errors import (
     GraphHasCyclesError,
     InputNotFoundError,
     NodeAlreadyDefinedError,
+    NodeConfigNotDefinedError,
+    NodeInputNotDefinedError,
     NodeNotFoundError,
+    NodeOutputNotDefinedError,
     OutputAlreadyDefinedError,
     OutputNotFoundError,
     RequiredNodeArrayInputNotFoundError,
@@ -320,3 +323,54 @@ def test_graph_builder_from_schema():
     assert graph.output_value("result") == 32
     input_stream.on_next(2)
     assert graph.output_value("result") == 40
+
+
+def test_strict_mode():
+    registry = Registry()
+    define_math_ops(registry)
+
+    @verb(
+        name="add_strict",
+        registry=registry,
+        strict=True,
+        bindings=[
+            Input(name="a", required=True),
+            Input(name="b", required=True),
+        ],
+    )
+    def add_strict(a: int, b: int) -> int:
+        return a + b
+
+    @verb(
+        name="constant_strict",
+        registry=registry,
+        strict=True,
+        bindings=[Config(name="value", required=True)],
+    )
+    def constant_strict(value: int) -> int:
+        return value
+
+    builder = GraphBuilder()
+    builder.add_node("c1", "constant_strict", config={"value": 1, "UNKNOWN": 3})
+    with pytest.raises(NodeConfigNotDefinedError):
+        builder.build(registry=registry)
+
+    builder = GraphBuilder()
+    builder.add_node("c1", "constant_strict", config={"value": 1})
+    builder.add_node("c2", "constant_strict", config={"value": 2})
+    builder.add_node("c3", "constant_strict", config={"value": 3})
+    builder.add_node("n1", "add_strict")
+    builder.add_edge("c1", "n1", to_port="a")
+    builder.add_edge("c2", "n1", to_port="b")
+    builder.add_edge("c3", "n1", to_port="c")
+    with pytest.raises(NodeInputNotDefinedError):
+        builder.build(registry=registry)
+
+    builder = GraphBuilder()
+    builder.add_node("c1", "constant_strict", config={"value": 1})
+    builder.add_node("c2", "constant_strict", config={"value": 2})
+    builder.add_node("n1", "add_strict")
+    builder.add_edge("c1", "n1", to_port="a", from_port="UNKNOWN")
+    builder.add_edge("c2", "n1", to_port="b")
+    with pytest.raises(NodeOutputNotDefinedError):
+        builder.build(registry=registry)
