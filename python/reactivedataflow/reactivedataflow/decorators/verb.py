@@ -30,6 +30,7 @@ def verb(
     output_names: list[str] | None = None,
     is_async: bool | None = None,
     override: bool | None = None,
+    include_default_output: bool | None = None,
     strict: bool | None = None,
 ) -> Callable[[Callable[P, Any]], Callable[P, Any]]:
     """Register an verb function with the given name.
@@ -47,14 +48,17 @@ def verb(
         is_async (bool | None): Whether the verb is an async function.
         override (bool | None): Whether to override the verb if it already exists.
         strict (bool | None): Whether to enforce strict port names. If True, then errors wil be raised at graph-building time if any inputs to this node don't align with the defined input bindings, or any mapped outputs don't align to the defined outputs list.
-
+        include_default_output (bool | None): Whether to include a default output port, default=True.
     """
     registry = registry or Registry.get_instance()
 
     def wrap_fn(verb: Callable[P, Any]) -> Callable[P, Any]:
         registration = Registration(
             fn=verb,
-            bindings=Bindings(bindings or []),
+            bindings=Bindings(
+                bindings or [],
+                include_default_output if include_default_output is not None else True,
+            ),
             fire_conditions=fire_conditions or [],
             emit_conditions=emit_conditions or [],
             adapters=adapters or [],

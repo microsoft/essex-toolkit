@@ -103,7 +103,9 @@ class GraphBuilder:
             raise NodeNotFoundError(from_node)
         if not self._graph.has_node(to_node):
             raise NodeNotFoundError(to_node)
+
         self._graph.add_edge(from_node, to_node, from_port=from_port, to_port=to_port)
+
         return self
 
     def load(self, model: Graph) -> "GraphBuilder":
@@ -222,7 +224,6 @@ class GraphBuilder:
         nodes = build_nodes()
         validate_inputs()
         named_inputs, array_inputs = build_node_inputs(nodes)
-
         bind_inputs(nodes, named_inputs, array_inputs)
 
         # Validate the graph
