@@ -4,7 +4,14 @@
 import pytest
 import reactivex as rx
 
-from reactivedataflow import Config, GraphBuilder, Input, NamedInputs, Registry, verb
+from reactivedataflow import (
+    Config,
+    GraphBuilder,
+    Input,
+    NamedInputs,
+    Registry,
+    verb,
+)
 from reactivedataflow.errors import (
     GraphHasCyclesError,
     InputNotFoundError,
@@ -19,7 +26,7 @@ from reactivedataflow.errors import (
     RequiredNodeConfigNotFoundError,
     RequiredNodeInputNotFoundError,
 )
-from reactivedataflow.model import Edge, Graph, InputNode, Node, Output
+from reactivedataflow.model import Edge, Graph, InputNode, Node, Output, ValRef
 
 from .define_math_ops import define_math_ops
 
@@ -307,7 +314,7 @@ def test_graph_builder_from_schema():
             ],
             nodes=[
                 Node(id="c3", verb="constant", config={"value": 3}),
-                Node(id="c5", verb="constant", config={"value": 5}),
+                Node(id="c5", verb="constant", config={"value": ValRef(value=5)}),
                 Node(id="first_add", verb="add"),
                 Node(id="second_add", verb="add"),
                 Node(id="product", verb="multiply"),
@@ -338,6 +345,20 @@ def test_graph_builder_from_schema():
     assert graph.output_value("result") == 32
     input_stream.on_next(2)
     assert graph.output_value("result") == 40
+
+
+def test_config_reference():
+    registry = Registry()
+    define_math_ops(registry)
+
+    graph = (
+        GraphBuilder()
+        .add_node("c1", "constant", config={"value": ValRef(reference="x")})
+        .add_output("c1")
+        .build(registry=registry, config={"x": 1})
+    )
+
+    assert graph.output_value("c1") == 1
 
 
 def test_strict_mode():
@@ -372,7 +393,11 @@ def test_strict_mode():
 
     # Pass in a bad config value to a node
     builder = GraphBuilder()
-    builder.add_node("c1", "constant_strict", config={"value": 1, "UNKNOWN": 3})
+    builder.add_node(
+        "c1",
+        "constant_strict",
+        config={"value": 1, "UNKNOWN": 3},
+    )
     with pytest.raises(NodeConfigNotDefinedError):
         builder.build(registry=registry)
 
