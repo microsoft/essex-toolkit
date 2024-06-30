@@ -21,7 +21,7 @@ from .errors import (
     RequiredNodeInputNotFoundError,
 )
 from .execution_graph import ExecutionGraph
-from .model import Graph, Output
+from .model import Graph, Output, ValRef
 from .nodes import ExecutionNode, InputNode, Node
 from .registry import Registry
 
@@ -166,6 +166,14 @@ class GraphBuilder:
 
                 registration = registry.get(node["verb"])
                 node_config = node.get("config", {}) or {}
+                for key, value in node_config.items():
+                    if isinstance(value, ValRef):
+                        if value.reference:
+                            node_config[key] = config[value.reference]
+                        else:
+                            node_config[key] = value.value
+                    else:
+                        node_config[key] = value
 
                 # Set up an execution node
                 verb = registry.get_verb_function(node["verb"])

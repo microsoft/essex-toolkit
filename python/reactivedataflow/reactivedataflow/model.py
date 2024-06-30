@@ -14,12 +14,22 @@ class InputNode(BaseModel):
     id: str = Field(..., description="Node identifier.")
 
 
+class ValRef(BaseModel):
+    """A model containing either a value or a reference to a global configuration."""
+
+    value: Any | None = Field(default=None, description="The value.")
+    reference: str | None = Field(
+        default=None, description="The name of the global configuration to reference."
+    )
+    type: str | None = Field(default=None, description="The type of the value.")
+
+
 class Node(BaseModel):
     """Processing Node Model."""
 
     id: str = Field(..., description="Node identifier.")
     verb: str = Field(..., description="The verb name to use.")
-    config: dict[str, Any] = Field(
+    config: dict[str, str | int | float | bool | ValRef] = Field(
         default_factory=dict, description="Configuration parameters."
     )
 
