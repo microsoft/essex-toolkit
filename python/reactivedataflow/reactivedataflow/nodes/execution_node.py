@@ -2,15 +2,13 @@
 """The reactivedataflow ExecutionNode class."""
 
 import asyncio
-from collections.abc import Awaitable
-from inspect import iscoroutine
-from typing import Any, cast
+from typing import Any
 
 import reactivex as rx
 
 from reactivedataflow.constants import default_output
 
-from .io import VerbInput, VerbOutput
+from .io import VerbInput
 from .node import Node
 from .types import VerbFunction
 
@@ -168,9 +166,7 @@ class ExecutionNode(Node):
             previous_output={name: obs.value for name, obs in self._outputs.items()},
         )
 
-        result = self._fn(inputs)
-        if iscoroutine(result):
-            result = await cast(Awaitable[VerbOutput], result)
+        result = await self._fn(inputs)
         if not result.no_output:
             for name, value in result.outputs.items():
                 self._output(name).on_next(value)

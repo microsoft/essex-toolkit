@@ -53,8 +53,8 @@ def test_register_override():
         e2 = test_fn2
 
     double_register()
-    found = registry.get_verb_function("test_fn")
-    assert found == e2
+    found = registry.get("test_fn")
+    assert found.fn == e2
 
 
 def test_static_registry_instance():

@@ -32,5 +32,4 @@ class Registration:
     input_mode: InputMode
     output_mode: OutputMode
     output_names: list[str] | None
-    is_async: bool
     strict: bool

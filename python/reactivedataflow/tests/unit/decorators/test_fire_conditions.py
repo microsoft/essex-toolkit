@@ -1,6 +1,8 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """reactivedataflow Emit Conditions Tests."""
 
+import asyncio
+
 from reactivedataflow import VerbInput, VerbOutput, fire_conditions
 
 
@@ -12,21 +14,23 @@ def returns_false(inputs: VerbInput) -> bool:
     return False
 
 
-def test_emits_output_when_conditions_pass() -> None:
+async def test_emits_output_when_conditions_pass() -> None:
     @fire_conditions(returns_true)
-    def test_fn2(inputs):
+    async def test_fn2(inputs):
+        await asyncio.sleep(0.001)
         return VerbOutput(outputs={"result": "result"})
 
-    result = test_fn2(VerbInput())
+    result = await test_fn2(VerbInput())
     assert result.no_output is False
     assert result.outputs["result"] == "result"
 
 
-def test_emits_no_output_if_conditions_fail() -> None:
+async def test_emits_no_output_if_conditions_fail() -> None:
     @fire_conditions(returns_true, returns_false)
-    def test_fn(inputs: VerbInput) -> VerbOutput:
+    async def test_fn(inputs: VerbInput) -> VerbOutput:
+        await asyncio.sleep(0.001)
         return VerbOutput(outputs={"result": "result"})
 
-    result = test_fn(VerbInput())
+    result = await test_fn(VerbInput())
     assert result.no_output is True
     assert result.outputs == {}
