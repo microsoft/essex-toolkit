@@ -45,4 +45,4 @@ jobs:
       - name: ${{ matrix.project }} - Test
         working-directory: ./python/${{ matrix.project }}
         run: |
-          poetry run poe test
+          poetry run poe test_coverage
