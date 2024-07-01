@@ -28,7 +28,6 @@ def verb(
     input_mode: InputMode | None = None,
     output_mode: OutputMode | None = None,
     output_names: list[str] | None = None,
-    is_async: bool | None = None,
     override: bool | None = None,
     include_default_output: bool | None = None,
     strict: bool | None = None,
@@ -45,7 +44,6 @@ def verb(
         input_mode (InputMode | None): The input mode of the verb. If raw, then the function is expected to adhere to the VerbFunction interface.
         output_mode (OutputMode | None): The output mode of the verb, either a single-value or tuple.
         output_names (list[str] | None): The names of the outputs in tuple output mode.
-        is_async (bool | None): Whether the verb is an async function.
         override (bool | None): Whether to override the verb if it already exists.
         strict (bool | None): Whether to enforce strict port names. If True, then errors wil be raised at graph-building time if any inputs to this node don't align with the defined input bindings, or any mapped outputs don't align to the defined outputs list.
         include_default_output (bool | None): Whether to include a default output port, default=True.
@@ -62,7 +60,6 @@ def verb(
             fire_conditions=fire_conditions or [],
             emit_conditions=emit_conditions or [],
             adapters=adapters or [],
-            is_async=is_async or False,
             strict=strict or False,
             input_mode=input_mode or InputMode.PortMapped,
             output_mode=output_mode or OutputMode.Value,

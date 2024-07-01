@@ -17,8 +17,8 @@ def emit_conditions(
     """Conditionally emit to output ports."""
 
     def wrap_fn(fn: VerbFunction) -> VerbFunction:
-        def wrapped_fn(inputs: VerbInput) -> VerbOutput:
-            result = fn(inputs)
+        async def wrapped_fn(inputs: VerbInput) -> VerbOutput:
+            result = await fn(inputs)
             are_conditions_met = all(
                 condition(inputs, result) for condition in conditions
             )

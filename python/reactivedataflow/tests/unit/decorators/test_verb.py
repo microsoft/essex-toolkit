@@ -2,7 +2,6 @@
 """reactivedataflow Verb Tests."""
 
 import asyncio
-from typing import cast
 
 import pytest
 
@@ -16,7 +15,6 @@ from reactivedataflow import (
 )
 from reactivedataflow.constants import default_output
 from reactivedataflow.errors import VerbNotFoundError
-from reactivedataflow.types import AsyncVerbFunction
 
 
 def test_verb_registration():
@@ -47,13 +45,13 @@ def test_raw_verb():
 async def test_async_verb():
     registry = Registry()
 
-    @verb(name="test_fn", registry=registry, output_mode=OutputMode.Raw, is_async=True)
+    @verb(name="test_fn", registry=registry, output_mode=OutputMode.Raw)
     async def test_fn(inputs: VerbInput):
         result = inputs.named_inputs.get("a", 100) + inputs.named_inputs.get("b", 100)
         await asyncio.sleep(0.001)
         return VerbOutput(outputs={default_output: result})
 
-    decorated_fn = cast(AsyncVerbFunction, registry.get_verb_function("test_fn"))
+    decorated_fn = registry.get_verb_function("test_fn")
 
     result = await decorated_fn(VerbInput(named_inputs={}))
     assert result.outputs[default_output] == 200
@@ -61,7 +59,7 @@ async def test_async_verb():
     assert result.outputs[default_output] == 3
 
 
-def test_verb_with_custom_decorators():
+async def test_verb_with_custom_decorators():
     registry = Registry()
 
     def custom_decorator(fn):
@@ -85,11 +83,11 @@ def test_verb_with_custom_decorators():
     decorated_fn = registry.get_verb_function("test_fn")
 
     assert test_fn(1, 2) == 3
-    decorated_output = decorated_fn(VerbInput(named_inputs={"a": 1, "b": 2}))
+    decorated_output = await decorated_fn(VerbInput(named_inputs={"a": 1, "b": 2}))
     assert decorated_output.outputs[default_output] == 4
 
 
-def test_verb_with_fire_conditions():
+async def test_verb_with_fire_conditions():
     registry = Registry()
     allow_fire = False
 
@@ -110,15 +108,15 @@ def test_verb_with_fire_conditions():
 
     wrapped_fn = registry.get_verb_function("test_fn")
 
-    result = wrapped_fn(VerbInput(named_inputs={"a": 1, "b": 2}))
+    result = await wrapped_fn(VerbInput(named_inputs={"a": 1, "b": 2}))
     assert result.no_output
 
     allow_fire = True
-    result = wrapped_fn(VerbInput(named_inputs={"a": 1, "b": 2}))
+    result = await wrapped_fn(VerbInput(named_inputs={"a": 1, "b": 2}))
     assert result.outputs[default_output] == 3
 
 
-def test_verb_with_emit_conditions():
+async def test_verb_with_emit_conditions():
     registry = Registry()
     allow_fire = False
 
@@ -139,9 +137,9 @@ def test_verb_with_emit_conditions():
 
     wrapped_fn = registry.get_verb_function("test_fn")
 
-    result = wrapped_fn(VerbInput(named_inputs={"a": 1, "b": 2}))
+    result = await wrapped_fn(VerbInput(named_inputs={"a": 1, "b": 2}))
     assert result.no_output
 
     allow_fire = True
-    result = wrapped_fn(VerbInput(named_inputs={"a": 1, "b": 2}))
+    result = await wrapped_fn(VerbInput(named_inputs={"a": 1, "b": 2}))
     assert result.outputs[default_output] == 3

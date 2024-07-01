@@ -11,10 +11,9 @@ from .io import (
     VerbOutput,
 )
 from .node import Node
-from .types import AsyncVerbFunction, EmitCondition, FireCondition, VerbFunction
+from .types import EmitCondition, FireCondition, VerbFunction
 
 __all__ = [
-    "AsyncVerbFunction",
     "EmitCondition",
     "EmitMode",
     "ExecutionNode",

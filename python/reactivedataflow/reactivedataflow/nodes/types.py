@@ -5,7 +5,6 @@ from collections.abc import Awaitable, Callable
 
 from .io import VerbInput, VerbOutput
 
-VerbFunction = Callable[[VerbInput], VerbOutput]
-AsyncVerbFunction = Callable[[VerbInput], Awaitable[VerbOutput]]
+VerbFunction = Callable[[VerbInput], Awaitable[VerbOutput]]
 FireCondition = Callable[[VerbInput], bool]
 EmitCondition = Callable[[VerbInput, VerbOutput], bool]

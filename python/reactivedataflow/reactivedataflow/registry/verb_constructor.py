@@ -46,8 +46,7 @@ def verb_constructor(
     def push(x):
         decorators.insert(0, x)
 
-    if registration.is_async:
-        push(handle_async_output())
+    push(handle_async_output())
 
     if registration.output_mode != OutputMode.Raw:
         push(
