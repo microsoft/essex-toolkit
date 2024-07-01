@@ -16,8 +16,12 @@ class Node(Protocol):
         """Get the ID of the node."""
         ...
 
-    def dispose(self) -> None:
+    def detach(self) -> None:
         """Detach the node from all inputs."""
+        ...
+
+    async def drain(self) -> None:
+        """Wait for the node to finish processing."""
         ...
 
     def output(self, name: str = default_output) -> rx.Observable[Any]:

@@ -1,15 +1,12 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """Output decorator tests."""
 
-import asyncio
-
 import pytest
 
 from reactivedataflow import (
     OutputMode,
     VerbOutput,
     connect_output,
-    handle_async_output,
 )
 from reactivedataflow.constants import default_output
 from reactivedataflow.errors import (
@@ -74,14 +71,3 @@ def test_raw_mode_output():
     result = stub()
     assert result.outputs == {default_output: 123}
     assert not result.no_output
-
-
-def test_async_output():
-    @connect_output(mode=OutputMode.Value)
-    @handle_async_output()
-    async def stub():
-        await asyncio.sleep(0.001)
-        return 1
-
-    result = stub()
-    assert result.outputs == {default_output: 1}

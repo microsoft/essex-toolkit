@@ -1,6 +1,8 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """reactivedataflow Graph Builder Tests."""
 
+import asyncio
+
 import pytest
 import reactivex as rx
 
@@ -39,7 +41,7 @@ def test_missing_input_raises_error():
         builder.build()
 
 
-def test_missing_node_input_raises_error():
+async def test_missing_node_input_raises_error():
     registry = Registry()
     define_math_ops(registry)
 
@@ -60,10 +62,12 @@ def test_missing_node_input_raises_error():
     builder.add_output("n")
 
     graph = builder.build(registry=registry)
+    await graph.drain()
     assert graph.output_value("n") == 2
+    await graph.dispose()
 
 
-def test_missing_array_input_raises_error():
+async def test_missing_array_input_raises_error():
     registry = Registry()
     define_math_ops(registry)
 
@@ -77,10 +81,12 @@ def test_missing_array_input_raises_error():
 
     builder.add_edge(from_node="const1", to_node="n")
     graph = builder.build(registry=registry)
+    await graph.drain()
     assert graph.output_value("n") == 1
+    await graph.dispose()
 
 
-def test_missing_dict_input_raises_error():
+async def test_missing_dict_input_raises_error():
     registry = Registry()
     define_math_ops(registry)
 
@@ -102,10 +108,12 @@ def test_missing_dict_input_raises_error():
 
     builder.add_edge(from_node="const1", to_node="n", to_port="a")
     graph = builder.build(registry=registry)
+    await graph.drain()
     assert graph.output_value("n") == 1
+    await graph.dispose()
 
 
-def test_missing_node_config_raises_error():
+async def test_missing_node_config_raises_error():
     registry = Registry()
     define_math_ops(registry)
 
@@ -120,13 +128,17 @@ def test_missing_node_config_raises_error():
     builder.add_output("n")
 
     graph = builder.build(registry=registry)
+    await graph.drain()
     assert graph.output_value("n") == 1
+    await graph.dispose()
 
 
-def test_cyclic_graph_raises_error():
+async def test_cyclic_graph_raises_error():
+    # Graph internals need an event loop, so wait on something
+    await asyncio.sleep(0.01)
+
     registry = Registry()
     define_math_ops(registry)
-
     builder = GraphBuilder()
     builder.add_node("n1", "add")
     builder.add_node("n2", "add")
@@ -137,7 +149,7 @@ def test_cyclic_graph_raises_error():
         builder.build(registry=registry)
 
 
-def test_double_add_node_raises_error():
+async def test_double_add_node_raises_error():
     registry = Registry()
     define_math_ops(registry)
 
@@ -148,10 +160,12 @@ def test_double_add_node_raises_error():
     builder.add_output("c1")
     graph = builder.build(registry=registry)
 
+    await graph.drain()
     assert graph.output_value("c1") == 2
+    await graph.dispose()
 
 
-def test_input_bind():
+async def test_input_bind():
     registry = Registry()
 
     graph = (
@@ -160,7 +174,9 @@ def test_input_bind():
         .add_output("i1")
         .build(registry=registry, inputs={"i1": rx.just(1)})
     )
+    await graph.drain()
     assert graph.output_value("i1") == 1
+    await graph.dispose()
 
 
 def test_throws_on_redundant_output():
@@ -178,7 +194,7 @@ def test_throws_on_add_edge_with_unknown_nodes():
         builder.add_edge(from_node="n2", to_node="n1")
 
 
-def test_simple_graph():
+async def test_simple_graph():
     registry = Registry()
     define_math_ops(registry)
 
@@ -188,10 +204,12 @@ def test_simple_graph():
         .add_output("c1")
         .build(registry=registry)
     )
+    await graph.drain()
     assert graph.output_value("c1") == 1
+    await graph.dispose()
 
 
-def test_math_op_graph():
+async def test_math_op_graph():
     registry = Registry()
     define_math_ops(registry)
 
@@ -208,6 +226,7 @@ def test_math_op_graph():
         .build(registry=registry)
     )
 
+    await graph.drain()
     assert graph.output_value("constant1") == 1
     assert graph.output_value("constant3") == 3
     assert graph.output_value("add1") == 4
@@ -221,9 +240,10 @@ def test_math_op_graph():
 
     graph.output("add1").subscribe(set_value)
     assert value == 4
+    await graph.dispose()
 
 
-def test_input_node():
+async def test_input_node():
     registry = Registry()
     builder = GraphBuilder()
     builder.add_input("i").add_output("i").add_output("fail_1", "i", "x")
@@ -244,17 +264,18 @@ def test_input_node():
         value = v
 
     outsub.subscribe(set_value)
-
+    await graph.drain()
     assert graph.output_value("i") == 1
     assert value == 1
 
     subject.on_next(2)
+    await graph.drain()
     assert graph.output_value("i") == 2
     assert value == 2
-    graph.dispose()
+    await graph.dispose()
 
 
-def test_multiple_edges_on_different_ports():
+async def test_multiple_edges_on_different_ports():
     registry = Registry()
     define_math_ops(registry)
     graph = (
@@ -266,10 +287,12 @@ def test_multiple_edges_on_different_ports():
         .add_output("result", "m1")
         .build(registry=registry)
     )
+    await graph.drain()
     assert graph.output_value("result") == 4
+    await graph.dispose()
 
 
-def test_graph_builder():
+async def test_graph_builder():
     registry = Registry()
     define_math_ops(registry)
 
@@ -298,11 +321,12 @@ def test_graph_builder():
         .add_output("result", "n3")
         .build(registry=registry)
     )
+    await graph.drain()
     assert graph.output_value("result") == 32
-    graph.dispose()
+    await graph.dispose()
 
 
-def test_graph_builder_from_schema():
+async def test_graph_builder_from_schema():
     registry = Registry()
     define_math_ops(registry)
 
@@ -342,12 +366,16 @@ def test_graph_builder_from_schema():
         graph.output_value("fail_1")
     with pytest.raises(OutputNotFoundError):
         graph.output("fail_1")
+
+    await graph.drain()
     assert graph.output_value("result") == 32
     input_stream.on_next(2)
+    await graph.drain()
     assert graph.output_value("result") == 40
+    await graph.dispose()
 
 
-def test_config_reference():
+async def test_config_reference():
     registry = Registry()
     define_math_ops(registry)
 
@@ -358,10 +386,12 @@ def test_config_reference():
         .build(registry=registry, config={"x": 1})
     )
 
+    await graph.drain()
     assert graph.output_value("c1") == 1
+    await graph.dispose()
 
 
-def test_strict_mode():
+async def test_strict_mode():
     registry = Registry()
     define_math_ops(registry)
 
@@ -389,7 +419,8 @@ def test_strict_mode():
     # Global Config values aren't strictly checked
     builder = GraphBuilder()
     builder.add_node("c1", "constant_strict", config={"value": 1})
-    builder.build(config={"hey": "there"}, registry=registry)
+    graph = builder.build(config={"hey": "there"}, registry=registry)
+    await graph.dispose()
 
     # Pass in a bad config value to a node
     builder = GraphBuilder()

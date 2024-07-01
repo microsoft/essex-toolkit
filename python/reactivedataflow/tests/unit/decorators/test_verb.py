@@ -2,6 +2,7 @@
 """reactivedataflow Verb Tests."""
 
 import asyncio
+from typing import cast
 
 import pytest
 
@@ -15,6 +16,7 @@ from reactivedataflow import (
 )
 from reactivedataflow.constants import default_output
 from reactivedataflow.errors import VerbNotFoundError
+from reactivedataflow.types import AsyncVerbFunction
 
 
 def test_verb_registration():
@@ -42,7 +44,7 @@ def test_raw_verb():
     assert result.outputs[default_output] == 3
 
 
-def test_async_verb():
+async def test_async_verb():
     registry = Registry()
 
     @verb(name="test_fn", registry=registry, output_mode=OutputMode.Raw, is_async=True)
@@ -51,11 +53,11 @@ def test_async_verb():
         await asyncio.sleep(0.001)
         return VerbOutput(outputs={default_output: result})
 
-    decorated_fn = registry.get_verb_function("test_fn")
+    decorated_fn = cast(AsyncVerbFunction, registry.get_verb_function("test_fn"))
 
-    result = decorated_fn(VerbInput(named_inputs={}))
+    result = await decorated_fn(VerbInput(named_inputs={}))
     assert result.outputs[default_output] == 200
-    result = decorated_fn(VerbInput(named_inputs={"a": 1, "b": 2}))
+    result = await decorated_fn(VerbInput(named_inputs={"a": 1, "b": 2}))
     assert result.outputs[default_output] == 3
 
 

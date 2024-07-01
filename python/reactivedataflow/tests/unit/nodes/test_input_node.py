@@ -9,7 +9,7 @@ from reactivedataflow.nodes import InputNode
 def test_input_node_has_id():
     node = InputNode("a")
     assert node.id == "a"
-    node.dispose()
+    node.detach()
 
 
 def test_input_node_attach():
@@ -23,4 +23,4 @@ def test_input_node_attach():
 
     first_attach.on_next(3)
     assert node.output_value() == 2
-    node.dispose()
+    node.detach()
