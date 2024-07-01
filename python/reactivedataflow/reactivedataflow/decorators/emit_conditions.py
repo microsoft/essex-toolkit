@@ -2,7 +2,7 @@
 """reactivedataflow Emit Conditions Decorator."""
 
 from collections.abc import Callable
-
+import logging
 from reactivedataflow.nodes import (
     EmitCondition,
     VerbFunction,
@@ -10,6 +10,7 @@ from reactivedataflow.nodes import (
     VerbOutput,
 )
 
+_log = logging.getLogger(__name__)
 
 def emit_conditions(
     *conditions: EmitCondition,
@@ -23,8 +24,10 @@ def emit_conditions(
                 condition(inputs, result) for condition in conditions
             )
             if not are_conditions_met:
+                _log.debug("Emit conditions not met for %s", fn.__qualname__)
                 return VerbOutput(no_output=True)
 
+            _log.debug("Emit conditions met for %s", fn.__qualname__)
             return result
 
         wrapped_fn.__qualname__ = f"{fn.__qualname__}_wrapemitcond"

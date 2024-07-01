@@ -3,6 +3,7 @@
 
 import asyncio
 from typing import Any
+import logging
 
 import reactivex as rx
 
@@ -12,6 +13,7 @@ from .io import VerbInput
 from .node import Node
 from .types import VerbFunction
 
+_log = logging.getLogger(__name__)
 
 class ExecutionNode(Node):
     """The ExecutionNode class for dynamic processing graphs."""
@@ -57,7 +59,7 @@ class ExecutionNode(Node):
         self._outputs = {}
         self._tasks = []
         # fire a recompute
-        self._schedule_recompute()
+        self._schedule_recompute("init")
 
     def _output(self, name: str) -> rx.subject.BehaviorSubject:
         """Get the subject of a given output."""
@@ -79,7 +81,7 @@ class ExecutionNode(Node):
     def config(self, value: dict[str, Any]) -> None:
         """Set the configuration of the node."""
         self._config = value
-        self._schedule_recompute()
+        self._schedule_recompute("config")
 
     def output(self, name: str = default_output) -> rx.Observable[Any]:
         """Get the observable of a given output."""
@@ -130,11 +132,11 @@ class ExecutionNode(Node):
 
         def on_named_value(value: Any, name: str) -> None:
             self._named_input_values[name] = value
-            self._schedule_recompute()
+            self._schedule_recompute("named_value")
 
         def on_array_value(value: Any, i: int) -> None:
             self._array_input_values[i] = value
-            self._schedule_recompute()
+            self._schedule_recompute("array_value")
 
         # Detach from inputs
         self.detach()
@@ -152,7 +154,8 @@ class ExecutionNode(Node):
                 sub = source.subscribe(lambda v, i=i: on_array_value(v, i))
                 self._subscriptions.append(sub)
 
-    def _schedule_recompute(self) -> None:
+    def _schedule_recompute(self, cause: str | None) -> None:
+        _log.debug(f"recompute scheduled for {self._id} due to {cause or 'unknown'}")
         task = asyncio.create_task(self._recompute())
         task.add_done_callback(lambda _: self._tasks.remove(task))
         self._tasks.append(task)
