@@ -7,7 +7,6 @@ from .decorators import (
     connect_output,
     emit_conditions,
     fire_conditions,
-    handle_async_output,
     verb,
 )
 from .execution_graph import ExecutionGraph
@@ -65,6 +64,5 @@ __all__ = [
     "connect_output",
     "emit_conditions",
     "fire_conditions",
-    "handle_async_output",
     "verb",
 ]

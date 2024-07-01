@@ -22,7 +22,7 @@ from reactivedataflow.ports import (
 from reactivedataflow.registry import Registry
 
 
-def test_configure_and_reconfigure():
+async def test_configure_and_reconfigure():
     registry = Registry()
 
     @verb(
@@ -36,15 +36,17 @@ def test_configure_and_reconfigure():
 
     wrapped_fn = registry.get_verb_function("execute")
     node = ExecutionNode("a", wrapped_fn, config={"value": "Hello"})
+    await node.drain()
     assert node.config.get("value") == "Hello"
     assert node.output_value() == "Hello"
 
     node.config = {"value": "World"}
+    await node.drain()
     assert node.config.get("value") == "World"
     assert node.output_value() == "World"
 
 
-def test_execution_node_with_raw_input():
+async def test_execution_node_with_raw_input():
     registry = Registry()
 
     @verb(
@@ -72,10 +74,11 @@ def test_execution_node_with_raw_input():
         "input_1": rx.of("Hello"),
         "input_2": rx.of("World"),
     })
+    await node.drain()
     assert output == "Hello World"
 
 
-def test_execution_node_with_named_inputs():
+async def test_execution_node_with_named_inputs():
     registry = Registry()
 
     @verb(
@@ -90,6 +93,7 @@ def test_execution_node_with_named_inputs():
 
     output: str | None = None
     node = ExecutionNode("a", wrapped_fn)
+    await node.drain()
 
     def on_output(o: str):
         nonlocal output
@@ -101,10 +105,11 @@ def test_execution_node_with_named_inputs():
         "input_1": rx.of("Hello"),
         "input_2": rx.of("World"),
     })
+    await node.drain()
     assert output == "Hello World"
 
 
-def test_execution_node_with_named_required_inputs():
+async def test_execution_node_with_named_required_inputs():
     registry = Registry()
 
     @verb(
@@ -130,10 +135,11 @@ def test_execution_node_with_named_required_inputs():
         "input_1": rx.of("Hello"),
         "input_2": rx.of("World"),
     })
+    await node.drain()
     assert output == "Hello World"
 
 
-def test_execution_node_with_required_inputs():
+async def test_execution_node_with_required_inputs():
     registry = Registry()
 
     @verb(
@@ -162,10 +168,11 @@ def test_execution_node_with_required_inputs():
         "input_1": rx.of("Hello"),
         "input_2": rx.of("World"),
     })
+    await node.drain()
     assert output == "Hello World"
 
 
-def test_execution_node_with_required_config():
+async def test_execution_node_with_required_config():
     registry = Registry()
 
     @verb(
@@ -194,10 +201,11 @@ def test_execution_node_with_required_config():
         "conf_1": "Hello",
         "conf_2": "World",
     }
+    await node.drain()
     assert output == "Hello World"
 
 
-def test_execution_node_with_required_config_and_inputs():
+async def test_execution_node_with_required_config_and_inputs():
     registry = Registry()
 
     @verb(
@@ -231,14 +239,16 @@ def test_execution_node_with_required_config_and_inputs():
         "conf_1": "Hello",
         "conf_2": "World",
     }
+    await node.drain()
     assert output is None
     node.attach({
         "input_1": rx.of("Hi"),
     })
+    await node.drain()
     assert output == "Hi Hello World"
 
 
-def test_execution_node_with_optional_inputs():
+async def test_execution_node_with_optional_inputs():
     registry = Registry()
 
     @verb(
@@ -265,12 +275,14 @@ def test_execution_node_with_optional_inputs():
 
     node.output().subscribe(on_output)
     node.attach({"input_1": rx.of("Hello")})
+    await node.drain()
     assert output == "Hello "
     node.attach({"input_1": rx.of("Hello"), "input_2": rx.of("World")})
+    await node.drain()
     assert output == "Hello World"
 
 
-def test_execution_node_with_multiple_outputs():
+async def test_execution_node_with_multiple_outputs():
     registry = Registry()
 
     @verb(
@@ -310,11 +322,12 @@ def test_execution_node_with_multiple_outputs():
         "input_1": rx.of("Hello"),
         "input_2": rx.of("World"),
     })
+    await node.drain()
     assert output_1 == "Hello World"
     assert output_2 == "World Hello"
 
 
-def test_execution_node_with_array_inputs():
+async def test_execution_node_with_array_inputs():
     registry = Registry()
 
     @verb(
@@ -337,6 +350,8 @@ def test_execution_node_with_array_inputs():
 
     node.output().subscribe(on_output)
     node.attach(array_inputs=[rx.just(1), rx.just(2)])
+    await node.drain()
     assert output == 3
     node.attach(array_inputs=[rx.just(2), rx.just(4), rx.of(5, 6)])
+    await node.drain()
     assert output == 12

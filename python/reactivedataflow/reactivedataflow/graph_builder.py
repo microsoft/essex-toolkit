@@ -243,6 +243,55 @@ class GraphBuilder:
                 if node.get("input") and nid not in inputs:
                     raise InputNotFoundError(nid)
 
+        def validate_node_requirements():
+            for nid in self._graph.nodes:
+                node = self._graph.nodes[nid]
+
+                if node.get("input"):
+                    # skip input nodes, they've already been validated
+                    continue
+
+                # Validate the inputs and config
+                registration = registry.get(node["verb"])
+                bindings = registration.ports
+                execution_node = nodes[nid]
+
+                if isinstance(execution_node, ExecutionNode):
+                    input_names = execution_node.input_names
+                    config_names = execution_node.config_names
+                    num_array_inputs = execution_node.num_array_inputs
+                    output_names = execution_node.output_names
+                    array_input = bindings.array_input
+
+                    if (
+                        array_input
+                        and array_input.required
+                        and num_array_inputs < array_input.required
+                    ):
+                        raise RequiredNodeArrayInputNotFoundError(nid)
+
+                    for required_input in bindings.required_input_names:
+                        if required_input not in input_names:
+                            raise RequiredNodeInputNotFoundError(nid, required_input)
+
+                    for required_config in bindings.required_config_names:
+                        if required_config not in config_names:
+                            raise RequiredNodeConfigNotFoundError(nid, required_config)
+
+                    if registration.strict:
+                        # Check that all inputs are accounted for
+                        for input_name in input_names:
+                            if input_name not in bindings.input_names:
+                                raise NodeInputNotDefinedError(input_name)
+
+                        for config_name in config_names:
+                            if config_name not in bindings.config_names:
+                                raise NodeConfigNotDefinedError(config_name)
+
+                        for output_name in output_names:
+                            if output_name not in bindings.output_names:
+                                raise NodeOutputNotDefinedError(output_name)
+
         nodes = build_nodes()
         validate_inputs()
         named_inputs, array_inputs = build_node_inputs(nodes)
@@ -252,52 +301,6 @@ class GraphBuilder:
         if not nx.is_directed_acyclic_graph(self._graph):
             raise GraphHasCyclesError
 
-        for nid in self._graph.nodes:
-            node = self._graph.nodes[nid]
-
-            if node.get("input"):
-                # skip input nodes, they've already been validated
-                continue
-
-            # Validate the inputs and config
-            registration = registry.get(node["verb"])
-            bindings = registration.ports
-            execution_node = nodes[nid]
-
-            if isinstance(execution_node, ExecutionNode):
-                input_names = execution_node.input_names
-                config_names = execution_node.config_names
-                num_array_inputs = execution_node.num_array_inputs
-                output_names = execution_node.output_names
-                array_input = bindings.array_input
-
-                if (
-                    array_input
-                    and array_input.required
-                    and num_array_inputs < array_input.required
-                ):
-                    raise RequiredNodeArrayInputNotFoundError(nid)
-
-                for required_input in bindings.required_input_names:
-                    if required_input not in input_names:
-                        raise RequiredNodeInputNotFoundError(nid, required_input)
-
-                for required_config in bindings.required_config_names:
-                    if required_config not in config_names:
-                        raise RequiredNodeConfigNotFoundError(nid, required_config)
-
-                if registration.strict:
-                    # Check that all inputs are accounted for
-                    for input_name in input_names:
-                        if input_name not in bindings.input_names:
-                            raise NodeInputNotDefinedError(input_name)
-
-                    for config_name in config_names:
-                        if config_name not in bindings.config_names:
-                            raise NodeConfigNotDefinedError(config_name)
-
-                    for output_name in output_names:
-                        if output_name not in bindings.output_names:
-                            raise NodeOutputNotDefinedError(output_name)
+        validate_node_requirements()
 
         return ExecutionGraph(nodes, self._outputs)

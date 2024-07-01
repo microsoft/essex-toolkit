@@ -1,13 +1,16 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """The reactivedataflow ExecutionNode class."""
 
-from typing import Any
+import asyncio
+from collections.abc import Awaitable
+from inspect import iscoroutine
+from typing import Any, cast
 
 import reactivex as rx
 
 from reactivedataflow.constants import default_output
 
-from .io import VerbInput
+from .io import VerbInput, VerbOutput
 from .node import Node
 from .types import VerbFunction
 
@@ -28,6 +31,7 @@ class ExecutionNode(Node):
 
     # Output Observable
     _outputs: dict[str, rx.subject.BehaviorSubject]
+    _tasks: list
 
     def __init__(
         self,
@@ -53,8 +57,9 @@ class ExecutionNode(Node):
         self._subscriptions = []
         # Output
         self._outputs = {}
+        self._tasks = []
         # fire a recompute
-        self._recompute()
+        self._schedule_recompute()
 
     def _output(self, name: str) -> rx.subject.BehaviorSubject:
         """Get the subject of a given output."""
@@ -76,7 +81,7 @@ class ExecutionNode(Node):
     def config(self, value: dict[str, Any]) -> None:
         """Set the configuration of the node."""
         self._config = value
-        self._recompute()
+        self._schedule_recompute()
 
     def output(self, name: str = default_output) -> rx.Observable[Any]:
         """Get the observable of a given output."""
@@ -86,7 +91,12 @@ class ExecutionNode(Node):
         """Get the observable of a given output."""
         return self._output(name).value
 
-    def dispose(self) -> None:
+    async def drain(self) -> None:
+        """Drain the tasks."""
+        if len(self._tasks) > 0:
+            await asyncio.gather(*self._tasks)
+
+    def detach(self) -> None:
         """Detach the node from all inputs."""
         if len(self._subscriptions) > 0:
             for subscription in self._subscriptions:
@@ -122,14 +132,14 @@ class ExecutionNode(Node):
 
         def on_named_value(value: Any, name: str) -> None:
             self._named_input_values[name] = value
-            self._recompute()
+            self._schedule_recompute()
 
         def on_array_value(value: Any, i: int) -> None:
             self._array_input_values[i] = value
-            self._recompute()
+            self._schedule_recompute()
 
         # Detach from inputs
-        self.dispose()
+        self.detach()
 
         if named_inputs:
             for name, source in named_inputs.items():
@@ -144,7 +154,13 @@ class ExecutionNode(Node):
                 sub = source.subscribe(lambda v, i=i: on_array_value(v, i))
                 self._subscriptions.append(sub)
 
-    def _recompute(self) -> None:
+    def _schedule_recompute(self) -> None:
+        task = asyncio.create_task(self._recompute())
+        task.add_done_callback(lambda _: self._tasks.remove(task))
+        self._tasks.append(task)
+
+    async def _recompute(self) -> None:
+        """Recompute the node."""
         inputs = VerbInput(
             config=self._config,
             named_inputs=self._named_input_values,
@@ -153,6 +169,8 @@ class ExecutionNode(Node):
         )
 
         result = self._fn(inputs)
+        if iscoroutine(result):
+            result = await cast(Awaitable[VerbOutput], result)
         if not result.no_output:
             for name, value in result.outputs.items():
                 self._output(name).on_next(value)

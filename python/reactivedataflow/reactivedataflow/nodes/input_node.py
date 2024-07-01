@@ -29,14 +29,17 @@ class InputNode(Node):
         self._values = rx.subject.BehaviorSubject(None)
         self._subscription = None
 
-    def dispose(self) -> None:
+    def detach(self) -> None:
         """Detach the node from all inputs."""
         if self._subscription:
             self._subscription.dispose()
 
+    async def drain(self) -> None:
+        """Wait for the node to finish processing."""
+
     def attach(self, value: rx.Observable[Any]) -> None:
         """Set the value of a given output."""
-        self.dispose()
+        self.detach()
         self._subscription = value.subscribe(lambda v: self._values.on_next(v))
 
     def output(self, name: str = default_output) -> rx.Observable[Any]:
