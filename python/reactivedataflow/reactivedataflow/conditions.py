@@ -62,11 +62,11 @@ def array_input_values_are_defined() -> FireCondition:
 T = TypeVar("T")
 
 
-def array_result_non_empty(name: str = default_output) -> EmitCondition:
+def array_result_not_empty(name: str = default_output) -> EmitCondition:
     """Create an emit condition to emit when the given array output is non-empty."""
 
     def check_array_results_non_empty(_inputs: VerbInput, outputs: VerbOutput) -> bool:
-        return (
+        return bool(
             name in outputs.outputs
             and outputs.outputs[name]
             and isinstance(outputs.outputs[name], list)
