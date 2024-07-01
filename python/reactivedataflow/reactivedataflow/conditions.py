@@ -5,6 +5,7 @@ from typing import Any, TypeVar, cast
 
 from reactivedataflow.nodes import EmitCondition, FireCondition, VerbInput, VerbOutput
 
+from .constants import default_output
 from .utils.equality import IsEqualCheck, default_is_equal
 
 
@@ -59,6 +60,29 @@ def array_input_values_are_defined() -> FireCondition:
 
 
 T = TypeVar("T")
+
+
+def array_result_non_empty(name: str = default_output) -> EmitCondition:
+    """Create an emit condition to emit when the given array output is non-empty."""
+
+    def check_array_results_non_empty(_inputs: VerbInput, outputs: VerbOutput) -> bool:
+        return (
+            name in outputs.outputs
+            and outputs.outputs[name]
+            and isinstance(outputs.outputs[name], list)
+            and len(outputs.outputs[name]) > 0
+        )
+
+    return check_array_results_non_empty
+
+
+def output_is_not_none(name: str) -> EmitCondition:
+    """Create an emit condition to emit when the given output is not None."""
+
+    def check_output_is_not_none(_inputs: VerbInput, outputs: VerbOutput) -> bool:
+        return name in outputs.outputs and outputs.outputs[name] is not None
+
+    return check_output_is_not_none
 
 
 def output_changed(

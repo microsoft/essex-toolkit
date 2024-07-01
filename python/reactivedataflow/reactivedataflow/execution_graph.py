@@ -1,7 +1,6 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """The reactivedataflow Library."""
 
-import asyncio
 from typing import Any
 
 import reactivex as rx
@@ -16,16 +15,21 @@ class ExecutionGraph:
 
     _nodes: dict[str, Node]
     _outputs: dict[str, Output]
+    _order: list[str]
 
-    def __init__(self, nodes: dict[str, Node], outputs: dict[str, Output]):
+    def __init__(
+        self, nodes: dict[str, Node], outputs: dict[str, Output], order: list[str]
+    ):
         """Initialize the execution graph.
 
         Args:
             nodes: The nodes in the graph.
             outputs: The outputs of the graph.
+            order: The topological order of the nodes, starting with input nodes.
         """
         self._nodes = nodes
         self._outputs = outputs
+        self._order = order
 
     async def dispose(self) -> None:
         """Dispose of all nodes."""
@@ -35,9 +39,8 @@ class ExecutionGraph:
 
     async def drain(self) -> None:
         """Drain the task queue."""
-        drains = [node.drain() for node in self._nodes.values()]
-        if len(drains) > 0:
-            await asyncio.gather(*drains)
+        for node_id in self._order:
+            await self._nodes[node_id].drain()
 
     def output(self, name: str) -> rx.Observable[Any]:
         """Read the output of a node."""

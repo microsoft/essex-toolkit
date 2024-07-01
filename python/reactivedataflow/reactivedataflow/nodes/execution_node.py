@@ -133,11 +133,11 @@ class ExecutionNode(Node):
 
         def on_named_value(value: Any, name: str) -> None:
             self._named_input_values[name] = value
-            self._schedule_recompute("named_value")
+            self._schedule_recompute(f"input: {name}")
 
         def on_array_value(value: Any, i: int) -> None:
             self._array_input_values[i] = value
-            self._schedule_recompute("array_value")
+            self._schedule_recompute(f"array_value@{i}")
 
         # Detach from inputs
         self.detach()
@@ -157,19 +157,18 @@ class ExecutionNode(Node):
 
     def _schedule_recompute(self, cause: str | None) -> None:
         _log.debug(f"recompute scheduled for {self._id} due to {cause or 'unknown'}")
-        task = asyncio.create_task(self._recompute())
+        inputs = VerbInput(
+            config=self._config.copy(),
+            named_inputs=self._named_input_values.copy(),
+            array_inputs=self._array_input_values.copy(),
+            previous_output={name: obs.value for name, obs in self._outputs.items()},
+        )
+        task = asyncio.create_task(self._recompute(inputs))
         task.add_done_callback(lambda _: self._tasks.remove(task))
         self._tasks.append(task)
 
-    async def _recompute(self) -> None:
+    async def _recompute(self, inputs: VerbInput) -> None:
         """Recompute the node."""
-        inputs = VerbInput(
-            config=self._config,
-            named_inputs=self._named_input_values,
-            array_inputs=self._array_input_values,
-            previous_output={name: obs.value for name, obs in self._outputs.items()},
-        )
-
         result = await self._fn(inputs)
         if not result.no_output:
             for name, value in result.outputs.items():

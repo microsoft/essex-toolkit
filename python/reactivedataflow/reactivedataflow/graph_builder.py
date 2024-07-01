@@ -303,4 +303,6 @@ class GraphBuilder:
 
         validate_node_requirements()
 
-        return ExecutionGraph(nodes, self._outputs)
+        visit_order = list(nx.topological_sort(self._graph))
+
+        return ExecutionGraph(nodes, self._outputs, visit_order)
