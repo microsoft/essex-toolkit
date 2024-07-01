@@ -1,11 +1,13 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """reactivedataflow Firing Conditions Decorator."""
 
-from collections.abc import Callable
 import logging
+from collections.abc import Callable
+
 from reactivedataflow.nodes import FireCondition, VerbFunction, VerbInput, VerbOutput
 
 _log = logging.getLogger(__name__)
+
 
 def fire_conditions(
     *conditions: FireCondition,
@@ -18,7 +20,7 @@ def fire_conditions(
             if not are_conditions_met:
                 _log.debug("Firing conditions not met for %s", fn.__qualname__)
                 return VerbOutput(no_output=True)
-            
+
             _log.debug("Firing conditions met for %s", fn.__qualname__)
             return await fn(inputs)
 

@@ -1,8 +1,9 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """reactivedataflow Emit Conditions Decorator."""
 
-from collections.abc import Callable
 import logging
+from collections.abc import Callable
+
 from reactivedataflow.nodes import (
     EmitCondition,
     VerbFunction,
@@ -11,6 +12,7 @@ from reactivedataflow.nodes import (
 )
 
 _log = logging.getLogger(__name__)
+
 
 def emit_conditions(
     *conditions: EmitCondition,

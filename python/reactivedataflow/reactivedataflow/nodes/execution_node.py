@@ -2,8 +2,8 @@
 """The reactivedataflow ExecutionNode class."""
 
 import asyncio
-from typing import Any
 import logging
+from typing import Any
 
 import reactivex as rx
 
@@ -14,6 +14,7 @@ from .node import Node
 from .types import VerbFunction
 
 _log = logging.getLogger(__name__)
+
 
 class ExecutionNode(Node):
     """The ExecutionNode class for dynamic processing graphs."""
