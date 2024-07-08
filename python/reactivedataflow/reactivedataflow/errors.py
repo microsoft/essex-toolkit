@@ -2,6 +2,16 @@
 """reactivedataflow Error Types."""
 
 
+class ConfigReferenceNotFoundError(ValueError):
+    """An exception for when a configuration reference is not found in the global configuration."""
+
+    def __init__(self, reference: str):
+        """Initialize the ConfigReferenceNotFoundError."""
+        super().__init__(
+            f"Configuration reference '{reference}' not found in global configuration."
+        )
+
+
 class NodeInputNotDefinedError(ValueError):
     """An exception for input not defined."""
 
