@@ -7,6 +7,7 @@ from typing import Any
 
 import reactivex as rx
 
+from reactivedataflow.config_provider import ConfigProvider
 from reactivedataflow.constants import default_output
 
 from .io import VerbInput
@@ -22,6 +23,7 @@ class ExecutionNode(Node):
     _id: str
     _fn: VerbFunction
     _config: dict[str, Any]
+    _config_providers: dict[str, ConfigProvider[Any]]
 
     # Input Observables
     _named_inputs: dict[str, rx.Observable]
@@ -39,6 +41,7 @@ class ExecutionNode(Node):
         nid: str,
         fn: VerbFunction,
         config: dict[str, Any] | None = None,
+        config_providers: dict[str, ConfigProvider[Any]] | None = None,
     ):
         """Initialize the ExecutionNode.
 
@@ -46,10 +49,12 @@ class ExecutionNode(Node):
             nid (str): The node identifier.
             fn (VerbFunction): The execution logic for the function. The input is a dictionary of input names to their latest values.
             config (dict[str, Any], optional): The configuration for the node. Defaults to None.
+            config_providers (dict[str, ConfigProvider[Any]], optional): The configuration providers for the node. Defaults to None.
         """
         self._id = nid
         self._fn = fn
         self._config = config or {}
+        self._config_providers = config_providers or {}
         # Inputs
         self._named_inputs = {}
         self._named_input_values = {}
@@ -157,8 +162,14 @@ class ExecutionNode(Node):
 
     def _schedule_recompute(self, cause: str | None) -> None:
         _log.debug(f"recompute scheduled for {self._id} due to {cause or 'unknown'}")
+
+        # Copy the config; wire in the config providers
+        config = self._config.copy()
+        for name, provider in self._config_providers.items():
+            config[name] = provider.get()
+
         inputs = VerbInput(
-            config=self._config.copy(),
+            config=config,
             named_inputs=self._named_input_values.copy(),
             array_inputs=self._array_input_values.copy(),
             previous_output={name: obs.value for name, obs in self._outputs.items()},

@@ -6,8 +6,10 @@ from typing import Any
 import networkx as nx
 import reactivex as rx
 
+from .config_provider import ConfigProvider
 from .constants import default_output
 from .errors import (
+    ConfigReferenceNotFoundError,
     GraphHasCyclesError,
     InputNotFoundError,
     NodeAlreadyDefinedError,
@@ -142,6 +144,7 @@ class GraphBuilder:
         self,
         inputs: dict[str, rx.Observable[Any]] | None = None,
         config: dict[str, Any] | None = None,
+        config_providers: dict[str, ConfigProvider[Any]] | None = None,
         registry: Registry | None = None,
     ) -> ExecutionGraph:
         """Build the graph.
@@ -149,11 +152,13 @@ class GraphBuilder:
         Args:
             inputs: The inputs to the graph.
             config: The global configuration for the graph.
+            config_providers: Configuration providers, dict[str, ConfigProvider] (see the ConfigProvider protocol).
             registry: The registry to use for verb lookup.
         """
-        inputs = inputs or {}
         registry = registry or Registry.get_instance()
+        inputs = inputs or {}
         config = config or {}
+        config_providers = config_providers or {}
 
         def build_nodes() -> dict[str, Node]:
             nodes: dict[str, Node] = {}
@@ -166,10 +171,19 @@ class GraphBuilder:
 
                 registration = registry.get(node["verb"])
                 node_config = node.get("config", {}) or {}
+                node_config_providers: dict[str, ConfigProvider[Any]] = {}
+
                 for key, value in node_config.items():
                     if isinstance(value, ValRef):
                         if value.reference:
-                            node_config[key] = config[value.reference]
+                            if value.reference in config:
+                                node_config[key] = config[value.reference]
+                            elif value.reference in config_providers:
+                                node_config_providers[key] = config_providers[
+                                    value.reference
+                                ]
+                            else:
+                                raise ConfigReferenceNotFoundError(key)
                         else:
                             node_config[key] = value.value
                     else:
@@ -182,9 +196,20 @@ class GraphBuilder:
                     for key, value in config.items()
                     if key in registration.ports.config_names
                 }
+                node_global_config_providers = {
+                    key: value
+                    for key, value in config_providers.items()
+                    if key in registration.ports.config_names
+                }
                 node_config = {**node_global_config, **node_config}
+                node_config_providers = {
+                    **node_global_config_providers,
+                    **node_config_providers,
+                }
 
-                execution_node = ExecutionNode(nid, verb, node_config)
+                execution_node = ExecutionNode(
+                    nid, verb, node_config, node_config_providers
+                )
                 nodes[nid] = execution_node
             return nodes
 

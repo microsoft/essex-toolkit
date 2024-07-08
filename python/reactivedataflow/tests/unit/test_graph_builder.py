@@ -15,6 +15,7 @@ from reactivedataflow import (
     verb,
 )
 from reactivedataflow.errors import (
+    ConfigReferenceNotFoundError,
     GraphHasCyclesError,
     InputNotFoundError,
     NodeAlreadyDefinedError,
@@ -29,6 +30,7 @@ from reactivedataflow.errors import (
     RequiredNodeInputNotFoundError,
 )
 from reactivedataflow.model import Edge, Graph, InputNode, Node, Output, ValRef
+from reactivedataflow.types import ConfigProvider
 
 from .define_math_ops import define_math_ops
 
@@ -194,6 +196,21 @@ def test_throws_on_add_edge_with_unknown_nodes():
         builder.add_edge(from_node="n2", to_node="n1")
 
 
+def test_throws_on_unknown_reference():
+    registry = Registry()
+    define_math_ops(registry)
+
+    with pytest.raises(ConfigReferenceNotFoundError):
+        (
+            GraphBuilder()
+            .add_node(
+                "c1", "constant", config={"value": ValRef(reference="value_provider")}
+            )
+            .add_output("c1")
+            .build(registry=registry)
+        )
+
+
 async def test_simple_graph():
     registry = Registry()
     define_math_ops(registry)
@@ -205,6 +222,35 @@ async def test_simple_graph():
         .build(registry=registry)
     )
     await graph.drain()
+    assert graph.output_value("c1") == 1
+    await graph.dispose()
+
+
+async def test_config_provider():
+    registry = Registry()
+    define_math_ops(registry)
+
+    value = 1
+
+    class ValueProvider(ConfigProvider[int]):
+        def get(self) -> int:
+            return value
+
+    provider = ValueProvider()
+    graph = (
+        GraphBuilder()
+        .add_node(
+            "c1", "constant", config={"value": ValRef(reference="value_provider")}
+        )
+        .add_output("c1")
+        .build(registry=registry, config_providers={"value_provider": provider})
+    )
+    await graph.drain()
+    assert graph.output_value("c1") == 1
+    value = 2
+    assert provider.get() == 2
+    await graph.drain()
+    # Value is not pushed
     assert graph.output_value("c1") == 1
     await graph.dispose()
 
