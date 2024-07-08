@@ -1,12 +1,15 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """reactivedataflow Firing Conditions."""
 
+import logging
 from typing import Any, TypeVar, cast
 
 from reactivedataflow.nodes import EmitCondition, FireCondition, VerbInput, VerbOutput
 
 from .constants import default_output
 from .utils.equality import IsEqualCheck, default_is_equal
+
+_log = logging.getLogger(__name__)
 
 
 def _check_array_input_not_empty(inputs: VerbInput):
@@ -32,19 +35,23 @@ def require_inputs(*required_inputs: str) -> FireCondition:
         def is_input_present(input_name: str):
             return _is_value_in_dict(input_name, inputs.named_inputs)
 
-        return all(is_input_present(input_name) for input_name in required_inputs)
+        result = all(is_input_present(input_name) for input_name in required_inputs)
+        _log.debug("...checking required inputs %s: %s", required_inputs, result)
+        return result
 
     return check_required_inputs
 
 
-def require_config(*required_inputs: str) -> FireCondition:
+def require_config(*required_config: str) -> FireCondition:
     """Create a fire condition to require the given configuration values to be present for the function to fire."""
 
     def check_required_config(inputs: VerbInput):
-        def is_config_present(input_name: str):
-            return _is_value_in_dict(input_name, inputs.config)
+        def is_config_present(config_name: str):
+            return _is_value_in_dict(config_name, inputs.config)
 
-        return all(is_config_present(input_name) for input_name in required_inputs)
+        result = all(is_config_present(config_name) for config_name in required_config)
+        _log.debug("...checking required config %s: %s", required_config, result)
+        return result
 
     return check_required_config
 
@@ -66,27 +73,31 @@ def array_result_not_empty(name: str = default_output) -> EmitCondition:
     """Create an emit condition to emit when the given array output is non-empty."""
 
     def check_array_results_non_empty(_inputs: VerbInput, outputs: VerbOutput) -> bool:
-        return bool(
+        result = bool(
             name in outputs.outputs
             and outputs.outputs[name]
             and isinstance(outputs.outputs[name], list)
             and len(outputs.outputs[name]) > 0
         )
+        _log.debug("...checking array results not empty: %s", result)
+        return result
 
     return check_array_results_non_empty
 
 
-def output_is_not_none(name: str) -> EmitCondition:
+def output_is_not_none(name: str = default_output) -> EmitCondition:
     """Create an emit condition to emit when the given output is not None."""
 
     def check_output_is_not_none(_inputs: VerbInput, outputs: VerbOutput) -> bool:
-        return name in outputs.outputs and outputs.outputs[name] is not None
+        result = name in outputs.outputs and outputs.outputs[name] is not None
+        _log.debug("...checking output is not None: %s", result)
+        return result
 
     return check_output_is_not_none
 
 
 def output_changed(
-    output_name: str, is_equal: IsEqualCheck[T] = default_is_equal
+    output_name: str = default_output, is_equal: IsEqualCheck[T] = default_is_equal
 ) -> EmitCondition:
     """Create an emit condition to emit when the given output has changed."""
 
@@ -102,6 +113,8 @@ def output_changed(
         previous = cast(T, previous)
         current = cast(T, current)
 
-        return not is_equal(previous, current)
+        result = not is_equal(previous, current)
+        _log.debug("...checking output changed: %s", result)
+        return result
 
     return check_output_changed

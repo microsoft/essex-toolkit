@@ -163,16 +163,21 @@ class ExecutionNode(Node):
     def _schedule_recompute(self, cause: str | None) -> None:
         _log.debug(f"recompute scheduled for {self._id} due to {cause or 'unknown'}")
 
-        # Copy the config; wire in the config providers
+        # Generate a shallow copy of the inputs and configuration
+        previous_output = {name: obs.value for name, obs in self._outputs.items()}
+        named_inputs = self._named_input_values.copy()
+        array_inputs = self._array_input_values.copy()
         config = self._config.copy()
         for name, provider in self._config_providers.items():
-            config[name] = provider.get()
+            value = provider.get()
+            _log.debug("inject config from provider %s, value=%s", name, value)
+            config[name] = value
 
         inputs = VerbInput(
             config=config,
-            named_inputs=self._named_input_values.copy(),
-            array_inputs=self._array_input_values.copy(),
-            previous_output={name: obs.value for name, obs in self._outputs.items()},
+            named_inputs=named_inputs,
+            array_inputs=array_inputs,
+            previous_output=previous_output,
         )
         task = asyncio.create_task(self._recompute(inputs))
         task.add_done_callback(lambda _: self._tasks.remove(task))
