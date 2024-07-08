@@ -9,7 +9,7 @@ from reactivedataflow.nodes import EmitCondition, FireCondition, VerbInput, Verb
 from .constants import default_output
 from .utils.equality import IsEqualCheck, default_is_equal
 
-log = logging.getLogger(__name__)
+_log = logging.getLogger(__name__)
 
 
 def _check_array_input_not_empty(inputs: VerbInput):
@@ -36,7 +36,7 @@ def require_inputs(*required_inputs: str) -> FireCondition:
             return _is_value_in_dict(input_name, inputs.named_inputs)
 
         result = all(is_input_present(input_name) for input_name in required_inputs)
-        log.debug("...checking required inputs %s: %s", required_inputs, result)
+        _log.debug("...checking required inputs %s: %s", required_inputs, result)
         return result
 
     return check_required_inputs
@@ -50,7 +50,7 @@ def require_config(*required_config: str) -> FireCondition:
             return _is_value_in_dict(config_name, inputs.config)
 
         result = all(is_config_present(config_name) for config_name in required_config)
-        log.debug("...checking required config %s: %s", required_config, result)
+        _log.debug("...checking required config %s: %s", required_config, result)
         return result
 
     return check_required_config
@@ -79,7 +79,7 @@ def array_result_not_empty(name: str = default_output) -> EmitCondition:
             and isinstance(outputs.outputs[name], list)
             and len(outputs.outputs[name]) > 0
         )
-        log.debug("...checking array results not empty: %s", result)
+        _log.debug("...checking array results not empty: %s", result)
         return result
 
     return check_array_results_non_empty
@@ -90,7 +90,7 @@ def output_is_not_none(name: str = default_output) -> EmitCondition:
 
     def check_output_is_not_none(_inputs: VerbInput, outputs: VerbOutput) -> bool:
         result = name in outputs.outputs and outputs.outputs[name] is not None
-        log.debug("...checking output is not None: %s", result)
+        _log.debug("...checking output is not None: %s", result)
         return result
 
     return check_output_is_not_none
@@ -114,7 +114,7 @@ def output_changed(
         current = cast(T, current)
 
         result = not is_equal(previous, current)
-        log.debug("...checking output changed: %s", result)
+        _log.debug("...checking output changed: %s", result)
         return result
 
     return check_output_changed
