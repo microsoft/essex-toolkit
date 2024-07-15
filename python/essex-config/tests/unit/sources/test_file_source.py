@@ -30,6 +30,14 @@ def test_toml_source():
         assert source.get_data()["test"]["hello"] == "world"
 
 
+def test_yaml_source():
+    mock_data = b"""test:
+      hello: world"""
+    with mock.patch("pathlib.Path.open", mock.mock_open(read_data=mock_data)):
+        source = FileSource(Path("dummy.yaml"))
+        assert source.get_data()["test"]["hello"] == "world"
+
+
 def test_unknown_file_source():
     with pytest.raises(ValueError, match="File type .txt not supported."):
         FileSource(Path("dummy.txt")).get_data()

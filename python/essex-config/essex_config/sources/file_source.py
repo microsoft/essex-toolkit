@@ -5,10 +5,16 @@ from pathlib import Path
 from typing import Any
 
 import tomllib
+import yaml
 
 from essex_config.sources.source import Source
 
-
+GET_DATA_FN = {
+    ".json": json.load,
+    ".toml": tomllib.load,
+    ".yaml": yaml.safe_load,
+    ".yml": yaml.safe_load,
+}
 class FileSource(Source):
     """Class to get the configuration from a file."""
 
@@ -20,12 +26,9 @@ class FileSource(Source):
 
     def get_data(self) -> dict[str, Any]:
         """Get the data dictionary."""
-        if self.file_path.suffix == ".json":
+        if self.file_path.suffix in GET_DATA_FN:
             with self.file_path.open() as file:
-                return json.load(file)
-        elif self.file_path.suffix == ".toml":
-            with self.file_path.open("rb") as file:
-                return tomllib.load(file)
+                return GET_DATA_FN[self.file_path.suffix](file)
         msg = f"File type {self.file_path.suffix} not supported."
         raise ValueError(msg)
 
