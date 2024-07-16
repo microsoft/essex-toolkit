@@ -145,11 +145,12 @@ async def test_config_raw_injection():
     builder.add_edge(from_node="const1", to_node="n", to_port="a")
     with pytest.raises(MissingConfigurationError):
         builder.build(registry=registry)
-    
+
     graph = builder.build(registry=registry, config_raw={"const1": 1})
     await graph.drain()
     assert graph.output_value("n") == 1
     await graph.dispose()
+
 
 async def test_missing_dict_input_raises_error():
     registry = Registry()
