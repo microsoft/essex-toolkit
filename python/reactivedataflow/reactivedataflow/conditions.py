@@ -58,6 +58,7 @@ def require_config(*required_config: str) -> FireCondition:
 
     return check_required_config
 
+
 def array_input_has_min_length(min_count: int = 1) -> FireCondition:
     """Create a fire condition to require the array input to have at least min_count elements for the function to fire."""
     return _check_array_have_min_length(min_count)

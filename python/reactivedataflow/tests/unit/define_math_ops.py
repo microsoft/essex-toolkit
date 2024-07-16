@@ -17,7 +17,9 @@ def define_math_ops(registry: Registry) -> None:
         name="add",
         registry=registry,
     )
-    def add(values: Annotated[list[int], ArrayInput(min_inputs=1, defined_inputs=True)]) -> int:
+    def add(
+        values: Annotated[list[int], ArrayInput(min_inputs=1, defined_inputs=True)],
+    ) -> int:
         return sum(values)
 
     @verb(
