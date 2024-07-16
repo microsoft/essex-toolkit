@@ -132,7 +132,7 @@ async def test_config_raw_injection():
     @verb(
         name="add_dict",
         registry=registry,
-        ports=[NamedInputs(required=["a"], parameter="values")],
+        ports=[NamedInputs(required_keys=["a"], parameter="values")],
     )
     def add(values: dict[str, int]) -> int:
         return sum(values.values())
@@ -159,7 +159,7 @@ async def test_missing_dict_input_raises_error():
     @verb(
         name="add_dict",
         registry=registry,
-        ports=[NamedInputs(required=["a"], parameter="values")],
+        ports=[NamedInputs(required_keys=["a"], parameter="values")],
     )
     def add(values: dict[str, int]) -> int:
         return sum(values.values())

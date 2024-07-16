@@ -114,7 +114,7 @@ async def test_execution_node_with_named_required_inputs():
 
     @verb(
         "execute",
-        ports=[NamedInputs(parameter="inputs", required=["input_1", "input_2"])],
+        ports=[NamedInputs(parameter="inputs", required_keys=["input_1", "input_2"])],
         registry=registry,
     )
     def execute(inputs: dict[str, str]) -> str:

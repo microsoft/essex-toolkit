@@ -16,12 +16,15 @@ def _check_array_input_not_empty(inputs: VerbInput):
     return len(inputs.array_inputs) > 0 if inputs.array_inputs else False
 
 
-def _check_array_input_has_valid_values(inputs: VerbInput):
-    return (
-        all(value is not None for value in inputs.array_inputs)
-        if inputs.array_inputs
-        else False
-    )
+def _check_array_input_has_valid_values(min_count: int):
+    def check(inputs: VerbInput):
+        return (
+            all(value is not None for value in inputs.array_inputs)
+            if inputs.array_inputs
+            else False
+        ) and len(inputs.array_inputs) >= min_count
+
+    return check
 
 
 def _is_value_in_dict(name: str, config: dict[str, Any]):
@@ -61,9 +64,9 @@ def array_input_not_empty() -> FireCondition:
     return _check_array_input_not_empty
 
 
-def array_input_values_are_defined() -> FireCondition:
+def array_input_values_are_defined(min_count: int = 1) -> FireCondition:
     """Create a fire condition to require the array input values to be defined for the function to fire."""
-    return _check_array_input_has_valid_values
+    return _check_array_input_has_valid_values(min_count)
 
 
 T = TypeVar("T")
@@ -71,13 +74,20 @@ T = TypeVar("T")
 
 def array_result_not_empty(name: str = default_output) -> EmitCondition:
     """Create an emit condition to emit when the given array output is non-empty."""
+    return array_result_has_min(name)
+
+
+def array_result_has_min(
+    name: str = default_output, min_count: int = 1
+) -> EmitCondition:
+    """Create an emit condition to emit when the given array output is non-empty."""
 
     def check_array_results_non_empty(_inputs: VerbInput, outputs: VerbOutput) -> bool:
         result = bool(
             name in outputs.outputs
             and outputs.outputs[name]
             and isinstance(outputs.outputs[name], list)
-            and len(outputs.outputs[name]) > 0
+            and len(outputs.outputs[name]) >= min_count
         )
         _log.debug("...checking array results not empty: %s", result)
         return result

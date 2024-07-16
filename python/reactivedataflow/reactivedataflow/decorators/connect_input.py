@@ -41,12 +41,15 @@ def connect_input(
 
             # Inject named parameters
             fn_kwargs.update({
-                p.parameter or p.name: inputs.named_inputs.get(p.name)
+                p.parameter or cast(str, p.name): inputs.named_inputs.get(
+                    cast(str, p.name)
+                )
                 for p in ports.input
             })
             # Inject configuration values
             fn_kwargs.update({
-                p.parameter or p.name: inputs.config.get(p.name) for p in ports.config
+                p.parameter or cast(str, p.name): inputs.config.get(cast(str, p.name))
+                for p in ports.config
             })
 
             return cast(Any, fn)(*args, **fn_kwargs)

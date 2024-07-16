@@ -1,6 +1,7 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """reactivedataflow Verb Decorator."""
 
+import inspect
 from collections.abc import Callable
 from typing import Any, ParamSpec
 
@@ -10,7 +11,15 @@ from reactivedataflow.nodes import (
     InputMode,
     OutputMode,
 )
-from reactivedataflow.ports import PortBinding, Ports
+from reactivedataflow.ports import (
+    ArrayInput,
+    Config,
+    Input,
+    NamedInputs,
+    Output,
+    PortBinding,
+    Ports,
+)
 from reactivedataflow.registry import Registration, Registry
 
 from .apply_decorators import Decorator
@@ -51,10 +60,29 @@ def verb(
     registry = registry or Registry.get_instance()
 
     def wrap_fn(verb: Callable[P, Any]) -> Callable[P, Any]:
+        ports_array = ports or []
+        for parameter_name, parameter in inspect.signature(verb).parameters.items():
+            annotation = parameter.annotation
+            if annotation and hasattr(annotation, "__metadata__"):
+                annotations = list(annotation.__metadata__)
+                for meta in annotations:
+                    if isinstance(meta, PortBinding):
+                        meta = meta.model_copy()
+                        if not isinstance(meta, Output):
+                            meta.parameter = parameter_name
+                        if isinstance(meta, (Input, Config)):
+                            meta.name = meta.name or parameter_name
+                        if isinstance(meta, (Input, Config, ArrayInput, NamedInputs)):
+                            meta.required = (
+                                meta.required
+                                or parameter.default is inspect.Parameter.empty
+                            )
+                        ports_array.append(meta)
+
         registration = Registration(
             fn=verb,
             ports=Ports(
-                ports or [],
+                ports_array,
                 include_default_output if include_default_output is not None else True,
             ),
             fire_conditions=fire_conditions or [],

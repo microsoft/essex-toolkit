@@ -1,6 +1,8 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """reactivedataflow Verb Registry."""
 
+from typing import cast
+
 from reactivedataflow.conditions import (
     array_input_values_are_defined,
     output_changed,
@@ -87,16 +89,21 @@ def _infer_firing_conditions(
 ) -> list[FireCondition]:
     firing_conditions = []
     required_inputs: list[str] = [
-        p.name for p in registration.ports.input if p.required
+        cast(str, p.name) for p in registration.ports.input if p.required
     ]
     required_config: list[str] = [
-        p.name for p in registration.ports.config if p.required
+        cast(str, p.name) for p in registration.ports.config if p.required
     ]
 
-    if registration.ports.array_input and registration.ports.array_input.required:
-        firing_conditions.append(array_input_values_are_defined())
-    if registration.ports.named_inputs and registration.ports.named_inputs.required:
-        required_inputs.extend(registration.ports.named_inputs.required)
+    if registration.ports.array_input and registration.ports.array_input.min_inputs:
+        firing_conditions.append(
+            array_input_values_are_defined(registration.ports.array_input.min_inputs)
+        )
+    if (
+        registration.ports.named_inputs
+        and registration.ports.named_inputs.required_keys
+    ):
+        required_inputs.extend(registration.ports.named_inputs.required_keys)
 
     if len(required_inputs) > 0:
         firing_conditions.append(require_inputs(*required_inputs))
@@ -114,7 +121,7 @@ def _infer_emit_conditions(
     # Create a composite emit condition. Any output that emits a changed value will allow an emit.
     ports = [p for p in registration.ports.outputs if p.emits_on == EmitMode.OnChange]
     if len(ports) > 0:
-        change_checks = [output_changed(p.name) for p in ports]
+        change_checks = [output_changed(cast(str, p.name)) for p in ports]
 
         def any_output_changed(inputs, outputs):
             return any(c(inputs, outputs) for c in change_checks)
@@ -129,7 +136,8 @@ def _input_parameter_map(
 ) -> dict[str, str]:
     result: dict[str, str] = {}
     for port in inputs:
-        result[port.name] = port.parameter or port.name
+        port_name = cast(str, port.name)
+        result[port_name] = port.parameter or port_name
     return result
 
 
@@ -138,5 +146,6 @@ def _config_parameter_map(
 ) -> dict[str, str]:
     result: dict[str, str] = {}
     for port in config:
-        result[port.name] = port.parameter or port.name
+        port_name = cast(str, port.name)
+        result[port_name] = port.parameter or port_name
     return result
