@@ -1,6 +1,7 @@
 """File source class implementation."""
 
 import json
+from collections.abc import Callable
 from pathlib import Path
 from typing import Any
 
@@ -9,12 +10,14 @@ import yaml
 
 from essex_config.sources.source import Source
 
-GET_DATA_FN = {
+GET_DATA_FN: dict[str, Callable[[Any], dict[str, Any]]] = {
     ".json": json.load,
     ".toml": tomllib.load,
     ".yaml": yaml.safe_load,
     ".yml": yaml.safe_load,
 }
+
+
 class FileSource(Source):
     """Class to get the configuration from a file."""
 

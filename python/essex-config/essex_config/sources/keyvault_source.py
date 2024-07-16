@@ -9,7 +9,7 @@ from azure.keyvault.secrets import SecretClient
 from essex_config.sources.source import Source
 
 
-class KeyvaultClient:
+class KeyvaultClient:  # pragma: no cover
     """Class to interact with Azure Keyvault."""
 
     def __init__(self, keyvault_url: str | None):

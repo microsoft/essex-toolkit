@@ -54,6 +54,11 @@ class Config(BaseModel):
 
         Creates an instance of the Configuration class based on the values of data. If data is None, it will use the environment variables.
 
+        Parameters
+        ----------
+            refresh_config : bool, optional
+                If True, it will refresh the configuration values, by default False
+
         Returns
         -------
             Config: Instance of the configuration class.

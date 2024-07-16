@@ -65,6 +65,7 @@ def test_redacted_secret():
     assert config.secret == "password"
     assert "password" not in str(Secret.get_config())
     assert "password" not in repr(Secret.get_config())
+    assert "password" not in config.__rich__()
 
 
 def test_dot_notation_alt_name():

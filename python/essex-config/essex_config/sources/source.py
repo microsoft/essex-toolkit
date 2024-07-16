@@ -8,7 +8,7 @@ class Source(ABC):
     """Abstract class to define the source of the configuration."""
 
     @abstractmethod
-    def get_data(self) -> dict[str, Any]:
+    def get_data(self) -> dict[str, Any]:  # pragma: no cover
         """Get the data dictionary."""
         raise NotImplementedError
 

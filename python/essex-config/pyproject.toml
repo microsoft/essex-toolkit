@@ -26,31 +26,29 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poe.tasks]
 _sort_imports = "ruff check --select I --fix . --preview"
-_format_code = "ruff format  . --preview"
 _ruff_check = 'ruff check . --preview'
-_pyright = "pyright"
-_pyright_types = "pyright --verifytypes essex_config --ignoreexternal"
-coverage_report = 'coverage report --omit "**/tests/**" --show-missing'
-check_format = 'ruff format . --check --preview'
+_format_code = "ruff format  . --preview"
+_format_check = 'ruff format . --check --preview'
+
+typecheck = "pyright"
+check_package_types = "pyright --verifytypes essex_config --ignoreexternal"
+check = ['_format_check', '_ruff_check', 'typecheck', 'check_package_types']
 fix = "ruff  --preview check --fix ."
 fix_unsafe = "ruff check --preview --fix --unsafe-fixes ."
+format = ['_sort_imports', '_format_code']
+test = "pytest tests"
 
-_test_all = "coverage run -m pytest ./tests"
-
-# Pass in a test pattern
-test_only = "pytest -s -k"
-
-[[tool.poe.tasks.format]]
-sequence = ['_sort_imports', '_format_code']
-ignore_fail = 'return_non_zero'
-
-[[tool.poe.tasks.check]]
-sequence = ['check_format', '_ruff_check', '_pyright', '_pyright_types']
-ignore_fail = 'return_non_zero'
-
-[[tool.poe.tasks.test]]
-sequence = ['_test_all', 'coverage_report']
-ignore_fail = 'return_non_zero'
+_test_with_coverage = 'coverage run --source=essex_config -m pytest tests/unit'
+_coverage_report = 'coverage report --fail-under=100 --show-missing --omit="essex_config/doc_gen/*"'
+_generate_coverage_xml = 'coverage xml --omit="essex_config/doc_gen/*"'
+_generate_coverage_html = 'coverage html --omit="essex_config/doc_gen/*"'
+test_coverage = [
+    '_test_with_coverage',  
+    '_generate_coverage_xml',
+    '_generate_coverage_html',
+    '_coverage_report'
+]
+test_only = "pytest -v -k"
 
 
 [tool.ruff]

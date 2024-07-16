@@ -13,6 +13,8 @@ def test_json_source():
         assert source.get_data() == {"TEST_VALUE": "test_value"}
 
         assert str(source) == "FileSource(file_path=dummy.json)"
+        assert repr(source) == "FileSource(file_path=dummy.json)"
+        assert source.__rich__() == "FileSource(file_path=dummy.json)"
 
 
 def test_str_file_source():
