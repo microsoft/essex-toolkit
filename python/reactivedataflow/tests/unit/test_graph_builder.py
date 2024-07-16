@@ -50,6 +50,11 @@ def test_missing_input_raises_error():
     with pytest.raises(InputNotFoundError):
         builder.build()
 
+def test_missing_output_raises_error():
+    builder = GraphBuilder()
+    builder.add_input("i1")
+    with pytest.raises(NodeNotFoundError):
+        builder.add_output("i2")
 
 async def test_missing_node_input_raises_error():
     registry = Registry()
