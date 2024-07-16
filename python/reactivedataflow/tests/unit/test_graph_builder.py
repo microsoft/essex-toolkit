@@ -2,6 +2,7 @@
 """reactivedataflow Graph Builder Tests."""
 
 import asyncio
+from typing import cast
 
 import pytest
 import reactivex as rx
@@ -18,6 +19,7 @@ from reactivedataflow.errors import (
     ConfigReferenceNotFoundError,
     GraphHasCyclesError,
     InputNotFoundError,
+    MissingConfigurationError,
     NodeAlreadyDefinedError,
     NodeConfigNotDefinedError,
     NodeInputNotDefinedError,
@@ -28,8 +30,17 @@ from reactivedataflow.errors import (
     RequiredNodeArrayInputNotFoundError,
     RequiredNodeConfigNotFoundError,
     RequiredNodeInputNotFoundError,
+    UnexpectedConfigurationError,
 )
-from reactivedataflow.model import Edge, Graph, InputNode, Node, Output, ValRef
+from reactivedataflow.model import (
+    ConfigSpec,
+    Edge,
+    Graph,
+    InputNode,
+    Node,
+    Output,
+    ValRef,
+)
 from reactivedataflow.types import ConfigProvider
 
 from .define_math_ops import define_math_ops
@@ -40,6 +51,32 @@ def test_missing_input_raises_error():
     builder.add_input("i1")
 
     with pytest.raises(InputNotFoundError):
+        builder.build()
+
+
+def test_missing_output_raises_error():
+    builder = GraphBuilder()
+    builder.add_input("i1")
+    with pytest.raises(NodeNotFoundError):
+        builder.add_output("i2")
+
+
+def test_raises_on_unexpected_raw_config_error():
+    builder = GraphBuilder()
+    with pytest.raises(UnexpectedConfigurationError):
+        builder.build(config_raw={"unexpected": 1})
+
+
+def test_raises_on_unexpected_config_provider_error():
+    builder = GraphBuilder()
+    with pytest.raises(UnexpectedConfigurationError):
+        builder.build(config_providers={"unexpected": cast(ConfigProvider, lambda: 1)})
+
+
+def test_raises_on_missing_keys_error():
+    builder = GraphBuilder()
+    builder.add_injected_config("missing")
+    with pytest.raises(MissingConfigurationError):
         builder.build()
 
 
@@ -83,6 +120,33 @@ async def test_missing_array_input_raises_error():
 
     builder.add_edge(from_node="const1", to_node="n")
     graph = builder.build(registry=registry)
+    await graph.drain()
+    assert graph.output_value("n") == 1
+    await graph.dispose()
+
+
+async def test_config_raw_injection():
+    registry = Registry()
+    define_math_ops(registry)
+
+    @verb(
+        name="add_dict",
+        registry=registry,
+        ports=[NamedInputs(required=["a"], parameter="values")],
+    )
+    def add(values: dict[str, int]) -> int:
+        return sum(values.values())
+
+    builder = GraphBuilder()
+    builder.add_node("const1", "constant", config={"value": ValRef(reference="const1")})
+    builder.add_injected_config("const1")
+    builder.add_node("n", "add_dict")
+    builder.add_output("n")
+    builder.add_edge(from_node="const1", to_node="n", to_port="a")
+    with pytest.raises(MissingConfigurationError):
+        builder.build(registry=registry)
+
+    graph = builder.build(registry=registry, config_raw={"const1": 1})
     await graph.drain()
     assert graph.output_value("n") == 1
     await graph.dispose()
@@ -243,6 +307,7 @@ async def test_config_provider():
             "c1", "constant", config={"value": ValRef(reference="value_provider")}
         )
         .add_output("c1")
+        .add_injected_config("value_provider")
         .build(registry=registry, config_providers={"value_provider": provider})
     )
     await graph.drain()
@@ -376,8 +441,7 @@ async def test_graph_builder_from_schema():
     registry = Registry()
     define_math_ops(registry)
 
-    builder = GraphBuilder()
-    builder.load(
+    builder = GraphBuilder().load_model(
         Graph(
             inputs=[
                 InputNode(id="input"),
@@ -429,7 +493,8 @@ async def test_config_reference():
         GraphBuilder()
         .add_node("c1", "constant", config={"value": ValRef(reference="x")})
         .add_output("c1")
-        .build(registry=registry, config={"x": 1})
+        .add_raw_config({"x": 1})
+        .build(registry=registry)
     )
 
     await graph.drain()
@@ -464,8 +529,10 @@ async def test_strict_mode():
 
     # Global Config values aren't strictly checked
     builder = GraphBuilder()
-    builder.add_node("c1", "constant_strict", config={"value": 1})
-    graph = builder.build(config={"hey": "there"}, registry=registry)
+    builder.add_node("c1", "constant_strict", config={"value": 1}).add_raw_config({
+        "hey": "there"
+    })
+    graph = builder.build(registry=registry)
     await graph.dispose()
 
     # Pass in a bad config value to a node
@@ -499,3 +566,25 @@ async def test_strict_mode():
     builder.add_edge("c2", "n1", to_port="b")
     with pytest.raises(NodeOutputNotDefinedError):
         builder.build(registry=registry)
+
+
+async def test_built_config():
+    registry = Registry()
+    define_math_ops(registry)
+
+    def build_constant(value: int) -> int:
+        return value
+
+    graph = (
+        GraphBuilder()
+        .add_node("c1", "constant", config={"value": ValRef(reference="x")})
+        .add_output("c1")
+        .add_built_config(
+            ConfigSpec(name="x", builder_name="constant", args={"value": 1})
+        )
+        .build(registry=registry, config_builders={"constant": build_constant})
+    )
+
+    await graph.drain()
+    assert graph.output_value("c1") == 1
+    await graph.dispose()

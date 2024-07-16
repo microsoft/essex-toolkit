@@ -59,6 +59,31 @@ class Output(BaseModel):
     port: str = Field(default=default_output, description="Port identifier.")
 
 
+class ConfigSpec(BaseModel):
+    """Configuration Specification Model."""
+
+    name: str = Field(..., description="Name of the configuration.")
+    builder_name: str = Field(..., description="The name of the builder to use.")
+    args: dict[str, Any] = Field(
+        default_factory=dict, description="Arguments to the builder."
+    )
+
+
+class Config(BaseModel):
+    """Global Configuration Model."""
+
+    raw: dict[str, str | int | float | bool] = Field(
+        default_factory=dict, description="Raw configuration."
+    )
+    built: list[ConfigSpec] = Field(
+        default_factory=list, description="Constructed configuration."
+    )
+    injected: list[str] = Field(
+        default_factory=list,
+        description="A list of expected configuration names to be injected, either as ConfigProviders or raw config.",
+    )
+
+
 class Graph(BaseModel):
     """Graph Model."""
 
@@ -74,3 +99,4 @@ class Graph(BaseModel):
     outputs: list[Output] = Field(
         default_factory=list, description="List of output nodes in the graph."
     )
+    config: Config = Field(default_factory=Config, description="Global configuration.")
