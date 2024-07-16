@@ -2,6 +2,7 @@
 """reactivedataflow Graph Builder Tests."""
 
 import asyncio
+from typing import cast
 
 import pytest
 import reactivex as rx
@@ -18,6 +19,7 @@ from reactivedataflow.errors import (
     ConfigReferenceNotFoundError,
     GraphHasCyclesError,
     InputNotFoundError,
+    MissingConfigurationError,
     NodeAlreadyDefinedError,
     NodeConfigNotDefinedError,
     NodeInputNotDefinedError,
@@ -28,6 +30,7 @@ from reactivedataflow.errors import (
     RequiredNodeArrayInputNotFoundError,
     RequiredNodeConfigNotFoundError,
     RequiredNodeInputNotFoundError,
+    UnexpectedConfigurationError,
 )
 from reactivedataflow.model import (
     ConfigSpec,
@@ -50,11 +53,32 @@ def test_missing_input_raises_error():
     with pytest.raises(InputNotFoundError):
         builder.build()
 
+
 def test_missing_output_raises_error():
     builder = GraphBuilder()
     builder.add_input("i1")
     with pytest.raises(NodeNotFoundError):
         builder.add_output("i2")
+
+
+def test_raises_on_unexpected_raw_config_error():
+    builder = GraphBuilder()
+    with pytest.raises(UnexpectedConfigurationError):
+        builder.build(config_raw={"unexpected": 1})
+
+
+def test_raises_on_unexpected_config_provider_error():
+    builder = GraphBuilder()
+    with pytest.raises(UnexpectedConfigurationError):
+        builder.build(config_providers={"unexpected": cast(ConfigProvider, lambda: 1)})
+
+
+def test_raises_on_missing_keys_error():
+    builder = GraphBuilder()
+    builder.add_injected_config("missing")
+    with pytest.raises(MissingConfigurationError):
+        builder.build()
+
 
 async def test_missing_node_input_raises_error():
     registry = Registry()
@@ -478,7 +502,9 @@ async def test_strict_mode():
 
     # Global Config values aren't strictly checked
     builder = GraphBuilder()
-    builder.add_node("c1", "constant_strict", config={"value": 1}).add_raw_config({"hey": "there"})
+    builder.add_node("c1", "constant_strict", config={"value": 1}).add_raw_config({
+        "hey": "there"
+    })
     graph = builder.build(registry=registry)
     await graph.dispose()
 

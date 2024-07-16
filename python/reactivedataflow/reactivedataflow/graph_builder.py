@@ -10,11 +10,11 @@ from .build_execution_graph import build_execution_graph
 from .config_provider import ConfigProvider
 from .constants import default_output
 from .errors import (
+    MissingConfigurationError,
     NodeAlreadyDefinedError,
     NodeNotFoundError,
     OutputAlreadyDefinedError,
     UnexpectedConfigurationError,
-    MissingConfigurationError,
 )
 from .execution_graph import ExecutionGraph
 from .model import Config, ConfigSpec, Edge, Graph, InputNode, Node, Output, ValRef
@@ -176,7 +176,7 @@ class GraphBuilder:
         config_providers = config_providers or {}
         expected_keys = set(self._config.injected)
         injected_keys: set[str] = set()
-        
+
         for key in config_raw:
             if key not in self._config.injected:
                 raise UnexpectedConfigurationError(key)
@@ -185,10 +185,10 @@ class GraphBuilder:
             if key not in self._config.injected:
                 raise UnexpectedConfigurationError(key)
             injected_keys.add(key)
-            
+
         if injected_keys != expected_keys:
             raise MissingConfigurationError(expected_keys - injected_keys)
-        
+
         return build_execution_graph(
             self.build_model(),
             inputs=inputs,
