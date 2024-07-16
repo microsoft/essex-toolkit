@@ -251,6 +251,7 @@ async def test_config_provider():
             "c1", "constant", config={"value": ValRef(reference="value_provider")}
         )
         .add_output("c1")
+        .add_injected_config("value_provider")
         .build(registry=registry, config_providers={"value_provider": provider})
     )
     await graph.drain()
@@ -436,7 +437,8 @@ async def test_config_reference():
         GraphBuilder()
         .add_node("c1", "constant", config={"value": ValRef(reference="x")})
         .add_output("c1")
-        .build(registry=registry, config_raw={"x": 1})
+        .add_raw_config({"x": 1})
+        .build(registry=registry)
     )
 
     await graph.drain()
@@ -471,8 +473,8 @@ async def test_strict_mode():
 
     # Global Config values aren't strictly checked
     builder = GraphBuilder()
-    builder.add_node("c1", "constant_strict", config={"value": 1})
-    graph = builder.build(config_raw={"hey": "there"}, registry=registry)
+    builder.add_node("c1", "constant_strict", config={"value": 1}).add_raw_config({"hey": "there"})
+    graph = builder.build(registry=registry)
     await graph.dispose()
 
     # Pass in a bad config value to a node
@@ -519,9 +521,9 @@ async def test_built_config():
         GraphBuilder()
         .add_node("c1", "constant", config={"value": ValRef(reference="x")})
         .add_output("c1")
-        .add_built_config([
+        .add_built_config(
             ConfigSpec(name="x", builder_name="constant", args={"value": 1})
-        ])
+        )
         .build(registry=registry, config_builders={"constant": build_constant})
     )
 

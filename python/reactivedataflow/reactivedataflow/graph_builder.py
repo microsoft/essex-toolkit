@@ -13,6 +13,8 @@ from .errors import (
     NodeAlreadyDefinedError,
     NodeNotFoundError,
     OutputAlreadyDefinedError,
+    UnexpectedConfigurationError,
+    MissingConfigurationError,
 )
 from .execution_graph import ExecutionGraph
 from .model import Config, ConfigSpec, Edge, Graph, InputNode, Node, Output, ValRef
@@ -52,14 +54,14 @@ class GraphBuilder:
         self._config.raw = {**self._config.raw, **config}
         return self
 
-    def add_built_config(self, config: list[ConfigSpec]) -> "GraphBuilder":
+    def add_built_config(self, *config: ConfigSpec) -> "GraphBuilder":
         """Add built configuration to the graph."""
-        self._config.built = [*self._config.built, *config]
+        self._config.built = [*self._config.built, *list(config)]
         return self
 
-    def add_injected_config(self, config: list[str]) -> "GraphBuilder":
+    def add_injected_config(self, *config: str) -> "GraphBuilder":
         """Add injected configuration to the graph."""
-        self._config.injected = [*self._config.injected, *config]
+        self._config.injected = [*self._config.injected, *list(config)]
         return self
 
     def add_output(
@@ -170,10 +172,27 @@ class GraphBuilder:
             config_builders: Configuration builder functions, dict[str, ConfigBuilder].
             registry: The registry to use for verb lookup.
         """
+        config_raw = config_raw or {}
+        config_providers = config_providers or {}
+        expected_keys = set(self._config.injected)
+        injected_keys: set[str] = set()
+        
+        for key in config_raw:
+            if key not in self._config.injected:
+                raise UnexpectedConfigurationError(key)
+            injected_keys.add(key)
+        for key in config_providers:
+            if key not in self._config.injected:
+                raise UnexpectedConfigurationError(key)
+            injected_keys.add(key)
+            
+        if injected_keys != expected_keys:
+            raise MissingConfigurationError(expected_keys - injected_keys)
+        
         return build_execution_graph(
             self.build_model(),
             inputs=inputs,
-            config_raw={**self._config.raw, **(config_raw or {})},
+            config_raw={**self._config.raw, **config_raw},
             config_providers=config_providers,
             config_builders=config_builders,
             registry=registry,

@@ -146,3 +146,17 @@ class PortNamesMustBeUniqueError(ValueError):
     def __init__(self):
         """Initialize the PortNamesMustBeUniqueError."""
         super().__init__("Port names must be unique.")
+
+class UnexpectedConfigurationError(ValueError):
+    """An exception for unexpected configuration."""
+
+    def __init__(self, config_key: str):
+        """Initialize the UnexpectedConfigurationError."""
+        super().__init__(f"Unexpected configuration '{config_key}'.")
+
+class MissingConfigurationError(ValueError):
+    """An exception for missing configuration."""
+
+    def __init__(self, config_keys: set[str]):
+        """Initialize the MissingConfigurationError."""
+        super().__init__(f"Missing configuration '{config_keys}'.")
