@@ -3,7 +3,7 @@
 
 from reactivedataflow import VerbInput, VerbOutput
 from reactivedataflow.conditions import (
-    array_input_has_min,
+    array_input_has_min_length,
     array_input_values_are_defined,
     array_result_has_min,
     array_result_not_empty,
@@ -36,7 +36,7 @@ def test_array_results_has_min():
 
 
 def test_array_input_has_min_values():
-    check = array_input_has_min(min_count=2)
+    check = array_input_has_min_length(min_count=2)
     inputs = VerbInput(array_inputs=[])
     assert check(inputs) is False
 

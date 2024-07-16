@@ -25,6 +25,9 @@ class ArrayInput(BaseModel, extra="allow"):
     min_inputs: int | None = Field(
         default=None, description="The minimum number of array inputs required."
     )
+    defined_inputs: bool = Field(
+        default=False, description="If true, then all array input values must be non-None for the verb to fire."
+    )
     parameter: str | None = Field(
         default=None,
         description="The name of the parameter on the implementing function.",

@@ -10,18 +10,14 @@ from reactivedataflow import (
     Registry,
     verb,
 )
-from reactivedataflow.conditions import (
-    array_input_not_empty,
-)
 
 
 def define_math_ops(registry: Registry) -> None:
     @verb(
         name="add",
         registry=registry,
-        fire_conditions=[array_input_not_empty()],
     )
-    def add(values: Annotated[list[int], ArrayInput()]) -> int:
+    def add(values: Annotated[list[int], ArrayInput(min_inputs=1, defined_inputs=True)]) -> int:
         return sum(values)
 
     @verb(
