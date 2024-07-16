@@ -173,7 +173,7 @@ class GraphBuilder:
         return build_execution_graph(
             self.build_model(),
             inputs=inputs,
-            config_raw=config_raw,
+            config_raw={**self._config.raw, **(config_raw or {})},
             config_providers=config_providers,
             config_builders=config_builders,
             registry=registry,
