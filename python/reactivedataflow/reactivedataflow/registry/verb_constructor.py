@@ -4,6 +4,7 @@
 from typing import cast
 
 from reactivedataflow.conditions import (
+    array_input_has_min,
     array_input_values_are_defined,
     output_changed,
     require_config,
@@ -96,8 +97,9 @@ def _infer_firing_conditions(
     ]
 
     if registration.ports.array_input and registration.ports.array_input.min_inputs:
+        firing_conditions.append(array_input_values_are_defined())
         firing_conditions.append(
-            array_input_values_are_defined(registration.ports.array_input.min_inputs)
+            array_input_has_min(registration.ports.array_input.min_inputs)
         )
     if (
         registration.ports.named_inputs

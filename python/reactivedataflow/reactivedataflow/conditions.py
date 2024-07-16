@@ -12,19 +12,19 @@ from .utils.equality import IsEqualCheck, default_is_equal
 _log = logging.getLogger(__name__)
 
 
-def _check_array_input_not_empty(inputs: VerbInput):
-    return len(inputs.array_inputs) > 0 if inputs.array_inputs else False
-
-
-def _check_array_input_has_valid_values(min_count: int):
+def _check_array_have_min_length(min_length: int):
     def check(inputs: VerbInput):
-        return (
-            all(value is not None for value in inputs.array_inputs)
-            if inputs.array_inputs
-            else False
-        ) and len(inputs.array_inputs) >= min_count
+        return len(inputs.array_inputs) >= min_length if inputs.array_inputs else False
 
     return check
+
+
+def _check_array_input_has_valid_values(inputs: VerbInput):
+    return (
+        all(value is not None for value in inputs.array_inputs)
+        if inputs.array_inputs
+        else False
+    )
 
 
 def _is_value_in_dict(name: str, config: dict[str, Any]):
@@ -61,12 +61,17 @@ def require_config(*required_config: str) -> FireCondition:
 
 def array_input_not_empty() -> FireCondition:
     """Create a fire condition to r the array input to be non-empty for the function to fire."""
-    return _check_array_input_not_empty
+    return _check_array_have_min_length(1)
 
 
-def array_input_values_are_defined(min_count: int = 1) -> FireCondition:
+def array_input_has_min(min_count: int = 1) -> FireCondition:
+    """Create a fire condition to require the array input to have at least min_count elements for the function to fire."""
+    return _check_array_have_min_length(min_count)
+
+
+def array_input_values_are_defined() -> FireCondition:
     """Create a fire condition to require the array input values to be defined for the function to fire."""
-    return _check_array_input_has_valid_values(min_count)
+    return _check_array_input_has_valid_values
 
 
 T = TypeVar("T")
