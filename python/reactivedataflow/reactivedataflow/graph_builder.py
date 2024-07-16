@@ -1,51 +1,65 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """The reactivedataflow Library."""
 
+from collections.abc import Callable
 from typing import Any
 
-import networkx as nx
 import reactivex as rx
 
+from .build_execution_graph import build_execution_graph
 from .config_provider import ConfigProvider
 from .constants import default_output
 from .errors import (
-    ConfigReferenceNotFoundError,
-    GraphHasCyclesError,
-    InputNotFoundError,
     NodeAlreadyDefinedError,
-    NodeConfigNotDefinedError,
-    NodeInputNotDefinedError,
     NodeNotFoundError,
-    NodeOutputNotDefinedError,
     OutputAlreadyDefinedError,
-    RequiredNodeArrayInputNotFoundError,
-    RequiredNodeConfigNotFoundError,
-    RequiredNodeInputNotFoundError,
 )
 from .execution_graph import ExecutionGraph
-from .model import Graph, Output, ValRef
-from .nodes import ExecutionNode, InputNode, Node
+from .model import Config, ConfigSpec, Edge, Graph, InputNode, Node, Output, ValRef
 from .registry import Registry
+
+ConfigBuilder = Callable[..., Any]
 
 
 class GraphBuilder:
     """GraphBuilder class.
 
-    This class can be used to iteratively construct a graph by adding nodes and edges, or by ingesting a Graph model directly.
-    Once a graph has been built, run the `build` command with the global configuration object to use, and it will return an ExecutionGraph object.
+    This class can be used to iteratively construct a graph model by adding nodes, edges, inputs, outputs, and configuration.
+    This graph can then be constructed into an execution graph using the `build_execution_graph` function.
     """
 
-    _graph: nx.DiGraph
+    _inputs: dict[str, InputNode]
     _outputs: dict[str, Output]
+    _nodes: dict[str, Node]
+    _edges: list[Edge]
+    _config: Config
 
     def __init__(self):
         """Initialize the GraphBuilder."""
-        self._graph = nx.DiGraph()
+        self._inputs = {}
         self._outputs = {}
+        self._nodes = {}
+        self._edges = []
+        self._config = Config()
 
     def add_input(self, nid: str) -> "GraphBuilder":
         """Add an input node to the graph."""
-        self._graph.add_node(nid, input=True)
+        self._inputs[nid] = InputNode(id=nid)
+        return self
+
+    def add_raw_config(self, config: dict[str, Any]) -> "GraphBuilder":
+        """Add raw configuration to the graph."""
+        self._config.raw = {**self._config.raw, **config}
+        return self
+
+    def add_built_config(self, config: list[ConfigSpec]) -> "GraphBuilder":
+        """Add built configuration to the graph."""
+        self._config.built = [*self._config.built, *config]
+        return self
+
+    def add_injected_config(self, config: list[str]) -> "GraphBuilder":
+        """Add injected configuration to the graph."""
+        self._config.injected = [*self._config.injected, *config]
         return self
 
     def add_output(
@@ -62,6 +76,8 @@ class GraphBuilder:
             node = name
         if name in self._outputs:
             raise OutputAlreadyDefinedError(name)
+        if name not in self._nodes:
+            raise NodeNotFoundError(node)
 
         self._outputs[name] = Output(name=name, node=node, port=port)
         return self
@@ -70,7 +86,7 @@ class GraphBuilder:
         self,
         nid: str,
         verb: str,
-        config: dict[str, Any] | None = None,
+        config: dict[str, str | int | float | bool | ValRef] | None = None,
         override: bool = False,
     ) -> "GraphBuilder":
         """Add a node to the graph.
@@ -81,9 +97,9 @@ class GraphBuilder:
             config: The configuration for the verb.
             override: Whether to override the node if it already exists.
         """
-        if self._graph.has_node(nid) and not override:
+        if nid in self._nodes and not override:
             raise NodeAlreadyDefinedError(nid)
-        self._graph.add_node(nid, verb=verb, config=config)
+        self._nodes[nid] = Node(id=nid, verb=verb, config=config or {})
         return self
 
     def add_edge(
@@ -101,233 +117,64 @@ class GraphBuilder:
             from_port (str | None): The output port to connect from. If None, then the default output port will be used.
             to_port: The input port to connect to. If None, then this input will be used as an array input.
         """
-        if not self._graph.has_node(from_node):
+        if from_node not in self._nodes:
             raise NodeNotFoundError(from_node)
-        if not self._graph.has_node(to_node):
+        if to_node not in self._nodes:
             raise NodeNotFoundError(to_node)
 
-        port_connection = {"from_port": from_port, "to_port": to_port}
-        if self._graph.has_edge(from_node, to_node):
-            edge = self._graph.get_edge_data(from_node, to_node)
-            edge["ports"].append(port_connection)
-        else:
-            self._graph.add_edge(from_node, to_node, ports=[port_connection])
-
+        self._edges.append(
+            Edge(
+                from_node=from_node,
+                to_node=to_node,
+                from_port=from_port or default_output,
+                to_port=to_port,
+            )
+        )
         return self
 
-    def load(self, model: Graph) -> "GraphBuilder":
-        """Load a graph model.
-
-        Args:
-            model: The graph model to load.
-        """
-        for node in model.inputs:
-            self.add_input(node.id)
-        for output in model.outputs:
-            self.add_output(output.name, output.node, output.port)
-        for node in model.nodes:
-            self.add_node(
-                node.id,
-                node.verb,
-                config=node.config,
-            )
-        for edge in model.edges:
-            self.add_edge(
-                from_node=edge.from_node,
-                from_port=edge.from_port,
-                to_node=edge.to_node,
-                to_port=edge.to_port,
-            )
+    def load_model(self, model: Graph) -> "GraphBuilder":
+        """Load a model into the builder."""
+        self._inputs = {node.id: node for node in model.inputs}
+        self._outputs = {output.name: output for output in model.outputs}
+        self._nodes = {node.id: node for node in model.nodes}
+        self._edges = model.edges
+        self._config = model.config
         return self
+
+    def build_model(
+        self,
+    ) -> Graph:
+        """Build the graph model instance."""
+        return Graph(
+            inputs=list(self._inputs.values()),
+            outputs=list(self._outputs.values()),
+            nodes=list(self._nodes.values()),
+            edges=self._edges,
+            config=self._config,
+        )
 
     def build(
         self,
         inputs: dict[str, rx.Observable[Any]] | None = None,
-        config: dict[str, Any] | None = None,
+        config_raw: dict[str, Any] | None = None,
         config_providers: dict[str, ConfigProvider[Any]] | None = None,
+        config_builders: dict[str, ConfigBuilder] | None = None,
         registry: Registry | None = None,
     ) -> ExecutionGraph:
-        """Build the graph.
+        """Build the execution graph.
 
         Args:
             inputs: The inputs to the graph.
-            config: The global configuration for the graph.
+            config_raw: The global configuration for the graph.
             config_providers: Configuration providers, dict[str, ConfigProvider] (see the ConfigProvider protocol).
+            config_builders: Configuration builder functions, dict[str, ConfigBuilder].
             registry: The registry to use for verb lookup.
         """
-        registry = registry or Registry.get_instance()
-        inputs = inputs or {}
-        config = config or {}
-        config_providers = config_providers or {}
-
-        def build_nodes() -> dict[str, Node]:
-            nodes: dict[str, Node] = {}
-            for nid in self._graph.nodes:
-                node = self._graph.nodes[nid]
-                # Check the `input` flag in the nx graph to determine if this is an input node.
-                if node.get("input"):
-                    nodes[nid] = InputNode(nid)
-                    continue
-
-                registration = registry.get(node["verb"])
-                node_config = node.get("config", {}) or {}
-                node_config_providers: dict[str, ConfigProvider[Any]] = {}
-
-                for key, value in node_config.items():
-                    if isinstance(value, ValRef):
-                        if value.reference:
-                            if value.reference in config:
-                                node_config[key] = config[value.reference]
-                            elif value.reference in config_providers:
-                                node_config_providers[key] = config_providers[
-                                    value.reference
-                                ]
-                            else:
-                                raise ConfigReferenceNotFoundError(key)
-                        else:
-                            node_config[key] = value.value
-                    else:
-                        node_config[key] = value
-
-                # Set up an execution node
-                verb = registry.get_verb_function(node["verb"])
-                node_global_config = {
-                    key: value
-                    for key, value in config.items()
-                    if key in registration.ports.config_names
-                }
-                node_global_config_providers = {
-                    key: value
-                    for key, value in config_providers.items()
-                    if key in registration.ports.config_names
-                }
-                node_config = {**node_global_config, **node_config}
-                node_config_providers = {
-                    **node_global_config_providers,
-                    **node_config_providers,
-                }
-
-                execution_node = ExecutionNode(
-                    nid, verb, node_config, node_config_providers
-                )
-                nodes[nid] = execution_node
-            return nodes
-
-        def build_node_inputs(
-            nodes: dict[str, Node],
-        ) -> tuple[
-            dict[str, dict[str, rx.Observable[Any]]],
-            dict[str, list[rx.Observable[Any]]],
-        ]:
-            named_inputs: dict[str, dict[str, rx.Observable]] = {}
-            array_inputs: dict[str, list[rx.Observable]] = {}
-            for edge in self._graph.edges(data=True):
-                # Unpack the edge details
-                from_node, to_node, data = edge
-                ports = data.get("ports", [])
-                for port_connection in ports:
-                    from_port = port_connection.get("from_port") or default_output
-                    to_port = port_connection.get("to_port")
-
-                    # Find the appropriate observable the "from" side of the edge represents.
-                    input_source = (
-                        inputs[from_node]
-                        if from_node in inputs
-                        else nodes[from_node].output(from_port)
-                    )
-
-                    if to_port:
-                        # to_port is defined, this is a named input
-                        if to_node not in named_inputs:
-                            named_inputs[to_node] = {}
-                        named_inputs[to_node][to_port] = input_source
-                    else:
-                        # to_port is not defined, this is an array input
-                        if to_node not in array_inputs:
-                            array_inputs[to_node] = []
-                        array_inputs[to_node].append(input_source)
-            return named_inputs, array_inputs
-
-        def bind_inputs(
-            nodes: dict[str, Node],
-            named_inputs: dict[str, dict[str, rx.Observable[Any]]],
-            array_inputs: dict[str, list[rx.Observable[Any]]],
-        ):
-            for nid in self._graph.nodes:
-                node = nodes[nid]
-                if isinstance(node, InputNode):
-                    node.attach(inputs[nid])
-                if isinstance(node, ExecutionNode):
-                    named_in = named_inputs.get(nid)
-                    array_in = array_inputs.get(nid)
-                    node.attach(named_inputs=named_in, array_inputs=array_in)
-
-        def validate_inputs():
-            for nid in self._graph.nodes:
-                node = self._graph.nodes[nid]
-                if node.get("input") and nid not in inputs:
-                    raise InputNotFoundError(nid)
-
-        def validate_node_requirements():
-            for nid in self._graph.nodes:
-                node = self._graph.nodes[nid]
-
-                if node.get("input"):
-                    # skip input nodes, they've already been validated
-                    continue
-
-                # Validate the inputs and config
-                registration = registry.get(node["verb"])
-                bindings = registration.ports
-                execution_node = nodes[nid]
-
-                if isinstance(execution_node, ExecutionNode):
-                    input_names = execution_node.input_names
-                    config_names = execution_node.config_names
-                    num_array_inputs = execution_node.num_array_inputs
-                    output_names = execution_node.output_names
-                    array_input = bindings.array_input
-
-                    if (
-                        array_input
-                        and array_input.required
-                        and num_array_inputs < array_input.required
-                    ):
-                        raise RequiredNodeArrayInputNotFoundError(nid)
-
-                    for required_input in bindings.required_input_names:
-                        if required_input not in input_names:
-                            raise RequiredNodeInputNotFoundError(nid, required_input)
-
-                    for required_config in bindings.required_config_names:
-                        if required_config not in config_names:
-                            raise RequiredNodeConfigNotFoundError(nid, required_config)
-
-                    if registration.strict:
-                        # Check that all inputs are accounted for
-                        for input_name in input_names:
-                            if input_name not in bindings.input_names:
-                                raise NodeInputNotDefinedError(input_name)
-
-                        for config_name in config_names:
-                            if config_name not in bindings.config_names:
-                                raise NodeConfigNotDefinedError(config_name)
-
-                        for output_name in output_names:
-                            if output_name not in bindings.output_names:
-                                raise NodeOutputNotDefinedError(output_name)
-
-        nodes = build_nodes()
-        validate_inputs()
-        named_inputs, array_inputs = build_node_inputs(nodes)
-        bind_inputs(nodes, named_inputs, array_inputs)
-
-        # Validate the graph
-        if not nx.is_directed_acyclic_graph(self._graph):
-            raise GraphHasCyclesError
-
-        validate_node_requirements()
-
-        visit_order = list(nx.topological_sort(self._graph))
-
-        return ExecutionGraph(nodes, self._outputs, visit_order)
+        return build_execution_graph(
+            self.build_model(),
+            inputs=inputs,
+            config_raw=config_raw,
+            config_providers=config_providers,
+            config_builders=config_builders,
+            registry=registry,
+        )

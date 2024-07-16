@@ -51,13 +51,13 @@ async def test_missing_node_input_raises_error():
     builder.add_node("n", "multiply")
 
     with pytest.raises(RequiredNodeInputNotFoundError):
-        builder.build(registry=registry)
+        builder.build()
 
     builder.add_node("const1", "constant", config={"value": 1})
     builder.add_edge(from_node="const1", to_node="n", to_port="a")
 
     with pytest.raises(RequiredNodeInputNotFoundError):
-        builder.build(registry=registry)
+        builder.build()
 
     builder.add_node("const2", "constant", config={"value": 2})
     builder.add_edge(from_node="const2", to_node="n", to_port="b")
@@ -376,8 +376,7 @@ async def test_graph_builder_from_schema():
     registry = Registry()
     define_math_ops(registry)
 
-    builder = GraphBuilder()
-    builder.load(
+    builder = GraphBuilder().load_model(
         Graph(
             inputs=[
                 InputNode(id="input"),
@@ -429,7 +428,7 @@ async def test_config_reference():
         GraphBuilder()
         .add_node("c1", "constant", config={"value": ValRef(reference="x")})
         .add_output("c1")
-        .build(registry=registry, config={"x": 1})
+        .build(registry=registry, config_raw={"x": 1})
     )
 
     await graph.drain()
@@ -465,7 +464,7 @@ async def test_strict_mode():
     # Global Config values aren't strictly checked
     builder = GraphBuilder()
     builder.add_node("c1", "constant_strict", config={"value": 1})
-    graph = builder.build(config={"hey": "there"}, registry=registry)
+    graph = builder.build(config_raw={"hey": "there"}, registry=registry)
     await graph.dispose()
 
     # Pass in a bad config value to a node
