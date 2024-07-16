@@ -125,6 +125,32 @@ async def test_missing_array_input_raises_error():
     await graph.dispose()
 
 
+async def test_config_raw_injection():
+    registry = Registry()
+    define_math_ops(registry)
+
+    @verb(
+        name="add_dict",
+        registry=registry,
+        ports=[NamedInputs(required=["a"], parameter="values")],
+    )
+    def add(values: dict[str, int]) -> int:
+        return sum(values.values())
+
+    builder = GraphBuilder()
+    builder.add_node("const1", "constant", config={"value": ValRef(reference="const1")})
+    builder.add_injected_config("const1")
+    builder.add_node("n", "add_dict")
+    builder.add_output("n")
+    builder.add_edge(from_node="const1", to_node="n", to_port="a")
+    with pytest.raises(MissingConfigurationError):
+        builder.build(registry=registry)
+    
+    graph = builder.build(registry=registry, config_raw={"const1": 1})
+    await graph.drain()
+    assert graph.output_value("n") == 1
+    await graph.dispose()
+
 async def test_missing_dict_input_raises_error():
     registry = Registry()
     define_math_ops(registry)
