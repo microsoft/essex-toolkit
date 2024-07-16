@@ -76,7 +76,7 @@ class GraphBuilder:
             node = name
         if name in self._outputs:
             raise OutputAlreadyDefinedError(name)
-        if name not in self._nodes:
+        if node not in self._nodes and node not in self._inputs:
             raise NodeNotFoundError(node)
 
         self._outputs[name] = Output(name=name, node=node, port=port)

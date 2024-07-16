@@ -51,13 +51,13 @@ async def test_missing_node_input_raises_error():
     builder.add_node("n", "multiply")
 
     with pytest.raises(RequiredNodeInputNotFoundError):
-        builder.build()
+        builder.build(registry=registry)
 
     builder.add_node("const1", "constant", config={"value": 1})
     builder.add_edge(from_node="const1", to_node="n", to_port="a")
 
     with pytest.raises(RequiredNodeInputNotFoundError):
-        builder.build()
+        builder.build(registry=registry)
 
     builder.add_node("const2", "constant", config={"value": 2})
     builder.add_edge(from_node="const2", to_node="n", to_port="b")
