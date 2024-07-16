@@ -3,7 +3,7 @@
 
 import pytest
 
-from reactivedataflow.errors import PortNamesMustBeUniqueError
+from reactivedataflow.errors import PortMissingNameError, PortNamesMustBeUniqueError
 from reactivedataflow.ports import (
     ArrayInput,
     Config,
@@ -24,6 +24,17 @@ def test_port_map_can_separate_port_types() -> None:
     assert len(ports.config) == 1
     assert len(ports.outputs) == 1
     assert ports.array_input is not None
+
+
+def test_missing_port_name_raises_error() -> None:
+    with pytest.raises(PortMissingNameError):
+        Ports([
+            Input(type="str"),
+        ])
+    with pytest.raises(PortMissingNameError):
+        Ports([
+            Config(type="str"),
+        ])
 
 
 def test_port_map_throws_on_duplicate_input_ports() -> None:

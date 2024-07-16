@@ -2,11 +2,11 @@
 """reactivedataflow PortMapper class."""
 
 from functools import cached_property
-from typing import Any
+from typing import Any, cast
 
 from pydantic import BaseModel, Field
 
-from reactivedataflow.errors import PortNamesMustBeUniqueError
+from reactivedataflow.errors import PortMissingNameError, PortNamesMustBeUniqueError
 from reactivedataflow.nodes import EmitMode
 from reactivedataflow.utils.equality import IsEqualCheck
 
@@ -19,8 +19,15 @@ class ArrayInput(BaseModel, extra="allow"):
     type: str | None = Field(
         default=None, description="The item-type of the array input port."
     )
-    required: int | None = Field(
+    required: bool = Field(
+        default=False, description="Whether the input port is required."
+    )
+    min_inputs: int | None = Field(
         default=None, description="The minimum number of array inputs required."
+    )
+    defined_inputs: bool = Field(
+        default=False,
+        description="If true, then all array input values must be non-None for the verb to fire.",
     )
     parameter: str | None = Field(
         default=None,
@@ -34,7 +41,10 @@ class NamedInputs(BaseModel, extra="allow"):
     type: dict[str, str] | None = Field(
         default=None, description="The type of the port."
     )
-    required: list[str] = Field(
+    required: bool = Field(
+        default=False, description="Whether the input port is required."
+    )
+    required_keys: list[str] = Field(
         default_factory=list, description="What named inputs are required."
     )
     parameter: str | None = Field(
@@ -46,7 +56,7 @@ class NamedInputs(BaseModel, extra="allow"):
 class Input(BaseModel, extra="allow"):
     """Specification for a named input port."""
 
-    name: str = Field(..., description="The name of the port.")
+    name: str | None = Field(default=None, description="The name of the port.")
     type: str | None = Field(default=None, description="The type of the port.")
     required: bool = Field(
         default=False, description="Whether the input port is required."
@@ -60,7 +70,7 @@ class Input(BaseModel, extra="allow"):
 class Output(BaseModel, extra="allow"):
     """Specification for an output port."""
 
-    name: str = Field(..., description="The name of the port.")
+    name: str | None = Field(default=None, description="The name of the port.")
     type: str | None = Field(default=None, description="The type of the port.")
     emits_on: EmitMode | None = Field(
         default=EmitMode.OnChange, description="When the port emits."
@@ -73,7 +83,7 @@ class Output(BaseModel, extra="allow"):
 class Config(BaseModel, extra="allow"):
     """Specification for a configuration field of an verb function."""
 
-    name: str = Field(..., description="The name of the port.")
+    name: str | None = Field(default=None, description="The name of the port.")
     type: str | None = Field(default=None, description="The type of the port.")
     required: bool = Field(default=False, description="Whether the port is required.")
     parameter: str | None = Field(
@@ -108,6 +118,10 @@ class Ports:
 
     def _validate(self):
         """Validate the ports."""
+        for port in self.bindings:
+            if isinstance(port, (Input, Output, Config)) and not port.name:
+                raise PortMissingNameError
+
         input_names = [port.name for port in self.bindings if isinstance(port, Input)]
         if len(input_names) != len(set(input_names)):
             raise PortNamesMustBeUniqueError
@@ -149,17 +163,17 @@ class Ports:
     @cached_property
     def input_names(self) -> set[str]:
         """Return the names of the inputs."""
-        return {p.name for p in self.input}
+        return {cast(str, p.name) for p in self.input}
 
     @cached_property
     def config_names(self) -> set[str]:
         """Return the names of the config."""
-        return {p.name for p in self.config}
+        return {cast(str, p.name) for p in self.config}
 
     @cached_property
     def output_names(self) -> set[str]:
         """Return the names of the outputs."""
-        result = {p.name for p in self.outputs}
+        result = {cast(str, p.name) for p in self.outputs}
         if self._has_default_output:
             result.add(default_output)
         return result
@@ -167,12 +181,12 @@ class Ports:
     @cached_property
     def required_input_names(self) -> set[str]:
         """Return the required named inputs."""
-        result = {p.name for p in self.input if p.required}
+        result = {cast(str, p.name) for p in self.input if p.required}
         if self.named_inputs:
-            result.update(self.named_inputs.required)
+            result.update(self.named_inputs.required_keys)
         return result
 
     @cached_property
     def required_config_names(self) -> set[str]:
         """Return the required named inputs."""
-        return {p.name for p in self.config if p.required}
+        return {cast(str, p.name) for p in self.config if p.required}

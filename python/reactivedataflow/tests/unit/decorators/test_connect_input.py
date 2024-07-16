@@ -41,7 +41,7 @@ def test_input_with_default_parameter_names():
 
 
 def test_input_dict_mapping():
-    @connect_input(Ports([NamedInputs(parameter="inputs", required=["a", "b"])]))
+    @connect_input(Ports([NamedInputs(parameter="inputs", required_keys=["a", "b"])]))
     def stub(inputs: dict[str, int]) -> int:
         return sum(inputs.values())
 

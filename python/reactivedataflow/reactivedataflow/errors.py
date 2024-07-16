@@ -148,6 +148,14 @@ class PortNamesMustBeUniqueError(ValueError):
         super().__init__("Port names must be unique.")
 
 
+class PortMissingNameError(ValueError):
+    """An exception for missing port name."""
+
+    def __init__(self):
+        """Initialize the PortMissingNameError."""
+        super().__init__("Port must have a name.")
+
+
 class UnexpectedConfigurationError(ValueError):
     """An exception for unexpected configuration."""
 

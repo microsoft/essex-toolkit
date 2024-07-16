@@ -2,7 +2,7 @@
 """reactivedataflow Graph Builder Tests."""
 
 import asyncio
-from typing import cast
+from typing import Annotated, cast
 
 import pytest
 import reactivex as rx
@@ -41,6 +41,7 @@ from reactivedataflow.model import (
     Output,
     ValRef,
 )
+from reactivedataflow.ports import ArrayInput
 from reactivedataflow.types import ConfigProvider
 
 from .define_math_ops import define_math_ops
@@ -125,6 +126,36 @@ async def test_missing_array_input_raises_error():
     await graph.dispose()
 
 
+async def test_array_input_with_min_entries():
+    registry = Registry()
+    define_math_ops(registry)
+
+    @verb(
+        name="add_test",
+        registry=registry,
+    )
+    def add_test(inputs: Annotated[list[int], ArrayInput(min_inputs=2)]) -> int:
+        return sum(inputs)
+
+    builder = GraphBuilder()
+    builder.add_node("const1", "constant", config={"value": 1})
+    builder.add_node("const2", "constant", config={"value": 2})
+    builder.add_node("n", "add_test")
+    builder.add_edge(from_node="const1", to_node="n")
+    builder.add_output("n")
+
+    graph = builder.build(registry=registry)
+    await graph.drain()
+    assert graph.output_value("n") is None
+    await graph.dispose()
+
+    builder.add_edge(from_node="const2", to_node="n")
+    graph = builder.build(registry=registry)
+    await graph.drain()
+    assert graph.output_value("n") == 3
+    await graph.dispose()
+
+
 async def test_config_raw_injection():
     registry = Registry()
     define_math_ops(registry)
@@ -132,7 +163,7 @@ async def test_config_raw_injection():
     @verb(
         name="add_dict",
         registry=registry,
-        ports=[NamedInputs(required=["a"], parameter="values")],
+        ports=[NamedInputs(required_keys=["a"], parameter="values")],
     )
     def add(values: dict[str, int]) -> int:
         return sum(values.values())
@@ -159,7 +190,7 @@ async def test_missing_dict_input_raises_error():
     @verb(
         name="add_dict",
         registry=registry,
-        ports=[NamedInputs(required=["a"], parameter="values")],
+        ports=[NamedInputs(required_keys=["a"], parameter="values")],
     )
     def add(values: dict[str, int]) -> int:
         return sum(values.values())

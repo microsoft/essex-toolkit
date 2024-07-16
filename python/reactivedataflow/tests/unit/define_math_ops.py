@@ -1,6 +1,8 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """reactivedataflow Graph Assembler Tests."""
 
+from typing import Annotated
+
 from reactivedataflow import (
     ArrayInput,
     Config,
@@ -8,36 +10,28 @@ from reactivedataflow import (
     Registry,
     verb,
 )
-from reactivedataflow.conditions import (
-    array_input_not_empty,
-)
 
 
 def define_math_ops(registry: Registry) -> None:
     @verb(
         name="add",
         registry=registry,
-        ports=[ArrayInput(required=True, parameter="values")],
-        fire_conditions=[array_input_not_empty()],
     )
-    def add(values: list[int]) -> int:
+    def add(
+        values: Annotated[list[int], ArrayInput(min_inputs=1, defined_inputs=True)],
+    ) -> int:
         return sum(values)
 
     @verb(
         name="multiply",
         registry=registry,
-        ports=[
-            Input(name="a", required=True),
-            Input(name="b", required=True),
-        ],
     )
-    def multiply(a: int, b: int) -> int:
+    def multiply(a: Annotated[int, Input()], b: Annotated[int, Input()]) -> int:
         return a * b
 
     @verb(
         name="constant",
         registry=registry,
-        ports=[Config(name="value", required=True)],
     )
-    def constant(value: int) -> int:
+    def constant(value: Annotated[int, Config()]) -> int:
         return value
