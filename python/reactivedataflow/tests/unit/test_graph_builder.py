@@ -29,7 +29,15 @@ from reactivedataflow.errors import (
     RequiredNodeConfigNotFoundError,
     RequiredNodeInputNotFoundError,
 )
-from reactivedataflow.model import Edge, Graph, InputNode, Node, Output, ValRef
+from reactivedataflow.model import (
+    ConfigSpec,
+    Edge,
+    Graph,
+    InputNode,
+    Node,
+    Output,
+    ValRef,
+)
 from reactivedataflow.types import ConfigProvider
 
 from .define_math_ops import define_math_ops
@@ -498,3 +506,25 @@ async def test_strict_mode():
     builder.add_edge("c2", "n1", to_port="b")
     with pytest.raises(NodeOutputNotDefinedError):
         builder.build(registry=registry)
+
+
+async def test_built_config():
+    registry = Registry()
+    define_math_ops(registry)
+
+    def build_constant(value: int) -> int:
+        return value
+
+    graph = (
+        GraphBuilder()
+        .add_node("c1", "constant", config={"value": ValRef(reference="x")})
+        .add_output("c1")
+        .add_built_config([
+            ConfigSpec(name="x", builder_name="constant", args={"value": 1})
+        ])
+        .build(registry=registry, config_builders={"constant": build_constant})
+    )
+
+    await graph.drain()
+    assert graph.output_value("c1") == 1
+    await graph.dispose()
