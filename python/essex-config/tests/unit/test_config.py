@@ -5,7 +5,7 @@ from typing import Annotated, Any, ClassVar
 import pytest
 
 from essex_config.config import Config
-from essex_config.configuration_field import ConfigurationField, FieldType
+from essex_config.configuration_field import ConfigurationField, FieldVisibility
 from essex_config.sources.source import Source
 
 
@@ -58,7 +58,9 @@ def test_redacted_secret():
 
         value1: Annotated[str, ConfigurationField()]
         value2: Annotated[int, ConfigurationField()]
-        secret: Annotated[str, ConfigurationField(field_type=FieldType.SECRET)]
+        secret: Annotated[
+            str, ConfigurationField(field_visibility=FieldVisibility.SECRET)
+        ]
 
     config = Secret.get_config()
 
@@ -105,6 +107,52 @@ def test_default():
 
     config = DefaultValueConfig.get_config()
     assert config.value == "default_value"
+
+
+def test_sub_config():
+    class SubConfig(Config):
+        sources: ClassVar[list[Source]] = [MockSource()]
+        value4: Annotated[bool, ConfigurationField()]
+
+    class TopLevelConfig(Config):
+        sources: ClassVar[list[Source]] = [MockSource()]
+
+        sub_config: SubConfig
+        value1: Annotated[str, ConfigurationField()]
+
+    config = TopLevelConfig.get_config()
+
+    assert config.value1 == "value1"
+    assert config.sub_config.value4 is True
+
+
+def test_hierarchy():
+    class HierarchySource(Source):
+        def get_data(self) -> dict[str, Any]:
+            return {
+                "TopLevelConfig": {
+                    "value1": "value1",
+                    "SubConfig": {"value4": True},
+                }
+            }
+
+    class SubConfig(Config):
+        sources: ClassVar[list[Source]] = [HierarchySource()]
+
+        value4: Annotated[bool, ConfigurationField()]
+
+    class TopLevelConfig(Config):
+        sources: ClassVar[list[Source]] = [HierarchySource()]
+
+        sub_config: SubConfig
+        value1: Annotated[str, ConfigurationField()]
+        ignored_field: str = "ignored"
+
+    config = TopLevelConfig.get_config()
+
+    assert config.value1 == "value1"
+    assert config.sub_config.value4 is True
+    assert config.ignored_field == "ignored"
 
 
 def test_refresh():

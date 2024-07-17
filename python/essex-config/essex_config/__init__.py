@@ -1,6 +1,6 @@
 """Main configuration API."""
 
 from .config import Config
-from .configuration_field import ConfigurationField, FieldType
+from .configuration_field import ConfigurationField, FieldVisibility
 
-__all__ = ["Config", "ConfigurationField", "FieldType"]
+__all__ = ["Config", "ConfigurationField", "FieldVisibility"]

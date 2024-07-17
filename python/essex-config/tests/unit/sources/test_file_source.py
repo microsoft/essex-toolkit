@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from unittest import mock
 
@@ -43,3 +44,23 @@ def test_yaml_source():
 def test_unknown_file_source():
     with pytest.raises(ValueError, match="File type .txt not supported."):
         FileSource(Path("dummy.txt")).get_data()
+
+
+def test_env_name_file_source():
+    # Set the environment variable
+    os.environ["FILE_NAME"] = "my_file.yml"
+
+    mock_data = b"""test:
+      hello: world"""
+
+    with mock.patch("pathlib.Path.open", mock.mock_open(read_data=mock_data)):
+        source = FileSource("FILE_NAME", use_env_var=True)
+        assert source.get_data()["test"]["hello"] == "world"
+
+    # Unset the environment variable
+    del os.environ["FILE_NAME"]
+
+
+def test_env_name_not_found_file_source():
+    with pytest.raises(ValueError, match="Environment variable FILE_NAME not found."):
+        FileSource("FILE_NAME", use_env_var=True)

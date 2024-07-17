@@ -1,6 +1,7 @@
 """File source class implementation."""
 
 import json
+import os
 from collections.abc import Callable
 from pathlib import Path
 from typing import Any
@@ -21,8 +22,15 @@ GET_DATA_FN: dict[str, Callable[[Any], dict[str, Any]]] = {
 class FileSource(Source):
     """Class to get the configuration from a file."""
 
-    def __init__(self, file_path: Path | str):
+    def __init__(self, file_path: Path | str, use_env_var: bool = False):
         """Initialize the class."""
+        if use_env_var and isinstance(file_path, str):
+            env_file_path = os.getenv(file_path)
+            if env_file_path is None:
+                msg = f"Environment variable {file_path} not found."
+                raise ValueError(msg)
+            file_path = Path(env_file_path)
+
         if isinstance(file_path, str):
             file_path = Path(file_path)
         self.file_path = file_path

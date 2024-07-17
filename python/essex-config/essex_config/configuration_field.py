@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from enum import StrEnum, auto
 
 
-class FieldType(StrEnum):
+class FieldVisibility(StrEnum):
     """Enum to define the type of configuration."""
 
     DEFAULT = auto()
@@ -15,7 +15,7 @@ class FieldType(StrEnum):
 class ConfigurationField:
     """Model to store the configuration field."""
 
-    field_type: FieldType = FieldType.DEFAULT
+    field_visibility: FieldVisibility = FieldVisibility.DEFAULT
     """Type of the field."""
     alt_name: str | None = None
     """Name to look for in the config file."""
