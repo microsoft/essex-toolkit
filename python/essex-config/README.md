@@ -149,7 +149,7 @@ class TopLevelConfig(Config):
     value1: Annotated[str, ConfigurationField()]
 ```
 
-When using `TopLevelConfig.get_config()`, you can access `config.sub_config.value4`. The nested configuration follows the same population rules.
+When using `TopLevelConfig.get_config()`, you can access `config.sub_config.value4`. The nested configuration follows the same population rules, the "Prefixed with class name" rule will use `TopLevelConfig.SubConfig` prefix for the `SubConfig` values when using in nested configuration mode.
 
 ## Documentation Utility
 Generate documentation for configuration classes as a markdown file or print to the terminal:
