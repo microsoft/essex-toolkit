@@ -1,5 +1,7 @@
 """Printer to print the configuration using rich."""
 
+from typing import cast
+
 from pydantic_core import PydanticUndefined
 from rich import box, print
 from rich.console import Group
@@ -27,12 +29,25 @@ class RichConfigurationPrinter(ConfigurationPrinter):
 
         for name, info in config_class.model_fields.items():
             default = info.default if info.default is not PydanticUndefined else ""
-            description = info.metadata[0].description
+            if issubclass(cast(type, info.annotation), Config):
+                params.add_row(
+                    f"{name}: {cast(type, info.annotation).__name__}",
+                    f"See {cast(type, info.annotation).__name__} for more details",
+                    str(info.is_required()),
+                    str(default),
+                )
+                continue
+            if len(info.metadata) == 0:
+                continue
+
+            description = (
+                info.metadata[0].description if info.metadata[0].description else ""
+            )
             if info.metadata[0].alt_name is not None:
-                description += f"\n\tAlternative name: {info.metadata[0].alt_name}"
+                description += f"\nAlternative name: {info.metadata[0].alt_name}"
             if info.metadata[0].fallback_names:
                 description += (
-                    f"\n\tFallback names: {', '.join(info.metadata[0].fallback_names)}"
+                    f"\nFallback names: {', '.join(info.metadata[0].fallback_names)}"
                 )
             params.add_row(
                 f"{name}: {info.annotation.__name__ if info.annotation is not None else 'Any'}",

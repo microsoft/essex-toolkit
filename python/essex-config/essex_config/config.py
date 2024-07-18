@@ -194,6 +194,8 @@ class Config(BaseModel):
         ----------
             refresh_config : bool, optional
                 If True, it will refresh the configuration values, by default False
+            parents: str, optional
+                The parent class name, used for nested configurations, by default None
 
         Returns
         -------
@@ -267,8 +269,17 @@ class Config(BaseModel):
     def __str__(self) -> str:
         """Return the string representation of the configuration."""
         values = []
+        values.append(f"{self.__class__.__name__}:")
         for name, info in self.model_fields.items():
-            if info.metadata[0].field_visibility == FieldVisibility.SECRET:
+            if issubclass(cast(type, info.annotation), Config):
+                values.extend([
+                    f"  {line}" for line in getattr(self, name).__str__().split("\n")
+                ])
+                continue
+            if (
+                len(info.metadata) > 0
+                and info.metadata[0].field_visibility == FieldVisibility.SECRET
+            ):
                 values.append(f'{name}="********"')
             else:
                 if info.annotation is str:

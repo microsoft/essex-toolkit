@@ -154,6 +154,8 @@ def test_hierarchy():
     assert config.sub_config.value4 is True
     assert config.ignored_field == "ignored"
 
+    assert "SubConfig" in str(config)
+
 
 def test_refresh():
     mock_source = MockSource()

@@ -42,8 +42,9 @@ def test_yaml_source():
 
 
 def test_unknown_file_source():
+    source = FileSource(Path("dummy.txt"))
     with pytest.raises(ValueError, match="File type .txt not supported."):
-        FileSource(Path("dummy.txt")).get_data()
+        source.get_data()
 
 
 def test_env_name_file_source():
@@ -62,5 +63,6 @@ def test_env_name_file_source():
 
 
 def test_env_name_not_found_file_source():
-    with pytest.raises(ValueError, match="Environment variable FILE_NAME not found."):
-        FileSource("FILE_NAME", use_env_var=True)
+    source = FileSource("MOCK_NAME", use_env_var=True)
+    with pytest.raises(ValueError, match="Environment variable MOCK_NAME not found."):
+        source.get_data()

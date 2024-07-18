@@ -28,6 +28,6 @@ def __find_subclasses(package_name: str) -> set[type]:
 
 def generate_docs(package: str, printer: ConfigurationPrinter) -> None:
     """Generate the documentation for all configuration classes in the package."""
-    subclasses = __find_subclasses(package)
+    subclasses = sorted(__find_subclasses(package), key=lambda x: x.__name__)
     for subclass in subclasses:
         printer.print(subclass)

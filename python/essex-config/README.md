@@ -129,10 +129,12 @@ The ConfigurationField object has four possible configurations:
 The library searches for field values in the following order:
 
 1. Field name
-2. Alternative name (alt_name)
-3. Fallback names (fallback_names)
+2. Alternative name (`alt_name`)
+3. Fallback names (`fallback_names`)
 4. Prefixed with the class name (e.g., MyConfig.field_name)
 5. Uppercased and underscores replacing dots (e.g., FIELD_NAME)
+
+When using dot-notation with `alt_name` or `fallback_names` the population mechanism will traverse the Source dictionary to assign a value, the same applies for the prefix with class name rule.
 
 If the field is required and no value is found, a ValueError is raised.
 

@@ -1,6 +1,7 @@
 """Printer to print the configuration using markdown file."""
 
 from pathlib import Path
+from typing import cast
 
 from pydantic_core import PydanticUndefined
 
@@ -26,14 +27,35 @@ class MarkdownConfigurationPrinter(ConfigurationPrinter):
 
             for name, info in config_class.model_fields.items():
                 default = info.default if info.default is not PydanticUndefined else ""
-                description = info.metadata[0].description
+                if info.annotation is not None and issubclass(
+                    cast(type, info.annotation), Config
+                ):
+                    file.write(f"### {name}: {cast(type, info.annotation).__name__}\n")
+                    file.write(
+                        f"See the [{cast(type, info.annotation).__name__}](#{cast(type, info.annotation).__name__}) section for more details\n\n"
+                    )
+                    file.write(f"* Required: `{info.is_required()!s}`\n")
+                    if default != "":
+                        file.write(f"* Default: `{default!s}`\n\n")
+                    continue
+                if len(info.metadata) == 0:
+                    continue
+
+                description = (
+                    info.metadata[0].description if info.metadata[0].description else ""
+                )
                 if info.metadata[0].alt_name is not None:
-                    description += f"\n\tAlternative name: {info.metadata[0].alt_name}"
+                    description += f"* Alternative name: `{info.metadata[0].alt_name}`"
                 if info.metadata[0].fallback_names:
-                    description += f"\n\tFallback names: {', '.join(info.metadata[0].fallback_names)}"
+                    fallback_names = [
+                        f"`{fallback_name}`"
+                        for fallback_name in info.metadata[0].fallback_names
+                    ]
+                    description += f"* Fallback names: {', '.join(fallback_names)}"
                 file.write(
                     f"### {name}: {info.annotation.__name__ if info.annotation is not None else 'Any'}\n"
                 )
-                file.write(f"Description: {description}\n")
-                file.write(f"Required: {info.is_required()!s}\n")
-                file.write(f"Default: {default!s}\n\n")
+                file.write(f"{description}\n")
+                file.write(f"* Required: `{info.is_required()!s}`\n")
+                if default != "":
+                    file.write(f"* Default: `{default!s}`\n\n")
