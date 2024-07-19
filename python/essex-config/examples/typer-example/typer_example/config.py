@@ -28,7 +28,7 @@ class ExampleSubConfig(Config):
 
     sub_config_value: Annotated[str, ConfigurationField()]
     another_sub_config_value: Annotated[
-        int, ConfigurationField(alt_name="sub_config_alt_name")
+        int, ConfigurationField(alias="sub_config_alias")
     ]
     sub_sub_config: ExampleSubSubConfig
 

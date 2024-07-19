@@ -5,8 +5,6 @@ Example of a configuration class that uses sub configurations.
 ## Sources
 
 * EnvSource()
-
-* FileSource(file_path=FILE_CONFIG)
 ## Parameters
 
 ### config_value: str
@@ -26,15 +24,13 @@ Example of a sub configuration class.
 ## Sources
 
 * EnvSource()
-
-* FileSource(file_path=FILE_CONFIG)
 ## Parameters
 
 ### sub_config_value: str
 
 * Required: `True`
 ### another_sub_config_value: int
-* Alternative name: `sub_config_alt_name`
+* Alternative name: `sub_config_alias`
 * Required: `True`
 ### sub_sub_config: ExampleSubSubConfig
 See the [ExampleSubSubConfig](#ExampleSubSubConfig) section for more details
@@ -47,8 +43,6 @@ Example of a sub-sub configuration class.
 ## Sources
 
 * EnvSource()
-
-* FileSource(file_path=FILE_CONFIG)
 ## Parameters
 
 ### sub_sub_config_value: str

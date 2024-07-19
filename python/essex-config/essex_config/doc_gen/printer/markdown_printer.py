@@ -21,7 +21,9 @@ class MarkdownConfigurationPrinter(ConfigurationPrinter):
             file.write(f"# {config_class.__name__}\n\n")
             file.write(f"{config_class.__doc__}\n\n")
             file.write("## Sources\n\n")
-            file.write("\n".join([f"* {source}\n" for source in config_class.sources]))
+            file.write(
+                "\n".join([f"* {source}\n" for source in config_class.__sources__])
+            )
 
             file.write("## Parameters\n\n")
 
@@ -44,8 +46,8 @@ class MarkdownConfigurationPrinter(ConfigurationPrinter):
                 description = (
                     info.metadata[0].description if info.metadata[0].description else ""
                 )
-                if info.metadata[0].alt_name is not None:
-                    description += f"* Alternative name: `{info.metadata[0].alt_name}`"
+                if info.metadata[0].alias is not None:
+                    description += f"* Alternative name: `{info.metadata[0].alias}`"
                 if info.metadata[0].fallback_names:
                     fallback_names = [
                         f"`{fallback_name}`"

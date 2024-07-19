@@ -2,6 +2,6 @@ ExampleConfig:
   config_value: "This is a string"
   ExampleSubConfig:
     sub_config_value: "This is another string"
-    sub_config_alt_name: 42
+    sub_config_alias: 42
   fallbacks:
     another_config_value: 3.14

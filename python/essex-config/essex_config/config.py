@@ -1,7 +1,8 @@
 """Main configuration module for the essex_config package."""
 
+import contextlib
 from functools import cache
-from typing import Any, ClassVar, TypeVar, cast
+from typing import ClassVar, TypeVar, cast
 
 from pydantic import BaseModel
 from pydantic_core import PydanticUndefined
@@ -157,34 +158,24 @@ class Config(BaseModel):
     ```
     """
 
-    sources: ClassVar[list[Source]] = DEFAULT_SOURCE_LIST
-
-    @staticmethod
-    def __resolve_value(names: list[str], data: dict[str, Any]) -> Any:
-        for name in names:
-            if name in data:
-                return data[name]
-
-            if "." in name:
-                parts = name.split(".")
-                value = data
-                try:
-                    for part in parts:
-                        value = value[part]
-                except KeyError:
-                    continue
-                return value
-
-        return None
+    __sources__: ClassVar[list[Source]] = DEFAULT_SOURCE_LIST
 
     @staticmethod
     @cache
-    def __get_data_from_source(source: Source) -> dict[str, Any]:
-        return source.get_data()
+    def __resolve_value(
+        name: str, source: Source, value_type: type[T], default_value: T
+    ) -> T | None:
+        if name in source:
+            return source.get_value(name, value_type)
+        return default_value
 
     @classmethod
     def get_config(
-        cls: type[T], refresh_config: bool = False, parents: str | None = None
+        cls: type[T],
+        *,
+        parents: str | None = None,
+        refresh_config: bool = False,
+        sources: list[Source] | None = None,
     ) -> T:
         """Instantiate the configuration and all values.
 
@@ -196,6 +187,9 @@ class Config(BaseModel):
                 If True, it will refresh the configuration values, by default False
             parents: str, optional
                 The parent class name, used for nested configurations, by default None
+            sources: list[Source], optional
+                A list of Source objects to be used to get the configuration values (overrides the __sources__ classvar),
+                If None is provided then the default list will be used, by default None
 
         Returns
         -------
@@ -208,8 +202,10 @@ class Config(BaseModel):
         """
         parents = cls.__name__ if parents is None else f"{parents}.{cls.__name__}"
 
+        sources = sources if sources is not None else cls.__sources__
+
         if refresh_config:
-            cls.__get_data_from_source.cache_clear()
+            cls.__resolve_value.cache_clear()
 
         values = {}
         for name, info in cls.model_fields.items():
@@ -220,22 +216,23 @@ class Config(BaseModel):
                 values[name] = sub_config_cls.get_config(parents=parents)
                 continue
 
-            if len(info.metadata) == 0 or not isinstance(
-                info.metadata[0], ConfigurationField
-            ):  # If there's a field without ConfigurationField then ignore it
-                continue
+            field_info: ConfigurationField | None = None
+            with contextlib.suppress(StopIteration):
+                field_info = next(
+                    config_field
+                    for config_field in info.metadata
+                    if isinstance(config_field, ConfigurationField)
+                )
 
-            field_info: ConfigurationField = info.metadata[0]
             value = None
-            for source in cls.sources:
-                data: dict[str, Any] = cls.__get_data_from_source(source)
-
+            for source in cls.__sources__:
                 possible_names = [name]
-                if field_info.alt_name is not None:
-                    possible_names.append(field_info.alt_name)
+                if field_info is not None:
+                    if field_info.alias is not None:
+                        possible_names.append(field_info.alias)
 
-                if field_info.fallback_names:
-                    possible_names += field_info.fallback_names
+                    if field_info.fallback_names:
+                        possible_names += field_info.fallback_names
 
                 possible_names.extend([
                     f"{parents}.{possible_name}" for possible_name in possible_names
@@ -246,23 +243,18 @@ class Config(BaseModel):
                     for possible_name in possible_names
                 ])
 
-                value = cls.__resolve_value(possible_names, data)
+                for possible_name in possible_names:
+                    value = cls.__resolve_value(
+                        possible_name, source, cast(type, info.annotation), info.default
+                    )
+                    if value is not None and value is not info.default:
+                        break
 
-            if value is None and info.is_required():
+            if (value is None or value is PydanticUndefined) and info.is_required():
                 msg = f"Value for {name} is required and not found in any source."
                 raise ValueError(msg)
 
-            if (
-                value is None
-                and info.default is not None
-                and info.default is not PydanticUndefined
-            ):
-                value = info.default
-
-            if info.annotation is None or info.annotation is Any:
-                values[name] = value
-            else:
-                values[name] = info.annotation(value)
+            values[name] = value
 
         return cls.model_validate(values)
 

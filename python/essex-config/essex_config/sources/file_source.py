@@ -3,13 +3,17 @@
 import json
 import os
 from collections.abc import Callable
+from functools import cache
 from pathlib import Path
-from typing import Any
+from typing import Any, TypeVar
 
 import tomllib
 import yaml
 
+from essex_config.sources.convert_utils import convert_to_type
 from essex_config.sources.source import Source
+
+T = TypeVar("T")
 
 GET_DATA_FN: dict[str, Callable[[Any], dict[str, Any]]] = {
     ".json": json.load,
@@ -27,24 +31,61 @@ class FileSource(Source):
         self._file_path = file_path
         self._use_env_var = use_env_var
 
-    def get_data(self) -> dict[str, Any]:
+    @staticmethod
+    @cache
+    def __get_data(file_path: str | Path, use_env_var: bool = False) -> dict[str, Any]:
         """Get the data dictionary."""
-        file_path = self._file_path
-        if self._use_env_var and isinstance(self._file_path, str):
-            env_file_path = os.getenv(self._file_path, None)
+        if use_env_var and isinstance(file_path, str):
+            env_file_path = os.getenv(file_path, None)
             if env_file_path is None:
-                msg = f"Environment variable {self._file_path} not found."
+                msg = f"Environment variable {file_path} not found."
                 raise ValueError(msg)
             file_path = Path(env_file_path)
 
         if isinstance(file_path, str):
-            file_path = Path(self._file_path)
+            file_path = Path(file_path)
 
         if file_path.suffix in GET_DATA_FN:
             with file_path.open() as file:
                 return GET_DATA_FN[file_path.suffix](file)
         msg = f"File type {file_path.suffix} not supported."
         raise ValueError(msg)
+
+    def get_value(self, key: str, value_type: type[T]) -> T:
+        """Get the value from the file."""
+        data = FileSource.__get_data(self._file_path, self._use_env_var)
+
+        if "." in key:
+            parts = key.split(".")
+            value = data
+            try:
+                for part in parts:
+                    value = value[part]
+            except KeyError as e:
+                msg = f"Key {key} not found in the file."
+                raise KeyError(msg) from e
+            return convert_to_type(value, value_type)
+
+        if key not in data:
+            msg = f"Key {key} not found in the file."
+            raise KeyError(msg)
+        return convert_to_type(data[key], value_type)
+
+    def __contains__(self, key: str) -> bool:
+        """Check if the key is present in the file."""
+        data = FileSource.__get_data(self._file_path, self._use_env_var)
+
+        if "." in key:
+            parts = key.split(".")
+            value = data
+            try:
+                for part in parts:
+                    value = value[part]
+            except KeyError:
+                return False
+            return True
+
+        return key in data
 
     def __str__(self) -> str:
         """Return the string representation of the source."""

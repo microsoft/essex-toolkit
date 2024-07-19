@@ -17,3 +17,10 @@ poetry install
 ```bash
 poetry run test-config config.yaml
 ```
+
+
+4. Generate config:
+
+```bash
+poetry run python -m essex_config.doc_gen typer_example
+```

@@ -18,7 +18,7 @@ class RichConfigurationPrinter(ConfigurationPrinter):
     def print(self, config_class: type[Config]) -> None:
         """Print the configuration."""
         docs = f"Description: {config_class.__doc__}\n\nConfig is read from the following sources:\n"
-        docs += "\n".join([f"\t- {source}" for source in config_class.sources])
+        docs += "\n".join([f"\t- {source}" for source in config_class.__sources__])
         params = Table(
             title="Parameters", show_header=True, expand=True, leading=2, box=box.SIMPLE
         )
@@ -43,8 +43,8 @@ class RichConfigurationPrinter(ConfigurationPrinter):
             description = (
                 info.metadata[0].description if info.metadata[0].description else ""
             )
-            if info.metadata[0].alt_name is not None:
-                description += f"\nAlternative name: {info.metadata[0].alt_name}"
+            if info.metadata[0].alias is not None:
+                description += f"\nAlternative name: {info.metadata[0].alias}"
             if info.metadata[0].fallback_names:
                 description += (
                     f"\nFallback names: {', '.join(info.metadata[0].fallback_names)}"

@@ -99,14 +99,21 @@ You can define custom sources by implementing a `Source` object. Override the `g
 Example of a custom source:
 
 ```python
+T = TypeVar("T")
+
 class CustomSource(Source):
     """Class to get the configuration from the environment."""
 
-    def get_data(self) -> dict[str, Any]:
-        """Get the data dictionary."""
-        return {
-            "some": "data"
-        }
+    def __init__(self, any_custom_data: Any):
+        self.data = any_custom_data
+
+    def get_value(self, key: str, value_type: type[T]) -> T:
+        """Get the value from a source"""
+        # custom logic to get the value
+        value = ...
+        # if the value is not found you should return a KeyError
+
+        return value
 
     def __str__(self) -> str:
         """Return the string representation of the source."""
@@ -119,7 +126,7 @@ class CustomSource(Source):
 The ConfigurationField object has four possible configurations:
 
 * `field_visibility`: Can be DEFAULT or SECRET. SECRET (redacts values when printed).
-* `alt_name`: Alternative name for the configuration field.
+* `alias`: Alternative name for the configuration field.
 * `fallback_names`: Additional names to look for in configuration sources.
 * `description`: For documentation purposes.
 
@@ -129,12 +136,12 @@ The ConfigurationField object has four possible configurations:
 The library searches for field values in the following order:
 
 1. Field name
-2. Alternative name (`alt_name`)
+2. Alternative name (`alias`)
 3. Fallback names (`fallback_names`)
 4. Prefixed with the class name (e.g., MyConfig.field_name)
 5. Uppercased and underscores replacing dots (e.g., FIELD_NAME)
 
-When using dot-notation with `alt_name` or `fallback_names` the population mechanism will traverse the Source dictionary to assign a value, the same applies for the prefix with class name rule.
+When using dot-notation with `alias` or `fallback_names` the population mechanism will traverse the Source dictionary to assign a value, the same applies for the prefix with class name rule.
 
 If the field is required and no value is found, a ValueError is raised.
 
