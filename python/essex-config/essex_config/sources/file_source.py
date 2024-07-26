@@ -26,7 +26,11 @@ GET_DATA_FN: dict[str, Callable[[Any], dict[str, Any]]] = {
 class FileSource(Source):
     """Class to get the configuration from a file."""
 
-    def __init__(self, file_path: Path | str, use_env_var: bool = False):
+    def __init__(
+        self,
+        file_path: Path | str,
+        use_env_var: bool = False,
+    ):
         """Initialize the class."""
         self._file_path = file_path
         self._use_env_var = use_env_var
@@ -51,24 +55,17 @@ class FileSource(Source):
         msg = f"File type {file_path.suffix} not supported."
         raise ValueError(msg)
 
-    def get_value(self, key: str, value_type: type[T]) -> T:
+    def _get_value(self, key: str, value_type: type[T]) -> T:
         """Get the value from the file."""
         data = FileSource.__get_data(self._file_path, self._use_env_var)
 
         if "." in key:
             parts = key.split(".")
             value = data
-            try:
-                for part in parts:
-                    value = value[part]
-            except KeyError as e:
-                msg = f"Key {key} not found in the file."
-                raise KeyError(msg) from e
+            for part in parts:
+                value = value[part]
             return convert_to_type(value, value_type)
 
-        if key not in data:
-            msg = f"Key {key} not found in the file."
-            raise KeyError(msg)
         return convert_to_type(data[key], value_type)
 
     def __contains__(self, key: str) -> bool:

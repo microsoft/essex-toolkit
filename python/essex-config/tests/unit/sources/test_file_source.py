@@ -54,7 +54,7 @@ def test_key_not_found():
     with mock.patch("pathlib.Path.open", mock.mock_open(read_data=mock_data)):
         source = FileSource(Path("dummy.yaml"))
         assert "not_found" not in source
-        with pytest.raises(KeyError, match="Key not_found not found in the file."):
+        with pytest.raises(KeyError, match="Key not_found not found in the source."):
             source.get_value("not_found", str)
 
 
@@ -65,7 +65,9 @@ def test_inner_key_not_found():
     with mock.patch("pathlib.Path.open", mock.mock_open(read_data=mock_data)):
         source = FileSource(Path("dummy.yaml"))
         assert "test.not_found" not in source
-        with pytest.raises(KeyError, match="Key test.not_found not found in the file."):
+        with pytest.raises(
+            KeyError, match="Key test.not_found not found in the source."
+        ):
             source.get_value("test.not_found", str)
 
 

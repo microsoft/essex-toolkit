@@ -12,13 +12,13 @@ T = TypeVar("T")
 class EnvSource(Source):
     """Class to get the configuration from the environment."""
 
-    def get_value(self, key: str, value_type: type[T]) -> T:
+    def _get_value(self, key: str, value_type: type[T]) -> T:
         """Get the value from the environment."""
-        value = os.getenv(key)
-        if value is None:
-            msg = f"Key {key} not found in the environment."
-            raise KeyError(msg)
-        return convert_to_type(value, value_type)
+        return convert_to_type(os.environ[key], value_type)
+
+    def format_key(self, key: str, prefix: str) -> str:
+        """Format the key based on the prefix."""
+        return f"{prefix}_{key}".upper() if prefix.strip() != "" else key.upper()
 
     def __contains__(self, key: str) -> bool:
         """Check if the key is present in the environment."""

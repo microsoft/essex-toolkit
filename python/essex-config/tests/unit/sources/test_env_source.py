@@ -29,5 +29,5 @@ def test_not_found():
 
     assert "NOT_FOUND" not in source
 
-    with pytest.raises(KeyError, match="Key NOT_FOUND not found in the environment."):
+    with pytest.raises(KeyError, match="Key NOT_FOUND not found in the source."):
         source.get_value("NOT_FOUND", str)

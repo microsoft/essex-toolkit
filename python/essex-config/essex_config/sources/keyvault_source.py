@@ -47,7 +47,11 @@ class KeyvaultClient:  # pragma: no cover
 class KeyvaultSource(Source):
     """Class to get the configuration from Azure Keyvault."""
 
-    def __init__(self, keyvault_name: str, use_env_var: bool = False) -> None:
+    def __init__(
+        self,
+        keyvault_name: str,
+        use_env_var: bool = False,
+    ) -> None:
         """Initialize the class."""
         self.keyvault_name = keyvault_name
         self.use_env_var = use_env_var
@@ -60,12 +64,9 @@ class KeyvaultSource(Source):
         )
         return f"https://{keyvault_name}.vault.azure.net/"
 
-    def get_value(self, key: str, value_type: type[T]) -> T:
+    def _get_value(self, key: str, value_type: type[T]) -> T:
         """Get the value from the keyvault."""
         client = KeyvaultClient.get_keyvault_client(self.__get_keyvault_url())
-        if key not in client.secrets:
-            msg = f"Key {key} not found in the keyvault."
-            raise KeyError(msg)
         value = client.get_secret(key)
         return convert_to_type(value, value_type)
 

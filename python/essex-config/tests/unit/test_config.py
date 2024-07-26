@@ -1,234 +1,175 @@
 """Test configuration for the essex-config package."""
 
 import re
-from typing import Annotated, ClassVar
+from typing import Annotated, TypeVar
 
 import pytest
-from pydantic import Field
+from pydantic import BaseModel, Field
 
-from essex_config.config import Config
-from essex_config.configuration_field import ConfigurationField, FieldVisibility
+from essex_config.config import Prefixed, config
+from essex_config.sources import Alias, Source
 from essex_config.sources.convert_utils import convert_to_type
-from essex_config.sources.source import Source
+
+T = TypeVar("T")
 
 
 class MockSource(Source):
     def __init__(self):
         self.data = {
-            "value1": "value1",
-            "value2": 2,
-            "value3": 3.0,
-            "value4": True,
-            "secret": "password",
-            "deep": {"value5": "value5"},
+            "hello": "world",
+            "prefix.hello": "world prefixed",
+            "not_hello": "not world",
+            "field_prefix.hello": "world prefixed field",
+            "no_prefix_field": 1,
+            "nested.hello": "nested world",
+            "nested2.hello": "nested2 world",
+            "not_int": "this is not a int value",
         }
+        super().__init__()
 
-    def get_value(self, key, value_type):
-        data = self.data
-        if "." in key:
-            parts = key.split(".")
-            value = data
-            try:
-                for part in parts:
-                    value = value[part]
-            except KeyError as e:
-                msg = f"Key {key} not found in the file."
-                raise KeyError(msg) from e
-            return convert_to_type(value, value_type)
-        if key not in data:
-            msg = f"Key {key} not found in the file."
-            raise KeyError(msg)
-        return convert_to_type(data[key], value_type)
+    def _get_value(self, key: str, value_type: type[T]) -> T:
+        return convert_to_type(self.data[key], value_type)
 
-    def __contains__(self, key: str) -> bool:
-        """Check if the key is present in the file."""
-        data = self.data
-
-        if "." in key:
-            parts = key.split(".")
-            value = data
-            try:
-                for part in parts:
-                    value = value[part]
-            except KeyError:
-                return False
-            return True
-
-        return key in data
+    def __contains__(self, key: str) -> bool:  # pragma: no cover
+        """Check if the key is present in the source."""
+        return key in self.data
 
 
-def test_basic_configuration():
-    class BasicConfig(Config):
-        __sources__: ClassVar[list[Source]] = [MockSource()]
+def test_basic_config():
+    @config(sources=[MockSource()])
+    class BasicConfiguration(BaseModel):
+        hello: str
 
-        value1: str
-        value2: int
-        value3: float
-        value4: bool
-        value5: Annotated[str, ConfigurationField(description="value from Field()")] = (
-            Field(default_factory=lambda: "default5")
-        )
+    basic_config = BasicConfiguration.config_load()
+    assert basic_config.hello == "world"
 
-    config = BasicConfig.get_config()
-    assert config.value1 == "value1"
-    assert config.value2 == 2
-    assert config.value3 == 3.0
-    assert config.value4 is True
-    assert config.value5 == "default5"
+    assert type(basic_config) == BasicConfiguration
+
+
+def test_prefixed_config():
+    @config(prefix="prefix", sources=[MockSource()])
+    class PrefixedConfiguration(BaseModel):
+        hello: str
+
+    basic_config = PrefixedConfiguration.config_load()
+    assert basic_config.hello == "world prefixed"
+
+
+def test_alias_config():
+    @config(sources=[MockSource()])
+    class AliasConfiguration(BaseModel):
+        hello: Annotated[str, Alias(MockSource, ["not_hello"])]
+
+    basic_config = AliasConfiguration.config_load()
+    assert basic_config.hello == "not world"
+
+
+def test_prefixed_field_config():
+    @config(sources=[MockSource()])
+    class PrefixedFieldConfiguration(BaseModel):
+        hello: Annotated[str, Prefixed("field_prefix")]
+        no_prefix_field: int
+
+    basic_config = PrefixedFieldConfiguration.config_load()
+    assert basic_config.hello == "world prefixed field"
+    assert basic_config.no_prefix_field == 1
+
+
+def test_nested_config():
+    class Inner(BaseModel):
+        hello: str
+
+    @config(sources=[MockSource()])
+    class NestedConfiguration(BaseModel):
+        hello: str
+        nested: Inner
+
+    basic_config = NestedConfiguration.config_load()
+    assert basic_config.hello == "world"
+    assert basic_config.nested.hello == "nested world"
+
+
+def test_nested_prefixed_field_config():
+    class Inner(BaseModel):
+        hello: str
+
+    @config(sources=[MockSource()])
+    class NestedConfiguration(BaseModel):
+        hello: str
+        nested: Annotated[Inner, Prefixed("nested2")]
+
+    basic_config = NestedConfiguration.config_load()
+    assert basic_config.hello == "world"
+    assert basic_config.nested.hello == "nested2 world"
+
+
+def test_cache_and_refresh():
+    source = MockSource()
+
+    @config(sources=[source])
+    class BasicConfiguration(BaseModel):
+        hello: str
+
+    basic_config = BasicConfiguration.config_load()
+    assert basic_config.hello == "world"
+
+    source.data["hello"] = "new world"
+
+    basic_config = BasicConfiguration.config_load()
+    assert basic_config.hello == "world"
+
+    basic_config = BasicConfiguration.config_load(refresh_config=True)
+    assert basic_config.hello == "new world"
+
+
+def test_basic_default_no_value_config():
+    @config(sources=[MockSource()])
+    class BasicConfiguration(BaseModel):
+        not_a_value_in_config: str = "hello"
+
+    basic_config = BasicConfiguration.config_load()
+    assert basic_config.not_a_value_in_config == "hello"
+
+
+def test_basic_default_no_value_field_config():
+    @config(sources=[MockSource()])
+    class BasicConfiguration(BaseModel):
+        not_a_value_in_config: str = Field(default="hello")
+
+    basic_config = BasicConfiguration.config_load()
+    assert basic_config.not_a_value_in_config == "hello"
+
+
+def test_basic_default_no_value_field_factory_config():
+    @config(sources=[MockSource()])
+    class BasicConfiguration(BaseModel):
+        not_a_value_in_config: str = Field(default_factory=lambda: "hello")
+
+    basic_config = BasicConfiguration.config_load()
+    assert basic_config.not_a_value_in_config == "hello"
+
+
+def test_missing_key():
+    @config(sources=[MockSource()])
+    class KeyErrorConfig(BaseModel):
+        not_valid_key: str
+
+    with pytest.raises(
+        ValueError,
+        match="Value for not_valid_key is required and not found in any source.",
+    ):
+        KeyErrorConfig.config_load()
 
 
 def test_wrong_type():
-    class BasicConfig(Config):
-        __sources__: ClassVar[list[Source]] = [MockSource()]
-
-        value1: int
-
-    with pytest.raises(
-        ValueError, match=re.escape("Cannot convert [value1] to type [<class 'int'>].")
-    ):
-        BasicConfig.get_config()
-
-
-def test_missing_config_value():
-    class MissingValueConfig(Config):
-        __sources__: ClassVar[list[Source]] = [MockSource()]
-
-        value5: Annotated[str, ConfigurationField()]
+    @config(sources=[MockSource()])
+    class WrongTypeConfig(BaseModel):
+        not_int: int
 
     with pytest.raises(
-        ValueError, match="Value for value5 is required and not found in any source."
+        ValueError,
+        match=re.escape(
+            "Cannot convert [this is not a int value] to type [<class 'int'>]."
+        ),
     ):
-        MissingValueConfig.get_config()
-
-
-def test_redacted_secret():
-    class Secret(Config):
-        __sources__: ClassVar[list[Source]] = [MockSource()]
-
-        value1: Annotated[str, ConfigurationField()]
-        value2: Annotated[int, ConfigurationField()]
-        secret: Annotated[
-            str, ConfigurationField(field_visibility=FieldVisibility.SECRET)
-        ]
-
-    config = Secret.get_config()
-
-    assert config.secret == "password"
-    assert "password" not in str(Secret.get_config())
-    assert "password" not in repr(Secret.get_config())
-    assert "password" not in config.__rich__()
-
-
-def test_dot_notation_alias():
-    class AltNameConfig(Config):
-        __sources__: ClassVar[list[Source]] = [MockSource()]
-
-        value: Annotated[str, ConfigurationField(alias="deep.value5")]
-
-    config = AltNameConfig.get_config()
-    assert config.value == "value5"
-
-
-def test_fallback_names():
-    class FallbackConfig(Config):
-        __sources__: ClassVar[list[Source]] = [MockSource()]
-
-        value: Annotated[
-            str,
-            ConfigurationField(fallback_names=["value10", "value11", "deep.value5"]),
-        ]
-
-    config = FallbackConfig.get_config()
-    assert config.value == "value5"
-
-
-def test_default():
-    class DefaultValueConfig(Config):
-        __sources__: ClassVar[list[Source]] = [MockSource()]
-
-        value: Annotated[
-            str,
-            ConfigurationField(
-                alias="hello.world",
-                fallback_names=["value10", "value11", "bye.world"],
-            ),
-        ] = "default_value"
-
-    config = DefaultValueConfig.get_config()
-    assert config.value == "default_value"
-
-
-def test_sub_config():
-    class SubConfig(Config):
-        __sources__: ClassVar[list[Source]] = [MockSource()]
-        value4: Annotated[bool, ConfigurationField()]
-
-    class TopLevelConfig(Config):
-        __sources__: ClassVar[list[Source]] = [MockSource()]
-
-        sub_config: SubConfig
-        value1: Annotated[str, ConfigurationField()]
-
-    config = TopLevelConfig.get_config()
-
-    assert config.value1 == "value1"
-    assert config.sub_config.value4 is True
-
-
-def test_hierarchy():
-    source = MockSource()
-
-    source.data = {
-        "TopLevelConfig": {
-            "value1": "value1",
-            "SubConfig": {"value4": True},
-        }
-    }
-
-    class SubConfig(Config):
-        __sources__: ClassVar[list[Source]] = [source]
-
-        value4: Annotated[bool, ConfigurationField()]
-
-    class TopLevelConfig(Config):
-        __sources__: ClassVar[list[Source]] = [source]
-
-        sub_config: SubConfig
-        value1: Annotated[str, ConfigurationField()]
-        ignored_field: str = "ignored"
-
-    config = TopLevelConfig.get_config()
-
-    assert config.value1 == "value1"
-    assert config.sub_config.value4 is True
-    assert config.ignored_field == "ignored"
-
-    assert "SubConfig" in str(config)
-
-
-def test_refresh():
-    mock_source = MockSource()
-
-    class DefaultValueConfig(Config):
-        __sources__: ClassVar[list[Source]] = [mock_source]
-
-        value: Annotated[
-            str,
-            ConfigurationField(
-                alias="hello.world",
-                fallback_names=["value10", "value11", "bye.world"],
-            ),
-        ] = "default_value"
-
-    config = DefaultValueConfig.get_config()
-    assert config.value == "default_value"
-
-    mock_source.data = {"hello": {"world": "new_value"}}
-
-    config = DefaultValueConfig.get_config()  # get_config should have cached values
-    assert config.value == "default_value"
-
-    config = DefaultValueConfig.get_config(
-        refresh_config=True
-    )  # refresh_config should refresh the values
-    assert config.value == "new_value"
+        WrongTypeConfig.config_load()
