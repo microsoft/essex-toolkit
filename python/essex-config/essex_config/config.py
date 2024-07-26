@@ -29,7 +29,7 @@ class Config(Protocol[V]):
     """Protocol to define the configuration class."""
 
     @classmethod
-    def config_load(
+    def load_config(
         cls: type,
         sources: list[Source] | None = None,
         *,
@@ -48,19 +48,16 @@ def load_config(
 ) -> T:
     """Instantiate the configuration and all values.
 
-    Creates an instance of the Configuration class based on the values of data. If data is None, it will use the environment variables.
-
     Parameters
     ----------
-        parents: str, optional
-            The parent class name, used for nested configurations, by default None
-        sources: list[Source], optional
-            A list of Source objects to be used to get the configuration values (overrides the __sources__ classvar),
-            If None is provided then the default list will be used, by default None
+        sources: tuple[Source], optional
+            A tuple of sources to use to get the values.
+        prefix: str, optional
+            The prefix name to use to look for the values in the sources, by default ""
 
     Returns
     -------
-        Config: Instance of the configuration class.
+        T: Instance of the configuration class.
 
     Raises
     ------
@@ -76,6 +73,7 @@ def load_config(
             for metadata in info.metadata
             if isinstance(metadata, Alias)
         }
+
 
         prefix_annotation = next(
             (metadata for metadata in info.metadata if isinstance(metadata, Prefixed)),
@@ -146,7 +144,7 @@ def config(
             return load_config(cls, tuple(sources), prefix)  # type: ignore
 
         protocol_cls = cast(type[Config[T]], cls)
-        protocol_cls.config_load = classmethod(load)  # type: ignore
+        protocol_cls.load_config = classmethod(load)  # type: ignore
         return protocol_cls
 
     return wrapper

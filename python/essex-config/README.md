@@ -26,11 +26,11 @@ class CustomerDatabase(BaseModel):
     password: str = Field(description="DB connection password")
 
 if __name__ == "__main__":
-    config = CustomerDatabase.config_load()
+    config = CustomerDatabase.load_config()
     print(config)
 ```
 
-When `CustomerDatabase.config_load()` is executed, values are populated from environment variables or default values.
+When `CustomerDatabase.load_config()` is executed, values are populated from environment variables or default values.
 
 ## Advanced Usage
 
@@ -157,7 +157,7 @@ class NestedConfiguration(BaseModel):
     hello: str
     nested: Inner
 
-nested_config = NestedConfiguration.config_load()
+nested_config = NestedConfiguration.load_config()
 ```
 
-`config_load()` populates every field, including `nested_config.nested.inner_hello`. The default prefix for every field in `Inner` is `nested`, which can be changed with `Annotated[Inner, Prefixed("new_prefix")]`.
+`load_config()` populates every field, including `nested_config.nested.inner_hello`. The default prefix for every field in `Inner` is `nested`, which can be changed with `Annotated[Inner, Prefixed("new_prefix")]`.

@@ -26,12 +26,13 @@ class Source(ABC):
         alias: Alias | None = None,
     ) -> T:
         """Get the value from the source."""
-        format_key = self.format_key(key, prefix)
         if alias is not None:
             for alias_key in alias.alias:
                 format_key = self.format_key(alias_key, prefix)
                 if format_key in self:
                     return self._get_value(format_key, value_type)
+        
+        format_key = self.format_key(key, prefix)
         if format_key in self:
             return self._get_value(format_key, value_type)
 
