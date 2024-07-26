@@ -3,13 +3,13 @@
 import re
 from typing import Annotated, TypeVar
 
-from essex_config.sources.env_source import EnvSource
 import pytest
 from pydantic import BaseModel, Field
 
 from essex_config.config import Prefixed, config
 from essex_config.sources import Alias, Source
 from essex_config.sources.convert_utils import convert_to_type
+from essex_config.sources.env_source import EnvSource
 
 T = TypeVar("T")
 
@@ -104,6 +104,7 @@ def test_nested_prefixed_field_config():
     assert basic_config.hello == "world"
     assert basic_config.nested.hello == "nested2 world"
 
+
 def test_nested_alias():
     class Inner(BaseModel):
         hello: Annotated[str, Alias(MockSource, ["not_hello_nested"])]
@@ -130,7 +131,6 @@ def test_nested_alias_for_different_source():
     basic_config = NestedConfiguration.load_config()
     assert basic_config.hello == "world"
     assert basic_config.nested.hello == "nested world"
-
 
 
 def test_cache_and_refresh():

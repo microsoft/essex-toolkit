@@ -74,7 +74,6 @@ def load_config(
             if isinstance(metadata, Alias)
         }
 
-
         prefix_annotation = next(
             (metadata for metadata in info.metadata if isinstance(metadata, Prefixed)),
             None,

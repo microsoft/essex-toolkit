@@ -31,7 +31,7 @@ class Source(ABC):
                 format_key = self.format_key(alias_key, prefix)
                 if format_key in self:
                     return self._get_value(format_key, value_type)
-        
+
         format_key = self.format_key(key, prefix)
         if format_key in self:
             return self._get_value(format_key, value_type)
