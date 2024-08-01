@@ -24,6 +24,6 @@ class EnvSource(Source):
         """Check if the key is present in the environment."""
         return key in os.environ
 
-    def __str__(self) -> str:
+    def __repr__(self) -> str:
         """Return the string representation of the source."""
         return "EnvSource()"

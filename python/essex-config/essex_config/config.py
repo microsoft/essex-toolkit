@@ -3,7 +3,7 @@
 from collections.abc import Callable
 from dataclasses import dataclass
 from functools import cache
-from typing import Protocol, TypeVar, cast
+from typing import Protocol, TypeVar, cast, runtime_checkable
 
 from pydantic import BaseModel
 from pydantic_core import PydanticUndefined
@@ -15,7 +15,7 @@ DEFAULT_SOURCE_LIST: list[Source] = [EnvSource()]
 
 
 T = TypeVar("T", bound=BaseModel)
-V = TypeVar("V", covariant=True)
+V = TypeVar("V", bound=BaseModel, covariant=True)
 
 
 @dataclass
@@ -25,6 +25,7 @@ class Prefixed:
     prefix: str
 
 
+@runtime_checkable
 class Config(Protocol[V]):
     """Protocol to define the configuration class."""
 
@@ -117,6 +118,21 @@ def load_config(
     return cls.model_validate(values)
 
 
+def _add_docs(cls: type[Config], sources: list[Source], prefix: str):
+    if cls.__doc__ is None:
+        cls.__doc__ = ""
+
+    new_docs = f"*Configuration Prefix: {prefix}*\n\n" if prefix != "" else ""
+    new_docs += "\n\n".join([
+        line.strip() for line in cls.__doc__.split("\n") if line.strip() != ""
+    ])
+
+    doc_sources = "\n".join([f"* {source!s}" for source in sources])
+    new_docs += f"\n\n# Sources:\n\n{doc_sources}\n"
+
+    cls.__doc__ = new_docs
+
+
 def config(
     *, sources: list[Source] = DEFAULT_SOURCE_LIST, prefix: str = ""
 ) -> Callable[[type[T]], type[Config[T]]]:
@@ -144,6 +160,9 @@ def config(
 
         protocol_cls = cast(type[Config[T]], cls)
         protocol_cls.load_config = classmethod(load)  # type: ignore
+
+        _add_docs(protocol_cls, _sources, _prefix)
+
         return protocol_cls
 
     return wrapper

@@ -75,6 +75,6 @@ class KeyvaultSource(Source):
         client = KeyvaultClient.get_keyvault_client(self.__get_keyvault_url())
         return key in client.secrets
 
-    def __str__(self) -> str:
+    def __repr__(self) -> str:
         """Return the string representation of the class."""
         return f"KeyvaultSource(keyvault_name={self.keyvault_name},use_env_var={self.use_env_var})"

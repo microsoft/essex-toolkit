@@ -84,6 +84,6 @@ class FileSource(Source):
 
         return key in data
 
-    def __str__(self) -> str:
+    def __repr__(self) -> str:
         """Return the string representation of the source."""
         return f"FileSource(file_path={self._file_path})"
