@@ -209,6 +209,23 @@ def test_union_type():
     assert UnionTypeConfig.load_config().no_prefix_field == 1
 
 
+def test_nested_optional():
+    class Inner(BaseModel):
+        hello: str
+
+    @config(sources=[MockSource()])
+    class NestedConfiguration(BaseModel):
+        hello: str
+        not_valid_key: Inner | None = None
+        nested: Inner | None
+
+    basic_config = NestedConfiguration.load_config()
+    assert basic_config.hello == "world"
+    assert basic_config.not_valid_key is None
+    assert isinstance(basic_config.nested, Inner)
+    assert basic_config.nested.hello == "nested world"
+
+
 def test_wrong_type():
     @config(sources=[MockSource()])
     class WrongTypeConfig(BaseModel):

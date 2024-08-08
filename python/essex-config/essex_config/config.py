@@ -105,8 +105,14 @@ def load_config(
                 if issubclass(type_, BaseModel):
                     if prefix_annotation is None:
                         field_prefix += f".{name}" if field_prefix != "" else name
-                    values[name] = load_config(type_, sources, prefix=field_prefix)
-                    break
+                    try:
+                        values[name] = load_config(type_, sources, prefix=field_prefix)
+                    except Exception:  # noqa: S112, BLE001
+                        continue
+                    else:
+                        break
+            if name in values and values[name] is not None:
+                continue
         elif issubclass(field_type, BaseModel):
             if prefix_annotation is None:
                 field_prefix += f".{name}" if field_prefix != "" else name
