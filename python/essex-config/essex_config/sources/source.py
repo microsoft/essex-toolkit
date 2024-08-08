@@ -52,10 +52,10 @@ class Source(ABC):
         """Check if the key is present in the source."""
         raise NotImplementedError
 
-    def __repr__(self) -> str:  # pragma: no cover
+    def __str__(self) -> str:  # pragma: no cover
         """Return the representation of the configuration."""
-        return self.__str__()
+        return self.__repr__()
 
     def __rich__(self) -> str:  # pragma: no cover
         """Return the rich representation of the configuration."""
-        return self.__str__()
+        return self.__repr__()

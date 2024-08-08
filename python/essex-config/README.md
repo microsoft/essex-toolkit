@@ -1,13 +1,13 @@
-# essex-configuration
+# essex-config
 
-essex-configuration is a Python library for creating configuration objects that read from various sources, including files, environment variables, and Azure Key Vault.
+essex-config is a Python library for creating configuration objects that read from various sources, including files, environment variables, and Azure Key Vault.
 
 ## Installation
 
-Install the essex-configuration library using pip:
+Install the essex-config library using pip:
 
 ```sh
-pip install essex-configuration
+pip install essex-config
 ```
 
 ## Basic Usage
@@ -46,7 +46,7 @@ class CustomerDatabase(BaseModel):
     ...
 ```
 
-`essex-configuration` supports three built-in sources:
+`essex-config` supports three built-in sources:
 
 1. `EnvSource()`: Reads from environment variables. Looks for the field name in uppercase (e.g., `HOST` for `host`).
 2. `FileSource(file_path: Path | str, use_env_var: bool = False)`: Reads from toml, json, or yaml files. `use_env_var=True` allows specifying the file path via an environment variable.
@@ -161,3 +161,14 @@ nested_config = NestedConfiguration.load_config()
 ```
 
 `load_config()` populates every field, including `nested_config.nested.inner_hello`. The default prefix for every field in `Inner` is `nested`, which can be changed with `Annotated[Inner, Prefixed("new_prefix")]`.
+
+
+## Documentation Generation
+
+Generate documentation for configuration classes as a markdown file or print to the terminal:
+
+python -m essex_config.doc_gen <name-of-your-package>
+
+Add the --output option to specify a markdown file.
+
+Example of the markdown can be found in CONFIG_EXAMPLE.md
