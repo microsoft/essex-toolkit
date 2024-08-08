@@ -3,7 +3,16 @@
 from collections.abc import Callable
 from dataclasses import dataclass
 from functools import cache
-from typing import Protocol, TypeVar, cast, runtime_checkable
+from types import UnionType
+from typing import (
+    Protocol,
+    TypeVar,
+    Union,
+    cast,
+    get_args,
+    get_origin,
+    runtime_checkable,
+)
 
 from pydantic import BaseModel
 from pydantic_core import PydanticUndefined
@@ -89,7 +98,16 @@ def load_config(
         else:
             field_prefix = prefix
 
-        if issubclass(field_type, BaseModel):
+        origin = get_origin(field_type)
+        if origin is Union or origin is UnionType:
+            types = get_args(field_type)
+            for type_ in types:
+                if issubclass(type_, BaseModel):
+                    if prefix_annotation is None:
+                        field_prefix += f".{name}" if field_prefix != "" else name
+                    values[name] = load_config(type_, sources, prefix=field_prefix)
+                    break
+        elif issubclass(field_type, BaseModel):
             if prefix_annotation is None:
                 field_prefix += f".{name}" if field_prefix != "" else name
             values[name] = load_config(field_type, sources, prefix=field_prefix)
