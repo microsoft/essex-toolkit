@@ -191,6 +191,41 @@ def test_missing_key():
         KeyErrorConfig.load_config()
 
 
+def test_not_required_field():
+    @config(sources=[MockSource()])
+    class NotRequiredConfig(BaseModel):
+        not_required_key: str | None = None
+
+    assert NotRequiredConfig.load_config().not_required_key is None
+
+
+def test_union_type():
+    @config(sources=[MockSource()])
+    class UnionTypeConfig(BaseModel):
+        hello: int | str | None = None
+        no_prefix_field: int | str | None = None
+
+    assert UnionTypeConfig.load_config().hello == "world"
+    assert UnionTypeConfig.load_config().no_prefix_field == 1
+
+
+def test_nested_optional():
+    class Inner(BaseModel):
+        hello: str
+
+    @config(sources=[MockSource()])
+    class NestedConfiguration(BaseModel):
+        hello: str
+        not_valid_key: Inner | None = None
+        nested: Inner | None
+
+    basic_config = NestedConfiguration.load_config()
+    assert basic_config.hello == "world"
+    assert basic_config.not_valid_key is None
+    assert isinstance(basic_config.nested, Inner)
+    assert basic_config.nested.hello == "nested world"
+
+
 def test_wrong_type():
     @config(sources=[MockSource()])
     class WrongTypeConfig(BaseModel):
@@ -200,6 +235,20 @@ def test_wrong_type():
         ValueError,
         match=re.escape(
             "Cannot convert [this is not a int value] to type [<class 'int'>]."
+        ),
+    ):
+        WrongTypeConfig.load_config()
+
+
+def test_wrong_union_type():
+    @config(sources=[MockSource()])
+    class WrongTypeConfig(BaseModel):
+        hello: int | float | None = None
+
+    with pytest.raises(
+        ValueError,
+        match=re.escape(
+            "Cannot convert [world] to any of the types [(<class 'int'>, <class 'float'>, <class 'NoneType'>)]."
         ),
     ):
         WrongTypeConfig.load_config()
