@@ -7,7 +7,7 @@ on:
       - 'python/**/*'
       - '**/*.py'
       - '**/*.toml'
-      - .github/workflows/python-ci-reactivedataflow.yml
+      - .github/workflows/python-ci.yml
 env:
   POETRY_VERSION: 1.8.3
 
@@ -16,8 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.10', '3.11', '3.12']
-        project: ["reactivedataflow"]
+        python-version: ['3.11', '3.12']
+        project: ["reactivedataflow", "essex-config"]
 
     steps:
       - uses: actions/checkout@v2

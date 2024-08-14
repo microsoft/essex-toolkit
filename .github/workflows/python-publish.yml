@@ -9,12 +9,16 @@ env:
 
 jobs:
   publish:
-    name: Upload reactivedataflow to PyPI
+    name: Upload python projects to PyPI
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project: ["reactivedataflow", "essex-config"]
+
     environment:
       name: pypi
-      url: https://pypi.org/p/reactivedataflow
+      url: https://pypi.org/p/${{ matrix.project }}
     permissions:
         id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
     
@@ -33,18 +37,18 @@ jobs:
 
       - name: Install dependencies
         shell: bash
-        working-directory: ./python/reactivedataflow
+        working-directory: ./python/${{ matrix.project }}
         run: poetry install
 
       - name: Build Distributable
         shell: bash
-        working-directory: ./python/reactivedataflow
+        working-directory: ./python/${{ matrix.project }}
         run: poetry build
 
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          packages-dir: python/reactivedataflow/dist
+          packages-dir: python/${{ matrix.project }}/dist
           skip-existing: true
           verbose: true
       
