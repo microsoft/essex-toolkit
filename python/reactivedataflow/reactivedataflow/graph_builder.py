@@ -119,7 +119,7 @@ class GraphBuilder:
             from_port (str | None): The output port to connect from. If None, then the default output port will be used.
             to_port: The input port to connect to. If None, then this input will be used as an array input.
         """
-        if from_node not in self._nodes:
+        if from_node not in self._nodes and from_node not in self._inputs:
             raise NodeNotFoundError(from_node)
         if to_node not in self._nodes:
             raise NodeNotFoundError(to_node)
@@ -136,11 +136,12 @@ class GraphBuilder:
 
     def load_model(self, model: Graph) -> "GraphBuilder":
         """Load a model into the builder."""
+        self._config = model.config
         self._inputs = {node.id: node for node in model.inputs}
         self._outputs = {output.name: output for output in model.outputs}
         self._nodes = {node.id: node for node in model.nodes}
-        self._edges = model.edges
-        self._config = model.config
+        for edge in model.edges:
+            self.add_edge(edge.from_node, edge.to_node, edge.from_port, edge.to_port)
         return self
 
     def build_model(

@@ -7,8 +7,6 @@ from typing import Any
 import networkx as nx
 import reactivex as rx
 
-from reactivedataflow.errors import NodeNotFoundError
-
 from .config_provider import ConfigProvider
 from .constants import default_output
 from .errors import (
@@ -245,10 +243,6 @@ def _build_nx_graph(model: Graph) -> nx.DiGraph:
         from_node = edge.from_node
         to_node = edge.to_node
         port_connection = {"from_port": edge.from_port, "to_port": edge.to_port}
-        if not graph.has_node(from_node):
-            raise NodeNotFoundError(from_node)
-        if not graph.has_node(to_node):
-            raise NodeNotFoundError(to_node)
         if graph.has_edge(from_node, to_node):
             edge = graph.get_edge_data(from_node, to_node)
             edge["ports"].append(port_connection)
