@@ -139,7 +139,7 @@ def test_edge_with_invalid_source_raises_error():
         )
     )
 
-    with pytest.raises(NodeNotFoundError):
+    with pytest.raises(NodeNotFoundError, match="Node x not found."):
         builder.build(registry=registry)
 
 
@@ -153,7 +153,7 @@ def test_edge_with_invalid_target_raises_error():
         )
     )
 
-    with pytest.raises(NodeNotFoundError):
+    with pytest.raises(NodeNotFoundError, match="Node x not found."):
         builder.build(registry=registry)
 
 
