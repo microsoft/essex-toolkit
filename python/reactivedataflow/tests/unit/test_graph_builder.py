@@ -126,6 +126,37 @@ async def test_missing_array_input_raises_error():
     await graph.dispose()
 
 
+def test_edge_with_invalid_source_raises_error():
+    registry = Registry()
+    define_math_ops(registry)
+
+    builder = GraphBuilder().load_model(
+        Graph(
+            nodes=[
+                Node(id="const1", verb="constant", config={"value": 1}),
+            ],
+            edges=[Edge(from_node="const1", to_node="x")],
+        )
+    )
+
+    with pytest.raises(NodeNotFoundError, match="Node x not found."):
+        builder.build(registry=registry)
+
+
+def test_edge_with_invalid_target_raises_error():
+    registry = Registry()
+    define_math_ops(registry)
+
+    builder = GraphBuilder().load_model(
+        Graph(
+            nodes=[Node(id="n", verb="add")], edges=[Edge(from_node="x", to_node="n")]
+        )
+    )
+
+    with pytest.raises(NodeNotFoundError, match="Node x not found."):
+        builder.build(registry=registry)
+
+
 async def test_array_input_with_min_entries():
     registry = Registry()
     define_math_ops(registry)
