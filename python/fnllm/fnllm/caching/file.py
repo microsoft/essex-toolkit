@@ -15,13 +15,14 @@ _log = logging.getLogger(__name__)
 class FileCache(Cache):
     """The FileCache class."""
 
-    def __init__(self, cache_path: Path | str):
+    def __init__(self, cache_path: Path | str, encoding: str | None = None):
         """Initialize the cache."""
         if isinstance(cache_path, str):
             cache_path = Path(cache_path)
 
         self._cache_path = cache_path
         self._cache_path.mkdir(exist_ok=True)
+        self._encoding = encoding or "utf-8"
 
     @property
     def cache_path(self) -> Path:
@@ -40,7 +41,7 @@ class FileCache(Cache):
             return None
 
         # throw if result is None
-        return json.loads(path.read_text())["result"]
+        return json.loads(path.read_text(encoding=self._encoding))["result"]
 
     async def remove(self, key: str) -> None:
         """Remove a value from the cache."""
@@ -55,7 +56,10 @@ class FileCache(Cache):
     ) -> None:
         """Write a value into the cache."""
         (self._cache_path / key).write_text(
-            json.dumps({"result": value, "metadata": metadata}, indent=2)
+            json.dumps(
+                {"result": value, "metadata": metadata}, indent=2, ensure_ascii=False
+            ),
+            encoding=self._encoding,
         )
 
     def child(self, key: str) -> "FileCache":
