@@ -1,7 +1,7 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """OpenAI Chat LLM."""
 
-from typing import Any, Literal, cast, overload
+from typing import Any, Literal, overload
 
 from typing_extensions import Unpack
 
@@ -71,6 +71,6 @@ class OpenAIChatLLMImpl(OpenAIChatLLM):
     ]:
         """Invoke the streaming chat output."""
         if stream:
-            return cast(Any, await self._streaming_chat_llm(prompt, **kwargs))
+            return await self._streaming_chat_llm(prompt, **kwargs)
 
-        return cast(Any, await self._text_chat_llm(prompt, **kwargs))
+        return await self._text_chat_llm(prompt, **kwargs)
