@@ -10,8 +10,8 @@ from typing import Generic
 import pydantic
 from typing_extensions import Unpack
 
-from fnllm.llm.services.errors import FailedToGenerateValidJsonError
-from fnllm.llm.types.generics import (
+from fnllm.services.errors import FailedToGenerateValidJsonError
+from fnllm.types.generics import (
     JSON,
     THistoryEntry,
     TInput,
@@ -19,7 +19,7 @@ from fnllm.llm.types.generics import (
     TModelParameters,
     TOutput,
 )
-from fnllm.llm.types.io import LLMInput, LLMOutput
+from fnllm.types.io import LLMInput, LLMOutput
 
 from .decorator import LLMDecorator
 

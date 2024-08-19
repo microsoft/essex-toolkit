@@ -6,9 +6,9 @@
 from logging import Logger
 from typing import Any
 
+from fnllm.events.base import LLMEvents
 from fnllm.limiting.base import Manifest
-from fnllm.llm.events.base import LLMEvents
-from fnllm.llm.types.metrics import LLMMetrics, LLMUsageMetrics
+from fnllm.types.metrics import LLMMetrics, LLMUsageMetrics
 
 
 class LLMEventsLogger(LLMEvents):

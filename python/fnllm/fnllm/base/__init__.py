@@ -3,6 +3,5 @@
 """LLM base package."""
 
 from .base import BaseLLM
-from .protocol import LLM
 
-__all__ = ["LLM", "BaseLLM"]
+__all__ = ["BaseLLM"]

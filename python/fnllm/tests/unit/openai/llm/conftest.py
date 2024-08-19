@@ -11,7 +11,6 @@ from openai.types.chat import ChatCompletionChunk
 from openai.types.chat.chat_completion_chunk import Choice as ChunkChoice
 from openai.types.chat.chat_completion_chunk import ChoiceDelta as ChunkChoiceDelta
 
-from fnllm.llm.types.metrics import LLMUsageMetrics
 from fnllm.openai.types.aliases import (
     OpenAIChatCompletionMessageModel,
     OpenAIChatCompletionModel,
@@ -27,6 +26,7 @@ from fnllm.openai.types.embeddings.io import (
     OpenAIEmbeddingsInput,
     OpenAIEmbeddingsOutput,
 )
+from fnllm.types.metrics import LLMUsageMetrics
 
 
 class MockAsyncStream(AsyncStream):

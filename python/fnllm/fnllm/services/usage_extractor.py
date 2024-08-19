@@ -5,8 +5,8 @@
 from abc import ABC, abstractmethod
 from typing import Generic
 
-from fnllm.llm.types import LLMUsageMetrics
-from fnllm.llm.types.generics import TOutput
+from fnllm.types import LLMUsageMetrics
+from fnllm.types.generics import TOutput
 
 
 class UsageExtractor(ABC, Generic[TOutput]):

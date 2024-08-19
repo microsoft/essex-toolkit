@@ -7,8 +7,7 @@ from unittest.mock import ANY, create_autospec, patch
 import pytest
 
 from fnllm.caching.base import Cache
-from fnllm.llm.events.base import LLMEvents
-from fnllm.llm.services.variable_injector import VariableInjector
+from fnllm.events.base import LLMEvents
 from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.factories.chat import create_openai_chat_llm
 from fnllm.openai.llm.chat_text import OpenAITextChatLLM
@@ -17,6 +16,7 @@ from fnllm.openai.llm.services.history_extractor import OpenAIHistoryExtractor
 from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
 from fnllm.openai.llm.services.retryer import OpenAIRetryer
 from fnllm.openai.llm.services.usage_extractor import OpenAIUsageExtractor
+from fnllm.services.variable_injector import VariableInjector
 
 
 def test_create_openai_chat_llm():

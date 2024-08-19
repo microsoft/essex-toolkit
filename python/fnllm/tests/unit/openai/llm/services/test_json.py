@@ -10,10 +10,10 @@ from openai.types.chat import ChatCompletionMessage
 from pydantic import BaseModel
 
 from fnllm.config.json_strategy import JsonStrategy
-from fnllm.llm.services.errors import FailedToGenerateValidJsonError
-from fnllm.llm.types.io import LLMOutput
 from fnllm.openai.llm.services.json import create_json_handler
 from fnllm.openai.types.chat.io import OpenAIChatOutput
+from fnllm.services.errors import FailedToGenerateValidJsonError
+from fnllm.types.io import LLMOutput
 
 
 class CustomModel(BaseModel):

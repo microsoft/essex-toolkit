@@ -8,9 +8,9 @@ import pytest
 from httpx import Request, Response
 from openai import RateLimitError
 
-from fnllm.llm.services.errors import RetriesExhaustedError
-from fnllm.llm.types.io import LLMOutput
 from fnllm.openai.llm.services.retryer import InternalServerError, OpenAIRetryer
+from fnllm.services.errors import RetriesExhaustedError
+from fnllm.types.io import LLMOutput
 
 
 def _rate_limit_error(message: str = "test") -> RateLimitError:

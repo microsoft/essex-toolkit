@@ -8,9 +8,6 @@ from unittest.mock import AsyncMock
 import pytest
 from pydantic import Field
 
-from fnllm.llm.tools.base import LLMTool
-from fnllm.llm.tools.errors import ToolInvalidArgumentsError, ToolNotFoundError
-from fnllm.llm.types.io import LLMOutput
 from fnllm.openai.llm.features.tools_parsing import OpenAIParseToolsLLM
 from fnllm.openai.types.aliases import (
     OpenAIChatCompletionMessageModel,
@@ -18,6 +15,9 @@ from fnllm.openai.types.aliases import (
     OpenAIFunctionModel,
 )
 from fnllm.openai.types.chat.io import OpenAIChatOutput
+from fnllm.tools.base import LLMTool
+from fnllm.tools.errors import ToolInvalidArgumentsError, ToolNotFoundError
+from fnllm.types.io import LLMOutput
 
 
 class ToolA(LLMTool):

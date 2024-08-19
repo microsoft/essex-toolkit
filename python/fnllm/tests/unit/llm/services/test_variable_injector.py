@@ -4,7 +4,7 @@
 
 import pytest
 
-from fnllm.llm.services.variable_injector import VariableInjector
+from fnllm.services.variable_injector import VariableInjector
 
 
 def test_variables_are_properly_replaced():

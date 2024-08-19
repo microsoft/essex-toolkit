@@ -4,10 +4,10 @@
 
 from typing import Generic, TypeVar
 
-from fnllm.llm.services.usage_extractor import UsageExtractor
-from fnllm.llm.types.metrics import LLMUsageMetrics
 from fnllm.openai.types.chat.io import OpenAIChatOutput
 from fnllm.openai.types.embeddings.io import OpenAIEmbeddingsOutput
+from fnllm.services.usage_extractor import UsageExtractor
+from fnllm.types.metrics import LLMUsageMetrics
 
 TOutputWithUsageMetrics = TypeVar(
     "TOutputWithUsageMetrics", OpenAIChatOutput, OpenAIEmbeddingsOutput

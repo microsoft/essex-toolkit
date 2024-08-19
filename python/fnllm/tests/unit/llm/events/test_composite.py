@@ -4,8 +4,8 @@
 
 from unittest.mock import Mock
 
-from fnllm.llm.events.base import LLMEvents
-from fnllm.llm.events.composite import LLMCompositeEvents
+from fnllm.events.base import LLMEvents
+from fnllm.events.composite import LLMCompositeEvents
 
 
 async def test_composite_events():

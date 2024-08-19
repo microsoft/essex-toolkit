@@ -6,7 +6,7 @@ from abc import ABC, abstractmethod
 from collections.abc import Sequence
 from typing import Generic
 
-from fnllm.llm.types.generics import THistoryEntry, TOutput
+from fnllm.types.generics import THistoryEntry, TOutput
 
 
 class HistoryExtractor(ABC, Generic[TOutput, THistoryEntry]):

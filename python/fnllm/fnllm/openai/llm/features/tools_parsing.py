@@ -7,11 +7,6 @@ from collections.abc import Sequence
 import pydantic
 from typing_extensions import Unpack
 
-from fnllm.llm.protocol import LLM
-from fnllm.llm.tools import LLMTool
-from fnllm.llm.tools.errors import ToolInvalidArgumentsError, ToolNotFoundError
-from fnllm.llm.types.generics import TJsonModel
-from fnllm.llm.types.io import LLMInput, LLMOutput
 from fnllm.openai.llm.utils import llm_tools_to_param
 from fnllm.openai.types.aliases import (
     OpenAIChatCompletionMessageModel,
@@ -23,6 +18,11 @@ from fnllm.openai.types.chat.io import (
     OpenAIChatOutput,
 )
 from fnllm.openai.types.chat.parameters import OpenAIChatParameters
+from fnllm.tools import LLMTool
+from fnllm.tools.errors import ToolInvalidArgumentsError, ToolNotFoundError
+from fnllm.types.generics import TJsonModel
+from fnllm.types.io import LLMInput, LLMOutput
+from fnllm.types.protocol import LLM
 
 
 class OpenAIParseToolsLLM(

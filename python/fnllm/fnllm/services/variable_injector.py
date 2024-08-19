@@ -5,7 +5,7 @@
 from string import Template
 from typing import TypeVar, cast
 
-from fnllm.llm.types import PromptVariables
+from fnllm.types import PromptVariables
 
 TInput = TypeVar("TInput")
 

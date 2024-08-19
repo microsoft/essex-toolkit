@@ -7,11 +7,11 @@ from typing import ClassVar, TypeAlias
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from fnllm.llm.types.metrics import LLMUsageMetrics
 from fnllm.openai.types.aliases import (
     OpenAIChatCompletionMessageModel,
     OpenAIChatCompletionMessageParam,
 )
+from fnllm.types.metrics import LLMUsageMetrics
 
 OpenAIChatMessageInput: TypeAlias = OpenAIChatCompletionMessageParam
 """OpenAI chat message input."""

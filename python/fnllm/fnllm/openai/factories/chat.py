@@ -3,10 +3,8 @@
 """Factory functions for creating OpenAI LLMs."""
 
 from fnllm.caching.base import Cache
+from fnllm.events.base import LLMEvents
 from fnllm.limiting.base import Limiter
-from fnllm.llm.events.base import LLMEvents
-from fnllm.llm.services.cache_interactor import CacheInteractor
-from fnllm.llm.services.variable_injector import VariableInjector
 from fnllm.openai.config import OpenAIConfig
 from fnllm.openai.llm.chat import OpenAIChatLLMImpl
 from fnllm.openai.llm.chat_streaming import OpenAIStreamingChatLLM
@@ -21,6 +19,8 @@ from fnllm.openai.types.client import (
     OpenAIStreamingChatLLMInstance,
     OpenAITextChatLLMInstance,
 )
+from fnllm.services.cache_interactor import CacheInteractor
+from fnllm.services.variable_injector import VariableInjector
 
 from .client import create_openai_client
 from .utils import create_limiter, rate_limiter, retryer

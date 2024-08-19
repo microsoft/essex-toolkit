@@ -8,10 +8,10 @@ from typing import Any, Generic
 
 from typing_extensions import Unpack
 
+from fnllm.events.base import LLMEvents
 from fnllm.limiting import Limiter, Manifest
-from fnllm.llm.events.base import LLMEvents
-from fnllm.llm.types.generics import TInput, TJsonModel, TModelParameters
-from fnllm.llm.types.io import LLMInput, LLMOutput
+from fnllm.types.generics import TInput, TJsonModel, TModelParameters
+from fnllm.types.io import LLMInput, LLMOutput
 
 from .decorator import LLMDecorator, THistoryEntry, TOutput
 

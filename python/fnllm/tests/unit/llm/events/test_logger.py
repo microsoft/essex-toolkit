@@ -5,9 +5,9 @@
 from logging import Logger
 from unittest.mock import Mock
 
+from fnllm.events.logger import LLMEventsLogger
 from fnllm.limiting.base import Manifest
-from fnllm.llm.events.logger import LLMEventsLogger
-from fnllm.llm.types.metrics import LLMMetrics, LLMUsageMetrics
+from fnllm.types.metrics import LLMMetrics, LLMUsageMetrics
 
 
 async def test_logger_is_called():

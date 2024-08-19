@@ -8,9 +8,9 @@ import tiktoken
 from pydantic import Field
 
 from fnllm.limiting.base import Limiter
-from fnllm.llm.tools import LLMTool
 from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
 from fnllm.openai.roles import OpenAIChatRole
+from fnllm.tools import LLMTool
 
 
 class TestTool(LLMTool):

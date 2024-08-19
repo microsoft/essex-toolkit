@@ -7,9 +7,6 @@ from typing import Literal, Protocol, TypeAlias, overload
 from openai import AsyncAzureOpenAI, AsyncOpenAI
 from typing_extensions import Unpack
 
-from fnllm.llm.protocol import LLM
-from fnllm.llm.types.generics import TJsonModel
-from fnllm.llm.types.io import LLMInput, LLMOutput
 from fnllm.openai.types.chat.io import (
     OpenAIChatCompletionInput,
     OpenAIChatHistoryEntry,
@@ -22,6 +19,9 @@ from fnllm.openai.types.embeddings.io import (
     OpenAIEmbeddingsOutput,
 )
 from fnllm.openai.types.embeddings.parameters import OpenAIEmbeddingsParameters
+from fnllm.types.generics import TJsonModel
+from fnllm.types.io import LLMInput, LLMOutput
+from fnllm.types.protocol import LLM
 
 OpenAIClient = AsyncOpenAI | AsyncAzureOpenAI
 """Allowed OpenAI client types."""

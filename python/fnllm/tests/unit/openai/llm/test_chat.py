@@ -5,7 +5,7 @@
 from unittest.mock import ANY, Mock
 
 from fnllm.caching.file import FileCache
-from fnllm.llm.events.base import LLMEvents
+from fnllm.events.base import LLMEvents
 from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.factories.chat import create_openai_chat_llm
 from fnllm.openai.roles import OpenAIChatRole

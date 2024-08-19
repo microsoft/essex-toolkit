@@ -6,14 +6,8 @@ from typing import Generic, Protocol
 
 from typing_extensions import Unpack
 
-from fnllm.llm.types.generics import (
-    THistoryEntry,
-    TInput,
-    TJsonModel,
-    TModelParameters,
-    TOutput,
-)
-from fnllm.llm.types.io import LLMInput, LLMOutput
+from .generics import THistoryEntry, TInput, TJsonModel, TModelParameters, TOutput
+from .io import LLMInput, LLMOutput
 
 
 class LLM(Protocol, Generic[TInput, TOutput, THistoryEntry, TModelParameters]):

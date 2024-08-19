@@ -13,8 +13,10 @@ from .generics import (
 )
 from .io import LLMInput, LLMOutput
 from .metrics import LLMMetrics, LLMRetryMetrics, LLMUsageMetrics
+from .protocol import LLM
 
 __all__ = [
+    "LLM",
     "JSON",
     "LLMInput",
     "LLMMetrics",

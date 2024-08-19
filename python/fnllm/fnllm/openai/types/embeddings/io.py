@@ -6,8 +6,8 @@ from typing import TypeAlias
 
 from pydantic import BaseModel
 
-from fnllm.llm.types.metrics import LLMUsageMetrics
 from fnllm.openai.types.aliases import OpenAIEmbeddingModel
+from fnllm.types.metrics import LLMUsageMetrics
 
 OpenAIEmbeddingsInput: TypeAlias = list[str] | str
 """Main input type for OpenAI embeddings."""

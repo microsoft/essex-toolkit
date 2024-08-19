@@ -4,11 +4,12 @@
 
 from pydantic import ValidationError
 
-from fnllm.llm.tools.base import LLMTool
 from fnllm.openai.types.aliases import (
     OpenAIChatCompletionMessageModel,
     OpenAIChatCompletionMessageToolCallModel,
 )
+
+from .base import LLMTool
 
 
 class ToolInvalidArgumentsError(RuntimeError):

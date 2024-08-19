@@ -5,15 +5,15 @@
 from unittest.mock import ANY, create_autospec, patch
 
 from fnllm.caching.base import Cache
-from fnllm.llm.events.base import LLMEvents
-from fnllm.llm.services.cache_interactor import CacheInteractor
-from fnllm.llm.services.variable_injector import VariableInjector
+from fnllm.events.base import LLMEvents
 from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.factories.embeddings import create_openai_embeddings_llm
 from fnllm.openai.llm.embeddings import OpenAIEmbeddingsLLM
 from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
 from fnllm.openai.llm.services.retryer import OpenAIRetryer
 from fnllm.openai.llm.services.usage_extractor import OpenAIUsageExtractor
+from fnllm.services.cache_interactor import CacheInteractor
+from fnllm.services.variable_injector import VariableInjector
 
 
 def test_create_openai_embeddings_llm():

@@ -8,8 +8,9 @@ from typing import Any, Generic
 from pydantic import BaseModel, Field, field_serializer
 from typing_extensions import NotRequired, TypedDict
 
-from fnllm.llm.tools.base import LLMTool
-from fnllm.llm.types.generics import (
+from fnllm.tools.base import LLMTool
+
+from .generics import (
     JSON,
     PromptVariables,
     THistoryEntry,
@@ -17,7 +18,7 @@ from fnllm.llm.types.generics import (
     TModelParameters,
     TOutput,
 )
-from fnllm.llm.types.metrics import LLMMetrics
+from .metrics import LLMMetrics
 
 
 class LLMInput(TypedDict, Generic[TJsonModel, THistoryEntry, TModelParameters]):

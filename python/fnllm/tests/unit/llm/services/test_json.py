@@ -9,16 +9,16 @@ from unittest.mock import AsyncMock
 import pytest
 from pydantic import BaseModel
 
-from fnllm.llm.base import BaseLLM
-from fnllm.llm.services.errors import FailedToGenerateValidJsonError
-from fnllm.llm.services.json import (
+from fnllm.base.base import BaseLLM
+from fnllm.services.errors import FailedToGenerateValidJsonError
+from fnllm.services.json import (
     JsonHandler,
     JsonMarshaler,
     JsonReceiver,
     JsonRequester,
     LooseModeJsonReceiver,
 )
-from fnllm.llm.types.io import LLMInput, LLMOutput
+from fnllm.types.io import LLMInput, LLMOutput
 
 
 class TestOutput(BaseModel):

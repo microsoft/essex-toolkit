@@ -9,9 +9,9 @@ import pytest
 from pydantic import BaseModel
 from typing_extensions import Unpack
 
-from fnllm.llm.base import BaseLLM
-from fnllm.llm.events.base import LLMEvents
-from fnllm.llm.types.io import LLMInput
+from fnllm.base.base import BaseLLM
+from fnllm.events.base import LLMEvents
+from fnllm.types.io import LLMInput
 
 
 class CustomError(BaseException):

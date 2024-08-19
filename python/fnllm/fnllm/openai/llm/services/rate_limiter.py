@@ -8,18 +8,18 @@ from typing import Final, Generic
 from openai import APIConnectionError, InternalServerError, RateLimitError
 from tiktoken import Encoding
 
+from fnllm.events.base import LLMEvents
 from fnllm.limiting import Limiter
-from fnllm.llm.events.base import LLMEvents
-from fnllm.llm.services.rate_limiter import RateLimiter
-from fnllm.llm.types.generics import (
+from fnllm.openai.llm.utils import llm_tools_to_param
+from fnllm.services.rate_limiter import RateLimiter
+from fnllm.types.generics import (
     THistoryEntry,
     TInput,
     TJsonModel,
     TModelParameters,
     TOutput,
 )
-from fnllm.llm.types.io import LLMInput
-from fnllm.openai.llm.utils import llm_tools_to_param
+from fnllm.types.io import LLMInput
 
 OPENAI_RETRYABLE_ERRORS: Final[list[type[Exception]]] = [
     RateLimitError,

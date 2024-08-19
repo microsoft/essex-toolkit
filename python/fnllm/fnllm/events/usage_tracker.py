@@ -3,9 +3,9 @@
 
 """Class for LLM event usage tracking."""
 
+from fnllm.events.base import LLMEvents
 from fnllm.limiting.base import Manifest
-from fnllm.llm.events.base import LLMEvents
-from fnllm.llm.types.metrics import LLMUsageMetrics
+from fnllm.types.metrics import LLMUsageMetrics
 from fnllm.utils.sliding_window import SlidingWindow
 
 

@@ -7,12 +7,12 @@ from unittest.mock import create_autospec
 
 import pytest
 
+from fnllm.events.base import LLMEvents
 from fnllm.limiting.base import Limiter
 from fnllm.limiting.composite import CompositeLimiter
 from fnllm.limiting.concurrency import ConcurrencyLimiter
 from fnllm.limiting.rpm import RPMLimiter
 from fnllm.limiting.tpm import TPMLimiter
-from fnllm.llm.events.base import LLMEvents
 from fnllm.openai.config import AzureOpenAIConfig, OpenAIConfig
 from fnllm.openai.factories.utils import create_limiter, rate_limiter, retryer
 from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter

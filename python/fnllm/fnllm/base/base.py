@@ -10,24 +10,24 @@ from typing import Generic
 from typing_extensions import Unpack
 
 from fnllm.caching.base import Cache
-from fnllm.llm.events.base import LLMEvents
-from fnllm.llm.protocol import LLM
-from fnllm.llm.services.decorator import LLMDecorator
-from fnllm.llm.services.history_extractor import HistoryExtractor
-from fnllm.llm.services.json import JsonHandler
-from fnllm.llm.services.rate_limiter import RateLimiter
-from fnllm.llm.services.retryer import Retryer
-from fnllm.llm.services.usage_extractor import UsageExtractor
-from fnllm.llm.services.variable_injector import VariableInjector
-from fnllm.llm.types.generics import (
+from fnllm.events.base import LLMEvents
+from fnllm.services.decorator import LLMDecorator
+from fnllm.services.history_extractor import HistoryExtractor
+from fnllm.services.json import JsonHandler
+from fnllm.services.rate_limiter import RateLimiter
+from fnllm.services.retryer import Retryer
+from fnllm.services.usage_extractor import UsageExtractor
+from fnllm.services.variable_injector import VariableInjector
+from fnllm.types.generics import (
     THistoryEntry,
     TInput,
     TJsonModel,
     TModelParameters,
     TOutput,
 )
-from fnllm.llm.types.io import LLMInput, LLMOutput
-from fnllm.llm.types.metrics import LLMUsageMetrics
+from fnllm.types.io import LLMInput, LLMOutput
+from fnllm.types.metrics import LLMUsageMetrics
+from fnllm.types.protocol import LLM
 
 
 class BaseLLM(

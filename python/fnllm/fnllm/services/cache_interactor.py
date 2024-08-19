@@ -6,8 +6,8 @@ from collections.abc import Awaitable, Callable
 from typing import Any
 
 from fnllm.caching.base import Cache
-from fnllm.llm.events.base import LLMEvents
-from fnllm.llm.types.generics import TJsonModel
+from fnllm.events.base import LLMEvents
+from fnllm.types.generics import TJsonModel
 
 
 class CacheInteractor:

@@ -7,7 +7,7 @@ from unittest.mock import AsyncMock
 from pydantic import BaseModel
 
 from fnllm.caching.file import FileCache
-from fnllm.llm.services.cache_interactor import CacheInteractor
+from fnllm.services.cache_interactor import CacheInteractor
 
 
 class CustomModel(BaseModel):

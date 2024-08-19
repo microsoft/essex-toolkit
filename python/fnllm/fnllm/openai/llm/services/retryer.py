@@ -7,9 +7,9 @@ from typing import Final, Generic
 
 from openai import APIConnectionError, InternalServerError, RateLimitError
 
-from fnllm.llm.events.base import LLMEvents
-from fnllm.llm.services.retryer import Retryer
-from fnllm.llm.types.generics import THistoryEntry, TInput, TModelParameters, TOutput
+from fnllm.events.base import LLMEvents
+from fnllm.services.retryer import Retryer
+from fnllm.types.generics import THistoryEntry, TInput, TModelParameters, TOutput
 
 OPENAI_RETRYABLE_ERRORS: Final[list[type[Exception]]] = [
     RateLimitError,

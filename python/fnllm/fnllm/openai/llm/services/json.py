@@ -2,22 +2,22 @@
 """OpenAI JSON Handler."""
 
 from fnllm.config.json_strategy import JsonStrategy
-from fnllm.llm.services.errors import FailedToGenerateValidJsonError
-from fnllm.llm.services.json import (
-    JsonHandler,
-    JsonMarshaler,
-    JsonReceiver,
-    JsonRequester,
-    LooseModeJsonReceiver,
-)
-from fnllm.llm.types.generics import JSON, TJsonModel
-from fnllm.llm.types.io import LLMInput, LLMOutput
 from fnllm.openai.types.chat.io import (
     OpenAIChatCompletionInput,
     OpenAIChatHistoryEntry,
     OpenAIChatOutput,
 )
 from fnllm.openai.types.chat.parameters import OpenAIChatParameters
+from fnllm.services.errors import FailedToGenerateValidJsonError
+from fnllm.services.json import (
+    JsonHandler,
+    JsonMarshaler,
+    JsonReceiver,
+    JsonRequester,
+    LooseModeJsonReceiver,
+)
+from fnllm.types.generics import JSON, TJsonModel
+from fnllm.types.io import LLMInput, LLMOutput
 
 
 def create_json_handler(

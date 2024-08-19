@@ -15,17 +15,17 @@ from tenacity import (
 )
 from typing_extensions import Unpack
 
-from fnllm.llm.events.base import LLMEvents
-from fnllm.llm.services.errors import RetriesExhaustedError
-from fnllm.llm.types.generics import (
+from fnllm.events.base import LLMEvents
+from fnllm.services.errors import RetriesExhaustedError
+from fnllm.types.generics import (
     THistoryEntry,
     TInput,
     TJsonModel,
     TModelParameters,
     TOutput,
 )
-from fnllm.llm.types.io import LLMInput, LLMOutput
-from fnllm.llm.types.metrics import LLMRetryMetrics
+from fnllm.types.io import LLMInput, LLMOutput
+from fnllm.types.metrics import LLMRetryMetrics
 
 from .decorator import LLMDecorator
 

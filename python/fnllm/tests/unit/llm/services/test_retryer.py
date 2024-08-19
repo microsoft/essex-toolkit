@@ -6,10 +6,10 @@ from unittest.mock import ANY, AsyncMock, Mock, call
 
 import pytest
 
-from fnllm.llm.events.base import LLMEvents
-from fnllm.llm.services.errors import RetriesExhaustedError
-from fnllm.llm.services.retryer import Retryer
-from fnllm.llm.types.io import LLMOutput
+from fnllm.events.base import LLMEvents
+from fnllm.services.errors import RetriesExhaustedError
+from fnllm.services.retryer import Retryer
+from fnllm.types.io import LLMOutput
 
 
 class TestRetryer(Retryer):

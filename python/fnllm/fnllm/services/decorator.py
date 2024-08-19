@@ -5,8 +5,8 @@
 from collections.abc import Awaitable, Callable
 from typing import Generic, Protocol
 
-from fnllm.llm.types.generics import THistoryEntry, TJsonModel, TOutput
-from fnllm.llm.types.io import LLMOutput
+from fnllm.types.generics import THistoryEntry, TJsonModel, TOutput
+from fnllm.types.io import LLMOutput
 
 
 class LLMDecorator(Protocol, Generic[TOutput, THistoryEntry]):

@@ -4,14 +4,8 @@
 
 from typing_extensions import Unpack
 
-from fnllm.llm.base import BaseLLM
-from fnllm.llm.events.base import LLMEvents
-from fnllm.llm.services.cache_interactor import CacheInteractor
-from fnllm.llm.services.rate_limiter import RateLimiter
-from fnllm.llm.services.retryer import Retryer
-from fnllm.llm.services.variable_injector import VariableInjector
-from fnllm.llm.types.io import LLMInput
-from fnllm.llm.types.metrics import LLMUsageMetrics
+from fnllm.base.base import BaseLLM
+from fnllm.events.base import LLMEvents
 from fnllm.openai.types.aliases import OpenAICreateEmbeddingResponseModel
 from fnllm.openai.types.client import OpenAIClient
 from fnllm.openai.types.embeddings.io import (
@@ -19,6 +13,12 @@ from fnllm.openai.types.embeddings.io import (
     OpenAIEmbeddingsOutput,
 )
 from fnllm.openai.types.embeddings.parameters import OpenAIEmbeddingsParameters
+from fnllm.services.cache_interactor import CacheInteractor
+from fnllm.services.rate_limiter import RateLimiter
+from fnllm.services.retryer import Retryer
+from fnllm.services.variable_injector import VariableInjector
+from fnllm.types.io import LLMInput
+from fnllm.types.metrics import LLMUsageMetrics
 
 from .services.usage_extractor import OpenAIUsageExtractor
 

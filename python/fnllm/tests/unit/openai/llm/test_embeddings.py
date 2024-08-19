@@ -5,7 +5,7 @@
 from unittest.mock import ANY, Mock
 
 from fnllm.caching.file import FileCache
-from fnllm.llm.events.base import LLMEvents
+from fnllm.events.base import LLMEvents
 from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.factories.embeddings import create_openai_embeddings_llm
 from fnllm.openai.types.aliases import OpenAIEmbeddingModel, OpenAIEmbeddingUsageModel
