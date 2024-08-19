@@ -30,7 +30,6 @@ pytest = "^8.2.2"
 coverage = "^7.5.4"
 poethepoet = "^0.27.0"
 pytest-asyncio = "^0.23.7"
-twine = "^5.1.1"
 ipykernel = "^6.29.5"
 
 [build-system]
