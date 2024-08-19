@@ -1,2 +1,2 @@
 #!/bin/sh
-poetry install -E azure
+poetry install -E azure -E openai
