@@ -32,14 +32,14 @@ def mock_output(response: str) -> OpenAIChatOutput:
 
 def test_schematic_mode_handlers():
     with pytest.raises(NotImplementedError):
-        create_json_handler(JsonStrategy.Schematic)
+        create_json_handler(JsonStrategy.STRUCTURED)
 
 
 async def test_loose_mode_handlers():
     expected_raw_json = {"integer": 1, "string": "value"}
     raw_json_str = json.dumps(expected_raw_json)
     delegate = AsyncMock(return_value=LLMOutput(output=mock_output(raw_json_str)))
-    handlers = create_json_handler(JsonStrategy.Loose)
+    handlers = create_json_handler(JsonStrategy.LOOSE)
     assert handlers.receiver is not None
     assert handlers.requester is None
     llm = handlers.receiver.decorate(delegate)
@@ -59,7 +59,7 @@ async def test_loose_mode_invalid_json_should_raise():
     prompt = "prompt"
 
     # creating the LLM
-    handlers = create_json_handler(JsonStrategy.Loose)
+    handlers = create_json_handler(JsonStrategy.LOOSE)
     assert handlers.receiver is not None
     llm = handlers.receiver.decorate(delegate)
 

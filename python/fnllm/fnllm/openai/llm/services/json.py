@@ -26,11 +26,11 @@ def create_json_handler(
     """Create a JSON handler for OpenAI."""
     marshaler = OpenAIJsonMarshaler()
     match strategy:
-        case JsonStrategy.Loose:
+        case JsonStrategy.LOOSE:
             return JsonHandler(None, OpenAILooseModeReceiver(marshaler))
-        case JsonStrategy.Valid:
+        case JsonStrategy.VALID:
             return JsonHandler(OpenAIJsonRequester(), JsonReceiver(marshaler))
-        case JsonStrategy.Schematic:
+        case JsonStrategy.STRUCTURED:
             raise NotImplementedError
 
 

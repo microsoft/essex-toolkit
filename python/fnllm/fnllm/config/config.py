@@ -39,6 +39,6 @@ class Config(BaseModel, frozen=True, extra="allow"):
     )
 
     json_strategy: JsonStrategy = Field(
-        default=JsonStrategy.Valid,
+        default=JsonStrategy.VALID,
         description="The strategy to use for JSON parsing.",
     )
