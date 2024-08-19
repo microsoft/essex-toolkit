@@ -16,8 +16,8 @@ from .metrics import LLMMetrics, LLMRetryMetrics, LLMUsageMetrics
 from .protocol import LLM
 
 __all__ = [
-    "LLM",
     "JSON",
+    "LLM",
     "LLMInput",
     "LLMMetrics",
     "LLMOutput",
