@@ -33,5 +33,6 @@ licenses.txt
 __pycache__/
 output/
 python/*/dist/
+notebooks/*_cache/
 
 tests/integration
