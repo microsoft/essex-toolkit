@@ -14,7 +14,11 @@ from fnllm.limiting.concurrency import ConcurrencyLimiter
 from fnllm.limiting.rpm import RPMLimiter
 from fnllm.limiting.tpm import TPMLimiter
 from fnllm.openai.config import AzureOpenAIConfig, OpenAIConfig
-from fnllm.openai.factories.utils import create_limiter, rate_limiter, retryer
+from fnllm.openai.factories.utils import (
+    create_limiter,
+    create_rate_limiter,
+    create_retryer,
+)
 from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
 from fnllm.openai.llm.services.retryer import OpenAIRetryer
 
@@ -40,7 +44,7 @@ def test_create_rate_limited_llm(requests_burst_mode: bool):
 
     llm = cast(
         OpenAIRateLimiter,
-        rate_limiter(
+        create_rate_limiter(
             config=config,
             events=mocked_events,
             limiter=limiter,
@@ -72,7 +76,7 @@ def test_create_retrying_llm():
 
     llm = cast(
         OpenAIRetryer,
-        retryer(
+        create_retryer(
             config=config,
             operation=tag,
             events=mocked_events,

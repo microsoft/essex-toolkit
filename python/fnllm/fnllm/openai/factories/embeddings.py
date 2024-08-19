@@ -12,7 +12,7 @@ from fnllm.services.cache_interactor import CacheInteractor
 from fnllm.services.variable_injector import VariableInjector
 
 from .client import create_openai_client
-from .utils import create_limiter, rate_limiter, retryer
+from .utils import create_limiter, create_rate_limiter, create_retryer
 
 
 def create_openai_embeddings_llm(
@@ -37,6 +37,6 @@ def create_openai_embeddings_llm(
         events=events,
         usage_extractor=OpenAIUsageExtractor(),
         variable_injector=VariableInjector(),
-        rate_limiter=rate_limiter(config=config, events=events, limiter=limiter),
-        retryer=retryer(config=config, operation=operation, events=events),
+        rate_limiter=create_rate_limiter(config=config, events=events, limiter=limiter),
+        retryer=create_retryer(config=config, operation=operation, events=events),
     )

@@ -23,7 +23,7 @@ from fnllm.services.cache_interactor import CacheInteractor
 from fnllm.services.variable_injector import VariableInjector
 
 from .client import create_openai_client
-from .utils import create_limiter, rate_limiter, retryer
+from .utils import create_limiter, create_rate_limiter, create_retryer
 
 
 def create_openai_chat_llm(
@@ -77,8 +77,8 @@ def _create_openai_text_chat_llm(
         usage_extractor=OpenAIUsageExtractor(),
         history_extractor=OpenAIHistoryExtractor(),
         variable_injector=VariableInjector(),
-        retryer=retryer(config=config, operation=operation, events=events),
-        rate_limiter=rate_limiter(config=config, limiter=limiter, events=events),
+        retryer=create_retryer(config=config, operation=operation, events=events),
+        rate_limiter=create_rate_limiter(config=config, limiter=limiter, events=events),
     )
 
     return OpenAIParseToolsLLM(result)
@@ -99,5 +99,5 @@ def _create_openai_streaming_chat_llm(
         events=events,
         emit_usage=config.track_stream_usage,
         variable_injector=VariableInjector(),
-        rate_limiter=rate_limiter(limiter=limiter, config=config, events=events),
+        rate_limiter=create_rate_limiter(limiter=limiter, config=config, events=events),
     )

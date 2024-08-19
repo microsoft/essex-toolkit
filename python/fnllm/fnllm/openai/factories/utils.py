@@ -43,7 +43,7 @@ def create_limiter(config: OpenAIConfig) -> Limiter:
     return CompositeLimiter(limiters)
 
 
-def rate_limiter(
+def create_rate_limiter(
     *,
     limiter: Limiter,
     config: OpenAIConfig,
@@ -57,7 +57,7 @@ def rate_limiter(
     )
 
 
-def retryer(
+def create_retryer(
     *,
     config: OpenAIConfig,
     operation: str,
