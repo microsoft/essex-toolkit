@@ -38,7 +38,7 @@ jobs:
       - name: Install dependencies
         shell: bash
         working-directory: ./python/${{ matrix.project }}
-        run: poetry install
+        run: ./scripts/install.sh
 
       - name: Build Distributable
         shell: bash
