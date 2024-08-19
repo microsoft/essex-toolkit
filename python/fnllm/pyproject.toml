@@ -1,8 +1,11 @@
 [tool.poetry]
 name = "fnllm"
-version = "0.0.3"
-description = ""
-authors = ["Chris Trevino <chtrevin@microsoft.com>"]
+version = "0.0.2"
+description = "A function-based LLM protocol and wrapper."
+authors = [
+    "Chris Trevino <chtrevin@microsoft.com>",
+    "Rodrigo Racanicci <rracanicci@microsoft.com>",
+]
 readme = "README.md"
 
 [tool.poetry.dependencies]
