@@ -647,3 +647,33 @@ async def test_built_config():
     await graph.drain()
     assert graph.output_value("c1") == 1
     await graph.dispose()
+
+
+async def test_graph_with_multi_bound_connections():
+    registry = Registry()
+    define_math_ops(registry)
+
+    def build_constant(value: int) -> int:
+        return value
+
+    handled: set[int] = set()
+
+    @verb(name="handle", registry=registry)
+    def handle(value: Annotated[int, Input()]) -> None:
+        handled.add(value)
+
+    graph = (
+        GraphBuilder()
+        .add_node("c1", "constant", config={"value": 1})
+        .add_node("c2", "constant", config={"value": 2})
+        .add_node("c3", "constant", config={"value": 3})
+        .add_node("handle", "handle")
+        .add_edge("c1", "handle", to_port="value")
+        .add_edge("c2", "handle", to_port="value")
+        .add_edge("c3", "handle", to_port="value")
+        .build(registry=registry)
+    )
+
+    await graph.drain()
+    assert handled == {1, 2, 3}
+    await graph.dispose()
