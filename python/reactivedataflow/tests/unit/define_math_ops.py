@@ -26,12 +26,14 @@ def define_math_ops(registry: Registry) -> None:
         name="multiply",
         registry=registry,
     )
-    def multiply(a: Annotated[int, Input()], b: Annotated[int, Input()]) -> int:
+    def multiply(
+        a: Annotated[int, Input(required=True)], b: Annotated[int, Input(required=True)]
+    ) -> int:
         return a * b
 
     @verb(
         name="constant",
         registry=registry,
     )
-    def constant(value: Annotated[int, Config()]) -> int:
+    def constant(value: Annotated[int, Config(required=True)]) -> int:
         return value

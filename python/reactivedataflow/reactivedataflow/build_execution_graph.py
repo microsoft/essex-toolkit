@@ -116,7 +116,7 @@ def build_execution_graph(
         dict[str, dict[str, rx.Observable[Any]]],
         dict[str, list[rx.Observable[Any]]],
     ]:
-        named_inputs: dict[str, dict[str, rx.Observable]] = {}
+        named_inputs: dict[str, dict[str, rx.Observable | list[rx.Observable]]] = {}
         array_inputs: dict[str, list[rx.Observable]] = {}
         for edge in graph.edges(data=True):
             # Unpack the edge details
@@ -137,13 +137,34 @@ def build_execution_graph(
                     # to_port is defined, this is a named input
                     if to_node not in named_inputs:
                         named_inputs[to_node] = {}
-                    named_inputs[to_node][to_port] = input_source
+
+                    # If this port is already bound, handle a multi-bind
+                    existing_binding = named_inputs[to_node].get(to_port)
+                    if existing_binding:
+                        if isinstance(existing_binding, list):
+                            existing_binding.append(input_source)
+                        else:
+                            named_inputs[to_node][to_port] = [
+                                existing_binding,
+                                input_source,
+                            ]
+                    else:
+                        named_inputs[to_node][to_port] = input_source
                 else:
                     # to_port is not defined, this is an array input
                     if to_node not in array_inputs:
                         array_inputs[to_node] = []
                     array_inputs[to_node].append(input_source)
-        return named_inputs, array_inputs
+
+        resolved_named_inputs: dict[str, dict[str, rx.Observable[Any]]] = {}
+        for nid, named_input in named_inputs.items():
+            resolved_named_inputs[nid] = {}
+            for name, value in named_input.items():
+                if isinstance(value, list):
+                    resolved_named_inputs[nid][name] = rx.merge(*value)
+                else:
+                    resolved_named_inputs[nid][name] = value
+        return resolved_named_inputs, array_inputs
 
     def bind_inputs(
         nodes: dict[str, Node],
