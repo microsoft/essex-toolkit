@@ -25,7 +25,7 @@ class FileCache(Cache):
         self._encoding = encoding or "utf-8"
 
     @property
-    def cache_path(self) -> Path:
+    def root_path(self) -> Path:
         """Cache path in the filesystem."""
         return self._cache_path
 
@@ -55,10 +55,11 @@ class FileCache(Cache):
         self, key: str, value: Any, metadata: dict[str, Any] | None = None
     ) -> None:
         """Write a value into the cache."""
+        content = json.dumps(
+            {"result": value, "metadata": metadata}, indent=2, ensure_ascii=False
+        )
         (self._cache_path / key).write_text(
-            json.dumps(
-                {"result": value, "metadata": metadata}, indent=2, ensure_ascii=False
-            ),
+            content,
             encoding=self._encoding,
         )
 

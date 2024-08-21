@@ -37,6 +37,10 @@ jobs:
         working-directory: ./python/${{ matrix.project }}
         run: ./scripts/install.sh
 
+      - name: Install Azurite
+        id: azuright
+        uses: potatoqualitee/azuright@v1.1
+
       - name: ${{ matrix.project }} - Check
         working-directory: ./python/${{ matrix.project }}
         run: |

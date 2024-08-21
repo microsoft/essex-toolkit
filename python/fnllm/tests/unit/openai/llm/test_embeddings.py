@@ -99,7 +99,7 @@ async def test_embeddings_llm_with_global_model_config_overwrite(
 
 
 async def test_embeddings_llm_with_cache(
-    embeddings_client_mock: OpenAIEmbeddingsClientMock, cache: FileCache
+    embeddings_client_mock: OpenAIEmbeddingsClientMock, file_cache: FileCache
 ):
     config = AzureOpenAIConfig(
         api_version="api_version",
@@ -121,7 +121,7 @@ async def test_embeddings_llm_with_cache(
             usage=OpenAIEmbeddingUsageModel(prompt_tokens=10, total_tokens=10),
             model=config.model,
         ),
-        cache=cache,
+        cache=file_cache,
         events=mocked_events,
     )
 

@@ -151,7 +151,7 @@ async def test_chat_llm_with_global_model_config_overwrite(
 
 
 async def test_chat_llm_with_cache(
-    chat_completion_client_mock: OpenAIChatCompletionClientMock, cache: FileCache
+    chat_completion_client_mock: OpenAIChatCompletionClientMock, file_cache: FileCache
 ):
     config = AzureOpenAIConfig(
         api_version="api_version",
@@ -172,7 +172,7 @@ async def test_chat_llm_with_cache(
             ),
             model=config.model,
         ),
-        cache=cache,
+        cache=file_cache,
         events=mocked_events,
     )
 

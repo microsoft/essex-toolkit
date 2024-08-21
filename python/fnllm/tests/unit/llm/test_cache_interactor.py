@@ -15,8 +15,8 @@ class CustomModel(BaseModel):
     attr2: int
 
 
-async def test_cache_interactor(cache: FileCache):
-    llm = CacheInteractor(events=None, cache=cache)
+async def test_cache_interactor(file_cache: FileCache):
+    llm = CacheInteractor(events=None, cache=file_cache)
     expected = CustomModel(attr1="test", attr2=10)
     func = AsyncMock(return_value=expected)
 
