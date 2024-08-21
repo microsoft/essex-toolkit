@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         python-version: ['3.11', '3.12']
-        project: ["reactivedataflow", "essex-config"]
+        project: ["reactivedataflow", "essex-config", "fnllm"]
 
     steps:
       - uses: actions/checkout@v2
@@ -35,7 +35,11 @@ jobs:
       - name: ${{ matrix.project }} - Install dependencies
         shell: bash
         working-directory: ./python/${{ matrix.project }}
-        run: poetry install
+        run: ./scripts/install.sh
+
+      - name: Install Azurite
+        id: azuright
+        uses: potatoqualitee/azuright@v1.1
 
       - name: ${{ matrix.project }} - Check
         working-directory: ./python/${{ matrix.project }}

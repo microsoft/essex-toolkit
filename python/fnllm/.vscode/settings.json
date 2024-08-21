@@ -1,0 +1,19 @@
+{
+	"notebook.formatOnSave.enabled": true,
+	"notebook.codeActionsOnSave": {
+		"notebook.source.organizeImports": "explicit",
+		"notebook.source.fixAll": "explicit"
+	},
+	"[python]": {
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "explicit",
+			"source.fixAll": "explicit"
+		},
+		"editor.defaultFormatter": "charliermarsh.ruff"
+	},
+	"ruff.nativeServer": true,
+	"ruff.configuration": "pyproject.toml",
+	"python.analysis.typeCheckingMode": "standard",
+	"azure-pipelines.1ESPipelineTemplatesSchemaFile": true
+}

@@ -1,0 +1,7 @@
+notebooks/*_cache/
+
+# Azurite
+temp_azurite/
+__azurite*.json
+__blobstorage*.json
+__blobstorage__/
