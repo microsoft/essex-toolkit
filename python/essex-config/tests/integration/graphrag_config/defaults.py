@@ -3,8 +3,6 @@
 
 """Common default configuration values."""
 
-from datashaper import AsyncType
-
 from .enums import (
     CacheType,
     InputFileType,
@@ -16,7 +14,6 @@ from .enums import (
 )
 
 ROOT_DIR = "."
-ASYNC_MODE = AsyncType.Threaded
 ENCODING_MODEL = "cl100k_base"
 #
 # LLM Parameters
