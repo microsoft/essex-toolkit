@@ -18,7 +18,8 @@ class EnvSource(Source):
 
     def format_key(self, key: str, prefix: str) -> str:
         """Format the key based on the prefix."""
-        return f"{prefix}_{key}".upper() if prefix.strip() != "" else key.upper()
+        result = f"{prefix}_{key}".upper() if prefix.strip() != "" else key.upper()
+        return result.replace(".", "_")
 
     def __contains__(self, key: str) -> bool:
         """Check if the key is present in the environment."""
