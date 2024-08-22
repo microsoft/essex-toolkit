@@ -3,7 +3,6 @@
 
 """Parameterization settings for the default configuration."""
 
-from devtools import pformat
 from pydantic import Field
 
 import tests.integration.graphrag_config.defaults as defs
@@ -31,10 +30,6 @@ from .umap_config import UmapConfig
 @config(prefix="graphrag")
 class GraphRagConfig(LLMConfig):
     """Base class for the Default-Configuration parameterization settings."""
-
-    def __repr__(self) -> str:
-        """Get a string representation."""
-        return pformat(self, highlight=False)
 
     def __str__(self):
         """Get a string representation."""
