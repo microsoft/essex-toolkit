@@ -19,6 +19,8 @@ pytest = "^8.2.2"
 ruff = "^0.4.7"
 poethepoet = "^0.26.1"
 pyright = "^1.1.365"
+datashaper = "^0.0.49"
+devtools = "^0.12.2"
 
 [build-system]
 requires = ["poetry-core"]
