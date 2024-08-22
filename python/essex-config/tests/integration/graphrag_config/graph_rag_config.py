@@ -8,7 +8,6 @@ from pydantic import Field
 
 import tests.integration.graphrag_config.defaults as defs
 from essex_config import config
-from essex_config.sources import EnvSource
 
 from .cache_config import CacheConfig
 from .chunking_config import ChunkingConfig
@@ -29,7 +28,7 @@ from .text_embedding_config import TextEmbeddingConfig
 from .umap_config import UmapConfig
 
 
-@config(prefix="graphrag", sources=[EnvSource()])
+@config(prefix="graphrag")
 class GraphRagConfig(LLMConfig):
     """Base class for the Default-Configuration parameterization settings."""
 
@@ -44,6 +43,16 @@ class GraphRagConfig(LLMConfig):
     root_dir: str = Field(
         description="The root directory for the configuration.", default=defs.ROOT_DIR
     )
+
+    encoding_model: str = Field(
+        description="The encoding model to use.", default=defs.ENCODING_MODEL
+    )
+    """The encoding model to use."""
+
+    skip_workflows: list[str] = Field(
+        description="The workflows to skip, usually for testing reasons.", default=[]
+    )
+    """The workflows to skip, usually for testing reasons."""
 
     reporting: ReportingConfig = Field(
         description="The reporting configuration.", default=ReportingConfig()
@@ -135,13 +144,3 @@ class GraphRagConfig(LLMConfig):
         description="The global search configuration.", default=GlobalSearchConfig()
     )
     """The global search configuration."""
-
-    encoding_model: str = Field(
-        description="The encoding model to use.", default=defs.ENCODING_MODEL
-    )
-    """The encoding model to use."""
-
-    skip_workflows: list[str] = Field(
-        description="The workflows to skip, usually for testing reasons.", default=[]
-    )
-    """The workflows to skip, usually for testing reasons."""
