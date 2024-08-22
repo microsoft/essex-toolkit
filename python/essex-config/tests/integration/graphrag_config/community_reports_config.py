@@ -3,6 +3,8 @@
 
 """Parameterization settings for the default configuration."""
 
+from typing import Any
+
 from pydantic import Field
 
 import tests.integration.graphrag_config.defaults as defs
@@ -24,6 +26,6 @@ class CommunityReportsConfig(LLMConfig):
         description="The maximum input length in tokens to use when generating reports.",
         default=defs.COMMUNITY_REPORT_MAX_INPUT_LENGTH,
     )
-    strategy: dict | None = Field(
+    strategy: dict[str, Any] | None = Field(
         description="The override strategy to use.", default=None
     )

@@ -3,6 +3,8 @@
 
 """Parameterization settings for the default configuration."""
 
+from typing import Any
+
 from pydantic import Field
 
 import tests.integration.graphrag_config.defaults as defs
@@ -20,6 +22,6 @@ class SummarizeDescriptionsConfig(LLMConfig):
         description="The description summarization maximum length.",
         default=defs.SUMMARIZE_DESCRIPTIONS_MAX_LENGTH,
     )
-    strategy: dict | None = Field(
+    strategy: dict[str, Any] | None = Field(
         description="The override strategy to use.", default=None
     )

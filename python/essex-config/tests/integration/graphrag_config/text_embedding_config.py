@@ -3,6 +3,8 @@
 
 """Parameterization settings for the default configuration."""
 
+from typing import Any
+
 from pydantic import Field
 
 import tests.integration.graphrag_config.defaults as defs
@@ -29,6 +31,6 @@ class TextEmbeddingConfig(LLMConfig):
     vector_store: dict | None = Field(
         description="The vector storage configuration", default=None
     )
-    strategy: dict | None = Field(
+    strategy: dict[str, Any] | None = Field(
         description="The override strategy to use.", default=None
     )

@@ -3,6 +3,8 @@
 
 """Parameterization settings for the default configuration."""
 
+from typing import Any
+
 from pydantic import Field
 
 import tests.integration.graphrag_config.defaults as defs
@@ -28,7 +30,7 @@ class ClaimExtractionConfig(LLMConfig):
         description="The maximum number of entity gleanings to use.",
         default=defs.CLAIM_MAX_GLEANINGS,
     )
-    strategy: dict | None = Field(
+    strategy: dict[str, Any] | None = Field(
         description="The override strategy to use.", default=None
     )
     encoding_model: str | None = Field(

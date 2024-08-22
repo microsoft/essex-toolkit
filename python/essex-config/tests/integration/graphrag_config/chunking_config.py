@@ -3,6 +3,8 @@
 
 """Parameterization settings for the default configuration."""
 
+from typing import Any
+
 from pydantic import BaseModel, Field
 
 import tests.integration.graphrag_config.defaults as defs
@@ -19,7 +21,7 @@ class ChunkingConfig(BaseModel):
         description="The chunk by columns to use.",
         default=defs.CHUNK_GROUP_BY_COLUMNS,
     )
-    strategy: dict | None = Field(
+    strategy: dict[str, Any] | None = Field(
         description="The chunk strategy to use, overriding the default tokenization strategy",
         default=None,
     )

@@ -3,6 +3,8 @@
 
 """Parameterization settings for the default configuration."""
 
+from typing import Any
+
 from pydantic import BaseModel, Field
 
 import tests.integration.graphrag_config.defaults as defs
@@ -14,6 +16,6 @@ class ClusterGraphConfig(BaseModel):
     max_cluster_size: int = Field(
         description="The maximum cluster size to use.", default=defs.MAX_CLUSTER_SIZE
     )
-    strategy: dict | None = Field(
+    strategy: dict[str, Any] | None = Field(
         description="The cluster strategy to use.", default=None
     )

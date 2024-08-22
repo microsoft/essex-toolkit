@@ -3,6 +3,8 @@
 
 """Parameterization settings for the default configuration."""
 
+from typing import Any
+
 from pydantic import BaseModel, Field
 
 import tests.integration.graphrag_config.defaults as defs
@@ -30,6 +32,6 @@ class EmbedGraphConfig(BaseModel):
     random_seed: int = Field(
         description="The node2vec random seed.", default=defs.NODE2VEC_RANDOM_SEED
     )
-    strategy: dict | None = Field(
+    strategy: dict[str, Any] | None = Field(
         description="The graph embedding strategy override.", default=None
     )
