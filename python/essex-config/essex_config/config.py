@@ -1,5 +1,6 @@
 """Main configuration module for the essex_config package."""
 
+import inspect
 from collections.abc import Callable
 from dataclasses import dataclass
 from functools import cache
@@ -102,7 +103,7 @@ def load_config(
         if origin is Union or origin is UnionType:
             types = get_args(field_type)
             for type_ in types:
-                if issubclass(type_, BaseModel):
+                if inspect.isclass(type_) and issubclass(type_, BaseModel):
                     if prefix_annotation is None:
                         field_prefix += f".{name}" if field_prefix != "" else name
                     try:
@@ -113,7 +114,7 @@ def load_config(
                         break
             if name in values and values[name] is not None:
                 continue
-        elif issubclass(field_type, BaseModel):
+        elif inspect.isclass(field_type) and issubclass(field_type, BaseModel):
             if prefix_annotation is None:
                 field_prefix += f".{name}" if field_prefix != "" else name
             values[name] = load_config(field_type, sources, prefix=field_prefix)
