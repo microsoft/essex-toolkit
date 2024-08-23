@@ -1,7 +1,8 @@
 import os
+from pathlib import Path
 from unittest import mock
 
-from essex_config.sources import EnvSource
+from essex_config.sources import EnvSource, FileSource
 
 from .graphrag_config import GraphRagConfig, LLMType, ReportingType, TextEmbeddingTarget
 
@@ -33,6 +34,19 @@ def test_graphrag_api_key_override():
 def test_graphrag_api_key_override_2():
     config = GraphRagConfig.load_config(sources=[EnvSource()])
     assert config.llm.api_key == "abc123"
+
+
+def test_graphrag_yml():
+    config = GraphRagConfig.load_config(
+        sources=[
+            EnvSource(),
+            FileSource(
+                Path("tests/integration/graphrag_fixtures/settings.yml", required=True)
+            ),
+        ]
+    )
+    assert config.root_dir == "/some/path"
+    assert config.encoding_model == "utf-812"
 
 
 @mock.patch.dict(
