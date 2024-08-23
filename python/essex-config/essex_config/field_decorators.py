@@ -11,6 +11,7 @@ class Alias:
 
     source: type
     alias: list[str]
+    include_prefix: bool = False
 
 
 @dataclass

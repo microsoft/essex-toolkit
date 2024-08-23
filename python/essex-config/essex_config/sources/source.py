@@ -24,7 +24,7 @@ class Source(ABC):
         value = None
         if alias is not None:
             for alias_key in alias.alias:
-                format_key = self.format_key(alias_key, prefix)
+                format_key = self.format_key(alias_key, prefix if alias.include_prefix else "")
                 if format_key in self:
                     value = self._get_value(format_key)
 
