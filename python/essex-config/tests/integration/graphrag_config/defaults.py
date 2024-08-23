@@ -3,14 +3,7 @@
 
 """Common default configuration values."""
 
-from .enums import (
-    CacheType,
-    InputFileType,
-    InputType,
-    LLMType,
-    ReportingType,
-    TextEmbeddingTarget,
-)
+from .enums import InputFileType, InputType, LLMType, ReportingType, TextEmbeddingTarget
 
 ROOT_DIR = "."
 ENCODING_MODEL = "cl100k_base"
@@ -40,7 +33,6 @@ EMBEDDING_BATCH_SIZE = 16
 EMBEDDING_BATCH_MAX_TOKENS = 8191
 EMBEDDING_TARGET = TextEmbeddingTarget.required
 
-CACHE_TYPE = CacheType.file
 CACHE_BASE_DIR = "cache"
 CHUNK_SIZE = 1200
 CHUNK_OVERLAP = 100

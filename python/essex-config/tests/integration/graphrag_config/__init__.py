@@ -21,7 +21,6 @@ from .reporting_config import ReportingConfig
 from .snapshots_config import SnapshotsConfig
 from .summarize_descriptions_config import SummarizeDescriptionsConfig
 from .text_embedding_config import TextEmbeddingConfig
-from .umap_config import UmapConfig
 
 __all__ = [
     "ChunkingConfig",
@@ -46,5 +45,4 @@ __all__ = [
     "SummarizeDescriptionsConfig",
     "TextEmbeddingConfig",
     "TextEmbeddingTarget",
-    "UmapConfig",
 ]

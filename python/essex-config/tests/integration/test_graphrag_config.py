@@ -97,7 +97,6 @@ def test_graphrag_api_key_override_2():
         "GRAPHRAG_CLAIM_EXTRACTION_ENCODING_MODEL": "model_xyz",
         "GRAPHRAG_CLUSTER_GRAPH_MAX_CLUSTER_SIZE": "100",
         "GRAPHRAG_CLUSTER_GRAPH_STRATEGY": '{"key": "value123"}',
-        "GRAPHRAG_UMAP_ENABLED": "1",
         "GRAPHRAG_LOCAL_SEARCH_TEXT_UNIT_PROP": "0.1",
         "GRAPHRAG_LOCAL_SEARCH_COMMUNITY_PROP": "0.2",
         "GRAPHRAG_LOCAL_SEARCH_CONVERSATION_HISTORY_MAX_TURNS": "10",
@@ -191,7 +190,6 @@ def test_graphrag_config_env_vars():
     assert config.claim_extraction.encoding_model == "model_xyz"
     assert config.cluster_graph.max_cluster_size == 100
     assert config.cluster_graph.strategy == {"key": "value123"}
-    assert config.umap.enabled is True
     assert config.local_search.text_unit_prop == 0.1
     assert config.local_search.community_prop == 0.2
     assert config.local_search.conversation_history_max_turns == 10

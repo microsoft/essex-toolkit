@@ -22,7 +22,6 @@ from .reporting_config import ReportingConfig
 from .snapshots_config import SnapshotsConfig
 from .summarize_descriptions_config import SummarizeDescriptionsConfig
 from .text_embedding_config import TextEmbeddingConfig
-from .umap_config import UmapConfig
 
 
 @config(prefix="graphrag")
@@ -112,11 +111,6 @@ class GraphRagConfig(LLMConfig):
         default=ClusterGraphConfig(),
     )
     """The cluster graph configuration to use."""
-
-    umap: UmapConfig = Field(
-        description="The UMAP configuration to use.", default=UmapConfig()
-    )
-    """The UMAP configuration to use."""
 
     local_search: LocalSearchConfig = Field(
         description="The local search configuration.", default=LocalSearchConfig()
