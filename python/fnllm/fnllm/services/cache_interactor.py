@@ -41,7 +41,7 @@ class CacheInteractor:
             await self._events.on_cache_hit(key, name)
         else:
             entry = await func()
-            await self._cache.set(key, entry.model_dump())
+            await self._cache.set(key, entry.model_dump(), {"input": key_data})
             await self._events.on_cache_miss(key, name)
 
         return entry
