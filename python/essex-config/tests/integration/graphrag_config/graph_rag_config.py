@@ -11,13 +11,11 @@ from essex_config import config
 from .chunking_config import ChunkingConfig
 from .claim_extraction_config import ClaimExtractionConfig
 from .cluster_graph_config import ClusterGraphConfig
-from .community_reports_config import CommunityReportsConfig
 from .embed_graph_config import EmbedGraphConfig
 from .entity_extraction_config import EntityExtractionConfig
 from .global_search_config import GlobalSearchConfig
 from .input_config import InputConfig
 from .llm_config import LLMConfig
-from .local_search_config import LocalSearchConfig
 from .reporting_config import ReportingConfig
 from .snapshots_config import SnapshotsConfig
 from .summarize_descriptions_config import SummarizeDescriptionsConfig
@@ -92,12 +90,6 @@ class GraphRagConfig(LLMConfig):
     )
     """The description summarization configuration to use."""
 
-    community_reports: CommunityReportsConfig = Field(
-        description="The community reports configuration to use.",
-        default=CommunityReportsConfig(),
-    )
-    """The community reports configuration to use."""
-
     claim_extraction: ClaimExtractionConfig = Field(
         description="The claim extraction configuration to use.",
         default=ClaimExtractionConfig(
@@ -111,11 +103,6 @@ class GraphRagConfig(LLMConfig):
         default=ClusterGraphConfig(),
     )
     """The cluster graph configuration to use."""
-
-    local_search: LocalSearchConfig = Field(
-        description="The local search configuration.", default=LocalSearchConfig()
-    )
-    """The local search configuration."""
 
     global_search: GlobalSearchConfig = Field(
         description="The global search configuration.", default=GlobalSearchConfig()

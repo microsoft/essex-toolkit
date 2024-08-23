@@ -6,7 +6,6 @@
 from .chunking_config import ChunkingConfig
 from .claim_extraction_config import ClaimExtractionConfig
 from .cluster_graph_config import ClusterGraphConfig
-from .community_reports_config import CommunityReportsConfig
 from .embed_graph_config import EmbedGraphConfig
 from .entity_extraction_config import EntityExtractionConfig
 from .enums import InputFileType, InputType, LLMType, ReportingType, TextEmbeddingTarget
@@ -15,7 +14,6 @@ from .graph_rag_config import GraphRagConfig
 from .input_config import InputConfig
 from .llm_config import LLMConfig
 from .llm_parameters import LLMParameters
-from .local_search_config import LocalSearchConfig
 from .parallelization_parameters import ParallelizationParameters
 from .reporting_config import ReportingConfig
 from .snapshots_config import SnapshotsConfig
@@ -26,7 +24,6 @@ __all__ = [
     "ChunkingConfig",
     "ClaimExtractionConfig",
     "ClusterGraphConfig",
-    "CommunityReportsConfig",
     "EmbedGraphConfig",
     "EntityExtractionConfig",
     "GlobalSearchConfig",
@@ -37,7 +34,6 @@ __all__ = [
     "LLMConfig",
     "LLMParameters",
     "LLMType",
-    "LocalSearchConfig",
     "ParallelizationParameters",
     "ReportingConfig",
     "ReportingType",
