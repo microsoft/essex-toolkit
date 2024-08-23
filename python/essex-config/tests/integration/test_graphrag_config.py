@@ -108,6 +108,8 @@ def test_graphrag_config_defaults():
         "GRAPHRAG_GLOBAL_SEARCH_MAP_MAX_TOKENS": "23456",
         "GRAPHRAG_GLOBAL_SEARCH_REDUCE_MAX_TOKENS": "34567",
         "GRAPHRAG_GLOBAL_SEARCH_CONCURRENCY": "10",
+        "GRAPHRAG_PARALLELIZATION_STAGGER": "0.1",
+        "GRAPHRAG_PARALLELIZATION_NUM_THREADS": "10",
     },
     clear=True,
 )
@@ -181,7 +183,7 @@ def test_graphrag_config_env_vars():
     assert config.local_search.text_unit_prop == 0.1
     assert config.local_search.community_prop == 0.2
     assert config.local_search.conversation_history_max_turns == 10
-    assert config.local_search.top_k_mapped_entities == 5
+    assert config.local_search.top_k_entities == 5
     assert config.local_search.top_k_relationships == 5
     assert config.local_search.temperature == 0.5
     assert config.local_search.top_p == 0.5
@@ -196,6 +198,8 @@ def test_graphrag_config_env_vars():
     assert config.global_search.map_max_tokens == 23456
     assert config.global_search.reduce_max_tokens == 34567
     assert config.global_search.concurrency == 10
+    assert config.parallelization.stagger == 0.1
+    assert config.parallelization.num_threads == 10
 
     assert config.entity_extraction.entity_types == ["type1", "type2"]
 
