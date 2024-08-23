@@ -9,7 +9,6 @@ from .enums import (
     InputType,
     LLMType,
     ReportingType,
-    StorageType,
     TextEmbeddingTarget,
 )
 
@@ -77,7 +76,6 @@ SNAPSHOTS_GRAPHML = False
 SNAPSHOTS_RAW_ENTITIES = False
 SNAPSHOTS_TOP_LEVEL_NODES = False
 STORAGE_BASE_DIR = "output/${timestamp}/artifacts"
-STORAGE_TYPE = StorageType.file
 SUMMARIZE_DESCRIPTIONS_MAX_LENGTH = 500
 UMAP_ENABLED = False
 

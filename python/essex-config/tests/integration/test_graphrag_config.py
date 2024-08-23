@@ -3,14 +3,7 @@ from unittest import mock
 
 from essex_config.sources import EnvSource
 
-from .graphrag_config import (
-    CacheType,
-    GraphRagConfig,
-    LLMType,
-    ReportingType,
-    StorageType,
-    TextEmbeddingTarget,
-)
+from .graphrag_config import GraphRagConfig, LLMType, ReportingType, TextEmbeddingTarget
 
 
 def test_graphrag_config_defaults():
@@ -53,16 +46,6 @@ def test_graphrag_api_key_override_2():
         "GRAPHRAG_REPORTING_CONNECTION_STRING": "cs://report",
         "GRAPHRAG_REPORTING_CONTAINER_NAME": "reportingcontainer",
         "GRAPHRAG_REPORTING_STORAGE_ACCOUNT_BLOB_URL": "https://reporting.blob.url",
-        "GRAPHRAG_STORAGE_TYPE": "blob",
-        "GRAPHRAG_STORAGE_BASE_DIR": "/some/base/dir",
-        "GRAPHRAG_STORAGE_CONNECTION_STRING": "cs://storage",
-        "GRAPHRAG_STORAGE_CONTAINER_NAME": "storagecontainer",
-        "GRAPHRAG_STORAGE_STORAGE_ACCOUNT_BLOB_URL": "https://storage.blob.url",
-        "GRAPHRAG_CACHE_TYPE": "blob",
-        "GRAPHRAG_CACHE_BASE_DIR": "/some/base/dir",
-        "GRAPHRAG_CACHE_CONNECTION_STRING": "cs://cache",
-        "GRAPHRAG_CACHE_CONTAINER_NAME": "cachecontainer",
-        "GRAPHRAG_CACHE_STORAGE_ACCOUNT_BLOB_URL": "https://cache.blob.url",
         "GRAPHRAG_INPUT_TYPE": "blob",
         "GRAPHRAG_INPUT_FILE_TYPE": "csv",
         "GRAPHRAG_INPUT_BASE_DIR": "/some/base/dir",
@@ -159,15 +142,6 @@ def test_graphrag_config_env_vars():
     assert config.reporting.connection_string == "cs://report"
     assert config.reporting.container_name == "reportingcontainer"
     assert config.reporting.storage_account_blob_url == "https://reporting.blob.url"
-    assert config.storage.type == StorageType.blob
-    assert config.storage.base_dir == "/some/base/dir"
-    assert config.storage.connection_string == "cs://storage"
-    assert config.storage.container_name == "storagecontainer"
-    assert config.cache.type == CacheType.blob
-    assert config.cache.base_dir == "/some/base/dir"
-    assert config.cache.connection_string == "cs://cache"
-    assert config.cache.container_name == "cachecontainer"
-    assert config.cache.storage_account_blob_url == "https://cache.blob.url"
     assert config.input.type == "blob"
     assert config.input.file_type == "csv"
     assert config.input.base_dir == "/some/base/dir"

@@ -8,7 +8,6 @@ from pydantic import Field
 import tests.integration.graphrag_config.defaults as defs
 from essex_config import config
 
-from .cache_config import CacheConfig
 from .chunking_config import ChunkingConfig
 from .claim_extraction_config import ClaimExtractionConfig
 from .cluster_graph_config import ClusterGraphConfig
@@ -21,7 +20,6 @@ from .llm_config import LLMConfig
 from .local_search_config import LocalSearchConfig
 from .reporting_config import ReportingConfig
 from .snapshots_config import SnapshotsConfig
-from .storage_config import StorageConfig
 from .summarize_descriptions_config import SummarizeDescriptionsConfig
 from .text_embedding_config import TextEmbeddingConfig
 from .umap_config import UmapConfig
@@ -53,16 +51,6 @@ class GraphRagConfig(LLMConfig):
         description="The reporting configuration.", default=ReportingConfig()
     )
     """The reporting configuration."""
-
-    storage: StorageConfig = Field(
-        description="The storage configuration.", default=StorageConfig()
-    )
-    """The storage configuration."""
-
-    cache: CacheConfig = Field(
-        description="The cache configuration.", default=CacheConfig()
-    )
-    """The cache configuration."""
 
     input: InputConfig = Field(
         description="The input configuration.", default=InputConfig()
