@@ -31,6 +31,7 @@ class MockSource(Source):
             "custom_parser": "[1,2,3,4]",
             "custom_parser2": "1,2,3,4",
             "malformed_json": "[1,2,3,4",
+            "hex_string": "0xDEADBEEF",
         }
         super().__init__()
 
@@ -292,6 +293,15 @@ def test_custom_parser_str():
 
     basic_config = CustomParserConfig.load_config()
     assert basic_config.custom_parser2 == ["1", "2", "3", "4"]
+
+
+def test_custom_parser_hex_values():
+    @config(sources=[MockSource()])
+    class CustomParserConfig(BaseModel):
+        hex_string: Annotated[int, Parser(lambda x, _: int(x, 0))]
+
+    basic_config = CustomParserConfig.load_config()
+    assert basic_config.hex_string == 0xDEADBEEF
 
 
 def test_add_runtime_source():
