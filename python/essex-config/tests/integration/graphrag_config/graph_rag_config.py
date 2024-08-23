@@ -3,10 +3,14 @@
 
 """Parameterization settings for the default configuration."""
 
+from typing import Annotated
+
 from pydantic import Field
 
 import tests.integration.graphrag_config.defaults as defs
 from essex_config import config
+from essex_config.field_decorators import Parser
+from essex_config.sources.utils import plain_text_list_parser
 
 from .chunking_config import ChunkingConfig
 from .claim_extraction_config import ClaimExtractionConfig
@@ -39,7 +43,7 @@ class GraphRagConfig(LLMConfig):
     )
     """The encoding model to use."""
 
-    skip_workflows: list[str] = Field(
+    skip_workflows: Annotated[list[str], Parser(plain_text_list_parser())] = Field(
         description="The workflows to skip, usually for testing reasons.", default=[]
     )
     """The workflows to skip, usually for testing reasons."""

@@ -11,7 +11,7 @@ from essex_config.field_decorators import Alias, Parser, Prefixed
 from essex_config.sources import Source
 from essex_config.sources.args_source import ArgSource
 from essex_config.sources.env_source import EnvSource
-from essex_config.sources.utils import json_list_parser
+from essex_config.sources.utils import json_list_parser, plain_text_list_parser
 
 T = TypeVar("T")
 
@@ -32,6 +32,8 @@ class MockSource(Source):
             "custom_parser2": "1,2,3,4",
             "malformed_json": "[1,2,3,4",
             "hex_string": "0xDEADBEEF",
+            "lower_false": "false",
+            "plain_text_list": "1,2,3,4",
         }
         super().__init__()
 
@@ -116,7 +118,9 @@ def test_nested_prefixed_field_config():
 
 def test_nested_alias():
     class Inner(BaseModel):
-        hello: Annotated[str, Alias(MockSource, ["not_hello_nested"])]
+        hello: Annotated[
+            str, Alias(MockSource, ["not_hello_nested"], include_prefix=True)
+        ]
 
     @config(sources=[MockSource()])
     class NestedConfiguration(BaseModel):
@@ -313,10 +317,40 @@ def test_add_runtime_source():
         hello: str
         runtime_source_var: str
         nested: Inner
+        lower_false: bool
+        random_bool: bool
 
     basic_config = RuntimeSourceConfig.load_config(
-        sources=[ArgSource(runtime_source_var="runtime", **{"nested.value": "world"})]
+        sources=[
+            ArgSource(
+                runtime_source_var="runtime",
+                random_bool="this is not false",
+                **{"nested.value": "world"},
+            )
+        ]
     )
     assert basic_config.hello == "world"
     assert basic_config.runtime_source_var == "runtime"
     assert basic_config.nested.value == "world"
+    assert basic_config.lower_false is False
+    assert basic_config.random_bool is True
+
+
+def test_plain_text_parser():
+    @config(sources=[MockSource()])
+    class CustomParserConfig(BaseModel):
+        plain_text_list: Annotated[list[int], Parser(plain_text_list_parser())]
+
+    basic_config = CustomParserConfig.load_config()
+    assert basic_config.plain_text_list == [1, 2, 3, 4]
+
+
+def test_malformed_plaintext_list():
+    @config()
+    class RuntimeSourceConfig(BaseModel):
+        malformed_list: Annotated[list[int], Parser(plain_text_list_parser())]
+
+    with pytest.raises(
+        ValueError, match="Error parsing the value 1,2,3,a for key malformed_list."
+    ):
+        RuntimeSourceConfig.load_config(sources=[ArgSource(malformed_list="1,2,3,a")])
