@@ -19,7 +19,7 @@ class LLMParameters(BaseModel):
     model_config = ConfigDict(protected_namespaces=(), extra="allow")
     api_key: Annotated[
         str | None,
-        Alias(EnvSource, ["OPENAI_API_KEY", "GRAPHRAG_OPENAI_KEY"]),
+        Alias(EnvSource, ["OPENAI_API_KEY", "GRAPHRAG_API_KEY"]),
     ] = Field(
         description="The API key to use for the LLM service.",
         default=None,
