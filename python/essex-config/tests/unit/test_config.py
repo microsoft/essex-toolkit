@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 from essex_config.config import config
 from essex_config.field_decorators import Alias, Parser, Prefixed
 from essex_config.sources import Source
+from essex_config.sources.args_source import ArgSource
 from essex_config.sources.env_source import EnvSource
 from essex_config.sources.utils import json_list_parser
 
@@ -275,7 +276,10 @@ def test_custom_parser_malformed_json():
     class CustomParserConfig(BaseModel):
         malformed_json: Annotated[list[int], Parser(json_list_parser)]
 
-    with pytest.raises(ValueError, match=re.escape("Error parsing the value [1,2,3,4 for key malformed_json.")):
+    with pytest.raises(
+        ValueError,
+        match=re.escape("Error parsing the value [1,2,3,4 for key malformed_json."),
+    ):
         CustomParserConfig.load_config()
 
 
@@ -288,3 +292,16 @@ def test_custom_parser_str():
 
     basic_config = CustomParserConfig.load_config()
     assert basic_config.custom_parser2 == ["1", "2", "3", "4"]
+
+
+def test_add_runtime_source():
+    @config(sources=[MockSource()])
+    class RuntimeSourceConfig(BaseModel):
+        hello: str
+        runtime_source_var: str
+
+    basic_config = RuntimeSourceConfig.load_config(
+        sources=[ArgSource(runtime_source_var="runtime")]
+    )
+    assert basic_config.hello == "world"
+    assert basic_config.runtime_source_var == "runtime"

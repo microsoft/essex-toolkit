@@ -180,6 +180,8 @@ def config(
                 load_config.cache_clear()
             if sources is None:
                 sources = _sources
+            else:
+                sources.extend(_sources)
             if prefix is None:
                 prefix = _prefix
 
