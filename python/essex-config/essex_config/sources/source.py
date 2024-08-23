@@ -1,18 +1,12 @@
 """Source Abstract class definition."""
 
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
-from typing import TypeVar
+from typing import Any, TypeVar
 
-T = TypeVar("T")
+from essex_config.field_decorators import Alias, Parser
+from essex_config.sources.convert_utils import convert_to_type
 
-
-@dataclass
-class Alias:
-    """Class to define the alias for the source."""
-
-    source: type["Source"]
-    alias: list[str]
+SourceValueType = TypeVar("SourceValueType")
 
 
 class Source(ABC):
@@ -21,26 +15,40 @@ class Source(ABC):
     def get_value(
         self,
         key: str,
-        value_type: type[T],
+        value_type: type[SourceValueType],
         prefix: str = "",
         alias: Alias | None = None,
-    ) -> T:
+        parser: Parser | None = None,
+    ) -> SourceValueType:
         """Get the value from the source."""
+        value = None
         if alias is not None:
             for alias_key in alias.alias:
                 format_key = self.format_key(alias_key, prefix)
                 if format_key in self:
-                    return self._get_value(format_key, value_type)
+                    value = self._get_value(format_key)
 
         format_key = self.format_key(key, prefix)
-        if format_key in self:
-            return self._get_value(format_key, value_type)
+        if format_key in self and value is None:
+            value = self._get_value(format_key)
+
+        if value is not None:
+            if parser is not None:
+                try:
+                    return parser.parse(value, value_type)
+                except Exception as e:
+                    msg = f"Error parsing the value {value} for key {key}."
+                    raise ValueError(msg) from e
+            return convert_to_type(value, value_type)
 
         msg = f"Key {key} not found in the source."
         raise KeyError(msg)
 
     @abstractmethod
-    def _get_value(self, key: str, value_type: type[T]) -> T:  # pragma: no cover
+    def _get_value(
+        self,
+        key: str,
+    ) -> Any:  # pragma: no cover
         raise NotImplementedError
 
     def format_key(self, key: str, prefix: str) -> str:

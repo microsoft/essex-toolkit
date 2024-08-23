@@ -2,15 +2,12 @@
 
 import os
 from functools import cache, cached_property
-from typing import TypeVar
+from typing import Any
 
 from azure.identity import DefaultAzureCredential
 from azure.keyvault.secrets import SecretClient
 
-from essex_config.sources.convert_utils import convert_to_type
 from essex_config.sources.source import Source
-
-T = TypeVar("T")
 
 
 class KeyvaultClient:  # pragma: no cover
@@ -64,11 +61,10 @@ class KeyvaultSource(Source):
         )
         return f"https://{keyvault_name}.vault.azure.net/"
 
-    def _get_value(self, key: str, value_type: type[T]) -> T:
+    def _get_value(self, key: str) -> Any:
         """Get the value from the keyvault."""
         client = KeyvaultClient.get_keyvault_client(self.__get_keyvault_url())
-        value = client.get_secret(key)
-        return convert_to_type(value, value_type)
+        return client.get_secret(key)
 
     def __contains__(self, key: str) -> bool:
         """Check if the key is present in the keyvault."""

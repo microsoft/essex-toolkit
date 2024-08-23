@@ -2,7 +2,6 @@
 
 import inspect
 from collections.abc import Callable
-from dataclasses import dataclass
 from functools import cache
 from types import UnionType
 from typing import (
@@ -18,21 +17,14 @@ from typing import (
 from pydantic import BaseModel
 from pydantic_core import PydanticUndefined
 
+from essex_config.field_decorators import Alias, Parser, Prefixed
 from essex_config.sources import EnvSource, Source
-from essex_config.sources.source import Alias
 
 DEFAULT_SOURCE_LIST: list[Source] = [EnvSource()]
 
 
 T = TypeVar("T", bound=BaseModel)
 V = TypeVar("V", bound=BaseModel, covariant=True)
-
-
-@dataclass
-class Prefixed:
-    """Class to define the prefix for the configuration."""
-
-    prefix: str
 
 
 @runtime_checkable
@@ -90,6 +82,11 @@ def load_config(
             None,
         )
 
+        parser_annotation = next(
+            (metadata for metadata in info.metadata if isinstance(metadata, Parser)),
+            None,
+        )
+
         if prefix_annotation is not None:
             field_prefix = (
                 f"{prefix}.{prefix_annotation.prefix}"
@@ -124,8 +121,13 @@ def load_config(
         for source in sources:
             try:
                 value = source.get_value(
-                    name, field_type, field_prefix, source_alias.get(type(source))
+                    name,
+                    field_type,
+                    field_prefix,
+                    source_alias.get(type(source)),
+                    parser_annotation,
                 )
+                break
             except KeyError:
                 continue
 

@@ -1,15 +1,16 @@
 """Test configuration for the essex-config package."""
 
 import re
-from typing import Annotated, TypeVar
+from typing import Annotated, Any, TypeVar
 
 import pytest
 from pydantic import BaseModel, Field
 
-from essex_config.config import Prefixed, config
-from essex_config.sources import Alias, Source
-from essex_config.sources.convert_utils import convert_to_type
+from essex_config.config import config
+from essex_config.field_decorators import Alias, Parser, Prefixed
+from essex_config.sources import Source
 from essex_config.sources.env_source import EnvSource
+from essex_config.sources.utils import json_list_parser
 
 T = TypeVar("T")
 
@@ -26,11 +27,17 @@ class MockSource(Source):
             "nested2.hello": "nested2 world",
             "nested.not_hello_nested": "nested alias world",
             "not_int": "this is not a int value",
+            "custom_parser": "[1,2,3,4]",
+            "custom_parser2": "1,2,3,4",
+            "malformed_json": "[1,2,3,4",
         }
         super().__init__()
 
-    def _get_value(self, key: str, value_type: type[T]) -> T:
-        return convert_to_type(self.data[key], value_type)
+    def _get_value(
+        self,
+        key: str,
+    ) -> Any:
+        return self.data[key]
 
     def __contains__(self, key: str) -> bool:  # pragma: no cover
         """Check if the key is present in the source."""
@@ -252,3 +259,32 @@ def test_wrong_union_type():
         ),
     ):
         WrongTypeConfig.load_config()
+
+
+def test_custom_parser():
+    @config(sources=[MockSource()])
+    class CustomParserConfig(BaseModel):
+        custom_parser: Annotated[list[int], Parser(json_list_parser)]
+
+    basic_config = CustomParserConfig.load_config()
+    assert basic_config.custom_parser == [1, 2, 3, 4]
+
+
+def test_custom_parser_malformed_json():
+    @config(sources=[MockSource()])
+    class CustomParserConfig(BaseModel):
+        malformed_json: Annotated[list[int], Parser(json_list_parser)]
+
+    with pytest.raises(ValueError, match=re.escape("Error parsing the value [1,2,3,4 for key malformed_json.")):
+        CustomParserConfig.load_config()
+
+
+def test_custom_parser_str():
+    @config(sources=[MockSource()])
+    class CustomParserConfig(BaseModel):
+        custom_parser2: Annotated[
+            list[str], Parser(lambda x, _: [str(i) for i in x.split(",")])
+        ]
+
+    basic_config = CustomParserConfig.load_config()
+    assert basic_config.custom_parser2 == ["1", "2", "3", "4"]
