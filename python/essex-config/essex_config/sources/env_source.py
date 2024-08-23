@@ -18,17 +18,17 @@ class EnvSource(Source):
         self,
         file_path: Path | str | None = None,
         use_env_var: bool = False,
-        silence_file_error: bool = False,
+        required: bool = False,
     ):
         """Initialize the class."""
         self._file_path = file_path
         self._use_env_var = use_env_var
-        self.silence_file_error = silence_file_error
+        self._required = required
 
     @staticmethod
     @cache
     def __get_data(
-        file_path: str | Path, use_env_var: bool, silence_file_error: bool
+        file_path: str | Path, use_env_var: bool, required: bool
     ) -> dict[str, Any]:
         """Get the data dictionary."""
         if use_env_var and isinstance(file_path, str):
@@ -40,10 +40,10 @@ class EnvSource(Source):
         if file_path.exists():
             return dotenv_values(file_path)
 
-        if silence_file_error:
-            return {}
-        msg = f"File {file_path} not found."
-        raise FileNotFoundError(msg)
+        if required:
+            msg = f"File {file_path} not found."
+            raise FileNotFoundError(msg)
+        return {}
 
     def _get_value(
         self,
@@ -52,7 +52,7 @@ class EnvSource(Source):
         """Get the value from the environment."""
         if self._file_path is not None:
             extra_data = EnvSource.__get_data(
-                self._file_path, self._use_env_var, self.silence_file_error
+                self._file_path, self._use_env_var, self._required
             )
             if key in extra_data:
                 return extra_data[key]
@@ -67,7 +67,7 @@ class EnvSource(Source):
         """Check if the key is present in the environment."""
         if self._file_path is not None:
             extra_data = EnvSource.__get_data(
-                self._file_path, self._use_env_var, self.silence_file_error
+                self._file_path, self._use_env_var, self._required
             )
             if key in extra_data:
                 return True

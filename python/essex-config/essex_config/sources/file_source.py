@@ -27,17 +27,17 @@ class FileSource(Source):
         self,
         file_path: Path | str,
         use_env_var: bool = False,
-        silence_file_error: bool = False,
+        required: bool = False,
     ):
         """Initialize the class."""
         self._file_path = file_path
         self._use_env_var = use_env_var
-        self._silence_file_error = silence_file_error
+        self._required = required
 
     @staticmethod
     @cache
     def __get_data(
-        file_path: str | Path, use_env_var: bool, silence_file_error: bool
+        file_path: str | Path, use_env_var: bool, required: bool
     ) -> dict[str, Any]:
         """Get the data dictionary."""
         if use_env_var and isinstance(file_path, str):
@@ -51,9 +51,9 @@ class FileSource(Source):
                 with file_path.open() as file:
                     return GET_DATA_FN[file_path.suffix](file)
             except FileNotFoundError:
-                if silence_file_error:
-                    return {}
-                raise
+                if required:
+                    raise
+                return {}
 
         msg = f"File type {file_path.suffix} not supported."
         raise ValueError(msg)
@@ -63,9 +63,7 @@ class FileSource(Source):
         key: str,
     ) -> Any:
         """Get the value from the file."""
-        data = FileSource.__get_data(
-            self._file_path, self._use_env_var, self._silence_file_error
-        )
+        data = FileSource.__get_data(self._file_path, self._use_env_var, self._required)
 
         if "." in key:
             parts = key.split(".")
@@ -78,9 +76,7 @@ class FileSource(Source):
 
     def __contains__(self, key: str) -> bool:
         """Check if the key is present in the file."""
-        data = FileSource.__get_data(
-            self._file_path, self._use_env_var, self._silence_file_error
-        )
+        data = FileSource.__get_data(self._file_path, self._use_env_var, self._required)
 
         if "." in key:
             parts = key.split(".")

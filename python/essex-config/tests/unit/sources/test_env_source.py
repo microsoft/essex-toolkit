@@ -51,12 +51,12 @@ def test_env_source_file_from_env():
 
 
 def test_env_source_file_invalid_file():
-    source = EnvSource(file_path="wrong/.env.test")
+    source = EnvSource(file_path="wrong/.env.test", required=True)
     with pytest.raises(FileNotFoundError, match="File wrong/.env.test not found."):
         source.get_value("TEST_VALUE", str)
 
 
-def test_env_source_file_silence_error():
-    source = EnvSource(file_path="wrong/.env.test", silence_file_error=True)
+def test_env_source_file_required_false():
+    source = EnvSource(file_path="wrong/.env.test")
     with pytest.raises(KeyError):
         source.get_value("TEST_VALUE", str)

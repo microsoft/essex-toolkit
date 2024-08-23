@@ -295,13 +295,18 @@ def test_custom_parser_str():
 
 
 def test_add_runtime_source():
+    class Inner(BaseModel):
+        value: str
+
     @config(sources=[MockSource()])
     class RuntimeSourceConfig(BaseModel):
         hello: str
         runtime_source_var: str
+        nested: Inner
 
     basic_config = RuntimeSourceConfig.load_config(
-        sources=[ArgSource(runtime_source_var="runtime")]
+        sources=[ArgSource(runtime_source_var="runtime", **{"nested.value": "world"})]
     )
     assert basic_config.hello == "world"
     assert basic_config.runtime_source_var == "runtime"
+    assert basic_config.nested.value == "world"

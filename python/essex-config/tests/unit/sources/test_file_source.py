@@ -99,12 +99,12 @@ def test_env_name_not_found_file_source():
 
 
 def test_env_source_file_missing():
-    source = FileSource(file_path="wrong/path.json")
+    source = FileSource(file_path="wrong/path.json", required=True)
     with pytest.raises(FileNotFoundError):
         source.get_value("test", str)
 
 
-def test_env_source_file_silence_error():
-    source = FileSource(file_path="wrong/path.json", silence_file_error=True)
+def test_env_source_file_required_false():
+    source = FileSource(file_path="wrong/path.json")
     with pytest.raises(KeyError, match="Key test not found in the source."):
         source.get_value("test", str)
