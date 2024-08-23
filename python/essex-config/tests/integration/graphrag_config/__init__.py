@@ -10,6 +10,15 @@ from .cluster_graph_config import ClusterGraphConfig
 from .community_reports_config import CommunityReportsConfig
 from .embed_graph_config import EmbedGraphConfig
 from .entity_extraction_config import EntityExtractionConfig
+from .enums import (
+    CacheType,
+    InputFileType,
+    InputType,
+    LLMType,
+    ReportingType,
+    StorageType,
+    TextEmbeddingTarget,
+)
 from .global_search_config import GlobalSearchConfig
 from .graph_rag_config import GraphRagConfig
 from .input_config import InputConfig
@@ -45,4 +54,11 @@ __all__ = [
     "SummarizeDescriptionsConfig",
     "TextEmbeddingConfig",
     "UmapConfig",
+    "CacheType",
+    "InputFileType",
+    "InputType",
+    "ReportingType",
+    "StorageType",
+    "TextEmbeddingTarget",
+    "LLMType",
 ]
