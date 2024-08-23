@@ -6,6 +6,7 @@ from essex_config.sources import EnvSource
 from .graphrag_config import (
     CacheType,
     GraphRagConfig,
+    LLMType,
     ReportingType,
     StorageType,
     TextEmbeddingTarget,
@@ -15,6 +16,30 @@ from .graphrag_config import (
 def test_graphrag_config_defaults():
     config = GraphRagConfig.load_config()
     assert config.root_dir == "."
+
+
+@mock.patch.dict(
+    os.environ,
+    {
+        "GRAPHRAG_API_KEY": "abc123",
+    },
+    clear=True,
+)
+def test_graphrag_api_key_override():
+    config = GraphRagConfig.load_config(sources=[EnvSource()])
+    assert config.llm.api_key == "abc123"
+
+
+@mock.patch.dict(
+    os.environ,
+    {
+        "OPENAI_API_KEY": "abc123",
+    },
+    clear=True,
+)
+def test_graphrag_api_key_override_2():
+    config = GraphRagConfig.load_config(sources=[EnvSource()])
+    assert config.llm.api_key == "abc123"
 
 
 @mock.patch.dict(
@@ -110,6 +135,18 @@ def test_graphrag_config_defaults():
         "GRAPHRAG_GLOBAL_SEARCH_CONCURRENCY": "10",
         "GRAPHRAG_PARALLELIZATION_STAGGER": "0.1",
         "GRAPHRAG_PARALLELIZATION_NUM_THREADS": "10",
+        "GRAPHRAG_LLM_API_KEY": "abc123",
+        "GRAPHRAG_LLM_TYPE": "azure_openai_chat",
+        "GRAPHRAG_LLM_MODEL": "model123",
+        "GRAPHRAG_LLM_MAX_TOKENS": "100",
+        "GRAPHRAG_LLM_TEMPERATURE": "0.5",
+        "GRAPHRAG_LLM_TOP_P": "0.5",
+        "GRAPHRAG_LLM_N": "10",
+        "GRAPHRAG_LLM_REQUEST_TIMEOUT": "10",
+        "GRAPHRAG_LLM_API_BASE": "https://api.base.url",
+        "GRAPHRAG_LLM_API_VERSION": "v1",
+        "GRAPHRAG_LLM_ORGANIZATION": "org",
+        "GRAPHRAG_ENTITY_EXTRACTION_PARALLELIZATION_MAX_THREADS": "1234",
     },
     clear=True,
 )
@@ -164,6 +201,7 @@ def test_graphrag_config_env_vars():
     assert config.entity_extraction.max_gleanings == 123
     assert config.entity_extraction.strategy == {"key": "value"}
     assert config.entity_extraction.encoding_model == "model_xyz"
+    assert config.entity_extraction.parallelization.num_threads == 1234
     assert config.summarize_descriptions.prompt == "c:\\some\\path\\to\\prompt"
     assert config.summarize_descriptions.max_length == 123456
     assert config.summarize_descriptions.strategy == {"key": "value"}
@@ -200,6 +238,17 @@ def test_graphrag_config_env_vars():
     assert config.global_search.concurrency == 10
     assert config.parallelization.stagger == 0.1
     assert config.parallelization.num_threads == 10
+    assert config.llm.api_key == "abc123"
+    assert config.llm.type == LLMType.AzureOpenAIChat
+    assert config.llm.model == "model123"
+    assert config.llm.max_tokens == 100
+    assert config.llm.temperature == 0.5
+    assert config.llm.top_p == 0.5
+    assert config.llm.n == 10
+    assert config.llm.request_timeout == 10
+    assert config.llm.api_base == "https://api.base.url"
+    assert config.llm.api_version == "v1"
+    assert config.llm.organization == "org"
 
     assert config.entity_extraction.entity_types == ["type1", "type2"]
 

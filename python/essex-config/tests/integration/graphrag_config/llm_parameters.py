@@ -3,9 +3,12 @@
 
 """LLM Parameters model."""
 
+from typing import Annotated
+
 from pydantic import BaseModel, ConfigDict, Field
 
 import tests.integration.graphrag_config.defaults as defs
+from essex_config.config import Alias, EnvSource
 
 from .enums import LLMType
 
@@ -14,7 +17,10 @@ class LLMParameters(BaseModel):
     """LLM Parameters model."""
 
     model_config = ConfigDict(protected_namespaces=(), extra="allow")
-    api_key: str | None = Field(
+    api_key: Annotated[
+        str | None,
+        Alias(EnvSource, ["OPENAI_API_KEY", "GRAPHRAG_OPENAI_KEY"]),
+    ] = Field(
         description="The API key to use for the LLM service.",
         default=None,
     )
