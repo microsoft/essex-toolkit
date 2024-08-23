@@ -3,7 +3,13 @@ from unittest import mock
 
 from essex_config.sources import EnvSource
 
-from .graphrag_config import CacheType, GraphRagConfig, ReportingType, StorageType
+from .graphrag_config import (
+    CacheType,
+    GraphRagConfig,
+    ReportingType,
+    StorageType,
+    TextEmbeddingTarget,
+)
 
 
 def test_graphrag_config_defaults():
@@ -50,6 +56,12 @@ def test_graphrag_config_defaults():
         "GRAPHRAG_EMBED_GRAPH_ITERATIONS": "123",
         "GRAPHRAG_EMBED_GRAPH_RANDOM_SEED": "0xDEADBEEF",
         "GRAPHRAG_EMBED_GRAPH_STRATEGY": '{"key": "value"}',
+        "GRAPHRAG_EMBEDDINGS_BATCH_SIZE": "100",
+        "GRAPHRAG_EMBEDDINGS_BATCH_MAX_TOKENS": "5_000",
+        "GRAPHRAG_EMBEDDINGS_TARGET": "all",
+        "GRAPHRAG_EMBEDDINGS_SKIP": "skip1,skip2",
+        "GRAPHRAG_EMBEDDINGS_VECTOR_STORE": '{"key": "valuex"}',
+        "GRAPHRAG_EMBEDDINGS_STRATEGY": '{"key": "valval"}',
     },
     clear=True,
 )
@@ -86,8 +98,15 @@ def test_graphrag_config_env_vars():
     assert config.embed_graph.walk_length == 11
     assert config.embed_graph.window_size == 12
     assert config.embed_graph.iterations == 123
-    assert config.embed_graph.random_seed == 0xDEADBEEF
     assert config.embed_graph.strategy == {"key": "value"}
+    assert config.embed_graph.random_seed == 0xDEADBEEF
+    assert config.embeddings.batch_size == 100
+    assert config.embeddings.batch_max_tokens == 5000
+    assert config.embeddings.target == TextEmbeddingTarget.all
+    assert config.embeddings.vector_store == {"key": "valuex"}
+    assert config.embeddings.strategy == {"key": "valval"}
+
+    assert config.embeddings.skip == ["skip1", "skip2"]
 
     assert config.input.document_attribute_columns == ["attr1", "attr2"]
 
