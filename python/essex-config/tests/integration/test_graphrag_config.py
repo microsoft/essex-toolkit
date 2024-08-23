@@ -62,6 +62,52 @@ def test_graphrag_config_defaults():
         "GRAPHRAG_EMBEDDINGS_SKIP": "skip1,skip2",
         "GRAPHRAG_EMBEDDINGS_VECTOR_STORE": '{"key": "valuex"}',
         "GRAPHRAG_EMBEDDINGS_STRATEGY": '{"key": "valval"}',
+        "GRAPHRAG_CHUNKS_SIZE": "100",
+        "GRAPHRAG_CHUNKS_OVERLAP": "12",
+        "GRAPHRAG_CHUNKS_STRATEGY": '{"key": "valval"}',
+        "GRAPHRAG_CHUNKS_ENCODING_MODEL": "model_xyz",
+        "GRAPHRAG_SNAPSHOTS_GRAPHML": "false",
+        "GRAPHRAG_SNAPSHOTS_RAW_ENTITIES": "1",
+        "GRAPHRAG_SNAPSHOTS_TOP_LEVEL_NODES": "True",
+        "GRAPHRAG_ENTITY_EXTRACTION_PROMPT": "c:\\some\\path\\to\\prompt",
+        "GRAPHRAG_ENTITY_EXTRACTION_ENTITY_TYPES": "type1,type2",
+        "GRAPHRAG_ENTITY_EXTRACTION_MAX_GLEANINGS": "123",
+        "GRAPHRAG_ENTITY_EXTRACTION_STRATEGY": '{"key": "value"}',
+        "GRAPHRAG_ENTITY_EXTRACTION_ENCODING_MODEL": "model_xyz",
+        "GRAPHRAG_SUMMARIZE_DESCRIPTIONS_PROMPT": "c:\\some\\path\\to\\prompt",
+        "GRAPHRAG_SUMMARIZE_DESCRIPTIONS_MAX_LENGTH": "123456",
+        "GRAPHRAG_SUMMARIZE_DESCRIPTIONS_STRATEGY": '{"key": "value"}',
+        "GRAPHRAG_COMMUNITY_REPORTS_PROMPT": "c:\\some\\path\\to\\prompt",
+        "GRAPHRAG_COMMUNITY_REPORTS_MAX_LENGTH": "123456",
+        "GRAPHRAG_COMMUNITY_REPORTS_MAX_INPUT_LENGTH": "1234567",
+        "GRAPHRAG_COMMUNITY_REPORTS_STRATEGY": '{"key": "value"}',
+        "GRAPHRAG_CLAIM_EXTRACTION_ENABLED": "True",
+        "GRAPHRAG_CLAIM_EXTRACTION_PROMPT": "c:\\some\\path\\to\\prompt",
+        "GRAPHRAG_CLAIM_EXTRACTION_DESCRIPTION": "A claim description",
+        "GRAPHRAG_CLAIM_EXTRACTION_MAX_GLEANINGS": "123",
+        "GRAPHRAG_CLAIM_EXTRACTION_STRATEGY": '{"key": "value"}',
+        "GRAPHRAG_CLAIM_EXTRACTION_ENCODING_MODEL": "model_xyz",
+        "GRAPHRAG_CLUSTER_GRAPH_MAX_CLUSTER_SIZE": "100",
+        "GRAPHRAG_CLUSTER_GRAPH_STRATEGY": '{"key": "value123"}',
+        "GRAPHRAG_UMAP_ENABLED": "1",
+        "GRAPHRAG_LOCAL_SEARCH_TEXT_UNIT_PROP": "0.1",
+        "GRAPHRAG_LOCAL_SEARCH_COMMUNITY_PROP": "0.2",
+        "GRAPHRAG_LOCAL_SEARCH_CONVERSATION_HISTORY_MAX_TURNS": "10",
+        "GRAPHRAG_LOCAL_SEARCH_TOP_K_MAPPED_ENTITIES": "5",
+        "GRAPHRAG_LOCAL_SEARCH_TOP_K_RELATIONSHIPS": "5",
+        "GRAPHRAG_LOCAL_SEARCH_TEMPERATURE": "0.5",
+        "GRAPHRAG_LOCAL_SEARCH_TOP_P": "0.5",
+        "GRAPHRAG_LOCAL_SEARCH_N": "10",
+        "GRAPHRAG_LOCAL_SEARCH_MAX_TOKENS": "100",
+        "GRAPHRAG_LOCAL_SEARCH_LLM_MAX_TOKENS": "1000",
+        "GRAPHRAG_GLOBAL_SEARCH_TEMPERATURE": "0.5",
+        "GRAPHRAG_GLOBAL_SEARCH_TOP_P": "0.5",
+        "GRAPHRAG_GLOBAL_SEARCH_N": "10",
+        "GRAPHRAG_GLOBAL_SEARCH_MAX_TOKENS": "100",
+        "GRAPHRAG_GLOBAL_SEARCH_DATA_MAX_TOKENS": "12345",
+        "GRAPHRAG_GLOBAL_SEARCH_MAP_MAX_TOKENS": "23456",
+        "GRAPHRAG_GLOBAL_SEARCH_REDUCE_MAX_TOKENS": "34567",
+        "GRAPHRAG_GLOBAL_SEARCH_CONCURRENCY": "10",
     },
     clear=True,
 )
@@ -105,6 +151,53 @@ def test_graphrag_config_env_vars():
     assert config.embeddings.target == TextEmbeddingTarget.all
     assert config.embeddings.vector_store == {"key": "valuex"}
     assert config.embeddings.strategy == {"key": "valval"}
+    assert config.chunks.size == 100
+    assert config.chunks.overlap == 12
+    assert config.chunks.strategy == {"key": "valval"}
+    assert config.chunks.encoding_model == "model_xyz"
+    assert config.snapshots.graphml is False
+    assert config.snapshots.raw_entities is True
+    assert config.snapshots.top_level_nodes is True
+    assert config.entity_extraction.prompt == "c:\\some\\path\\to\\prompt"
+    assert config.entity_extraction.max_gleanings == 123
+    assert config.entity_extraction.strategy == {"key": "value"}
+    assert config.entity_extraction.encoding_model == "model_xyz"
+    assert config.summarize_descriptions.prompt == "c:\\some\\path\\to\\prompt"
+    assert config.summarize_descriptions.max_length == 123456
+    assert config.summarize_descriptions.strategy == {"key": "value"}
+    assert config.community_reports.prompt == "c:\\some\\path\\to\\prompt"
+    assert config.community_reports.max_length == 123456
+    assert config.community_reports.max_input_length == 1234567
+    assert config.community_reports.strategy == {"key": "value"}
+    assert config.claim_extraction.enabled is True
+    assert config.claim_extraction.prompt == "c:\\some\\path\\to\\prompt"
+    assert config.claim_extraction.description == "A claim description"
+    assert config.claim_extraction.max_gleanings == 123
+    assert config.claim_extraction.strategy == {"key": "value"}
+    assert config.claim_extraction.encoding_model == "model_xyz"
+    assert config.cluster_graph.max_cluster_size == 100
+    assert config.cluster_graph.strategy == {"key": "value123"}
+    assert config.umap.enabled is True
+    assert config.local_search.text_unit_prop == 0.1
+    assert config.local_search.community_prop == 0.2
+    assert config.local_search.conversation_history_max_turns == 10
+    assert config.local_search.top_k_mapped_entities == 5
+    assert config.local_search.top_k_relationships == 5
+    assert config.local_search.temperature == 0.5
+    assert config.local_search.top_p == 0.5
+    assert config.local_search.n == 10
+    assert config.local_search.max_tokens == 100
+    assert config.local_search.llm_max_tokens == 1000
+    assert config.global_search.temperature == 0.5
+    assert config.global_search.top_p == 0.5
+    assert config.global_search.n == 10
+    assert config.global_search.max_tokens == 100
+    assert config.global_search.data_max_tokens == 12345
+    assert config.global_search.map_max_tokens == 23456
+    assert config.global_search.reduce_max_tokens == 34567
+    assert config.global_search.concurrency == 10
+
+    assert config.entity_extraction.entity_types == ["type1", "type2"]
 
     assert config.embeddings.skip == ["skip1", "skip2"]
 
