@@ -114,7 +114,7 @@ def test_graphrag_api_key_override_2():
         "GRAPHRAG_LLM_API_BASE": "https://api.base.url",
         "GRAPHRAG_LLM_API_VERSION": "v1",
         "GRAPHRAG_LLM_ORGANIZATION": "org",
-        "GRAPHRAG_ENTITY_EXTRACTION_PARALLELIZATION_MAX_THREADS": "1234",
+        "GRAPHRAG_ENTITY_EXTRACTION_PARALLELIZATION_NUM_THREADS": "1234",
     },
     clear=True,
 )
