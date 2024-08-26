@@ -20,7 +20,7 @@ def test_graphrag_config_defaults():
     clear=True,
 )
 def test_graphrag_api_key_override():
-    config = GraphRagConfig.load_config(sources=[EnvSource()])
+    config = GraphRagConfig.load_config(sources=[EnvSource(prefix="graphrag")])
     assert config.llm.api_key == "abc123"
 
 
@@ -32,16 +32,18 @@ def test_graphrag_api_key_override():
     clear=True,
 )
 def test_graphrag_api_key_override_2():
-    config = GraphRagConfig.load_config(sources=[EnvSource()])
+    config = GraphRagConfig.load_config(sources=[EnvSource(prefix="graphrag")])
     assert config.llm.api_key == "abc123"
 
 
 def test_graphrag_yml():
     config = GraphRagConfig.load_config(
         sources=[
-            EnvSource(),
+            EnvSource(prefix="graphrag"),
             FileSource(
-                Path("tests/integration/graphrag_fixtures/settings.yml", required=True)
+                Path("tests/integration/graphrag_fixtures/settings.yml"),
+                required=True,
+                prefix="",
             ),
         ]
     )
@@ -133,7 +135,7 @@ def test_graphrag_yml():
     clear=True,
 )
 def test_graphrag_config_env_vars():
-    config = GraphRagConfig.load_config(sources=[EnvSource()])
+    config = GraphRagConfig.load_config(sources=[EnvSource(prefix="graphrag")])
     assert config.root_dir == "root"
     assert config.encoding_model == "model_xyz"
     assert config.reporting.type == ReportingType.console

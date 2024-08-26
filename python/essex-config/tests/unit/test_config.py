@@ -17,12 +17,13 @@ T = TypeVar("T")
 
 
 class MockSource(Source):
-    def __init__(self):
+    def __init__(self, prefix: str | None = None):
         self.data = {
             "hello": "world",
             "prefix.hello": "world prefixed",
             "not_hello": "not world",
             "field_prefix.hello": "world prefixed field",
+            "source_prefix.field_prefix.hello": "world prefixed field",
             "no_prefix_field": 1,
             "nested.hello": "nested world",
             "nested2.hello": "nested2 world",
@@ -35,7 +36,7 @@ class MockSource(Source):
             "lower_false": "false",
             "plain_text_list": "1,2,3,4",
         }
-        super().__init__()
+        super().__init__(prefix)
 
     def _get_value(
         self,
@@ -68,6 +69,24 @@ def test_prefixed_config():
     assert basic_config.hello == "world prefixed"
 
 
+def test_prefixed_source():
+    @config(sources=[MockSource(prefix="prefix")])
+    class PrefixedConfiguration(BaseModel):
+        hello: str
+
+    basic_config = PrefixedConfiguration.load_config()
+    assert basic_config.hello == "world prefixed"
+
+
+def test_prefixed_source_overrides_config():
+    @config(prefix="override_this", sources=[MockSource(prefix="prefix")])
+    class PrefixedConfiguration(BaseModel):
+        hello: str
+
+    basic_config = PrefixedConfiguration.load_config()
+    assert basic_config.hello == "world prefixed"
+
+
 def test_alias_config():
     @config(sources=[MockSource()])
     class AliasConfiguration(BaseModel):
@@ -86,6 +105,15 @@ def test_prefixed_field_config():
     basic_config = PrefixedFieldConfiguration.load_config()
     assert basic_config.hello == "world prefixed field"
     assert basic_config.no_prefix_field == 1
+
+
+def test_prefixed_field_config_with_source_prefix():
+    @config(sources=[MockSource(prefix="source_prefix")])
+    class PrefixedFieldConfiguration(BaseModel):
+        hello: Annotated[str, Prefixed("field_prefix")]
+
+    basic_config = PrefixedFieldConfiguration.load_config()
+    assert basic_config.hello == "world prefixed field"
 
 
 def test_nested_config():

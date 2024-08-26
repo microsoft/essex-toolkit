@@ -26,7 +26,7 @@ from .summarize_descriptions_config import SummarizeDescriptionsConfig
 from .text_embedding_config import TextEmbeddingConfig
 
 
-@config(prefix="graphrag")
+@config()
 class GraphRagConfig(LLMConfig):
     """Base class for the Default-Configuration parameterization settings."""
 

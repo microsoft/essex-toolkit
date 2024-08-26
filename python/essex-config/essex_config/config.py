@@ -48,6 +48,7 @@ def load_config(
     cls: type[T],
     sources: tuple[Source, ...],
     prefix: str = "",
+    inner: bool = False,
 ) -> T:
     """Instantiate the configuration and all values.
 
@@ -104,7 +105,9 @@ def load_config(
                     if prefix_annotation is None:
                         field_prefix += f".{name}" if field_prefix != "" else name
                     try:
-                        values[name] = load_config(type_, sources, prefix=field_prefix)
+                        values[name] = load_config(
+                            type_, sources, prefix=field_prefix, inner=True
+                        )
                     except Exception:  # noqa: S112, BLE001
                         continue
                     else:
@@ -114,11 +117,31 @@ def load_config(
         elif inspect.isclass(field_type) and issubclass(field_type, BaseModel):
             if prefix_annotation is None:
                 field_prefix += f".{name}" if field_prefix != "" else name
-            values[name] = load_config(field_type, sources, prefix=field_prefix)
+            values[name] = load_config(
+                field_type, sources, prefix=field_prefix, inner=True
+            )
             continue
 
         value = None
         for source in sources:
+            if (
+                source.prefix is not None
+                and prefix_annotation is not None
+                and field_prefix == prefix_annotation.prefix
+            ) or (source.prefix is not None and inner):
+                # Add the source prefix to the prefix annotated field
+                field_prefix = f"{source.prefix}.{field_prefix}"
+            elif source.prefix is not None and field_prefix != "":
+                # Replace the root prefix with the source prefix
+                without_root_prefix = ".".join(field_prefix.split(".")[1:])
+                field_prefix = (
+                    f"{source.prefix}.{without_root_prefix}"
+                    if without_root_prefix != ""
+                    else source.prefix
+                )
+            elif source.prefix is not None and field_prefix == "":
+                # Use the source prefix as the field prefix
+                field_prefix = source.prefix
             try:
                 value = source.get_value(
                     name,

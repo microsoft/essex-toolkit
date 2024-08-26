@@ -48,8 +48,10 @@ class KeyvaultSource(Source):
         self,
         keyvault_name: str,
         use_env_var: bool = False,
+        prefix: str | None = None,
     ) -> None:
         """Initialize the class."""
+        super().__init__(prefix)
         self.keyvault_name = keyvault_name
         self.use_env_var = use_env_var
 

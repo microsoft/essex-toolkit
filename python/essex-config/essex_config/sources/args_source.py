@@ -8,8 +8,9 @@ from essex_config.sources.source import Source
 class ArgSource(Source):
     """Class to get the configuration from the environment."""
 
-    def __init__(self, **kwargs: Any):
+    def __init__(self, prefix: str | None = None, **kwargs: Any):
         """Initialize the class."""
+        super().__init__(prefix)
         self._args = kwargs
 
     def _get_value(

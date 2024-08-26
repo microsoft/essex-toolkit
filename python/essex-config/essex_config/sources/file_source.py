@@ -28,8 +28,10 @@ class FileSource(Source):
         file_path: Path | str,
         use_env_var: bool = False,
         required: bool = False,
+        prefix: str | None = None,
     ):
         """Initialize the class."""
+        super().__init__(prefix)
         self._file_path = file_path
         self._use_env_var = use_env_var
         self._required = required

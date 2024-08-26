@@ -12,6 +12,10 @@ SourceValueType = TypeVar("SourceValueType")
 class Source(ABC):
     """Abstract class to define the source of the configuration."""
 
+    def __init__(self, prefix: str | None = None):
+        """Initialize the class."""
+        self.prefix = prefix
+
     def get_value(
         self,
         key: str,
