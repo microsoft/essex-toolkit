@@ -96,3 +96,15 @@ def test_env_name_not_found_file_source():
     source = FileSource("MOCK_NAME", use_env_var=True)
     with pytest.raises(ValueError, match="Environment variable MOCK_NAME not found."):
         source.get_value("anything", str)
+
+
+def test_env_source_file_missing():
+    source = FileSource(file_path="wrong/path.json", required=True)
+    with pytest.raises(FileNotFoundError):
+        source.get_value("test", str)
+
+
+def test_env_source_file_required_false():
+    source = FileSource(file_path="wrong/path.json")
+    with pytest.raises(KeyError, match="Key test not found in the source."):
+        source.get_value("test", str)

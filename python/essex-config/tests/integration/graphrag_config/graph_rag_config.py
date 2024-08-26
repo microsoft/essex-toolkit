@@ -3,31 +3,30 @@
 
 """Parameterization settings for the default configuration."""
 
+from typing import Annotated
+
 from pydantic import Field
 
 import tests.integration.graphrag_config.defaults as defs
 from essex_config import config
+from essex_config.field_decorators import Parser
+from essex_config.sources.utils import plain_text_list_parser
 
-from .cache_config import CacheConfig
 from .chunking_config import ChunkingConfig
 from .claim_extraction_config import ClaimExtractionConfig
 from .cluster_graph_config import ClusterGraphConfig
-from .community_reports_config import CommunityReportsConfig
 from .embed_graph_config import EmbedGraphConfig
 from .entity_extraction_config import EntityExtractionConfig
 from .global_search_config import GlobalSearchConfig
 from .input_config import InputConfig
 from .llm_config import LLMConfig
-from .local_search_config import LocalSearchConfig
 from .reporting_config import ReportingConfig
 from .snapshots_config import SnapshotsConfig
-from .storage_config import StorageConfig
 from .summarize_descriptions_config import SummarizeDescriptionsConfig
 from .text_embedding_config import TextEmbeddingConfig
-from .umap_config import UmapConfig
 
 
-@config(prefix="graphrag")
+@config()
 class GraphRagConfig(LLMConfig):
     """Base class for the Default-Configuration parameterization settings."""
 
@@ -44,7 +43,7 @@ class GraphRagConfig(LLMConfig):
     )
     """The encoding model to use."""
 
-    skip_workflows: list[str] = Field(
+    skip_workflows: Annotated[list[str], Parser(plain_text_list_parser())] = Field(
         description="The workflows to skip, usually for testing reasons.", default=[]
     )
     """The workflows to skip, usually for testing reasons."""
@@ -53,16 +52,6 @@ class GraphRagConfig(LLMConfig):
         description="The reporting configuration.", default=ReportingConfig()
     )
     """The reporting configuration."""
-
-    storage: StorageConfig = Field(
-        description="The storage configuration.", default=StorageConfig()
-    )
-    """The storage configuration."""
-
-    cache: CacheConfig = Field(
-        description="The cache configuration.", default=CacheConfig()
-    )
-    """The cache configuration."""
 
     input: InputConfig = Field(
         description="The input configuration.", default=InputConfig()
@@ -105,12 +94,6 @@ class GraphRagConfig(LLMConfig):
     )
     """The description summarization configuration to use."""
 
-    community_reports: CommunityReportsConfig = Field(
-        description="The community reports configuration to use.",
-        default=CommunityReportsConfig(),
-    )
-    """The community reports configuration to use."""
-
     claim_extraction: ClaimExtractionConfig = Field(
         description="The claim extraction configuration to use.",
         default=ClaimExtractionConfig(
@@ -124,16 +107,6 @@ class GraphRagConfig(LLMConfig):
         default=ClusterGraphConfig(),
     )
     """The cluster graph configuration to use."""
-
-    umap: UmapConfig = Field(
-        description="The UMAP configuration to use.", default=UmapConfig()
-    )
-    """The UMAP configuration to use."""
-
-    local_search: LocalSearchConfig = Field(
-        description="The local search configuration.", default=LocalSearchConfig()
-    )
-    """The local search configuration."""
 
     global_search: GlobalSearchConfig = Field(
         description="The global search configuration.", default=GlobalSearchConfig()

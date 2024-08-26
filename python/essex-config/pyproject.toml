@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "essex-config"
-version = "0.0.1"
+version = "0.0.2"
 description = ""
 authors = ["Andres Morales <andresmor@microsoft.com>"]
 readme = "README.md"
@@ -12,6 +12,7 @@ azure-identity = "^1.16.0"
 azure-keyvault-secrets = "^4.8.0"
 rich = "^13.7.1"
 pyyaml = "^6.0.1"
+python-dotenv = "^1.0.1"
 
 [tool.poetry.group.dev.dependencies]
 coverage = "^7.5.4"

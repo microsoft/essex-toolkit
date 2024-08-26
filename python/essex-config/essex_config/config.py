@@ -2,7 +2,6 @@
 
 import inspect
 from collections.abc import Callable
-from dataclasses import dataclass
 from functools import cache
 from types import UnionType
 from typing import (
@@ -18,21 +17,14 @@ from typing import (
 from pydantic import BaseModel
 from pydantic_core import PydanticUndefined
 
+from essex_config.field_decorators import Alias, Parser, Prefixed
 from essex_config.sources import EnvSource, Source
-from essex_config.sources.source import Alias
 
 DEFAULT_SOURCE_LIST: list[Source] = [EnvSource()]
 
 
 T = TypeVar("T", bound=BaseModel)
 V = TypeVar("V", bound=BaseModel, covariant=True)
-
-
-@dataclass
-class Prefixed:
-    """Class to define the prefix for the configuration."""
-
-    prefix: str
 
 
 @runtime_checkable
@@ -56,6 +48,7 @@ def load_config(
     cls: type[T],
     sources: tuple[Source, ...],
     prefix: str = "",
+    inner: bool = False,
 ) -> T:
     """Instantiate the configuration and all values.
 
@@ -90,6 +83,11 @@ def load_config(
             None,
         )
 
+        parser_annotation = next(
+            (metadata for metadata in info.metadata if isinstance(metadata, Parser)),
+            None,
+        )
+
         if prefix_annotation is not None:
             field_prefix = (
                 f"{prefix}.{prefix_annotation.prefix}"
@@ -107,7 +105,9 @@ def load_config(
                     if prefix_annotation is None:
                         field_prefix += f".{name}" if field_prefix != "" else name
                     try:
-                        values[name] = load_config(type_, sources, prefix=field_prefix)
+                        values[name] = load_config(
+                            type_, sources, prefix=field_prefix, inner=True
+                        )
                     except Exception:  # noqa: S112, BLE001
                         continue
                     else:
@@ -117,15 +117,40 @@ def load_config(
         elif inspect.isclass(field_type) and issubclass(field_type, BaseModel):
             if prefix_annotation is None:
                 field_prefix += f".{name}" if field_prefix != "" else name
-            values[name] = load_config(field_type, sources, prefix=field_prefix)
+            values[name] = load_config(
+                field_type, sources, prefix=field_prefix, inner=True
+            )
             continue
 
         value = None
         for source in sources:
+            if (
+                source.prefix is not None
+                and prefix_annotation is not None
+                and field_prefix == prefix_annotation.prefix
+            ) or (source.prefix is not None and inner):
+                # Add the source prefix to the prefix annotated field
+                field_prefix = f"{source.prefix}.{field_prefix}"
+            elif source.prefix is not None and field_prefix != "":
+                # Replace the root prefix with the source prefix
+                without_root_prefix = ".".join(field_prefix.split(".")[1:])
+                field_prefix = (
+                    f"{source.prefix}.{without_root_prefix}"
+                    if without_root_prefix != ""
+                    else source.prefix
+                )
+            elif source.prefix is not None and field_prefix == "":
+                # Use the source prefix as the field prefix
+                field_prefix = source.prefix
             try:
                 value = source.get_value(
-                    name, field_type, field_prefix, source_alias.get(type(source))
+                    name,
+                    field_type,
+                    field_prefix,
+                    source_alias.get(type(source)),
+                    parser_annotation,
                 )
+                break
             except KeyError:
                 continue
 
@@ -178,6 +203,8 @@ def config(
                 load_config.cache_clear()
             if sources is None:
                 sources = _sources
+            else:
+                sources.extend(_sources)
             if prefix is None:
                 prefix = _prefix
 

@@ -3,15 +3,7 @@
 
 """Common default configuration values."""
 
-from .enums import (
-    CacheType,
-    InputFileType,
-    InputType,
-    LLMType,
-    ReportingType,
-    StorageType,
-    TextEmbeddingTarget,
-)
+from .enums import InputFileType, InputType, LLMType, ReportingType, TextEmbeddingTarget
 
 ROOT_DIR = "."
 ENCODING_MODEL = "cl100k_base"
@@ -41,8 +33,6 @@ EMBEDDING_BATCH_SIZE = 16
 EMBEDDING_BATCH_MAX_TOKENS = 8191
 EMBEDDING_TARGET = TextEmbeddingTarget.required
 
-CACHE_TYPE = CacheType.file
-CACHE_BASE_DIR = "cache"
 CHUNK_SIZE = 1200
 CHUNK_OVERLAP = 100
 CHUNK_GROUP_BY_COLUMNS = ["id"]
@@ -77,21 +67,7 @@ SNAPSHOTS_GRAPHML = False
 SNAPSHOTS_RAW_ENTITIES = False
 SNAPSHOTS_TOP_LEVEL_NODES = False
 STORAGE_BASE_DIR = "output/${timestamp}/artifacts"
-STORAGE_TYPE = StorageType.file
 SUMMARIZE_DESCRIPTIONS_MAX_LENGTH = 500
-UMAP_ENABLED = False
-
-# Local Search
-LOCAL_SEARCH_TEXT_UNIT_PROP = 0.5
-LOCAL_SEARCH_COMMUNITY_PROP = 0.1
-LOCAL_SEARCH_CONVERSATION_HISTORY_MAX_TURNS = 5
-LOCAL_SEARCH_TOP_K_MAPPED_ENTITIES = 10
-LOCAL_SEARCH_TOP_K_RELATIONSHIPS = 10
-LOCAL_SEARCH_MAX_TOKENS = 12_000
-LOCAL_SEARCH_LLM_TEMPERATURE = 0
-LOCAL_SEARCH_LLM_TOP_P = 1
-LOCAL_SEARCH_LLM_N = 1
-LOCAL_SEARCH_LLM_MAX_TOKENS = 2000
 
 # Global Search
 GLOBAL_SEARCH_LLM_TEMPERATURE = 0

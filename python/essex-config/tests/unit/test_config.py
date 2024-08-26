@@ -1,36 +1,48 @@
 """Test configuration for the essex-config package."""
 
 import re
-from typing import Annotated, TypeVar
+from typing import Annotated, Any, TypeVar
 
 import pytest
 from pydantic import BaseModel, Field
 
-from essex_config.config import Prefixed, config
-from essex_config.sources import Alias, Source
-from essex_config.sources.convert_utils import convert_to_type
+from essex_config.config import config
+from essex_config.field_decorators import Alias, Parser, Prefixed
+from essex_config.sources import Source
+from essex_config.sources.args_source import ArgSource
 from essex_config.sources.env_source import EnvSource
+from essex_config.sources.utils import json_list_parser, plain_text_list_parser
 
 T = TypeVar("T")
 
 
 class MockSource(Source):
-    def __init__(self):
+    def __init__(self, prefix: str | None = None):
         self.data = {
             "hello": "world",
             "prefix.hello": "world prefixed",
             "not_hello": "not world",
             "field_prefix.hello": "world prefixed field",
+            "source_prefix.field_prefix.hello": "world prefixed field",
             "no_prefix_field": 1,
             "nested.hello": "nested world",
             "nested2.hello": "nested2 world",
             "nested.not_hello_nested": "nested alias world",
             "not_int": "this is not a int value",
+            "custom_parser": "[1,2,3,4]",
+            "custom_parser2": "1,2,3,4",
+            "malformed_json": "[1,2,3,4",
+            "hex_string": "0xDEADBEEF",
+            "lower_false": "false",
+            "plain_text_list": "1,2,3,4",
         }
-        super().__init__()
+        super().__init__(prefix)
 
-    def _get_value(self, key: str, value_type: type[T]) -> T:
-        return convert_to_type(self.data[key], value_type)
+    def _get_value(
+        self,
+        key: str,
+    ) -> Any:
+        return self.data[key]
 
     def __contains__(self, key: str) -> bool:  # pragma: no cover
         """Check if the key is present in the source."""
@@ -57,6 +69,24 @@ def test_prefixed_config():
     assert basic_config.hello == "world prefixed"
 
 
+def test_prefixed_source():
+    @config(sources=[MockSource(prefix="prefix")])
+    class PrefixedConfiguration(BaseModel):
+        hello: str
+
+    basic_config = PrefixedConfiguration.load_config()
+    assert basic_config.hello == "world prefixed"
+
+
+def test_prefixed_source_overrides_config():
+    @config(prefix="override_this", sources=[MockSource(prefix="prefix")])
+    class PrefixedConfiguration(BaseModel):
+        hello: str
+
+    basic_config = PrefixedConfiguration.load_config()
+    assert basic_config.hello == "world prefixed"
+
+
 def test_alias_config():
     @config(sources=[MockSource()])
     class AliasConfiguration(BaseModel):
@@ -75,6 +105,15 @@ def test_prefixed_field_config():
     basic_config = PrefixedFieldConfiguration.load_config()
     assert basic_config.hello == "world prefixed field"
     assert basic_config.no_prefix_field == 1
+
+
+def test_prefixed_field_config_with_source_prefix():
+    @config(sources=[MockSource(prefix="source_prefix")])
+    class PrefixedFieldConfiguration(BaseModel):
+        hello: Annotated[str, Prefixed("field_prefix")]
+
+    basic_config = PrefixedFieldConfiguration.load_config()
+    assert basic_config.hello == "world prefixed field"
 
 
 def test_nested_config():
@@ -107,7 +146,9 @@ def test_nested_prefixed_field_config():
 
 def test_nested_alias():
     class Inner(BaseModel):
-        hello: Annotated[str, Alias(MockSource, ["not_hello_nested"])]
+        hello: Annotated[
+            str, Alias(MockSource, ["not_hello_nested"], include_prefix=True)
+        ]
 
     @config(sources=[MockSource()])
     class NestedConfiguration(BaseModel):
@@ -252,3 +293,92 @@ def test_wrong_union_type():
         ),
     ):
         WrongTypeConfig.load_config()
+
+
+def test_custom_parser():
+    @config(sources=[MockSource()])
+    class CustomParserConfig(BaseModel):
+        custom_parser: Annotated[list[int], Parser(json_list_parser)]
+
+    basic_config = CustomParserConfig.load_config()
+    assert basic_config.custom_parser == [1, 2, 3, 4]
+
+
+def test_custom_parser_malformed_json():
+    @config(sources=[MockSource()])
+    class CustomParserConfig(BaseModel):
+        malformed_json: Annotated[list[int], Parser(json_list_parser)]
+
+    with pytest.raises(
+        ValueError,
+        match=re.escape("Error parsing the value [1,2,3,4 for key malformed_json."),
+    ):
+        CustomParserConfig.load_config()
+
+
+def test_custom_parser_str():
+    @config(sources=[MockSource()])
+    class CustomParserConfig(BaseModel):
+        custom_parser2: Annotated[
+            list[str], Parser(lambda x, _: [str(i) for i in x.split(",")])
+        ]
+
+    basic_config = CustomParserConfig.load_config()
+    assert basic_config.custom_parser2 == ["1", "2", "3", "4"]
+
+
+def test_custom_parser_hex_values():
+    @config(sources=[MockSource()])
+    class CustomParserConfig(BaseModel):
+        hex_string: Annotated[int, Parser(lambda x, _: int(x, 0))]
+
+    basic_config = CustomParserConfig.load_config()
+    assert basic_config.hex_string == 0xDEADBEEF
+
+
+def test_add_runtime_source():
+    class Inner(BaseModel):
+        value: str
+
+    @config(sources=[MockSource()])
+    class RuntimeSourceConfig(BaseModel):
+        hello: str
+        runtime_source_var: str
+        nested: Inner
+        lower_false: bool
+        random_bool: bool
+
+    basic_config = RuntimeSourceConfig.load_config(
+        sources=[
+            ArgSource(
+                runtime_source_var="runtime",
+                random_bool="this is not false",
+                **{"nested.value": "world"},
+            )
+        ]
+    )
+    assert basic_config.hello == "world"
+    assert basic_config.runtime_source_var == "runtime"
+    assert basic_config.nested.value == "world"
+    assert basic_config.lower_false is False
+    assert basic_config.random_bool is True
+
+
+def test_plain_text_parser():
+    @config(sources=[MockSource()])
+    class CustomParserConfig(BaseModel):
+        plain_text_list: Annotated[list[int], Parser(plain_text_list_parser())]
+
+    basic_config = CustomParserConfig.load_config()
+    assert basic_config.plain_text_list == [1, 2, 3, 4]
+
+
+def test_malformed_plaintext_list():
+    @config()
+    class RuntimeSourceConfig(BaseModel):
+        malformed_list: Annotated[list[int], Parser(plain_text_list_parser())]
+
+    with pytest.raises(
+        ValueError, match="Error parsing the value 1,2,3,a for key malformed_list."
+    ):
+        RuntimeSourceConfig.load_config(sources=[ArgSource(malformed_list="1,2,3,a")])
