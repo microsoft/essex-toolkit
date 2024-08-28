@@ -7,7 +7,7 @@ import pytest
 from pydantic import BaseModel, Field
 
 from essex_config import load_config
-from essex_config.field_decorators import Alias, Parser, Prefixed, Updatable
+from essex_config.field_annotations import Alias, Parser, Prefixed, Updatable
 from essex_config.sources import Source
 from essex_config.sources.args_source import ArgSource
 from essex_config.sources.env_source import EnvSource

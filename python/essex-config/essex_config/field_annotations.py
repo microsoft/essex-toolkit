@@ -2,7 +2,12 @@
 
 from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, cast
+
+from pydantic.fields import FieldInfo
+from typing_extensions import TypeVar
+
+T = TypeVar("T")
 
 
 @dataclass
@@ -33,3 +38,14 @@ class Updatable:
     """Class to define the updatable field."""
 
     update: Callable[[Any, Any], Any]
+
+
+def get_annotation(cls: type[T], field_info: FieldInfo) -> T:
+    """Get the annotation from the field info."""
+    return cast(
+        T,
+        next(
+            (metadata for metadata in field_info.metadata if isinstance(metadata, cls)),
+            None,
+        ),
+    )
