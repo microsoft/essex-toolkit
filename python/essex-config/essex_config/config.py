@@ -156,7 +156,7 @@ def _load_config(
                 # Use the source prefix as the field prefix
                 field_prefix = source.prefix
             try:
-                if value is not None and update_annotation is not None:
+                if value and update_annotation:
                     _value = source.get_value(
                         name,
                         field_type,
