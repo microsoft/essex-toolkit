@@ -26,3 +26,10 @@ class Parser:
     """Class to define the parser for the configuration."""
 
     parse: Callable[[Any, type], Any]
+
+
+@dataclass
+class Updatable:
+    """Class to define the updatable field."""
+
+    update: Callable[[Any, Any], Any]

@@ -14,7 +14,7 @@ from typing import (
 from pydantic import BaseModel
 from pydantic_core import PydanticUndefined
 
-from essex_config.field_decorators import Alias, Parser, Prefixed
+from essex_config.field_decorators import Alias, Parser, Prefixed, Updatable
 from essex_config.sources import EnvSource, Source
 
 DEFAULT_SOURCE_LIST: list[Source] = [EnvSource()]
@@ -101,6 +101,11 @@ def _load_config(
             None,
         )
 
+        update_annotation = next(
+            (metadata for metadata in info.metadata if isinstance(metadata, Updatable)),
+            None,
+        )
+
         if prefix_annotation is not None:
             field_prefix = (
                 f"{prefix}.{prefix_annotation.prefix}"
@@ -156,14 +161,26 @@ def _load_config(
                 # Use the source prefix as the field prefix
                 field_prefix = source.prefix
             try:
-                value = source.get_value(
-                    name,
-                    field_type,
-                    field_prefix,
-                    source_alias.get(type(source)),
-                    parser_annotation,
-                )
-                break
+                if value is not None and update_annotation is not None:
+                    _value = source.get_value(
+                        name,
+                        field_type,
+                        field_prefix,
+                        source_alias.get(type(source)),
+                        parser_annotation,
+                    )
+                    value = update_annotation.update(value, _value)
+                else:
+                    value = source.get_value(
+                        name,
+                        field_type,
+                        field_prefix,
+                        source_alias.get(type(source)),
+                        parser_annotation,
+                    )
+
+                if update_annotation is None:
+                    break
             except KeyError:
                 continue
 
