@@ -7,7 +7,7 @@ import pytest
 from pydantic import BaseModel, Field
 
 from essex_config import load_config
-from essex_config.field_decorators import Alias, Parser, Prefixed
+from essex_config.field_annotations import Alias, Parser, Prefixed, Updatable
 from essex_config.sources import Source
 from essex_config.sources.args_source import ArgSource
 from essex_config.sources.env_source import EnvSource
@@ -371,3 +371,51 @@ def test_malformed_plaintext_list():
         ValueError, match="Error parsing the value 1,2,3,a for key malformed_list."
     ):
         load_config(RuntimeSourceConfig, sources=[ArgSource(malformed_list="1,2,3,a")])
+
+
+def test_updatable_dict():
+    class UpdatableConfig(BaseModel):
+        value: Annotated[dict[str, Any], Updatable(lambda x, y: {**x, **y})]
+
+    basic_config = load_config(
+        UpdatableConfig,
+        sources=[
+            ArgSource(value={"a": 1}),
+            ArgSource(value={"b": 2}),
+            ArgSource(value={"a": 3}),
+        ],
+    )
+
+    assert basic_config.value == {"a": 3, "b": 2}
+
+
+def test_updatable_replace_dict():
+    class UpdatableConfig(BaseModel):
+        value: Annotated[dict[str, Any], Updatable(lambda _, y: y)]
+
+    basic_config = load_config(
+        UpdatableConfig,
+        sources=[
+            ArgSource(value={"a": 1}),
+            ArgSource(value={"b": 2}),
+            ArgSource(value={"a": 3}),
+        ],
+    )
+
+    assert basic_config.value == {"a": 3}
+
+
+def test_default_order_behavior():
+    class NonUpdatableConfig(BaseModel):
+        value: dict[str, Any]
+
+    basic_config = load_config(
+        NonUpdatableConfig,
+        sources=[
+            ArgSource(value={"a": 1}),
+            ArgSource(value={"b": 2}),
+            ArgSource(value={"a": 3}),
+        ],
+    )
+
+    assert basic_config.value == {"a": 1}
