@@ -3,11 +3,9 @@
 import importlib
 import inspect
 import pkgutil
-from typing import cast
 
 from pydantic import BaseModel
 
-from essex_config.config import Config
 from essex_config.doc_gen.printer import ConfigurationPrinter
 
 
@@ -23,8 +21,8 @@ def __find_subclasses(package_name: str) -> list[type]:
 
         # Iterate through all members of the module
         for _, obj in inspect.getmembers(module):
-            if inspect.isclass(obj) and issubclass(obj, Config) and obj is not Config:
-                subclasses.append(cast(type[Config[BaseModel]], obj))
+            if inspect.isclass(obj) and issubclass(obj, BaseModel):
+                subclasses.append(obj)
 
     return subclasses
 

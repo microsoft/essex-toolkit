@@ -8,7 +8,6 @@ from typing import Annotated
 from pydantic import Field
 
 import tests.integration.graphrag_config.defaults as defs
-from essex_config import config
 from essex_config.field_decorators import Parser
 from essex_config.sources.utils import plain_text_list_parser
 
@@ -26,7 +25,6 @@ from .summarize_descriptions_config import SummarizeDescriptionsConfig
 from .text_embedding_config import TextEmbeddingConfig
 
 
-@config()
 class GraphRagConfig(LLMConfig):
     """Base class for the Default-Configuration parameterization settings."""
 

@@ -4,7 +4,7 @@ from typing import Annotated
 
 from pydantic import BaseModel, Field
 
-from essex_config.config import Prefixed, config
+from essex_config.config import Prefixed
 from essex_config.sources.env_source import EnvSource
 from essex_config.sources.file_source import FileSource
 from essex_config.sources.source import Alias
@@ -22,7 +22,6 @@ class NestedConfiguration(BaseModel):
     )
 
 
-@config(prefix="test", sources=[EnvSource(), FileSource("config.yml")])
 class MainConfiguration(BaseModel):
     """Main configuration class for the project.
 
