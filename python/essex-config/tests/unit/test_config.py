@@ -91,24 +91,6 @@ def test_prefixed_source_overrides_config():
     assert basic_config.hello == "world prefixed"
 
 
-def test_prefixed_source():
-    @config(sources=[MockSource(prefix="prefix")])
-    class PrefixedConfiguration(BaseModel):
-        hello: str
-
-    basic_config = PrefixedConfiguration.load_config()
-    assert basic_config.hello == "world prefixed"
-
-
-def test_prefixed_source_overrides_config():
-    @config(prefix="override_this", sources=[MockSource(prefix="prefix")])
-    class PrefixedConfiguration(BaseModel):
-        hello: str
-
-    basic_config = PrefixedConfiguration.load_config()
-    assert basic_config.hello == "world prefixed"
-
-
 def test_alias_config():
     class AliasConfiguration(BaseModel):
         hello: Annotated[str, Alias(MockSource, ["not_hello"])]
