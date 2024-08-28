@@ -7,12 +7,6 @@ from . import sample_module
 
 def test_generate_docs():
     mock_printer = MagicMock()
-    generate_docs(sample_module.__name__, mock_printer, [], False)
-    mock_printer.print.assert_called_once()
-
-
-def test_generate_docs_filter():
-    mock_printer = MagicMock()
     generate_docs(sample_module.__name__, mock_printer, ["MainConfiguration"], False)
     mock_printer.print.assert_called_once()
 

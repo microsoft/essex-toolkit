@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "essex-config"
-version = "0.0.2"
-description = ""
+version = "0.0.3"
+description = "Python library for creating configuration objects that read from various sources, including files, environment variables, and Azure Key Vault."
 authors = ["Andres Morales <andresmor@microsoft.com>"]
 readme = "README.md"
 

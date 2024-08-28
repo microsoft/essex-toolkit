@@ -2,13 +2,14 @@ import os
 from pathlib import Path
 from unittest import mock
 
+from essex_config import load_config
 from essex_config.sources import EnvSource, FileSource
 
 from .graphrag_config import GraphRagConfig, LLMType, ReportingType, TextEmbeddingTarget
 
 
 def test_graphrag_config_defaults():
-    config = GraphRagConfig.load_config()
+    config = load_config(GraphRagConfig)
     assert config.root_dir == "."
 
 
@@ -20,7 +21,7 @@ def test_graphrag_config_defaults():
     clear=True,
 )
 def test_graphrag_api_key_override():
-    config = GraphRagConfig.load_config(sources=[EnvSource(prefix="graphrag")])
+    config = load_config(GraphRagConfig, sources=[EnvSource(prefix="graphrag")])
     assert config.llm.api_key == "abc123"
 
 
@@ -32,12 +33,13 @@ def test_graphrag_api_key_override():
     clear=True,
 )
 def test_graphrag_api_key_override_2():
-    config = GraphRagConfig.load_config(sources=[EnvSource(prefix="graphrag")])
+    config = load_config(GraphRagConfig, sources=[EnvSource(prefix="graphrag")])
     assert config.llm.api_key == "abc123"
 
 
 def test_graphrag_yml():
-    config = GraphRagConfig.load_config(
+    config = load_config(
+        GraphRagConfig,
         sources=[
             EnvSource(prefix="graphrag"),
             FileSource(
@@ -45,7 +47,7 @@ def test_graphrag_yml():
                 required=True,
                 prefix="",
             ),
-        ]
+        ],
     )
     assert config.root_dir == "/some/path"
     assert config.encoding_model == "utf-812"
@@ -135,7 +137,7 @@ def test_graphrag_yml():
     clear=True,
 )
 def test_graphrag_config_env_vars():
-    config = GraphRagConfig.load_config(sources=[EnvSource(prefix="graphrag")])
+    config = load_config(GraphRagConfig, sources=[EnvSource(prefix="graphrag")])
     assert config.root_dir == "root"
     assert config.encoding_model == "model_xyz"
     assert config.reporting.type == ReportingType.console
