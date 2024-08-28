@@ -1,4 +1,6 @@
 import os
+import re
+from pathlib import Path
 from unittest import mock
 
 import pytest
@@ -51,8 +53,11 @@ def test_env_source_file_from_env():
 
 
 def test_env_source_file_invalid_file():
-    source = EnvSource(file_path="wrong/.env.test", required=True)
-    with pytest.raises(FileNotFoundError, match="File wrong/.env.test not found."):
+    wrong_file_path = Path("wrong/.env.test")
+    source = EnvSource(file_path=wrong_file_path, required=True)
+    with pytest.raises(
+        FileNotFoundError, match=re.escape(f"File {wrong_file_path!s} not found.")
+    ):
         source.get_value("TEST_VALUE", str)
 
 
