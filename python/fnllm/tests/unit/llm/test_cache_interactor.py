@@ -44,6 +44,21 @@ async def test_cache_interactor(file_cache: FileCache):
     assert result == expected
     func.assert_not_called()
 
+    #
+    # Call with a cache bypass
+    #
+    func.reset_mock()
+    result = await llm.get_or_insert(
+        func,
+        prefix="test",
+        key_data={"a": 1, "b": "two"},
+        name="name",
+        json_model=CustomModel,
+        bypass=True,
+    )
+    assert result == expected
+    func.assert_called()
+
     # call with a different key data should not be a cache hit
     # so func should be called
     func.reset_mock()
