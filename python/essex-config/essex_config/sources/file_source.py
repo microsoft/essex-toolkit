@@ -5,7 +5,7 @@ from collections.abc import Callable
 from functools import cache
 from io import TextIOWrapper
 from pathlib import Path
-from typing import Any, cast
+from typing import Any
 
 import toml
 import yaml
@@ -15,8 +15,7 @@ from essex_config.sources.utils import path_from_variable
 
 
 def _read_toml(stream: TextIOWrapper) -> dict[str, Any]:
-    content: bytes = cast(bytes, stream.read())
-    return toml.loads(content.decode("utf-8"))
+    return toml.loads(stream.read())
 
 
 GET_DATA_FN: dict[str, Callable[[Any], dict[str, Any]]] = {
