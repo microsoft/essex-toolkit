@@ -3,18 +3,24 @@
 import json
 from collections.abc import Callable
 from functools import cache
+from io import TextIOWrapper
 from pathlib import Path
 from typing import Any
 
-import tomllib
+import toml
 import yaml
 
 from essex_config.sources.source import Source
 from essex_config.sources.utils import path_from_variable
 
+
+def _read_toml(stream: TextIOWrapper) -> dict[str, Any]:
+    return toml.loads(stream.read().decode("utf-8"))
+
+
 GET_DATA_FN: dict[str, Callable[[Any], dict[str, Any]]] = {
     ".json": json.load,
-    ".toml": tomllib.load,
+    ".toml": _read_toml,
     ".yaml": yaml.safe_load,
     ".yml": yaml.safe_load,
 }
@@ -51,7 +57,10 @@ class FileSource(Source):
         if file_path.suffix in GET_DATA_FN:
             try:
                 with file_path.open() as file:
-                    return GET_DATA_FN[file_path.suffix](file)
+                    get_data = GET_DATA_FN[file_path.suffix]
+                    result = get_data(file)
+                    print("RESULT", result)
+                    return result
             except FileNotFoundError:
                 if required:
                     raise
