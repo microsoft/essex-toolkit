@@ -3,7 +3,7 @@
 """OpenAI aliases types."""
 
 from collections.abc import Sequence
-from typing import Literal, Required, TypeAlias
+from typing import Literal, TypeAlias
 
 from openai.types.chat import (
     ChatCompletion as ChatCompletionModel,
@@ -66,7 +66,7 @@ from openai.types.embedding import Embedding as EmbeddingModel
 from openai.types.shared_params.function_definition import (
     FunctionDefinition as FunctionDefinitionParam,
 )
-from typing_extensions import TypedDict
+from typing_extensions import Required, TypedDict
 
 OpenAIChatModel: TypeAlias = ChatModel
 """Alias for the ChatModel (available model types)."""
