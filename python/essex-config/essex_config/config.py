@@ -1,6 +1,5 @@
 """Main configuration module for the essex_config package."""
 
-import inspect
 from functools import cache
 from types import UnionType
 from typing import (
@@ -22,6 +21,8 @@ from essex_config.field_annotations import (
     get_annotation,
 )
 from essex_config.sources import EnvSource, Source
+
+from .utils import is_pydantic_model
 
 DEFAULT_SOURCE_LIST: list[Source] = [EnvSource()]
 
@@ -114,7 +115,7 @@ def _load_config(
         if origin is Union or origin is UnionType:
             types = get_args(field_type)
             for type_ in types:
-                if inspect.isclass(type_) and issubclass(type_, BaseModel):
+                if is_pydantic_model(type_):
                     if prefix_annotation is None:
                         field_prefix += f".{name}" if field_prefix != "" else name
                     try:
@@ -127,7 +128,7 @@ def _load_config(
                         break
             if name in values and values[name] is not None:
                 continue
-        elif inspect.isclass(field_type) and issubclass(field_type, BaseModel):
+        elif is_pydantic_model(field_type):
             if prefix_annotation is None:
                 field_prefix += f".{name}" if field_prefix != "" else name
             values[name] = _load_config(
