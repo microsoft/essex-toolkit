@@ -103,7 +103,7 @@ class OpenAITextChatLLM(
         *,
         messages: list[OpenAIChatHistoryEntry],
         parameters: OpenAIChatParameters,
-        bypass: bool,
+        bypass_cache: bool,
     ) -> OpenAIChatCompletionModel:
         # TODO: check if we need to remove max_tokens and n from the keys
         return await self._cache.get_or_insert(
@@ -115,7 +115,7 @@ class OpenAITextChatLLM(
             key_data={"messages": messages, "parameters": parameters},
             name=name,
             json_model=OpenAIChatCompletionModel,
-            bypass=bypass,
+            bypass_cache=bypass_cache,
         )
 
     async def _execute_llm(
@@ -127,7 +127,7 @@ class OpenAITextChatLLM(
     ) -> OpenAIChatOutput:
         name = kwargs.get("name")
         history = kwargs.get("history", [])
-        nocache = kwargs.get("nocache", False)
+        bypass_cache = kwargs.get("bypass_cache", False)
         local_model_parameters = kwargs.get("model_parameters")
         messages, prompt_message = build_chat_messages(prompt, history)
         completion_parameters = self._build_completion_parameters(
@@ -135,7 +135,10 @@ class OpenAITextChatLLM(
         )
 
         completion = await self._call_completion_or_cache(
-            name, messages=messages, parameters=completion_parameters, bypass=nocache
+            name,
+            messages=messages,
+            parameters=completion_parameters,
+            bypass_cache=bypass_cache,
         )
 
         response = completion.choices[0].message

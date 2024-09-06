@@ -28,10 +28,10 @@ class CacheInteractor:
         key_data: dict[str, Any],
         name: str | None,
         json_model: type[TJsonModel],
-        bypass: bool = False,
+        bypass_cache: bool = False,
     ) -> TJsonModel:
         """Get or insert an item into the cache."""
-        if not self._cache or bypass:
+        if not self._cache or bypass_cache:
             return await func()
 
         key = self._cache.create_key(key_data, prefix=prefix)

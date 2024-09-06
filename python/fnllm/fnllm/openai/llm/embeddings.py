@@ -86,7 +86,7 @@ class OpenAIEmbeddingsLLM(
         *,
         prompt: OpenAIEmbeddingsInput,
         parameters: OpenAIEmbeddingsParameters,
-        bypass: bool,
+        bypass_cache: bool,
     ) -> OpenAICreateEmbeddingResponseModel:
         # TODO: check if we need to remove max_tokens and n from the keys
         return await self._cache.get_or_insert(
@@ -97,7 +97,7 @@ class OpenAIEmbeddingsLLM(
             prefix=f"embeddings_{name}" if name else "embeddings",
             key_data={"input": prompt, "parameters": parameters},
             name=name,
-            bypass=bypass,
+            bypass_cache=bypass_cache,
             json_model=OpenAICreateEmbeddingResponseModel,
         )
 
@@ -106,7 +106,7 @@ class OpenAIEmbeddingsLLM(
     ) -> OpenAIEmbeddingsOutput:
         name = kwargs.get("name")
         local_model_parameters = kwargs.get("model_parameters")
-        nocache = kwargs.get("nocache", False)
+        bypass_cache = kwargs.get("bypass_cache", False)
 
         embeddings_parameters = self._build_embeddings_parameters(
             local_model_parameters
@@ -116,7 +116,7 @@ class OpenAIEmbeddingsLLM(
             name,
             prompt=prompt,
             parameters=embeddings_parameters,
-            bypass=nocache,
+            bypass_cache=bypass_cache,
         )
 
         return OpenAIEmbeddingsOutput(

@@ -54,7 +54,7 @@ async def test_cache_interactor(file_cache: FileCache):
         key_data={"a": 1, "b": "two"},
         name="name",
         json_model=CustomModel,
-        bypass=True,
+        bypass_cache=True,
     )
     assert result == expected
     func.assert_called()
