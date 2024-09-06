@@ -25,7 +25,7 @@ openai = ["openai", "tiktoken"]
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.5.1"
-pyright = "^1.1.370"
+pyright = "^1.1.379"
 pytest = "^8.2.2"
 coverage = "^7.5.4"
 poethepoet = "^0.27.0"

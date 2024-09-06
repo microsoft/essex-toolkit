@@ -928,13 +928,13 @@ files = [
 
 [[package]]
 name = "openai"
-version = "1.43.1"
+version = "1.44.0"
 description = "The official Python library for the openai API"
 optional = true
 python-versions = ">=3.7.1"
 files = [
-    {file = "openai-1.43.1-py3-none-any.whl", hash = "sha256:23ed3aa71e89cf644c911f7ab80087d08c0bf46ce6b75d9a811fc7942cff85c2"},
-    {file = "openai-1.43.1.tar.gz", hash = "sha256:b64843711b7c92ded36795062ea1f8cad84ec6c2848646f2a786ac4617a6b9f5"},
+    {file = "openai-1.44.0-py3-none-any.whl", hash = "sha256:99a12bbda15f9c632ee911851e101669a82ee34992fbfd658a9db27d90dc0a9c"},
+    {file = "openai-1.44.0.tar.gz", hash = "sha256:acde74598976ec85bc477e9abb94eeb17f6efd998914d5685eeb46a69116894a"},
 ]
 
 [package.dependencies]
@@ -1889,4 +1889,4 @@ openai = ["openai", "tiktoken"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "b7e151522e3334596334b6027eadbe57a1ca2127095e83e834781c81e8d5bd06"
+content-hash = "ebdc205b230261371e79561c52939484d5c035de44e0086431fbe5905d04aeeb"
