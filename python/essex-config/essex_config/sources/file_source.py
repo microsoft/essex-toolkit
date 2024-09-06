@@ -5,7 +5,7 @@ from collections.abc import Callable
 from functools import cache
 from io import TextIOWrapper
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import toml
 import yaml
@@ -15,7 +15,8 @@ from essex_config.sources.utils import path_from_variable
 
 
 def _read_toml(stream: TextIOWrapper) -> dict[str, Any]:
-    return toml.loads(stream.read().decode("utf-8"))
+    content: bytes = cast(bytes, stream.read())
+    return toml.loads(content.decode("utf-8"))
 
 
 GET_DATA_FN: dict[str, Callable[[Any], dict[str, Any]]] = {
@@ -58,9 +59,7 @@ class FileSource(Source):
             try:
                 with file_path.open() as file:
                     get_data = GET_DATA_FN[file_path.suffix]
-                    result = get_data(file)
-                    print("RESULT", result)
-                    return result
+                    return get_data(file)
             except FileNotFoundError:
                 if required:
                     raise
