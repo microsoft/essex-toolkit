@@ -45,6 +45,9 @@ class LLMInput(TypedDict, Generic[TJsonModel, THistoryEntry, TModelParameters]):
     model_parameters: NotRequired[TModelParameters]
     """Additional model parameters to use in the LLM invocation."""
 
+    bypass_cache: NotRequired[bool]
+    """Bypass the cache (if any) for this LLM invocation."""
+
 
 class LLMOutput(BaseModel, Generic[TOutput, TJsonModel, THistoryEntry]):
     """The output of an LLM invocation."""

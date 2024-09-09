@@ -7,6 +7,25 @@ import pytest
 from essex_config.sources import FileSource
 
 
+def test_str_file_source():
+    source = FileSource(Path(__file__).parent / "file_source_fixtures" / "test.json")
+    assert "TEST_VALUE" in source
+    assert source.get_value("TEST_VALUE", str) == "test_value"
+
+
+def test_toml_file():
+    source = FileSource(Path(__file__).parent / "file_source_fixtures" / "test.toml")
+    assert source.get_value("test.hello", str) == "world"
+    assert source.get_value("test.integer", int) == 42
+
+
+def test_yaml_source():
+    source = FileSource(Path(__file__).parent / "file_source_fixtures" / "test.yaml")
+    assert "test.hello" in source
+    assert source.get_value("test.hello", str) == "world"
+    assert source.get_value("test.integer", int) == 42
+
+
 def test_json_source():
     mock_data = '{"TEST_VALUE": "test_value"}'
     with mock.patch("pathlib.Path.open", mock.mock_open(read_data=mock_data)):
@@ -16,35 +35,6 @@ def test_json_source():
         assert str(source) == "FileSource(file_path=dummy.json)"
         assert repr(source) == "FileSource(file_path=dummy.json)"
         assert source.__rich__() == "FileSource(file_path=dummy.json)"
-
-
-def test_str_file_source():
-    mock_data = '{"TEST_VALUE": "test_value"}'
-    with mock.patch("pathlib.Path.open", mock.mock_open(read_data=mock_data)):
-        source = FileSource("dummy.json")
-        assert "TEST_VALUE" in source
-        assert source.get_value("TEST_VALUE", str) == "test_value"
-
-
-def test_toml_source():
-    mock_data = b"""[test]
-    hello = "world"
-    integer = 42"""
-    with mock.patch("pathlib.Path.open", mock.mock_open(read_data=mock_data)):
-        source = FileSource(Path("dummy.toml"))
-        assert source.get_value("test.hello", str) == "world"
-        assert source.get_value("test.integer", int) == 42
-
-
-def test_yaml_source():
-    mock_data = b"""test:
-      hello: world
-      integer: 42"""
-    with mock.patch("pathlib.Path.open", mock.mock_open(read_data=mock_data)):
-        source = FileSource(Path("dummy.yaml"))
-        assert "test.hello" in source
-        assert source.get_value("test.hello", str) == "world"
-        assert source.get_value("test.integer", int) == 42
 
 
 def test_key_not_found():
