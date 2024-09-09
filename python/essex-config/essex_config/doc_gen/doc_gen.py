@@ -4,9 +4,8 @@ import importlib
 import inspect
 import pkgutil
 
-from pydantic import BaseModel
-
 from essex_config.doc_gen.printer import ConfigurationPrinter
+from essex_config.utils import is_pydantic_model
 
 
 def __find_subclasses(package_name: str) -> list[type]:
@@ -21,7 +20,7 @@ def __find_subclasses(package_name: str) -> list[type]:
 
         # Iterate through all members of the module
         for _, obj in inspect.getmembers(module):
-            if inspect.isclass(obj) and issubclass(obj, BaseModel):
+            if is_pydantic_model(obj):
                 subclasses.append(obj)
 
     return subclasses

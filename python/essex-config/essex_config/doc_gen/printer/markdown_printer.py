@@ -9,6 +9,7 @@ from pydantic_core import PydanticUndefined
 from essex_config.config import Prefixed
 from essex_config.doc_gen.printer.printer import ConfigurationPrinter
 from essex_config.sources.source import Alias
+from essex_config.utils import is_pydantic_model
 
 
 class MarkdownConfigurationPrinter(ConfigurationPrinter):
@@ -61,7 +62,7 @@ class MarkdownConfigurationPrinter(ConfigurationPrinter):
                     prefix_annotation.prefix if prefix_annotation is not None else ""
                 )
 
-            if issubclass(field_type, BaseModel):
+            if is_pydantic_model(field_type):
                 subclass_description = (
                     f"See {name}: {field_type.__name__} for more details."
                     if not disable_nested
@@ -94,18 +95,18 @@ class MarkdownConfigurationPrinter(ConfigurationPrinter):
                         ),
                         None,
                     )
-                    if info.annotation is not None and issubclass(
-                        cast(type, info.annotation), BaseModel
-                    ):
+
+                    anno_type = cast(type, info.annotation)
+                    if anno_type is not None and is_pydantic_model(anno_type):
                         prefix = (
                             f"{prefix_annotation.prefix}"
                             if prefix_annotation is not None
                             else name
                         )
                         subclass_docs = self._get_markdown(
-                            cast(type[BaseModel], info.annotation),
+                            cast(type[BaseModel], anno_type),
                             disable_nested,
                             prefix,
-                            override_name=f"{name}: {info.annotation.__name__}",
+                            override_name=f"{name}: {anno_type.__name__}",
                         )
                         file.write(subclass_docs)

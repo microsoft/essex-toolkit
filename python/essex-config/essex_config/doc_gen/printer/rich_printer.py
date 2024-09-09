@@ -13,6 +13,7 @@ from rich.table import Table
 from essex_config.config import Prefixed
 from essex_config.doc_gen.printer.printer import ConfigurationPrinter
 from essex_config.sources.source import Alias
+from essex_config.utils import is_pydantic_model
 
 
 class RichConfigurationPrinter(ConfigurationPrinter):
@@ -64,7 +65,7 @@ class RichConfigurationPrinter(ConfigurationPrinter):
                     prefix_annotation.prefix if prefix_annotation is not None else ""
                 )
 
-            if issubclass(field_type, BaseModel):
+            if is_pydantic_model(field_type):
                 params.add_row(
                     f"{name}: {field_type.__name__}",
                     f"See {name}: {field_type.__name__} for more details."
@@ -105,9 +106,7 @@ class RichConfigurationPrinter(ConfigurationPrinter):
                     ),
                     None,
                 )
-                if info.annotation is not None and issubclass(
-                    cast(type, info.annotation), BaseModel
-                ):
+                if info.annotation is not None and is_pydantic_model(info.annotation):
                     prefix = (
                         f"{prefix_annotation.prefix}"
                         if prefix_annotation is not None
