@@ -47,6 +47,12 @@ class EnvSource(Source):
             raise FileNotFoundError(msg)
         return {}
 
+    def get_data(self) -> dict[str, Any]:
+        """Get the data from the environment."""
+        if not self._file_path:
+            return {}
+        return EnvSource.__get_data(self._file_path, self._use_env_var, self._required)
+
     def _get_value(
         self,
         key: str,

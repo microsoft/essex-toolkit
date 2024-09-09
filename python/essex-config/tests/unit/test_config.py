@@ -1,7 +1,10 @@
 """Test configuration for the essex-config package."""
 
+import os
 import re
+from pathlib import Path
 from typing import Annotated, Any, TypeVar
+from unittest import mock
 
 import pytest
 from pydantic import BaseModel, Field
@@ -14,6 +17,16 @@ from essex_config.sources.env_source import EnvSource
 from essex_config.sources.utils import json_list_parser, plain_text_list_parser
 
 T = TypeVar("T")
+
+
+@pytest.fixture()
+def _mock_env_vars():
+    with mock.patch.dict(
+        os.environ,
+        {"TEST_VALUE": "test value"},
+        clear=True,
+    ):
+        yield
 
 
 class MockSource(Source):
@@ -35,6 +48,11 @@ class MockSource(Source):
             "hex_string": "0xDEADBEEF",
             "lower_false": "false",
             "plain_text_list": "1,2,3,4",
+            "env_var": "${TEST_VALUE}",
+            "env_list": '["${TEST_VALUE}", "world"]',
+            "env_dict": '{"key": "${TEST_VALUE}", "key2": "world"}',
+            "escaped_template_str": "$${DO_NOT_REPLACE}",
+            "nested.env_var": "${TEST_VALUE}",
         }
         super().__init__(prefix)
 
@@ -419,3 +437,67 @@ def test_default_order_behavior():
     )
 
     assert basic_config.value == {"a": 1}
+
+
+@pytest.mark.usefixtures("_mock_env_vars")
+def test_parsing_env_variables():
+    class NestedConfig(BaseModel):
+        env_var: str
+
+    class BasicConfiguration(BaseModel):
+        env_var: str
+        escaped_template_str: str
+        nested: NestedConfig
+        env_list: Annotated[list[str], Parser(json_list_parser)]
+        env_dict: dict[str, str]
+        other: set[str] = Field(default_factory=lambda: {"hello"})
+
+    basic_config = load_config(
+        BasicConfiguration, sources=[MockSource()], parse_env_values=True
+    )
+    assert basic_config.env_var == "test value"
+    assert basic_config.escaped_template_str == "${DO_NOT_REPLACE}"
+    assert basic_config.nested.env_var == "test value"
+    assert basic_config.env_list == ["test value", "world"]
+    assert basic_config.env_dict == {"key": "test value", "key2": "world"}
+    assert basic_config.other == {"hello"}
+
+    assert type(basic_config) == BasicConfiguration
+
+
+def test_parsing_missing_env_variables():
+    class BasicConfiguration(BaseModel):
+        env_var: str
+
+    with pytest.raises(
+        KeyError,
+        match=re.escape("TEST_VALUE"),
+    ):
+        load_config(
+            BasicConfiguration,
+            sources=[MockSource()],
+            parse_env_values=True,
+        )
+
+
+def test_parsing_env_variables_with_dotenv_file():
+    class BasicConfiguration(BaseModel):
+        env_var: str
+        escaped_template_str: str
+
+    env_file = (Path(__file__).parent / ".." / ".env.test").resolve()
+
+    basic_config = load_config(
+        BasicConfiguration,
+        sources=[
+            MockSource(),
+            EnvSource(file_path=env_file, required=True),
+            EnvSource(),
+        ],
+        parse_env_values=True,
+        refresh_config=True,
+    )
+    assert basic_config.env_var == "test value"
+    assert basic_config.escaped_template_str == "${DO_NOT_REPLACE}"
+
+    assert type(basic_config) == BasicConfiguration

@@ -1,8 +1,10 @@
 """Main configuration module for the essex_config package."""
 
+import os
 from functools import cache
 from types import UnionType
 from typing import (
+    Any,
     TypeVar,
     Union,
     cast,
@@ -21,6 +23,7 @@ from essex_config.field_annotations import (
     get_annotation,
 )
 from essex_config.sources import EnvSource, Source
+from essex_config.utils import parse_string_template
 
 from .utils import is_pydantic_model
 
@@ -37,6 +40,7 @@ def load_config(
     prefix: str = "",
     inner: bool = False,
     refresh_config: bool = False,
+    parse_env_values: bool = False,
 ) -> T:
     """Instantiate the configuration and all values.
 
@@ -60,7 +64,7 @@ def load_config(
     """
     if refresh_config:
         _load_config.cache_clear()
-    return _load_config(cls, tuple(sources), prefix, inner)
+    return _load_config(cls, tuple(sources), prefix, inner, parse_env_values)
 
 
 @cache
@@ -69,6 +73,7 @@ def _load_config(
     sources: tuple[Source, ...],
     prefix: str = "",
     inner: bool = False,
+    parse_env_values: bool = False,
 ) -> T:
     """Instantiate the configuration and all values.
 
@@ -120,7 +125,11 @@ def _load_config(
                         field_prefix += f".{name}" if field_prefix != "" else name
                     try:
                         values[name] = _load_config(
-                            type_, sources, prefix=field_prefix, inner=True
+                            type_,
+                            sources,
+                            prefix=field_prefix,
+                            inner=True,
+                            parse_env_values=parse_env_values,
                         )
                     except Exception:  # noqa: S112, BLE001
                         continue
@@ -132,9 +141,18 @@ def _load_config(
             if prefix_annotation is None:
                 field_prefix += f".{name}" if field_prefix != "" else name
             values[name] = _load_config(
-                field_type, sources, prefix=field_prefix, inner=True
+                field_type,
+                sources,
+                prefix=field_prefix,
+                inner=True,
+                parse_env_values=parse_env_values,
             )
             continue
+
+        env_values: dict[str, Any] = {}
+        for source in filter(lambda src: isinstance(src, EnvSource), sources):
+            source = cast(EnvSource, source)
+            env_values = {**source.get_data(), **env_values}
 
         value = None
         for source in sources:
@@ -184,6 +202,9 @@ def _load_config(
             value = info.default
         if value is None and info.default_factory is not None:
             value = info.default_factory()
+
+        if parse_env_values:
+            value = parse_string_template(value, {**os.environ, **env_values})
 
         if (value is None or value is PydanticUndefined) and info.is_required():
             msg = f"Value for {name} is required and not found in any source."
