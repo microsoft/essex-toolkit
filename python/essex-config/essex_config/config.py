@@ -149,10 +149,9 @@ def _load_config(
             continue
 
         env_values: dict[str, Any] = {}
-        for source in sources:
-            if isinstance(source, EnvSource):
-                extra_data = source.get_data()
-                env_values = {**extra_data, **env_values}
+        for source in filter(lambda src: isinstance(src, EnvSource), sources):
+            source = cast(EnvSource, source)
+            env_values = {**source.get_data(), **env_values}
 
         value = None
         for source in sources:
