@@ -6,7 +6,7 @@ authors = ["Andres Morales <andresmor@microsoft.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.11"
 pydantic = "^2.7.3"
 azure-identity = "^1.16.0"
 azure-keyvault-secrets = "^4.8.0"
