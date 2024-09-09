@@ -450,6 +450,7 @@ def test_parsing_env_variables():
         nested: NestedConfig
         env_list: Annotated[list[str], Parser(json_list_parser)]
         env_dict: dict[str, str]
+        other: set[str] = Field(default_factory=lambda: {"hello"})
 
     basic_config = load_config(
         BasicConfiguration, sources=[MockSource()], parse_env_values=True
@@ -459,6 +460,7 @@ def test_parsing_env_variables():
     assert basic_config.nested.env_var == "test value"
     assert basic_config.env_list == ["test value", "world"]
     assert basic_config.env_dict == {"key": "test value", "key2": "world"}
+    assert basic_config.other == {"hello"}
 
     assert type(basic_config) == BasicConfiguration
 
@@ -487,7 +489,11 @@ def test_parsing_env_variables_with_dotenv_file():
 
     basic_config = load_config(
         BasicConfiguration,
-        sources=[MockSource(), EnvSource(file_path=env_file, required=True)],
+        sources=[
+            MockSource(),
+            EnvSource(file_path=env_file, required=True),
+            EnvSource(),
+        ],
         parse_env_values=True,
         refresh_config=True,
     )
