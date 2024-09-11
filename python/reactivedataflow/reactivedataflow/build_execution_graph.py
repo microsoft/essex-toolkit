@@ -15,6 +15,7 @@ from .errors import (
     InputNotFoundError,
     NodeConfigNotDefinedError,
     NodeInputNotDefinedError,
+    NodeNotFoundError,
     NodeOutputNotDefinedError,
     RequiredNodeArrayInputNotFoundError,
     RequiredNodeConfigNotFoundError,
@@ -250,6 +251,8 @@ def build_execution_graph(
 
     output_map: dict[str, Output] = {}
     for output in model.outputs:
+        if output.node not in nodes:
+            raise NodeNotFoundError(output.name)
         output_map[output.name] = output
     return ExecutionGraph(nodes, output_map, visit_order)
 
