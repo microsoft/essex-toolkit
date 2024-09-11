@@ -15,6 +15,7 @@ from reactivedataflow import (
     Registry,
     verb,
 )
+from reactivedataflow.definitions import ConfigProvider
 from reactivedataflow.errors import (
     ConfigReferenceNotFoundError,
     GraphHasCyclesError,
@@ -42,7 +43,6 @@ from reactivedataflow.model import (
     ValRef,
 )
 from reactivedataflow.ports import ArrayInput
-from reactivedataflow.types import ConfigProvider
 
 from .define_math_ops import define_math_ops
 
@@ -60,6 +60,14 @@ def test_missing_output_raises_error():
     builder.add_input("i1")
     with pytest.raises(NodeNotFoundError):
         builder.add_output("i2")
+
+
+def test_missing_output_model_raises_error():
+    builder = GraphBuilder().load_model(
+        Graph(outputs=[Output(name="o1", node="missing")])
+    )
+    with pytest.raises(NodeNotFoundError):
+        builder.build()
 
 
 def test_raises_on_unexpected_raw_config_error():

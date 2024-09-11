@@ -10,9 +10,9 @@ import reactivex as rx
 from reactivedataflow.config_provider import ConfigProvider
 from reactivedataflow.constants import default_output
 
+from .definitions import VerbFunction
 from .io import VerbInput
 from .node import Node
-from .types import VerbFunction
 
 _log = logging.getLogger(__name__)
 
