@@ -6,7 +6,6 @@ from pathlib import Path
 from typing import Annotated, Any, TypeVar
 from unittest import mock
 
-from essex_config.sources.file_source import FileSource
 import pytest
 from pydantic import BaseModel, Field
 
@@ -15,6 +14,7 @@ from essex_config.field_annotations import Alias, Parser, Prefixed, Updatable
 from essex_config.sources import Source
 from essex_config.sources.args_source import ArgSource
 from essex_config.sources.env_source import EnvSource
+from essex_config.sources.file_source import FileSource
 from essex_config.sources.utils import json_list_parser, plain_text_list_parser
 
 T = TypeVar("T")
