@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Annotated, Any, TypeVar
 from unittest import mock
 
+from essex_config.sources.file_source import FileSource
 import pytest
 from pydantic import BaseModel, Field
 
@@ -499,5 +500,23 @@ def test_parsing_env_variables_with_dotenv_file():
     )
     assert basic_config.env_var == "test value"
     assert basic_config.escaped_template_str == "${DO_NOT_REPLACE}"
+
+    assert type(basic_config) == BasicConfiguration
+
+
+def test_parsing_env_variables_with_dotenv_file():
+    class BasicConfiguration(BaseModel):
+        test_value: bool
+
+    yaml_file = (Path(__file__).parent / ".." / "test.yaml").resolve()
+
+    basic_config = load_config(
+        BasicConfiguration,
+        sources=[
+            # EnvSource(prefix="TEST"),
+            FileSource(file_path=yaml_file),
+        ],
+    )
+    assert basic_config.test_value
 
     assert type(basic_config) == BasicConfiguration

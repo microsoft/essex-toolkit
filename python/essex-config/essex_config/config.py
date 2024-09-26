@@ -156,6 +156,7 @@ def _load_config(
 
         value = None
         for source in sources:
+            previous_prefix = field_prefix
             if (
                 source.prefix is not None
                 and prefix_annotation is not None
@@ -196,7 +197,9 @@ def _load_config(
                 if update_annotation is None:
                     break
             except KeyError:
-                continue
+                pass
+
+            field_prefix = previous_prefix
 
         if value is None and info.default is not PydanticUndefined:
             value = info.default
