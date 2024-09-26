@@ -197,7 +197,7 @@ def _load_config(
                 if update_annotation is None:
                     break
             except KeyError:
-                pass
+                continue
 
         if value is None and info.default is not PydanticUndefined:
             value = info.default
