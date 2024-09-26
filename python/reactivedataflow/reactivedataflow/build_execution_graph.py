@@ -23,13 +23,10 @@ from .errors import (
 )
 from .execution_graph import ExecutionGraph
 from .model import Graph, Output, ValRef
-from .nodes import (
-    ExecutionNode,
-    InputNode,
-    Node,
-    OnNodeFinishCallback,
-    OnNodeStartCallback,
-)
+from .nodes.definitions import OnNodeFinishCallback, OnNodeStartCallback
+from .nodes.execution_node import ExecutionNode
+from .nodes.input_node import InputNode
+from .nodes.node import Node
 from .registry import Registry
 
 ConfigBuilder = Callable[..., Any]

@@ -3,7 +3,7 @@
 
 from .config_provider import ConfigProvider
 from .decorators import AnyFn, Decorator
-from .nodes import (
+from .nodes.definitions import (
     EmitCondition,
     FireCondition,
     OnNodeFinishCallback,
