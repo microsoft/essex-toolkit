@@ -7,6 +7,7 @@ from typing import Any
 import reactivex as rx
 
 from .build_execution_graph import build_execution_graph
+from .callbacks import Callbacks
 from .config_provider import ConfigProvider
 from .constants import default_output
 from .errors import (
@@ -18,7 +19,6 @@ from .errors import (
 )
 from .execution_graph import ExecutionGraph
 from .model import Config, ConfigSpec, Edge, Graph, InputNode, Node, Output, ValRef
-from .nodes.node import OnNodeFinishCallback, OnNodeStartCallback
 from .registry import Registry
 
 ConfigBuilder = Callable[..., Any]
@@ -164,8 +164,7 @@ class GraphBuilder:
         config_providers: dict[str, ConfigProvider[Any]] | None = None,
         config_builders: dict[str, ConfigBuilder] | None = None,
         registry: Registry | None = None,
-        on_node_start: OnNodeStartCallback | None = None,
-        on_node_finish: OnNodeFinishCallback | None = None,
+        callbacks: Callbacks | None = None,
     ) -> ExecutionGraph:
         """Build the execution graph.
 
@@ -175,8 +174,7 @@ class GraphBuilder:
             config_providers: Configuration providers, dict[str, ConfigProvider] (see the ConfigProvider protocol).
             config_builders: Configuration builder functions, dict[str, ConfigBuilder].
             registry: The registry to use for verb lookup.
-            on_node_start: The callback for when a node starts.
-            on_node_finish: The callback for when a node finishes.
+            callbacks: The execution graph callbacks.
         """
         config_raw = config_raw or {}
         config_providers = config_providers or {}
@@ -202,6 +200,5 @@ class GraphBuilder:
             config_providers=config_providers,
             config_builders=config_builders,
             registry=registry,
-            on_node_start=on_node_start,
-            on_node_finish=on_node_finish,
+            callbacks=callbacks,
         )

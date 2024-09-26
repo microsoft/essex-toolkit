@@ -5,9 +5,8 @@ from typing import Any, Protocol
 
 import reactivex as rx
 
+from reactivedataflow.callbacks import Callbacks
 from reactivedataflow.constants import default_output
-
-from .definitions import OnNodeFinishCallback, OnNodeStartCallback, Unsubscribe
 
 
 class Node(Protocol):
@@ -16,11 +15,6 @@ class Node(Protocol):
     @property
     def id(self) -> str:
         """Get the ID of the node."""
-        ...
-
-    @property
-    def verb(self) -> str:
-        """Get the verb name of the node."""
         ...
 
     def detach(self) -> None:
@@ -39,10 +33,6 @@ class Node(Protocol):
         """Get the observable of a given output."""
         ...
 
-    def on_start(self, callback: OnNodeStartCallback) -> Unsubscribe:
-        """Subscribe to events for when the node begins execution."""
-        ...
-
-    def on_finish(self, callback: OnNodeFinishCallback) -> Unsubscribe:
-        """Subscribe to events for when the node finishes execution."""
+    def set_callbacks(self, callbacks: Callbacks) -> None:
+        """Set the callbacks for the node."""
         ...

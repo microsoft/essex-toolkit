@@ -5,10 +5,11 @@ from typing import Any
 
 import reactivex as rx
 
+from reactivedataflow.callbacks import Callbacks
 from reactivedataflow.constants import default_output
 from reactivedataflow.errors import OutputNotFoundError
 
-from .node import Node, OnNodeFinishCallback, OnNodeStartCallback, Unsubscribe
+from .node import Node
 
 
 class InputNode(Node):
@@ -17,22 +18,19 @@ class InputNode(Node):
     _id: str
     _values: rx.subject.BehaviorSubject
     _subscription: rx.abc.DisposableBase | None
+    _callbacks: Callbacks | None
 
     @property
     def id(self) -> str:
         """Get the ID of the node."""
         return self._id
 
-    @property
-    def verb(self) -> str:
-        """Get the verb name of the node."""
-        return "Input"
-
     def __init__(self, nid: str):
         """Initialize the InputNode."""
         self._id = nid
         self._values = rx.subject.BehaviorSubject(None)
         self._subscription = None
+        self._callbacks = None
 
     def detach(self) -> None:
         """Detach the node from all inputs."""
@@ -59,10 +57,6 @@ class InputNode(Node):
             raise OutputNotFoundError(name)
         return self._values.value
 
-    def on_start(self, callback: OnNodeStartCallback) -> Unsubscribe:
-        """Add a callback to be called when the recompute starts."""
-        return lambda: None
-
-    def on_finish(self, callback: OnNodeFinishCallback) -> Unsubscribe:
-        """Add a callback to be called when the recompute finishes."""
-        return lambda: None
+    def set_callbacks(self, callbacks: Callbacks) -> None:
+        """Set the callbacks for the node."""
+        self._callbacks = callbacks

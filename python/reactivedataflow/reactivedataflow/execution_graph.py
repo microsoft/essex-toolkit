@@ -5,9 +5,10 @@ from typing import Any
 
 import reactivex as rx
 
+from .callbacks import Callbacks
 from .errors import OutputNotFoundError
 from .model import Output
-from .nodes.execution_node import Node, OnNodeFinishCallback, OnNodeStartCallback
+from .nodes.verb_node import Node
 
 
 class ExecutionGraph:
@@ -16,16 +17,14 @@ class ExecutionGraph:
     _nodes: dict[str, Node]
     _outputs: dict[str, Output]
     _order: list[str]
-    _on_node_start: OnNodeStartCallback
-    _on_node_finish: OnNodeFinishCallback
+    _callbacks: Callbacks | None
 
     def __init__(
         self,
         nodes: dict[str, Node],
         outputs: dict[str, Output],
         order: list[str],
-        on_node_start: OnNodeStartCallback | None = None,
-        on_node_finish: OnNodeFinishCallback | None = None,
+        callbacks: Callbacks | None,
     ):
         """Initialize the execution graph.
 
@@ -33,18 +32,16 @@ class ExecutionGraph:
             nodes: The nodes in the graph.
             outputs: The outputs of the graph.
             order: The topological order of the nodes, starting with input nodes.
-            on_node_start: The callback for when a node starts.
-            on_node_finish: The callback for when a node finishes
+            callbacks: The execution graph callbacks.
         """
         self._nodes = nodes
         self._outputs = outputs
         self._order = order
-        self._on_node_start = on_node_start or (lambda _node_id, _verb: None)
-        self._on_node_finish = on_node_finish or (lambda _node_id, _verb, _timing: None)
+        self._callbacks = callbacks
 
-        for node in self._nodes.values():
-            node.on_start(self._on_node_start)
-            node.on_finish(self._on_node_finish)
+        if self._callbacks:
+            for node in self._nodes.values():
+                node.set_callbacks(self._callbacks)
 
     async def dispose(self) -> None:
         """Dispose of all nodes."""

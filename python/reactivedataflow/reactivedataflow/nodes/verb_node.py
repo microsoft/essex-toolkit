@@ -7,22 +7,18 @@ from typing import Any
 
 import reactivex as rx
 
+from reactivedataflow.callbacks import Callbacks
 from reactivedataflow.config_provider import ConfigProvider
 from reactivedataflow.constants import default_output
 
-from .definitions import (
-    OnNodeFinishCallback,
-    OnNodeStartCallback,
-    Unsubscribe,
-    VerbFunction,
-)
+from .definitions import VerbFunction
 from .io import VerbInput
 from .node import Node
 
 _log = logging.getLogger(__name__)
 
 
-class ExecutionNode(Node):
+class VerbNode(Node):
     """The ExecutionNode class for dynamic processing graphs."""
 
     _id: str
@@ -30,8 +26,7 @@ class ExecutionNode(Node):
     _fn: VerbFunction
     _config: dict[str, Any]
     _config_providers: dict[str, ConfigProvider[Any]]
-    _on_start_callbacks: list[OnNodeStartCallback]
-    _on_finish_callbacks: list[OnNodeFinishCallback]
+    _callbacks: Callbacks | None
 
     # Input Observables
     _named_inputs: dict[str, rx.Observable]
@@ -66,8 +61,7 @@ class ExecutionNode(Node):
         self._verb_name = verb_name
         self._config = config or {}
         self._config_providers = config_providers or {}
-        self._on_start_callbacks = []
-        self._on_finish_callbacks = []
+        self._callbacks = None
         # Inputs
         self._named_inputs = {}
         self._named_input_values = {}
@@ -201,23 +195,17 @@ class ExecutionNode(Node):
         task.add_done_callback(lambda _: self._tasks.remove(task))
         self._tasks.append(task)
 
-    def on_start(self, callback: OnNodeStartCallback) -> Unsubscribe:
-        """Add a callback to be called when the recompute starts."""
-        self._on_start_callbacks.append(callback)
-        return lambda: self._on_start_callbacks.remove(callback)
-
-    def on_finish(self, callback: OnNodeFinishCallback) -> Unsubscribe:
-        """Add a callback to be called when the recompute finishes."""
-        self._on_finish_callbacks.append(callback)
-        return lambda: self._on_finish_callbacks.remove(callback)
+    def set_callbacks(self, callbacks: Callbacks) -> None:
+        """Set the callbacks for the node."""
+        self._callbacks = callbacks
 
     def _fire_start(self) -> None:
-        for callback in self._on_start_callbacks:
-            callback(self.id, self.verb)
+        if self._callbacks and self._callbacks.on_verb_start:
+            self._callbacks.on_verb_start(self.id, self.verb)
 
     def _fire_finish(self, duration: float) -> None:
-        for callback in self._on_finish_callbacks:
-            callback(self.id, self.verb, duration)
+        if self._callbacks and self._callbacks.on_verb_finish:
+            self._callbacks.on_verb_finish(self.id, self.verb, duration)
 
     async def _recompute(self, inputs: VerbInput) -> None:
         """Recompute the node."""
@@ -230,4 +218,6 @@ class ExecutionNode(Node):
         # Update the outputs
         if not result.no_output:
             for name, value in result.outputs.items():
+                self._output(name).on_next(value)
+                self._output(name).on_next(value)
                 self._output(name).on_next(value)

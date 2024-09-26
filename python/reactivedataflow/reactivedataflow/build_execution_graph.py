@@ -7,6 +7,7 @@ from typing import Any
 import networkx as nx
 import reactivex as rx
 
+from .callbacks import Callbacks
 from .config_provider import ConfigProvider
 from .constants import default_output
 from .errors import (
@@ -23,10 +24,9 @@ from .errors import (
 )
 from .execution_graph import ExecutionGraph
 from .model import Graph, Output, ValRef
-from .nodes.definitions import OnNodeFinishCallback, OnNodeStartCallback
-from .nodes.execution_node import ExecutionNode
 from .nodes.input_node import InputNode
 from .nodes.node import Node
+from .nodes.verb_node import VerbNode
 from .registry import Registry
 
 ConfigBuilder = Callable[..., Any]
@@ -39,8 +39,7 @@ def build_execution_graph(
     config_providers: dict[str, ConfigProvider[Any]] | None = None,
     config_builders: dict[str, ConfigBuilder] | None = None,
     registry: Registry | None = None,
-    on_node_start: OnNodeStartCallback | None = None,
-    on_node_finish: OnNodeFinishCallback | None = None,
+    callbacks: Callbacks | None = None,
 ) -> ExecutionGraph:
     """Build the graph.
 
@@ -51,8 +50,7 @@ def build_execution_graph(
         config_providers: Configuration providers, dict[str, ConfigProvider] (see the ConfigProvider protocol).
         config_builders: Configuration builder functions, dict[str, ConfigBuilder].
         registry: The registry to use for verb lookup.
-        on_node_start: The callback for when a node starts.
-        on_node_finish: The callback for when a node finishes
+        callbacks: The callbacks to use for the graph.
     """
     graph = _build_nx_graph(model)
     registry = registry or Registry.get_instance()
@@ -113,7 +111,7 @@ def build_execution_graph(
                 **node_config_providers,
             }
 
-            execution_node = ExecutionNode(
+            execution_node = VerbNode(
                 nid, verb_name, verb, node_config, node_config_providers
             )
             nodes[nid] = execution_node
@@ -184,7 +182,7 @@ def build_execution_graph(
             node = nodes[nid]
             if isinstance(node, InputNode):
                 node.attach(inputs[nid])
-            if isinstance(node, ExecutionNode):
+            if isinstance(node, VerbNode):
                 named_in = named_inputs.get(nid)
                 array_in = array_inputs.get(nid)
                 node.attach(named_inputs=named_in, array_inputs=array_in)
@@ -208,7 +206,7 @@ def build_execution_graph(
             bindings = registration.ports
             execution_node = nodes[nid]
 
-            if isinstance(execution_node, ExecutionNode):
+            if isinstance(execution_node, VerbNode):
                 input_names = execution_node.input_names
                 config_names = execution_node.config_names
                 num_array_inputs = execution_node.num_array_inputs
@@ -262,7 +260,7 @@ def build_execution_graph(
         if output.node not in nodes:
             raise NodeNotFoundError(output.name)
         output_map[output.name] = output
-    return ExecutionGraph(nodes, output_map, visit_order, on_node_start, on_node_finish)
+    return ExecutionGraph(nodes, output_map, visit_order, callbacks)
 
 
 def _build_nx_graph(model: Graph) -> nx.DiGraph:

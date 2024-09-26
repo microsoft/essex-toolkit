@@ -7,14 +7,7 @@ from typing import Annotated, cast
 import pytest
 import reactivex as rx
 
-from reactivedataflow import (
-    Config,
-    GraphBuilder,
-    Input,
-    NamedInputs,
-    Registry,
-    verb,
-)
+from reactivedataflow import Config, GraphBuilder, Input, NamedInputs, Registry, verb
 from reactivedataflow.definitions import ConfigProvider
 from reactivedataflow.errors import (
     ConfigReferenceNotFoundError,
@@ -538,25 +531,22 @@ async def test_graph_builder_from_schema():
     # Build the graph
     input_stream = rx.subject.BehaviorSubject(1)
 
-    num_starts = 0
+    class WFCallbacks:
+        def __init__(self):
+            self.num_starts = 0
+            self.num_finishes = 0
 
-    def on_start(node_id: str, verb: str) -> None:
-        nonlocal num_starts
-        print(f"Starting node {verb}@{node_id}")
-        num_starts = num_starts + 1
+        def on_verb_start(self, node_id: str, verb: str) -> None:
+            print(f"Starting node {verb}@{node_id}")
+            self.num_starts = self.num_starts + 1
 
-    num_finishes = 0
+        def on_verb_finish(self, node_id: str, verb: str, duration: float) -> None:
+            print(f"Finished node {verb}@{node_id} in {duration}")
+            self.num_finishes = self.num_finishes + 1
 
-    def on_finish(node_id: str, verb: str, timing: float) -> None:
-        nonlocal num_finishes
-        print(f"Finished node {verb}@{node_id} in {timing}")
-        num_finishes = num_finishes + 1
-
+    callbacks = WFCallbacks()
     graph = builder.build(
-        registry=registry,
-        inputs={"input": input_stream},
-        on_node_start=on_start,
-        on_node_finish=on_finish,
+        registry=registry, inputs={"input": input_stream}, callbacks=callbacks
     )
 
     with pytest.raises(OutputNotFoundError):
@@ -571,8 +561,8 @@ async def test_graph_builder_from_schema():
     assert graph.output_value("result") == 40
     await graph.dispose()
 
-    assert num_finishes > 0
-    assert num_starts == num_finishes
+    assert callbacks.num_finishes > 0
+    assert callbacks.num_starts == callbacks.num_finishes
 
 
 async def test_config_reference():
