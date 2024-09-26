@@ -156,31 +156,31 @@ def _load_config(
 
         value = None
         for source in sources:
-            previous_prefix = field_prefix
+            source_prefix = field_prefix
             if (
                 source.prefix is not None
                 and prefix_annotation is not None
-                and field_prefix == prefix_annotation.prefix
+                and source_prefix == prefix_annotation.prefix
             ) or (source.prefix is not None and inner):
                 # Add the source prefix to the prefix annotated field
-                field_prefix = f"{source.prefix}.{field_prefix}"
-            elif source.prefix is not None and field_prefix != "":
+                source_prefix = f"{source.prefix}.{source_prefix}"
+            elif source.prefix is not None and source_prefix != "":
                 # Replace the root prefix with the source prefix
-                without_root_prefix = ".".join(field_prefix.split(".")[1:])
-                field_prefix = (
+                without_root_prefix = ".".join(source_prefix.split(".")[1:])
+                source_prefix = (
                     f"{source.prefix}.{without_root_prefix}"
                     if without_root_prefix != ""
                     else source.prefix
                 )
-            elif source.prefix is not None and field_prefix == "":
+            elif source.prefix is not None and source_prefix == "":
                 # Use the source prefix as the field prefix
-                field_prefix = source.prefix
+                source_prefix = source.prefix
             try:
                 if value and update_annotation:
                     _value = source.get_value(
                         name,
                         field_type,
-                        field_prefix,
+                        source_prefix,
                         source_alias.get(type(source)),
                         parser_annotation,
                     )
@@ -189,7 +189,7 @@ def _load_config(
                     value = source.get_value(
                         name,
                         field_type,
-                        field_prefix,
+                        source_prefix,
                         source_alias.get(type(source)),
                         parser_annotation,
                     )
@@ -198,8 +198,6 @@ def _load_config(
                     break
             except KeyError:
                 pass
-
-            field_prefix = previous_prefix
 
         if value is None and info.default is not PydanticUndefined:
             value = info.default
