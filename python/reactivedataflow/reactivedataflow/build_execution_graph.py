@@ -23,7 +23,13 @@ from .errors import (
 )
 from .execution_graph import ExecutionGraph
 from .model import Graph, Output, ValRef
-from .nodes import ExecutionNode, InputNode, Node
+from .nodes import (
+    ExecutionNode,
+    InputNode,
+    Node,
+    OnNodeFinishCallback,
+    OnNodeStartCallback,
+)
 from .registry import Registry
 
 ConfigBuilder = Callable[..., Any]
@@ -36,6 +42,8 @@ def build_execution_graph(
     config_providers: dict[str, ConfigProvider[Any]] | None = None,
     config_builders: dict[str, ConfigBuilder] | None = None,
     registry: Registry | None = None,
+    on_node_start: OnNodeStartCallback | None = None,
+    on_node_finish: OnNodeFinishCallback | None = None,
 ) -> ExecutionGraph:
     """Build the graph.
 
@@ -46,6 +54,8 @@ def build_execution_graph(
         config_providers: Configuration providers, dict[str, ConfigProvider] (see the ConfigProvider protocol).
         config_builders: Configuration builder functions, dict[str, ConfigBuilder].
         registry: The registry to use for verb lookup.
+        on_node_start: The callback for when a node starts.
+        on_node_finish: The callback for when a node finishes
     """
     graph = _build_nx_graph(model)
     registry = registry or Registry.get_instance()
@@ -88,7 +98,8 @@ def build_execution_graph(
                     node_config[key] = value
 
             # Set up an execution node
-            verb = registry.get_verb_function(node["verb"])
+            verb_name = node["verb"]
+            verb = registry.get_verb_function(verb_name)
             node_global_config = {
                 key: value
                 for key, value in config.items()
@@ -106,7 +117,7 @@ def build_execution_graph(
             }
 
             execution_node = ExecutionNode(
-                nid, verb, node_config, node_config_providers
+                nid, verb_name, verb, node_config, node_config_providers
             )
             nodes[nid] = execution_node
         return nodes
@@ -254,7 +265,7 @@ def build_execution_graph(
         if output.node not in nodes:
             raise NodeNotFoundError(output.name)
         output_map[output.name] = output
-    return ExecutionGraph(nodes, output_map, visit_order)
+    return ExecutionGraph(nodes, output_map, visit_order, on_node_start, on_node_finish)
 
 
 def _build_nx_graph(model: Graph) -> nx.DiGraph:

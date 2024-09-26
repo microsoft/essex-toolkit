@@ -9,6 +9,7 @@ from reactivedataflow.nodes import InputNode
 def test_input_node_has_id():
     node = InputNode("a")
     assert node.id == "a"
+    assert node.verb == "Input"
     node.detach()
 
 

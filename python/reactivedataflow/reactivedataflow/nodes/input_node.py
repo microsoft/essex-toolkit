@@ -8,7 +8,7 @@ import reactivex as rx
 from reactivedataflow.constants import default_output
 from reactivedataflow.errors import OutputNotFoundError
 
-from .node import Node
+from .node import Node, OnNodeFinishCallback, OnNodeStartCallback, Unsubscribe
 
 
 class InputNode(Node):
@@ -22,6 +22,11 @@ class InputNode(Node):
     def id(self) -> str:
         """Get the ID of the node."""
         return self._id
+
+    @property
+    def verb(self) -> str:
+        """Get the verb name of the node."""
+        return "Input"
 
     def __init__(self, nid: str):
         """Initialize the InputNode."""
@@ -53,3 +58,11 @@ class InputNode(Node):
         if name != default_output:
             raise OutputNotFoundError(name)
         return self._values.value
+
+    def on_start(self, callback: OnNodeStartCallback) -> Unsubscribe:
+        """Add a callback to be called when the recompute starts."""
+        return lambda: None
+
+    def on_finish(self, callback: OnNodeFinishCallback) -> Unsubscribe:
+        """Add a callback to be called when the recompute finishes."""
+        return lambda: None

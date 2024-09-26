@@ -537,7 +537,27 @@ async def test_graph_builder_from_schema():
 
     # Build the graph
     input_stream = rx.subject.BehaviorSubject(1)
-    graph = builder.build(registry=registry, inputs={"input": input_stream})
+
+    num_starts = 0
+
+    def on_start(node_id: str, verb: str) -> None:
+        nonlocal num_starts
+        print(f"Starting node {verb}@{node_id}")
+        num_starts = num_starts + 1
+
+    num_finishes = 0
+
+    def on_finish(node_id: str, verb: str, timing: float) -> None:
+        nonlocal num_finishes
+        print(f"Finished node {verb}@{node_id} in {timing}")
+        num_finishes = num_finishes + 1
+
+    graph = builder.build(
+        registry=registry,
+        inputs={"input": input_stream},
+        on_node_start=on_start,
+        on_node_finish=on_finish,
+    )
 
     with pytest.raises(OutputNotFoundError):
         graph.output_value("fail_1")
@@ -550,6 +570,9 @@ async def test_graph_builder_from_schema():
     await graph.drain()
     assert graph.output_value("result") == 40
     await graph.dispose()
+
+    assert num_finishes > 0
+    assert num_starts == num_finishes
 
 
 async def test_config_reference():

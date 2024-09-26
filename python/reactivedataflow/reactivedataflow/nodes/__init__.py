@@ -11,7 +11,7 @@ from .io import (
     VerbInput,
     VerbOutput,
 )
-from .node import Node
+from .node import Node, OnNodeFinishCallback, OnNodeStartCallback, Unsubscribe
 
 __all__ = [
     "EmitCondition",
@@ -21,7 +21,10 @@ __all__ = [
     "InputMode",
     "InputNode",
     "Node",
+    "OnNodeFinishCallback",
+    "OnNodeStartCallback",
     "OutputMode",
+    "Unsubscribe",
     "VerbFunction",
     "VerbInput",
     "VerbOutput",
