@@ -14,6 +14,7 @@ from essex_config.field_annotations import Alias, Parser, Prefixed, Updatable
 from essex_config.sources import Source
 from essex_config.sources.args_source import ArgSource
 from essex_config.sources.env_source import EnvSource
+from essex_config.sources.file_source import FileSource
 from essex_config.sources.utils import json_list_parser, plain_text_list_parser
 
 T = TypeVar("T")
@@ -499,5 +500,23 @@ def test_parsing_env_variables_with_dotenv_file():
     )
     assert basic_config.env_var == "test value"
     assert basic_config.escaped_template_str == "${DO_NOT_REPLACE}"
+
+    assert type(basic_config) == BasicConfiguration
+
+
+def test_use_file_source_after_env_with_prefix():
+    class BasicConfiguration(BaseModel):
+        test_value: bool
+
+    yaml_file = (Path(__file__).parent / ".." / "test.yaml").resolve()
+
+    basic_config = load_config(
+        BasicConfiguration,
+        sources=[
+            EnvSource(prefix="TEST"),
+            FileSource(file_path=yaml_file),
+        ],
+    )
+    assert basic_config.test_value
 
     assert type(basic_config) == BasicConfiguration
