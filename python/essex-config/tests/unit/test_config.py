@@ -513,7 +513,7 @@ def test_parsing_env_variables_with_dotenv_file():
     basic_config = load_config(
         BasicConfiguration,
         sources=[
-            # EnvSource(prefix="TEST"),
+            EnvSource(prefix="TEST"),
             FileSource(file_path=yaml_file),
         ],
     )
