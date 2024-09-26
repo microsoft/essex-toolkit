@@ -504,7 +504,7 @@ def test_parsing_env_variables_with_dotenv_file():
     assert type(basic_config) == BasicConfiguration
 
 
-def test_parsing_env_variables_with_dotenv_file():
+def test_use_file_source_after_env_with_prefix():
     class BasicConfiguration(BaseModel):
         test_value: bool
 
