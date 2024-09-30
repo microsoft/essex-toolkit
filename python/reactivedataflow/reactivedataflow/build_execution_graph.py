@@ -180,12 +180,13 @@ def build_execution_graph(
     ):
         for nid in graph.nodes:
             node = nodes[nid]
-            if isinstance(node, InputNode):
-                node.attach(inputs[nid])
-            if isinstance(node, VerbNode):
-                named_in = named_inputs.get(nid)
-                array_in = array_inputs.get(nid)
-                node.attach(named_inputs=named_in, array_inputs=array_in)
+            match node:
+                case InputNode():
+                    node.attach(inputs[nid])
+                case VerbNode():
+                    named_in = named_inputs.get(nid)
+                    array_in = array_inputs.get(nid)
+                    node.attach(named_inputs=named_in, array_inputs=array_in)
 
     def validate_inputs():
         for nid in graph.nodes:
