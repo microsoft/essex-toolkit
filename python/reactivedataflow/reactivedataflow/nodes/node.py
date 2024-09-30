@@ -5,6 +5,7 @@ from typing import Any, Protocol
 
 import reactivex as rx
 
+from reactivedataflow.callbacks import Callbacks
 from reactivedataflow.constants import default_output
 
 
@@ -30,4 +31,8 @@ class Node(Protocol):
 
     def output_value(self, name: str = default_output) -> Any:
         """Get the observable of a given output."""
+        ...
+
+    def set_callbacks(self, callbacks: Callbacks) -> None:
+        """Set the callbacks for the node."""
         ...

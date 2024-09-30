@@ -7,6 +7,7 @@ from typing import Any
 
 import reactivex as rx
 
+from reactivedataflow.callbacks import Callbacks
 from reactivedataflow.config_provider import ConfigProvider
 from reactivedataflow.constants import default_output
 
@@ -17,13 +18,15 @@ from .node import Node
 _log = logging.getLogger(__name__)
 
 
-class ExecutionNode(Node):
+class VerbNode(Node):
     """The ExecutionNode class for dynamic processing graphs."""
 
     _id: str
+    _verb_name: str
     _fn: VerbFunction
     _config: dict[str, Any]
     _config_providers: dict[str, ConfigProvider[Any]]
+    _callbacks: Callbacks | None
 
     # Input Observables
     _named_inputs: dict[str, rx.Observable]
@@ -39,6 +42,7 @@ class ExecutionNode(Node):
     def __init__(
         self,
         nid: str,
+        verb_name: str,
         fn: VerbFunction,
         config: dict[str, Any] | None = None,
         config_providers: dict[str, ConfigProvider[Any]] | None = None,
@@ -47,14 +51,17 @@ class ExecutionNode(Node):
 
         Args:
             nid (str): The node identifier.
+            verb_name (str): The name of the verb.
             fn (VerbFunction): The execution logic for the function. The input is a dictionary of input names to their latest values.
             config (dict[str, Any], optional): The configuration for the node. Defaults to None.
             config_providers (dict[str, ConfigProvider[Any]], optional): The configuration providers for the node. Defaults to None.
         """
         self._id = nid
         self._fn = fn
+        self._verb_name = verb_name
         self._config = config or {}
         self._config_providers = config_providers or {}
+        self._callbacks = None
         # Inputs
         self._named_inputs = {}
         self._named_input_values = {}
@@ -77,6 +84,11 @@ class ExecutionNode(Node):
     def id(self) -> str:
         """Get the ID of the node."""
         return self._id
+
+    @property
+    def verb(self) -> str:
+        """Get the verb name of the node."""
+        return self._verb_name
 
     @property
     def config(self) -> dict[str, Any]:
@@ -183,9 +195,27 @@ class ExecutionNode(Node):
         task.add_done_callback(lambda _: self._tasks.remove(task))
         self._tasks.append(task)
 
+    def set_callbacks(self, callbacks: Callbacks) -> None:
+        """Set the callbacks for the node."""
+        self._callbacks = callbacks
+
+    def _fire_start(self) -> None:
+        if self._callbacks and self._callbacks.on_verb_start:
+            self._callbacks.on_verb_start(self.id, self.verb)
+
+    def _fire_finish(self, duration: float) -> None:
+        if self._callbacks and self._callbacks.on_verb_finish:
+            self._callbacks.on_verb_finish(self.id, self.verb, duration)
+
     async def _recompute(self, inputs: VerbInput) -> None:
         """Recompute the node."""
+        self._fire_start()
+        start = asyncio.get_event_loop().time()
         result = await self._fn(inputs)
+        end = asyncio.get_event_loop().time()
+        self._fire_finish(end - start)
+
+        # Update the outputs
         if not result.no_output:
             for name, value in result.outputs.items():
                 self._output(name).on_next(value)

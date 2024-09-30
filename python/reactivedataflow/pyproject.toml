@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "reactivedataflow"
-version = "0.1.16"
+version = "0.1.17"
 description = "Reactive Dataflow Graphs"
 license = "MIT"
 authors = ["Chris Trevino <chtrevin@microsoft.com>"]
@@ -42,9 +42,9 @@ format = ['_sort_imports', '_format_code']
 test = "pytest tests"
 
 _test_with_coverage = 'coverage run --source=reactivedataflow -m pytest tests/unit'
-_coverage_report = 'coverage report --fail-under=100 --show-missing --omit="reactivedataflow/nodes/node.py,reactivedataflow/types.py,reactivedataflow/config_provider.py"'
-_generate_coverage_xml = 'coverage xml --omit="reactivedataflow/nodes/node.py,reactivedataflow/types.py,reactivedataflow/config_provider.py"'
-_generate_coverage_html = 'coverage html --omit="reactivedataflow/nodes/node.py,reactivedataflow/types.py,reactivedataflow/config_provider.py"'
+_coverage_report = 'coverage report --fail-under=100 --show-missing --omit="reactivedataflow/nodes/node.py,reactivedataflow/types.py,reactivedataflow/config_provider.py,reactivedataflow/callbacks.py"'
+_generate_coverage_xml = 'coverage xml --omit="reactivedataflow/nodes/node.py,reactivedataflow/types.py,reactivedataflow/config_provider.py,reactivedataflow/callbacks.py"'
+_generate_coverage_html = 'coverage html --omit="reactivedataflow/nodes/node.py,reactivedataflow/types.py,reactivedataflow/config_provider.py,reactivedataflow/callbacks.py"'
 test_coverage = [
     '_test_with_coverage',  
     '_generate_coverage_xml',

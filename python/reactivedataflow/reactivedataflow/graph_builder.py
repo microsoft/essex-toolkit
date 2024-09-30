@@ -7,6 +7,7 @@ from typing import Any
 import reactivex as rx
 
 from .build_execution_graph import build_execution_graph
+from .callbacks import Callbacks
 from .config_provider import ConfigProvider
 from .constants import default_output
 from .errors import (
@@ -163,6 +164,7 @@ class GraphBuilder:
         config_providers: dict[str, ConfigProvider[Any]] | None = None,
         config_builders: dict[str, ConfigBuilder] | None = None,
         registry: Registry | None = None,
+        callbacks: Callbacks | None = None,
     ) -> ExecutionGraph:
         """Build the execution graph.
 
@@ -172,6 +174,7 @@ class GraphBuilder:
             config_providers: Configuration providers, dict[str, ConfigProvider] (see the ConfigProvider protocol).
             config_builders: Configuration builder functions, dict[str, ConfigBuilder].
             registry: The registry to use for verb lookup.
+            callbacks: The execution graph callbacks.
         """
         config_raw = config_raw or {}
         config_providers = config_providers or {}
@@ -197,4 +200,5 @@ class GraphBuilder:
             config_providers=config_providers,
             config_builders=config_builders,
             registry=registry,
+            callbacks=callbacks,
         )

@@ -13,22 +13,15 @@ from .execution_graph import ExecutionGraph
 from .graph_builder import GraphBuilder
 from .nodes import (
     EmitMode,
-    ExecutionNode,
     InputMode,
     InputNode,
     Node,
     OutputMode,
     VerbInput,
+    VerbNode,
     VerbOutput,
 )
-from .ports import (
-    ArrayInput,
-    Config,
-    Input,
-    NamedInputs,
-    Output,
-    Ports,
-)
+from .ports import ArrayInput, Config, Input, NamedInputs, Output, Ports
 from .registry import Registry
 
 # Public API
@@ -46,7 +39,6 @@ __all__ = [
     "Config",
     "EmitMode",
     "ExecutionGraph",
-    "ExecutionNode",
     "GraphBuilder",
     "Input",
     "InputMode",
@@ -58,6 +50,7 @@ __all__ = [
     "Ports",
     "Registry",
     "VerbInput",
+    "VerbNode",
     "VerbOutput",
     "apply_decorators",
     "connect_input",

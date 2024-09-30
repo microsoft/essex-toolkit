@@ -2,21 +2,14 @@
 """reactivedataflow Nodes."""
 
 from .definitions import EmitCondition, FireCondition, VerbFunction
-from .execution_node import ExecutionNode
 from .input_node import InputNode
-from .io import (
-    EmitMode,
-    InputMode,
-    OutputMode,
-    VerbInput,
-    VerbOutput,
-)
+from .io import EmitMode, InputMode, OutputMode, VerbInput, VerbOutput
 from .node import Node
+from .verb_node import VerbNode
 
 __all__ = [
     "EmitCondition",
     "EmitMode",
-    "ExecutionNode",
     "FireCondition",
     "InputMode",
     "InputNode",
@@ -24,5 +17,6 @@ __all__ = [
     "OutputMode",
     "VerbFunction",
     "VerbInput",
+    "VerbNode",
     "VerbOutput",
 ]

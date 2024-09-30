@@ -7,6 +7,7 @@ from typing import Any
 import networkx as nx
 import reactivex as rx
 
+from .callbacks import Callbacks
 from .config_provider import ConfigProvider
 from .constants import default_output
 from .errors import (
@@ -23,7 +24,9 @@ from .errors import (
 )
 from .execution_graph import ExecutionGraph
 from .model import Graph, Output, ValRef
-from .nodes import ExecutionNode, InputNode, Node
+from .nodes.input_node import InputNode
+from .nodes.node import Node
+from .nodes.verb_node import VerbNode
 from .registry import Registry
 
 ConfigBuilder = Callable[..., Any]
@@ -36,6 +39,7 @@ def build_execution_graph(
     config_providers: dict[str, ConfigProvider[Any]] | None = None,
     config_builders: dict[str, ConfigBuilder] | None = None,
     registry: Registry | None = None,
+    callbacks: Callbacks | None = None,
 ) -> ExecutionGraph:
     """Build the graph.
 
@@ -46,6 +50,7 @@ def build_execution_graph(
         config_providers: Configuration providers, dict[str, ConfigProvider] (see the ConfigProvider protocol).
         config_builders: Configuration builder functions, dict[str, ConfigBuilder].
         registry: The registry to use for verb lookup.
+        callbacks: The callbacks to use for the graph.
     """
     graph = _build_nx_graph(model)
     registry = registry or Registry.get_instance()
@@ -88,7 +93,8 @@ def build_execution_graph(
                     node_config[key] = value
 
             # Set up an execution node
-            verb = registry.get_verb_function(node["verb"])
+            verb_name = node["verb"]
+            verb = registry.get_verb_function(verb_name)
             node_global_config = {
                 key: value
                 for key, value in config.items()
@@ -105,8 +111,8 @@ def build_execution_graph(
                 **node_config_providers,
             }
 
-            execution_node = ExecutionNode(
-                nid, verb, node_config, node_config_providers
+            execution_node = VerbNode(
+                nid, verb_name, verb, node_config, node_config_providers
             )
             nodes[nid] = execution_node
         return nodes
@@ -174,12 +180,13 @@ def build_execution_graph(
     ):
         for nid in graph.nodes:
             node = nodes[nid]
-            if isinstance(node, InputNode):
-                node.attach(inputs[nid])
-            if isinstance(node, ExecutionNode):
-                named_in = named_inputs.get(nid)
-                array_in = array_inputs.get(nid)
-                node.attach(named_inputs=named_in, array_inputs=array_in)
+            match node:
+                case InputNode():
+                    node.attach(inputs[nid])
+                case VerbNode():
+                    named_in = named_inputs.get(nid)
+                    array_in = array_inputs.get(nid)
+                    node.attach(named_inputs=named_in, array_inputs=array_in)
 
     def validate_inputs():
         for nid in graph.nodes:
@@ -200,7 +207,7 @@ def build_execution_graph(
             bindings = registration.ports
             execution_node = nodes[nid]
 
-            if isinstance(execution_node, ExecutionNode):
+            if isinstance(execution_node, VerbNode):
                 input_names = execution_node.input_names
                 config_names = execution_node.config_names
                 num_array_inputs = execution_node.num_array_inputs
@@ -254,7 +261,7 @@ def build_execution_graph(
         if output.node not in nodes:
             raise NodeNotFoundError(output.name)
         output_map[output.name] = output
-    return ExecutionGraph(nodes, output_map, visit_order)
+    return ExecutionGraph(nodes, output_map, visit_order, callbacks)
 
 
 def _build_nx_graph(model: Graph) -> nx.DiGraph:

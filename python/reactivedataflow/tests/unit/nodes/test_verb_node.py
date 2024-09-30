@@ -5,20 +5,9 @@ from typing import Any
 
 import reactivex as rx
 
-from reactivedataflow import (
-    ExecutionNode,
-    OutputMode,
-    VerbInput,
-    verb,
-)
+from reactivedataflow import OutputMode, VerbInput, VerbNode, verb
 from reactivedataflow.nodes import InputMode
-from reactivedataflow.ports import (
-    ArrayInput,
-    Config,
-    Input,
-    NamedInputs,
-    Output,
-)
+from reactivedataflow.ports import ArrayInput, Config, Input, NamedInputs, Output
 from reactivedataflow.registry import Registry
 
 
@@ -35,7 +24,7 @@ async def test_configure_and_reconfigure():
         return inputs.config.get("value")
 
     wrapped_fn = registry.get_verb_function("execute")
-    node = ExecutionNode("a", wrapped_fn, config={"value": "Hello"})
+    node = VerbNode("a", "execute", wrapped_fn, config={"value": "Hello"})
     await node.drain()
     assert node.config.get("value") == "Hello"
     assert node.output_value() == "Hello"
@@ -63,7 +52,7 @@ async def test_execution_node_with_raw_input():
     wrapped_fn = registry.get_verb_function("execute")
 
     output: str | None = None
-    node = ExecutionNode("a", wrapped_fn)
+    node = VerbNode("a", "execute", wrapped_fn)
 
     def on_output(o: str):
         nonlocal output
@@ -92,7 +81,7 @@ async def test_execution_node_with_named_inputs():
     wrapped_fn = registry.get_verb_function("execute")
 
     output: str | None = None
-    node = ExecutionNode("a", wrapped_fn)
+    node = VerbNode("a", "execute", wrapped_fn)
     await node.drain()
 
     def on_output(o: str):
@@ -123,7 +112,7 @@ async def test_execution_node_with_named_required_inputs():
     wrapped_fn = registry.get_verb_function("execute")
 
     output: str | None = None
-    node = ExecutionNode("a", wrapped_fn)
+    node = VerbNode("a", "execute", wrapped_fn)
 
     def on_output(o: str):
         nonlocal output
@@ -156,7 +145,7 @@ async def test_execution_node_with_required_inputs():
 
     output: str | None = None
     fn = registry.get_verb_function("execute_with_required_inputs")
-    node = ExecutionNode("a", fn)
+    node = VerbNode("a", "execute_with_required_inputs", fn)
     assert node.id == "a"
 
     def on_output(o: str):
@@ -189,7 +178,7 @@ async def test_execution_node_with_required_config():
 
     output: str | None = None
     fn = registry.get_verb_function("execute_with_required_config")
-    node = ExecutionNode("a", fn)
+    node = VerbNode("a", "execute_with_required_config", fn)
     assert node.id == "a"
 
     def on_output(o: str):
@@ -227,7 +216,7 @@ async def test_execution_node_with_required_config_and_inputs():
 
     output: str | None = None
     fn = registry.get_verb_function("execute_with_required_config")
-    node = ExecutionNode("a", fn)
+    node = VerbNode("a", "execute_with_required_config", fn)
     assert node.id == "a"
 
     def on_output(o: str):
@@ -267,7 +256,7 @@ async def test_execution_node_with_optional_inputs():
     wrapped_fn = registry.get_verb_function("execute_with_optional_inputs")
 
     output: str | None = None
-    node = ExecutionNode("a", wrapped_fn)
+    node = VerbNode("a", "execute_with_optional_inputs", wrapped_fn)
 
     def on_output(o: str):
         nonlocal output
@@ -304,7 +293,7 @@ async def test_execution_node_with_multiple_outputs():
 
     wrapped_fn = registry.get_verb_function("execute_with_two_outputs")
 
-    node = ExecutionNode("a", wrapped_fn)
+    node = VerbNode("a", "execute_with_two_outputs", wrapped_fn)
     output_1: str | None = None
     output_2: str | None = None
 
@@ -341,7 +330,7 @@ async def test_execution_node_with_array_inputs():
         return sum(values)
 
     wrapped_fn = registry.get_verb_function("execute_with_array_inputs")
-    node = ExecutionNode("a", wrapped_fn)
+    node = VerbNode("a", "execute_with_array_inputs", wrapped_fn)
     output: str | None = None
 
     def on_output(o: str):

@@ -5,6 +5,7 @@ from typing import Any
 
 import reactivex as rx
 
+from reactivedataflow.callbacks import Callbacks
 from reactivedataflow.constants import default_output
 from reactivedataflow.errors import OutputNotFoundError
 
@@ -17,6 +18,7 @@ class InputNode(Node):
     _id: str
     _values: rx.subject.BehaviorSubject
     _subscription: rx.abc.DisposableBase | None
+    _callbacks: Callbacks | None
 
     @property
     def id(self) -> str:
@@ -28,6 +30,7 @@ class InputNode(Node):
         self._id = nid
         self._values = rx.subject.BehaviorSubject(None)
         self._subscription = None
+        self._callbacks = None
 
     def detach(self) -> None:
         """Detach the node from all inputs."""
@@ -53,3 +56,7 @@ class InputNode(Node):
         if name != default_output:
             raise OutputNotFoundError(name)
         return self._values.value
+
+    def set_callbacks(self, callbacks: Callbacks) -> None:
+        """Set the callbacks for the node."""
+        self._callbacks = callbacks
