@@ -219,5 +219,3 @@ class VerbNode(Node):
         if not result.no_output:
             for name, value in result.outputs.items():
                 self._output(name).on_next(value)
-                self._output(name).on_next(value)
-                self._output(name).on_next(value)

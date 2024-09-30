@@ -344,4 +344,3 @@ async def test_execution_node_with_array_inputs():
     node.attach(array_inputs=[rx.just(2), rx.just(4), rx.of(5, 6)])
     await node.drain()
     assert output == 12
-    assert output == 12
