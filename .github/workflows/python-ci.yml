@@ -32,10 +32,6 @@ jobs:
         with:
           version: ${{ env.UV_VERSION }}
 
-      - name: ${{ matrix.project }} - Install dependencies
-        shell: bash
-        run: uv sync
-
       - name: Install Azurite
         id: azuright
         uses: potatoqualitee/azuright@v1.1

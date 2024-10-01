@@ -35,10 +35,6 @@ jobs:
         with:
           version: ${{ env.UV_VERSION }}
 
-      - name: Install dependencies
-        shell: bash
-        run: uv sync
-
       - name: Build Distributable
         shell: bash
         working-directory: ./python/${{ matrix.project }}
