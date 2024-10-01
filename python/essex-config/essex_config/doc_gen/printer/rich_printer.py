@@ -4,7 +4,7 @@ from typing import cast
 
 from pydantic import BaseModel
 from pydantic_core import PydanticUndefined
-from rich import box, print
+from rich import box, print  # noqa: A004 - override print
 from rich.console import Group
 from rich.markdown import Markdown
 from rich.panel import Panel

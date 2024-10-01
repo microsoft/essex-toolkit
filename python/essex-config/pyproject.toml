@@ -20,7 +20,7 @@ typing-extensions = "^4.12.2"
 [tool.poetry.group.dev.dependencies]
 coverage = "^7.5.4"
 pytest = "^8.2.2"
-ruff = "^0.4.7"
+ruff = "^0.6.8"
 poethepoet = "^0.26.1"
 pyright = "^1.1.365"
 

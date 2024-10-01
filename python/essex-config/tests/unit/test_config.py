@@ -20,7 +20,7 @@ from essex_config.sources.utils import json_list_parser, plain_text_list_parser
 T = TypeVar("T")
 
 
-@pytest.fixture()
+@pytest.fixture
 def _mock_env_vars():
     with mock.patch.dict(
         os.environ,
@@ -75,7 +75,7 @@ def test_basic_config():
     basic_config = load_config(BasicConfiguration, sources=[MockSource()])
     assert basic_config.hello == "world"
 
-    assert type(basic_config) == BasicConfiguration
+    assert isinstance(basic_config, BasicConfiguration)
 
 
 def test_prefixed_config():
@@ -463,7 +463,7 @@ def test_parsing_env_variables():
     assert basic_config.env_dict == {"key": "test value", "key2": "world"}
     assert basic_config.other == {"hello"}
 
-    assert type(basic_config) == BasicConfiguration
+    assert isinstance(basic_config, BasicConfiguration)
 
 
 def test_parsing_missing_env_variables():
@@ -501,7 +501,7 @@ def test_parsing_env_variables_with_dotenv_file():
     assert basic_config.env_var == "test value"
     assert basic_config.escaped_template_str == "${DO_NOT_REPLACE}"
 
-    assert type(basic_config) == BasicConfiguration
+    assert isinstance(basic_config, BasicConfiguration)
 
 
 def test_use_file_source_after_env_with_prefix():
@@ -519,4 +519,4 @@ def test_use_file_source_after_env_with_prefix():
     )
     assert basic_config.test_value
 
-    assert type(basic_config) == BasicConfiguration
+    assert isinstance(basic_config, BasicConfiguration)
