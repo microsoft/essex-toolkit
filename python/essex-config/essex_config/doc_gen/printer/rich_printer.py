@@ -4,8 +4,7 @@ from typing import cast
 
 from pydantic import BaseModel
 from pydantic_core import PydanticUndefined
-from rich import box
-from rich import print as rprint
+from rich import box, print
 from rich.console import Group
 from rich.markdown import Markdown
 from rich.panel import Panel
@@ -96,7 +95,7 @@ class RichConfigurationPrinter(ConfigurationPrinter):
 
     def print(self, config_class: type[BaseModel], disable_nested: bool) -> None:
         """Print the configuration."""
-        rprint(self._get_config_panel(config_class, disable_nested))
+        print(self._get_config_panel(config_class, disable_nested))
         if not disable_nested:
             for name, info in config_class.model_fields.items():
                 prefix_annotation = next(
@@ -113,7 +112,7 @@ class RichConfigurationPrinter(ConfigurationPrinter):
                         if prefix_annotation is not None
                         else name
                     )
-                    rprint(
+                    print(
                         self._get_config_panel(
                             cast(type[BaseModel], info.annotation),
                             disable_nested,
