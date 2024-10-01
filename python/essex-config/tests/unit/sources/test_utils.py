@@ -7,7 +7,7 @@ import pytest
 from essex_config.sources.utils import path_from_variable
 
 
-@pytest.fixture()
+@pytest.fixture
 def _mock_env_vars():
     with mock.patch.dict(os.environ, {"TEST_VALUE": "test_value"}, clear=True):
         yield

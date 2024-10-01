@@ -1,31 +1,31 @@
-[tool.poetry]
+[project]
 name = "reactivedataflow"
 version = "0.1.17"
 description = "Reactive Dataflow Graphs"
 license = "MIT"
-authors = ["Chris Trevino <chtrevin@microsoft.com>"]
+authors = [{name="Chris Trevino", email="chtrevin@microsoft.com"}]
 readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "reactivex>=4.0.4",
+    "networkx>=3.3",
+    "pydantic>=2.7.4"
+]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-reactivex = "^4.0.4"
-networkx = "^3.3"
-pydantic = "^2.7.4"
-
-
-[tool.poetry.group.dev.dependencies]
-ruff = "^0.4.8"
-poethepoet = "^0.26.1"
-pytest = "^8.2.2"
-pyright = "^1.1.366"
-coverage = "^7.5.3"
-numpy = "<2"
-pytest-asyncio = "^0.23.7"
+[tool.uv]
+dev-dependencies = [
+    "ruff>=0.4.8",
+    "poethepoet>=0.26.1",
+    "pytest>=8.2.2",
+    "pyright>=1.1.366",
+    "coverage>=7.5.3",
+    "numpy<2",
+    "pytest-asyncio>=0.23.7"
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.poe.tasks]
 _sort_imports = "ruff check --select I --fix . --preview"

@@ -22,7 +22,17 @@
     "editor.defaultFormatter": "biomejs.biome"
   },
   "[python]": {
-    "editor.defaultFormatter": "charliermarsh.ruff"
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "explicit",
+			"source.fixAll": "explicit"
+		},
+		"editor.defaultFormatter": "charliermarsh.ruff"
+	},
+  "notebook.formatOnSave.enabled": true,
+	"notebook.codeActionsOnSave": {
+    "notebook.source.fixAll": "explicit",
+    "notebook.source.organizeImports": "explicit"
   },
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
@@ -34,5 +44,6 @@
     ".yarnrc.yml": "yarn.lock, .pnp.cjs, .pnp.loader.mjs",
     ".gitignore": ".gitattributes",
     "README.md": "SECURITY.md, SUPPORT.md, CODE_OF_CONDUCT.md, LICENSE"
-  }
+  },
+	"ruff.configuration": "./pyproject.toml"  
 }
