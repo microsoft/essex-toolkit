@@ -4,7 +4,7 @@ from typing import cast
 
 from pydantic import BaseModel
 from pydantic_core import PydanticUndefined
-from rich import box, print  # noqa: A004 - override print
+from rich import box, print
 from rich.console import Group
 from rich.markdown import Markdown
 from rich.panel import Panel
@@ -40,11 +40,13 @@ class RichConfigurationPrinter(ConfigurationPrinter):
         for name, info in config_class.model_fields.items():
             default = info.default if info.default is not PydanticUndefined else ""
             field_type = cast(type, info.annotation)
-            source_alias: str = "\n".join([
-                f"{metadata.source.__name__}: {metadata.alias}"
-                for metadata in info.metadata
-                if isinstance(metadata, Alias)
-            ])
+            source_alias: str = "\n".join(
+                [
+                    f"{metadata.source.__name__}: {metadata.alias}"
+                    for metadata in info.metadata
+                    if isinstance(metadata, Alias)
+                ]
+            )
 
             prefix_annotation = next(
                 (
