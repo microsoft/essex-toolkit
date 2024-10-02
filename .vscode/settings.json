@@ -22,7 +22,17 @@
     "editor.defaultFormatter": "biomejs.biome"
   },
   "[python]": {
-    "editor.defaultFormatter": "charliermarsh.ruff"
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "explicit",
+			"source.fixAll": "explicit"
+		},
+		"editor.defaultFormatter": "charliermarsh.ruff"
+	},
+  "notebook.formatOnSave.enabled": true,
+	"notebook.codeActionsOnSave": {
+    "notebook.source.fixAll": "explicit",
+    "notebook.source.organizeImports": "explicit"
   },
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
@@ -30,9 +40,10 @@
     "*.ts": "${capture}.ts, ${capture}.hooks.ts, ${capture}.hooks.tsx, ${capture}.stories.tsx, ${capture}.spec.tsx, ${capture}.base.ts, ${capture}.base.tsx, ${capture}.types.ts, ${capture}.styles.ts, ${capture}.styles.tsx, ${capture}.utils.ts, ${capture}.utils.tsx, ${capture}.module.scss, ${capture}.module.css, ${capture}.md",
     "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
     "*.jsx": "${capture}.js",
-    "package.json": ".npmignore, turbo.json, tsconfig.json, tsconfig.*.json, jest.config.js, rome.json",
-    ".yarnrc.yml": "yarn.lock, .pnp.cjs, .pnp.loader.mjs",
+    "package.json": ".npmignore, turbo.json, biome.json, tsconfig.json, tsconfig.*.json, jest.config.js, rome.json, .yarnrc.yml, yarn.lock, .pnp.cjs, .pnp.loader.mjs",
+    "pyproject.toml": "uv.lock, poetry.lock",
     ".gitignore": ".gitattributes",
     "README.md": "SECURITY.md, SUPPORT.md, CODE_OF_CONDUCT.md, LICENSE"
-  }
+  },
+	"ruff.configuration": "./pyproject.toml"  
 }
