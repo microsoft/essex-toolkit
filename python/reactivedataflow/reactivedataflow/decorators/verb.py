@@ -24,6 +24,7 @@ P = ParamSpec("P")
 
 def verb(
     name: str,
+    *,
     adapters: list[Decorator] | None = None,
     fire_conditions: list[FireCondition] | None = None,
     emit_conditions: list[EmitCondition] | None = None,
