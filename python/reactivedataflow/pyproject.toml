@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "reactivedataflow"
-version = "0.1.17"
+version = "0.1.18"
 description = "Reactive Dataflow Graphs"
 license = "MIT"
 authors = ["Chris Trevino <chtrevin@microsoft.com>"]
