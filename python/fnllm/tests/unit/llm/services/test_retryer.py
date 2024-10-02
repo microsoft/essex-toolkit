@@ -5,7 +5,6 @@
 from unittest.mock import ANY, AsyncMock, Mock, call
 
 import pytest
-
 from fnllm.events.base import LLMEvents
 from fnllm.services.errors import RetriesExhaustedError
 from fnllm.services.retryer import Retryer

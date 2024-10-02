@@ -14,6 +14,7 @@ from fnllm.openai.types.aliases import (
     OpenAICompletionUsageModel,
 )
 from fnllm.openai.types.chat.io import OpenAIChatOutput
+
 from tests.unit.openai.llm.conftest import OpenAIChatCompletionClientMock
 
 

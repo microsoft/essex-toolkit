@@ -9,6 +9,7 @@ from fnllm.events.base import LLMEvents
 from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.factories.embeddings import create_openai_embeddings_llm
 from fnllm.openai.types.aliases import OpenAIEmbeddingModel, OpenAIEmbeddingUsageModel
+
 from tests.unit.openai.llm.conftest import OpenAIEmbeddingsClientMock
 
 

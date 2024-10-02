@@ -185,7 +185,8 @@ def validate_blob_container_name(container_name: str) -> bool:
     container_name (str)
         The blob container name to be validated.
 
-    Returns:
+    Returns
+    -------
         bool: True if valid, raises otherwise.
     """
     # Check the length of the name

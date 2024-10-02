@@ -1,5 +1,4 @@
 import pytest
-
 from essex_config.sources import ArgSource
 
 

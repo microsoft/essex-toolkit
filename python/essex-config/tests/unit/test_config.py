@@ -7,8 +7,6 @@ from typing import Annotated, Any, TypeVar
 from unittest import mock
 
 import pytest
-from pydantic import BaseModel, Field
-
 from essex_config import load_config
 from essex_config.field_annotations import Alias, Parser, Prefixed, Updatable
 from essex_config.sources import Source
@@ -16,6 +14,7 @@ from essex_config.sources.args_source import ArgSource
 from essex_config.sources.env_source import EnvSource
 from essex_config.sources.file_source import FileSource
 from essex_config.sources.utils import json_list_parser, plain_text_list_parser
+from pydantic import BaseModel, Field
 
 T = TypeVar("T")
 

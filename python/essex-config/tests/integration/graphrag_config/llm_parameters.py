@@ -5,10 +5,10 @@
 
 from typing import Annotated
 
+from essex_config.config import Alias, EnvSource
 from pydantic import BaseModel, ConfigDict, Field
 
 import tests.integration.graphrag_config.defaults as defs
-from essex_config.config import Alias, EnvSource
 
 from .enums import LLMType
 

@@ -2,12 +2,11 @@
 
 from typing import Annotated
 
-from pydantic import BaseModel, Field
-
 from essex_config.config import Prefixed
 from essex_config.sources.env_source import EnvSource
 from essex_config.sources.file_source import FileSource
 from essex_config.sources.source import Alias
+from pydantic import BaseModel, Field
 
 
 class NestedConfiguration(BaseModel):

@@ -4,7 +4,6 @@
 from typing import TYPE_CHECKING
 
 import pytest
-
 from reactivedataflow import OutputMode, VerbInput, VerbOutput, verb
 from reactivedataflow.errors import VerbAlreadyDefinedError, VerbNotFoundError
 from reactivedataflow.registry import Registry

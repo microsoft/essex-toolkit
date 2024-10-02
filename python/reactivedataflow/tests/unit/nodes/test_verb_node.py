@@ -4,7 +4,6 @@
 from typing import Any
 
 import reactivex as rx
-
 from reactivedataflow import OutputMode, VerbInput, VerbNode, verb
 from reactivedataflow.nodes import InputMode
 from reactivedataflow.ports import ArrayInput, Config, Input, NamedInputs, Output

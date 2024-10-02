@@ -5,12 +5,11 @@
 from unittest.mock import ANY, AsyncMock, call, patch
 
 import pytest
-from httpx import Request, Response
-from openai import RateLimitError
-
 from fnllm.openai.llm.services.retryer import InternalServerError, OpenAIRetryer
 from fnllm.services.errors import RetriesExhaustedError
 from fnllm.types.io import LLMOutput
+from httpx import Request, Response
+from openai import RateLimitError
 
 
 def _rate_limit_error(message: str = "test") -> RateLimitError:

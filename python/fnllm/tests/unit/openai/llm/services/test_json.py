@@ -6,14 +6,13 @@ import json
 from unittest.mock import AsyncMock
 
 import pytest
-from openai.types.chat import ChatCompletionMessage
-from pydantic import BaseModel
-
 from fnllm.config.json_strategy import JsonStrategy
 from fnllm.openai.llm.services.json import create_json_handler
 from fnllm.openai.types.chat.io import OpenAIChatOutput
 from fnllm.services.errors import FailedToGenerateValidJsonError
 from fnllm.types.io import LLMOutput
+from openai.types.chat import ChatCompletionMessage
+from pydantic import BaseModel
 
 
 class CustomModel(BaseModel):

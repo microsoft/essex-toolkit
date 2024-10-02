@@ -5,11 +5,11 @@
 
 from typing import Annotated, Any
 
+from essex_config.field_annotations import Parser
+from essex_config.sources.utils import plain_text_list_parser
 from pydantic import Field
 
 import tests.integration.graphrag_config.defaults as defs
-from essex_config.field_annotations import Parser
-from essex_config.sources.utils import plain_text_list_parser
 
 from .llm_config import LLMConfig
 

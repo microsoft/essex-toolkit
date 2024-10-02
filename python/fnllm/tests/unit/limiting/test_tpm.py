@@ -5,7 +5,6 @@
 from unittest.mock import Mock
 
 from aiolimiter import AsyncLimiter
-
 from fnllm.limiting.base import Manifest
 from fnllm.limiting.tpm import TPMLimiter
 
