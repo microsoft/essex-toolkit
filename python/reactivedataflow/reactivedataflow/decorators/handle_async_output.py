@@ -13,9 +13,9 @@ P = ParamSpec("P")
 T = TypeVar("T")
 
 
-def handle_async_output() -> (
-    Callable[[Callable[P, Any]], Callable[P, Awaitable[VerbOutput]]]
-):
+def handle_async_output() -> Callable[
+    [Callable[P, Any]], Callable[P, Awaitable[VerbOutput]]
+]:
     """Unroll async output.
 
     Args:
