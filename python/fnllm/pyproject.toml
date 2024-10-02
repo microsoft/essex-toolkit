@@ -156,7 +156,6 @@ ignore = [
     "SLF001",
 ]
 "examples/*" = ["S", "D", "ANN", "T201", "PTH", "TRY", "PERF"]
-"rich_printer.py" = ["A004"]
 "*.ipynb" = ["T201"]
 
 [tool.ruff.lint.pydocstyle]

@@ -40,13 +40,11 @@ class RichConfigurationPrinter(ConfigurationPrinter):
         for name, info in config_class.model_fields.items():
             default = info.default if info.default is not PydanticUndefined else ""
             field_type = cast(type, info.annotation)
-            source_alias: str = "\n".join(
-                [
-                    f"{metadata.source.__name__}: {metadata.alias}"
-                    for metadata in info.metadata
-                    if isinstance(metadata, Alias)
-                ]
-            )
+            source_alias: str = "\n".join([
+                f"{metadata.source.__name__}: {metadata.alias}"
+                for metadata in info.metadata
+                if isinstance(metadata, Alias)
+            ])
 
             prefix_annotation = next(
                 (
