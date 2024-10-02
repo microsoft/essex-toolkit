@@ -3,7 +3,6 @@
 """Tests for llm.features.variables_replacing."""
 
 import pytest
-
 from fnllm.services.variable_injector import VariableInjector
 
 

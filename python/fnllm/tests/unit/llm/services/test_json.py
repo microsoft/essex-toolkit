@@ -7,8 +7,6 @@ from typing import Any, cast
 from unittest.mock import AsyncMock
 
 import pytest
-from pydantic import BaseModel
-
 from fnllm.base.base import BaseLLM
 from fnllm.services.errors import FailedToGenerateValidJsonError
 from fnllm.services.json import (
@@ -19,6 +17,7 @@ from fnllm.services.json import (
     LooseModeJsonReceiver,
 )
 from fnllm.types.io import LLMInput, LLMOutput
+from pydantic import BaseModel
 
 
 class TestOutput(BaseModel):

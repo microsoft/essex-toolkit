@@ -1,8 +1,7 @@
 from unittest.mock import MagicMock, Mock, patch
 
-from pydantic import BaseModel
-
 from essex_config.doc_gen.printer.rich_printer import RichConfigurationPrinter
+from pydantic import BaseModel
 
 
 @patch("essex_config.doc_gen.printer.rich_printer.print")

@@ -6,12 +6,11 @@ from typing import Any
 from unittest.mock import Mock
 
 import pytest
-from pydantic import BaseModel
-from typing_extensions import Unpack
-
 from fnllm.base.base import BaseLLM
 from fnllm.events.base import LLMEvents
 from fnllm.types.io import LLMInput
+from pydantic import BaseModel
+from typing_extensions import Unpack
 
 
 class CustomError(BaseException):

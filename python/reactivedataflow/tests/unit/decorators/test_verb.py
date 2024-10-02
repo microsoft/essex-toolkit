@@ -4,7 +4,6 @@
 import asyncio
 
 import pytest
-
 from reactivedataflow import (
     Input,
     OutputMode,
