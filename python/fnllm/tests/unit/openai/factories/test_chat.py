@@ -5,7 +5,6 @@
 from unittest.mock import ANY, create_autospec, patch
 
 import pytest
-
 from fnllm.caching.base import Cache
 from fnllm.events.base import LLMEvents
 from fnllm.openai.config import AzureOpenAIConfig

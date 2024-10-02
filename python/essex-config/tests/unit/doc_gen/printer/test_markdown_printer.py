@@ -1,9 +1,8 @@
 from pathlib import Path
 from unittest.mock import mock_open, patch
 
-from pydantic import BaseModel
-
 from essex_config.doc_gen.printer.markdown_printer import MarkdownConfigurationPrinter
+from pydantic import BaseModel
 
 
 def test_basic_config():

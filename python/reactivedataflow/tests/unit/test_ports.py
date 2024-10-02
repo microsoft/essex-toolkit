@@ -2,7 +2,6 @@
 """reactivedataflow PortMap tests."""
 
 import pytest
-
 from reactivedataflow.errors import PortMissingNameError, PortNamesMustBeUniqueError
 from reactivedataflow.ports import (
     ArrayInput,

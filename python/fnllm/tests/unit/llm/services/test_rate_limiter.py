@@ -6,7 +6,6 @@ from asyncio import Semaphore
 from unittest.mock import AsyncMock, Mock, call
 
 from aiolimiter import AsyncLimiter
-
 from fnllm.events.base import LLMEvents
 from fnllm.limiting.base import Manifest
 from fnllm.limiting.composite import CompositeLimiter

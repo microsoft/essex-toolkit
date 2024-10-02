@@ -3,10 +3,10 @@
 """Tests for openai.llm.chat."""
 
 import pytest
-
 from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.factories.chat import create_openai_chat_llm
 from fnllm.openai.types.aliases import OpenAICompletionUsageModel
+
 from tests.unit.openai.llm.conftest import OpenAIChatCompletionStreamingClientMock
 
 

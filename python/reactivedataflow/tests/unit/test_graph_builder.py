@@ -6,7 +6,6 @@ from typing import Annotated, cast
 
 import pytest
 import reactivex as rx
-
 from reactivedataflow import Config, GraphBuilder, Input, NamedInputs, Registry, verb
 from reactivedataflow.definitions import ConfigProvider
 from reactivedataflow.errors import (

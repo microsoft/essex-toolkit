@@ -7,7 +7,6 @@ from collections.abc import Generator
 from typing import Any
 
 import pytest
-
 from fnllm.caching.blob import BlobCache
 from fnllm.caching.file import FileCache
 

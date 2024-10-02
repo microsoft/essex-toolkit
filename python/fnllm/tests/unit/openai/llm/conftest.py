@@ -6,11 +6,6 @@ from collections.abc import AsyncIterator
 from unittest.mock import AsyncMock
 
 import pytest
-from openai import AsyncStream
-from openai.types.chat import ChatCompletionChunk
-from openai.types.chat.chat_completion_chunk import Choice as ChunkChoice
-from openai.types.chat.chat_completion_chunk import ChoiceDelta as ChunkChoiceDelta
-
 from fnllm.openai.types.aliases import (
     OpenAIChatCompletionMessageModel,
     OpenAIChatCompletionModel,
@@ -27,6 +22,10 @@ from fnllm.openai.types.embeddings.io import (
     OpenAIEmbeddingsOutput,
 )
 from fnllm.types.metrics import LLMUsageMetrics
+from openai import AsyncStream
+from openai.types.chat import ChatCompletionChunk
+from openai.types.chat.chat_completion_chunk import Choice as ChunkChoice
+from openai.types.chat.chat_completion_chunk import ChoiceDelta as ChunkChoiceDelta
 
 
 class MockAsyncStream(AsyncStream):

@@ -2,10 +2,9 @@
 
 """Tests for openai.factories.client."""
 
-from openai import AsyncAzureOpenAI, AsyncOpenAI
-
 from fnllm.openai.config import AzureOpenAIConfig, PublicOpenAIConfig
 from fnllm.openai.factories.client import create_openai_client
+from openai import AsyncAzureOpenAI, AsyncOpenAI
 
 
 def test_create_azure_client():

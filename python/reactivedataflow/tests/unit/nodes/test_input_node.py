@@ -2,7 +2,6 @@
 """Tests for the InputNode class."""
 
 import reactivex as rx
-
 from reactivedataflow.nodes import InputNode
 
 

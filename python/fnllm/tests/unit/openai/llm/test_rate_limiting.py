@@ -5,12 +5,11 @@
 from unittest.mock import AsyncMock
 
 import tiktoken
-from pydantic import Field
-
 from fnllm.limiting.base import Limiter
 from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
 from fnllm.openai.roles import OpenAIChatRole
 from fnllm.tools import LLMTool
+from pydantic import Field
 
 
 class TestTool(LLMTool):

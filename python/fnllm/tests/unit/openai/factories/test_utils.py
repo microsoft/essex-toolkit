@@ -6,7 +6,6 @@ from typing import cast
 from unittest.mock import create_autospec
 
 import pytest
-
 from fnllm.events.base import LLMEvents
 from fnllm.limiting.base import Limiter
 from fnllm.limiting.composite import CompositeLimiter

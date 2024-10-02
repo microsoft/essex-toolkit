@@ -6,7 +6,6 @@ import json
 from typing import Any
 
 import pytest
-
 from fnllm.caching.base import Cache, _hash
 
 

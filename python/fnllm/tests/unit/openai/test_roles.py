@@ -5,7 +5,6 @@
 from string import Template
 
 import pytest
-
 from fnllm.openai.roles import OpenAIChatRole
 from fnllm.openai.types.aliases import (
     OpenAIChatCompletionMessageToolCallParam,

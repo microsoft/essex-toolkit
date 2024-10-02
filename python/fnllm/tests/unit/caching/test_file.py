@@ -7,7 +7,6 @@ import pathlib
 from typing import Any
 
 import pytest
-
 from fnllm.caching.file import FileCache
 
 
