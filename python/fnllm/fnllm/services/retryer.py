@@ -85,9 +85,9 @@ class Retryer(
                     call_end = asyncio.get_event_loop().time()
                     call_times.append(call_end - call_start)
 
-            async def execute_with_retry() -> (
-                LLMOutput[TOutput, TJsonModel, THistoryEntry]
-            ):
+            async def execute_with_retry() -> LLMOutput[
+                TOutput, TJsonModel, THistoryEntry
+            ]:
                 nonlocal attempt_number
                 try:
                     async for a in AsyncRetrying(

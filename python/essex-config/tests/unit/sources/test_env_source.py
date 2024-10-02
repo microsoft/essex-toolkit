@@ -8,7 +8,7 @@ import pytest
 from essex_config.sources import EnvSource
 
 
-@pytest.fixture()
+@pytest.fixture
 def _mock_env_vars():
     with mock.patch.dict(
         os.environ,

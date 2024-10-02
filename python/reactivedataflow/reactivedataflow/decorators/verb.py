@@ -5,12 +5,7 @@ import inspect
 from collections.abc import Callable
 from typing import Any, ParamSpec
 
-from reactivedataflow.nodes import (
-    EmitCondition,
-    FireCondition,
-    InputMode,
-    OutputMode,
-)
+from reactivedataflow.nodes import EmitCondition, FireCondition, InputMode, OutputMode
 from reactivedataflow.ports import (
     ArrayInput,
     Config,
@@ -70,9 +65,9 @@ def verb(
                         meta = meta.model_copy()
                         if not isinstance(meta, Output):
                             meta.parameter = parameter_name
-                        if isinstance(meta, (Input, Config)):
+                        if isinstance(meta, Input | Config):
                             meta.name = meta.name or parameter_name
-                        if isinstance(meta, (Input, Config, ArrayInput, NamedInputs)):
+                        if isinstance(meta, Input | Config | ArrayInput | NamedInputs):
                             meta.required = (
                                 meta.required
                                 or parameter.default is inspect.Parameter.empty

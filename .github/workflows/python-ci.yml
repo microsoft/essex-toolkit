@@ -35,7 +35,7 @@ jobs:
       - name: ${{ matrix.project }} - Install dependencies
         shell: bash
         working-directory: ./python/${{ matrix.project }}
-        run: ./scripts/install.sh
+        run: poetry install
 
       - name: Install Azurite
         id: azuright

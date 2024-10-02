@@ -119,7 +119,7 @@ class Ports:
     def _validate(self):
         """Validate the ports."""
         for port in self.bindings:
-            if isinstance(port, (Input, Output, Config)) and not port.name:
+            if isinstance(port, Input | Output | Config) and not port.name:
                 raise PortMissingNameError
 
         input_names = [port.name for port in self.bindings if isinstance(port, Input)]

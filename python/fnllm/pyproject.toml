@@ -24,13 +24,19 @@ azure = ["azure-identity", "azure-storage-blob"]
 openai = ["openai", "tiktoken"]
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.5.1"
+ruff = "^0.6.8"
 pyright = "^1.1.379"
 pytest = "^8.2.2"
 coverage = "^7.5.4"
 poethepoet = "^0.27.0"
 pytest-asyncio = "^0.23.7"
 ipykernel = "^6.29.5"
+# Optional Dependencies
+tiktoken =  "^0.7.0"
+openai =  "^1.35.12"
+azure-identity =  "^1.17.1"
+azure-storage-blob =  "^12.20.0"
+
 
 [build-system]
 requires = ["poetry-core"]
