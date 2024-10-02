@@ -48,14 +48,16 @@ Optionally, they may include:
 * The _to_port_, which is the name of the input port in the target node. If this is not provided it will be treated as an array input.
 * The _from_port_, which is the name of the output port in the source node. If this is not provided it, we will use the _default output name_.
 
-# Usage
-
+# Simple Example
 The first task in using `reactivedataflow` is to define your relevant processing verbs.  
 Processing verbs are _pure functions_ that are annotated using the `@verb` decorator and the `Annotated` feature. 
 A key feature of `reactivedataflow` is that verb functions _are not explicitly coupled_ to reactivedataflow, and may be used in other contexts as well.
 
+For more detail on defining various node types, see the [Defining Verbs](#defining-verbs) section.
+
 ```python
 from reactivedataflow import verb, Input, Config
+from typing import Annotated
 
 @verb(name="print")
 def print_verb(
@@ -100,3 +102,119 @@ graph.output("result").subscribe(print)
 # !hello
 # !world
 ```
+
+# Defining Verbs
+
+## Named Inputs
+```python
+from reactivedataflow import verb, Input
+from typing import Annotated
+
+@verb(name="add")
+def add(
+	a: Annotated[int, Input()], 
+	b: Annotated[int, Input()]
+) -> int:
+	return a + b
+```
+Input Options:
+* `required` (bool, default=?): Whether this input is required. This is inferred from whether the argument has a default value.
+
+## Array Inputs
+```python
+from reactivedataflow import verb, ArrayInput
+from typing import Annotated
+
+@verb(name="add")
+def add(
+	inputs: Annotated[list[int], ArrayInput(min_inputs=2)]
+) -> int:
+	return sum(inputs)
+```
+
+Array Input Options:
+* `required` (bool, default=?): Whether this input is required. This is inferred from whether the argument has a default value.
+* `min_inputs` (int, default=None): The minimum number of inputs that must be provided to the verb node.
+* `defined_inputs` (bool, default=False): If true, then each array value must be non-None for the verb to fire.
+
+## Explicit Port Definitions
+As an alternative to decorating function arguments, ports may be defined explicitly. 
+Each port has a name and maps into a parameter name.
+```python
+@verb(
+		"add"
+		ports=[
+				Input(name="input_1", parameter="x", required=True),
+				Input(name="input_2", parameter="y", required=True),
+				Config(name="config", parameter="config", required=False),
+				Output(name="output)
+		]
+)
+def add(x: int, y: int, config: int = 0) -> int:
+		return x + y + config
+```
+
+## Multiple Outputs
+When multiple outputs are desired, you can set the `output_mode` to `OutputMode.Tuple` and provide a list of output port names.
+
+```python
+@verb(
+		"twin_outputs",
+		output_names=["output_1", "output_2"],
+		output_mode=OutputMode.Tuple,
+)
+def twin_outputs(
+	x: Annotated[str | None, Input()], 
+	y: Annotated[str | None, Input()]
+) -> tuple[str, str]:
+		output_1 = f"{x} {y}"
+		output_2 = f"{y} {x}"
+		return output_1, output_2
+```
+
+## Custom Registry
+There may be cases where you want to separate verb definitions from each other. This is most often used in testing. In these cases, verbs can be initialized with a custom registry instance. By default, a singleton registry is used.
+
+```python
+from reactivedataflow import verb, Input, Config, VerbRegistry
+
+registry = VerbRegistry()
+@verb(name="add", registry=registry)
+...
+```
+
+## Verb Conditions
+The `verb` API allows for users to define _firing_ and _emitting_ conditions. 
+These are predicate functions that operate on `VerbInput` and `VerbOutput` objects. 
+
+The low-level VerbNode type essentially operates as a function that accepts a `VerbInput` and returns a `VerbOutput`. Our `verb` decorators are a higher-level API that automatically bundles and unpacks these values for you.
+
+```python
+from reactivedataflow import verb, Input, Config, VerbCondition, VerbInput
+
+def fire_condition(input: VerbInput) -> bool:
+	return input["a"] > 0
+
+def emit_condition(input: VerbInput, output: VerbOutput) -> bool:
+	return output["result"] > 0
+
+@verb(
+	name="add", 
+	fire_conditions=[fire_condition],
+	emit_conditions=[emit_condition]
+)
+def add(
+	a: Annotated[int, Input()], 
+	b: Annotated[int, Input()]
+) -> int:
+	return a + b
+```
+
+
+## 
+
+## To Discuss:
+* Builder API
+* Configuration injection
+* Error handling
+* More complex examples
