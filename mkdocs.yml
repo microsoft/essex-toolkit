@@ -1,0 +1,19 @@
+site_name: Essex-Toolkit
+  
+theme:
+  name: material
+  features:
+    - content.code.copy
+    - content.code.select
+
+nav:
+  - Intro: index.md
+  - essex-config: '!include ./python/essex-config/mkdocs.yml'
+  - reactivedataflow: '!include ./python/reactivedataflow/mkdocs.yml'
+
+plugins:
+  - search
+  - monorepo
+
+repo_url: https://github.com/microsoft/essex-toolkit
+repo_name: essex-toolkit
