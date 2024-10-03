@@ -1,7 +1,11 @@
 [tool.poetry]
 name = "essex-toolkit"
 version = "0.0.5"
-authors = ["Andres Morales <andresmor@microsoft.com>", "Chris Trevino <chtrevin@microsoft.com>"]
+authors = [
+    "Andres Morales <andresmor@microsoft.com>", 
+    "Chris Trevino <chtrevin@microsoft.com>", 
+    "Rodrigo Racanicci <rracanicci@microsoft.com>"
+]
 description = "Essex Toolkit python libraries."
 package-mode = false
 
