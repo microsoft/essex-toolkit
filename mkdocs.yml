@@ -17,3 +17,10 @@ plugins:
 
 repo_url: https://github.com/microsoft/essex-toolkit
 repo_name: essex-toolkit
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
