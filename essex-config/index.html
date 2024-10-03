@@ -583,35 +583,35 @@
 
 <h1 id="getting-started">Getting Started</h1>
 <p>essex-config is a Python library for creating configuration objects that read from various sources, including files, environment variables, and Azure Key Vault.</p>
-<pre><code class="language-sh">pip install essex-config
-</code></pre>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>essex-config
+</code></pre></div>
 <h2 id="basic-usage">Basic Usage</h2>
 <p>Create a configuration object for connecting to a customer database:</p>
-<pre><code class="language-python">from pydantic import BaseModel, Field
-from essex_config import load_config
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
+<span class="kn">from</span> <span class="nn">essex_config</span> <span class="kn">import</span> <span class="n">load_config</span>
 
-class CustomerDatabase(BaseModel):
-    &quot;&quot;&quot;Configuration for connecting to the Customer Database&quot;&quot;&quot;
-    host: str = Field(default=&quot;127.0.0.1&quot;, description=&quot;DB connection host&quot;)
-    port: int = Field(description=&quot;DB connection port&quot;)
-    password: str = Field(description=&quot;DB connection password&quot;)
+<span class="k">class</span> <span class="nc">CustomerDatabase</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for connecting to the Customer Database&quot;&quot;&quot;</span>
+    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;DB connection host&quot;</span><span class="p">)</span>
+    <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;DB connection port&quot;</span><span class="p">)</span>
+    <span class="n">password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;DB connection password&quot;</span><span class="p">)</span>
 
-if __name__ == &quot;__main__&quot;:
-    config = load_config(CustomerDatabase)
-    print(config)
-</code></pre>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="n">CustomerDatabase</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</code></pre></div>
 <p>When <code>load_config(CustomerDatabase)</code> is executed, values are populated from environment variables or default values.</p>
 <h2 id="nested-configurations">Nested Configurations</h2>
 <p>Nest configuration objects:</p>
-<pre><code class="language-python">class Inner(BaseModel):
-    inner_hello: str
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Inner</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">inner_hello</span><span class="p">:</span> <span class="nb">str</span>
 
-class NestedConfiguration(BaseModel):
-    hello: str
-    nested: Inner
+<span class="k">class</span> <span class="nc">NestedConfiguration</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">hello</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">nested</span><span class="p">:</span> <span class="n">Inner</span>
 
-nested_config = load_config(NestedConfiguration)
-</code></pre>
+<span class="n">nested_config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="n">NestedConfiguration</span><span class="p">)</span>
+</code></pre></div>
 <p><code>load_config()</code> populates every field, including <code>nested_config.nested.inner_hello</code>. The default prefix for every field in <code>Inner</code> is <code>nested</code>, which can be changed with <code>Annotated[Inner, Prefixed("new_prefix")]</code>.</p>
 
 

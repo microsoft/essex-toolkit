@@ -667,8 +667,8 @@
 
 <h1 id="getting-started">Getting Started</h1>
 <p>reactivedataflow is a Python library for building reactive data processing graphs. It is designed to work with streaming data sources.</p>
-<pre><code class="language-sh">pip install reactivedataflow
-</code></pre>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>reactivedataflow
+</code></pre></div>
 <p>The dependencies for this project include <code>rx</code>, <code>networkx</code>, and <code>pydantic</code>.</p>
 <h2 id="legacy">Legacy</h2>
 <p><code>reactivedataflow</code> has a design that is inspired by our prior work with <a href="https://github.com/microsoft/datashaper">datashaper</a> and the neuron model of neural networks.
@@ -678,23 +678,21 @@ In traditional neural network topologies, there are "hidden" layers of normal ne
 <h2 id="nodes">Nodes</h2>
 <p>Nodes are the heart of the system, and they are responsible for processing data streams and emitting transformed results. A key feature of this system is that data streams between nodes are <em>polymorphic</em> - meaning that they can be any type. Care should be taken that the processing function of a verb node is able to handle the data types that are passed to it.</p>
 <h4 id="input-nodes">Input Nodes</h4>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid"><code>flowchart LR
     A[rx source observable] --&gt; B((Input Node))
     B --&gt; |default output| C[consumer]
     B --&gt; |default output| D[consumer]
-    B --&gt; |default output| E[consumer]
-</code></pre>
+    B --&gt; |default output| E[consumer]</code></pre>
 <p>Input nodes are simple nodes that are initialized with a <code>reactivex</code> event stream, and emit data on a single output port.</p>
 <h4 id="output-nodes">Output Nodes</h4>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid"><code>flowchart LR
     A((node)) --&gt; | named output | B((Output Node))
     B --&gt;  C[graph reader]
-
 </code></pre>
 <p>Output nodes are simple nodes that are used to observe the output of a verb node. They are initialized with a reference to a verb node, and emit data on a single output port. 
 This is the primary mechanism for reading results from the processing graph.</p>
 <h4 id="verb-nodes">Verb Nodes</h4>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid"><code>flowchart LR
     A[named inputs] --&gt;|x| B((Verb Node))
     A[named inputs] --&gt;|y| B((Verb Node))
     A[named inputs] --&gt;|z| B((Verb Node))
@@ -702,8 +700,7 @@ This is the primary mechanism for reading results from the processing graph.</p>
     D[configuration] --&gt; |named static values| B
     B --&gt; |p| E[named outputs]
     B --&gt; |q| E[named outputs]
-    B --&gt; |s| E[named outputs]
-</code></pre>
+    B --&gt; |s| E[named outputs]</code></pre>
 <p>Verb nodes are composed of a number of "ports" that are used to describe their inputs, outputs, and configuration properties. </p>
 <ul>
 <li><em>Input ports</em> represent data streams that are consumed by the verb node. Each message from an input port will result in a re-evaluation of the VerbNode's processing function, and may result in new messages being emitted on any number of output ports. </li>

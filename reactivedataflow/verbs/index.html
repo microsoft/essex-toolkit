@@ -727,41 +727,41 @@
 <p>Verbs are at the heart of <code>reactivedataflow</code>. Verbs are custom processing functions that react to input event streams and emit output event streams. Verbs are normally defined using <em>pure functions</em> which are annotated using the <code>@verb</code> decorator and the <code>Annotated</code> feature. This mechanism allows verbs to be used in other contexts as well, not just <code>reactivedataflow</code>, improving their utility and testability.</p>
 <p>At a base level, the system treats each verb as a function that accepts a <code>VerbInput</code> and returns a <code>VerbOutput</code>. The <code>verb</code> decorator and related annotations provide convenience mechanisms for adapting pure functions to fit into the execution model.</p>
 <h2 id="annotated-verbs-recommended">Annotated Verbs (recommended)</h2>
-<pre><code class="language-python">from reactivedataflow import verb, Input
-from typing import Annotated
+<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Annotated</span>
 
-@verb(&quot;add&quot;)
-def add(
-    a: Annotated[int, Input()], 
-    b: Annotated[int, Input()]
-) -&gt; int:
-    return a + b
-</code></pre>
-<p>Input Options:</p>
+<span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span>
+    <span class="n">a</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()],</span> 
+    <span class="n">b</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</code></pre></div>
+Input Options:</p>
 <ul>
 <li><code>required</code> <em>(bool, default=?)</em>: Whether this input is required. This is inferred from whether the argument has a default value.</li>
 </ul>
 <h2 id="raw-verbs">Raw Verbs</h2>
-<pre><code class="language-python">from reactivedataflow import verb, VerbInput, VerbOutput, InputMode, OutputMode
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">VerbInput</span><span class="p">,</span> <span class="n">VerbOutput</span><span class="p">,</span> <span class="n">InputMode</span><span class="p">,</span> <span class="n">OutputMode</span>
 
-@verb(
-    name=&quot;add&quot;, 
-    input_mode=InputMode.Raw, 
-    output_mode=OutputMode.Raw
-)
-def add(input: VerbInput) -&gt; VerbOutput:
-    return {&quot;result&quot;: input[&quot;a&quot;] + input[&quot;b&quot;]}
-</code></pre>
+<span class="nd">@verb</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> 
+    <span class="n">input_mode</span><span class="o">=</span><span class="n">InputMode</span><span class="o">.</span><span class="n">Raw</span><span class="p">,</span> 
+    <span class="n">output_mode</span><span class="o">=</span><span class="n">OutputMode</span><span class="o">.</span><span class="n">Raw</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">VerbInput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VerbOutput</span><span class="p">:</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="nb">input</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">input</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]}</span>
+</code></pre></div>
 <h2 id="using-array-inputs">Using Array Inputs</h2>
-<pre><code class="language-python">from reactivedataflow import verb, ArrayInput
-from typing import Annotated
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">ArrayInput</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Annotated</span>
 
-@verb(&quot;add&quot;)
-def add(
-    inputs: Annotated[list[int], ArrayInput(min_inputs=2)]
-) -&gt; int:
-    return sum(inputs)
-</code></pre>
+<span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">ArrayInput</span><span class="p">(</span><span class="n">min_inputs</span><span class="o">=</span><span class="mi">2</span><span class="p">)]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+</code></pre></div>
 <p>Array Input Options:</p>
 <ul>
 <li><code>required</code> <em>(bool, default=?)</em>: Whether this input is required. This is inferred from whether the argument has a default value.</li>
@@ -771,98 +771,98 @@ def add(
 <h2 id="using-explicit-port-definitions">Using Explicit Port Definitions</h2>
 <p>As an alternative to decorating function arguments, ports may be defined explicitly. 
 Each port has a name and maps into a parameter name.</p>
-<pre><code class="language-python">from reactivedataflow import verb, Input, Config
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Config</span>
 
-@verb(
-    &quot;add&quot;,
-    ports=[
-        Input(name=&quot;input_1&quot;, parameter=&quot;x&quot;, required=True),
-        Input(name=&quot;input_2&quot;, parameter=&quot;y&quot;, required=True),
-        Config(name=&quot;config&quot;, parameter=&quot;z&quot;, required=False),
-        Output(name=&quot;output&quot;),
-    ]
-)
-def add(x: int, y: int, z: int = 0) -&gt; int:
-    return x + y + z
-</code></pre>
+<span class="nd">@verb</span><span class="p">(</span>
+    <span class="s2">&quot;add&quot;</span><span class="p">,</span>
+    <span class="n">ports</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">Input</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;input_1&quot;</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="n">Input</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;input_2&quot;</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="n">Config</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+        <span class="n">Output</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;output&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span>
+</code></pre></div>
 <h2 id="emitting-multiple-outputs">Emitting Multiple Outputs</h2>
 <p>When multiple outputs are desired, you can set the <code>output_mode</code> to <code>OutputMode.Tuple</code> and provide a list of output port names.</p>
-<pre><code class="language-python">@verb(
-    &quot;twin_outputs&quot;,
-    output_names=[&quot;output_1&quot;, &quot;output_2&quot;],
-    output_mode=OutputMode.Tuple,
-)
-def twin_outputs(
-    x: Annotated[str | None, Input()], 
-    y: Annotated[str | None, Input()]
-) -&gt; tuple[str, str]:
-    output_1 = f&quot;{x} {y}&quot;
-    output_2 = f&quot;{y} {x}&quot;
-    return output_1, output_2
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nd">@verb</span><span class="p">(</span>
+    <span class="s2">&quot;twin_outputs&quot;</span><span class="p">,</span>
+    <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;output_1&quot;</span><span class="p">,</span> <span class="s2">&quot;output_2&quot;</span><span class="p">],</span>
+    <span class="n">output_mode</span><span class="o">=</span><span class="n">OutputMode</span><span class="o">.</span><span class="n">Tuple</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">twin_outputs</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Input</span><span class="p">()],</span> 
+    <span class="n">y</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Input</span><span class="p">()]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="n">output_1</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">output_2</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="n">output_1</span><span class="p">,</span> <span class="n">output_2</span>
+</code></pre></div>
 <h2 id="using-a-custom-registry">Using a Custom Registry</h2>
 <p>There may be cases where you want to separate verb definitions from each other. This is most often used in testing. In these cases, verbs can be initialized with a custom registry instance. By default, a singleton registry is used.</p>
-<pre><code class="language-python">from reactivedataflow import verb, Input, Config, VerbRegistry
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Config</span><span class="p">,</span> <span class="n">VerbRegistry</span>
 
-registry = VerbRegistry()
-@verb(&quot;add&quot;, registry=registry)
-...
-</code></pre>
+<span class="n">registry</span> <span class="o">=</span> <span class="n">VerbRegistry</span><span class="p">()</span>
+<span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">registry</span><span class="o">=</span><span class="n">registry</span><span class="p">)</span>
+<span class="o">...</span>
+</code></pre></div>
 <h2 id="overriding-a-defined-verb">Overriding a Defined Verb</h2>
 <p>Verbs are registered as their Python files are loaded. In situations where you need to override a verb definition, you can use the <code>override</code> parameter.</p>
-<pre><code class="language-python">from reactivedataflow import verb, Input, Config, VerbRegistry
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Config</span><span class="p">,</span> <span class="n">VerbRegistry</span>
 
-registry = VerbRegistry()
-@verb(&quot;add&quot;, override=True)
-...
-</code></pre>
+<span class="n">registry</span> <span class="o">=</span> <span class="n">VerbRegistry</span><span class="p">()</span>
+<span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">override</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="o">...</span>
+</code></pre></div>
 <h2 id="adding-custom-adapters">Adding Custom Adapters</h2>
 <p>You can register decorator functions that are applied <em>before</em> any <code>reactivedataflow</code> decoration is applied. This is useful for adding custom behavior to verbs.</p>
-<pre><code class="language-python">from reactivedataflow import verb, Input, Config
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Config</span>
 
-def emit_telemetry(fn):
-    def wrap_fn():
-        print(f&quot;Calling {fn.__name__}&quot;)
-        return fn()
-    return wrap_n
+<span class="k">def</span> <span class="nf">emit_telemetry</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrap_fn</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calling </span><span class="si">{</span><span class="n">fn</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fn</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">wrap_n</span>
 
-@verb(&quot;add&quot;, adapters=[emit_telemetry])
-def add(
-    a: Annotated[int, Input()], 
-    b: Annotated[int, Input()]
-) -&gt; int:
-    return a + b
-</code></pre>
+<span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">adapters</span><span class="o">=</span><span class="p">[</span><span class="n">emit_telemetry</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span>
+    <span class="n">a</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()],</span> 
+    <span class="n">b</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</code></pre></div>
 <h2 id="overriding-a-defined-verb_1">Overriding a Defined Verb</h2>
 <p>Verbs are registered as their Python files are loaded. In situations where you need to override a verb definition, you can use the <code>override</code> parameter.</p>
-<pre><code class="language-python">from reactivedataflow import verb, Input, Config, VerbRegistry
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Config</span><span class="p">,</span> <span class="n">VerbRegistry</span>
 
-registry = VerbRegistry()
-@verb(&quot;add&quot;, override=True)
-...
-</code></pre>
+<span class="n">registry</span> <span class="o">=</span> <span class="n">VerbRegistry</span><span class="p">()</span>
+<span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">override</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="o">...</span>
+</code></pre></div>
 <h2 id="fireemit-conditions">Fire/Emit Conditions</h2>
 <p>The <code>verb</code> API allows for users to define <em>firing</em> and <em>emitting</em> conditions. 
 These are predicate functions that operate on <code>VerbInput</code> and <code>VerbOutput</code> objects. </p>
-<pre><code class="language-python">from reactivedataflow import verb, Input, Config, VerbCondition, VerbInput
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Config</span><span class="p">,</span> <span class="n">VerbCondition</span><span class="p">,</span> <span class="n">VerbInput</span>
 
-def fire_condition(input: VerbInput) -&gt; bool:
-    return input[&quot;a&quot;] &gt; 0
+<span class="k">def</span> <span class="nf">fire_condition</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">VerbInput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">input</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
 
-def emit_condition(input: VerbInput, output: VerbOutput) -&gt; bool:
-    return output[&quot;result&quot;] &gt; 0
+<span class="k">def</span> <span class="nf">emit_condition</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">VerbInput</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="n">VerbOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">output</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
 
-@verb(
-    &quot;add&quot;, 
-    fire_conditions=[fire_condition],
-    emit_conditions=[emit_condition]
-)
-def add(
-    a: Annotated[int, Input()], 
-    b: Annotated[int, Input()]
-) -&gt; int:
-    return a + b
-</code></pre>
+<span class="nd">@verb</span><span class="p">(</span>
+    <span class="s2">&quot;add&quot;</span><span class="p">,</span> 
+    <span class="n">fire_conditions</span><span class="o">=</span><span class="p">[</span><span class="n">fire_condition</span><span class="p">],</span>
+    <span class="n">emit_conditions</span><span class="o">=</span><span class="p">[</span><span class="n">emit_condition</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span>
+    <span class="n">a</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()],</span> 
+    <span class="n">b</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</code></pre></div>
 
 
 

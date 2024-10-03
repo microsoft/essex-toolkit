@@ -604,123 +604,122 @@
 <p>The first task in using <code>reactivedataflow</code> is to define your relevant processing verbs.<br />
 Processing verbs are <em>pure functions</em> that are annotated using the <code>@verb</code> decorator and the <code>Annotated</code> feature. 
 A key feature of <code>reactivedataflow</code> is that verb functions <em>are not explicitly coupled</em> to reactivedataflow, and may be used in other contexts as well.</p>
-<pre><code class="language-python">from reactivedataflow import verb, Input, Config
-from typing import Annotated
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Config</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Annotated</span>
 
-@verb(name=&quot;print&quot;)
-def print_verb(
-    val: Annotated[str, Input()], 
-    prefix: Annotated[str, Config()] = &quot;&quot;
-) -&gt; str:
-    return f&quot;{prefix}{val}&quot;
-</code></pre>
+<span class="nd">@verb</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;print&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">print_verb</span><span class="p">(</span>
+    <span class="n">val</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Input</span><span class="p">()],</span> 
+    <span class="n">prefix</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Config</span><span class="p">()]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}{</span><span class="n">val</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
 <p>Once we have a set of verbs defined, we can define a processing graph to establish a dataflow. 
 In this example, we'll load a simple one-node graph using the <code>Graph</code> schema. 
 The <code>GraphBuilder</code> also has a builder-mode API so that graphs can be defined iteratively.</p>
-<pre><code class="language-python">import reactivex as rx
-from reactivedataflow import (
-    GraphBuilder,
-    Graph,
-    InputNode,
-    Node,
-    Edge,
-    Output
-)
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">reactivex</span> <span class="k">as</span> <span class="nn">rx</span>
+<span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">GraphBuilder</span><span class="p">,</span>
+    <span class="n">Graph</span><span class="p">,</span>
+    <span class="n">InputNode</span><span class="p">,</span>
+    <span class="n">Node</span><span class="p">,</span>
+    <span class="n">Edge</span><span class="p">,</span>
+    <span class="n">Output</span>
+<span class="p">)</span>
 
-#
-# Define a simple graph
-#
-graph = GraphBuilder().load_model(
-    Graph(
-        inputs=[InputNode(id=&quot;input&quot;)],
-        nodes=[Node(id=&quot;printed&quot;, verb=&quot;print&quot;, config={&quot;prefix&quot;: &quot;!&quot;})],
-        edges=[Edge(from_node=&quot;input&quot;, to_node=&quot;printed&quot;)],
-        outputs=[Output(name=&quot;result&quot;, node=&quot;printed&quot;)],
-    )
-).build(
-    inputs={
-        &quot;input&quot;: rx.of([&quot;hello&quot;, &quot;world&quot;]),
-    }
-)
-graph.output(&quot;result&quot;).subscribe(print)
-# Output: 
-# !hello
-# !world
-</code></pre>
+<span class="c1">#</span>
+<span class="c1"># Define a simple graph</span>
+<span class="c1">#</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">GraphBuilder</span><span class="p">()</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span>
+    <span class="n">Graph</span><span class="p">(</span>
+        <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">InputNode</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;input&quot;</span><span class="p">)],</span>
+        <span class="n">nodes</span><span class="o">=</span><span class="p">[</span><span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;printed&quot;</span><span class="p">,</span> <span class="n">verb</span><span class="o">=</span><span class="s2">&quot;print&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;prefix&quot;</span><span class="p">:</span> <span class="s2">&quot;!&quot;</span><span class="p">})],</span>
+        <span class="n">edges</span><span class="o">=</span><span class="p">[</span><span class="n">Edge</span><span class="p">(</span><span class="n">from_node</span><span class="o">=</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">to_node</span><span class="o">=</span><span class="s2">&quot;printed&quot;</span><span class="p">)],</span>
+        <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">Output</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;result&quot;</span><span class="p">,</span> <span class="n">node</span><span class="o">=</span><span class="s2">&quot;printed&quot;</span><span class="p">)],</span>
+    <span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="n">rx</span><span class="o">.</span><span class="n">of</span><span class="p">([</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;world&quot;</span><span class="p">]),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="nb">print</span><span class="p">)</span>
+<span class="c1"># Output: </span>
+<span class="c1"># !hello</span>
+<span class="c1"># !world</span>
+</code></pre></div>
 <h2 id="math-operators">Math Operators</h2>
-<pre><code class="language-python">
-@verb(&quot;add&quot;)
-def add(
-    values: Annotated[list[int], ArrayInput(min_inputs=1, defined_inputs=True)],
-) -&gt; int:
-    return sum(values)
+<div class="highlight"><pre><span></span><code><span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span>
+    <span class="n">values</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">ArrayInput</span><span class="p">(</span><span class="n">min_inputs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">defined_inputs</span><span class="o">=</span><span class="kc">True</span><span class="p">)],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
 
-@verb(&quot;multiply&quot;)
-def multiply(a: Annotated[int, Input()], b: Annotated[int, Input()]) -&gt; int:
-    return a * b
+<span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;multiply&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()],</span> <span class="n">b</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
 
-@verb(&quot;constant&quot;)
-def constant(value: Annotated[int, Config()]) -&gt; int:
-    return value
+<span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;constant&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">constant</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Config</span><span class="p">()])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">value</span>
 
-graph = GraphBuilder().load_model(
-    Graph(
-        inputs=[
-            InputNode(id=&quot;input&quot;),
-        ],
-        nodes=[
-            Node(id=&quot;c3&quot;, verb=&quot;constant&quot;, config={&quot;value&quot;: 3}),
-            Node(id=&quot;c5&quot;, verb=&quot;constant&quot;, config={&quot;value&quot;: ValRef(value=5)}),
-            Node(id=&quot;first_add&quot;, verb=&quot;add&quot;),
-            Node(id=&quot;second_add&quot;, verb=&quot;add&quot;),
-            Node(id=&quot;product&quot;, verb=&quot;multiply&quot;),
-        ],
-        edges=[
-            # First sum inputs: 1 + 3 = 4
-            Edge(from_node=&quot;input&quot;, to_node=&quot;first_add&quot;),
-            Edge(from_node=&quot;c3&quot;, to_node=&quot;first_add&quot;),
-            # Second sum inputs: 5 + 3 = 8
-            Edge(from_node=&quot;c3&quot;, to_node=&quot;second_add&quot;),
-            Edge(from_node=&quot;c5&quot;, to_node=&quot;second_add&quot;),
-            # Multiply the sums: 4 * 8 = 32
-            Edge(from_node=&quot;first_add&quot;, to_node=&quot;product&quot;, to_port=&quot;a&quot;),
-            Edge(from_node=&quot;second_add&quot;, to_node=&quot;product&quot;, to_port=&quot;b&quot;),
-        ],
-        outputs=[Output(name=&quot;result&quot;, node=&quot;product&quot;)],
-    )
-).build(
-    inputs={
-        &quot;input&quot;: rx.of([1]),
-    }
-)
-graph.output(&quot;result&quot;).subscribe(print)
-# Output: 32
-</code></pre>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">GraphBuilder</span><span class="p">()</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span>
+    <span class="n">Graph</span><span class="p">(</span>
+        <span class="n">inputs</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">InputNode</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;input&quot;</span><span class="p">),</span>
+        <span class="p">],</span>
+        <span class="n">nodes</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;c3&quot;</span><span class="p">,</span> <span class="n">verb</span><span class="o">=</span><span class="s2">&quot;constant&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}),</span>
+            <span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;c5&quot;</span><span class="p">,</span> <span class="n">verb</span><span class="o">=</span><span class="s2">&quot;constant&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">ValRef</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">5</span><span class="p">)}),</span>
+            <span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;first_add&quot;</span><span class="p">,</span> <span class="n">verb</span><span class="o">=</span><span class="s2">&quot;add&quot;</span><span class="p">),</span>
+            <span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;second_add&quot;</span><span class="p">,</span> <span class="n">verb</span><span class="o">=</span><span class="s2">&quot;add&quot;</span><span class="p">),</span>
+            <span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;product&quot;</span><span class="p">,</span> <span class="n">verb</span><span class="o">=</span><span class="s2">&quot;multiply&quot;</span><span class="p">),</span>
+        <span class="p">],</span>
+        <span class="n">edges</span><span class="o">=</span><span class="p">[</span>
+            <span class="c1"># First sum inputs: 1 + 3 = 4</span>
+            <span class="n">Edge</span><span class="p">(</span><span class="n">from_node</span><span class="o">=</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">to_node</span><span class="o">=</span><span class="s2">&quot;first_add&quot;</span><span class="p">),</span>
+            <span class="n">Edge</span><span class="p">(</span><span class="n">from_node</span><span class="o">=</span><span class="s2">&quot;c3&quot;</span><span class="p">,</span> <span class="n">to_node</span><span class="o">=</span><span class="s2">&quot;first_add&quot;</span><span class="p">),</span>
+            <span class="c1"># Second sum inputs: 5 + 3 = 8</span>
+            <span class="n">Edge</span><span class="p">(</span><span class="n">from_node</span><span class="o">=</span><span class="s2">&quot;c3&quot;</span><span class="p">,</span> <span class="n">to_node</span><span class="o">=</span><span class="s2">&quot;second_add&quot;</span><span class="p">),</span>
+            <span class="n">Edge</span><span class="p">(</span><span class="n">from_node</span><span class="o">=</span><span class="s2">&quot;c5&quot;</span><span class="p">,</span> <span class="n">to_node</span><span class="o">=</span><span class="s2">&quot;second_add&quot;</span><span class="p">),</span>
+            <span class="c1"># Multiply the sums: 4 * 8 = 32</span>
+            <span class="n">Edge</span><span class="p">(</span><span class="n">from_node</span><span class="o">=</span><span class="s2">&quot;first_add&quot;</span><span class="p">,</span> <span class="n">to_node</span><span class="o">=</span><span class="s2">&quot;product&quot;</span><span class="p">,</span> <span class="n">to_port</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">),</span>
+            <span class="n">Edge</span><span class="p">(</span><span class="n">from_node</span><span class="o">=</span><span class="s2">&quot;second_add&quot;</span><span class="p">,</span> <span class="n">to_node</span><span class="o">=</span><span class="s2">&quot;product&quot;</span><span class="p">,</span> <span class="n">to_port</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">),</span>
+        <span class="p">],</span>
+        <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">Output</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;result&quot;</span><span class="p">,</span> <span class="n">node</span><span class="o">=</span><span class="s2">&quot;product&quot;</span><span class="p">)],</span>
+    <span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="n">rx</span><span class="o">.</span><span class="n">of</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="nb">print</span><span class="p">)</span>
+<span class="c1"># Output: 32</span>
+</code></pre></div>
 <h2 id="math-operators-using-builder-api">Math Operators using Builder API</h2>
-<pre><code class="language-python"># Assemble a graph:
-#
-#  n1 ----\
-#         n3
-#  n2 ----/
-#
-graph = GraphBuilder()
-    # Define Constant Layer
-    .add_node(&quot;c1&quot;, &quot;constant&quot;, config={&quot;value&quot;: 1})
-    .add_node(&quot;c3&quot;, &quot;constant&quot;, config={&quot;value&quot;: 3})
-    .add_node(&quot;c5&quot;, &quot;constant&quot;, config={&quot;value&quot;: 5})
-    # Define Execution Layer
-    .add_node(&quot;n1&quot;, &quot;add&quot;)
-    .add_edge(from_node=&quot;c1&quot;, to_node=&quot;n1&quot;)
-    .add_edge(from_node=&quot;c3&quot;, to_node=&quot;n1&quot;)
-    .add_node(&quot;n2&quot;, &quot;add&quot;)
-    .add_edge(from_node=&quot;c3&quot;, to_node=&quot;n2&quot;)
-    .add_edge(from_node=&quot;c5&quot;, to_node=&quot;n2&quot;)
-    .add_node(&quot;n3&quot;, &quot;multiply&quot;)
-    .add_edge(from_node=&quot;n1&quot;, to_node=&quot;n3&quot;, to_port=&quot;a&quot;)
-    .add_edge(from_node=&quot;n2&quot;, to_node=&quot;n3&quot;, to_port=&quot;b&quot;)
-    .add_output(&quot;result&quot;, &quot;n3&quot;)
-    .build()
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1"># Assemble a graph:</span>
+<span class="c1">#</span>
+<span class="c1">#  n1 ----\</span>
+<span class="c1">#         n3</span>
+<span class="c1">#  n2 ----/</span>
+<span class="c1">#</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">GraphBuilder</span><span class="p">()</span>
+    <span class="c1"># Define Constant Layer</span>
+    <span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;c1&quot;</span><span class="p">,</span> <span class="s2">&quot;constant&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+    <span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;c3&quot;</span><span class="p">,</span> <span class="s2">&quot;constant&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">})</span>
+    <span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;c5&quot;</span><span class="p">,</span> <span class="s2">&quot;constant&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">})</span>
+    <span class="c1"># Define Execution Layer</span>
+    <span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;n1&quot;</span><span class="p">,</span> <span class="s2">&quot;add&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">from_node</span><span class="o">=</span><span class="s2">&quot;c1&quot;</span><span class="p">,</span> <span class="n">to_node</span><span class="o">=</span><span class="s2">&quot;n1&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">from_node</span><span class="o">=</span><span class="s2">&quot;c3&quot;</span><span class="p">,</span> <span class="n">to_node</span><span class="o">=</span><span class="s2">&quot;n1&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;n2&quot;</span><span class="p">,</span> <span class="s2">&quot;add&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">from_node</span><span class="o">=</span><span class="s2">&quot;c3&quot;</span><span class="p">,</span> <span class="n">to_node</span><span class="o">=</span><span class="s2">&quot;n2&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">from_node</span><span class="o">=</span><span class="s2">&quot;c5&quot;</span><span class="p">,</span> <span class="n">to_node</span><span class="o">=</span><span class="s2">&quot;n2&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;n3&quot;</span><span class="p">,</span> <span class="s2">&quot;multiply&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">from_node</span><span class="o">=</span><span class="s2">&quot;n1&quot;</span><span class="p">,</span> <span class="n">to_node</span><span class="o">=</span><span class="s2">&quot;n3&quot;</span><span class="p">,</span> <span class="n">to_port</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">from_node</span><span class="o">=</span><span class="s2">&quot;n2&quot;</span><span class="p">,</span> <span class="n">to_node</span><span class="o">=</span><span class="s2">&quot;n3&quot;</span><span class="p">,</span> <span class="n">to_port</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_output</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">,</span> <span class="s2">&quot;n3&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">build</span><span class="p">()</span>
+</code></pre></div>
 
 
 

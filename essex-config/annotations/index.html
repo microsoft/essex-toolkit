@@ -585,18 +585,17 @@
 <p>Essex-config offers Annotations for fields which modifies the behavior of the basic configuration loading.</p>
 <h2 id="prefixes">Prefixes</h2>
 <p>The <code>load_config</code> function supports using a prefix for values in different sources:</p>
-<pre><code class="language-python">class CustomerDatabase(BaseModel):
-    &quot;&quot;&quot;Configuration for connecting to the Customer Database&quot;&quot;&quot;
-    host: str = Field(default=&quot;127.0.0.1&quot;, description=&quot;DB connection host&quot;)
-    port: int = Field(description=&quot;DB connection port&quot;)
-    password: str = Field(description=&quot;DB connection password&quot;)
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">CustomerDatabase</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for connecting to the Customer Database&quot;&quot;&quot;</span>
+    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;DB connection host&quot;</span><span class="p">)</span>
+    <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;DB connection port&quot;</span><span class="p">)</span>
+    <span class="n">password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;DB connection password&quot;</span><span class="p">)</span>
 
 
-if __name__ == &quot;__main__&quot;:
-    config = load_config(CustomerDatabase, prefix=&quot;customer_db&quot;)
-    print(config)
-
-</code></pre>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="n">CustomerDatabase</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;customer_db&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</code></pre></div>
 <p>With a prefix, sources look for values accordingly:</p>
 <ul>
 <li><code>EnvSource()</code>: Uses UPPER_SNAKE_CASE (e.g., <code>CUSTOMER_DB_HOST</code>, <code>CUSTOMER_DB_PORT</code>, <code>CUSTOMER_DB_PASSWORD</code>).</li>
@@ -604,21 +603,21 @@ if __name__ == &quot;__main__&quot;:
 <li><code>KeyvaultSource()</code>: Joins the prefix with the key using <code>.</code>.</li>
 </ul>
 <p>To add a prefix for a specific field, use <code>Annotated</code>:</p>
-<pre><code class="language-python">class CustomerDatabase(BaseModel):
-    &quot;&quot;&quot;Configuration for connecting to the Customer Database&quot;&quot;&quot;
-    host: Annotated[str, Prefixed(&quot;some_prefix&quot;)] = Field(default=&quot;127.0.0.1&quot;, description=&quot;DB connection host&quot;)
-    port: int = Field(description=&quot;DB connection port&quot;)
-    password: str = Field(description=&quot;DB connection password&quot;)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">CustomerDatabase</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for connecting to the Customer Database&quot;&quot;&quot;</span>
+    <span class="n">host</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Prefixed</span><span class="p">(</span><span class="s2">&quot;some_prefix&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;DB connection host&quot;</span><span class="p">)</span>
+    <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;DB connection port&quot;</span><span class="p">)</span>
+    <span class="n">password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;DB connection password&quot;</span><span class="p">)</span>
+</code></pre></div>
 <p>In this case, the prefix for <code>host</code> will be <code>customer_db.some_prefix</code>.</p>
 <h2 id="alias">Alias</h2>
 <p>Use <code>Annotated</code> to add source-specific aliases:</p>
-<pre><code class="language-python">class CustomerDatabase(BaseModel):
-    &quot;&quot;&quot;Configuration for connecting to the Customer Database&quot;&quot;&quot;
-    host: Annotated[str, Alias(EnvSource, [&quot;customer_db_host&quot;])] = Field(default=&quot;127.0.0.1&quot;, description=&quot;DB connection host&quot;)
-    port: int = Field(description=&quot;DB connection port&quot;)
-    password: str = Field(description=&quot;DB connection password&quot;)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">CustomerDatabase</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for connecting to the Customer Database&quot;&quot;&quot;</span>
+    <span class="n">host</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Alias</span><span class="p">(</span><span class="n">EnvSource</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;customer_db_host&quot;</span><span class="p">])]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;DB connection host&quot;</span><span class="p">)</span>
+    <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;DB connection port&quot;</span><span class="p">)</span>
+    <span class="n">password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;DB connection password&quot;</span><span class="p">)</span>
+</code></pre></div>
 <p><code>essex-config</code> will look to populate <code>host</code> from <code>customer_db_host</code> when using the <code>EnvSource</code>.</p>
 
 

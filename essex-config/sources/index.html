@@ -572,46 +572,45 @@
 <li><code>KeyvaultSource(keyvault_name: str, use_env_var: bool = False)</code>: Fetches values from an Azure Key Vault. <code>use_env_var=True</code> allows specifying the Key Vault name via an environment variable.</li>
 </ol>
 <p>Example of multiple sources:</p>
-<pre><code class="language-python">from pydantic import BaseModel, Field
-from essex_config import config
-from essex_config.sources import EnvSource, FileSource, KeyVaultSource
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
+<span class="kn">from</span> <span class="nn">essex_config</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">from</span> <span class="nn">essex_config.sources</span> <span class="kn">import</span> <span class="n">EnvSource</span><span class="p">,</span> <span class="n">FileSource</span><span class="p">,</span> <span class="n">KeyVaultSource</span>
 
-class CustomerDatabase(Config):
-    &quot;&quot;&quot;Configuration for connecting to the Customer Database&quot;&quot;&quot;
-    host: str = Field(default=&quot;127.0.0.1&quot;, description=&quot;DB connection host&quot;)
-    port: int = Field(description=&quot;DB connection port&quot;)
-    password: str = Field(description=&quot;DB connection password&quot;)
+<span class="k">class</span> <span class="nc">CustomerDatabase</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for connecting to the Customer Database&quot;&quot;&quot;</span>
+    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;DB connection host&quot;</span><span class="p">)</span>
+    <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;DB connection port&quot;</span><span class="p">)</span>
+    <span class="n">password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;DB connection password&quot;</span><span class="p">)</span>
 
 
-if __name__ == &quot;__main__&quot;:
-    config = load_config(CustomerDatabase, sources=[
-        EnvSource(),
-        FileSource(&quot;SETTINGS_PATH&quot;, use_env_name=True),
-        KeyVaultSource(&quot;KEYVAULT_NAME&quot;, use_env_name=True),
-        FileSource(&quot;pyproject.toml&quot;)
-    ])
-    print(config)
-
-</code></pre>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="n">CustomerDatabase</span><span class="p">,</span> <span class="n">sources</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">EnvSource</span><span class="p">(),</span>
+        <span class="n">FileSource</span><span class="p">(</span><span class="s2">&quot;SETTINGS_PATH&quot;</span><span class="p">,</span> <span class="n">use_env_name</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="n">KeyVaultSource</span><span class="p">(</span><span class="s2">&quot;KEYVAULT_NAME&quot;</span><span class="p">,</span> <span class="n">use_env_name</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="n">FileSource</span><span class="p">(</span><span class="s2">&quot;pyproject.toml&quot;</span><span class="p">)</span>
+    <span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</code></pre></div>
 <p>Fields are populated from sources in the specified order.</p>
 <h2 id="custom-sources">Custom Sources</h2>
 <p>Define custom sources by implementing a <code>Source</code> object and overriding the <code>_get_value()</code> and <code>__contains__()</code> methods. Optionally override the <code>_format()</code> method to provide a custom formatting for the prefix and key.</p>
 <p>Example of a custom source:</p>
-<pre><code class="language-python">T = TypeVar(&quot;T&quot;)
+<div class="highlight"><pre><span></span><code><span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
 
-class MockSource(Source):
-    def __init__(self):
-        self.data = {
-            &quot;hello&quot;: &quot;world&quot;
-        }
+<span class="k">class</span> <span class="nc">MockSource</span><span class="p">(</span><span class="n">Source</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span>
+        <span class="p">}</span>
 
-    def _get_value(self, key: str, value_type: type[T]) -&gt; T:
-        return convert_to_type(self.data[key], value_type)
+    <span class="k">def</span> <span class="nf">_get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value_type</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">convert_to_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">value_type</span><span class="p">)</span>
 
-    def __contains__(self, key: str) -&gt; bool:
-        &quot;&quot;&quot;Check if the key is present in the source.&quot;&quot;&quot;
-        return key in self.data
-</code></pre>
+    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if the key is present in the source.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+</code></pre></div>
 
 
 
