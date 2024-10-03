@@ -21,6 +21,7 @@ pyright = "^1.1.366"
 coverage = "^7.5.3"
 numpy = "<2"
 pytest-asyncio = "^0.23.7"
+mkdocs = "^1.6.1"
 
 [build-system]
 requires = ["poetry-core"]
@@ -40,6 +41,9 @@ fix = "ruff  --preview check --fix ."
 fix_unsafe = "ruff check --preview --fix --unsafe-fixes ."
 format = ['_sort_imports', '_format_code']
 test = "pytest tests"
+
+serve_docs = "mkdocs serve"
+build_docs = "mkdocs build"
 
 _test_with_coverage = 'coverage run --source=reactivedataflow -m pytest tests/unit'
 _coverage_report = 'coverage report --fail-under=100 --show-missing --omit="reactivedataflow/nodes/node.py,reactivedataflow/types.py,reactivedataflow/config_provider.py,reactivedataflow/callbacks.py"'
