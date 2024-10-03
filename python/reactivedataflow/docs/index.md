@@ -20,20 +20,42 @@ Nodes are the heart of the system, and they are responsible for processing data 
 
 #### Input Nodes
 
-<img src="./images/input_node.png" height="300" title="Input Node"/>
+```mermaid
+flowchart LR
+    A[rx source observable] --> B((Input Node))
+    B --> |default output| C[consumer]
+    B --> |default output| D[consumer]
+    B --> |default output| E[consumer]
+```
 
 Input nodes are simple nodes that are initialized with a `reactivex` event stream, and emit data on a single output port.
 
 #### Output Nodes
 
-<img src="./images/output_node.png" height="250" title="Output Node"/>
+```mermaid
+flowchart LR
+    A((node)) --> | named output | B((Output Node))
+    B -->  C[graph reader]
+
+```
 
 Output nodes are simple nodes that are used to observe the output of a verb node. They are initialized with a reference to a verb node, and emit data on a single output port. 
 This is the primary mechanism for reading results from the processing graph.
 
 #### Verb Nodes
 
-<img src="./images/verb_node.png" height="350" title="Verb Node"/>
+```mermaid
+flowchart LR
+    A[named inputs] -->|x| B((Verb Node))
+    A[named inputs] -->|y| B((Verb Node))
+    A[named inputs] -->|z| B((Verb Node))
+    C[array input] --> |array input| B
+    D[configuration] --> |named static values| B
+    B --> |p| E[named outputs]
+    B --> |q| E[named outputs]
+    B --> |s| E[named outputs]
+``` 
+    
 
 Verb nodes are composed of a number of "ports" that are used to describe their inputs, outputs, and configuration properties. 
 
