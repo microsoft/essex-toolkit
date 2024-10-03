@@ -7,12 +7,11 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.10"
-essex-config = {path = "./essex-config"}
-reactivedataflow = {path = "./reactivedataflow"}
-fnllm = {path = "./fnllm"}
+essex-config = {path = "./python/essex-config"}
+reactivedataflow = {path = "./python/reactivedataflow"}
+fnllm = {path = "./python/fnllm"}
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.6.8"
 poethepoet = "^0.26.1"
 mkdocs-material = "^9.5.39"
 mkdocs-monorepo-plugin = "^1.1.0"
@@ -22,15 +21,5 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poe.tasks]
-_sort_imports = "ruff check --select I --fix . --preview"
-_ruff_check = 'ruff check . --preview'
-_format_code = "ruff format  . --preview"
-_format_check = 'ruff format . --check --preview'
-
-check = ['_format_check', '_ruff_check']
-fix = "ruff  --preview check --fix ."
-fix_unsafe = "ruff check --preview --fix --unsafe-fixes ."
-format = ['_sort_imports', '_format_code']
-
 serve_docs = "mkdocs serve"
 build_docs = "mkdocs build"
