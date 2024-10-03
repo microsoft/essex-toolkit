@@ -23,7 +23,6 @@ pytest = "^8.2.2"
 ruff = "^0.6.8"
 poethepoet = "^0.26.1"
 pyright = "^1.1.365"
-mkdocs-material = "^9.5.39"
 
 [build-system]
 requires = ["poetry-core"]
@@ -42,9 +41,6 @@ fix = "ruff  --preview check --fix ."
 fix_unsafe = "ruff check --preview --fix --unsafe-fixes ."
 format = ['_sort_imports', '_format_code']
 test = "pytest tests"
-
-serve_docs = "mkdocs serve"
-build_docs = "mkdocs build"
 
 _test_with_coverage = 'coverage run --source=essex_config -m pytest tests/unit'
 _coverage_report = 'coverage report --fail-under=100 --show-missing --omit="essex_config/doc_gen/__main__.py"'
