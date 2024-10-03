@@ -1,0 +1,17 @@
+site_name: Essex-Toolkit
+
+plugins:
+  - search
+theme:
+  name: material
+  features:
+    - content.code.copy
+    - content.code.select
+
+nav:
+  - Intro: index.md
+  - essex-config: '!include ./essex-config/mkdocs.yml'
+  - reactivedataflow: '!include ./reactivedataflow/mkdocs.yml'
+
+plugins:
+  - monorepo
