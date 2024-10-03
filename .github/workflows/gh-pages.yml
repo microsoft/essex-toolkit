@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-
 permissions:
   contents: write
 
@@ -24,7 +23,7 @@ jobs:
       - name: Use Node ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ env.NODE_VERSION }}}
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Use up Python ${{ env.PYTHON_VERSION }}
         uses: actions/setup-python@v2
@@ -64,6 +63,9 @@ jobs:
 
       - name: Copy Storybook to Python Docs
         run: cp -r javascript/stories/storybook-static site/storybook
+
+      - name: List Docsite Contents
+        run: find site
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.3.3
