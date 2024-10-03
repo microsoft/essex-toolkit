@@ -1,15 +1,15 @@
 name: gh-pages
-on:
-  push:
-    branches:
-      - main
-
+on: [push, pull_request]
+# on:
+#   push:
+#     branches:
+#       - main
 permissions:
   contents: write
 
 env:
   POETRY_VERSION: '1.8.3'
-  NODE_VERSION: '18.x'
+  NODE_VERSION: '20.x'
   PYTHON_VERSION: '3.12'
 
 jobs:
