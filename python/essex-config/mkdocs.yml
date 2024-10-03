@@ -1,0 +1,16 @@
+site_name: essex-config
+plugins:
+  - search
+theme:
+  name: material
+  features:
+    - content.code.copy
+    - content.code.select
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences:
+  
+repo_url: https://github.com/microsoft/essex-toolkit/tree/main/python/essex-config
+repo_name: essex-config
