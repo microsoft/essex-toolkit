@@ -6,6 +6,7 @@ javascript/*/dist/
 javascript/*/storybook-static/
 javascript/*/docsTemp/
 python/*/site/
+site/
 .swc/
 .turbo/
 
