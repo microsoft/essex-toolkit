@@ -4,6 +4,9 @@ plugins:
   - search
 theme:
   name: material
+  features:
+    - content.code.copy
+    - content.code.select
 markdown_extensions:
   - pymdownx.superfences:
       custom_fences:
