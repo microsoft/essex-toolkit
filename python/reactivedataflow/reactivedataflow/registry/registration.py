@@ -5,12 +5,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 
 from reactivedataflow.decorators import Decorator
-from reactivedataflow.nodes import (
-    EmitCondition,
-    FireCondition,
-    InputMode,
-    OutputMode,
-)
+from reactivedataflow.nodes import EmitCondition, FireCondition, InputMode, OutputMode
 from reactivedataflow.ports import Ports
 
 
