@@ -1,7 +1,5 @@
 site_name: Essex-Toolkit
-
-plugins:
-  - search
+  
 theme:
   name: material
   features:
@@ -14,4 +12,8 @@ nav:
   - reactivedataflow: '!include ./reactivedataflow/mkdocs.yml'
 
 plugins:
+  - search
   - monorepo
+
+repo_url: https://github.com/microsoft/essex-toolkit
+repo_name: essex-toolkit

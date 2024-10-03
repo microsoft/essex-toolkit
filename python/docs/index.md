@@ -6,9 +6,9 @@ See individual package README for specific information.
 
 ## Python Packages
 
-### [essex-config](essex-config/)
+### [essex-config](essex-config/index.md)
 A configuration library that allows for easy configuration of Python applications using environment variables, files, and Azure Key Vault.
 ### fnllm
 An LLM wrapper library that provides rate limiting, retry logic, caching, JSON model parsing, and more.
-### [reactivedataflow](reactivedataflow/)
+### [reactivedataflow](reactivedataflow/index.md)
 A library for creating reactive data flows in Python.
