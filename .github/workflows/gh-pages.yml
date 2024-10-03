@@ -9,7 +9,7 @@ permissions:
 
 env:
   POETRY_VERSION: '1.8.3'
-  NODE_VERSION: '20.x'
+  NODE_VERSION: '18.x'
   PYTHON_VERSION: '3.12'
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
       - name: Use Node ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ env.NODE_VERSION }}}
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Use up Python ${{ env.PYTHON_VERSION }}
         uses: actions/setup-python@v2
