@@ -64,6 +64,9 @@ jobs:
       - name: Copy Storybook to Python Docs
         run: cp -r javascript/stories/storybook-static site/storybook
 
+      - name: List Docsite Contents
+        run: find site
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
