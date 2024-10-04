@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../examples/">
       
       
       
@@ -270,48 +270,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../essex-config/annotations/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Field Annotations
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../essex-config/documentation/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Documentation Generation
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../essex-config/" class="md-nav__link">
         
   
@@ -338,6 +296,48 @@
   
   <span class="md-ellipsis">
     Sources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../essex-config/annotations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Field Annotations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../essex-config/documentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentation Generation
   </span>
   
 
@@ -398,11 +398,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../examples/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Examples
+    Getting Started
   </span>
   
 
@@ -419,11 +419,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../examples/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Getting Started
+    Examples
   </span>
   
 
@@ -729,40 +729,40 @@
 <p>Verbs are at the heart of <code>reactivedataflow</code>. Verbs are custom processing functions that react to input event streams and emit output event streams. Verbs are normally defined using <em>pure functions</em> which are annotated using the <code>@verb</code> decorator and the <code>Annotated</code> feature. This mechanism allows verbs to be used in other contexts as well, not just <code>reactivedataflow</code>, improving their utility and testability.</p>
 <p>At a base level, the system treats each verb as a function that accepts a <code>VerbInput</code> and returns a <code>VerbOutput</code>. The <code>verb</code> decorator and related annotations provide convenience mechanisms for adapting pure functions to fit into the execution model.</p>
 <h2 id="annotated-verbs-recommended">Annotated Verbs (recommended)</h2>
-<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Annotated</span>
-
-<span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">add</span><span class="p">(</span>
-    <span class="n">a</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()],</span> 
-    <span class="n">b</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()]</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Annotated</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">def</span> <span class="nf">add</span><span class="p">(</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">a</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()],</span> 
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">b</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()]</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 </code></pre></div>
 Input Options:</p>
 <ul>
 <li><code>required</code> <em>(bool, default=?)</em>: Whether this input is required. This is inferred from whether the argument has a default value.</li>
 </ul>
 <h2 id="raw-verbs">Raw Verbs</h2>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">VerbInput</span><span class="p">,</span> <span class="n">VerbOutput</span><span class="p">,</span> <span class="n">InputMode</span><span class="p">,</span> <span class="n">OutputMode</span>
-
-<span class="nd">@verb</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> 
-    <span class="n">input_mode</span><span class="o">=</span><span class="n">InputMode</span><span class="o">.</span><span class="n">Raw</span><span class="p">,</span> 
-    <span class="n">output_mode</span><span class="o">=</span><span class="n">OutputMode</span><span class="o">.</span><span class="n">Raw</span>
-<span class="p">)</span>
-<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">VerbInput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VerbOutput</span><span class="p">:</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="nb">input</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">input</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">VerbInput</span><span class="p">,</span> <span class="n">VerbOutput</span><span class="p">,</span> <span class="n">InputMode</span><span class="p">,</span> <span class="n">OutputMode</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nd">@verb</span><span class="p">(</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> 
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">input_mode</span><span class="o">=</span><span class="n">InputMode</span><span class="o">.</span><span class="n">Raw</span><span class="p">,</span> 
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">output_mode</span><span class="o">=</span><span class="n">OutputMode</span><span class="o">.</span><span class="n">Raw</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">VerbInput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VerbOutput</span><span class="p">:</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="nb">input</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">input</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]}</span>
 </code></pre></div>
 <h2 id="using-array-inputs">Using Array Inputs</h2>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">ArrayInput</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Annotated</span>
-
-<span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">add</span><span class="p">(</span>
-    <span class="n">inputs</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">ArrayInput</span><span class="p">(</span><span class="n">min_inputs</span><span class="o">=</span><span class="mi">2</span><span class="p">)]</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">ArrayInput</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Annotated</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">def</span> <span class="nf">add</span><span class="p">(</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">inputs</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">ArrayInput</span><span class="p">(</span><span class="n">min_inputs</span><span class="o">=</span><span class="mi">2</span><span class="p">)]</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
 </code></pre></div>
 <p>Array Input Options:</p>
 <ul>
@@ -773,97 +773,97 @@ Input Options:</p>
 <h2 id="using-explicit-port-definitions">Using Explicit Port Definitions</h2>
 <p>As an alternative to decorating function arguments, ports may be defined explicitly. 
 Each port has a name and maps into a parameter name.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Config</span>
-
-<span class="nd">@verb</span><span class="p">(</span>
-    <span class="s2">&quot;add&quot;</span><span class="p">,</span>
-    <span class="n">ports</span><span class="o">=</span><span class="p">[</span>
-        <span class="n">Input</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;input_1&quot;</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-        <span class="n">Input</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;input_2&quot;</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-        <span class="n">Config</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
-        <span class="n">Output</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;output&quot;</span><span class="p">),</span>
-    <span class="p">]</span>
-<span class="p">)</span>
-<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Config</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nd">@verb</span><span class="p">(</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="s2">&quot;add&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">ports</span><span class="o">=</span><span class="p">[</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="n">Input</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;input_1&quot;</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="n">Input</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;input_2&quot;</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="n">Config</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="n">Output</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;output&quot;</span><span class="p">),</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="p">]</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">)</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span>
 </code></pre></div>
 <h2 id="emitting-multiple-outputs">Emitting Multiple Outputs</h2>
 <p>When multiple outputs are desired, you can set the <code>output_mode</code> to <code>OutputMode.Tuple</code> and provide a list of output port names.</p>
-<div class="highlight"><pre><span></span><code><span class="nd">@verb</span><span class="p">(</span>
-    <span class="s2">&quot;twin_outputs&quot;</span><span class="p">,</span>
-    <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;output_1&quot;</span><span class="p">,</span> <span class="s2">&quot;output_2&quot;</span><span class="p">],</span>
-    <span class="n">output_mode</span><span class="o">=</span><span class="n">OutputMode</span><span class="o">.</span><span class="n">Tuple</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="k">def</span> <span class="nf">twin_outputs</span><span class="p">(</span>
-    <span class="n">x</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Input</span><span class="p">()],</span> 
-    <span class="n">y</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Input</span><span class="p">()]</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-    <span class="n">output_1</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="n">output_2</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="k">return</span> <span class="n">output_1</span><span class="p">,</span> <span class="n">output_2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@verb</span><span class="p">(</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="s2">&quot;twin_outputs&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;output_1&quot;</span><span class="p">,</span> <span class="s2">&quot;output_2&quot;</span><span class="p">],</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="n">output_mode</span><span class="o">=</span><span class="n">OutputMode</span><span class="o">.</span><span class="n">Tuple</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="k">def</span> <span class="nf">twin_outputs</span><span class="p">(</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="n">x</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Input</span><span class="p">()],</span> 
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="n">y</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Input</span><span class="p">()]</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="n">output_1</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="n">output_2</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="k">return</span> <span class="n">output_1</span><span class="p">,</span> <span class="n">output_2</span>
 </code></pre></div>
 <h2 id="using-a-custom-registry">Using a Custom Registry</h2>
 <p>There may be cases where you want to separate verb definitions from each other. This is most often used in testing. In these cases, verbs can be initialized with a custom registry instance. By default, a singleton registry is used.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Config</span><span class="p">,</span> <span class="n">VerbRegistry</span>
-
-<span class="n">registry</span> <span class="o">=</span> <span class="n">VerbRegistry</span><span class="p">()</span>
-<span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">registry</span><span class="o">=</span><span class="n">registry</span><span class="p">)</span>
-<span class="o">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Config</span><span class="p">,</span> <span class="n">VerbRegistry</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">registry</span> <span class="o">=</span> <span class="n">VerbRegistry</span><span class="p">()</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">registry</span><span class="o">=</span><span class="n">registry</span><span class="p">)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="o">...</span>
 </code></pre></div>
 <h2 id="overriding-a-defined-verb">Overriding a Defined Verb</h2>
 <p>Verbs are registered as their Python files are loaded. In situations where you need to override a verb definition, you can use the <code>override</code> parameter.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Config</span><span class="p">,</span> <span class="n">VerbRegistry</span>
-
-<span class="n">registry</span> <span class="o">=</span> <span class="n">VerbRegistry</span><span class="p">()</span>
-<span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">override</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="o">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Config</span><span class="p">,</span> <span class="n">VerbRegistry</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">registry</span> <span class="o">=</span> <span class="n">VerbRegistry</span><span class="p">()</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">override</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="o">...</span>
 </code></pre></div>
 <h2 id="adding-custom-adapters">Adding Custom Adapters</h2>
 <p>You can register decorator functions that are applied <em>before</em> any <code>reactivedataflow</code> decoration is applied. This is useful for adding custom behavior to verbs.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Config</span>
-
-<span class="k">def</span> <span class="nf">emit_telemetry</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">wrap_fn</span><span class="p">():</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calling </span><span class="si">{</span><span class="n">fn</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">fn</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">wrap_n</span>
-
-<span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">adapters</span><span class="o">=</span><span class="p">[</span><span class="n">emit_telemetry</span><span class="p">])</span>
-<span class="k">def</span> <span class="nf">add</span><span class="p">(</span>
-    <span class="n">a</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()],</span> 
-    <span class="n">b</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()]</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Config</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">def</span> <span class="nf">emit_telemetry</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="k">def</span> <span class="nf">wrap_fn</span><span class="p">():</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calling </span><span class="si">{</span><span class="n">fn</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>        <span class="k">return</span> <span class="n">fn</span><span class="p">()</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="k">return</span> <span class="n">wrap_n</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">adapters</span><span class="o">=</span><span class="p">[</span><span class="n">emit_telemetry</span><span class="p">])</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="k">def</span> <span class="nf">add</span><span class="p">(</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>    <span class="n">a</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()],</span> 
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    <span class="n">b</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()]</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 </code></pre></div>
 <h2 id="overriding-a-defined-verb_1">Overriding a Defined Verb</h2>
 <p>Verbs are registered as their Python files are loaded. In situations where you need to override a verb definition, you can use the <code>override</code> parameter.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Config</span><span class="p">,</span> <span class="n">VerbRegistry</span>
-
-<span class="n">registry</span> <span class="o">=</span> <span class="n">VerbRegistry</span><span class="p">()</span>
-<span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">override</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="o">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Config</span><span class="p">,</span> <span class="n">VerbRegistry</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">registry</span> <span class="o">=</span> <span class="n">VerbRegistry</span><span class="p">()</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="nd">@verb</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">override</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="o">...</span>
 </code></pre></div>
 <h2 id="fireemit-conditions">Fire/Emit Conditions</h2>
 <p>The <code>verb</code> API allows for users to define <em>firing</em> and <em>emitting</em> conditions. 
 These are predicate functions that operate on <code>VerbInput</code> and <code>VerbOutput</code> objects. </p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Config</span><span class="p">,</span> <span class="n">VerbCondition</span><span class="p">,</span> <span class="n">VerbInput</span>
-
-<span class="k">def</span> <span class="nf">fire_condition</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">VerbInput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="k">return</span> <span class="nb">input</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
-
-<span class="k">def</span> <span class="nf">emit_condition</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">VerbInput</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="n">VerbOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">output</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
-
-<span class="nd">@verb</span><span class="p">(</span>
-    <span class="s2">&quot;add&quot;</span><span class="p">,</span> 
-    <span class="n">fire_conditions</span><span class="o">=</span><span class="p">[</span><span class="n">fire_condition</span><span class="p">],</span>
-    <span class="n">emit_conditions</span><span class="o">=</span><span class="p">[</span><span class="n">emit_condition</span><span class="p">]</span>
-<span class="p">)</span>
-<span class="k">def</span> <span class="nf">add</span><span class="p">(</span>
-    <span class="n">a</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()],</span> 
-    <span class="n">b</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()]</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span> <span class="nn">reactivedataflow</span> <span class="kn">import</span> <span class="n">verb</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Config</span><span class="p">,</span> <span class="n">VerbCondition</span><span class="p">,</span> <span class="n">VerbInput</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">def</span> <span class="nf">fire_condition</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">VerbInput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="k">return</span> <span class="nb">input</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="k">def</span> <span class="nf">emit_condition</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">VerbInput</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="n">VerbOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="k">return</span> <span class="n">output</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="nd">@verb</span><span class="p">(</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    <span class="s2">&quot;add&quot;</span><span class="p">,</span> 
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    <span class="n">fire_conditions</span><span class="o">=</span><span class="p">[</span><span class="n">fire_condition</span><span class="p">],</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>    <span class="n">emit_conditions</span><span class="o">=</span><span class="p">[</span><span class="n">emit_condition</span><span class="p">]</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="p">)</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="k">def</span> <span class="nf">add</span><span class="p">(</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>    <span class="n">a</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()],</span> 
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>    <span class="n">b</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Input</span><span class="p">()]</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 </code></pre></div>
 
 
@@ -894,7 +894,7 @@ These are predicate functions that operate on <code>VerbInput</code> and <code>V
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Getting Started">
+          <a href="../examples/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Examples">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -904,7 +904,7 @@ These are predicate functions that operate on <code>VerbInput</code> and <code>V
                 Previous
               </span>
               <div class="md-ellipsis">
-                Getting Started
+                Examples
               </div>
             </div>
           </a>
