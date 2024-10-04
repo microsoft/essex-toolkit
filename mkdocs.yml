@@ -33,6 +33,9 @@ extra:
 extra_javascript:
   - "scripts/create_cookie_banner.js"
 markdown_extensions:
+
+  - pymdownx.highlight:
+      anchor_linenums: true
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
