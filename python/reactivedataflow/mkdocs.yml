@@ -1,1 +1,5 @@
 site_name: reactivedataflow
+nav:
+  - index.md
+  - examples.md
+  - verbs.md

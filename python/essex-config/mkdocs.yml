@@ -1,1 +1,6 @@
 site_name: essex-config
+nav:
+  - index.md
+  - sources.md
+  - annotations.md
+  - documentation.md
