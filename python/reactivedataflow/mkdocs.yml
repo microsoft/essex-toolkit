@@ -1,18 +1,5 @@
 site_name: reactivedataflow
-extra_css: [index.css]
-plugins:
-  - search
-theme:
-  name: material
-  features:
-    - content.code.copy
-    - content.code.select
-markdown_extensions:
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
-
-repo_url: https://github.com/microsoft/essex-toolkit/tree/main/python/reactivedataflow
-repo_name: reactivedataflow
+nav:
+  - index.md
+  - examples.md
+  - verbs.md
