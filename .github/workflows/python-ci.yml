@@ -12,6 +12,28 @@ env:
   UV_VERSION: "0.4.17"
 
 jobs:
+  docs_build:
+    runs-on: ubuntu-latest
+    env:
+      PYTHON_VERSION: '3.12'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python ${{ env.PYTHON_VERSION}}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON_VERSION}}
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
+        with:
+          version: ${{ env.UV_VERSION }}
+          
+      - name: Essex-Toolkit - Build Docs
+        shell: bash
+        run: uv run poe build_docs
+
   build:
     runs-on: ubuntu-latest
     strategy:

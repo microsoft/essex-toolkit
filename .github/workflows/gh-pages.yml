@@ -3,9 +3,13 @@ on:
   push:
     branches:
       - main
-
 permissions:
   contents: write
+
+env:
+  POETRY_VERSION: '1.8.3'
+  NODE_VERSION: '18.x'
+  PYTHON_VERSION: '3.12'
 
 jobs:
   build:
@@ -16,10 +20,15 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Use Node 18.x
+      - name: Use Node ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
-          node-version: 18.x
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Use up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -34,14 +43,33 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - run: yarn install
-        name: Install dependencies
+        name: yarn install
 
       - run: yarn bundle:storybook
         name: bundle storybook
+      
+      - name: Install Poetry ${{ env.POETRY_VERSION }}
+        uses: abatilo/actions-poetry@v2.1.6
+        with:
+          poetry-version: ${{ env.POETRY_VERSION }}
+
+      - name: poetry intsall
+        shell: bash
+        run: poetry install
+  
+      - name: mkdocs build
+        shell: bash
+        run: poetry run poe build_docs
+
+      - name: Copy Storybook to Python Docs
+        run: cp -r javascript/stories/storybook-static site/storybook
+
+      - name: List Docsite Contents
+        run: find site
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
           branch: gh-pages
-          folder: javascript/stories/storybook-static
+          folder: site
           clean: true

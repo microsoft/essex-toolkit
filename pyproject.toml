@@ -1,7 +1,24 @@
 [project]
 name = "essex-toolkit"
-version = "0.1.0"
+description = "Essex Toolkit python libraries."
+version = "0.0.5"
 requires-python = ">=3.10"
+authors = [
+    { name = "Andres Morales", email = "andresmor@microsoft.com" },
+    { name = "Chris Trevino", email = "chtrevin@microsoft.com" }, 
+    { name = "Rodrigo Racanicci", email = "rracanicci@microsoft.com" }
+]
 
 [tool.uv.workspace]
 members = ["python/*"]
+
+[tool.uv]
+dev-dependencies = [
+		"poethepoet>=0.26.1",
+		"mkdocs-material>=9.5.39",
+		"mkdocs-monorepo-plugin>=1.1.0"
+]
+
+[tool.poe.tasks]
+serve_docs = "mkdocs serve"
+build_docs = "mkdocs build"
