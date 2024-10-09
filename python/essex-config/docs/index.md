@@ -43,3 +43,23 @@ nested_config = load_config(NestedConfiguration)
 ```
 
 `load_config()` populates every field, including `nested_config.nested.inner_hello`. The default prefix for every field in `Inner` is `nested`, which can be changed with `Annotated[Inner, Prefixed("new_prefix")]`.
+
+
+## String Interpolation
+
+### Environment Variables
+
+For configuration files, environment variables are used to fill string templates. For example, if your config contains `${TEST_VALUE}`, the value is fetched from the TEST_VALUE environment variable. This also supports lists and dictionaries, such as `["${TEST_VALUE}", "world"]` and `{"key": "${TEST_VALUE}", "key2": "world"}`.
+
+
+### Self Configuration Reference
+
+Self-reference works by replacing values from the same configuration source it is reading. For example, if your config contains:
+```json
+{
+    "host": "localhost",
+    "port": 8080,
+    "url": "http://${self.host}:${self.port}"
+}
+```
+The url gets populated with the host and port defined in the source.

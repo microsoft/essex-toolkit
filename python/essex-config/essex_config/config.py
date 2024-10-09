@@ -3,14 +3,7 @@
 import os
 from functools import cache
 from types import UnionType
-from typing import (
-    Any,
-    TypeVar,
-    Union,
-    cast,
-    get_args,
-    get_origin,
-)
+from typing import Any, TypeVar, Union, cast, get_args, get_origin
 
 from pydantic import BaseModel
 from pydantic_core import PydanticUndefined

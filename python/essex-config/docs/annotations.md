@@ -51,3 +51,54 @@ class CustomerDatabase(BaseModel):
 ```
 
 `essex-config` will look to populate `host` from `customer_db_host` when using the `EnvSource`.
+
+## Parser
+
+You can use custom parsers to handle specific data formats. For example:
+
+```python
+class CustomParserConfig(BaseModel):
+    custom_parser: Annotated[list[int], Parser(json_list_parser)]
+
+config = load_config(CustomParserConfig)
+print(config.custom_parser)
+```
+
+Essex-config offers `json_list_parser` and `plain_text_list_parser` by default from `essex_config.sources.utils`. You can also create your own parsers by providing a function that takes a string and a type as arguments and returns an instance of that type.
+
+## Updatable
+
+The Updatable annotation indicates that the variable can be updated by other sources. For example:
+
+```python
+class UpdatableConfig(BaseModel):
+    value: Annotated[dict[str, Any], Updatable(lambda x, y: {**x, **y})]
+
+config = load_config(
+    UpdatableConfig,
+    sources=[
+        ArgSource(value={"a": 1}),
+        ArgSource(value={"b": 2}),
+        ArgSource(value={"a": 3}),
+    ],
+)
+print(config.value)
+```
+
+In this case, Updatable gets a function that defines how to update the variable and the `config.value` will contain:
+
+```python
+{
+    "a": 3,
+    "b": 2
+}
+```
+
+Without the Updatable annotation the values would be:
+
+```python
+{
+    "a": 1,
+    "b": 2
+}
+```
