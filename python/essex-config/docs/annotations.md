@@ -93,3 +93,12 @@ In this case, Updatable gets a function that defines how to update the variable 
     "b": 2
 }
 ```
+
+Without the Updatable annotation the values would be:
+
+```python
+{
+    "a": 1,
+    "b": 2
+}
+```
