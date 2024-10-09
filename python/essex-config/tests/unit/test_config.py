@@ -57,7 +57,7 @@ class MockSource(Source):
             "port": 8080,
             "url": "https://${self.host}:${self.port}",
             "url_list": ["https://${self.host}:${self.port}", "world"],
-            "url_dict": {"key": "https://${self.host}:${self.port}", "key2": "world"},
+            "url_dict": {"key": "${self.url}", "key2": "world"},
             "failed_url": "${self.unknown}",
         }
         super().__init__(prefix)

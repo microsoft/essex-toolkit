@@ -62,6 +62,8 @@ class Source(ABC):
                     match_str,
                     self.get_value(config_value, str, prefix),
                 )
+                if re.search(SELF_REF_REGEX, value):
+                    value = self._populate_self_reference(value, prefix)
             except KeyError as keyerror:
                 msg = f"Value for {match.group()} is required and not found in current config source."
                 raise ValueError(msg) from keyerror
@@ -72,10 +74,10 @@ class Source(ABC):
             case str():
                 return self._populate_self_reference(value, prefix)
             case list():
-                return [self._populate_self_reference(item, prefix) for item in value]
+                return [self._parse_self_reference(item, prefix) for item in value]
             case dict():
                 return {
-                    key: self._populate_self_reference(val, prefix)
+                    key: self._parse_self_reference(val, prefix)
                     for key, val in value.items()
                 }
             case _:
