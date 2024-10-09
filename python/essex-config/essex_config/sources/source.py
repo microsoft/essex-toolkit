@@ -67,7 +67,7 @@ class Source(ABC):
                 raise ValueError(msg) from keyerror
         return value
 
-    def _parse_self_reference(self, value: Any, prefix: str) -> str:
+    def _parse_self_reference(self, value: Any, prefix: str) -> Any:
         match value:
             case str():
                 return self._populate_self_reference(value, prefix)
