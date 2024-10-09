@@ -337,6 +337,39 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#string-interpolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      String Interpolation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="String Interpolation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#self-configuration-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Self Configuration Reference
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -565,6 +598,39 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#string-interpolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      String Interpolation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="String Interpolation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#self-configuration-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Self Configuration Reference
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -615,6 +681,18 @@
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="n">nested_config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="n">NestedConfiguration</span><span class="p">)</span>
 </code></pre></div>
 <p><code>load_config()</code> populates every field, including <code>nested_config.nested.inner_hello</code>. The default prefix for every field in <code>Inner</code> is <code>nested</code>, which can be changed with <code>Annotated[Inner, Prefixed("new_prefix")]</code>.</p>
+<h2 id="string-interpolation">String Interpolation</h2>
+<h3 id="environment-variables">Environment Variables</h3>
+<p>For configuration files, environment variables are used to fill string templates. For example, if your config contains <code>${TEST_VALUE}</code>, the value is fetched from the TEST_VALUE environment variable. This also supports lists and dictionaries, such as <code>["${TEST_VALUE}", "world"]</code> and <code>{"key": "${TEST_VALUE}", "key2": "world"}</code>.</p>
+<h3 id="self-configuration-reference">Self Configuration Reference</h3>
+<p>Self-reference works by replacing values from the same configuration source it is reading. For example, if your config contains:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">&quot;host&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8080</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://${self.host}:${self.port}&quot;</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
+</code></pre></div>
+The url gets populated with the host and port defined in the source.</p>
 
 
 
