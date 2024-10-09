@@ -53,6 +53,9 @@ class MockSource(Source):
             "env_dict": '{"key": "${TEST_VALUE}", "key2": "world"}',
             "escaped_template_str": "$${DO_NOT_REPLACE}",
             "nested.env_var": "${TEST_VALUE}",
+            "host": "localhost",
+            "port": 8080,
+            "url": "https://${self.host}:${self.port}",
         }
         super().__init__(prefix)
 
@@ -517,5 +520,35 @@ def test_use_file_source_after_env_with_prefix():
         ],
     )
     assert basic_config.test_value
+
+    assert isinstance(basic_config, BasicConfiguration)
+
+
+def test_self_reference_in_template():
+    class BasicConfiguration(BaseModel):
+        url: str
+
+    basic_config = load_config(BasicConfiguration, sources=[MockSource()])
+    assert basic_config.url == "https://localhost:8080"
+
+    assert isinstance(basic_config, BasicConfiguration)
+
+
+def test_self_reference_yaml():
+    class BasicConfiguration(BaseModel):
+        url: str
+        port2: int
+
+    yaml_file = (Path(__file__).parent / ".." / "test.yaml").resolve()
+
+    basic_config = load_config(
+        BasicConfiguration,
+        sources=[
+            EnvSource(prefix="TEST"),
+            FileSource(file_path=yaml_file),
+        ],
+    )
+    assert basic_config.url == "https://localhost:8080"
+    assert isinstance(basic_config.port2, int)
 
     assert isinstance(basic_config, BasicConfiguration)
