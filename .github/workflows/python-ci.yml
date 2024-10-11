@@ -9,8 +9,7 @@ on:
       - '**/*.toml'
       - .github/workflows/python-ci.yml
 env:
-  UV_VERSION: "0.4.20"
-  UV_CACHE_DIR: ".uv_cache"
+  UV_VERSION: "0.4.20"  
 
 jobs:
   docs_build:
@@ -55,19 +54,9 @@ jobs:
         with:
           version: ${{ env.UV_VERSION }}
 
-      - uses: actions/cache@v2
-        id: uv-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{env.UV_CACHE_DIR}}
-          key: ${{ runner.os }}-uv-${{ matrix.python-version}}-${{ hashFiles('**/uv.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-uv-${{ matrix.python-version}}
-
       - name: Install Dependencies
         run: uv sync --locked
-        env:
-          UV_CACHE_DIR: ${{env.UV_CACHE_DIR}}
-
+      
       - name: Install Azurite
         id: azuright
         uses: potatoqualitee/azuright@v1.1
