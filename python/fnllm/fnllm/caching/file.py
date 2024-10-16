@@ -21,7 +21,7 @@ class FileCache(Cache):
             cache_path = Path(cache_path)
 
         self._cache_path = cache_path
-        self._cache_path.mkdir(exist_ok=True)
+        self._cache_path.mkdir(exist_ok=True, parents=True)
         self._encoding = encoding or "utf-8"
 
     @property
