@@ -3,7 +3,7 @@
 import os
 import re
 from pathlib import Path
-from typing import Annotated, Any, TypeVar
+from typing import Annotated, Any, Literal, TypeVar
 from unittest import mock
 
 import pytest
@@ -577,3 +577,18 @@ def test_missing_self_reference():
                 MockSource(),
             ],
         )
+
+
+def test_literal_value():
+    class SampleModel(BaseModel, frozen=True, extra="allow", protected_namespaces=()):
+        true_value: Literal[True] = Field(default=True)
+        string_value: Literal["Hello"] = Field(default="Hello")
+        int_value: Literal[1] = Field(default=1)
+        none_value: Literal[None] = Field(default=None)
+
+    sample_config = load_config(SampleModel, sources=[MockSource()])
+
+    assert sample_config.true_value
+    assert sample_config.string_value == "Hello"
+    assert sample_config.int_value == 1
+    assert sample_config.none_value is None
