@@ -3,7 +3,7 @@
 import os
 import re
 from pathlib import Path
-from typing import Annotated, Any, TypeVar
+from typing import Annotated, Any, Literal, TypeVar
 from unittest import mock
 
 import pytest
@@ -577,3 +577,35 @@ def test_missing_self_reference():
                 MockSource(),
             ],
         )
+
+
+def test_literal_value():
+    yaml_file = (Path(__file__).parent / ".." / "test.yaml").resolve()
+
+    class SampleModel(BaseModel, frozen=True, extra="allow", protected_namespaces=()):
+        true_value: Literal[True] = Field(default=True)
+        string_value: Literal["Hello"] = Field(default="Hello")
+        int_value: Literal[1] = Field(default=1)
+        none_value: Literal[None] = Field(default=None)
+        sample: Literal["sample", 1] = Field(default="sample")
+
+    sample_config = load_config(SampleModel, sources=[FileSource(file_path=yaml_file)])
+
+    assert sample_config.true_value
+    assert sample_config.string_value == "Hello"
+    assert sample_config.int_value == 1
+    assert sample_config.none_value is None
+    assert sample_config.sample in ["sample", 1]
+
+
+def test_wrong_type_literal():
+    yaml_file = (Path(__file__).parent / ".." / "test.yaml").resolve()
+
+    class SampleModel(BaseModel, frozen=True, extra="allow", protected_namespaces=()):
+        wrong_type: Literal[80]
+
+    with pytest.raises(
+        ValueError,
+        match=re.escape("Cannot convert [hello] to type [typing.Literal[80]]."),
+    ):
+        load_config(SampleModel, sources=[FileSource(yaml_file)])
