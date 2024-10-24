@@ -9,7 +9,7 @@ on:
       - '**/*.toml'
       - .github/workflows/python-ci.yml
 env:
-  POETRY_VERSION: '1.8.3'
+  UV_VERSION: "0.4.20"  
 
 jobs:
   docs_build:
@@ -25,18 +25,14 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION}}
 
-      - name: Install Poetry ${{ env.POETRY_VERSION }}
-        uses: abatilo/actions-poetry@v2.1.6
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
         with:
-          poetry-version: ${{ env.POETRY_VERSION }}
-
-      - name: Essex-Toolkit Install dependencies
-        shell: bash
-        run: poetry install
-
+          version: ${{ env.UV_VERSION }}
+          
       - name: Essex-Toolkit - Build Docs
         shell: bash
-        run: poetry run poe build_docs
+        run: uv run poe build_docs
 
   build:
     runs-on: ubuntu-latest
@@ -53,16 +49,14 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install Poetry ${{ env.POETRY_VERSION }}
-        uses: abatilo/actions-poetry@v2.1.6
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
         with:
-          poetry-version: ${{ env.POETRY_VERSION }}
+          version: ${{ env.UV_VERSION }}
 
-      - name: ${{ matrix.project }} - Install dependencies
-        shell: bash
-        working-directory: ./python/${{ matrix.project }}
-        run: poetry install
-
+      - name: Install Dependencies
+        run: uv sync --locked
+      
       - name: Install Azurite
         id: azuright
         uses: potatoqualitee/azuright@v1.1
@@ -70,9 +64,9 @@ jobs:
       - name: ${{ matrix.project }} - Check
         working-directory: ./python/${{ matrix.project }}
         run: |
-          poetry run poe check
+          uv run poe check
 
       - name: ${{ matrix.project }} - Test
         working-directory: ./python/${{ matrix.project }}
         run: |
-          poetry run poe test_coverage
+          uv run poe test_coverage
