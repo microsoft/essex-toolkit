@@ -1,1 +1,7 @@
 test_value: True
+host: localhost
+port: 8080
+url: https://${self.host}:${self.port}
+port2: ${self.port}
+sample: 1
+wrong_type: "hello"

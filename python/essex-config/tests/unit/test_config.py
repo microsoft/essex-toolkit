@@ -3,7 +3,7 @@
 import os
 import re
 from pathlib import Path
-from typing import Annotated, Any, TypeVar
+from typing import Annotated, Any, Literal, TypeVar
 from unittest import mock
 
 import pytest
@@ -53,6 +53,12 @@ class MockSource(Source):
             "env_dict": '{"key": "${TEST_VALUE}", "key2": "world"}',
             "escaped_template_str": "$${DO_NOT_REPLACE}",
             "nested.env_var": "${TEST_VALUE}",
+            "host": "localhost",
+            "port": 8080,
+            "url": "https://${self.host}:${self.port}",
+            "url_list": ["https://${self.host}:${self.port}", "world"],
+            "url_dict": {"key": "${self.url}", "key2": "world"},
+            "failed_url": "${self.unknown}",
         }
         super().__init__(prefix)
 
@@ -519,3 +525,87 @@ def test_use_file_source_after_env_with_prefix():
     assert basic_config.test_value
 
     assert isinstance(basic_config, BasicConfiguration)
+
+
+def test_self_reference_in_template():
+    class BasicConfiguration(BaseModel):
+        url: str
+        url_list: list[str]
+        url_dict: dict[str, str]
+
+    basic_config = load_config(BasicConfiguration, sources=[MockSource()])
+    assert basic_config.url == "https://localhost:8080"
+    assert basic_config.url_list == ["https://localhost:8080", "world"]
+    assert basic_config.url_dict == {"key": "https://localhost:8080", "key2": "world"}
+
+    assert isinstance(basic_config, BasicConfiguration)
+
+
+def test_self_reference_yaml():
+    class BasicConfiguration(BaseModel):
+        url: str
+        port2: int
+
+    yaml_file = (Path(__file__).parent / ".." / "test.yaml").resolve()
+
+    basic_config = load_config(
+        BasicConfiguration,
+        sources=[
+            EnvSource(prefix="TEST"),
+            FileSource(file_path=yaml_file),
+        ],
+    )
+    assert basic_config.url == "https://localhost:8080"
+    assert isinstance(basic_config.port2, int)
+
+    assert isinstance(basic_config, BasicConfiguration)
+
+
+def test_missing_self_reference():
+    class BasicConfiguration(BaseModel):
+        failed_url: str
+
+    with pytest.raises(
+        ValueError,
+        match=re.escape(
+            "Value for ${self.unknown} is required and not found in current config source."
+        ),
+    ):
+        load_config(
+            BasicConfiguration,
+            sources=[
+                MockSource(),
+            ],
+        )
+
+
+def test_literal_value():
+    yaml_file = (Path(__file__).parent / ".." / "test.yaml").resolve()
+
+    class SampleModel(BaseModel, frozen=True, extra="allow", protected_namespaces=()):
+        true_value: Literal[True] = Field(default=True)
+        string_value: Literal["Hello"] = Field(default="Hello")
+        int_value: Literal[1] = Field(default=1)
+        none_value: Literal[None] = Field(default=None)
+        sample: Literal["sample", 1] = Field(default="sample")
+
+    sample_config = load_config(SampleModel, sources=[FileSource(file_path=yaml_file)])
+
+    assert sample_config.true_value
+    assert sample_config.string_value == "Hello"
+    assert sample_config.int_value == 1
+    assert sample_config.none_value is None
+    assert sample_config.sample in ["sample", 1]
+
+
+def test_wrong_type_literal():
+    yaml_file = (Path(__file__).parent / ".." / "test.yaml").resolve()
+
+    class SampleModel(BaseModel, frozen=True, extra="allow", protected_namespaces=()):
+        wrong_type: Literal[80]
+
+    with pytest.raises(
+        ValueError,
+        match=re.escape("Cannot convert [hello] to type [typing.Literal[80]]."),
+    ):
+        load_config(SampleModel, sources=[FileSource(yaml_file)])

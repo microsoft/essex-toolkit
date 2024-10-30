@@ -12,7 +12,7 @@ Example of multiple sources:
 
 ```python
 from pydantic import BaseModel, Field
-from essex_config import config
+from essex_config import load_config
 from essex_config.sources import EnvSource, FileSource, KeyVaultSource
 
 class CustomerDatabase(Config):
