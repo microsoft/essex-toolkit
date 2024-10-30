@@ -131,6 +131,7 @@ class BaseLLM(
 
         Leave signature alone as prompt, **kwargs.
         """
+        await self._events.on_execute_llm()
         output = await self._execute_llm(prompt, **kwargs)
         result: LLMOutput[TOutput, TJsonModel, THistoryEntry] = LLMOutput(output=output)
 
