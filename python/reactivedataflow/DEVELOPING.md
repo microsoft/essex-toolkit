@@ -3,29 +3,29 @@
 ## Prerequisites
 
 * Python 3.10+
-* [Poetry 1.8+](https://python-poetry.org/)
+* [uv](https://docs.astral.sh/uv/getting-started/installation/)
 
 ## Development Scripts
 
 ```sh
 # Install dependencies
-poetry install
+uv sync
 
 # Run tests
-poetry run poe test
+uv run poe test
 
 # Run tests with coverage
-poetry run poe test_coverage
+uv run poe test_coverage
 
 # Run static checks
-poetry run poe check
+uv run poe check
 
 # Perform automated fixes
-poetry run poe fix
+uv run poe fix
 
 # Perform unsafe automated fixes
-poetry run poe fix_unsafe
+uv run poe fix_unsafe
 
 # Format the code
-poetry run poe format
+uv run poe format
 ```

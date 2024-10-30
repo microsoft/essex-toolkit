@@ -41,9 +41,9 @@
     "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
     "*.jsx": "${capture}.js",
     "package.json": ".npmignore, turbo.json, biome.json, tsconfig.json, tsconfig.*.json, jest.config.js, rome.json, .yarnrc.yml, yarn.lock, .pnp.cjs, .pnp.loader.mjs",
-    "pyproject.toml": "uv.lock, poetry.lock, ruff.toml, mkdocs.yml",
+    "pyproject.toml": "uv.lock, ruff.toml, mkdocs.yml",
     ".gitignore": ".gitattributes",
     "README.md": "SECURITY.md, SUPPORT.md, CODE_OF_CONDUCT.md, LICENSE"
   },
-	"ruff.configuration": "./ruff.toml"  
+	"ruff.configuration": "./ruff.toml"
 }
