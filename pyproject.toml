@@ -1,28 +1,23 @@
-[tool.poetry]
+[project]
 name = "essex-toolkit"
-version = "0.0.5"
-authors = [
-    "Andres Morales <andresmor@microsoft.com>", 
-    "Chris Trevino <chtrevin@microsoft.com>", 
-    "Rodrigo Racanicci <rracanicci@microsoft.com>"
-]
 description = "Essex Toolkit python libraries."
-package-mode = false
+version = "0.0.5"
+requires-python = ">=3.10"
+authors = [
+    { name = "Andres Morales", email = "andresmor@microsoft.com" },
+    { name = "Chris Trevino", email = "chtrevin@microsoft.com" }, 
+    { name = "Rodrigo Racanicci", email = "rracanicci@microsoft.com" }
+]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-essex-config = {path = "./python/essex-config"}
-reactivedataflow = {path = "./python/reactivedataflow"}
-fnllm = {path = "./python/fnllm"}
+[tool.uv.workspace]
+members = ["python/*"]
 
-[tool.poetry.group.dev.dependencies]
-poethepoet = "^0.26.1"
-mkdocs-material = "^9.5.39"
-mkdocs-monorepo-plugin = "^1.1.0"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv]
+dev-dependencies = [
+		"poethepoet>=0.26.1",
+		"mkdocs-material>=9.5.39",
+		"mkdocs-monorepo-plugin>=1.1.0"
+]
 
 [tool.poe.tasks]
 serve_docs = "mkdocs serve"

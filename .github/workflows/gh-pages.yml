@@ -7,9 +7,9 @@ permissions:
   contents: write
 
 env:
-  POETRY_VERSION: '1.8.3'
   NODE_VERSION: '18.x'
   PYTHON_VERSION: '3.12'
+  UV_VERSION: '0.4.20'
 
 jobs:
   build:
@@ -48,18 +48,19 @@ jobs:
       - run: yarn bundle:storybook
         name: bundle storybook
       
-      - name: Install Poetry ${{ env.POETRY_VERSION }}
-        uses: abatilo/actions-poetry@v2.1.6
+      
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
         with:
-          poetry-version: ${{ env.POETRY_VERSION }}
+          version: ${{ env.UV_VERSION }}
 
-      - name: poetry intsall
+      - name: Install Dependencies
         shell: bash
-        run: poetry install
+        run: uv sync --locked
   
       - name: mkdocs build
         shell: bash
-        run: poetry run poe build_docs
+        run: uv run poe build_docs
 
       - name: Copy Storybook to Python Docs
         run: cp -r javascript/stories/storybook-static site/storybook

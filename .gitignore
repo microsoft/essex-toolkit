@@ -32,6 +32,7 @@ licenses.txt
 .pnp.*
 
 # Python Artifacts
+.venv/
 __pycache__/
 output/
 python/*/dist/
