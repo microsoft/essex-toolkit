@@ -5,9 +5,8 @@
 from fnllm.caching.base import Cache
 from fnllm.events.base import LLMEvents
 from fnllm.openai.config import OpenAIConfig
-from fnllm.openai.llm.embeddings import OpenAIEmbeddingsLLM
 from fnllm.openai.llm.services.usage_extractor import OpenAIUsageExtractor
-from fnllm.openai.types.client import OpenAIClient, OpenAIEmbeddingsLLMInstance
+from fnllm.openai.types.client import OpenAIClient, OpenAIEmbeddingsLLM
 from fnllm.services.cache_interactor import CacheInteractor
 from fnllm.services.variable_injector import VariableInjector
 
@@ -21,7 +20,7 @@ def create_openai_embeddings_llm(
     client: OpenAIClient | None = None,
     cache: Cache | None = None,
     events: LLMEvents | None = None,
-) -> OpenAIEmbeddingsLLMInstance:
+) -> OpenAIEmbeddingsLLM:
     """Create an OpenAI embeddings LLM."""
     operation = "embedding"
 

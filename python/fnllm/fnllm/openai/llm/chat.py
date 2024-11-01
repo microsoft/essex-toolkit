@@ -14,8 +14,8 @@ from fnllm.openai.types.chat.io import (
 from fnllm.openai.types.chat.parameters import OpenAIChatParameters
 from fnllm.openai.types.client import (
     OpenAIChatLLM,
-    OpenAIStreamingChatLLMInstance,
-    OpenAITextChatLLMInstance,
+    OpenAIStreamingChatLLM,
+    OpenAITextChatLLM,
 )
 from fnllm.types.generics import TJsonModel
 from fnllm.types.io import LLMInput, LLMOutput
@@ -27,8 +27,8 @@ class OpenAIChatLLMImpl(OpenAIChatLLM):
     def __init__(
         self,
         *,
-        text_chat_llm: OpenAITextChatLLMInstance,
-        streaming_chat_llm: OpenAIStreamingChatLLMInstance,
+        text_chat_llm: OpenAITextChatLLM,
+        streaming_chat_llm: OpenAIStreamingChatLLM,
     ):
         """Create a new OpenAI Chat Facade."""
         self._text_chat_llm = text_chat_llm

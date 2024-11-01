@@ -12,9 +12,9 @@ from .factories import (
 from .roles import OpenAIChatRole
 from .types.client import (
     OpenAIClient,
-    OpenAIEmbeddingsLLMInstance,
-    OpenAIStreamingChatLLMInstance,
-    OpenAITextChatLLMInstance,
+    OpenAIEmbeddingsLLM,
+    OpenAIStreamingChatLLM,
+    OpenAITextChatLLM,
 )
 
 # TODO: include type aliases?
@@ -24,9 +24,9 @@ __all__ = [
     "OpenAIClient",
     "OpenAIConfig",
     "OpenAIConfig",
-    "OpenAIEmbeddingsLLMInstance",
-    "OpenAIStreamingChatLLMInstance",
-    "OpenAITextChatLLMInstance",
+    "OpenAIEmbeddingsLLM",
+    "OpenAIStreamingChatLLM",
+    "OpenAITextChatLLM",
     "PublicOpenAIConfig",
     "create_openai_chat_llm",
     "create_openai_client",

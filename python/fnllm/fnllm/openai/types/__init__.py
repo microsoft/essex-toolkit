@@ -42,8 +42,8 @@ from .chat.parameters import OpenAIChatParameters
 from .client import (
     OpenAIChatLLM,
     OpenAIClient,
-    OpenAIEmbeddingsLLMInstance,
-    OpenAITextChatLLMInstance,
+    OpenAIEmbeddingsLLM,
+    OpenAITextChatLLM,
 )
 from .embeddings.io import OpenAIEmbeddingsInput, OpenAIEmbeddingsOutput
 from .embeddings.parameters import OpenAIEmbeddingsParameters
@@ -76,7 +76,7 @@ __all__ = [
     "OpenAIEmbeddingModel",
     "OpenAIEmbeddingUsageModel",
     "OpenAIEmbeddingsInput",
-    "OpenAIEmbeddingsLLMInstance",
+    "OpenAIEmbeddingsLLM",
     "OpenAIEmbeddingsOutput",
     "OpenAIEmbeddingsParameters",
     "OpenAIFunctionCallCreateParam",
@@ -88,5 +88,5 @@ __all__ = [
     "OpenAIFunctionParam",
     "OpenAIResponseFormatCreateParam",
     "OpenAIStreamingChatOutput",
-    "OpenAITextChatLLMInstance",
+    "OpenAITextChatLLM",
 ]
