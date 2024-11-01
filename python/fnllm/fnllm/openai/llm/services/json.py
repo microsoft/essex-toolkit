@@ -8,7 +8,6 @@ from fnllm.openai.types.chat.io import (
     OpenAIChatOutput,
 )
 from fnllm.openai.types.chat.parameters import OpenAIChatParameters
-from fnllm.services.errors import FailedToGenerateValidJsonError
 from fnllm.services.json import (
     JsonHandler,
     JsonMarshaler,
@@ -16,7 +15,7 @@ from fnllm.services.json import (
     JsonRequester,
     LooseModeJsonReceiver,
 )
-from fnllm.types.generics import JSON, TJsonModel
+from fnllm.types.generics import TJsonModel
 from fnllm.types.io import LLMInput, LLMOutput
 
 
@@ -27,7 +26,7 @@ def create_json_handler(
     marshaler = OpenAIJsonMarshaler()
     match strategy:
         case JsonStrategy.LOOSE:
-            return JsonHandler(None, OpenAILooseModeReceiver(marshaler))
+            return JsonHandler(None, LooseModeJsonReceiver(marshaler))
         case JsonStrategy.VALID:
             return JsonHandler(OpenAIJsonRequester(), JsonReceiver(marshaler))
         case JsonStrategy.STRUCTURED:
@@ -83,24 +82,3 @@ class OpenAIJsonRequester(
         result: OpenAIChatParameters = parameters.copy()
         result["response_format"] = {"type": "json_object"}
         return result
-
-
-class OpenAILooseModeReceiver(
-    LooseModeJsonReceiver[
-        OpenAIChatCompletionInput,
-        OpenAIChatOutput,
-        OpenAIChatHistoryEntry,
-        OpenAIChatParameters,
-    ]
-):
-    """A loose mode output parser."""
-
-    async def _try_recovering_malformed_json(
-        self,
-        err: FailedToGenerateValidJsonError,
-        json_string: str | None,
-        prompt: OpenAIChatCompletionInput,
-        kwargs: LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters],
-    ) -> tuple[str | None, JSON | None, TJsonModel | None]:
-        """Try to recover from a bad JSON error. Null JSON = unable to recover."""
-        return (None, None, None)

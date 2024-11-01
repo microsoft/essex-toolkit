@@ -73,7 +73,7 @@ class TestReceiver(LooseModeJsonReceiver):
     async def _try_recovering_malformed_json(
         self,
         err: FailedToGenerateValidJsonError,
-        json_string: str | None,
+        json_string: str,
         prompt: Any,
         kwargs: Any,
     ) -> tuple[str | None, Any | None, Any | None]:
@@ -141,6 +141,10 @@ async def test_loose_mode_receiver_handles_valid_json():
 
 
 async def test_loose_mode_receiver_handles_valid_json_default_handler():
+    class CustomModel(BaseModel):
+        integer: int
+        string: str
+
     bad_json = '{"x": 1'
     llm = TestLLM(
         json_handler=JsonHandler(None, TestReceiver()),
@@ -149,7 +153,31 @@ async def test_loose_mode_receiver_handles_valid_json_default_handler():
 
     # call the llm and assert result
     with pytest.raises(FailedToGenerateValidJsonError):
-        await llm("prompt", json=True)
+        await llm("prompt", json=True, json_model=CustomModel)
+
+
+async def test_loose_mode_receiver_can_parse_incomplete_json():
+    bad_json = '{"x": 1'
+    llm = TestLLM(
+        json_handler=JsonHandler(None, TestReceiver()),
+        output=LLMOutput(output=TestOutput(content=bad_json)),
+    )
+
+    # call the llm and assert result
+    result = await llm("prompt", json=True)
+    assert result.raw_json == {"x": 1}
+
+
+async def test_loose_mode_receiver_can_parse_json_with_markdown_headers():
+    bad_json = '```json\n{"x": 1}```'
+    llm = TestLLM(
+        json_handler=JsonHandler(None, TestReceiver()),
+        output=LLMOutput(output=TestOutput(content=bad_json)),
+    )
+
+    # call the llm and assert result
+    result = await llm("prompt", json=True)
+    assert result.raw_json == {"x": 1}
 
 
 async def test_loose_mode_receiver_read_model():
