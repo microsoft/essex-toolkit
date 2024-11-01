@@ -35,8 +35,8 @@ dev-dependencies = [
     "ipykernel>=6.29.5",
     "hatchling>=1.25.0",
     # OpenAI Optional
-    "openai>=1.35.12",
-    "tiktoken>=0.7.0",
+    "openai>=1.53.0",
+    "tiktoken>=0.8.0",
     # Azure Optional
     "azure-identity>=1.17.1",
     "azure-storage-blob>=12.20.0"

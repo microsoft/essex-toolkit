@@ -32,7 +32,7 @@ from .services.usage_extractor import OpenAIUsageExtractor
 from .utils import build_chat_messages
 
 
-class OpenAITextChatLLM(
+class OpenAITextChatLLMImpl(
     BaseLLM[
         OpenAIChatCompletionInput,
         OpenAIChatOutput,

@@ -2,6 +2,7 @@
 
 """Tests for openai.factories.chat."""
 
+from typing import TYPE_CHECKING
 from unittest.mock import ANY, create_autospec, patch
 
 import pytest
@@ -9,13 +10,30 @@ from fnllm.caching.base import Cache
 from fnllm.events.base import LLMEvents
 from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.factories.chat import create_openai_chat_llm
-from fnllm.openai.llm.chat_text import OpenAITextChatLLM
+from fnllm.openai.llm.chat_text import OpenAITextChatLLMImpl
 from fnllm.openai.llm.features.tools_parsing import OpenAIParseToolsLLM
 from fnllm.openai.llm.services.history_extractor import OpenAIHistoryExtractor
 from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
 from fnllm.openai.llm.services.retryer import OpenAIRetryer
 from fnllm.openai.llm.services.usage_extractor import OpenAIUsageExtractor
 from fnllm.services.variable_injector import VariableInjector
+
+if TYPE_CHECKING:
+    from fnllm import ChatLLM
+
+
+def test_oai_chat_llm_assignable_to_chat_llm():
+    config = AzureOpenAIConfig(
+        api_key="key",
+        organization="organization",
+        api_version="api_version",
+        endpoint="endpoint",
+        deployment="deployment",
+        model="my_models",
+        chat_parameters={"temperature": 0.5},
+    )
+    llm: ChatLLM = create_openai_chat_llm(config)
+    assert llm is not None
 
 
 def test_create_openai_chat_llm():
@@ -33,7 +51,7 @@ def test_create_openai_chat_llm():
 
     with (
         patch.object(
-            OpenAITextChatLLM,
+            OpenAITextChatLLMImpl,
             "__init__",
             return_value=None,
         ) as new_chat_llm,
