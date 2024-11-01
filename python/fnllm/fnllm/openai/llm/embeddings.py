@@ -23,7 +23,7 @@ from fnllm.types.metrics import LLMUsageMetrics
 from .services.usage_extractor import OpenAIUsageExtractor
 
 
-class OpenAIEmbeddingsLLM(
+class OpenAIEmbeddingsLLMImpl(
     BaseLLM[
         OpenAIEmbeddingsInput, OpenAIEmbeddingsOutput, None, OpenAIEmbeddingsParameters
     ],

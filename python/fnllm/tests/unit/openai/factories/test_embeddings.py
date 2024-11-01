@@ -8,7 +8,7 @@ from fnllm.caching.base import Cache
 from fnllm.events.base import LLMEvents
 from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.factories.embeddings import create_openai_embeddings_llm
-from fnllm.openai.llm.embeddings import OpenAIEmbeddingsLLM
+from fnllm.openai.llm.embeddings import OpenAIEmbeddingsLLMImpl
 from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
 from fnllm.openai.llm.services.retryer import OpenAIRetryer
 from fnllm.openai.llm.services.usage_extractor import OpenAIUsageExtractor
@@ -31,7 +31,7 @@ def test_create_openai_embeddings_llm():
 
     with (
         patch.object(
-            OpenAIEmbeddingsLLM,
+            OpenAIEmbeddingsLLMImpl,
             "__init__",
             return_value=None,
         ) as new_embeddings_llm,

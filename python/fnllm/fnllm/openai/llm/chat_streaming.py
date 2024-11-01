@@ -33,7 +33,7 @@ from .utils import build_chat_messages
 ChunkStream: TypeAlias = AsyncStream[ChatCompletionChunk]
 
 
-class OpenAIStreamingChatLLM(
+class OpenAIStreamingChatLLMImpl(
     BaseLLM[
         OpenAIChatCompletionInput,
         OpenAIStreamingChatOutput,

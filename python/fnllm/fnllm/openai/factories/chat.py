@@ -7,6 +7,8 @@ from fnllm.events.base import LLMEvents
 from fnllm.limiting.base import Limiter
 from fnllm.openai.config import OpenAIConfig
 from fnllm.openai.llm.chat import OpenAIChatLLMImpl
+from fnllm.openai.llm.chat_streaming import OpenAIStreamingChatLLMImpl
+from fnllm.openai.llm.chat_text import OpenAITextChatLLMImpl
 from fnllm.openai.llm.features.tools_parsing import OpenAIParseToolsLLM
 from fnllm.openai.llm.services.history_extractor import OpenAIHistoryExtractor
 from fnllm.openai.llm.services.json import create_json_handler
@@ -65,7 +67,7 @@ def _create_openai_text_chat_llm(
     events: LLMEvents | None,
 ) -> OpenAITextChatLLM:
     operation = "chat"
-    result = OpenAITextChatLLM(
+    result = OpenAITextChatLLMImpl(
         client,
         model=config.model,
         model_parameters=config.chat_parameters,
@@ -90,7 +92,7 @@ def _create_openai_streaming_chat_llm(
     events: LLMEvents | None,
 ) -> OpenAIStreamingChatLLM:
     """Create an OpenAI streaming chat LLM."""
-    return OpenAIStreamingChatLLM(
+    return OpenAIStreamingChatLLMImpl(
         client,
         model=config.model,
         model_parameters=config.chat_parameters,

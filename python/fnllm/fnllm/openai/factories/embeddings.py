@@ -5,6 +5,7 @@
 from fnllm.caching.base import Cache
 from fnllm.events.base import LLMEvents
 from fnllm.openai.config import OpenAIConfig
+from fnllm.openai.llm.embeddings import OpenAIEmbeddingsLLMImpl
 from fnllm.openai.llm.services.usage_extractor import OpenAIUsageExtractor
 from fnllm.openai.types.client import OpenAIClient, OpenAIEmbeddingsLLM
 from fnllm.services.cache_interactor import CacheInteractor
@@ -28,7 +29,7 @@ def create_openai_embeddings_llm(
         client = create_openai_client(config)
 
     limiter = create_limiter(config)
-    return OpenAIEmbeddingsLLM(
+    return OpenAIEmbeddingsLLMImpl(
         client,
         model=config.model,
         model_parameters=config.embeddings_parameters,
