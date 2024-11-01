@@ -2,6 +2,7 @@
 
 """Tests for openai.factories.chat."""
 
+from typing import TYPE_CHECKING
 from unittest.mock import ANY, create_autospec, patch
 
 import pytest
@@ -16,6 +17,23 @@ from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
 from fnllm.openai.llm.services.retryer import OpenAIRetryer
 from fnllm.openai.llm.services.usage_extractor import OpenAIUsageExtractor
 from fnllm.services.variable_injector import VariableInjector
+
+if TYPE_CHECKING:
+    from fnllm import ChatLLM
+
+
+def test_oai_chat_llm_assignable_to_chat_llm():
+    config = AzureOpenAIConfig(
+        api_key="key",
+        organization="organization",
+        api_version="api_version",
+        endpoint="endpoint",
+        deployment="deployment",
+        model="my_models",
+        chat_parameters={"temperature": 0.5},
+    )
+    llm: ChatLLM = create_openai_chat_llm(config)
+    assert llm is not None
 
 
 def test_create_openai_chat_llm():

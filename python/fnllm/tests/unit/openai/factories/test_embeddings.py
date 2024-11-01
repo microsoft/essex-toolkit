@@ -2,6 +2,7 @@
 
 """Tests for openai.factories.chat."""
 
+from typing import TYPE_CHECKING
 from unittest.mock import ANY, create_autospec, patch
 
 from fnllm.caching.base import Cache
@@ -14,6 +15,22 @@ from fnllm.openai.llm.services.retryer import OpenAIRetryer
 from fnllm.openai.llm.services.usage_extractor import OpenAIUsageExtractor
 from fnllm.services.cache_interactor import CacheInteractor
 from fnllm.services.variable_injector import VariableInjector
+
+if TYPE_CHECKING:
+    from fnllm import EmbeddingsLLM
+
+
+def test_oai_embedding_llm_assignable_to_embedding_llm():
+    config = AzureOpenAIConfig(
+        api_key="key",
+        organization="organization",
+        api_version="api_version",
+        endpoint="endpoint",
+        deployment="deployment",
+        model="my_models",
+    )
+    llm: EmbeddingsLLM = create_openai_embeddings_llm(config)
+    assert llm is not None
 
 
 def test_create_openai_embeddings_llm():
