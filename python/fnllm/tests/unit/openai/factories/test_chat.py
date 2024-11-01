@@ -10,7 +10,7 @@ from fnllm.caching.base import Cache
 from fnllm.events.base import LLMEvents
 from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.factories.chat import create_openai_chat_llm
-from fnllm.openai.llm.chat import OpenAIChatLLMImpl
+from fnllm.openai.llm.chat_text import OpenAITextChatLLMImpl
 from fnllm.openai.llm.features.tools_parsing import OpenAIParseToolsLLM
 from fnllm.openai.llm.services.history_extractor import OpenAIHistoryExtractor
 from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
@@ -51,7 +51,7 @@ def test_create_openai_chat_llm():
 
     with (
         patch.object(
-            OpenAIChatLLMImpl,
+            OpenAITextChatLLMImpl,
             "__init__",
             return_value=None,
         ) as new_chat_llm,
