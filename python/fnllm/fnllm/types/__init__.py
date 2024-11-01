@@ -2,6 +2,14 @@
 
 """Common type definitions for the LLM package."""
 
+from .generalized import (
+    ChatLLM,
+    ChatLLMInput,
+    ChatLLMOutput,
+    EmbeddingsLLM,
+    EmbeddingsLLMInput,
+    EmbeddingsLLMOutput,
+)
 from .generics import (
     JSON,
     PromptVariables,
@@ -18,6 +26,12 @@ from .protocol import LLM
 __all__ = [
     "JSON",
     "LLM",
+    "ChatLLM",
+    "ChatLLMInput",
+    "ChatLLMOutput",
+    "EmbeddingsLLM",
+    "EmbeddingsLLMInput",
+    "EmbeddingsLLMOutput",
     "LLMInput",
     "LLMMetrics",
     "LLMOutput",

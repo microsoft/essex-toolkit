@@ -11,6 +11,7 @@ from fnllm.openai.types.aliases import (
     OpenAIChatCompletionMessageModel,
     OpenAIChatCompletionMessageParam,
 )
+from fnllm.types.generalized import ChatLLMOutput
 from fnllm.types.metrics import LLMUsageMetrics
 
 OpenAIChatMessageInput: TypeAlias = OpenAIChatCompletionMessageParam
@@ -23,7 +24,7 @@ OpenAIChatCompletionInput: TypeAlias = str | OpenAIChatMessageInput | None
 """Main input type for OpenAI completions."""
 
 
-class OpenAIChatOutput(BaseModel):
+class OpenAIChatOutput(ChatLLMOutput):
     """OpenAI chat completion output."""
 
     raw_input: OpenAIChatMessageInput | None
@@ -32,15 +33,8 @@ class OpenAIChatOutput(BaseModel):
     raw_output: OpenAIChatCompletionMessageModel
     """Raw output message from OpenAI."""
 
-    content: str | None
-    """Raw output content of the model."""
-
     usage: LLMUsageMetrics | None
     """Usage statistics for the completion request."""
-
-    def __str__(self) -> str:
-        """String representation o the output."""
-        return self.content or ""
 
 
 class OpenAIStreamingChatOutput(BaseModel, arbitrary_types_allowed=True):

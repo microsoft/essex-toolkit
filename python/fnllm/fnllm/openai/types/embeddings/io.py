@@ -4,16 +4,15 @@
 
 from typing import TypeAlias
 
-from pydantic import BaseModel
-
 from fnllm.openai.types.aliases import OpenAIEmbeddingModel
+from fnllm.types.generalized import EmbeddingsLLMInput, EmbeddingsLLMOutput
 from fnllm.types.metrics import LLMUsageMetrics
 
-OpenAIEmbeddingsInput: TypeAlias = list[str] | str
+OpenAIEmbeddingsInput: TypeAlias = EmbeddingsLLMInput
 """Main input type for OpenAI embeddings."""
 
 
-class OpenAIEmbeddingsOutput(BaseModel):
+class OpenAIEmbeddingsOutput(EmbeddingsLLMOutput):
     """OpenAI embeddings completion output."""
 
     raw_input: OpenAIEmbeddingsInput | None
@@ -21,9 +20,6 @@ class OpenAIEmbeddingsOutput(BaseModel):
 
     raw_output: list[OpenAIEmbeddingModel]
     """Raw embeddings output from OpenAI."""
-
-    embeddings: list[list[float]] | None
-    """Parsed embeddings output."""
 
     usage: LLMUsageMetrics | None
     """Usage statistics for the embeddings request."""

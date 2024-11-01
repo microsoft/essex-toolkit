@@ -26,7 +26,7 @@ from fnllm.types.protocol import LLM
 OpenAIClient = AsyncOpenAI | AsyncAzureOpenAI
 """Allowed OpenAI client types."""
 
-OpenAITextChatLLMInstance: TypeAlias = LLM[
+OpenAITextChatLLM: TypeAlias = LLM[
     OpenAIChatCompletionInput,
     OpenAIChatOutput,
     OpenAIChatHistoryEntry,
@@ -34,14 +34,14 @@ OpenAITextChatLLMInstance: TypeAlias = LLM[
 ]
 """Alias for the fully typed OpenAIChatLLM instance."""
 
-OpenAIStreamingChatLLMInstance: TypeAlias = LLM[
+OpenAIStreamingChatLLM: TypeAlias = LLM[
     OpenAIChatCompletionInput,
     OpenAIStreamingChatOutput,
     OpenAIChatHistoryEntry,
     OpenAIChatParameters,
 ]
 
-OpenAIEmbeddingsLLMInstance: TypeAlias = LLM[
+OpenAIEmbeddingsLLM: TypeAlias = LLM[
     OpenAIEmbeddingsInput, OpenAIEmbeddingsOutput, None, OpenAIEmbeddingsParameters
 ]
 """Alias for the fully typed OpenAIEmbeddingsLLM instance."""
