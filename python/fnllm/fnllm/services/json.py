@@ -5,9 +5,10 @@
 import json
 from abc import ABC, abstractmethod
 from collections.abc import Awaitable, Callable
-from typing import Generic
+from typing import Generic, cast
 
 import pydantic
+from json_repair import repair_json
 from typing_extensions import Unpack
 
 from fnllm.services.errors import FailedToGenerateValidJsonError
@@ -207,21 +208,27 @@ class LooseModeJsonReceiver(
             raw_json = self._parse_json_string(json_string)
             model = self._read_model_from_json(raw_json, json_model)
         except FailedToGenerateValidJsonError as err:
-            (
-                json_string,
-                raw_json,
-                model,
-            ) = await self._try_recovering_malformed_json(
-                err, json_string, prompt, kwargs
-            )
-            if raw_json is not None:
-                self._marshaler.inject_json_string(json_string, result)
-                result.raw_json = raw_json
-                result.parsed_json = model
-                return result
+            # A 'None' value would not have thrown an error
+            json_string = cast(str, json_string)
+            try:
+                (
+                    json_string,
+                    raw_json,
+                    model,
+                ) = await self._try_recovering_malformed_json(
+                    err, json_string, prompt, kwargs
+                )
+                if raw_json is not None:
+                    self._marshaler.inject_json_string(json_string, result)
+                    result.raw_json = raw_json
+                    result.parsed_json = model
+                    return result
 
-            # The recovery didn't work, raise the error
-            raise
+                # The recovery didn't work, raise the error
+                raise
+            except BaseException:  # noqa BLE001
+                # The recovery didn't work, raise the error
+                raise FailedToGenerateValidJsonError from err
         else:
             self._marshaler.inject_json_string(json_string, result)
             result.raw_json = raw_json
@@ -254,9 +261,13 @@ class LooseModeJsonReceiver(
     async def _try_recovering_malformed_json(
         self,
         err: FailedToGenerateValidJsonError,
-        json_string: str | None,
+        json_string: str,
         prompt: TInput,
         kwargs: LLMInput[TJsonModel, THistoryEntry, TModelParameters],
     ) -> tuple[str | None, JSON | None, TJsonModel | None]:
         """Try to recover from a bad JSON error. Null JSON = unable to recover."""
-        return (None, None, None)
+        json_string = cast(str, repair_json(json_string, skip_json_loads=True))
+        json_object = cast(JSON, json.loads(json_string)) if json_string else None
+        json_model = kwargs.get("json_model")
+        model_instance = json_model.model_validate(json_object) if json_model else None
+        return (json_string, json_object, model_instance)

@@ -9,7 +9,6 @@ import pytest
 from fnllm.config.json_strategy import JsonStrategy
 from fnllm.openai.llm.services.json import create_json_handler
 from fnllm.openai.types.chat.io import OpenAIChatOutput
-from fnllm.services.errors import FailedToGenerateValidJsonError
 from fnllm.types.io import LLMOutput
 from openai.types.chat import ChatCompletionMessage
 from pydantic import BaseModel
@@ -50,18 +49,3 @@ async def test_loose_mode_handlers():
     assert response.raw_json == expected_raw_json
     assert response.parsed_json is None
     delegate.assert_called_once()
-
-
-async def test_loose_mode_invalid_json_should_raise():
-    raw_json_str = "{invalid"
-    delegate = AsyncMock(return_value=LLMOutput(output=mock_output(raw_json_str)))
-    prompt = "prompt"
-
-    # creating the LLM
-    handlers = create_json_handler(JsonStrategy.LOOSE)
-    assert handlers.receiver is not None
-    llm = handlers.receiver.decorate(delegate)
-
-    # call the llm and assert it raises
-    with pytest.raises(FailedToGenerateValidJsonError):
-        await llm(prompt, json=True)
