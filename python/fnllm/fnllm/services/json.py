@@ -155,7 +155,7 @@ class JsonReceiver(
         """Invoke the JSON decorator."""
         error: FailedToGenerateValidJsonError | None = None
         name = kwargs.get("name", "")
-        for attempt in range(self._max_retries):
+        for attempt in range(self._max_retries + 1):
             try:
                 if attempt > 0:
                     kwargs["name"] = f"{name}-(retry {attempt})"
@@ -163,7 +163,7 @@ class JsonReceiver(
             except FailedToGenerateValidJsonError as e:
                 error = e
 
-        raise error
+        raise FailedToGenerateValidJsonError from error
 
     async def try_receive_json(
         self,
