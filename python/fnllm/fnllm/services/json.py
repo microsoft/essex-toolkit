@@ -131,15 +131,41 @@ class JsonRequester(
 
 class JsonReceiver(
     BaseJsonDecorator[TInput, TOutput, THistoryEntry],
-    Generic[TInput, TOutput, THistoryEntry],
+    Generic[TInput, TOutput, THistoryEntry, TModelParameters],
 ):
     """A decorator for handling JSON output. This implementation should be the outer decorator."""
 
-    def __init__(self, marshaler: JsonMarshaler[TOutput, THistoryEntry]):
+    def __init__(
+        self,
+        marshaler: JsonMarshaler[TOutput, THistoryEntry],
+        max_retries: int,
+    ):
         """Create a new JsonReceiver."""
         self._marshaler = marshaler
+        self._max_retries = max_retries
 
     async def invoke_json(
+        self,
+        delegate: Callable[
+            ..., Awaitable[LLMOutput[TOutput, TJsonModel, THistoryEntry]]
+        ],
+        prompt: TInput,
+        kwargs: LLMInput[TJsonModel, THistoryEntry, TModelParameters],
+    ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
+        """Invoke the JSON decorator."""
+        error: FailedToGenerateValidJsonError | None = None
+        name = kwargs.get("name", "")
+        for attempt in range(self._max_retries):
+            try:
+                if attempt > 0:
+                    kwargs["name"] = f"{name}-(retry {attempt})"
+                return await self.try_receive_json(delegate, prompt, kwargs)
+            except FailedToGenerateValidJsonError as e:
+                error = e
+
+        raise error
+
+    async def try_receive_json(
         self,
         delegate: Callable[
             ..., Awaitable[LLMOutput[TOutput, TJsonModel, THistoryEntry]]
@@ -183,16 +209,12 @@ class JsonReceiver(
 
 
 class LooseModeJsonReceiver(
-    BaseJsonDecorator[TInput, TOutput, THistoryEntry],
+    JsonReceiver[TInput, TOutput, THistoryEntry, TModelParameters],
     Generic[TInput, TOutput, THistoryEntry, TModelParameters],
 ):
     """A decorator for handling JSON output. This implementation should be the outer decorator."""
 
-    def __init__(self, marshaler: JsonMarshaler[TOutput, THistoryEntry]):
-        """Create a new JsonReceiver."""
-        self._marshaler = marshaler
-
-    async def invoke_json(
+    async def try_receive_json(
         self,
         delegate: Callable[
             ..., Awaitable[LLMOutput[TOutput, TJsonModel, THistoryEntry]]
@@ -202,6 +224,7 @@ class LooseModeJsonReceiver(
     ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
         """Invoke the JSON decorator."""
         json_model = kwargs.get("json_model")
+
         result = await delegate(prompt, **kwargs)
         json_string = self._marshaler.extract_json_string(result)
         try:
