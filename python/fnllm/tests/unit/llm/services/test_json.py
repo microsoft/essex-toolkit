@@ -309,3 +309,19 @@ async def test_standard_mode_receiver_read_model_invalid():
     # call the llm and assert result
     with pytest.raises(FailedToGenerateValidJsonError):
         await llm("prompt", json_model=Model)
+
+
+async def test_json_receiver_retry_loop():
+    receiver = JsonReceiver(TestMarshaler(), 3)
+    delegate = AsyncMock()
+    delegate.side_effect = [
+        # Invalid JSON
+        LLMOutput(output=TestOutput(content='{"x": 1"')),
+        LLMOutput(output=TestOutput(content='{"x": 2"')),
+        # Valid JSON
+        LLMOutput(output=TestOutput(content='{"x": 3}')),
+    ]
+    result = await receiver.invoke_json(
+        delegate=delegate, prompt="prompt", kwargs=LLMInput()
+    )
+    assert result.raw_json == {"x": 3}
