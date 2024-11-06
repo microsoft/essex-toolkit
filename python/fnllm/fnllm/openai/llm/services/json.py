@@ -21,14 +21,17 @@ from fnllm.types.io import LLMInput, LLMOutput
 
 def create_json_handler(
     strategy: JsonStrategy,
+    max_retries: int,
 ) -> JsonHandler[OpenAIChatOutput, OpenAIChatHistoryEntry]:
     """Create a JSON handler for OpenAI."""
     marshaler = OpenAIJsonMarshaler()
     match strategy:
         case JsonStrategy.LOOSE:
-            return JsonHandler(None, LooseModeJsonReceiver(marshaler))
+            return JsonHandler(None, LooseModeJsonReceiver(marshaler, max_retries))
         case JsonStrategy.VALID:
-            return JsonHandler(OpenAIJsonRequester(), JsonReceiver(marshaler))
+            return JsonHandler(
+                OpenAIJsonRequester(), JsonReceiver(marshaler, max_retries)
+            )
         case JsonStrategy.STRUCTURED:
             raise NotImplementedError
 

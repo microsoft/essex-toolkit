@@ -66,8 +66,8 @@ class TestMarshaler(JsonMarshaler):
 class TestReceiver(LooseModeJsonReceiver):
     __test__ = False  # this is not a pytest class
 
-    def __init__(self, recovery=None):
-        super().__init__(TestMarshaler())
+    def __init__(self, recovery=None, max_retries=3):
+        super().__init__(TestMarshaler(), max_retries)
         self._recovery = recovery
 
     async def _try_recovering_malformed_json(
@@ -259,7 +259,7 @@ async def test_loose_mode_fails():
 async def test_standard_mode_fails():
     bad_json = '{"x": 1'
     llm = TestLLM(
-        json_handler=JsonHandler(None, JsonReceiver(TestMarshaler())),
+        json_handler=JsonHandler(None, JsonReceiver(TestMarshaler(), 0)),
         output=LLMOutput(
             output=TestOutput(
                 content=bad_json,
@@ -280,7 +280,7 @@ async def test_standard_mode_receiver_read_model():
     expected_raw_json = {"integer": 1, "string": "value"}
     raw_json_str = json.dumps(expected_raw_json)
     llm = TestLLM(
-        json_handler=JsonHandler(None, JsonReceiver(TestMarshaler())),
+        json_handler=JsonHandler(None, JsonReceiver(TestMarshaler(), 0)),
         output=LLMOutput(output=TestOutput(content=raw_json_str)),
     )
 
@@ -302,10 +302,26 @@ async def test_standard_mode_receiver_read_model_invalid():
     expected_raw_json = {"integerxxx": 1, "string": "value"}
     raw_json_str = json.dumps(expected_raw_json)
     llm = TestLLM(
-        json_handler=JsonHandler(None, JsonReceiver(TestMarshaler())),
+        json_handler=JsonHandler(None, JsonReceiver(TestMarshaler(), 0)),
         output=LLMOutput(output=TestOutput(content=raw_json_str)),
     )
 
     # call the llm and assert result
     with pytest.raises(FailedToGenerateValidJsonError):
         await llm("prompt", json_model=Model)
+
+
+async def test_json_receiver_retry_loop():
+    receiver = JsonReceiver(TestMarshaler(), 3)
+    delegate = AsyncMock()
+    delegate.side_effect = [
+        # Invalid JSON
+        LLMOutput(output=TestOutput(content='{"x": 1"')),
+        LLMOutput(output=TestOutput(content='{"x": 2"')),
+        # Valid JSON
+        LLMOutput(output=TestOutput(content='{"x": 3}')),
+    ]
+    result = await receiver.invoke_json(
+        delegate=delegate, prompt="prompt", kwargs=LLMInput()
+    )
+    assert result.raw_json == {"x": 3}

@@ -73,7 +73,7 @@ def _create_openai_text_chat_llm(
         model_parameters=config.chat_parameters,
         cache=CacheInteractor(events, cache),
         events=events,
-        json_handler=create_json_handler(config.json_strategy),
+        json_handler=create_json_handler(config.json_strategy, config.max_json_retries),
         usage_extractor=OpenAIUsageExtractor(),
         history_extractor=OpenAIHistoryExtractor(),
         variable_injector=VariableInjector(),
