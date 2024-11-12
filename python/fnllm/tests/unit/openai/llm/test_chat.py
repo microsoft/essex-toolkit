@@ -2,6 +2,7 @@
 
 """Tests for openai.llm.chat."""
 
+from typing import TYPE_CHECKING
 from unittest.mock import ANY, Mock
 
 from fnllm.caching.file import FileCache
@@ -16,6 +17,9 @@ from fnllm.openai.types.aliases import (
 from fnllm.openai.types.chat.io import OpenAIChatOutput
 
 from tests.unit.openai.llm.conftest import OpenAIChatCompletionClientMock
+
+if TYPE_CHECKING:
+    from fnllm.openai.types import OpenAIChatLLM
 
 
 def test_open_ai_chat_output_str():
@@ -117,7 +121,7 @@ async def test_chat_llm_with_global_model_config_overwrite(
     )
 
     # create llm instance with mocked client
-    llm = create_openai_chat_llm(
+    llm: OpenAIChatLLM = create_openai_chat_llm(
         config=config,
         client=chat_completion_client_mock.mock_response(
             message=OpenAIChatCompletionMessageModel(
@@ -129,6 +133,8 @@ async def test_chat_llm_with_global_model_config_overwrite(
             model=config.model,
         ),
     )
+    child = llm.child("test")
+    assert child is not None
 
     # call llm
     input_prompt = None  # also test None prompt

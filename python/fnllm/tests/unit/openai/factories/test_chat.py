@@ -34,6 +34,7 @@ def test_oai_chat_llm_assignable_to_chat_llm():
     )
     llm: ChatLLM = create_openai_chat_llm(config)
     assert llm is not None
+    assert llm.child("test") is not None
 
 
 def test_create_openai_chat_llm():
