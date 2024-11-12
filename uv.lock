@@ -528,7 +528,7 @@ wheels = [
 
 [[package]]
 name = "fnllm"
-version = "0.0.8"
+version = "0.0.9"
 source = { editable = "python/fnllm" }
 dependencies = [
     { name = "aiolimiter" },

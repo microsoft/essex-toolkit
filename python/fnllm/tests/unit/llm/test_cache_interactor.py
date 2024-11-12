@@ -84,7 +84,7 @@ async def test_cache_interactor(file_cache: FileCache):
     func.assert_called_once()
 
 
-async def test_cache_interactor_child_empty():
+def test_cache_interactor_child_empty():
     llm = CacheInteractor(events=None, cache=None)
     child = llm.child("test")
     assert child is llm
