@@ -34,6 +34,13 @@ class OpenAIChatLLMImpl(OpenAIChatLLM):
         self._text_chat_llm = text_chat_llm
         self._streaming_chat_llm = streaming_chat_llm
 
+    def child(self, name: str) -> "OpenAIChatLLMImpl":
+        """Create a child LLM (with child cache)."""
+        return OpenAIChatLLMImpl(
+            text_chat_llm=self._text_chat_llm.child(name),
+            streaming_chat_llm=self._streaming_chat_llm.child(name),
+        )
+
     @overload
     async def __call__(
         self,

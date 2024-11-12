@@ -2,6 +2,8 @@
 
 """The EmbeddingsLLM class."""
 
+from typing import cast
+
 from typing_extensions import Unpack
 
 from fnllm.base.base import BaseLLM
@@ -68,6 +70,22 @@ class OpenAIEmbeddingsLLMImpl(
         self._model = model
         self._cache = cache
         self._global_model_parameters = model_parameters or {}
+
+    def child(self, name: str) -> "OpenAIEmbeddingsLLMImpl":
+        """Create a child LLM."""
+        return OpenAIEmbeddingsLLMImpl(
+            self._client,
+            self._model,
+            self._cache.child(name),
+            usage_extractor=cast(
+                OpenAIUsageExtractor[OpenAIEmbeddingsOutput], self._usage_extractor
+            ),
+            variable_injector=self._variable_injector,
+            rate_limiter=self._rate_limiter,
+            retryer=self._retryer,
+            model_parameters=self._global_model_parameters,
+            events=self._events,
+        )
 
     def _build_embeddings_parameters(
         self, local_parameters: OpenAIEmbeddingsParameters | None

@@ -31,6 +31,9 @@ async def test_streaming_chat_llm(
             model=config.model,
         ),
     )
+    # Child LLM same as parent, no cache used in streaming LLM
+    child = llm.child("test")
+    assert llm is not child
 
     # call llm
     input_prompt = "Hello! $user"

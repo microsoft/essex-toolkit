@@ -52,3 +52,18 @@ async def test_on_error():
         await llm("test")
 
     mocked_events.on_error.assert_called_once()
+
+
+def test_clone_empty():
+    llm = CustomLLM()
+    child = llm.child("test")
+
+    # No cache, child == llm
+    assert child is llm
+
+
+def test_clone_valid():
+    llm = CustomLLM(cache=Mock())
+    child = llm.child("test")
+    # Cache, child is not llm
+    assert child is not llm

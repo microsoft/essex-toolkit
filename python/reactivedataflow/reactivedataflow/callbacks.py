@@ -1,9 +1,10 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """The ExecutionGraphCallbacks protocol."""
 
-from typing import Protocol
+from typing import Protocol, runtime_checkable
 
 
+@runtime_checkable
 class Callbacks(Protocol):
     """The callbacks for the execution graph."""
 
