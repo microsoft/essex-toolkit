@@ -66,6 +66,23 @@ class BaseLLM(
             decorated = decorator.decorate(decorated)
         self._decorated_target = decorated
 
+    def child(
+        self, name: str
+    ) -> "BaseLLM[TInput, TOutput, THistoryEntry, TModelParameters]":
+        """Create a child LLM."""
+        if self._cache is None:
+            return self
+        return self.__class__(
+            events=self._events,
+            cache=self._cache.child(name),
+            usage_extractor=self._usage_extractor,
+            history_extractor=self._history_extractor,
+            variable_injector=self._variable_injector,
+            rate_limiter=self._rate_limiter,
+            retryer=self._retryer,
+            json_handler=self._json_handler,
+        )
+
     @property
     def events(self) -> LLMEvents:
         """Registered LLM events handler."""

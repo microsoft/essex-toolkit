@@ -176,6 +176,9 @@ async def test_chat_llm_with_cache(
         cache=file_cache,
         events=mocked_events,
     )
+    # Can create child LLM
+    child = llm.child("test_subdir")
+    assert child is not llm
 
     # call llm
     input_prompt = "Hello!"

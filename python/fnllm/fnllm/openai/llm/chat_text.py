@@ -3,7 +3,7 @@
 """The chat-based LLM implementation."""
 
 from collections.abc import Iterator
-from typing import cast
+from typing import Any, cast
 
 from openai.types.chat.chat_completion_message_param import ChatCompletionMessageParam
 from typing_extensions import Unpack
@@ -85,6 +85,26 @@ class OpenAITextChatLLMImpl(
         self._model = model
         self._global_model_parameters = model_parameters or {}
         self._cache = cache
+
+    def child(self, name: str) -> Any:
+        """Create a child LLM."""
+        if self._cache is None:
+            return self
+        return OpenAITextChatLLMImpl(
+            self._client,
+            self._model,
+            self._cache.child(name),
+            events=self.events,
+            usage_extractor=cast(
+                OpenAIUsageExtractor[OpenAIChatOutput], self._usage_extractor
+            ),
+            history_extractor=cast(OpenAIHistoryExtractor, self._history_extractor),
+            variable_injector=self._variable_injector,
+            rate_limiter=self._rate_limiter,
+            retryer=self._retryer,
+            model_parameters=self._global_model_parameters,
+            json_handler=self._json_handler,
+        )
 
     def _build_completion_parameters(
         self, local_parameters: OpenAIChatParameters | None

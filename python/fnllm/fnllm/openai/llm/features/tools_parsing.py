@@ -47,6 +47,10 @@ class OpenAIParseToolsLLM(
         """Create a new OpenAIParseToolsLLM."""
         self._delegate = delegate
 
+    def child(self, name: str) -> "OpenAIParseToolsLLM":
+        """Create a child LLM (with child cache)."""
+        return OpenAIParseToolsLLM(self._delegate.child(name))
+
     def _add_tools_to_parameters(
         self,
         parameters: LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters],

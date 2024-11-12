@@ -2,7 +2,7 @@
 
 """LLM protocol module."""
 
-from typing import Generic, Protocol
+from typing import Any, Generic, Protocol
 
 from typing_extensions import Unpack
 
@@ -19,4 +19,8 @@ class LLM(Protocol, Generic[TInput, TOutput, THistoryEntry, TModelParameters]):
         **kwargs: Unpack[LLMInput[TJsonModel, THistoryEntry, TModelParameters]],
     ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:  # pragma: no cover
         """Invoke the LLM, treating the LLM as a function."""
+        ...
+
+    def child(self, name: str) -> Any:
+        """Create a child LLM (with child cache)."""
         ...

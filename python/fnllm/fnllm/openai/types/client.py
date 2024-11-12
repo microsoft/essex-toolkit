@@ -71,3 +71,7 @@ class OpenAIChatLLM(Protocol):
             LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters]
         ],
     ) -> LLMOutput[OpenAIChatOutput, TJsonModel, OpenAIChatHistoryEntry]: ...
+
+    def child(self, name: str) -> "OpenAIChatLLM":
+        """Create a child LLM."""
+        ...

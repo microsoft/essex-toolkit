@@ -20,6 +20,12 @@ class CacheInteractor:
         self._events = events or LLMEvents()
         self._cache = cache
 
+    def child(self, name: str) -> "CacheInteractor":
+        """Create a child cache interactor."""
+        if self._cache is None:
+            return self
+        return CacheInteractor(events=self._events, cache=self._cache.child(name))
+
     async def get_or_insert(
         self,
         func: Callable[[], Awaitable[TJsonModel]],

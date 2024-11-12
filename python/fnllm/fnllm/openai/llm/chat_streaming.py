@@ -80,6 +80,10 @@ class OpenAIStreamingChatLLMImpl(
         self._emit_usage = emit_usage
         self._global_model_parameters = model_parameters or {}
 
+    def child(self, name: str) -> "OpenAIStreamingChatLLMImpl":
+        """Create a child LLM."""
+        return self
+
     def _build_completion_parameters(
         self, local_parameters: OpenAIChatParameters | None
     ) -> OpenAIChatParameters:
