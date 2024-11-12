@@ -2,7 +2,7 @@
 
 """OpenAI client types."""
 
-from typing import Literal, Protocol, TypeAlias, overload
+from typing import Literal, Protocol, TypeAlias, overload, runtime_checkable
 
 from openai import AsyncAzureOpenAI, AsyncOpenAI
 from typing_extensions import Unpack
@@ -47,6 +47,7 @@ OpenAIEmbeddingsLLM: TypeAlias = LLM[
 """Alias for the fully typed OpenAIEmbeddingsLLM instance."""
 
 
+@runtime_checkable
 class OpenAIChatLLM(Protocol):
     """Protocol for the OpenAI chat LLM."""
 

@@ -2,7 +2,7 @@
 
 """LLM protocol module."""
 
-from typing import Any, Generic, Protocol
+from typing import Any, Generic, Protocol, runtime_checkable
 
 from typing_extensions import Unpack
 
@@ -10,6 +10,7 @@ from .generics import THistoryEntry, TInput, TJsonModel, TModelParameters, TOutp
 from .io import LLMInput, LLMOutput
 
 
+@runtime_checkable
 class LLM(Protocol, Generic[TInput, TOutput, THistoryEntry, TModelParameters]):
     """LLM protocol definition."""
 
