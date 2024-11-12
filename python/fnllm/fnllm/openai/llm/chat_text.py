@@ -88,8 +88,6 @@ class OpenAITextChatLLMImpl(
 
     def child(self, name: str) -> Any:
         """Create a child LLM."""
-        if self._cache is None:
-            return self
         return OpenAITextChatLLMImpl(
             self._client,
             self._model,

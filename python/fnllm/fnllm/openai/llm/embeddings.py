@@ -73,8 +73,6 @@ class OpenAIEmbeddingsLLMImpl(
 
     def child(self, name: str) -> "OpenAIEmbeddingsLLMImpl":
         """Create a child LLM."""
-        if self._cache is None:
-            return self
         return OpenAIEmbeddingsLLMImpl(
             self._client,
             self._model,
