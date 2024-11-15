@@ -18,6 +18,7 @@ def test_basic_config(
 ):
     class BasicConfiguration(BaseModel):
         hello: str
+        world: str | int
 
     mock_group.return_value = MagicMock()
     mock_markdown.return_value = MagicMock()
@@ -35,7 +36,7 @@ def test_basic_config(
 
     mock_table.assert_called_once()
     assert params_table_mock.add_column.call_count == 6
-    assert params_table_mock.add_row.call_count == 1
+    assert params_table_mock.add_row.call_count == 2
     mock_markdown.assert_called_once()
     mock_group.assert_called_once()
 

@@ -20,7 +20,7 @@ def __find_subclasses(package_name: str) -> list[type]:
 
         # Iterate through all members of the module
         for _, obj in inspect.getmembers(module):
-            if is_pydantic_model(obj):
+            if is_pydantic_model(obj) and obj.__name__ != "BaseModel":
                 subclasses.append(obj)
 
     return subclasses
@@ -33,10 +33,10 @@ def generate_docs(
     disable_nested: bool,
 ) -> None:
     """Generate the documentation for all configuration classes in the package."""
-    subclasses = __find_subclasses(package)
+    subclasses = set(__find_subclasses(package))
     if len(classes) > 0:
-        subclasses = [
+        subclasses = {
             subclass for subclass in subclasses if subclass.__name__ in classes
-        ]
+        }
     for subclass in subclasses:
         printer.print(subclass, disable_nested)
