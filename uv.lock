@@ -440,7 +440,7 @@ wheels = [
 
 [[package]]
 name = "essex-config"
-version = "0.0.5"
+version = "0.0.6"
 source = { editable = "python/essex-config" }
 dependencies = [
     { name = "azure-identity" },
