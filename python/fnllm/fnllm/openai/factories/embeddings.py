@@ -20,6 +20,7 @@ def create_openai_embeddings_llm(
     *,
     client: OpenAIClient | None = None,
     cache: Cache | None = None,
+    cache_interactor: CacheInteractor | None = None,
     events: LLMEvents | None = None,
 ) -> OpenAIEmbeddingsLLM:
     """Create an OpenAI embeddings LLM."""
@@ -33,7 +34,7 @@ def create_openai_embeddings_llm(
         client,
         model=config.model,
         model_parameters=config.embeddings_parameters,
-        cache=CacheInteractor(events, cache),
+        cache=cache_interactor or CacheInteractor(events, cache),
         events=events,
         usage_extractor=OpenAIUsageExtractor(),
         variable_injector=VariableInjector(),
