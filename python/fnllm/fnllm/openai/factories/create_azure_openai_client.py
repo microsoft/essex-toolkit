@@ -13,6 +13,15 @@ from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.types.client import OpenAIClient
 
 
+class CredentialRequiredError(ValueError):
+    """Credential is required for Azure OpenAI when key is not present."""
+
+    def __init__(self) -> None:
+        super().__init__(
+            "Credential is required for Azure OpenAI when key is not present."
+        )
+
+
 def create_azure_openai_client(
     config: AzureOpenAIConfig, *, credential: TokenProvider | None = None
 ) -> OpenAIClient:
@@ -38,7 +47,6 @@ def _get_azure_ad_token_provider(
         return None
 
     if credential is None:
-        msg = "Credential is required for Azure OpenAI when key is not present."
-        raise ValueError(msg)
+        raise CredentialRequiredError
 
     return get_bearer_token_provider(credential, config.cognitive_services_endpoint)
