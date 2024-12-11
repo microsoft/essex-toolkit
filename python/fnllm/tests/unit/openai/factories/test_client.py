@@ -4,11 +4,9 @@
 
 from unittest.mock import Mock
 
-import pytest
 from fnllm.openai.config import AzureOpenAIConfig, PublicOpenAIConfig
 from fnllm.openai.factories.client import create_openai_client
 from fnllm.openai.factories.create_azure_openai_client import (
-    CredentialRequiredError,
     create_azure_openai_client,
 )
 from openai import AsyncAzureOpenAI, AsyncOpenAI
@@ -39,7 +37,7 @@ def test_create_azure_client():
     assert client.max_retries == 0
 
 
-def test_create_azure_client_with_no_credential_or_key_raises():
+def test_create_azure_client_with_no_credential_uses_default_credential():
     config = AzureOpenAIConfig(
         organization="organization",
         api_version="api_version",
@@ -47,8 +45,8 @@ def test_create_azure_client_with_no_credential_or_key_raises():
         deployment="deployment",
         timeout=200,
     )
-    with pytest.raises(CredentialRequiredError):
-        create_azure_openai_client(config)
+    client = create_azure_openai_client(config)
+    assert client is not None
 
 
 def test_can_create_azure_client_with_credential():
