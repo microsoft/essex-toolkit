@@ -10,12 +10,12 @@ from fnllm.openai.config import AzureOpenAIConfig, OpenAIConfig, PublicOpenAICon
 from fnllm.openai.types.client import OpenAIClient
 
 
-def create_openai_client(config: OpenAIConfig) -> OpenAIClient:
+def create_openai_client(config: OpenAIConfig, **kwargs) -> OpenAIClient:
     """Create a new OpenAI client instance."""
     if config.azure:
         from .create_azure_openai_client import create_azure_openai_client
 
-        return create_azure_openai_client(cast(AzureOpenAIConfig, config))
+        return create_azure_openai_client(cast(AzureOpenAIConfig, config), **kwargs)
 
     return create_public_openai_client(cast(PublicOpenAIConfig, config))
 
