@@ -156,12 +156,14 @@ class BaseLLM(
         await self._events.on_execute_llm()
         output = await self._execute_llm(prompt, **kwargs)
         result: LLMOutput[TOutput, TJsonModel, THistoryEntry] = LLMOutput(output=output)
-
+        await self._inject_usage(result)
         self._inject_history(result, kwargs.get("history"))
 
         return result
 
-    async def inject_usage(self, result: LLMOutput[TOutput, TJsonModel, THistoryEntry]):
+    async def _inject_usage(
+        self, result: LLMOutput[TOutput, TJsonModel, THistoryEntry]
+    ):
         """Inject token consumption usage into a response."""
         usage = LLMUsageMetrics()
         if self._usage_extractor:
