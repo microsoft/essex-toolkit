@@ -2,27 +2,31 @@
 
 """The EmbeddingsLLM class."""
 
-from typing import cast
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, cast
 
 from typing_extensions import Unpack
 
 from fnllm.base.base import BaseLLM
-from fnllm.events.base import LLMEvents
 from fnllm.openai.types.aliases import OpenAICreateEmbeddingResponseModel
-from fnllm.openai.types.client import OpenAIClient
 from fnllm.openai.types.embeddings.io import (
     OpenAIEmbeddingsInput,
     OpenAIEmbeddingsOutput,
 )
 from fnllm.openai.types.embeddings.parameters import OpenAIEmbeddingsParameters
-from fnllm.services.cache_interactor import CacheInteractor
-from fnllm.services.rate_limiter import RateLimiter
-from fnllm.services.retryer import Retryer
-from fnllm.services.variable_injector import VariableInjector
-from fnllm.types.io import LLMInput
 from fnllm.types.metrics import LLMUsageMetrics
 
 from .services.usage_extractor import OpenAIUsageExtractor
+
+if TYPE_CHECKING:
+    from fnllm.events.base import LLMEvents
+    from fnllm.openai.types.client import OpenAIClient
+    from fnllm.services.cache_interactor import CacheInteractor
+    from fnllm.services.rate_limiter import RateLimiter
+    from fnllm.services.retryer import Retryer
+    from fnllm.services.variable_injector import VariableInjector
+    from fnllm.types.io import LLMInput
 
 
 class OpenAIEmbeddingsLLMImpl(
@@ -71,7 +75,7 @@ class OpenAIEmbeddingsLLMImpl(
         self._cache = cache
         self._global_model_parameters = model_parameters or {}
 
-    def child(self, name: str) -> "OpenAIEmbeddingsLLMImpl":
+    def child(self, name: str) -> OpenAIEmbeddingsLLMImpl:
         """Create a child LLM."""
         return OpenAIEmbeddingsLLMImpl(
             self._client,

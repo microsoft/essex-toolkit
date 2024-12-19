@@ -2,12 +2,17 @@
 
 """LLM cache-interactor module."""
 
-from collections.abc import Awaitable, Callable
-from typing import Any
+from __future__ import annotations
 
-from fnllm.caching.base import Cache
+from typing import TYPE_CHECKING, Any
+
 from fnllm.events.base import LLMEvents
-from fnllm.types.generics import TJsonModel
+
+if TYPE_CHECKING:
+    from collections.abc import Awaitable, Callable
+
+    from fnllm.caching.base import Cache
+    from fnllm.types.generics import TJsonModel
 
 
 class CacheInteractor:
@@ -20,7 +25,7 @@ class CacheInteractor:
         self._events = events or LLMEvents()
         self._cache = cache
 
-    def child(self, name: str) -> "CacheInteractor":
+    def child(self, name: str) -> CacheInteractor:
         """Create a child cache interactor."""
         if self._cache is None:
             return self

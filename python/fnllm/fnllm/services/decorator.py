@@ -2,11 +2,16 @@
 
 """Base protocol for decorator services."""
 
-from collections.abc import Awaitable, Callable
-from typing import Generic, Protocol, runtime_checkable
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Generic, Protocol, runtime_checkable
 
 from fnllm.types.generics import THistoryEntry, TJsonModel, TOutput
-from fnllm.types.io import LLMOutput
+
+if TYPE_CHECKING:
+    from collections.abc import Awaitable, Callable
+
+    from fnllm.types.io import LLMOutput
 
 
 @runtime_checkable

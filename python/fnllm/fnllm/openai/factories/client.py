@@ -2,12 +2,16 @@
 
 """Create OpenAI client instance."""
 
-from typing import Any, cast
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Any, cast
 
 from openai import AsyncOpenAI
 
 from fnllm.openai.config import AzureOpenAIConfig, OpenAIConfig, PublicOpenAIConfig
-from fnllm.openai.types.client import OpenAIClient
+
+if TYPE_CHECKING:
+    from fnllm.openai.types.client import OpenAIClient
 
 
 def create_openai_client(

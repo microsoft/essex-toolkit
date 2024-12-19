@@ -2,18 +2,23 @@
 
 """Rate limiting LLM implementation."""
 
+from __future__ import annotations
+
 from abc import abstractmethod
-from collections.abc import Awaitable, Callable
-from typing import Any, Generic
+from typing import TYPE_CHECKING, Any, Generic
 
 from typing_extensions import Unpack
 
 from fnllm.events.base import LLMEvents
 from fnllm.limiting import Limiter, Manifest
 from fnllm.types.generics import TInput, TJsonModel, TModelParameters
-from fnllm.types.io import LLMInput, LLMOutput
 
 from .decorator import LLMDecorator, THistoryEntry, TOutput
+
+if TYPE_CHECKING:
+    from collections.abc import Awaitable, Callable
+
+    from fnllm.types.io import LLMInput, LLMOutput
 
 
 class RateLimiter(

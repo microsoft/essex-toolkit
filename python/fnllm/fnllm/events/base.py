@@ -3,10 +3,13 @@
 
 """Base class for LLM event handling."""
 
-from typing import Any
+from __future__ import annotations
 
-from fnllm.limiting.base import Manifest
-from fnllm.types.metrics import LLMMetrics, LLMUsageMetrics
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from fnllm.limiting.base import Manifest
+    from fnllm.types.metrics import LLMMetrics, LLMUsageMetrics
 
 
 class LLMEvents:

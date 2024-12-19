@@ -2,9 +2,11 @@
 
 """The chat-based LLM implementation."""
 
+from __future__ import annotations
+
 import traceback
 from collections.abc import AsyncIterator, Callable, Iterator
-from typing import TypeAlias, cast
+from typing import TYPE_CHECKING, TypeAlias, cast
 
 from openai import AsyncStream
 from openai.types.chat import ChatCompletionChunk
@@ -12,23 +14,25 @@ from openai.types.chat.chat_completion_message_param import ChatCompletionMessag
 from typing_extensions import Unpack
 
 from fnllm.base.base import BaseLLM
-from fnllm.events.base import LLMEvents
-from fnllm.openai.types.aliases import OpenAIChatModel
 from fnllm.openai.types.chat.io import (
     OpenAIChatCompletionInput,
     OpenAIChatHistoryEntry,
     OpenAIStreamingChatOutput,
 )
 from fnllm.openai.types.chat.parameters import OpenAIChatParameters
-from fnllm.openai.types.client import OpenAIClient
-from fnllm.services.rate_limiter import RateLimiter
-from fnllm.services.retryer import Retryer
-from fnllm.services.variable_injector import VariableInjector
 from fnllm.types import LLMMetrics, LLMUsageMetrics
-from fnllm.types.generics import TJsonModel
-from fnllm.types.io import LLMInput
 
 from .utils import build_chat_messages
+
+if TYPE_CHECKING:
+    from fnllm.events.base import LLMEvents
+    from fnllm.openai.types.aliases import OpenAIChatModel
+    from fnllm.openai.types.client import OpenAIClient
+    from fnllm.services.rate_limiter import RateLimiter
+    from fnllm.services.retryer import Retryer
+    from fnllm.services.variable_injector import VariableInjector
+    from fnllm.types.generics import TJsonModel
+    from fnllm.types.io import LLMInput
 
 ChunkStream: TypeAlias = AsyncStream[ChatCompletionChunk]
 
@@ -80,7 +84,7 @@ class OpenAIStreamingChatLLMImpl(
         self._emit_usage = emit_usage
         self._global_model_parameters = model_parameters or {}
 
-    def child(self, name: str) -> "OpenAIStreamingChatLLMImpl":
+    def child(self, name: str) -> OpenAIStreamingChatLLMImpl:
         """Create a child LLM."""
         return self
 

@@ -2,6 +2,8 @@
 
 """Azure Blob Storage Cache."""
 
+from __future__ import annotations
+
 import json
 import re
 from pathlib import Path
@@ -155,7 +157,7 @@ class BlobCache(Cache):
         for blob in [*self.container_client.list_blob_names()]:
             self.blob_client(blob).delete_blob()
 
-    def child(self, key: str) -> "BlobCache":
+    def child(self, key: str) -> BlobCache:
         """Create a child storage instance."""
         path = str(Path(self._path_prefix) / key)
         return BlobCache(

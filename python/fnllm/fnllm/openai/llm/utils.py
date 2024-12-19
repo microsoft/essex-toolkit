@@ -2,8 +2,9 @@
 
 """OpenAI parsing utilities."""
 
-from collections.abc import Iterable, Sequence
-from typing import cast
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, cast
 
 from fnllm.openai.types.aliases import (
     OpenAIChatCompletionAssistantMessageParam,
@@ -19,7 +20,11 @@ from fnllm.openai.types.aliases import (
     OpenAIFunctionParam,
 )
 from fnllm.openai.types.chat.io import OpenAIChatCompletionInput, OpenAIChatHistoryEntry
-from fnllm.tools.base import LLMTool
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable, Sequence
+
+    from fnllm.tools.base import LLMTool
 
 
 def function_call_to_param(

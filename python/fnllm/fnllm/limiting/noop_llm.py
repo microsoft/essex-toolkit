@@ -2,6 +2,8 @@
 
 """Noop limiter module."""
 
+from __future__ import annotations
+
 from fnllm.limiting.base import Limiter, Manifest
 
 

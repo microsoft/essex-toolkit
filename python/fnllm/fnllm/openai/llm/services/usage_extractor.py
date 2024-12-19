@@ -2,6 +2,8 @@
 
 """LLM metrics parsing module for OpenAI."""
 
+from __future__ import annotations
+
 from typing import Generic, TypeVar
 
 from fnllm.openai.types.chat.io import OpenAIChatOutput

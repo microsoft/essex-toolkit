@@ -2,6 +2,8 @@
 
 """File cache implementation for the `Cache` protocol.."""
 
+from __future__ import annotations
+
 import json
 import logging
 from pathlib import Path
@@ -63,7 +65,7 @@ class FileCache(Cache):
             encoding=self._encoding,
         )
 
-    def child(self, key: str) -> "FileCache":
+    def child(self, key: str) -> FileCache:
         """Create a child cache."""
         return FileCache(self._cache_path / key)
 

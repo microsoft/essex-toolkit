@@ -3,6 +3,8 @@
 
 """LLM Configuration Protocol definition."""
 
+from __future__ import annotations
+
 from pydantic import BaseModel, Field
 
 from .json_strategy import JsonStrategy

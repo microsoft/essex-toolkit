@@ -2,6 +2,8 @@
 
 """TPM RPM limiter module."""
 
+from __future__ import annotations
+
 from aiolimiter import AsyncLimiter
 
 from fnllm.limiting.base import Limiter, Manifest
@@ -25,6 +27,6 @@ class TPMLimiter(Limiter):
         """Do nothing."""
 
     @classmethod
-    def from_tpm(cls, tokens_per_minute: int) -> "TPMLimiter":
+    def from_tpm(cls, tokens_per_minute: int) -> TPMLimiter:
         """Create a new RpmLimiter."""
         return cls(AsyncLimiter(tokens_per_minute))

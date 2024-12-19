@@ -2,10 +2,11 @@
 
 """Rate limiting LLM implementation."""
 
+from __future__ import annotations
+
 import asyncio
 from abc import abstractmethod
-from collections.abc import Awaitable, Callable, Sequence
-from typing import Any, Generic
+from typing import TYPE_CHECKING, Any, Generic
 
 from tenacity import (
     AsyncRetrying,
@@ -24,10 +25,14 @@ from fnllm.types.generics import (
     TModelParameters,
     TOutput,
 )
-from fnllm.types.io import LLMInput, LLMOutput
 from fnllm.types.metrics import LLMRetryMetrics
 
 from .decorator import LLMDecorator
+
+if TYPE_CHECKING:
+    from collections.abc import Awaitable, Callable, Sequence
+
+    from fnllm.types.io import LLMInput, LLMOutput
 
 
 class Retryer(

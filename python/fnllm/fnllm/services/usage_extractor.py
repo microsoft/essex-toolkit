@@ -2,11 +2,15 @@
 
 """LLM cache-interactor module."""
 
-from abc import ABC, abstractmethod
-from typing import Generic
+from __future__ import annotations
 
-from fnllm.types import LLMUsageMetrics
+from abc import ABC, abstractmethod
+from typing import TYPE_CHECKING, Generic
+
 from fnllm.types.generics import TOutput
+
+if TYPE_CHECKING:
+    from fnllm.types import LLMUsageMetrics
 
 
 class UsageExtractor(ABC, Generic[TOutput]):

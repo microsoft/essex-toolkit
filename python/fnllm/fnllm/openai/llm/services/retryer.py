@@ -2,14 +2,18 @@
 
 """Rate limiting LLM implementation for OpenAI."""
 
+from __future__ import annotations
+
 import asyncio
-from typing import Final, Generic
+from typing import TYPE_CHECKING, Final, Generic
 
 from openai import APIConnectionError, InternalServerError, RateLimitError
 
-from fnllm.events.base import LLMEvents
 from fnllm.services.retryer import Retryer
 from fnllm.types.generics import THistoryEntry, TInput, TModelParameters, TOutput
+
+if TYPE_CHECKING:
+    from fnllm.events.base import LLMEvents
 
 OPENAI_RETRYABLE_ERRORS: Final[list[type[Exception]]] = [
     RateLimitError,

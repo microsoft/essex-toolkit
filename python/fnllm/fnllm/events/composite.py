@@ -2,13 +2,18 @@
 
 """Class for LLM composite event handling."""
 
+from __future__ import annotations
+
 import asyncio
-from collections.abc import Sequence
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from fnllm.events.base import LLMEvents
-from fnllm.limiting.base import Manifest
-from fnllm.types.metrics import LLMMetrics, LLMUsageMetrics
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
+
+    from fnllm.limiting.base import Manifest
+    from fnllm.types.metrics import LLMMetrics, LLMUsageMetrics
 
 
 class LLMCompositeEvents(LLMEvents):

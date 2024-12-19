@@ -2,6 +2,8 @@
 
 """Concurrency limiter module."""
 
+from __future__ import annotations
+
 from asyncio import Semaphore
 
 from fnllm.limiting.base import Limiter, Manifest
@@ -25,6 +27,6 @@ class ConcurrencyLimiter(Limiter):
             self._semaphore.release()
 
     @classmethod
-    def from_max_concurrency(cls, max_concurrency: int) -> "ConcurrencyLimiter":
+    def from_max_concurrency(cls, max_concurrency: int) -> ConcurrencyLimiter:
         """Create a new ConcurrencyLimiter."""
         return cls(Semaphore(max_concurrency))

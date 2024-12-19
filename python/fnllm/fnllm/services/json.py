@@ -2,10 +2,11 @@
 
 """Base protocol for decorator services."""
 
+from __future__ import annotations
+
 import json
 from abc import ABC, abstractmethod
-from collections.abc import Awaitable, Callable
-from typing import Generic, cast
+from typing import TYPE_CHECKING, Generic, cast
 
 import pydantic
 from json_repair import repair_json
@@ -20,9 +21,13 @@ from fnllm.types.generics import (
     TModelParameters,
     TOutput,
 )
-from fnllm.types.io import LLMInput, LLMOutput
 
 from .decorator import LLMDecorator
+
+if TYPE_CHECKING:
+    from collections.abc import Awaitable, Callable
+
+    from fnllm.types.io import LLMInput, LLMOutput
 
 
 class JsonHandler(Generic[TOutput, THistoryEntry]):

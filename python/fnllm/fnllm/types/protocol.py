@@ -2,12 +2,16 @@
 
 """LLM protocol module."""
 
-from typing import Any, Generic, Protocol, runtime_checkable
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Any, Generic, Protocol, runtime_checkable
 
 from typing_extensions import Unpack
 
 from .generics import THistoryEntry, TInput, TJsonModel, TModelParameters, TOutput
-from .io import LLMInput, LLMOutput
+
+if TYPE_CHECKING:
+    from .io import LLMInput, LLMOutput
 
 
 @runtime_checkable

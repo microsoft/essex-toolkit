@@ -2,6 +2,8 @@
 
 """TPM RPM limiter module."""
 
+from __future__ import annotations
+
 from aiolimiter import AsyncLimiter
 
 from fnllm.limiting.base import Limiter, Manifest
@@ -23,9 +25,7 @@ class RPMLimiter(Limiter):
         """Do nothing."""
 
     @classmethod
-    def from_rpm(
-        cls, requests_per_minute: int, burst_mode: bool = True
-    ) -> "RPMLimiter":
+    def from_rpm(cls, requests_per_minute: int, burst_mode: bool = True) -> RPMLimiter:
         """Create a new RPMLimiter."""
         if burst_mode:
             return cls(AsyncLimiter(requests_per_minute, time_period=60))

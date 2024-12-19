@@ -2,10 +2,10 @@
 
 """Factory functions for creating OpenAI LLMs."""
 
-from fnllm.caching.base import Cache
-from fnllm.events.base import LLMEvents
-from fnllm.limiting.base import Limiter
-from fnllm.openai.config import OpenAIConfig
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 from fnllm.openai.llm.chat import OpenAIChatLLMImpl
 from fnllm.openai.llm.chat_streaming import OpenAIStreamingChatLLMImpl
 from fnllm.openai.llm.chat_text import OpenAITextChatLLMImpl
@@ -13,17 +13,23 @@ from fnllm.openai.llm.features.tools_parsing import OpenAIParseToolsLLM
 from fnllm.openai.llm.services.history_extractor import OpenAIHistoryExtractor
 from fnllm.openai.llm.services.json import create_json_handler
 from fnllm.openai.llm.services.usage_extractor import OpenAIUsageExtractor
-from fnllm.openai.types.client import (
-    OpenAIChatLLM,
-    OpenAIClient,
-    OpenAIStreamingChatLLM,
-    OpenAITextChatLLM,
-)
 from fnllm.services.cache_interactor import CacheInteractor
 from fnllm.services.variable_injector import VariableInjector
 
 from .client import create_openai_client
 from .utils import create_limiter, create_rate_limiter, create_retryer
+
+if TYPE_CHECKING:
+    from fnllm.caching.base import Cache
+    from fnllm.events.base import LLMEvents
+    from fnllm.limiting.base import Limiter
+    from fnllm.openai.config import OpenAIConfig
+    from fnllm.openai.types.client import (
+        OpenAIChatLLM,
+        OpenAIClient,
+        OpenAIStreamingChatLLM,
+        OpenAITextChatLLM,
+    )
 
 
 def create_openai_chat_llm(
