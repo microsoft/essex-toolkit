@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import json
 import logging
+import time
 from pathlib import Path
 from typing import Any
 
@@ -43,7 +44,16 @@ class FileCache(Cache):
             return None
 
         # throw if result is None
-        return json.loads(path.read_text(encoding=self._encoding))["result"]
+        cache_entry = json.loads(path.read_text(encoding=self._encoding))
+
+        # Mark the cache entry as updated to keep it alive
+        cache_entry["updated"] = time.time()
+        (self._cache_path / key).write_text(
+            _content_text(cache_entry),
+            encoding=self._encoding,
+        )
+
+        return cache_entry["result"]
 
     async def remove(self, key: str) -> None:
         """Remove a value from the cache."""
@@ -57,17 +67,26 @@ class FileCache(Cache):
         self, key: str, value: Any, metadata: dict[str, Any] | None = None
     ) -> None:
         """Write a value into the cache."""
-        content = json.dumps(
-            {"result": value, "metadata": metadata}, indent=2, ensure_ascii=False
-        )
+        create_time = time.time()
+        content = {
+            "result": value,
+            "metadata": metadata,
+            "created": create_time,
+            "updated": create_time,
+        }
         (self._cache_path / key).write_text(
-            content,
+            _content_text(content),
             encoding=self._encoding,
         )
 
     def child(self, key: str) -> FileCache:
         """Create a child cache."""
         return FileCache(self._cache_path / key)
+
+
+def _content_text(item: dict[str, Any]) -> str:
+    """Return the content of the cache item."""
+    return json.dumps(item, indent=2, ensure_ascii=False)
 
 
 def _clear_dir(path: Path) -> None:
