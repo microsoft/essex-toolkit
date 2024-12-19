@@ -164,7 +164,6 @@ class BaseLLM(
     async def _inject_usage(
         self, result: LLMOutput[TOutput, TJsonModel, THistoryEntry]
     ):
-        """Inject token consumption usage into a response."""
         usage = LLMUsageMetrics()
         if self._usage_extractor:
             usage = self._usage_extractor.extract_usage(result.output)
