@@ -22,7 +22,7 @@ from .services.usage_extractor import OpenAIUsageExtractor
 if TYPE_CHECKING:
     from fnllm.events.base import LLMEvents
     from fnllm.openai.types.client import OpenAIClient
-    from fnllm.services.cache_interactor import CacheInteractor
+    from fnllm.services.cache_interactor import Cached, CacheInteractor
     from fnllm.services.rate_limiter import RateLimiter
     from fnllm.services.retryer import Retryer
     from fnllm.services.variable_injector import VariableInjector
@@ -109,7 +109,7 @@ class OpenAIEmbeddingsLLMImpl(
         prompt: OpenAIEmbeddingsInput,
         parameters: OpenAIEmbeddingsParameters,
         bypass_cache: bool,
-    ) -> OpenAICreateEmbeddingResponseModel:
+    ) -> Cached[OpenAICreateEmbeddingResponseModel]:
         # TODO: check if we need to remove max_tokens and n from the keys
         return await self._cache.get_or_insert(
             lambda: self._client.embeddings.create(
@@ -140,14 +140,16 @@ class OpenAIEmbeddingsLLMImpl(
             parameters=embeddings_parameters,
             bypass_cache=bypass_cache,
         )
+        result = response.value
+        usage: LLMUsageMetrics | None = None
+        if result.usage and not response.hit:
+            usage = LLMUsageMetrics(
+                input_tokens=result.usage.prompt_tokens,
+            )
 
         return OpenAIEmbeddingsOutput(
             raw_input=prompt,
-            raw_output=response.data,
-            embeddings=[d.embedding for d in response.data],
-            usage=LLMUsageMetrics(
-                input_tokens=response.usage.prompt_tokens,
-            )
-            if response.usage
-            else None,
+            raw_output=result.data,
+            embeddings=[d.embedding for d in result.data],
+            usage=usage,
         )

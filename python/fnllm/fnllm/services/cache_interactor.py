@@ -4,7 +4,8 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
+from dataclasses import dataclass
+from typing import TYPE_CHECKING, Any, Generic, TypeVar
 
 from fnllm.events.base import LLMEvents
 
@@ -13,6 +14,17 @@ if TYPE_CHECKING:
 
     from fnllm.caching.base import Cache
     from fnllm.types.generics import TJsonModel
+
+
+T = TypeVar("T")
+
+
+@dataclass
+class Cached(Generic[T]):
+    """A cached value."""
+
+    value: T
+    hit: bool
 
 
 class CacheInteractor:
@@ -40,20 +52,23 @@ class CacheInteractor:
         name: str | None,
         json_model: type[TJsonModel],
         bypass_cache: bool = False,
-    ) -> TJsonModel:
+    ) -> Cached[TJsonModel]:
         """Get or insert an item into the cache."""
         if not self._cache or bypass_cache:
-            return await func()
+            result = await func()
+            return Cached(value=result, hit=False)
 
         key = self._cache.create_key(key_data, prefix=prefix)
         cached_value = await self._cache.get(key)
 
         if cached_value:
             entry = json_model.model_validate(cached_value)
+            hit = True
             await self._events.on_cache_hit(key, name)
         else:
             entry = await func()
+            hit = False
             await self._cache.set(key, entry.model_dump(), {"input": key_data})
             await self._events.on_cache_miss(key, name)
 
-        return entry
+        return Cached(value=entry, hit=hit)
