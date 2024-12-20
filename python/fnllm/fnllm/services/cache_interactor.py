@@ -59,8 +59,8 @@ class CacheInteractor:
             return Cached(value=result, hit=False)
 
         key = self._cache.create_key(key_data, prefix=prefix)
-        if self._cache.has(key):
-            cached_value = await self._cache.get(key)
+        cached_value = await self._cache.get(key)
+        if cached_value is not None:
             entry = json_model.model_validate(cached_value)
             hit = True
             await self._events.on_cache_hit(key, name)
