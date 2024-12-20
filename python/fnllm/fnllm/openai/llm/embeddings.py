@@ -151,5 +151,5 @@ class OpenAIEmbeddingsLLMImpl(
             raw_input=prompt,
             raw_output=result.data,
             embeddings=[d.embedding for d in result.data],
-            usage=usage,
+            usage=usage or LLMUsageMetrics(),
         )

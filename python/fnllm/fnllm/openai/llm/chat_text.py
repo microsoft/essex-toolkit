@@ -171,9 +171,10 @@ class OpenAITextChatLLMImpl(
                 input_tokens=completion.usage.prompt_tokens,
                 output_tokens=completion.usage.completion_tokens,
             )
+
         return OpenAIChatOutput(
             raw_input=prompt_message,
             raw_output=result,
             content=result.content,
-            usage=usage,
+            usage=usage or LLMUsageMetrics(),
         )
