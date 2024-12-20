@@ -27,7 +27,7 @@ async def test_cache_interactor(file_cache: FileCache):
         name="name",
         json_model=CustomModel,
     )
-    assert result == expected
+    assert result.value == expected
     func.assert_called_once()
 
     # call and assert func will not be called
@@ -40,7 +40,8 @@ async def test_cache_interactor(file_cache: FileCache):
         name="name",
         json_model=CustomModel,
     )
-    assert result == expected
+    assert result.value == expected
+    assert result.hit is True
     func.assert_not_called()
 
     #
@@ -55,7 +56,8 @@ async def test_cache_interactor(file_cache: FileCache):
         json_model=CustomModel,
         bypass_cache=True,
     )
-    assert result == expected
+    assert result.value == expected
+    assert result.hit is False
     func.assert_called()
 
     # call with a different key data should not be a cache hit
@@ -68,7 +70,8 @@ async def test_cache_interactor(file_cache: FileCache):
         name="name",
         json_model=CustomModel,
     )
-    assert result == expected
+    assert result.value == expected
+    assert result.hit is False
     func.assert_called_once()
 
     # different prefix should not be cache hit
@@ -80,7 +83,8 @@ async def test_cache_interactor(file_cache: FileCache):
         name="name",
         json_model=CustomModel,
     )
-    assert result == expected
+    assert result.value == expected
+    assert result.hit is False
     func.assert_called_once()
 
 
