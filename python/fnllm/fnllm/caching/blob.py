@@ -2,11 +2,8 @@
 
 """Azure Blob Storage Cache."""
 
-from __future__ import annotations
-
 import json
 import re
-import time
 from pathlib import Path
 from typing import Any
 
@@ -33,7 +30,11 @@ class InvalidBlobCacheArgumentsError(ValueError):
 
 
 class BlobCache(Cache):
-    """The Blob-Storage implementation."""
+    """
+    The Blob-Storage implementation.
+
+    Note that this implementation does not track audit fields "created" and "accessed", since these are natively available in Azure Blob Storage.
+    """
 
     _connection_string: str | None
     _container_name: str
@@ -134,11 +135,6 @@ class BlobCache(Cache):
         else:
             blob_data = blob_data.decode(self._encoding)
             data = json.loads(blob_data)
-
-            # Update the accessed date
-            data["accessed"] = time.time()
-            blob_client = self.blob_client(key)
-            blob_client.upload_blob(data.encode(self._encoding), overwrite=True)
             return data["result"]
 
     async def set(
@@ -146,16 +142,8 @@ class BlobCache(Cache):
     ) -> None:
         """Set a value in the cache."""
         key = self._keyname(key)
-        create_time = time.time()
         content = json.dumps(
-            {
-                "result": value,
-                "metadata": metadata,
-                "created": create_time,
-                "accessed": create_time,
-            },
-            indent=2,
-            ensure_ascii=False,
+            {"result": value, "metadata": metadata}, indent=2, ensure_ascii=False
         )
         blob_client = self.blob_client(key)
         blob_client.upload_blob(content.encode(self._encoding), overwrite=True)
@@ -171,7 +159,7 @@ class BlobCache(Cache):
         for blob in [*self.container_client.list_blob_names()]:
             self.blob_client(blob).delete_blob()
 
-    def child(self, key: str) -> BlobCache:
+    def child(self, key: str) -> "BlobCache":
         """Create a child storage instance."""
         path = str(Path(self._path_prefix) / key)
         return BlobCache(

@@ -12,3 +12,4 @@
 # * `fnllm.tools`: Tools Usage for LLMs.
 # * `fnllm.utils`: General fnllm utilities.
 # * `fnllm.openai`: OpenAI specific implementations.
+# * `fnllm.errors`: Custom Errors types for fnllm.
