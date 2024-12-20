@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Self
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from types import TracebackType
@@ -31,7 +31,7 @@ class LimitContext:
         self._limiter = limiter
         self._manifest = manifest
 
-    async def __aenter__(self) -> Self:
+    async def __aenter__(self) -> LimitContext:  # noqa: PYI034 - Self requires python 3.11+
         """Enter the context."""
         await self._limiter.acquire(self._manifest)
         return self
