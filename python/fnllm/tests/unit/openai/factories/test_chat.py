@@ -19,7 +19,7 @@ from fnllm.openai.llm.services.usage_extractor import OpenAIUsageExtractor
 from fnllm.services.variable_injector import VariableInjector
 
 if TYPE_CHECKING:
-    from fnllm import ChatLLM
+    from fnllm.types import ChatLLM
 
 
 def test_oai_chat_llm_assignable_to_chat_llm():
