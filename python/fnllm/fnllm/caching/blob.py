@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import json
 import re
+import time
 from pathlib import Path
 from typing import Any
 
@@ -133,6 +134,11 @@ class BlobCache(Cache):
         else:
             blob_data = blob_data.decode(self._encoding)
             data = json.loads(blob_data)
+
+            # Update the accessed date
+            data["accessed"] = time.time()
+            blob_client = self.blob_client(key)
+            blob_client.upload_blob(data.encode(self._encoding), overwrite=True)
             return data["result"]
 
     async def set(
@@ -140,8 +146,16 @@ class BlobCache(Cache):
     ) -> None:
         """Set a value in the cache."""
         key = self._keyname(key)
+        create_time = time.time()
         content = json.dumps(
-            {"result": value, "metadata": metadata}, indent=2, ensure_ascii=False
+            {
+                "result": value,
+                "metadata": metadata,
+                "created": create_time,
+                "accessed": create_time,
+            },
+            indent=2,
+            ensure_ascii=False,
         )
         blob_client = self.blob_client(key)
         blob_client.upload_blob(content.encode(self._encoding), overwrite=True)

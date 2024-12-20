@@ -47,7 +47,7 @@ class FileCache(Cache):
         cache_entry = json.loads(path.read_text(encoding=self._encoding))
 
         # Mark the cache entry as updated to keep it alive
-        cache_entry["updated"] = time.time()
+        cache_entry["accessed"] = time.time()
         (self._cache_path / key).write_text(
             _content_text(cache_entry),
             encoding=self._encoding,
@@ -72,7 +72,7 @@ class FileCache(Cache):
             "result": value,
             "metadata": metadata,
             "created": create_time,
-            "updated": create_time,
+            "accessed": create_time,
         }
         (self._cache_path / key).write_text(
             _content_text(content),
