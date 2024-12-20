@@ -17,7 +17,7 @@ from fnllm.services.cache_interactor import CacheInteractor
 from fnllm.services.variable_injector import VariableInjector
 
 if TYPE_CHECKING:
-    from fnllm import EmbeddingsLLM
+    from fnllm.types import EmbeddingsLLM
 
 
 def test_oai_embedding_llm_assignable_to_embedding_llm():

@@ -3,6 +3,8 @@
 
 """Cache protocol definition."""
 
+from __future__ import annotations
+
 import hashlib
 import json
 from abc import ABC, abstractmethod
@@ -38,7 +40,7 @@ class Cache(ABC):
         """Write a value into the cache."""
 
     @abstractmethod
-    def child(self, key: str) -> "Cache":
+    def child(self, key: str) -> Cache:
         """Create a child cache."""
 
     def create_key(self, data: Any, *, prefix: str | None = None) -> str:

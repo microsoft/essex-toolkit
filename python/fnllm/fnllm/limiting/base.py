@@ -2,9 +2,14 @@
 
 """Base limiter interface."""
 
+from __future__ import annotations
+
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from types import TracebackType
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from types import TracebackType
 
 
 @dataclass
@@ -21,12 +26,12 @@ class Manifest:
 class LimitContext:
     """A context manager for limiting."""
 
-    def __init__(self, limiter: "Limiter", manifest: Manifest):
+    def __init__(self, limiter: Limiter, manifest: Manifest):
         """Create a new LimitContext."""
         self._limiter = limiter
         self._manifest = manifest
 
-    async def __aenter__(self) -> "LimitContext":
+    async def __aenter__(self) -> LimitContext:  # noqa: PYI034 - Self requires python 3.11+
         """Enter the context."""
         await self._limiter.acquire(self._manifest)
         return self

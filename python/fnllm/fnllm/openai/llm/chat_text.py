@@ -2,14 +2,15 @@
 
 """The chat-based LLM implementation."""
 
+from __future__ import annotations
+
 from collections.abc import Iterator
-from typing import Any, cast
+from typing import TYPE_CHECKING, Any, cast
 
 from openai.types.chat.chat_completion_message_param import ChatCompletionMessageParam
 from typing_extensions import Unpack
 
 from fnllm.base.base import BaseLLM
-from fnllm.events.base import LLMEvents
 from fnllm.openai.types.aliases import OpenAIChatCompletionModel, OpenAIChatModel
 from fnllm.openai.types.chat.io import (
     OpenAIChatCompletionInput,
@@ -17,19 +18,22 @@ from fnllm.openai.types.chat.io import (
     OpenAIChatOutput,
 )
 from fnllm.openai.types.chat.parameters import OpenAIChatParameters
-from fnllm.openai.types.client import OpenAIClient
-from fnllm.services.cache_interactor import CacheInteractor
-from fnllm.services.json import JsonHandler
-from fnllm.services.rate_limiter import RateLimiter
-from fnllm.services.retryer import Retryer
-from fnllm.services.variable_injector import VariableInjector
-from fnllm.types.generics import TJsonModel
-from fnllm.types.io import LLMInput
 from fnllm.types.metrics import LLMUsageMetrics
 
 from .services.history_extractor import OpenAIHistoryExtractor
 from .services.usage_extractor import OpenAIUsageExtractor
 from .utils import build_chat_messages
+
+if TYPE_CHECKING:
+    from fnllm.events.base import LLMEvents
+    from fnllm.openai.types.client import OpenAIClient
+    from fnllm.services.cache_interactor import Cached, CacheInteractor
+    from fnllm.services.json import JsonHandler
+    from fnllm.services.rate_limiter import RateLimiter
+    from fnllm.services.retryer import Retryer
+    from fnllm.services.variable_injector import VariableInjector
+    from fnllm.types.generics import TJsonModel
+    from fnllm.types.io import LLMInput
 
 
 class OpenAITextChatLLMImpl(
@@ -122,7 +126,7 @@ class OpenAITextChatLLMImpl(
         messages: list[OpenAIChatHistoryEntry],
         parameters: OpenAIChatParameters,
         bypass_cache: bool,
-    ) -> OpenAIChatCompletionModel:
+    ) -> Cached[OpenAIChatCompletionModel]:
         # TODO: check if we need to remove max_tokens and n from the keys
         return await self._cache.get_or_insert(
             lambda: self._client.chat.completions.create(
@@ -152,23 +156,25 @@ class OpenAITextChatLLMImpl(
             local_model_parameters
         )
 
-        completion = await self._call_completion_or_cache(
+        response = await self._call_completion_or_cache(
             name,
             messages=messages,
             parameters=completion_parameters,
             bypass_cache=bypass_cache,
         )
+        completion = response.value
 
-        response = completion.choices[0].message
-
-        return OpenAIChatOutput(
-            raw_input=prompt_message,
-            raw_output=response,
-            content=response.content,
-            usage=LLMUsageMetrics(
+        result = completion.choices[0].message
+        usage: LLMUsageMetrics | None = None
+        if completion.usage and not response.hit:
+            usage = LLMUsageMetrics(
                 input_tokens=completion.usage.prompt_tokens,
                 output_tokens=completion.usage.completion_tokens,
             )
-            if completion.usage
-            else None,
+
+        return OpenAIChatOutput(
+            raw_input=prompt_message,
+            raw_output=result,
+            content=result.content,
+            usage=usage or LLMUsageMetrics(),
         )

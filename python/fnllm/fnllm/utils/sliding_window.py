@@ -4,6 +4,8 @@
 
 # Copyright (c) 2024 Microsoft Corporation.
 
+from __future__ import annotations
+
 from asyncio import Lock
 from collections import deque
 from dataclasses import dataclass

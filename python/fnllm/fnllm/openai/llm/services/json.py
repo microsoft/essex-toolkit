@@ -1,6 +1,10 @@
 # Copyright (c) 2024 Microsoft Corporation.
 """OpenAI JSON Handler."""
 
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 from fnllm.config.json_strategy import JsonStrategy
 from fnllm.openai.types.chat.io import (
     OpenAIChatCompletionInput,
@@ -15,8 +19,10 @@ from fnllm.services.json import (
     JsonRequester,
     LooseModeJsonReceiver,
 )
-from fnllm.types.generics import TJsonModel
-from fnllm.types.io import LLMInput, LLMOutput
+
+if TYPE_CHECKING:
+    from fnllm.types.generics import TJsonModel
+    from fnllm.types.io import LLMInput, LLMOutput
 
 
 def create_json_handler(

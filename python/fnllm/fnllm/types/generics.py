@@ -2,6 +2,8 @@
 
 """LLM generic variables."""
 
+from __future__ import annotations
+
 from typing import Any, TypeAlias, TypeVar
 
 from pydantic import BaseModel

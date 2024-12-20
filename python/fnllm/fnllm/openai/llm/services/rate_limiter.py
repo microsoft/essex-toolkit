@@ -2,14 +2,13 @@
 
 """Rate limiting LLM implementation for OpenAI."""
 
+from __future__ import annotations
+
 import json
-from typing import Final, Generic
+from typing import TYPE_CHECKING, Final, Generic
 
 from openai import APIConnectionError, InternalServerError, RateLimitError
-from tiktoken import Encoding
 
-from fnllm.events.base import LLMEvents
-from fnllm.limiting import Limiter
 from fnllm.openai.llm.utils import llm_tools_to_param
 from fnllm.services.rate_limiter import RateLimiter
 from fnllm.types.generics import (
@@ -19,7 +18,13 @@ from fnllm.types.generics import (
     TModelParameters,
     TOutput,
 )
-from fnllm.types.io import LLMInput
+
+if TYPE_CHECKING:
+    from tiktoken import Encoding
+
+    from fnllm.events.base import LLMEvents
+    from fnllm.limiting import Limiter
+    from fnllm.types.io import LLMInput
 
 OPENAI_RETRYABLE_ERRORS: Final[list[type[Exception]]] = [
     RateLimitError,

@@ -2,9 +2,14 @@
 
 """Composite limiter module."""
 
-from collections.abc import Sequence
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
 
 from .base import Limiter, Manifest
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
 
 class CompositeLimiter(Limiter):

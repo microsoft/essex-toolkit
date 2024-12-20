@@ -2,27 +2,31 @@
 
 """The EmbeddingsLLM class."""
 
-from typing import cast
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, cast
 
 from typing_extensions import Unpack
 
 from fnllm.base.base import BaseLLM
-from fnllm.events.base import LLMEvents
 from fnllm.openai.types.aliases import OpenAICreateEmbeddingResponseModel
-from fnllm.openai.types.client import OpenAIClient
 from fnllm.openai.types.embeddings.io import (
     OpenAIEmbeddingsInput,
     OpenAIEmbeddingsOutput,
 )
 from fnllm.openai.types.embeddings.parameters import OpenAIEmbeddingsParameters
-from fnllm.services.cache_interactor import CacheInteractor
-from fnllm.services.rate_limiter import RateLimiter
-from fnllm.services.retryer import Retryer
-from fnllm.services.variable_injector import VariableInjector
-from fnllm.types.io import LLMInput
 from fnllm.types.metrics import LLMUsageMetrics
 
 from .services.usage_extractor import OpenAIUsageExtractor
+
+if TYPE_CHECKING:
+    from fnllm.events.base import LLMEvents
+    from fnllm.openai.types.client import OpenAIClient
+    from fnllm.services.cache_interactor import Cached, CacheInteractor
+    from fnllm.services.rate_limiter import RateLimiter
+    from fnllm.services.retryer import Retryer
+    from fnllm.services.variable_injector import VariableInjector
+    from fnllm.types.io import LLMInput
 
 
 class OpenAIEmbeddingsLLMImpl(
@@ -71,7 +75,7 @@ class OpenAIEmbeddingsLLMImpl(
         self._cache = cache
         self._global_model_parameters = model_parameters or {}
 
-    def child(self, name: str) -> "OpenAIEmbeddingsLLMImpl":
+    def child(self, name: str) -> OpenAIEmbeddingsLLMImpl:
         """Create a child LLM."""
         return OpenAIEmbeddingsLLMImpl(
             self._client,
@@ -105,7 +109,7 @@ class OpenAIEmbeddingsLLMImpl(
         prompt: OpenAIEmbeddingsInput,
         parameters: OpenAIEmbeddingsParameters,
         bypass_cache: bool,
-    ) -> OpenAICreateEmbeddingResponseModel:
+    ) -> Cached[OpenAICreateEmbeddingResponseModel]:
         # TODO: check if we need to remove max_tokens and n from the keys
         return await self._cache.get_or_insert(
             lambda: self._client.embeddings.create(
@@ -136,14 +140,16 @@ class OpenAIEmbeddingsLLMImpl(
             parameters=embeddings_parameters,
             bypass_cache=bypass_cache,
         )
+        result = response.value
+        usage: LLMUsageMetrics | None = None
+        if result.usage and not response.hit:
+            usage = LLMUsageMetrics(
+                input_tokens=result.usage.prompt_tokens,
+            )
 
         return OpenAIEmbeddingsOutput(
             raw_input=prompt,
-            raw_output=response.data,
-            embeddings=[d.embedding for d in response.data],
-            usage=LLMUsageMetrics(
-                input_tokens=response.usage.prompt_tokens,
-            )
-            if response.usage
-            else None,
+            raw_output=result.data,
+            embeddings=[d.embedding for d in result.data],
+            usage=usage or LLMUsageMetrics(),
         )

@@ -2,11 +2,15 @@
 
 """LLM cache-interactor module."""
 
+from __future__ import annotations
+
 from abc import ABC, abstractmethod
-from collections.abc import Sequence
-from typing import Generic
+from typing import TYPE_CHECKING, Generic
 
 from fnllm.types.generics import THistoryEntry, TOutput
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
 
 class HistoryExtractor(ABC, Generic[TOutput, THistoryEntry]):

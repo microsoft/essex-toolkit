@@ -30,7 +30,11 @@ class InvalidBlobCacheArgumentsError(ValueError):
 
 
 class BlobCache(Cache):
-    """The Blob-Storage implementation."""
+    """
+    The Blob-Storage implementation.
+
+    Note that this implementation does not track audit fields "created" and "accessed", since these are natively available in Azure Blob Storage.
+    """
 
     _connection_string: str | None
     _container_name: str

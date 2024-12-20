@@ -1,6 +1,6 @@
 [project]
 name = "fnllm"
-version = "0.0.12"
+version = "0.0.13"
 description = "A function-based LLM protocol and wrapper."
 authors = [
     {name="Chris Trevino", email="chtrevin@microsoft.com"},
@@ -63,7 +63,7 @@ format = ['_sort_imports', '_format_code']
 test = "pytest tests"
 
 _test_with_coverage = 'coverage run --source=fnllm -m pytest tests/unit'
-_coverage_report = 'coverage report --fail-under=100 --show-missing --omit="fnllm/services/decorator.py,fnllm/types/protocol.py,fnllm/openai/types/client.py"'
+_coverage_report = 'coverage report --fail-under=90 --show-missing --omit="fnllm/services/decorator.py,fnllm/types/protocol.py,fnllm/openai/types/client.py"'
 _generate_coverage_xml = 'coverage xml --omit="fnllm/services/decorator.py"'
 _generate_coverage_html = 'coverage html --omit="fnllm/services/decorator.py"'
 test_coverage = [

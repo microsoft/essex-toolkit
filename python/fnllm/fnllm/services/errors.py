@@ -2,6 +2,8 @@
 
 """Base LLM related errors."""
 
+from __future__ import annotations
+
 
 class RetriesExhaustedError(RuntimeError):
     """Retries exhausted error."""
