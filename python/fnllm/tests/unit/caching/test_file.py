@@ -2,6 +2,7 @@
 
 """Tests for the caching.file."""
 
+import json
 import os
 import pathlib
 from typing import Any
@@ -105,6 +106,26 @@ async def test_children(file_cache: FileCache):
 async def test_create_from_str(cache_from_str: FileCache):
     await cache_from_str.set("key", "value")
     assert await cache_from_str.get("key") == "value"
+
+
+async def test_common_errors(file_cache: FileCache):
+    (file_cache.root_path / "json_error").write_text("not json")
+    result = await file_cache.get("json_error")
+    assert result is None
+
+    non_unicode_data = bytes([0x80, 0x81, 0x82])
+    (file_cache.root_path / "non_unicode").write_bytes(non_unicode_data)
+    result = await file_cache.get("non_unicode")
+    assert result is None
+
+    file = file_cache.root_path / "permission_error"
+    (file_cache.root_path / "permission_error").write_text(
+        json.dumps({"result": "value"})
+    )
+    file.chmod(0o000)
+    result = await file_cache.get("permission_error")
+    assert result is None
+    file.chmod(0o777)
 
 
 def _is_dir_empty(path: pathlib.Path) -> bool:

@@ -171,11 +171,11 @@ def test_container_name_validation():
 async def test_handles_common_errors(blob_cache: BlobCache):
     # Json Errors
     blob_cache.blob_client("json_error").upload_blob("""{ "data""")
-    json_value = await blob_cache.get("json_error")
-    assert json_value is None
+    result = await blob_cache.get("json_error")
+    assert result is None
 
     # Unicode Errors
     non_unicode_data = bytes([0x80, 0x81, 0x82])
     blob_cache.blob_client("unicode_error").upload_blob(non_unicode_data)
-    unicode_value = await blob_cache.get("unicode_error")
-    assert unicode_value is None
+    result = await blob_cache.get("unicode_error")
+    assert result is None

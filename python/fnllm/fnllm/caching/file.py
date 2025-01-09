@@ -48,9 +48,6 @@ class FileCache(Cache):
         except json.JSONDecodeError:
             _log.warning("Cache entry %s is corrupted", path)
             return None
-        except FileNotFoundError:
-            _log.error("File %s not found", path)
-            return None
         except PermissionError:
             _log.error("Permission denied for file %s", path)
             return None
