@@ -5,12 +5,10 @@
 from __future__ import annotations
 
 import traceback
-from collections.abc import AsyncIterator, Callable, Iterator
 from typing import TYPE_CHECKING, TypeAlias, cast
 
 from openai import AsyncStream
 from openai.types.chat import ChatCompletionChunk
-from openai.types.chat.chat_completion_message_param import ChatCompletionMessageParam
 from typing_extensions import Unpack
 
 from fnllm.base.base import BaseLLM
@@ -25,6 +23,12 @@ from fnllm.types import LLMMetrics, LLMUsageMetrics
 from .utils import build_chat_messages
 
 if TYPE_CHECKING:
+    from collections.abc import AsyncIterator, Callable, Iterator
+
+    from openai.types.chat.chat_completion_message_param import (
+        ChatCompletionMessageParam,
+    )
+
     from fnllm.events.base import LLMEvents
     from fnllm.openai.types.aliases import OpenAIChatModel
     from fnllm.openai.types.client import OpenAIClient
@@ -118,7 +122,7 @@ class OpenAIStreamingChatLLMImpl(
             completion_kwargs["stream_options"] = {"include_usage": True}
 
         completion: ChunkStream = await self._client.chat.completions.create(
-            messages=cast(Iterator[ChatCompletionMessageParam], messages),
+            messages=cast("Iterator[ChatCompletionMessageParam]", messages),
             **completion_kwargs,
         )
 

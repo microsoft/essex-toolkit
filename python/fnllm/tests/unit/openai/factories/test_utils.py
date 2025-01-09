@@ -2,7 +2,7 @@
 
 """Tests for openai.factories.utils."""
 
-from typing import cast
+from typing import TYPE_CHECKING, cast
 from unittest.mock import create_autospec
 
 import pytest
@@ -18,8 +18,10 @@ from fnllm.openai.factories.utils import (
     create_rate_limiter,
     create_retryer,
 )
-from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
-from fnllm.openai.llm.services.retryer import OpenAIRetryer
+
+if TYPE_CHECKING:
+    from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
+    from fnllm.openai.llm.services.retryer import OpenAIRetryer
 
 
 @pytest.mark.parametrize("requests_burst_mode", ([True, False]))
@@ -42,7 +44,7 @@ def test_create_rate_limited_llm(requests_burst_mode: bool):
     limiter = create_limiter(config)
 
     llm = cast(
-        OpenAIRateLimiter,
+        "OpenAIRateLimiter",
         create_rate_limiter(
             config=config,
             events=mocked_events,
@@ -74,7 +76,7 @@ def test_create_retrying_llm():
     tag = test_create_retrying_llm.__name__
 
     llm = cast(
-        OpenAIRetryer,
+        "OpenAIRetryer",
         create_retryer(
             config=config,
             operation=tag,

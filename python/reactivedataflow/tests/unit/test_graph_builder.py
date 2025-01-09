@@ -130,7 +130,7 @@ def test_edge_with_invalid_source_raises_error():
     registry = Registry()
     define_math_ops(registry)
 
-    with pytest.raises(NodeNotFoundError, match="Node x not found."):
+    with pytest.raises(NodeNotFoundError, match="Node x not found"):
         GraphBuilder().load_model(
             Graph(
                 nodes=[
@@ -145,7 +145,7 @@ def test_edge_with_invalid_target_raises_error():
     registry = Registry()
     define_math_ops(registry)
 
-    with pytest.raises(NodeNotFoundError, match="Node x not found."):
+    with pytest.raises(NodeNotFoundError, match="Node x not found"):
         GraphBuilder().load_model(
             Graph(
                 nodes=[Node(id="n", verb="add")],

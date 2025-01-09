@@ -237,7 +237,7 @@ class LooseModeJsonReceiver(
             model = self._read_model_from_json(raw_json, json_model)
         except FailedToGenerateValidJsonError as err:
             # A 'None' value would not have thrown an error
-            json_string = cast(str, json_string)
+            json_string = cast("str", json_string)
             try:
                 (
                     json_string,
@@ -294,8 +294,8 @@ class LooseModeJsonReceiver(
         kwargs: LLMInput[TJsonModel, THistoryEntry, TModelParameters],
     ) -> tuple[str | None, JSON | None, TJsonModel | None]:
         """Try to recover from a bad JSON error. Null JSON = unable to recover."""
-        json_string = cast(str, repair_json(json_string, skip_json_loads=True))
-        json_object = cast(JSON, json.loads(json_string)) if json_string else None
+        json_string = cast("str", repair_json(json_string, skip_json_loads=True))
+        json_object = cast("JSON", json.loads(json_string)) if json_string else None
         json_model = kwargs.get("json_model")
         model_instance = json_model.model_validate(json_object) if json_model else None
         return (json_string, json_object, model_instance)

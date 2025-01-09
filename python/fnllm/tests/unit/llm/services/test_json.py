@@ -198,7 +198,7 @@ async def test_loose_mode_receiver_read_model():
 
     assert response.output.content == raw_json_str
     assert response.raw_json == expected_raw_json
-    model: Model = cast(Model, response.parsed_json)
+    model: Model = cast("Model", response.parsed_json)
     assert model.integer == 1
     assert model.string == "value"
 
@@ -289,7 +289,7 @@ async def test_standard_mode_receiver_read_model():
 
     assert response.output.content == raw_json_str
     assert response.raw_json == expected_raw_json
-    model: Model = cast(Model, response.parsed_json)
+    model: Model = cast("Model", response.parsed_json)
     assert model.integer == 1
     assert model.string == "value"
 

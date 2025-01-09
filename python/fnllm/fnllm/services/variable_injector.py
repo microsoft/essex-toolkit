@@ -25,4 +25,4 @@ class VariableInjector:
         if isinstance(parsed_prompt, str) and variables:
             parsed_prompt = Template(parsed_prompt).substitute(**variables)
 
-        return cast(TInput, parsed_prompt)
+        return cast("TInput", parsed_prompt)

@@ -247,7 +247,7 @@ def test_missing_key():
 
     with pytest.raises(
         ValueError,
-        match="Value for not_valid_key is required and not found in any source.",
+        match="Value for not_valid_key is required and not found in any source",
     ):
         load_config(KeyErrorConfig, sources=[MockSource()])
 
@@ -392,7 +392,7 @@ def test_malformed_plaintext_list():
         malformed_list: Annotated[list[int], Parser(plain_text_list_parser())]
 
     with pytest.raises(
-        ValueError, match="Error parsing the value 1,2,3,a for key malformed_list."
+        ValueError, match="Error parsing the value 1,2,3,a for key malformed_list"
     ):
         load_config(RuntimeSourceConfig, sources=[ArgSource(malformed_list="1,2,3,a")])
 
@@ -586,7 +586,7 @@ def test_literal_value():
         true_value: Literal[True] = Field(default=True)
         string_value: Literal["Hello"] = Field(default="Hello")
         int_value: Literal[1] = Field(default=1)
-        none_value: Literal[None] = Field(default=None)
+        none_value: None = Field(default=None)
         sample: Literal["sample", 1] = Field(default="sample")
 
     sample_config = load_config(SampleModel, sources=[FileSource(file_path=yaml_file)])

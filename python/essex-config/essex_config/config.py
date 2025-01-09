@@ -1,6 +1,7 @@
 """Main configuration module for the essex_config package."""
 
 import os
+from collections.abc import Callable
 from functools import cache
 from types import UnionType
 from typing import Any, TypeVar, Union, cast, get_args, get_origin
@@ -170,14 +171,14 @@ def _load_config(
                 source_prefix = source.prefix
             try:
                 if value and update_annotation:
-                    _value = source.get_value(
+                    source_value = source.get_value(
                         name,
                         field_type,
                         source_prefix,
                         source_alias.get(type(source)),
                         parser_annotation,
                     )
-                    value = update_annotation.update(value, _value)
+                    value = update_annotation.update(value, source_value)
                 else:
                     value = source.get_value(
                         name,
@@ -195,7 +196,8 @@ def _load_config(
         if value is None and info.default is not PydanticUndefined:
             value = info.default
         if value is None and info.default_factory is not None:
-            value = info.default_factory()
+            factory = cast(Callable[[], Any], info.default_factory)
+            value = factory()
 
         if parse_env_values:
             value = parse_string_template(value, {**os.environ, **env_values})

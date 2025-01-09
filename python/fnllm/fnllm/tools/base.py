@@ -45,14 +45,14 @@ class LLMTool(BaseModel):
     @lru_cache
     def get_name(cls) -> str:
         """Getter for the tool name (class specific)."""
-        return cls.__tool_name__ or cast(str, cls.get_json_schema().get("title", ""))
+        return cls.__tool_name__ or cast("str", cls.get_json_schema().get("title", ""))
 
     @classmethod
     @lru_cache
     def get_description(cls) -> str:
         """Getter for the tool description (class specific)."""
         return cls.__tool_description__ or cast(
-            str, cls.get_json_schema().get("description", "")
+            "str", cls.get_json_schema().get("description", "")
         )
 
     @classmethod

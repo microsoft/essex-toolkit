@@ -4,10 +4,8 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterator
 from typing import TYPE_CHECKING, Any, cast
 
-from openai.types.chat.chat_completion_message_param import ChatCompletionMessageParam
 from typing_extensions import Unpack
 
 from fnllm.base.base import BaseLLM
@@ -20,11 +18,15 @@ from fnllm.openai.types.chat.io import (
 from fnllm.openai.types.chat.parameters import OpenAIChatParameters
 from fnllm.types.metrics import LLMUsageMetrics
 
-from .services.history_extractor import OpenAIHistoryExtractor
-from .services.usage_extractor import OpenAIUsageExtractor
 from .utils import build_chat_messages
 
 if TYPE_CHECKING:
+    from collections.abc import Iterator
+
+    from openai.types.chat.chat_completion_message_param import (
+        ChatCompletionMessageParam,
+    )
+
     from fnllm.events.base import LLMEvents
     from fnllm.openai.types.client import OpenAIClient
     from fnllm.services.cache_interactor import Cached, CacheInteractor
@@ -34,6 +36,9 @@ if TYPE_CHECKING:
     from fnllm.services.variable_injector import VariableInjector
     from fnllm.types.generics import TJsonModel
     from fnllm.types.io import LLMInput
+
+    from .services.history_extractor import OpenAIHistoryExtractor
+    from .services.usage_extractor import OpenAIUsageExtractor
 
 
 class OpenAITextChatLLMImpl(
@@ -98,9 +103,9 @@ class OpenAITextChatLLMImpl(
             self._cache.child(name),
             events=self.events,
             usage_extractor=cast(
-                OpenAIUsageExtractor[OpenAIChatOutput], self._usage_extractor
+                "OpenAIUsageExtractor[OpenAIChatOutput]", self._usage_extractor
             ),
-            history_extractor=cast(OpenAIHistoryExtractor, self._history_extractor),
+            history_extractor=cast("OpenAIHistoryExtractor", self._history_extractor),
             variable_injector=self._variable_injector,
             rate_limiter=self._rate_limiter,
             retryer=self._retryer,
@@ -130,7 +135,7 @@ class OpenAITextChatLLMImpl(
         # TODO: check if we need to remove max_tokens and n from the keys
         return await self._cache.get_or_insert(
             lambda: self._client.chat.completions.create(
-                messages=cast(Iterator[ChatCompletionMessageParam], messages),
+                messages=cast("Iterator[ChatCompletionMessageParam]", messages),
                 **parameters,
             ),
             prefix=f"chat_{name}" if name else "chat",

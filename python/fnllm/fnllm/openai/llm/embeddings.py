@@ -17,8 +17,6 @@ from fnllm.openai.types.embeddings.io import (
 from fnllm.openai.types.embeddings.parameters import OpenAIEmbeddingsParameters
 from fnllm.types.metrics import LLMUsageMetrics
 
-from .services.usage_extractor import OpenAIUsageExtractor
-
 if TYPE_CHECKING:
     from fnllm.events.base import LLMEvents
     from fnllm.openai.types.client import OpenAIClient
@@ -27,6 +25,8 @@ if TYPE_CHECKING:
     from fnllm.services.retryer import Retryer
     from fnllm.services.variable_injector import VariableInjector
     from fnllm.types.io import LLMInput
+
+    from .services.usage_extractor import OpenAIUsageExtractor
 
 
 class OpenAIEmbeddingsLLMImpl(
@@ -82,7 +82,7 @@ class OpenAIEmbeddingsLLMImpl(
             self._model,
             self._cache.child(name),
             usage_extractor=cast(
-                OpenAIUsageExtractor[OpenAIEmbeddingsOutput], self._usage_extractor
+                "OpenAIUsageExtractor[OpenAIEmbeddingsOutput]", self._usage_extractor
             ),
             variable_injector=self._variable_injector,
             rate_limiter=self._rate_limiter,

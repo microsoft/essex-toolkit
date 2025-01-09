@@ -31,7 +31,7 @@ def test_can_build_with_storage_account_blob_url():
         # Bogus credential is passed in, but it's not valid. Good enough for coverage.
         with pytest.raises(
             ValueError,
-            match="Unable to determine account name for shared key credential.",
+            match="Unable to determine account name for shared key credential",
         ):
             BlobCache(
                 container_name="container",

@@ -22,5 +22,5 @@ def test_path_from_env():
 
 @pytest.mark.usefixtures("_mock_env_vars")
 def test_path_from_missing_env_var():
-    with pytest.raises(ValueError, match="Environment variable NOT_FOUND not found."):
+    with pytest.raises(ValueError, match="Environment variable NOT_FOUND not found"):
         path_from_variable("NOT_FOUND")

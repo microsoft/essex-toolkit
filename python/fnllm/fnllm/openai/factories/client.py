@@ -8,9 +8,8 @@ from typing import TYPE_CHECKING, Any, cast
 
 from openai import AsyncOpenAI
 
-from fnllm.openai.config import AzureOpenAIConfig, OpenAIConfig, PublicOpenAIConfig
-
 if TYPE_CHECKING:
+    from fnllm.openai.config import AzureOpenAIConfig, OpenAIConfig, PublicOpenAIConfig
     from fnllm.openai.types.client import OpenAIClient
 
 
@@ -24,11 +23,11 @@ def create_openai_client(
             create_azure_openai_client,
         )
 
-        config = cast(AzureOpenAIConfig, config)
-        credential = cast(TokenProvider | None, credential)
+        config = cast("AzureOpenAIConfig", config)
+        credential = cast("TokenProvider | None", credential)
         return create_azure_openai_client(config, credential=credential)
 
-    return create_public_openai_client(cast(PublicOpenAIConfig, config))
+    return create_public_openai_client(cast("PublicOpenAIConfig", config))
 
 
 def create_public_openai_client(config: PublicOpenAIConfig) -> OpenAIClient:
