@@ -17,7 +17,7 @@ class TestTool(LLMTool):
 
     """TestTool description."""
 
-    a: str = Field(description="TestTool argument A.", default=10)
+    a: str = Field(description="TestTool argument A.", default="10")
 
 
 def test_estimate_request_tokens():

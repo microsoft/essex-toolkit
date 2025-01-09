@@ -34,12 +34,12 @@ class CommonOpenAIConfig(Config, frozen=True, extra="allow", protected_namespace
     encoding: str = Field(default="cl100k_base", description="The encoding model.")
 
     chat_parameters: OpenAIChatParameters = Field(
-        default_factory=dict,
+        default_factory=OpenAIChatParameters,
         description="Global chat parameters to be used across calls.",
     )
 
     embeddings_parameters: OpenAIEmbeddingsParameters = Field(
-        default_factory=dict,
+        default_factory=OpenAIEmbeddingsParameters,
         description="Global embeddings parameters to be used across calls.",
     )
 

@@ -22,7 +22,7 @@ from pydantic import Field
 class ToolA(LLMTool):
     """Tool A description."""
 
-    a: str = Field(description="ToolA argument A.", default=10)
+    a: str = Field(description="ToolA argument A.", default="10")
 
 
 class ToolB(LLMTool):
