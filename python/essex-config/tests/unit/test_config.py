@@ -247,7 +247,7 @@ def test_missing_key():
 
     with pytest.raises(
         ValueError,
-        match="Value for not_valid_key is required and not found in any source",
+        match=r"Value for not_valid_key is required and not found in any source.",
     ):
         load_config(KeyErrorConfig, sources=[MockSource()])
 
@@ -392,7 +392,7 @@ def test_malformed_plaintext_list():
         malformed_list: Annotated[list[int], Parser(plain_text_list_parser())]
 
     with pytest.raises(
-        ValueError, match="Error parsing the value 1,2,3,a for key malformed_list"
+        ValueError, match=r"Error parsing the value 1,2,3,a for key malformed_list."
     ):
         load_config(RuntimeSourceConfig, sources=[ArgSource(malformed_list="1,2,3,a")])
 

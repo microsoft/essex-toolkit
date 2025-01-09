@@ -69,5 +69,5 @@ def test_missing_key(mock_keyvault_client):
 
     # Call get_data and verify the results
     assert "MISSING_KEY" not in source
-    with pytest.raises(KeyError, match="Key MISSING_KEY not found in the source"):
+    with pytest.raises(KeyError, match=r"Key MISSING_KEY not found in the source."):
         source.get_value("MISSING_KEY", str)

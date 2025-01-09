@@ -32,7 +32,7 @@ def test_not_found():
 
     assert "NOT_FOUND" not in source
 
-    with pytest.raises(KeyError, match="Key NOT_FOUND not found in the source"):
+    with pytest.raises(KeyError, match=r"Key NOT_FOUND not found in the source."):
         source.get_value("NOT_FOUND", str)
 
 
@@ -55,7 +55,7 @@ def test_env_source_file_invalid_file():
     wrong_file_path = Path("wrong/.env.test")
     source = EnvSource(file_path=wrong_file_path, required=True)
     with pytest.raises(
-        FileNotFoundError, match=re.escape(f"File {wrong_file_path!s} not found")
+        FileNotFoundError, match=re.escape(f"File {wrong_file_path!s} not found.")
     ):
         source.get_value("TEST_VALUE", str)
 

@@ -174,7 +174,7 @@ class OpenAIChatCompletionStreamingClientMock:
 
     def mock_response(
         self,
-        message: list[str | BaseException | None],
+        message: list[str | None | BaseException],
         *,
         completion_id: str = "mocked_id",
         created: int = 0,

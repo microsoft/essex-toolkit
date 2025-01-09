@@ -50,7 +50,7 @@ class OpenAIChatParameters(TypedDict):
 
     service_tier: NotRequired[Literal["auto", "default"] | None]
 
-    stop: NotRequired[str | list[str] | None]
+    stop: NotRequired[str | None | list[str]]
 
     temperature: NotRequired[float | None]
 

@@ -19,14 +19,11 @@ from fnllm.openai.types.aliases import (
     OpenAIFunctionModel,
     OpenAIFunctionParam,
 )
+from fnllm.openai.types.chat.io import OpenAIChatCompletionInput, OpenAIChatHistoryEntry
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Sequence
 
-    from fnllm.openai.types.chat.io import (
-        OpenAIChatCompletionInput,
-        OpenAIChatHistoryEntry,
-    )
     from fnllm.tools.base import LLMTool
 
 
@@ -119,4 +116,4 @@ def build_chat_messages(
     messages = [*history]
     if prompt is not None:
         messages.append(prompt)
-    return messages, cast("OpenAIChatHistoryEntry", prompt)
+    return messages, cast(OpenAIChatHistoryEntry, prompt)
