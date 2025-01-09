@@ -60,9 +60,8 @@ select = [
     # ANN # Type annotations, re-enable when we get bandwidth
 ]
 ignore = [
-    # Deprecated Rules
-    "ANN101",
-    "ANN102",
+    # This looks like it results in weaker types and refactor-ability.
+    "TC006",
     # Conflicts with interface argument checking
     "ARG002",
     "ANN204",

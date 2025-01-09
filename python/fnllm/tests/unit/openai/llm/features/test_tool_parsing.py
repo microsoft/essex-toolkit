@@ -22,7 +22,7 @@ from pydantic import Field
 class ToolA(LLMTool):
     """Tool A description."""
 
-    a: str = Field(description="ToolA argument A.", default=10)
+    a: str = Field(description="ToolA argument A.", default="10")
 
 
 class ToolB(LLMTool):
@@ -117,7 +117,7 @@ async def test_tools_are_parsed():
                         "parameters": {
                             "properties": {
                                 "a": {
-                                    "default": 10,
+                                    "default": "10",
                                     "description": "ToolA argument A.",
                                     "title": "A",
                                     "type": "string",
