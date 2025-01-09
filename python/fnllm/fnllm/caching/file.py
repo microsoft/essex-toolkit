@@ -43,8 +43,17 @@ class FileCache(Cache):
         if not path.exists():
             return None
 
-        # throw if result is None
-        cache_entry = json.loads(path.read_text(encoding=self._encoding))
+        try:
+            cache_entry = json.loads(path.read_text(encoding=self._encoding))
+        except json.JSONDecodeError:
+            _log.warning("Cache entry %s is corrupted", path)
+            return None
+        except PermissionError:
+            _log.error("Permission denied for file %s", path)
+            return None
+        except UnicodeDecodeError:
+            _log.error("Encoding error reading file %s", path)
+            return None
 
         # Mark the cache entry as updated to keep it alive
         cache_entry["accessed"] = time.time()

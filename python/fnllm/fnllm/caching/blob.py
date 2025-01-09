@@ -133,9 +133,15 @@ class BlobCache(Cache):
         except ResourceNotFoundError:
             return None
         else:
-            blob_data = blob_data.decode(self._encoding)
-            data = json.loads(blob_data)
-            return data["result"]
+            try:
+                blob_data = blob_data.decode(self._encoding)
+                data = json.loads(blob_data)
+            except json.JSONDecodeError:
+                return None
+            except UnicodeDecodeError:
+                return None
+            else:
+                return data["result"]
 
     async def set(
         self, key: str, value: Any, metadata: dict[str, Any] | None = None
