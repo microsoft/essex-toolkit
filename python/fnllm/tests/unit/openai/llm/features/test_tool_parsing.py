@@ -117,7 +117,7 @@ async def test_tools_are_parsed():
                         "parameters": {
                             "properties": {
                                 "a": {
-                                    "default": 10,
+                                    "default": "10",
                                     "description": "ToolA argument A.",
                                     "title": "A",
                                     "type": "string",
