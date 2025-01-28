@@ -80,10 +80,6 @@ class LLMParameters(BaseModel):
         description="The maximum number of retries to use for the LLM service.",
         default=defs.LLM_MAX_RETRIES,
     )
-    max_retry_wait: float = Field(
-        description="The maximum retry wait to use for the LLM service.",
-        default=defs.LLM_MAX_RETRY_WAIT,
-    )
     concurrent_requests: int = Field(
         description="Whether to use concurrent requests for the LLM service.",
         default=defs.LLM_CONCURRENT_REQUESTS,
