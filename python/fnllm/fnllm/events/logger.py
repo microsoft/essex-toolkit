@@ -96,15 +96,3 @@ class LLMEventsLogger(LLMEvents):
             cache_key,
             name,
         )
-
-    async def on_try(self, attempt_number: int) -> None:
-        """Called every time a new try to call the LLM happens."""
-        self._logger.debug("calling llm, attempt #%d", attempt_number)
-
-    async def on_retryable_error(
-        self, error: BaseException, attempt_number: int
-    ) -> None:
-        """Called when retryable errors happen."""
-        self._logger.warning(
-            "retryable error happened on attempt #%d: %s", attempt_number, str(error)
-        )

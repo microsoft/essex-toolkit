@@ -48,11 +48,3 @@ async def test_composite_events():
     await events.on_usage(Mock())
     delegate_a.on_usage.assert_called_once()
     delegate_b.on_usage.assert_called_once()
-
-    await events.on_try(Mock())
-    delegate_a.on_try.assert_called_once()
-    delegate_b.on_try.assert_called_once()
-
-    await events.on_retryable_error(Mock(), Mock())
-    delegate_a.on_retryable_error.assert_called_once()
-    delegate_b.on_retryable_error.assert_called_once()

@@ -46,11 +46,3 @@ async def test_logger_is_called():
     logger.reset_mock()
     await events.on_cache_miss("", "")
     logger.info.assert_called_once()
-
-    logger.reset_mock()
-    await events.on_try(1)
-    logger.debug.assert_called_once()
-
-    logger.reset_mock()
-    await events.on_retryable_error(Mock(), 1)
-    logger.warning.assert_called_once()

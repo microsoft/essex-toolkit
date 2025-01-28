@@ -51,11 +51,3 @@ class LLMEvents:
 
     async def on_cache_miss(self, cache_key: str, name: str | None) -> None:
         """Called when there is a cache miss."""
-
-    async def on_try(self, attempt_number: int) -> None:
-        """Called every time a new try to call the LLM happens."""
-
-    async def on_retryable_error(
-        self, error: BaseException, attempt_number: int
-    ) -> None:
-        """Called when retryable errors happen."""

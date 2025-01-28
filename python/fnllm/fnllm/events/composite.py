@@ -82,18 +82,3 @@ class LLMCompositeEvents(LLMEvents):
         await asyncio.gather(*[
             handler.on_cache_miss(cache_key, name) for handler in self._handlers
         ])
-
-    async def on_try(self, attempt_number: int) -> None:
-        """Called every time a new try to call the LLM happens."""
-        await asyncio.gather(*[
-            handler.on_try(attempt_number) for handler in self._handlers
-        ])
-
-    async def on_retryable_error(
-        self, error: BaseException, attempt_number: int
-    ) -> None:
-        """Called when retryable errors happen."""
-        await asyncio.gather(*[
-            handler.on_retryable_error(error, attempt_number)
-            for handler in self._handlers
-        ])
