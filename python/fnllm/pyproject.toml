@@ -1,11 +1,12 @@
 [project]
 name = "fnllm"
-version = "0.0.14"
+version = "0.0.15"
 description = "A function-based LLM protocol and wrapper."
 authors = [
     {name="Chris Trevino", email="chtrevin@microsoft.com"},
     {name="Rodrigo Racanicci", email="rracanicci@microsoft.com"}
 ]
+license = { file = "LICENSE" }
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [

@@ -429,7 +429,7 @@ wheels = [
 
 [[package]]
 name = "essex-config"
-version = "0.0.5"
+version = "0.0.6"
 source = { editable = "python/essex-config" }
 dependencies = [
     { name = "azure-identity" },
@@ -517,7 +517,7 @@ wheels = [
 
 [[package]]
 name = "fnllm"
-version = "0.0.14"
+version = "0.0.15"
 source = { editable = "python/fnllm" }
 dependencies = [
     { name = "aiolimiter" },
@@ -1664,7 +1664,7 @@ wheels = [
 
 [[package]]
 name = "reactivedataflow"
-version = "0.1.17"
+version = "0.1.18"
 source = { editable = "python/reactivedataflow" }
 dependencies = [
     { name = "networkx" },

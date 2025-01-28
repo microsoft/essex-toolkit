@@ -1,8 +1,8 @@
 [project]
 name = "reactivedataflow"
-version = "0.1.17"
+version = "0.1.18"
 description = "Reactive Dataflow Graphs"
-license = "MIT"
+license = {file = "LICENSE" }
 authors = [{name="Chris Trevino", email="chtrevin@microsoft.com"}]
 readme = "README.md"
 requires-python = ">=3.10"

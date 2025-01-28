@@ -1,10 +1,11 @@
 [project]
 name = "essex-config"
-version = "0.0.5"
+version = "0.0.6"
 description = "Python library for creating configuration objects that read from various sources, including files, environment variables, and Azure Key Vault."
 authors = [{ name = "Andres Morales", email = "andresmor@microsoft.com"}]
 readme = "README.md"
 requires-python = ">=3.10"
+license = { file = "LICENSE" }
 dependencies = [
     "pydantic>=2.7.3",
     "azure-identity>=1.16.0",
