@@ -21,30 +21,17 @@ class LLMUsageMetrics(BaseModel):
         return self.input_tokens + self.output_tokens
 
 
-class LLMRetryMetrics(BaseModel):
-    """Metrics related to LLM retries."""
-
-    num_retries: int = 0
-    """Number of times the request was retried."""
-
-    total_time: float = 0
-    """Total time the request took to execute (across all retries)."""
-
-    call_times: list[float] = Field(default_factory=list)
-    """Time taken for each request try."""
-
-
 class LLMMetrics(BaseModel):
     """LLM useful metrics."""
 
     estimated_input_tokens: int = 0
     """Estimated input tokens."""
 
+    total_time: float = 0
+    """Total time the request took to execute (across all retries)."""
+
     usage: LLMUsageMetrics = Field(default_factory=LLMUsageMetrics)
     """LLM request usage metrics."""
-
-    retry: LLMRetryMetrics = Field(default_factory=LLMRetryMetrics)
-    """LLM retry metrics."""
 
     @computed_field()
     @property

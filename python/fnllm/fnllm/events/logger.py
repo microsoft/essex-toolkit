@@ -75,9 +75,8 @@ class LLMEventsLogger(LLMEvents):
     ) -> None:
         """Called when a request goes through (called by the retrying LLM)."""
         self._logger.info(
-            "request succeed with %d retries in %.2fs and used %d tokens",
-            metrics.retry.num_retries,
-            metrics.retry.total_time,
+            "request succeed in %.2fs and used %d tokens",
+            metrics.total_time,
             metrics.usage.total_tokens,
         )
 

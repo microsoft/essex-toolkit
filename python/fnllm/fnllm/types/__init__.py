@@ -20,7 +20,7 @@ from .generics import (
     TOutput,
 )
 from .io import LLMInput, LLMOutput
-from .metrics import LLMMetrics, LLMRetryMetrics, LLMUsageMetrics
+from .metrics import LLMMetrics, LLMUsageMetrics
 from .protocol import LLM
 
 __all__ = [
@@ -35,7 +35,6 @@ __all__ = [
     "LLMInput",
     "LLMMetrics",
     "LLMOutput",
-    "LLMRetryMetrics",
     "LLMUsageMetrics",
     "PromptVariables",
     "THistoryEntry",

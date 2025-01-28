@@ -4,6 +4,7 @@
 
 from __future__ import annotations
 
+import asyncio
 from collections.abc import Iterator
 from typing import TYPE_CHECKING, Any, cast
 
@@ -18,7 +19,7 @@ from fnllm.openai.types.chat.io import (
     OpenAIChatOutput,
 )
 from fnllm.openai.types.chat.parameters import OpenAIChatParameters
-from fnllm.types.metrics import LLMUsageMetrics
+from fnllm.types.metrics import LLMMetrics, LLMUsageMetrics
 
 from .services.history_extractor import OpenAIHistoryExtractor
 from .services.usage_extractor import OpenAIUsageExtractor
@@ -132,16 +133,10 @@ class OpenAITextChatLLMImpl(
         messages: list[OpenAIChatHistoryEntry],
         parameters: OpenAIChatParameters,
     ) -> OpenAIChatCompletionModel:
-        result = await self._client.chat.completions.create(
+        return await self._client.chat.completions.create(
             messages=cast(Iterator[ChatCompletionMessageParam], messages),
             **parameters,
         )
-        metrics = LLMUsageMetrics(
-            input_tokens=result.usage.prompt_tokens,
-            output_tokens=result.usage.completion_tokens,
-        )
-        self.events.on_success(metrics)
-        return result
 
     async def _execute_llm(
         self,
@@ -158,21 +153,29 @@ class OpenAITextChatLLMImpl(
         completion_parameters = self._build_completion_parameters(
             local_model_parameters
         )
-
+        start = asyncio.get_event_loop().time()
         response = await self._call_completion_or_cache(
             name,
             messages=messages,
             parameters=completion_parameters,
             bypass_cache=bypass_cache,
         )
+        end = asyncio.get_event_loop().time()
         completion = response.value
 
         result = completion.choices[0].message
         usage: LLMUsageMetrics | None = None
+
         if completion.usage and not response.hit:
             usage = LLMUsageMetrics(
                 input_tokens=completion.usage.prompt_tokens,
                 output_tokens=completion.usage.completion_tokens,
+            )
+            await self.events.on_success(
+                LLMMetrics(
+                    usage=usage,
+                    total_time=end - start,
+                )
             )
 
         return OpenAIChatOutput(
