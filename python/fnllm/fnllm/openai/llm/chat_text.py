@@ -119,16 +119,29 @@ class OpenAITextChatLLMImpl(
     ) -> Cached[OpenAIChatCompletionModel]:
         # TODO: check if we need to remove max_tokens and n from the keys
         return await self._cache.get_or_insert(
-            lambda: self._client.chat.completions.create(
-                messages=cast(Iterator[ChatCompletionMessageParam], messages),
-                **parameters,
-            ),
+            lambda: self._network_invoke(messages, parameters),
             prefix=f"chat_{name}" if name else "chat",
             key_data={"messages": messages, "parameters": parameters},
             name=name,
             json_model=OpenAIChatCompletionModel,
             bypass_cache=bypass_cache,
         )
+
+    async def _network_invoke(
+        self,
+        messages: list[OpenAIChatHistoryEntry],
+        parameters: OpenAIChatParameters,
+    ) -> OpenAIChatCompletionModel:
+        result = await self._client.chat.completions.create(
+            messages=cast(Iterator[ChatCompletionMessageParam], messages),
+            **parameters,
+        )
+        metrics = LLMUsageMetrics(
+            input_tokens=result.usage.prompt_tokens,
+            output_tokens=result.usage.completion_tokens,
+        )
+        self.events.on_success(metrics)
+        return result
 
     async def _execute_llm(
         self,
