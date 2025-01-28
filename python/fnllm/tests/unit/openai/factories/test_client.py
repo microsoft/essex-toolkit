@@ -34,7 +34,7 @@ def test_create_azure_client():
         f"{config.endpoint}/openai/deployments/{config.deployment}"
     )
     assert client.timeout == config.timeout
-    assert client.max_retries == 0
+    assert client.max_retries == 2
 
 
 def test_create_azure_client_with_no_credential_uses_default_credential():
@@ -76,7 +76,7 @@ def test_create_public_client():
     assert client.base_url == _enforce_trailing_slash(config.base_url)
     assert client.organization == config.organization
     assert client.timeout == config.timeout
-    assert client.max_retries == 0
+    assert client.max_retries == 2
 
 
 def _enforce_trailing_slash(url: str | None) -> str | None:
