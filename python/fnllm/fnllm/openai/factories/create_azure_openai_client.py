@@ -24,7 +24,7 @@ def create_azure_openai_client(
         azure_endpoint=config.endpoint,
         azure_deployment=config.deployment,
         timeout=config.timeout,
-        max_retries=0,
+        max_retries=config.max_retries,
     )
 
 

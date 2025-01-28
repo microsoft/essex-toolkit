@@ -84,10 +84,6 @@ class LLMParameters(BaseModel):
         description="The maximum retry wait to use for the LLM service.",
         default=defs.LLM_MAX_RETRY_WAIT,
     )
-    sleep_on_rate_limit_recommendation: bool = Field(
-        description="Whether to sleep on rate limit recommendations.",
-        default=defs.LLM_SLEEP_ON_RATE_LIMIT_RECOMMENDATION,
-    )
     concurrent_requests: int = Field(
         description="Whether to use concurrent requests for the LLM service.",
         default=defs.LLM_CONCURRENT_REQUESTS,

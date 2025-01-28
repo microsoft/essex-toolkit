@@ -43,11 +43,6 @@ class CommonOpenAIConfig(Config, frozen=True, extra="allow", protected_namespace
         description="Global embeddings parameters to be used across calls.",
     )
 
-    sleep_on_rate_limit_recommendation: bool = Field(
-        default=False,
-        description="Whether to sleep on rate limit recommendation.",
-    )
-
 
 class PublicOpenAIConfig(
     CommonOpenAIConfig, frozen=True, extra="allow", protected_namespaces=()

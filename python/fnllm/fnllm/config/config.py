@@ -14,16 +14,12 @@ class Config(BaseModel, frozen=True, extra="allow"):
     """Configuration protocol definition."""
 
     max_retries: int = Field(
-        default=10,
+        default=2,
         description="The maximum number of retries.",
     )
 
     max_json_retries: int = Field(
         default=3, description="The maximum number of retries for JSON generation."
-    )
-
-    max_retry_wait: float = Field(
-        default=10, description="The maximum retry wait time."
     )
 
     max_concurrency: int | None = Field(

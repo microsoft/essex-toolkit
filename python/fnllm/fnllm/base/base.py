@@ -30,7 +30,6 @@ if TYPE_CHECKING:
     from fnllm.services.history_extractor import HistoryExtractor
     from fnllm.services.json import JsonHandler
     from fnllm.services.rate_limiter import RateLimiter
-    from fnllm.services.retryer import Retryer
     from fnllm.services.usage_extractor import UsageExtractor
     from fnllm.services.variable_injector import VariableInjector
 
@@ -52,8 +51,6 @@ class BaseLLM(
         variable_injector: VariableInjector | None = None,
         rate_limiter: RateLimiter[TInput, TOutput, THistoryEntry, TModelParameters]
         | None = None,
-        retryer: Retryer[TInput, TOutput, THistoryEntry, TModelParameters]
-        | None = None,
         json_handler: JsonHandler[TOutput, THistoryEntry] | None = None,
     ) -> None:
         """Base constructor for the BaseLLM."""
@@ -63,7 +60,6 @@ class BaseLLM(
         self._history_extractor = history_extractor
         self._variable_injector = variable_injector
         self._rate_limiter = rate_limiter
-        self._retryer = retryer
         self._json_handler = json_handler
 
         decorated = self._decorator_target
@@ -84,7 +80,6 @@ class BaseLLM(
             history_extractor=self._history_extractor,
             variable_injector=self._variable_injector,
             rate_limiter=self._rate_limiter,
-            retryer=self._retryer,
             json_handler=self._json_handler,
         )
 
@@ -101,8 +96,6 @@ class BaseLLM(
             decorators.append(self._json_handler.requester)
         if self._rate_limiter:
             decorators.append(self._rate_limiter)
-        if self._retryer:
-            decorators.append(self._retryer)
         if self._json_handler and self._json_handler.receiver:
             decorators.append(self._json_handler.receiver)
         return decorators

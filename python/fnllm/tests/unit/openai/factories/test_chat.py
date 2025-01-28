@@ -14,7 +14,6 @@ from fnllm.openai.llm.chat_text import OpenAITextChatLLMImpl
 from fnllm.openai.llm.features.tools_parsing import OpenAIParseToolsLLM
 from fnllm.openai.llm.services.history_extractor import OpenAIHistoryExtractor
 from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
-from fnllm.openai.llm.services.retryer import OpenAIRetryer
 from fnllm.openai.llm.services.usage_extractor import OpenAIUsageExtractor
 from fnllm.services.variable_injector import VariableInjector
 
@@ -71,7 +70,6 @@ def test_create_openai_chat_llm():
         patch.object(
             OpenAIRateLimiter, "__init__", return_value=None
         ) as new_rate_limit_llm,
-        patch.object(OpenAIRetryer, "__init__", return_value=None) as new_retrying_llm,
     ):
         client = create_openai_chat_llm(
             config, cache=mocked_cache, events=mocked_events
@@ -87,7 +85,6 @@ def test_create_openai_chat_llm():
             usage_extractor=ANY,
             history_extractor=ANY,
             variable_injector=ANY,
-            retryer=ANY,
             rate_limiter=ANY,
             json_handler=ANY,
         )
@@ -98,7 +95,6 @@ def test_create_openai_chat_llm():
         new_history_extractor.assert_called()
         new_usage_extractor.assert_called()
         new_rate_limit_llm.assert_called()
-        new_retrying_llm.assert_called()
 
         assert client is not None
 
@@ -114,7 +110,6 @@ def test_invalid_encoding_should_raise():
         chat_parameters={"temperature": 0.5},
         encoding="invalid",
         max_retries=2,
-        max_retry_wait=15,
     )
 
     with pytest.raises(ValueError):  # noqa: PT011

@@ -17,7 +17,7 @@ from fnllm.services.cache_interactor import CacheInteractor
 from fnllm.services.variable_injector import VariableInjector
 
 from .client import create_openai_client
-from .utils import create_limiter, create_rate_limiter, create_retryer
+from .utils import create_limiter, create_rate_limiter
 
 if TYPE_CHECKING:
     from fnllm.caching.base import Cache
@@ -75,7 +75,6 @@ def _create_openai_text_chat_llm(
     cache_interactor: CacheInteractor | None,
     events: LLMEvents | None,
 ) -> OpenAITextChatLLM:
-    operation = "chat"
     result = OpenAITextChatLLMImpl(
         client,
         model=config.model,
@@ -86,7 +85,6 @@ def _create_openai_text_chat_llm(
         usage_extractor=OpenAIUsageExtractor(),
         history_extractor=OpenAIHistoryExtractor(),
         variable_injector=VariableInjector(),
-        retryer=create_retryer(config=config, operation=operation, events=events),
         rate_limiter=create_rate_limiter(config=config, limiter=limiter, events=events),
     )
 

@@ -13,14 +13,12 @@ from fnllm.limiting.concurrency import ConcurrencyLimiter
 from fnllm.limiting.rpm import RPMLimiter
 from fnllm.limiting.tpm import TPMLimiter
 from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
-from fnllm.openai.llm.services.retryer import OpenAIRetryer
 
 if TYPE_CHECKING:
     from fnllm.events.base import LLMEvents
     from fnllm.limiting.base import Limiter
     from fnllm.openai.config import OpenAIConfig
     from fnllm.services.rate_limiter import RateLimiter
-    from fnllm.services.retryer import Retryer
 
 
 def _get_encoding(encoding_name: str) -> tiktoken.Encoding:
@@ -57,21 +55,5 @@ def create_rate_limiter(
     return OpenAIRateLimiter(
         encoder=_get_encoding(config.encoding),
         limiter=limiter,
-        events=events,
-    )
-
-
-def create_retryer(
-    *,
-    config: OpenAIConfig,
-    operation: str,
-    events: LLMEvents | None,
-) -> Retryer[Any, Any, Any, Any]:
-    """Wraps the LLM with retry logic."""
-    return OpenAIRetryer(
-        tag=operation,
-        max_retries=config.max_retries,
-        max_retry_wait=config.max_retry_wait,
-        sleep_on_rate_limit_recommendation=config.sleep_on_rate_limit_recommendation,
         events=events,
     )

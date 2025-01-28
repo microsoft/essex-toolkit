@@ -29,7 +29,6 @@ if TYPE_CHECKING:
     from fnllm.openai.types.aliases import OpenAIChatModel
     from fnllm.openai.types.client import OpenAIClient
     from fnllm.services.rate_limiter import RateLimiter
-    from fnllm.services.retryer import Retryer
     from fnllm.services.variable_injector import VariableInjector
     from fnllm.types.generics import TJsonModel
     from fnllm.types.io import LLMInput
@@ -60,13 +59,6 @@ class OpenAIStreamingChatLLMImpl(
             OpenAIChatParameters,
         ]
         | None = None,
-        retryer: Retryer[
-            OpenAIChatCompletionInput,
-            OpenAIStreamingChatOutput,
-            OpenAIChatHistoryEntry,
-            OpenAIChatParameters,
-        ]
-        | None = None,
         emit_usage: bool = False,
         model_parameters: OpenAIChatParameters | None = None,
         events: LLMEvents | None = None,
@@ -76,7 +68,6 @@ class OpenAIStreamingChatLLMImpl(
             events=events,
             variable_injector=variable_injector,
             rate_limiter=rate_limiter,
-            retryer=retryer,
         )
 
         self._client = client

@@ -24,7 +24,6 @@ if TYPE_CHECKING:
     from fnllm.openai.types.client import OpenAIClient
     from fnllm.services.cache_interactor import Cached, CacheInteractor
     from fnllm.services.rate_limiter import RateLimiter
-    from fnllm.services.retryer import Retryer
     from fnllm.services.variable_injector import VariableInjector
     from fnllm.types.io import LLMInput
 
@@ -51,13 +50,6 @@ class OpenAIEmbeddingsLLMImpl(
             OpenAIEmbeddingsParameters,
         ]
         | None = None,
-        retryer: Retryer[
-            OpenAIEmbeddingsInput,
-            OpenAIEmbeddingsOutput,
-            None,
-            OpenAIEmbeddingsParameters,
-        ]
-        | None = None,
         model_parameters: OpenAIEmbeddingsParameters | None = None,
         events: LLMEvents | None = None,
     ):
@@ -67,7 +59,6 @@ class OpenAIEmbeddingsLLMImpl(
             usage_extractor=usage_extractor,
             variable_injector=variable_injector,
             rate_limiter=rate_limiter,
-            retryer=retryer,
         )
 
         self._client = client
@@ -86,7 +77,6 @@ class OpenAIEmbeddingsLLMImpl(
             ),
             variable_injector=self._variable_injector,
             rate_limiter=self._rate_limiter,
-            retryer=self._retryer,
             model_parameters=self._global_model_parameters,
             events=self._events,
         )

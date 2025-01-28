@@ -30,7 +30,6 @@ if TYPE_CHECKING:
     from fnllm.services.cache_interactor import Cached, CacheInteractor
     from fnllm.services.json import JsonHandler
     from fnllm.services.rate_limiter import RateLimiter
-    from fnllm.services.retryer import Retryer
     from fnllm.services.variable_injector import VariableInjector
     from fnllm.types.generics import TJsonModel
     from fnllm.types.io import LLMInput
@@ -62,13 +61,6 @@ class OpenAITextChatLLMImpl(
             OpenAIChatParameters,
         ]
         | None = None,
-        retryer: Retryer[
-            OpenAIChatCompletionInput,
-            OpenAIChatOutput,
-            OpenAIChatHistoryEntry,
-            OpenAIChatParameters,
-        ]
-        | None = None,
         model_parameters: OpenAIChatParameters | None = None,
         events: LLMEvents | None = None,
         json_handler: JsonHandler[OpenAIChatOutput, OpenAIChatHistoryEntry]
@@ -80,7 +72,6 @@ class OpenAITextChatLLMImpl(
             usage_extractor=usage_extractor,
             history_extractor=history_extractor,
             variable_injector=variable_injector,
-            retryer=retryer,
             rate_limiter=rate_limiter,
             json_handler=json_handler,
         )
@@ -103,7 +94,6 @@ class OpenAITextChatLLMImpl(
             history_extractor=cast(OpenAIHistoryExtractor, self._history_extractor),
             variable_injector=self._variable_injector,
             rate_limiter=self._rate_limiter,
-            retryer=self._retryer,
             model_parameters=self._global_model_parameters,
             json_handler=self._json_handler,
         )

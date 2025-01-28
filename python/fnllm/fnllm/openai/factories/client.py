@@ -38,5 +38,5 @@ def create_public_openai_client(config: PublicOpenAIConfig) -> OpenAIClient:
         base_url=config.base_url,
         organization=config.organization,
         timeout=config.timeout,
-        max_retries=0,
+        max_retries=config.max_retries,
     )

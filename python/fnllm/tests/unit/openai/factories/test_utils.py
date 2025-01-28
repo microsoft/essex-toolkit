@@ -16,10 +16,8 @@ from fnllm.openai.config import AzureOpenAIConfig, OpenAIConfig
 from fnllm.openai.factories.utils import (
     create_limiter,
     create_rate_limiter,
-    create_retryer,
 )
 from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
-from fnllm.openai.llm.services.retryer import OpenAIRetryer
 
 
 @pytest.mark.parametrize("requests_burst_mode", ([True, False]))
@@ -55,38 +53,6 @@ def test_create_rate_limited_llm(requests_burst_mode: bool):
     assert llm._limiter == limiter
 
     _assert_concurrency_tpm_rpm(limiter, config)
-
-
-def test_create_retrying_llm():
-    config = AzureOpenAIConfig(
-        api_key="key",
-        organization="organization",
-        api_version="api_version",
-        endpoint="endpoint",
-        deployment="deployment",
-        model="my_models",
-        chat_parameters={"temperature": 0.5},
-        encoding="p50k_base",
-        max_retries=2,
-        max_retry_wait=15,
-    )
-    mocked_events = create_autospec(LLMEvents, instance=True)
-    tag = test_create_retrying_llm.__name__
-
-    llm = cast(
-        OpenAIRetryer,
-        create_retryer(
-            config=config,
-            operation=tag,
-            events=mocked_events,
-        ),
-    )
-
-    assert llm._tag == tag
-    assert llm._events == mocked_events
-
-    assert llm._max_retries == config.max_retries
-    assert llm._max_retry_wait == config.max_retry_wait
 
 
 def _assert_concurrency_tpm_rpm(limiter: Limiter, config: OpenAIConfig) -> None:

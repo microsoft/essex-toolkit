@@ -11,7 +11,6 @@ from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.factories.embeddings import create_openai_embeddings_llm
 from fnllm.openai.llm.embeddings import OpenAIEmbeddingsLLMImpl
 from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
-from fnllm.openai.llm.services.retryer import OpenAIRetryer
 from fnllm.openai.llm.services.usage_extractor import OpenAIUsageExtractor
 from fnllm.services.cache_interactor import CacheInteractor
 from fnllm.services.variable_injector import VariableInjector
@@ -64,7 +63,6 @@ def test_create_openai_embeddings_llm():
         patch.object(
             OpenAIRateLimiter, "__init__", return_value=None
         ) as new_rate_limit_llm,
-        patch.object(OpenAIRetryer, "__init__", return_value=None) as new_retrying_llm,
     ):
         client = create_openai_embeddings_llm(
             config, cache=mocked_cache, events=mocked_events
@@ -81,7 +79,6 @@ def test_create_openai_embeddings_llm():
             events=mocked_events,
             usage_extractor=ANY,
             variable_injector=ANY,
-            retryer=ANY,
             rate_limiter=ANY,
         )
 
@@ -89,6 +86,5 @@ def test_create_openai_embeddings_llm():
         new_variable_injector.assert_called_once()
         new_usage_extractor.assert_called_once()
         new_rate_limit_llm.assert_called_once()
-        new_retrying_llm.assert_called_once()
 
         assert client is not None
