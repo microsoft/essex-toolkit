@@ -5,13 +5,16 @@
 
 from __future__ import annotations
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 from .json_strategy import JsonStrategy
+from .retry_strategy import RetryStrategy
 
 
 class Config(BaseModel, frozen=True, extra="allow"):
     """Configuration protocol definition."""
+
+    model_config = ConfigDict(use_enum_values=True, validate_default=True)
 
     max_retries: int = Field(
         default=10,
@@ -47,4 +50,9 @@ class Config(BaseModel, frozen=True, extra="allow"):
     json_strategy: JsonStrategy = Field(
         default=JsonStrategy.VALID,
         description="The strategy to use for JSON parsing.",
+    )
+
+    retry_strategy: RetryStrategy = Field(
+        default=RetryStrategy.TENACITY,
+        description="The retry strategy to use for the LLM service.",
     )

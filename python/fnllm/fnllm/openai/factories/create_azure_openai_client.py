@@ -7,6 +7,7 @@ from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 from openai import AsyncAzureOpenAI
 from openai.lib.azure import AsyncAzureADTokenProvider
 
+from fnllm.config import RetryStrategy
 from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.types.client import OpenAIClient
 
@@ -15,6 +16,10 @@ def create_azure_openai_client(
     config: AzureOpenAIConfig, *, credential: TokenProvider | None = None
 ) -> OpenAIClient:
     """Create a new OpenAI client instance."""
+    max_retries = (
+        config.max_retries if config.retry_strategy == RetryStrategy.NATIVE else 0
+    )
+
     return AsyncAzureOpenAI(
         api_key=config.api_key,
         azure_ad_token_provider=_get_azure_ad_token_provider(config, credential),
@@ -24,7 +29,7 @@ def create_azure_openai_client(
         azure_endpoint=config.endpoint,
         azure_deployment=config.deployment,
         timeout=config.timeout,
-        max_retries=0,
+        max_retries=max_retries,
     )
 
 

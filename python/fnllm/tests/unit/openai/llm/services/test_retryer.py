@@ -5,6 +5,7 @@
 from unittest.mock import ANY, AsyncMock, call, patch
 
 import pytest
+from fnllm.config import RetryStrategy
 from fnllm.openai.llm.services.retryer import InternalServerError, OpenAIRetryer
 from fnllm.services.errors import RetriesExhaustedError
 from fnllm.types.io import LLMOutput
@@ -34,7 +35,7 @@ def _internal_server_error() -> InternalServerError:
 
 async def test_retrying_llm_passthrough():
     delegate = AsyncMock(return_value=LLMOutput(output="result"))
-    retryer = OpenAIRetryer()
+    retryer = OpenAIRetryer(retry_strategy=RetryStrategy.TENACITY)
     llm = retryer.decorate(delegate)
 
     response = await llm("prompt")
@@ -51,7 +52,7 @@ async def test_retrying_llm_recovers():
         _rate_limit_error(),
         LLMOutput(output="result"),
     ]
-    retryer = OpenAIRetryer()
+    retryer = OpenAIRetryer(retry_strategy=RetryStrategy.TENACITY)
     llm = retryer.decorate(delegate)
 
     response = await llm("prompt")
@@ -70,7 +71,9 @@ async def test_retrying_llm_with_sleep_recovers():
     ]
     sleep = AsyncMock()
 
-    retryer = OpenAIRetryer(sleep_on_rate_limit_recommendation=True)
+    retryer = OpenAIRetryer(
+        sleep_on_rate_limit_recommendation=True, retry_strategy=RetryStrategy.TENACITY
+    )
     llm = retryer.decorate(delegate)
 
     with patch("asyncio.sleep", sleep):
@@ -92,7 +95,9 @@ async def test_retrying_llm_with_sleep_recovers_on_non_sleep_error():
         LLMOutput(output="result"),
     ]
 
-    retryer = OpenAIRetryer(sleep_on_rate_limit_recommendation=True)
+    retryer = OpenAIRetryer(
+        sleep_on_rate_limit_recommendation=True, retry_strategy=RetryStrategy.TENACITY
+    )
     llm = retryer.decorate(delegate)
 
     response = await llm("prompt")
@@ -108,6 +113,7 @@ async def test_retrying_llm_raises_retries_exhausted():
     retryer = OpenAIRetryer(
         max_retry_wait=0.1,
         max_retries=5,
+        retry_strategy=RetryStrategy.TENACITY,
     )
     llm = retryer.decorate(delegate)
 
