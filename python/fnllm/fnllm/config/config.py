@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, Field
 
 from .json_strategy import JsonStrategy
 from .retry_strategy import RetryStrategy
@@ -13,8 +13,6 @@ from .retry_strategy import RetryStrategy
 
 class Config(BaseModel, frozen=True, extra="allow"):
     """Configuration protocol definition."""
-
-    model_config = ConfigDict(use_enum_values=True, validate_default=True)
 
     max_retries: int = Field(
         default=10,
