@@ -36,4 +36,4 @@ def _get_azure_ad_token_provider(
         return None
 
     credential = credential or DefaultAzureCredential()
-    return get_bearer_token_provider(credential, config.cognitive_services_endpoint)
+    return get_bearer_token_provider(credential, config.audience)
