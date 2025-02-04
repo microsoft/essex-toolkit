@@ -78,9 +78,9 @@ class AzureOpenAIConfig(
 
     api_version: str | None = Field(description="The OpenAI API version.")
 
-    cognitive_services_endpoint: str = Field(
+    audience: str = Field(
         default="https://cognitiveservices.azure.com/.default",
-        description="The Azure Cognitive Services endpoint.",
+        description="The Azure OpenAI Audience.",
     )
 
 

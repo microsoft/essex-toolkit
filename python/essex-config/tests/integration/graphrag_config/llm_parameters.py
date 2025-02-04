@@ -59,8 +59,8 @@ class LLMParameters(BaseModel):
     proxy: str | None = Field(
         description="The proxy to use for the LLM service.", default=None
     )
-    cognitive_services_endpoint: str | None = Field(
-        description="The endpoint to reach cognitives services.", default=None
+    audience: str | None = Field(
+        description="The authentication audience.", default=None
     )
     deployment_name: str | None = Field(
         description="The deployment name to use for the LLM service.", default=None
