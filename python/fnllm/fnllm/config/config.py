@@ -8,6 +8,7 @@ from __future__ import annotations
 from pydantic import BaseModel, Field
 
 from .json_strategy import JsonStrategy
+from .retry_strategy import RetryStrategy
 
 
 class Config(BaseModel, frozen=True, extra="allow"):
@@ -47,4 +48,9 @@ class Config(BaseModel, frozen=True, extra="allow"):
     json_strategy: JsonStrategy = Field(
         default=JsonStrategy.VALID,
         description="The strategy to use for JSON parsing.",
+    )
+
+    retry_strategy: RetryStrategy = Field(
+        default=RetryStrategy.TENACITY,
+        description="The retry strategy to use for the LLM service.",
     )

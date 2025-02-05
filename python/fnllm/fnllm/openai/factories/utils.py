@@ -74,4 +74,5 @@ def create_retryer(
         max_retry_wait=config.max_retry_wait,
         sleep_on_rate_limit_recommendation=config.sleep_on_rate_limit_recommendation,
         events=events,
+        retry_strategy=config.retry_strategy,
     )

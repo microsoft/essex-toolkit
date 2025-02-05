@@ -10,6 +10,8 @@ from openai.lib.azure import AsyncAzureADTokenProvider
 from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.types.client import OpenAIClient
 
+from .max_retries import get_max_retries
+
 
 def create_azure_openai_client(
     config: AzureOpenAIConfig, *, credential: TokenProvider | None = None
@@ -24,7 +26,7 @@ def create_azure_openai_client(
         azure_endpoint=config.endpoint,
         azure_deployment=config.deployment,
         timeout=config.timeout,
-        max_retries=0,
+        max_retries=get_max_retries(config),
     )
 
 

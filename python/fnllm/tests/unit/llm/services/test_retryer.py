@@ -5,6 +5,7 @@
 from unittest.mock import ANY, AsyncMock, Mock, call
 
 import pytest
+from fnllm.config import RetryStrategy
 from fnllm.events.base import LLMEvents
 from fnllm.services.errors import RetriesExhaustedError
 from fnllm.services.retryer import Retryer
@@ -25,7 +26,9 @@ class TestRetryer(Retryer):
 async def test_retrying_llm_passthrough():
     delegate = AsyncMock(return_value=LLMOutput(output="result"))
     events = Mock(spec=LLMEvents)
-    retryer = TestRetryer(retryable_errors=[], events=events)
+    retryer = TestRetryer(
+        retryable_errors=[], events=events, retry_strategy=RetryStrategy.TENACITY
+    )
     llm = retryer.decorate(delegate)
 
     response = await llm("prompt")
@@ -39,12 +42,37 @@ async def test_retrying_llm_passthrough():
     events.on_success.assert_called_once()
 
 
+async def test_retrying_native_strategy():
+    delegate = AsyncMock(return_value=LLMOutput(output="result"))
+    events = Mock(spec=LLMEvents)
+    retryer = TestRetryer(
+        retryable_errors=[ValueError],
+        events=events,
+        retry_strategy=RetryStrategy.NATIVE,
+    )
+    llm = retryer.decorate(delegate)
+
+    response = await llm("prompt")
+
+    assert response.output == "result"
+    assert response.metrics.retry.num_retries == 0
+    assert len(response.metrics.retry.call_times) == 0
+    assert response.metrics.retry.total_time >= 0
+
+    events.on_try.assert_not_called()
+    events.on_success.assert_called_once()
+
+
 async def test_retrying_llm_recovers():
     delegate = AsyncMock()
     delegate.side_effect = [ValueError, LLMOutput(output="result")]
 
     events = Mock(spec=LLMEvents)
-    retryer = TestRetryer(retryable_errors=[ValueError], events=events)
+    retryer = TestRetryer(
+        retryable_errors=[ValueError],
+        events=events,
+        retry_strategy=RetryStrategy.TENACITY,
+    )
     llm = retryer.decorate(delegate)
 
     response = await llm("prompt")
@@ -65,6 +93,7 @@ async def test_retrying_llm_raises_retries_exhausted():
         retryable_errors=[ValueError],
         max_retry_wait=0.1,
         max_retries=5,
+        retry_strategy=RetryStrategy.TENACITY,
     )
     llm = retryer.decorate(delegate)
 
@@ -83,6 +112,7 @@ async def test_retrying_llm_emits_error_if_not_retryable():
         retryable_errors=[],
         max_retry_wait=0.1,
         max_retries=5,
+        retry_strategy=RetryStrategy.TENACITY,
     )
     llm = retryer.decorate(delegate)
 

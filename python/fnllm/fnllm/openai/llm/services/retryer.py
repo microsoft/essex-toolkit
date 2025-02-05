@@ -13,6 +13,7 @@ from fnllm.services.retryer import Retryer
 from fnllm.types.generics import THistoryEntry, TInput, TModelParameters, TOutput
 
 if TYPE_CHECKING:
+    from fnllm.config import RetryStrategy
     from fnllm.events.base import LLMEvents
 
 OPENAI_RETRYABLE_ERRORS: Final[list[type[Exception]]] = [
@@ -36,6 +37,7 @@ class OpenAIRetryer(
         max_retry_wait: float = 10,
         sleep_on_rate_limit_recommendation: bool = False,
         events: LLMEvents | None = None,
+        retry_strategy: RetryStrategy,
     ):
         """Create a new BaseRateLimitLLM."""
         super().__init__(
@@ -44,6 +46,7 @@ class OpenAIRetryer(
             max_retries=max_retries,
             max_retry_wait=max_retry_wait,
             events=events,
+            retry_strategy=retry_strategy,
         )
         self._sleep_on_rate_limit_recommendation = sleep_on_rate_limit_recommendation
 

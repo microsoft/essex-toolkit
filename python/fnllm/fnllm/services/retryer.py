@@ -16,6 +16,7 @@ from tenacity import (
 )
 from typing_extensions import Unpack
 
+from fnllm.config import RetryStrategy
 from fnllm.events.base import LLMEvents
 from fnllm.services.errors import RetriesExhaustedError
 from fnllm.types.generics import (
@@ -49,12 +50,14 @@ class Retryer(
         max_retries: int = 10,
         max_retry_wait: float = 10,
         events: LLMEvents | None = None,
+        retry_strategy: RetryStrategy,
     ):
         """Create a new RetryingLLM."""
         self._retryable_errors = retryable_errors
         self._tag = tag
         self._max_retries = max_retries
         self._max_retry_wait = max_retry_wait
+        self._retry_strategy = retry_strategy
         self._events = events or LLMEvents()
 
     @abstractmethod
@@ -70,58 +73,70 @@ class Retryer(
         """Execute the LLM with the configured rate limits."""
 
         async def invoke(prompt: TInput, **kwargs: Unpack[LLMInput[Any, Any, Any]]):
-            name = kwargs.get("name", self._tag)
-            attempt_number = 0
-            call_times: list[float] = []
-
-            async def attempt() -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
-                nonlocal call_times
-                call_start = asyncio.get_event_loop().time()
-
-                try:
-                    await self._events.on_try(attempt_number)
-                    return await delegate(prompt, **kwargs)
-                except BaseException as error:
-                    if isinstance(error, tuple(self._retryable_errors)):
-                        await self._events.on_retryable_error(error, attempt_number)
-                        await self._on_retryable_error(error)
-                    raise
-                finally:
-                    call_end = asyncio.get_event_loop().time()
-                    call_times.append(call_end - call_start)
-
-            async def execute_with_retry() -> LLMOutput[
-                TOutput, TJsonModel, THistoryEntry
-            ]:
-                nonlocal attempt_number
-                try:
-                    async for a in AsyncRetrying(
-                        stop=stop_after_attempt(self._max_retries),
-                        wait=wait_exponential_jitter(max=self._max_retry_wait),
-                        reraise=True,
-                        retry=retry_if_exception_type(tuple(self._retryable_errors)),
-                    ):
-                        with a:
-                            attempt_number += 1
-                            return await attempt()
-                except BaseException as error:
-                    if not isinstance(error, tuple(self._retryable_errors)):
-                        raise
-
-                raise RetriesExhaustedError(name, self._max_retries)
-
+            num_retries = 0
+            call_times = []
             start = asyncio.get_event_loop().time()
-            result = await execute_with_retry()
-            end = asyncio.get_event_loop().time()
 
+            if self._retry_strategy == RetryStrategy.TENACITY:
+                result, call_times, num_retries = await self._execute_with_retry(
+                    delegate, prompt, **kwargs
+                )
+            else:
+                result = await delegate(prompt, **kwargs)
+
+            end = asyncio.get_event_loop().time()
             result.metrics.retry = LLMRetryMetrics(
-                num_retries=attempt_number - 1,
                 total_time=end - start,
+                num_retries=num_retries,
                 call_times=call_times,
             )
-
             await self._events.on_success(result.metrics)
 
             return result
 
         return invoke
+
+    async def _execute_with_retry(
+        self,
+        delegate: Callable[
+            ..., Awaitable[LLMOutput[TOutput, TJsonModel, THistoryEntry]]
+        ],
+        prompt: TInput,
+        **kwargs: Unpack[LLMInput[Any, Any, Any]],
+    ) -> tuple[LLMOutput[TOutput, TJsonModel, THistoryEntry], list[float], int]:
+        name = kwargs.get("name", self._tag)
+        call_times: list[float] = []
+        attempt_number = 0
+
+        async def attempt() -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
+            nonlocal call_times
+            call_start = asyncio.get_event_loop().time()
+
+            try:
+                await self._events.on_try(attempt_number)
+                return await delegate(prompt, **kwargs)
+            except BaseException as error:
+                if isinstance(error, tuple(self._retryable_errors)):
+                    await self._events.on_retryable_error(error, attempt_number)
+                    await self._on_retryable_error(error)
+                raise
+            finally:
+                call_end = asyncio.get_event_loop().time()
+                call_times.append(call_end - call_start)
+
+        try:
+            async for a in AsyncRetrying(
+                stop=stop_after_attempt(self._max_retries),
+                wait=wait_exponential_jitter(max=self._max_retry_wait),
+                reraise=True,
+                retry=retry_if_exception_type(tuple(self._retryable_errors)),
+            ):
+                with a:
+                    attempt_number += 1
+                    result = await attempt()
+                    return result, call_times, attempt_number - 1
+        except BaseException as error:
+            if not isinstance(error, tuple(self._retryable_errors)):
+                raise
+
+        raise RetriesExhaustedError(name, self._max_retries)

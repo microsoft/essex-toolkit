@@ -10,6 +10,8 @@ from openai import AsyncOpenAI
 
 from fnllm.openai.config import AzureOpenAIConfig, OpenAIConfig, PublicOpenAIConfig
 
+from .max_retries import get_max_retries
+
 if TYPE_CHECKING:
     from fnllm.openai.types.client import OpenAIClient
 
@@ -38,5 +40,5 @@ def create_public_openai_client(config: PublicOpenAIConfig) -> OpenAIClient:
         base_url=config.base_url,
         organization=config.organization,
         timeout=config.timeout,
-        max_retries=0,
+        max_retries=get_max_retries(config),
     )
