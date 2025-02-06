@@ -18,7 +18,7 @@ if __name__ == "__main__":
         "package", help="Package name to search for configuration classes."
     )
     parser.add_argument(
-        "classes", help="Classes to generate documentation for.", nargs="+"
+        "classes", help="Classes to generate documentation for.", nargs="*"
     )
     parser.add_argument(
         "--disable_nested",
