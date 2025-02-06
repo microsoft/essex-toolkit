@@ -93,6 +93,7 @@ async def test_retrying_llm_raises_retries_exhausted():
         retryable_errors=[ValueError],
         max_retry_wait=0.1,
         max_retries=5,
+        events=LLMEvents(),
         retry_strategy=RetryStrategy.TENACITY,
     )
     llm = retryer.decorate(delegate)
@@ -112,6 +113,7 @@ async def test_retrying_llm_emits_error_if_not_retryable():
         retryable_errors=[],
         max_retry_wait=0.1,
         max_retries=5,
+        events=LLMEvents(),
         retry_strategy=RetryStrategy.TENACITY,
     )
     llm = retryer.decorate(delegate)
