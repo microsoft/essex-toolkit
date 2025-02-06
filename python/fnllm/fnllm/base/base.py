@@ -25,7 +25,6 @@ from fnllm.types.protocol import LLM
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from fnllm.caching.base import Cache
     from fnllm.services.decorator import LLMDecorator
     from fnllm.services.history_extractor import HistoryExtractor
     from fnllm.services.json import JsonHandler
@@ -46,7 +45,6 @@ class BaseLLM(
         self,
         *,
         events: LLMEvents | None = None,
-        cache: Cache | None = None,
         usage_extractor: UsageExtractor[TOutput] | None = None,
         history_extractor: HistoryExtractor[TOutput, THistoryEntry] | None = None,
         variable_injector: VariableInjector | None = None,
@@ -58,7 +56,6 @@ class BaseLLM(
     ) -> None:
         """Base constructor for the BaseLLM."""
         self._events = events or LLMEvents()
-        self._cache = cache
         self._usage_extractor = usage_extractor
         self._history_extractor = history_extractor
         self._variable_injector = variable_injector
@@ -75,18 +72,8 @@ class BaseLLM(
         self, name: str
     ) -> BaseLLM[TInput, TOutput, THistoryEntry, TModelParameters]:
         """Create a child LLM."""
-        if self._cache is None:
-            return self
-        return self.__class__(
-            events=self._events,
-            cache=self._cache.child(name),
-            usage_extractor=self._usage_extractor,
-            history_extractor=self._history_extractor,
-            variable_injector=self._variable_injector,
-            rate_limiter=self._rate_limiter,
-            retryer=self._retryer,
-            json_handler=self._json_handler,
-        )
+        # TODO(chtrevin): Remove this function?
+        return self
 
     @property
     def events(self) -> LLMEvents:
@@ -130,6 +117,10 @@ class BaseLLM(
     ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
         """Run the LLM invocation, returning an LLMOutput."""
         prompt, kwargs = self._rewrite_input(prompt, kwargs)
+
+        result = await self._try_execute_cached(prompt, **kwargs)
+        if result is not None:
+            return LLMOutput(output=result)
         return await self._decorated_target(prompt, **kwargs)
 
     def _rewrite_input(
@@ -187,3 +178,10 @@ class BaseLLM(
         prompt: TInput,
         **kwargs: Unpack[LLMInput[TJsonModel, THistoryEntry, TModelParameters]],
     ) -> TOutput: ...
+
+    @abstractmethod
+    async def _try_execute_cached(
+        self,
+        prompt: TInput,
+        **kwargs: Unpack[LLMInput[TJsonModel, THistoryEntry, TModelParameters]],
+    ) -> TOutput | None: ...

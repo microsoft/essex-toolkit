@@ -153,3 +153,8 @@ class OpenAIEmbeddingsLLMImpl(
             embeddings=[d.embedding for d in result.data],
             usage=usage or LLMUsageMetrics(),
         )
+
+    async def _try_execute_cached(
+        self, prompt: OpenAIEmbeddingsInput, **kwargs: Unpack[LLMInput]
+    ) -> OpenAIEmbeddingsOutput:
+        return None
