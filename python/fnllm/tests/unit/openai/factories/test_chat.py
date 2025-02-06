@@ -93,7 +93,7 @@ def test_create_openai_chat_llm():
             variable_injector=ANY,
             retryer=ANY,
             rate_limiter=ANY,
-            json_handler=ANY,
+            json_receiver=ANY,
         )
 
         # check delegates have been called
