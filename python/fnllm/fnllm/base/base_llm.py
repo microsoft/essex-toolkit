@@ -115,7 +115,8 @@ class BaseLLM(
     ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
         """Invoke the LLM."""
         try:
-            return await self._invoke(prompt, **kwargs)
+            prompt, kwargs = self._rewrite_input(prompt, kwargs)
+            return await self._decorated_target(prompt, **kwargs)
         except BaseException as e:
             stack_trace = traceback.format_exc()
             if self._events:
@@ -123,15 +124,6 @@ class BaseLLM(
                     e, stack_trace, {"prompt": prompt, "kwargs": kwargs}
                 )
             raise
-
-    async def _invoke(
-        self,
-        prompt: TInput,
-        **kwargs: Unpack[LLMInput[TJsonModel, THistoryEntry, TModelParameters]],
-    ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
-        """Run the LLM invocation, returning an LLMOutput."""
-        prompt, kwargs = self._rewrite_input(prompt, kwargs)
-        return await self._decorated_target(prompt, **kwargs)
 
     def _rewrite_input(
         self,
