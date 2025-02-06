@@ -7,10 +7,8 @@ from typing import TYPE_CHECKING
 
 from fnllm.base.config.json_strategy import JsonStrategy
 from fnllm.base.services.json import (
-    JsonHandler,
     JsonMarshaler,
     JsonReceiver,
-    JsonRequester,
     LooseModeJsonReceiver,
 )
 from fnllm.openai.types.chat.io import (
@@ -18,26 +16,29 @@ from fnllm.openai.types.chat.io import (
     OpenAIChatHistoryEntry,
     OpenAIChatOutput,
 )
-from fnllm.openai.types.chat.parameters import OpenAIChatParameters
 
 if TYPE_CHECKING:
+    from fnllm.openai.types.chat.parameters import OpenAIChatParameters
     from fnllm.types.generics import TJsonModel
-    from fnllm.types.io import LLMInput, LLMOutput
+    from fnllm.types.io import LLMOutput
 
 
 def create_json_handler(
     strategy: JsonStrategy,
     max_retries: int,
-) -> JsonHandler[OpenAIChatOutput, OpenAIChatHistoryEntry]:
+) -> JsonReceiver[
+    OpenAIChatCompletionInput,
+    OpenAIChatOutput,
+    OpenAIChatHistoryEntry,
+    OpenAIChatParameters,
+]:
     """Create a JSON handler for OpenAI."""
     marshaler = OpenAIJsonMarshaler()
     match strategy:
         case JsonStrategy.LOOSE:
-            return JsonHandler(None, LooseModeJsonReceiver(marshaler, max_retries))
+            return LooseModeJsonReceiver(marshaler, max_retries)
         case JsonStrategy.VALID:
-            return JsonHandler(
-                OpenAIJsonRequester(), JsonReceiver(marshaler, max_retries)
-            )
+            return JsonReceiver(marshaler, max_retries)
         case JsonStrategy.STRUCTURED:
             raise NotImplementedError
 
@@ -59,35 +60,3 @@ class OpenAIJsonMarshaler(JsonMarshaler[OpenAIChatOutput, OpenAIChatHistoryEntry
     ) -> str | None:
         """Extract the JSON string from the output."""
         return output.output.content
-
-
-class OpenAIJsonRequester(
-    JsonRequester[
-        OpenAIChatCompletionInput,
-        OpenAIChatOutput,
-        OpenAIChatHistoryEntry,
-        OpenAIChatParameters,
-    ]
-):
-    """An OpenAI JSON requester."""
-
-    def rewrite_args(
-        self,
-        prompt: OpenAIChatCompletionInput,
-        kwargs: LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters],
-    ) -> tuple[
-        OpenAIChatCompletionInput,
-        LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters],
-    ]:
-        """Rewrite the input prompt and arguments.."""
-        kwargs["model_parameters"] = self._enable_oai_json_mode(
-            kwargs.get("model_parameters", {})
-        )
-        return prompt, kwargs
-
-    def _enable_oai_json_mode(
-        self, parameters: OpenAIChatParameters
-    ) -> OpenAIChatParameters:
-        result: OpenAIChatParameters = parameters.copy()
-        result["response_format"] = {"type": "json_object"}
-        return result

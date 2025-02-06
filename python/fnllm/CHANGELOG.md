@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Move `fnllm.config` to `fnllm.base.config`
 * Move `fnllm.openai.llm.services` to `fnllm.openai.services`
 * Add `fnllm.enums` to re-export common enumerations.
+* Streamline JSON Mode object model.
 ### Deprecated
 ### Removed
 ### Fixed

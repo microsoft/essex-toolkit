@@ -29,7 +29,7 @@ if TYPE_CHECKING:
 
     from .services.decorator import LLMDecorator
     from .services.history_extractor import HistoryExtractor
-    from .services.json import JsonHandler
+    from .services.json import JsonReceiver
     from .services.rate_limiter import RateLimiter
     from .services.retryer import Retryer
     from .services.usage_extractor import UsageExtractor
@@ -55,7 +55,8 @@ class BaseLLM(
         | None = None,
         retryer: Retryer[TInput, TOutput, THistoryEntry, TModelParameters]
         | None = None,
-        json_handler: JsonHandler[TOutput, THistoryEntry] | None = None,
+        json_receiver: JsonReceiver[TInput, TOutput, THistoryEntry, TModelParameters]
+        | None = None,
     ) -> None:
         """Base constructor for the BaseLLM."""
         self._events = events or LLMEvents()
@@ -65,7 +66,7 @@ class BaseLLM(
         self._variable_injector = variable_injector
         self._rate_limiter = rate_limiter
         self._retryer = retryer
-        self._json_handler = json_handler
+        self._json_receiver = json_receiver
 
         decorated = self._decorator_target
         for decorator in self.decorators:
@@ -86,7 +87,7 @@ class BaseLLM(
             variable_injector=self._variable_injector,
             rate_limiter=self._rate_limiter,
             retryer=self._retryer,
-            json_handler=self._json_handler,
+            json_receiver=self._json_receiver,
         )
 
     @property
@@ -98,14 +99,12 @@ class BaseLLM(
     def decorators(self) -> list[LLMDecorator[TOutput, THistoryEntry]]:
         """Get the list of LLM decorators."""
         decorators: list[LLMDecorator] = []
-        if self._json_handler and self._json_handler.requester:
-            decorators.append(self._json_handler.requester)
         if self._rate_limiter:
             decorators.append(self._rate_limiter)
         if self._retryer:
             decorators.append(self._retryer)
-        if self._json_handler and self._json_handler.receiver:
-            decorators.append(self._json_handler.receiver)
+        if self._json_receiver:
+            decorators.append(self._json_receiver)
         return decorators
 
     async def __call__(
@@ -180,3 +179,9 @@ class BaseLLM(
         prompt: TInput,
         **kwargs: Unpack[LLMInput[TJsonModel, THistoryEntry, TModelParameters]],
     ) -> TOutput: ...
+
+    def is_json_mode(
+        self, kwargs: LLMInput[TJsonModel, THistoryEntry, TModelParameters]
+    ) -> bool:
+        """Check if the given request is requesting JSON mode."""
+        return kwargs.get("json") is True or kwargs.get("json_model") is not None

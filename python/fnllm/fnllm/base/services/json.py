@@ -22,71 +22,10 @@ from fnllm.types.generics import (
     TOutput,
 )
 
-from .decorator import LLMDecorator
-
 if TYPE_CHECKING:
     from collections.abc import Awaitable, Callable
 
     from fnllm.types.io import LLMInput, LLMOutput
-
-
-class JsonHandler(Generic[TOutput, THistoryEntry]):
-    """A json-handling strategy."""
-
-    def __init__(
-        self,
-        requester: LLMDecorator[TOutput, THistoryEntry] | None,
-        receiver: LLMDecorator[TOutput, THistoryEntry] | None,
-    ):
-        """Create a new JsonHandler."""
-        self._requester = requester
-        self._receiver = receiver
-
-    @property
-    def requester(self) -> LLMDecorator[TOutput, THistoryEntry] | None:
-        """The inner decorator."""
-        return self._requester
-
-    @property
-    def receiver(self) -> LLMDecorator[TOutput, THistoryEntry] | None:
-        """The inner decorator."""
-        return self._receiver
-
-
-class BaseJsonDecorator(
-    ABC, LLMDecorator[TOutput, THistoryEntry], Generic[TInput, TOutput, THistoryEntry]
-):
-    """An OpenAI JSON parsing LLM."""
-
-    def decorate(
-        self,
-        delegate: Callable[
-            ..., Awaitable[LLMOutput[TOutput, TJsonModel, THistoryEntry]]
-        ],
-    ) -> Callable[..., Awaitable[LLMOutput[TOutput, TJsonModel, THistoryEntry]]]:
-        """Decorate the delegate with the JSON functionality."""
-        this = self
-
-        async def invoke(
-            prompt: TInput,
-            **kwargs: Unpack[LLMInput[TJsonModel, THistoryEntry, TModelParameters]],
-        ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
-            if kwargs.get("json_model") is not None or kwargs.get("json"):
-                return await this.invoke_json(delegate, prompt, kwargs)
-            return await delegate(prompt, **kwargs)
-
-        return invoke
-
-    @abstractmethod
-    async def invoke_json(
-        self,
-        delegate: Callable[
-            ..., Awaitable[LLMOutput[TOutput, TJsonModel, THistoryEntry]]
-        ],
-        prompt: TInput,
-        kwargs: LLMInput[TJsonModel, THistoryEntry, TModelParameters],
-    ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
-        """Invoke the JSON decorator."""
 
 
 class JsonMarshaler(ABC, Generic[TOutput, THistoryEntry]):
@@ -107,35 +46,7 @@ class JsonMarshaler(ABC, Generic[TOutput, THistoryEntry]):
         """Extract the JSON string from the output."""
 
 
-class JsonRequester(
-    BaseJsonDecorator[TInput, TOutput, THistoryEntry],
-    Generic[TInput, TOutput, THistoryEntry, TModelParameters],
-):
-    """A decorator for handling JSON output. This implementation should be the outer decorator."""
-
-    @abstractmethod
-    def rewrite_args(
-        self,
-        prompt: TInput,
-        kwargs: LLMInput[TJsonModel, THistoryEntry, TModelParameters],
-    ) -> tuple[TInput, LLMInput[TJsonModel, THistoryEntry, TModelParameters]]:
-        """Rewrite the input prompt and arguments.."""
-
-    async def invoke_json(
-        self,
-        delegate: Callable[
-            ..., Awaitable[LLMOutput[TOutput, TJsonModel, THistoryEntry]]
-        ],
-        prompt: TInput,
-        kwargs: LLMInput[TJsonModel, THistoryEntry, TModelParameters],
-    ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
-        """Invoke the JSON decorator."""
-        prompt, kwargs = self.rewrite_args(prompt, kwargs)
-        return await delegate(prompt, **kwargs)
-
-
 class JsonReceiver(
-    BaseJsonDecorator[TInput, TOutput, THistoryEntry],
     Generic[TInput, TOutput, THistoryEntry, TModelParameters],
 ):
     """A decorator for handling JSON output. This implementation should be the outer decorator."""
@@ -148,6 +59,25 @@ class JsonReceiver(
         """Create a new JsonReceiver."""
         self._marshaler = marshaler
         self._max_retries = max_retries
+
+    def decorate(
+        self,
+        delegate: Callable[
+            ..., Awaitable[LLMOutput[TOutput, TJsonModel, THistoryEntry]]
+        ],
+    ) -> Callable[..., Awaitable[LLMOutput[TOutput, TJsonModel, THistoryEntry]]]:
+        """Decorate the delegate with the JSON functionality."""
+        this = self
+
+        async def invoke(
+            prompt: TInput,
+            **kwargs: Unpack[LLMInput[TJsonModel, THistoryEntry, TModelParameters]],
+        ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
+            if kwargs.get("json_model") is not None or kwargs.get("json"):
+                return await this.invoke_json(delegate, prompt, kwargs)
+            return await delegate(prompt, **kwargs)
+
+        return invoke
 
     async def invoke_json(
         self,

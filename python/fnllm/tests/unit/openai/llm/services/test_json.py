@@ -37,10 +37,9 @@ async def test_loose_mode_handlers():
     expected_raw_json = {"integer": 1, "string": "value"}
     raw_json_str = json.dumps(expected_raw_json)
     delegate = AsyncMock(return_value=LLMOutput(output=mock_output(raw_json_str)))
-    handlers = create_json_handler(JsonStrategy.LOOSE, 0)
-    assert handlers.receiver is not None
-    assert handlers.requester is None
-    llm = handlers.receiver.decorate(delegate)
+    handler = create_json_handler(JsonStrategy.LOOSE, 0)
+    assert handler is not None
+    llm = handler.decorate(delegate)
 
     # call the llm and assert result
     prompt = "prompt"

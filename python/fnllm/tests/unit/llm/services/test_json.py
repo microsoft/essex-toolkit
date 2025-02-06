@@ -10,10 +10,8 @@ import pytest
 from fnllm.base.base_llm import BaseLLM
 from fnllm.base.services.errors import FailedToGenerateValidJsonError
 from fnllm.base.services.json import (
-    JsonHandler,
     JsonMarshaler,
     JsonReceiver,
-    JsonRequester,
     LooseModeJsonReceiver,
 )
 from fnllm.types.io import LLMInput, LLMOutput
@@ -29,11 +27,11 @@ class TestOutput(BaseModel):
 class TestLLM(BaseLLM):
     def __init__(
         self,
-        json_handler: JsonHandler,
         output: Any,
+        json_handler: JsonReceiver | None = None,
         on_execute: AsyncMock | None = None,
     ):
-        super().__init__(json_handler=json_handler)
+        super().__init__(json_receiver=json_handler)
         self._output = output
         self._on_execute = on_execute or AsyncMock()
 
@@ -85,42 +83,9 @@ class TestReceiver(LooseModeJsonReceiver):
         )
 
 
-class TestRequester(JsonRequester):
-    def __init__(self):
-        self.num_rewrites = 0
-
-    def rewrite_args(self, prompt: str, kwargs: LLMInput) -> tuple[str, LLMInput]:
-        self.num_rewrites += 1
-        return prompt + "test", {**kwargs, "model_parameters": {"test": "xyz"}}
-
-
 class CustomModel(BaseModel):
     integer: int
     string: str
-
-
-async def test_requester_rewrites_for_json():
-    requester = TestRequester()
-    llm = TestLLM(
-        json_handler=JsonHandler(requester, None),
-        output=LLMOutput(output=TestOutput(content="")),
-    )
-
-    # call the llm and assert result
-    await llm("prompt", json=True)
-    assert requester.num_rewrites == 1
-
-
-async def test_requester_does_not_rewrite_non_json():
-    requester = TestRequester()
-    llm = TestLLM(
-        json_handler=JsonHandler(requester, None),
-        output=LLMOutput(output=TestOutput(content="")),
-    )
-
-    # call the llm and assert result
-    await llm("prompt")
-    assert requester.num_rewrites == 0
 
 
 async def test_loose_mode_receiver_handles_valid_json():
@@ -128,7 +93,7 @@ async def test_loose_mode_receiver_handles_valid_json():
     raw_json_str = json.dumps(expected_raw_json)
     recovery = AsyncMock(raises=ValueError)
     llm = TestLLM(
-        json_handler=JsonHandler(None, TestReceiver(recovery)),
+        json_handler=TestReceiver(recovery),
         output=LLMOutput(output=TestOutput(content=raw_json_str)),
     )
 
@@ -147,7 +112,7 @@ async def test_loose_mode_receiver_handles_valid_json_default_handler():
 
     bad_json = '{"x": 1'
     llm = TestLLM(
-        json_handler=JsonHandler(None, TestReceiver()),
+        json_handler=TestReceiver(),
         output=LLMOutput(output=TestOutput(content=bad_json)),
     )
 
@@ -159,7 +124,7 @@ async def test_loose_mode_receiver_handles_valid_json_default_handler():
 async def test_loose_mode_receiver_can_parse_incomplete_json():
     bad_json = '{"x": 1'
     llm = TestLLM(
-        json_handler=JsonHandler(None, TestReceiver()),
+        json_handler=TestReceiver(),
         output=LLMOutput(output=TestOutput(content=bad_json)),
     )
 
@@ -171,7 +136,7 @@ async def test_loose_mode_receiver_can_parse_incomplete_json():
 async def test_loose_mode_receiver_can_parse_json_with_markdown_headers():
     bad_json = '```json\n{"x": 1}```'
     llm = TestLLM(
-        json_handler=JsonHandler(None, TestReceiver()),
+        json_handler=TestReceiver(),
         output=LLMOutput(output=TestOutput(content=bad_json)),
     )
 
@@ -189,7 +154,7 @@ async def test_loose_mode_receiver_read_model():
     raw_json_str = json.dumps(expected_raw_json)
     recovery = AsyncMock(raises=ValueError)
     llm = TestLLM(
-        json_handler=JsonHandler(None, TestReceiver(recovery)),
+        json_handler=TestReceiver(recovery),
         output=LLMOutput(output=TestOutput(content=raw_json_str)),
     )
 
@@ -212,7 +177,7 @@ async def test_loose_mode_receiver_read_model_invalid():
     raw_json_str = json.dumps(expected_raw_json)
     recovery = AsyncMock(return_value=(None, None, None))
     llm = TestLLM(
-        json_handler=JsonHandler(None, TestReceiver(recovery)),
+        json_handler=TestReceiver(recovery),
         output=LLMOutput(output=TestOutput(content=raw_json_str)),
     )
 
@@ -227,7 +192,7 @@ async def test_loose_mode_recovers():
     raw_json_str = json.dumps(expected_raw_json)
     recovery = AsyncMock(return_value=(raw_json_str, expected_raw_json, None))
     llm = TestLLM(
-        json_handler=JsonHandler(None, TestReceiver(recovery)),
+        json_handler=TestReceiver(recovery),
         output=LLMOutput(output=TestOutput(content=bad_json)),
     )
 
@@ -243,7 +208,7 @@ async def test_loose_mode_fails():
     bad_json = '{"x": 1'
     recovery = AsyncMock(return_value=(None, None, None))
     llm = TestLLM(
-        json_handler=JsonHandler(None, TestReceiver(recovery)),
+        json_handler=TestReceiver(recovery),
         output=LLMOutput(
             output=TestOutput(
                 content=bad_json,
@@ -259,7 +224,7 @@ async def test_loose_mode_fails():
 async def test_standard_mode_fails():
     bad_json = '{"x": 1'
     llm = TestLLM(
-        json_handler=JsonHandler(None, JsonReceiver(TestMarshaler(), 0)),
+        json_handler=JsonReceiver(TestMarshaler(), 0),
         output=LLMOutput(
             output=TestOutput(
                 content=bad_json,
@@ -280,7 +245,7 @@ async def test_standard_mode_receiver_read_model():
     expected_raw_json = {"integer": 1, "string": "value"}
     raw_json_str = json.dumps(expected_raw_json)
     llm = TestLLM(
-        json_handler=JsonHandler(None, JsonReceiver(TestMarshaler(), 0)),
+        json_handler=JsonReceiver(TestMarshaler(), 0),
         output=LLMOutput(output=TestOutput(content=raw_json_str)),
     )
 
@@ -302,7 +267,7 @@ async def test_standard_mode_receiver_read_model_invalid():
     expected_raw_json = {"integerxxx": 1, "string": "value"}
     raw_json_str = json.dumps(expected_raw_json)
     llm = TestLLM(
-        json_handler=JsonHandler(None, JsonReceiver(TestMarshaler(), 0)),
+        json_handler=JsonReceiver(TestMarshaler(), 0),
         output=LLMOutput(output=TestOutput(content=raw_json_str)),
     )
 
