@@ -14,7 +14,8 @@
 			".devcontainer/",
 			".vscode/",
 			"archived/",
-			"python/"
+			"python/",
+			".venv/"
 		]
 	},
 	"organizeImports": {

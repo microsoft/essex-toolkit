@@ -22,15 +22,15 @@
     "editor.defaultFormatter": "biomejs.biome"
   },
   "[python]": {
-		"editor.formatOnSave": true,
-		"editor.codeActionsOnSave": {
-			"source.organizeImports": "explicit",
-			"source.fixAll": "explicit"
-		},
-		"editor.defaultFormatter": "charliermarsh.ruff"
-	},
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit",
+      "source.fixAll": "explicit"
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
   "notebook.formatOnSave.enabled": true,
-	"notebook.codeActionsOnSave": {
+  "notebook.codeActionsOnSave": {
     "notebook.source.fixAll": "explicit",
     "notebook.source.organizeImports": "explicit"
   },
@@ -45,5 +45,5 @@
     ".gitignore": ".gitattributes",
     "README.md": "SECURITY.md, SUPPORT.md, CODE_OF_CONDUCT.md, CHANGELOG.md, LICENSE"
   },
-	"ruff.configuration": "./ruff.toml"
+  "ruff.configuration": "./ruff.toml"
 }
