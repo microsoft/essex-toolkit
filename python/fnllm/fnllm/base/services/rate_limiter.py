@@ -4,21 +4,19 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable
-from contextlib import contextmanager
+from collections.abc import Awaitable, Callable
 from typing import TYPE_CHECKING, Any, Generic
 
 from typing_extensions import Unpack
 
 from fnllm.limiting import Limiter, Manifest
 from fnllm.types.generics import TInput, TJsonModel, TModelParameters
-from fnllm.types.io import LLMInput
+from fnllm.types.io import LLMInput, LLMOutput
 
 from .decorator import LLMDecorator, THistoryEntry, TOutput
 
 if TYPE_CHECKING:
     from fnllm.events.base import LLMEvents
-    from fnllm.types.io import LLMOutput
 
 TokenEstimator = Callable[
     [TInput, LLMInput[TJsonModel, THistoryEntry, TModelParameters]], int
@@ -36,24 +34,21 @@ class RateLimiter(
         limiter: Limiter,
         *,
         events: LLMEvents,
-        estimator: TokenEstimator,
+        estimator: TokenEstimator[TInput, TJsonModel, THistoryEntry, TModelParameters],
     ):
         """Create a new BaseRateLimitLLM."""
         self._limiter = limiter
         self._events = events
         self._estimator = estimator
 
-    def estimate_request_tokens(self, prompt: TInput, kwargs: LLMInput) -> int:
+    def _estimate_request_tokens(self, prompt: TInput, kwargs: LLMInput) -> int:
         """Estimate the number of tokens needed for an OpenAI request."""
         return self._estimator(prompt, kwargs)
 
-    async def update_response(
+    async def _handle_post_request_limiting(
         self,
         result: LLMOutput[TOutput, TJsonModel, THistoryEntry],
-        estimated_input_tokens: int,
     ) -> None:
-        """Handle the post-request limiting."""
-        result.metrics.estimated_input_tokens = estimated_input_tokens
         diff = result.metrics.tokens_diff
 
         if diff > 0:
@@ -62,18 +57,28 @@ class RateLimiter(
             async with self._limiter.use(manifest):
                 await self._events.on_post_limit(manifest)
 
-    @contextmanager
-    async def limit(
+    def decorate(
         self,
-        estimated_input_tokens: int,
-        prompt: TInput,
-        **args: Unpack[LLMInput[Any, Any, Any]],
-    ):
-        """Limit the rate of the LLM."""
-        manifest = Manifest(request_tokens=estimated_input_tokens)
-        try:
-            with self._limiter.use(manifest):
-                await self._events.on_limit_acquired(manifest)
-                yield
-        finally:
-            await self._events.on_limit_released(manifest)
+        delegate: Callable[
+            ..., Awaitable[LLMOutput[TOutput, TJsonModel, THistoryEntry]]
+        ],
+    ) -> Callable[..., Awaitable[LLMOutput[TOutput, TJsonModel, THistoryEntry]]]:
+        """Execute the LLM with the configured rate limits."""
+
+        async def invoke(prompt: TInput, **args: Unpack[LLMInput[Any, Any, Any]]):
+            estimated_input_tokens = self._estimate_request_tokens(prompt, args)
+
+            manifest = Manifest(request_tokens=estimated_input_tokens)
+            try:
+                async with self._limiter.use(manifest):
+                    await self._events.on_limit_acquired(manifest)
+                    result = await delegate(prompt, **args)
+            finally:
+                await self._events.on_limit_released(manifest)
+
+            result.metrics.estimated_input_tokens = estimated_input_tokens
+            await self._handle_post_request_limiting(result)
+
+            return result
+
+        return invoke

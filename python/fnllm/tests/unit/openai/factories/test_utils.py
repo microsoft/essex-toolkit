@@ -6,6 +6,7 @@ from typing import cast
 from unittest.mock import create_autospec
 
 import pytest
+from fnllm.base.services.rate_limiter import RateLimiter
 from fnllm.events.base import LLMEvents
 from fnllm.limiting.base import Limiter
 from fnllm.limiting.composite import CompositeLimiter
@@ -18,7 +19,6 @@ from fnllm.openai.factories.utils import (
     create_rate_limiter,
     create_retryer,
 )
-from fnllm.openai.services.openai_rate_limiter import OpenAIRateLimiter
 from fnllm.openai.services.openai_retryer import OpenAIRetryer
 
 
@@ -42,7 +42,7 @@ def test_create_rate_limited_llm(requests_burst_mode: bool):
     limiter = create_limiter(config)
 
     llm = cast(
-        OpenAIRateLimiter,
+        RateLimiter,
         create_rate_limiter(
             config=config,
             events=mocked_events,
@@ -50,7 +50,6 @@ def test_create_rate_limited_llm(requests_burst_mode: bool):
         ),
     )
 
-    assert llm._encoding.name == config.encoding
     assert llm._events == mocked_events
     assert llm._limiter == limiter
 

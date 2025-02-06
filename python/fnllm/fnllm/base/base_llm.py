@@ -99,6 +99,8 @@ class BaseLLM(
     def decorators(self) -> list[LLMDecorator[TOutput, THistoryEntry]]:
         """Get the list of LLM decorators."""
         decorators: list[LLMDecorator] = []
+        if self._rate_limiter:
+            decorators.append(self._rate_limiter)
         if self._retryer:
             decorators.append(self._retryer)
         if self._json_receiver:
@@ -144,27 +146,13 @@ class BaseLLM(
         Leave signature alone as prompt, **kwargs.
         """
         await self._events.on_execute_llm()
-        output = await self._invoke_rate_limited(prompt, **kwargs)
-        result = LLMOutput(output=output)
+        output = await self._execute_llm(prompt, **kwargs)
+        result: LLMOutput[TOutput, TJsonModel, THistoryEntry] = LLMOutput(output=output)
+
         await self._inject_usage(result)
         self._inject_history(result, kwargs.get("history"))
 
         return result
-
-    async def _invoke_rate_limited(
-        self,
-        prompt: TInput,
-        **kwargs: Unpack[LLMInput[TJsonModel, THistoryEntry, TModelParameters]],
-    ):
-        """Limit the LLM."""
-        if self._rate_limiter is None:
-            return self._execute_llm(prompt, **kwargs)
-
-        est_input_tokens = self._rate_limiter.estimate_request_tokens(prompt, kwargs)
-        async with self._rate_limiter.limit(est_input_tokens, prompt, **kwargs):
-            output = self._execute_llm(prompt, **kwargs)
-            await self._rate_limiter.update_response(output, est_input_tokens)
-            return output
 
     async def _inject_usage(
         self, result: LLMOutput[TOutput, TJsonModel, THistoryEntry]
