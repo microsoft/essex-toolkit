@@ -11,6 +11,7 @@ from openai.types.chat.chat_completion_message_param import ChatCompletionMessag
 from typing_extensions import Unpack
 
 from fnllm.base.base_llm import BaseLLM
+from fnllm.base.config import JsonStrategy
 from fnllm.openai.services.openai_history_extractor import (
     OpenAIHistoryExtractor,
 )
@@ -29,7 +30,7 @@ from fnllm.types.metrics import LLMUsageMetrics
 
 if TYPE_CHECKING:
     from fnllm.base.services.cache_interactor import Cached, CacheInteractor
-    from fnllm.base.services.json import JsonHandler
+    from fnllm.base.services.json import JsonReceiver
     from fnllm.base.services.rate_limiter import RateLimiter
     from fnllm.base.services.retryer import Retryer
     from fnllm.base.services.variable_injector import VariableInjector
@@ -74,8 +75,14 @@ class OpenAITextChatLLMImpl(
         | None = None,
         model_parameters: OpenAIChatParameters | None = None,
         events: LLMEvents | None = None,
-        json_handler: JsonHandler[OpenAIChatOutput, OpenAIChatHistoryEntry]
-        | None = None,
+        json_handler: JsonReceiver[
+            OpenAIChatCompletionInput,
+            OpenAIChatOutput,
+            OpenAIChatHistoryEntry,
+            OpenAIChatParameters,
+        ]
+        | None,
+        json_strategy: JsonStrategy = JsonStrategy.VALID,
     ):
         """Create a new OpenAIChatLLM."""
         super().__init__(
@@ -84,14 +91,15 @@ class OpenAITextChatLLMImpl(
             history_extractor=history_extractor,
             variable_injector=variable_injector,
             retryer=retryer,
-            rate_limiter=rate_limiter,
             json_handler=json_handler,
+            rate_limiter=rate_limiter,
         )
 
         self._client = client
         self._model = model
         self._global_model_parameters = model_parameters or {}
         self._cache = cache
+        self._json_strategy = json_strategy
 
     def child(self, name: str) -> Any:
         """Create a child LLM."""
@@ -99,6 +107,7 @@ class OpenAITextChatLLMImpl(
             self._client,
             self._model,
             self._cache.child(name),
+            json_handler=self._json_handler,
             events=self.events,
             usage_extractor=cast(
                 OpenAIUsageExtractor[OpenAIChatOutput], self._usage_extractor
@@ -108,7 +117,7 @@ class OpenAITextChatLLMImpl(
             rate_limiter=self._rate_limiter,
             retryer=self._retryer,
             model_parameters=self._global_model_parameters,
-            json_handler=self._json_handler,
+            json_strategy=self._json_strategy,
         )
 
     def _build_completion_parameters(
@@ -165,8 +174,8 @@ class OpenAITextChatLLMImpl(
             parameters=completion_parameters,
             bypass_cache=bypass_cache,
         )
-        completion = response.value
 
+        completion = response.value
         result = completion.choices[0].message
         usage: LLMUsageMetrics | None = None
         if completion.usage and not response.hit:
@@ -181,3 +190,25 @@ class OpenAITextChatLLMImpl(
             content=result.content,
             usage=usage or LLMUsageMetrics(),
         )
+
+    def _rewrite_input(
+        self,
+        prompt: OpenAIChatCompletionInput,
+        kwargs: LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters],
+    ) -> tuple[
+        OpenAIChatCompletionInput,
+        LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters],
+    ]:
+        prompt, kwargs = super()._rewrite_input(prompt, kwargs)
+        if self.is_json_mode(kwargs) and self._json_strategy == JsonStrategy.VALID:
+            kwargs["model_parameters"] = self._enable_oai_json_mode(
+                kwargs.get("model_parameters", {})
+            )
+        return prompt, kwargs
+
+    def _enable_oai_json_mode(
+        self, parameters: OpenAIChatParameters
+    ) -> OpenAIChatParameters:
+        result: OpenAIChatParameters = parameters.copy()
+        result["response_format"] = {"type": "json_object"}
+        return result

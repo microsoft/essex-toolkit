@@ -10,6 +10,7 @@ def test_child_with_cache():
         client=Mock(),
         cache=CacheInteractor(events=LLMEvents(), cache=None),
         model="model",
+        json_handler=None,
     )
     child = llm.child("test")
     assert llm is not child
