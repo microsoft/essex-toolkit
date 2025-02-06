@@ -11,6 +11,7 @@ from openai.types.chat.chat_completion_message_param import ChatCompletionMessag
 from typing_extensions import Unpack
 
 from fnllm.base.base import BaseLLM
+from fnllm.caching import Cache
 from fnllm.openai.types.aliases import OpenAIChatCompletionModel, OpenAIChatModel
 from fnllm.openai.types.chat.io import (
     OpenAIChatCompletionInput,
@@ -27,7 +28,7 @@ from .utils import build_chat_messages
 if TYPE_CHECKING:
     from fnllm.events.base import LLMEvents
     from fnllm.openai.types.client import OpenAIClient
-    from fnllm.services.cache_interactor import Cached, CacheInteractor
+    from fnllm.services.cache_interactor import Cached
     from fnllm.services.json import JsonHandler
     from fnllm.services.rate_limiter import RateLimiter
     from fnllm.services.retryer import Retryer
@@ -50,7 +51,7 @@ class OpenAITextChatLLMImpl(
         self,
         client: OpenAIClient,
         model: str | OpenAIChatModel,
-        cache: CacheInteractor,
+        cache: Cache | None = None,
         *,
         usage_extractor: OpenAIUsageExtractor[OpenAIChatOutput] | None = None,
         history_extractor: OpenAIHistoryExtractor | None = None,
@@ -121,13 +122,17 @@ class OpenAITextChatLLMImpl(
 
     async def _call_completion_or_cache(
         self,
-        name: str | None,
-        *,
-        messages: list[OpenAIChatHistoryEntry],
-        parameters: OpenAIChatParameters,
-        bypass_cache: bool,
+        prompt: OpenAIChatCompletionInput,
+        **kwargs: Unpack[
+            LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters]
+        ],
     ) -> Cached[OpenAIChatCompletionModel]:
         # TODO: check if we need to remove max_tokens and n from the keys
+        name = kwargs.get("name")
+        bypass_cache = kwargs.get("bypass_cache", False)
+        local_model_parameters = kwargs.get("model_parameters")
+        parameters = self._build_completion_parameters(local_model_parameters)
+        messages = kwargs.get("messages", [])
         return await self._cache.get_or_insert(
             lambda: self._client.chat.completions.create(
                 messages=cast(Iterator[ChatCompletionMessageParam], messages),
@@ -147,34 +152,79 @@ class OpenAITextChatLLMImpl(
             LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters]
         ],
     ) -> OpenAIChatOutput:
-        name = kwargs.get("name")
         history = kwargs.get("history", [])
-        bypass_cache = kwargs.get("bypass_cache", False)
-        local_model_parameters = kwargs.get("model_parameters")
         messages, prompt_message = build_chat_messages(prompt, history)
-        completion_parameters = self._build_completion_parameters(
-            local_model_parameters
+        local_model_parameters = kwargs.get("model_parameters")
+        parameters = self._build_completion_parameters(local_model_parameters)
+        completion = await self._client.chat.completions.create(
+            messages=cast(Iterator[ChatCompletionMessageParam], messages),
+            **parameters,
         )
 
-        response = await self._call_completion_or_cache(
-            name,
-            messages=messages,
-            parameters=completion_parameters,
-            bypass_cache=bypass_cache,
-        )
-        completion = response.value
+        if self._cache is not None and not kwargs.get("bypass_cache"):
+            cache_key = self._create_cache_key(messages, **kwargs)
+            await self._cache.set(
+                cache_key,
+                completion.model_dump(),
+                {"messages": messages, "parameters": parameters},
+            )
 
-        result = completion.choices[0].message
         usage: LLMUsageMetrics | None = None
-        if completion.usage and not response.hit:
+        if completion.usage:
             usage = LLMUsageMetrics(
                 input_tokens=completion.usage.prompt_tokens,
                 output_tokens=completion.usage.completion_tokens,
             )
 
+        return self._create_response(completion, prompt_message, usage)
+
+    async def _try_execute_cached(
+        self,
+        prompt: OpenAIChatCompletionInput,
+        **kwargs: Unpack[
+            LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters]
+        ],
+    ) -> OpenAIChatOutput:
+        if self._cache is None or kwargs.get("bypass_cache") is True:
+            return None
+
+        name = kwargs.get("name")
+        history = kwargs.get("history", [])
+        messages, prompt_message = build_chat_messages(prompt, history)
+        key = self._create_cache_key(messages, **kwargs)
+        result = await self._cache.get(key)
+        if result is not None:
+            entry = OpenAIChatCompletionModel.model_validate(result)
+            await self._events.on_cache_hit(key, name)
+            return self._create_response(entry, prompt_message)
+
+        await self._events.on_cache_miss(key, name)
+        return None
+
+    def _create_cache_key(
+        self,
+        messages: list[OpenAIChatHistoryEntry],
+        **kwargs: Unpack[
+            LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters]
+        ],
+    ) -> str:
+        local_model_parameters = kwargs.get("model_parameters")
+        parameters = self._build_completion_parameters(local_model_parameters)
+        return self._cache.create_key(
+            {"messages": messages, "parameters": parameters}, prefix="chat"
+        )
+
+    def _create_response(
+        self,
+        model: OpenAIChatCompletionModel,
+        prompt: OpenAIChatCompletionInput,
+        usage: LLMUsageMetrics | None = None,
+    ) -> OpenAIChatOutput:
+        completion = model.choices[0].message
+        usage = usage or LLMUsageMetrics()
         return OpenAIChatOutput(
-            raw_input=prompt_message,
-            raw_output=result,
-            content=result.content,
-            usage=usage or LLMUsageMetrics(),
+            raw_input=prompt,
+            raw_output=completion,
+            content=completion.content,
+            usage=usage,
         )

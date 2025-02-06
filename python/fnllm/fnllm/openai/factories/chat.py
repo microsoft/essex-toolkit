@@ -13,7 +13,6 @@ from fnllm.openai.llm.features.tools_parsing import OpenAIParseToolsLLM
 from fnllm.openai.llm.services.history_extractor import OpenAIHistoryExtractor
 from fnllm.openai.llm.services.json import create_json_handler
 from fnllm.openai.llm.services.usage_extractor import OpenAIUsageExtractor
-from fnllm.services.cache_interactor import CacheInteractor
 from fnllm.services.variable_injector import VariableInjector
 
 from .client import create_openai_client
@@ -37,7 +36,6 @@ def create_openai_chat_llm(
     *,
     client: OpenAIClient | None = None,
     cache: Cache | None = None,
-    cache_interactor: CacheInteractor | None = None,
     events: LLMEvents | None = None,
 ) -> OpenAIChatLLM:
     """Create an OpenAI chat LLM."""
@@ -50,7 +48,6 @@ def create_openai_chat_llm(
         client=client,
         config=config,
         cache=cache,
-        cache_interactor=cache_interactor,
         events=events,
         limiter=limiter,
     )
@@ -72,7 +69,6 @@ def _create_openai_text_chat_llm(
     config: OpenAIConfig,
     limiter: Limiter,
     cache: Cache | None,
-    cache_interactor: CacheInteractor | None,
     events: LLMEvents | None,
 ) -> OpenAITextChatLLM:
     operation = "chat"
@@ -80,7 +76,7 @@ def _create_openai_text_chat_llm(
         client,
         model=config.model,
         model_parameters=config.chat_parameters,
-        cache=cache_interactor or CacheInteractor(events, cache),
+        cache=cache,
         events=events,
         json_handler=create_json_handler(config.json_strategy, config.max_json_retries),
         usage_extractor=OpenAIUsageExtractor(),

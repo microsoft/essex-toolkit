@@ -135,6 +135,15 @@ class OpenAIStreamingChatLLMImpl(
         iterator.on_usage(handle_usage)
         return result
 
+    async def _try_execute_cached(
+        self,
+        prompt: OpenAIChatCompletionInput,
+        **kwargs: Unpack[
+            LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters]
+        ],
+    ) -> OpenAIStreamingChatOutput | None:
+        return None
+
 
 class StreamingChatIterator:
     """A streaming llm response iterator."""

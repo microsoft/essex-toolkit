@@ -8,7 +8,6 @@ from typing import TYPE_CHECKING
 
 from fnllm.openai.llm.embeddings import OpenAIEmbeddingsLLMImpl
 from fnllm.openai.llm.services.usage_extractor import OpenAIUsageExtractor
-from fnllm.services.cache_interactor import CacheInteractor
 from fnllm.services.variable_injector import VariableInjector
 
 from .client import create_openai_client
@@ -26,7 +25,6 @@ def create_openai_embeddings_llm(
     *,
     client: OpenAIClient | None = None,
     cache: Cache | None = None,
-    cache_interactor: CacheInteractor | None = None,
     events: LLMEvents | None = None,
 ) -> OpenAIEmbeddingsLLM:
     """Create an OpenAI embeddings LLM."""
@@ -40,7 +38,7 @@ def create_openai_embeddings_llm(
         client,
         model=config.model,
         model_parameters=config.embeddings_parameters,
-        cache=cache_interactor or CacheInteractor(events, cache),
+        cache=cache,
         events=events,
         usage_extractor=OpenAIUsageExtractor(),
         variable_injector=VariableInjector(),
