@@ -11,4 +11,13 @@ def test_child_with_cache():
         json_receiver=None,
     )
     child = llm.child("test")
+    assert llm is child
+
+    llm = OpenAITextChatLLMImpl(
+        client=Mock(),
+        cache=Mock(),
+        model="model",
+        json_receiver=None,
+    )
+    child = llm.child("test")
     assert llm is not child

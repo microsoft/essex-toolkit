@@ -21,6 +21,14 @@ def test_embedding_llm_child_with_cache():
         model="model",
     )
     child = llm.child("test")
+    assert llm is child
+
+    llm = OpenAIEmbeddingsLLMImpl(
+        client=Mock(),
+        cache=Mock(),
+        model="model",
+    )
+    child = llm.child("test")
     assert llm is not child
 
 
