@@ -11,8 +11,12 @@ from openai.types.chat.chat_completion_message_param import ChatCompletionMessag
 from typing_extensions import Unpack
 
 from fnllm.base.base_llm import BaseLLM
-from fnllm.openai.services.history_extractor import OpenAIHistoryExtractor
-from fnllm.openai.services.usage_extractor import OpenAIUsageExtractor
+from fnllm.openai.services.openai_history_extractor import (
+    OpenAIHistoryExtractor,
+)
+from fnllm.openai.services.openai_usage_extractor import (
+    OpenAIUsageExtractor,
+)
 from fnllm.openai.types.aliases import OpenAIChatCompletionModel, OpenAIChatModel
 from fnllm.openai.types.chat.io import (
     OpenAIChatCompletionInput,

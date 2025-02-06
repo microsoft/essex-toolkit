@@ -18,8 +18,8 @@ from fnllm.openai.factories.utils import (
     create_rate_limiter,
     create_retryer,
 )
-from fnllm.openai.services.rate_limiter import OpenAIRateLimiter
-from fnllm.openai.services.retryer import OpenAIRetryer
+from fnllm.openai.services.openai_rate_limiter import OpenAIRateLimiter
+from fnllm.openai.services.openai_retryer import OpenAIRetryer
 
 
 @pytest.mark.parametrize("requests_burst_mode", ([True, False]))

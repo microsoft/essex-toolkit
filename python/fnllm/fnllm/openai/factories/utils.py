@@ -12,8 +12,8 @@ from fnllm.limiting.composite import CompositeLimiter
 from fnllm.limiting.concurrency import ConcurrencyLimiter
 from fnllm.limiting.rpm import RPMLimiter
 from fnllm.limiting.tpm import TPMLimiter
-from fnllm.openai.services.rate_limiter import OpenAIRateLimiter
-from fnllm.openai.services.retryer import OpenAIRetryer
+from fnllm.openai.services.openai_rate_limiter import OpenAIRateLimiter
+from fnllm.openai.services.openai_retryer import OpenAIRetryer
 
 if TYPE_CHECKING:
     from fnllm.base.services.rate_limiter import RateLimiter

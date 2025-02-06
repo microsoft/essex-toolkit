@@ -9,7 +9,9 @@ from typing import TYPE_CHECKING, cast
 from typing_extensions import Unpack
 
 from fnllm.base.base_llm import BaseLLM
-from fnllm.openai.services.usage_extractor import OpenAIUsageExtractor
+from fnllm.openai.services.openai_usage_extractor import (
+    OpenAIUsageExtractor,
+)
 from fnllm.openai.types.aliases import OpenAICreateEmbeddingResponseModel
 from fnllm.openai.types.embeddings.io import (
     OpenAIEmbeddingsInput,

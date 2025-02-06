@@ -12,9 +12,11 @@ from fnllm.events.base import LLMEvents
 from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.factories.embeddings import create_openai_embeddings_llm
 from fnllm.openai.llm.openai_embeddings_llm import OpenAIEmbeddingsLLMImpl
-from fnllm.openai.services.rate_limiter import OpenAIRateLimiter
-from fnllm.openai.services.retryer import OpenAIRetryer
-from fnllm.openai.services.usage_extractor import OpenAIUsageExtractor
+from fnllm.openai.services.openai_rate_limiter import OpenAIRateLimiter
+from fnllm.openai.services.openai_retryer import OpenAIRetryer
+from fnllm.openai.services.openai_usage_extractor import (
+    OpenAIUsageExtractor,
+)
 
 if TYPE_CHECKING:
     from fnllm.types import EmbeddingsLLM
