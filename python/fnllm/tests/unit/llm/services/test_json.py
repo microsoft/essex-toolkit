@@ -39,10 +39,10 @@ class TestLLM(BaseLLM):
     def inner(self) -> AsyncMock:
         return self._on_execute
 
-    async def _decorator_target(self, prompt: Any, **kwargs: Any) -> Any:
+    async def _decorator_target(self, prompt: Any, kwargs: Any) -> Any:
         return self._output
 
-    def _execute_llm(self, prompt: Any, **kwargs: Any) -> Any:
+    def _execute_llm(self, prompt: Any, kwargs: Any) -> Any:
         self._on_execute(prompt, **kwargs)
 
 

@@ -6,8 +6,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, cast
 
-from typing_extensions import Unpack
-
 from fnllm.base.base_llm import BaseLLM
 from fnllm.openai.services.openai_usage_extractor import (
     OpenAIUsageExtractor,
@@ -125,7 +123,7 @@ class OpenAIEmbeddingsLLMImpl(
         )
 
     async def _execute_llm(
-        self, prompt: OpenAIEmbeddingsInput, **kwargs: Unpack[LLMInput]
+        self, prompt: OpenAIEmbeddingsInput, kwargs: LLMInput
     ) -> OpenAIEmbeddingsOutput:
         name = kwargs.get("name")
         local_model_parameters = kwargs.get("model_parameters")

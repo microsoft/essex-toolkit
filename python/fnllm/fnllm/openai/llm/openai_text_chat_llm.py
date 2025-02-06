@@ -8,7 +8,6 @@ from collections.abc import Iterator
 from typing import TYPE_CHECKING, Any, cast
 
 from openai.types.chat.chat_completion_message_param import ChatCompletionMessageParam
-from typing_extensions import Unpack
 
 from fnllm.base.base_llm import BaseLLM
 from fnllm.base.config import JsonStrategy
@@ -156,9 +155,7 @@ class OpenAITextChatLLMImpl(
     async def _execute_llm(
         self,
         prompt: OpenAIChatCompletionInput,
-        **kwargs: Unpack[
-            LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters]
-        ],
+        kwargs: LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters],
     ) -> OpenAIChatOutput:
         name = kwargs.get("name")
         history = kwargs.get("history", [])

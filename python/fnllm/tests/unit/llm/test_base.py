@@ -10,7 +10,6 @@ from fnllm.base.base_llm import BaseLLM
 from fnllm.events.base import LLMEvents
 from fnllm.types.io import LLMInput
 from pydantic import BaseModel
-from typing_extensions import Unpack
 
 
 class CustomError(BaseException):
@@ -21,7 +20,7 @@ class ErrorLLM(BaseLLM[str, str, Any, Any]):
     async def _execute_llm(
         self,
         prompt: str,
-        **kwargs: Unpack[LLMInput[Any, Any, Any]],
+        kwargs: LLMInput[Any, Any, Any],
     ) -> str:
         msg = "Test error."
         raise CustomError(msg)
@@ -31,7 +30,7 @@ class CustomLLM(BaseLLM[str, str, Any, Any]):
     async def _execute_llm(
         self,
         prompt: str,
-        **kwargs: Unpack[LLMInput[Any, Any, Any]],
+        kwargs: LLMInput[Any, Any, Any],
     ) -> str:
         return "Some result."
 
