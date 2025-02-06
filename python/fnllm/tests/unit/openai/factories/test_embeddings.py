@@ -5,7 +5,6 @@
 from typing import TYPE_CHECKING
 from unittest.mock import ANY, create_autospec, patch
 
-from fnllm.base.services.cache_interactor import CacheInteractor
 from fnllm.base.services.rate_limiter import RateLimiter
 from fnllm.base.services.retryer import Retryer
 from fnllm.base.services.variable_injector import VariableInjector
@@ -55,9 +54,6 @@ def test_create_openai_embeddings_llm():
             return_value=None,
         ) as new_embeddings_llm,
         patch.object(
-            CacheInteractor, "__init__", return_value=None
-        ) as new_cache_interactor,
-        patch.object(
             VariableInjector, "__init__", return_value=None
         ) as new_variable_injector,
         patch.object(
@@ -70,14 +66,12 @@ def test_create_openai_embeddings_llm():
             config, cache=mocked_cache, events=mocked_events
         )
 
-        new_cache_interactor.assert_called_with(mocked_events, mocked_cache)
-
         # check config has been forwarded
         new_embeddings_llm.assert_called_once_with(
             ANY,
             model=config.model,
             model_parameters=config.embeddings_parameters,
-            cache=ANY,
+            cache=mocked_cache,
             events=mocked_events,
             usage_extractor=ANY,
             variable_injector=ANY,

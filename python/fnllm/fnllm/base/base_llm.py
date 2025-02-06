@@ -107,14 +107,35 @@ class BaseLLM(
             decorators.append(self._json_receiver)
         return decorators
 
+    async def _decorator_target(
+        self,
+        prompt: TInput,
+        **kwargs: Unpack[LLMInput[TJsonModel, THistoryEntry, TModelParameters]],
+    ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
+        """Target for the decorator chain.
+
+        Leave signature alone as prompt,  kwargs.
+        """
+        await self._events.on_execute_llm()
+        output = await self._execute_llm(prompt, kwargs)
+        return await self._handle_output(output, kwargs, cached=False)
+
     async def __call__(
         self,
         prompt: TInput,
         **kwargs: Unpack[LLMInput[TJsonModel, THistoryEntry, TModelParameters]],
     ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
-        """Invoke the LLM."""
+        """
+        Invoke the LLM.
+
+        This is the primary entry point for invoking the LLM.
+        """
         try:
             prompt, kwargs = self._rewrite_input(prompt, kwargs)
+            if not kwargs.get("bypass_cache"):
+                result = await self._try_execute_cached(prompt, kwargs)
+                if result is not None:
+                    return await self._handle_output(result, kwargs, cached=True)
             return await self._decorated_target(prompt, **kwargs)
         except BaseException as e:
             stack_trace = traceback.format_exc()
@@ -136,29 +157,23 @@ class BaseLLM(
             )
         return prompt, kwargs
 
-    async def _decorator_target(
+    async def _handle_output(
         self,
-        prompt: TInput,
-        **kwargs: Unpack[LLMInput[TJsonModel, THistoryEntry, TModelParameters]],
+        output: TOutput,
+        kwargs: LLMInput[TJsonModel, THistoryEntry, TModelParameters],
+        *,
+        cached: bool,
     ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
-        """Target for the decorator chain.
-
-        Leave signature alone as prompt, **kwargs.
-        """
-        await self._events.on_execute_llm()
-        output = await self._execute_llm(prompt, **kwargs)
         result: LLMOutput[TOutput, TJsonModel, THistoryEntry] = LLMOutput(output=output)
-
-        await self._inject_usage(result)
+        await self._inject_usage(result, cached=cached)
         self._inject_history(result, kwargs.get("history"))
-
         return result
 
     async def _inject_usage(
-        self, result: LLMOutput[TOutput, TJsonModel, THistoryEntry]
+        self, result: LLMOutput[TOutput, TJsonModel, THistoryEntry], *, cached: bool
     ):
         usage = LLMUsageMetrics()
-        if self._usage_extractor:
+        if self._usage_extractor and not cached:
             usage = self._usage_extractor.extract_usage(result.output)
             await self._events.on_usage(usage)
         result.metrics.usage = usage
@@ -173,11 +188,19 @@ class BaseLLM(
                 history, result.output
             )
 
+    async def _try_execute_cached(
+        self,
+        prompt: TInput,
+        kwargs: LLMInput[TJsonModel, THistoryEntry, TModelParameters],
+    ) -> TOutput | None:
+        """Attempt to execute the LLM using a cached result."""
+        return None
+
     @abstractmethod
     async def _execute_llm(
         self,
         prompt: TInput,
-        **kwargs: Unpack[LLMInput[TJsonModel, THistoryEntry, TModelParameters]],
+        kwargs: LLMInput[TJsonModel, THistoryEntry, TModelParameters],
     ) -> TOutput: ...
 
     def is_json_mode(

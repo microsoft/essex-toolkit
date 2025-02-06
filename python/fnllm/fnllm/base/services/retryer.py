@@ -77,7 +77,7 @@ class Retryer(
 
             if self._retry_strategy == RetryStrategy.TENACITY:
                 result, call_times, num_retries = await self._execute_with_retry(
-                    delegate, prompt, **kwargs
+                    delegate, prompt, kwargs
                 )
             else:
                 result = await delegate(prompt, **kwargs)
@@ -100,7 +100,7 @@ class Retryer(
             ..., Awaitable[LLMOutput[TOutput, TJsonModel, THistoryEntry]]
         ],
         prompt: TInput,
-        **kwargs: Unpack[LLMInput[Any, Any, Any]],
+        kwargs: LLMInput[Any, Any, Any],
     ) -> tuple[LLMOutput[TOutput, TJsonModel, THistoryEntry], list[float], int]:
         name = kwargs.get("name", self._tag)
         call_times: list[float] = []
