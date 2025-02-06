@@ -158,7 +158,7 @@ class OpenAITextChatLLMImpl(
                 output_tokens=completion.usage.completion_tokens,
             )
 
-        if not bypass_cache:
+        if not bypass_cache and self._cache is not None:
             key = self._get_cache_key(prompt, kwargs)
             await self._cache.set(
                 key,
@@ -205,6 +205,9 @@ class OpenAITextChatLLMImpl(
         prompt: OpenAIChatCompletionInput,
         kwargs: LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters],
     ) -> str:
+        if self._cache is None:
+            msg = "Cache is not enabled."
+            raise ValueError(msg)
         name = kwargs.get("name")
         history = kwargs.get("history", [])
         local_model_parameters = kwargs.get("model_parameters")
