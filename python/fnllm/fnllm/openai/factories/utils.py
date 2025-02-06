@@ -9,15 +9,18 @@ from typing import TYPE_CHECKING, Any
 import tiktoken
 
 from fnllm.base.services.rate_limiter import RateLimiter
+from fnllm.base.services.retryer import Retryer
 from fnllm.limiting.composite import CompositeLimiter
 from fnllm.limiting.concurrency import ConcurrencyLimiter
 from fnllm.limiting.rpm import RPMLimiter
 from fnllm.limiting.tpm import TPMLimiter
-from fnllm.openai.services.openai_retryer import OpenAIRetryer
+from fnllm.openai.services.openai_retryable_error_handler import (
+    OPENAI_RETRYABLE_ERRORS,
+    OpenAIRetryableErrorHandler,
+)
 from fnllm.openai.services.openai_token_estimator import OpenAITokenEstimator
 
 if TYPE_CHECKING:
-    from fnllm.base.services.retryer import Retryer
     from fnllm.events.base import LLMEvents
     from fnllm.limiting.base import Limiter
     from fnllm.openai.config import OpenAIConfig
@@ -70,11 +73,15 @@ def create_retryer(
     events: LLMEvents,
 ) -> Retryer[Any, Any, Any, Any]:
     """Wraps the LLM with retry logic."""
-    return OpenAIRetryer(
+    handler = None
+    if config.sleep_on_rate_limit_recommendation:
+        handler = OpenAIRetryableErrorHandler()
+    return Retryer(
         tag=operation,
         max_retries=config.max_retries,
         max_retry_wait=config.max_retry_wait,
-        sleep_on_rate_limit_recommendation=config.sleep_on_rate_limit_recommendation,
         events=events,
         retry_strategy=config.retry_strategy,
+        retryable_errors=OPENAI_RETRYABLE_ERRORS,
+        retryable_error_handler=handler,
     )

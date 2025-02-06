@@ -7,6 +7,7 @@ from unittest.mock import ANY, create_autospec, patch
 
 import pytest
 from fnllm.base.services.rate_limiter import RateLimiter
+from fnllm.base.services.retryer import Retryer
 from fnllm.base.services.variable_injector import VariableInjector
 from fnllm.caching.base import Cache
 from fnllm.events.base import LLMEvents
@@ -16,7 +17,6 @@ from fnllm.openai.llm.openai_text_chat_llm import OpenAITextChatLLMImpl
 from fnllm.openai.services.openai_history_extractor import (
     OpenAIHistoryExtractor,
 )
-from fnllm.openai.services.openai_retryer import OpenAIRetryer
 from fnllm.openai.services.openai_tools_parsing import OpenAIParseToolsLLM
 from fnllm.openai.services.openai_usage_extractor import (
     OpenAIUsageExtractor,
@@ -73,7 +73,7 @@ def test_create_openai_chat_llm():
             OpenAIUsageExtractor, "__init__", return_value=None
         ) as new_usage_extractor,
         patch.object(RateLimiter, "__init__", return_value=None) as new_rate_limit_llm,
-        patch.object(OpenAIRetryer, "__init__", return_value=None) as new_retrying_llm,
+        patch.object(Retryer, "__init__", return_value=None) as new_retrying_llm,
     ):
         client = create_openai_chat_llm(
             config, cache=mocked_cache, events=mocked_events

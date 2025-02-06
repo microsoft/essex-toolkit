@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 import asyncio
-from abc import abstractmethod
+from collections.abc import Awaitable, Callable, Sequence
 from typing import TYPE_CHECKING, Any, Generic
 
 from tenacity import (
@@ -30,10 +30,10 @@ from fnllm.types.metrics import LLMRetryMetrics
 from .decorator import LLMDecorator
 
 if TYPE_CHECKING:
-    from collections.abc import Awaitable, Callable, Sequence
-
     from fnllm.events import LLMEvents
     from fnllm.types.io import LLMInput, LLMOutput
+
+RetryableErrorHandler = Callable[[BaseException], Awaitable[None]]
 
 
 class Retryer(
@@ -51,6 +51,7 @@ class Retryer(
         max_retry_wait: float = 10,
         events: LLMEvents,
         retry_strategy: RetryStrategy,
+        retryable_error_handler: RetryableErrorHandler | None,
     ):
         """Create a new RetryingLLM."""
         self._retryable_errors = retryable_errors
@@ -59,10 +60,7 @@ class Retryer(
         self._max_retry_wait = max_retry_wait
         self._retry_strategy = retry_strategy
         self._events = events
-
-    @abstractmethod
-    async def _on_retryable_error(self, error: BaseException) -> None:
-        """Called as soon as retryable error happen."""
+        self._retryable_error_handler = retryable_error_handler
 
     def decorate(
         self,
@@ -118,7 +116,8 @@ class Retryer(
             except BaseException as error:
                 if isinstance(error, tuple(self._retryable_errors)):
                     await self._events.on_retryable_error(error, attempt_number)
-                    await self._on_retryable_error(error)
+                    if self._retryable_error_handler is not None:
+                        await self._retryable_error_handler(error)
                 raise
             finally:
                 call_end = asyncio.get_event_loop().time()
