@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
-## [0.1.0] - 20205-02-06
+## [0.1.0] - 2025-02-05
 
 ### Added
 - Add config option `retry_strategy`, which may be used to opt-out of Tenacity's retry strategy and rely on the underlying library instead (e.g. OpenAI's retry logic).
