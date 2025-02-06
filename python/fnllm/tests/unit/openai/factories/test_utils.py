@@ -7,6 +7,7 @@ from unittest.mock import create_autospec
 
 import pytest
 from fnllm.base.services.rate_limiter import RateLimiter
+from fnllm.base.services.retryer import Retryer
 from fnllm.events.base import LLMEvents
 from fnllm.limiting.base import Limiter
 from fnllm.limiting.composite import CompositeLimiter
@@ -19,7 +20,6 @@ from fnllm.openai.factories.utils import (
     create_rate_limiter,
     create_retryer,
 )
-from fnllm.openai.services.openai_retryer import OpenAIRetryer
 
 
 @pytest.mark.parametrize("requests_burst_mode", ([True, False]))
@@ -73,7 +73,7 @@ def test_create_retrying_llm():
     tag = test_create_retrying_llm.__name__
 
     llm = cast(
-        OpenAIRetryer,
+        Retryer,
         create_retryer(
             config=config,
             operation=tag,

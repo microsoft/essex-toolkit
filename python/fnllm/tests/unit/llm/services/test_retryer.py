@@ -27,7 +27,10 @@ async def test_retrying_llm_passthrough():
     delegate = AsyncMock(return_value=LLMOutput(output="result"))
     events = Mock(spec=LLMEvents)
     retryer = TestRetryer(
-        retryable_errors=[], events=events, retry_strategy=RetryStrategy.TENACITY
+        retryable_errors=[],
+        events=events,
+        retry_strategy=RetryStrategy.TENACITY,
+        retryable_error_handler=None,
     )
     llm = retryer.decorate(delegate)
 
@@ -49,6 +52,7 @@ async def test_retrying_native_strategy():
         retryable_errors=[ValueError],
         events=events,
         retry_strategy=RetryStrategy.NATIVE,
+        retryable_error_handler=None,
     )
     llm = retryer.decorate(delegate)
 
@@ -72,6 +76,7 @@ async def test_retrying_llm_recovers():
         retryable_errors=[ValueError],
         events=events,
         retry_strategy=RetryStrategy.TENACITY,
+        retryable_error_handler=None,
     )
     llm = retryer.decorate(delegate)
 
@@ -84,25 +89,30 @@ async def test_retrying_llm_recovers():
 
     events.on_try.assert_has_calls([call(1), call(2)])
     events.on_retryable_error.assert_called_with(ANY, 1)
-    retryer.on_retryable_mock.assert_called_once()
 
 
 async def test_retrying_llm_raises_retries_exhausted():
-    delegate = AsyncMock(side_effect=ValueError)
+    num_calls = 0
+
+    def delegate(*args, **kwargs):
+        nonlocal num_calls
+        num_calls += 1
+        raise ValueError
+
     retryer = TestRetryer(
         retryable_errors=[ValueError],
         max_retry_wait=0.1,
         max_retries=5,
         events=LLMEvents(),
         retry_strategy=RetryStrategy.TENACITY,
+        retryable_error_handler=None,
     )
     llm = retryer.decorate(delegate)
 
     with pytest.raises(RetriesExhaustedError):
         await llm("prompt")
 
-    assert delegate.call_count == 5
-    assert retryer.on_retryable_mock.call_count == 5
+    assert num_calls == 5
 
 
 async def test_retrying_llm_emits_error_if_not_retryable():
@@ -115,6 +125,7 @@ async def test_retrying_llm_emits_error_if_not_retryable():
         max_retries=5,
         events=LLMEvents(),
         retry_strategy=RetryStrategy.TENACITY,
+        retryable_error_handler=None,
     )
     llm = retryer.decorate(delegate)
 
