@@ -118,12 +118,7 @@ class BaseLLM(
         """
         await self._events.on_execute_llm()
         output = await self._execute_llm(prompt, kwargs)
-        result: LLMOutput[TOutput, TJsonModel, THistoryEntry] = LLMOutput(output=output)
-
-        await self._inject_usage(result)
-        self._inject_history(result, kwargs.get("history"))
-
-        return result
+        return await self._handle_output(output, kwargs, cached=False)
 
     async def __call__(
         self,
@@ -139,7 +134,7 @@ class BaseLLM(
             prompt, kwargs = self._rewrite_input(prompt, kwargs)
             result = await self._try_execute_cached(prompt, kwargs)
             if result is not None:
-                return result
+                return await self._handle_output(result, kwargs, cached=True)
             return await self._decorated_target(prompt, kwargs)
         except BaseException as e:
             stack_trace = traceback.format_exc()
@@ -161,11 +156,23 @@ class BaseLLM(
             )
         return prompt, kwargs
 
+    async def _handle_output(
+        self,
+        output: TOutput,
+        kwargs: LLMInput[TJsonModel, THistoryEntry, TModelParameters],
+        *,
+        cached: bool,
+    ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
+        result: LLMOutput[TOutput, TJsonModel, THistoryEntry] = LLMOutput(output=output)
+        await self._inject_usage(result, cached=cached)
+        self._inject_history(result, kwargs.get("history"))
+        return result
+
     async def _inject_usage(
-        self, result: LLMOutput[TOutput, TJsonModel, THistoryEntry]
+        self, result: LLMOutput[TOutput, TJsonModel, THistoryEntry], *, cached: bool
     ):
         usage = LLMUsageMetrics()
-        if self._usage_extractor:
+        if self._usage_extractor and not cached:
             usage = self._usage_extractor.extract_usage(result.output)
             await self._events.on_usage(usage)
         result.metrics.usage = usage
@@ -184,7 +191,7 @@ class BaseLLM(
         self,
         prompt: TInput,
         kwargs: LLMInput[TJsonModel, THistoryEntry, TModelParameters],
-    ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry] | None:
+    ) -> TOutput | None:
         """Attempt to execute the LLM using a cached result."""
         return None
 
