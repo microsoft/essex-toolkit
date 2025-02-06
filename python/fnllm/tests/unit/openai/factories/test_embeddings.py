@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING
 from unittest.mock import ANY, create_autospec, patch
 
 from fnllm.caching.base import Cache
+from fnllm.caching.file import FileCache
 from fnllm.events.base import LLMEvents
 from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.factories.embeddings import create_openai_embeddings_llm
@@ -13,7 +14,6 @@ from fnllm.openai.llm.embeddings import OpenAIEmbeddingsLLMImpl
 from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
 from fnllm.openai.llm.services.retryer import OpenAIRetryer
 from fnllm.openai.llm.services.usage_extractor import OpenAIUsageExtractor
-from fnllm.services.cache_interactor import CacheInteractor
 from fnllm.services.variable_injector import VariableInjector
 
 if TYPE_CHECKING:
@@ -52,9 +52,7 @@ def test_create_openai_embeddings_llm():
             "__init__",
             return_value=None,
         ) as new_embeddings_llm,
-        patch.object(
-            CacheInteractor, "__init__", return_value=None
-        ) as new_cache_interactor,
+        patch.object(FileCache, "__init__", return_value=None) as new_cache,
         patch.object(
             VariableInjector, "__init__", return_value=None
         ) as new_variable_injector,
@@ -70,14 +68,12 @@ def test_create_openai_embeddings_llm():
             config, cache=mocked_cache, events=mocked_events
         )
 
-        new_cache_interactor.assert_called_with(mocked_events, mocked_cache)
-
         # check config has been forwarded
         new_embeddings_llm.assert_called_once_with(
             ANY,
             model=config.model,
             model_parameters=config.embeddings_parameters,
-            cache=ANY,
+            cache=new_cache,
             events=mocked_events,
             usage_extractor=ANY,
             variable_injector=ANY,

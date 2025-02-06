@@ -20,9 +20,9 @@ from fnllm.types.metrics import LLMUsageMetrics
 from .services.usage_extractor import OpenAIUsageExtractor
 
 if TYPE_CHECKING:
+    from fnllm.caching.base import Cache
     from fnllm.events.base import LLMEvents
     from fnllm.openai.types.client import OpenAIClient
-    from fnllm.services.cache_interactor import Cached, CacheInteractor
     from fnllm.services.rate_limiter import RateLimiter
     from fnllm.services.retryer import Retryer
     from fnllm.services.variable_injector import VariableInjector
@@ -40,7 +40,7 @@ class OpenAIEmbeddingsLLMImpl(
         self,
         client: OpenAIClient,
         model: str,
-        cache: CacheInteractor,
+        cache: Cache,
         *,
         usage_extractor: OpenAIUsageExtractor[OpenAIEmbeddingsOutput] | None = None,
         variable_injector: VariableInjector | None = None,
@@ -102,59 +102,63 @@ class OpenAIEmbeddingsLLMImpl(
 
         return params
 
-    async def _call_embeddings_or_cache(
-        self,
-        name: str | None,
-        *,
-        prompt: OpenAIEmbeddingsInput,
-        parameters: OpenAIEmbeddingsParameters,
-        bypass_cache: bool,
-    ) -> Cached[OpenAICreateEmbeddingResponseModel]:
-        # TODO: check if we need to remove max_tokens and n from the keys
-        return await self._cache.get_or_insert(
-            lambda: self._client.embeddings.create(
-                input=prompt,
-                **parameters,
-            ),
-            prefix=f"embeddings_{name}" if name else "embeddings",
-            key_data={"input": prompt, "parameters": parameters},
-            name=name,
-            bypass_cache=bypass_cache,
-            json_model=OpenAICreateEmbeddingResponseModel,
-        )
-
     async def _execute_llm(
         self, prompt: OpenAIEmbeddingsInput, **kwargs: Unpack[LLMInput]
     ) -> OpenAIEmbeddingsOutput:
-        name = kwargs.get("name")
         local_model_parameters = kwargs.get("model_parameters")
-        bypass_cache = kwargs.get("bypass_cache", False)
+        parameters = self._build_embeddings_parameters(local_model_parameters)
+        result = await self._client.embeddings.create(input=prompt, **parameters)
 
-        embeddings_parameters = self._build_embeddings_parameters(
-            local_model_parameters
-        )
-
-        response = await self._call_embeddings_or_cache(
-            name,
-            prompt=prompt,
-            parameters=embeddings_parameters,
-            bypass_cache=bypass_cache,
-        )
-        result = response.value
         usage: LLMUsageMetrics | None = None
-        if result.usage and not response.hit:
+        if result.usage:
             usage = LLMUsageMetrics(
                 input_tokens=result.usage.prompt_tokens,
             )
 
-        return OpenAIEmbeddingsOutput(
-            raw_input=prompt,
-            raw_output=result.data,
-            embeddings=[d.embedding for d in result.data],
-            usage=usage or LLMUsageMetrics(),
+        if self._cache is not None and not kwargs.get("bypass_cache"):
+            await self._cache.set(
+                self._create_cache_key(prompt, **kwargs),
+                result.model_dump(),
+                {"input": prompt, "parameters": parameters},
+            )
+
+        return self._create_response(result, prompt, usage)
+
+    def _create_cache_key(self, prompt: str, **kwargs: Unpack[LLMInput]) -> str:
+        local_model_parameters = kwargs.get("model_parameters")
+        parameters = self._build_embeddings_parameters(local_model_parameters)
+        return self._cache.create_key(
+            {"input": prompt, "parameters": parameters}, prefix="chat"
         )
 
     async def _try_execute_cached(
         self, prompt: OpenAIEmbeddingsInput, **kwargs: Unpack[LLMInput]
     ) -> OpenAIEmbeddingsOutput:
+        if self._cache is None or kwargs.get("bypass_cache"):
+            return None
+
+        name = kwargs.get("name")
+        cache_key = self._create_cache_key(prompt, **kwargs)
+
+        result = await self._cache.get(cache_key)
+        if result is not None:
+            result = OpenAICreateEmbeddingResponseModel.model_validate(result)
+            self._on_cache_hit(cache_key, name)
+            return self._create_response(result, prompt)
+
+        self._events.on_cache_miss(cache_key, name)
         return None
+
+    def _create_response(
+        self,
+        model: OpenAICreateEmbeddingResponseModel,
+        prompt: OpenAIEmbeddingsInput,
+        usage: LLMUsageMetrics | None = None,
+    ) -> OpenAIEmbeddingsOutput:
+        usage = usage or LLMUsageMetrics()
+        return OpenAIEmbeddingsOutput(
+            raw_input=prompt,
+            raw_output=model.data,
+            embeddings=[d.embedding for d in model.data],
+            usage=usage or LLMUsageMetrics(),
+        )
