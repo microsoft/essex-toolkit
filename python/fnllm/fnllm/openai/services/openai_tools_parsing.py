@@ -9,13 +9,13 @@ from typing import TYPE_CHECKING
 import pydantic
 from typing_extensions import Unpack
 
-from fnllm.openai.llm.utils import llm_tools_to_param
 from fnllm.openai.types.chat.io import (
     OpenAIChatCompletionInput,
     OpenAIChatHistoryEntry,
     OpenAIChatOutput,
 )
 from fnllm.openai.types.chat.parameters import OpenAIChatParameters
+from fnllm.openai.utils import llm_tools_to_param
 from fnllm.tools import LLMTool
 from fnllm.tools.errors import ToolInvalidArgumentsError, ToolNotFoundError
 from fnllm.types.protocol import LLM

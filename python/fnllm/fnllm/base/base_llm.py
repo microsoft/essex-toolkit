@@ -26,13 +26,14 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
 
     from fnllm.caching.base import Cache
-    from fnllm.services.decorator import LLMDecorator
-    from fnllm.services.history_extractor import HistoryExtractor
-    from fnllm.services.json import JsonHandler
-    from fnllm.services.rate_limiter import RateLimiter
-    from fnllm.services.retryer import Retryer
-    from fnllm.services.usage_extractor import UsageExtractor
-    from fnllm.services.variable_injector import VariableInjector
+
+    from .services.decorator import LLMDecorator
+    from .services.history_extractor import HistoryExtractor
+    from .services.json import JsonHandler
+    from .services.rate_limiter import RateLimiter
+    from .services.retryer import Retryer
+    from .services.usage_extractor import UsageExtractor
+    from .services.variable_injector import VariableInjector
 
 
 class BaseLLM(
@@ -114,7 +115,8 @@ class BaseLLM(
     ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
         """Invoke the LLM."""
         try:
-            return await self._invoke(prompt, **kwargs)
+            prompt, kwargs = self._rewrite_input(prompt, kwargs)
+            return await self._decorated_target(prompt, **kwargs)
         except BaseException as e:
             stack_trace = traceback.format_exc()
             if self._events:
@@ -122,15 +124,6 @@ class BaseLLM(
                     e, stack_trace, {"prompt": prompt, "kwargs": kwargs}
                 )
             raise
-
-    async def _invoke(
-        self,
-        prompt: TInput,
-        **kwargs: Unpack[LLMInput[TJsonModel, THistoryEntry, TModelParameters]],
-    ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
-        """Run the LLM invocation, returning an LLMOutput."""
-        prompt, kwargs = self._rewrite_input(prompt, kwargs)
-        return await self._decorated_target(prompt, **kwargs)
 
     def _rewrite_input(
         self,

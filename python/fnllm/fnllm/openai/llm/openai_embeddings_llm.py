@@ -8,7 +8,10 @@ from typing import TYPE_CHECKING, cast
 
 from typing_extensions import Unpack
 
-from fnllm.base.base import BaseLLM
+from fnllm.base.base_llm import BaseLLM
+from fnllm.openai.services.openai_usage_extractor import (
+    OpenAIUsageExtractor,
+)
 from fnllm.openai.types.aliases import OpenAICreateEmbeddingResponseModel
 from fnllm.openai.types.embeddings.io import (
     OpenAIEmbeddingsInput,
@@ -17,15 +20,13 @@ from fnllm.openai.types.embeddings.io import (
 from fnllm.openai.types.embeddings.parameters import OpenAIEmbeddingsParameters
 from fnllm.types.metrics import LLMUsageMetrics
 
-from .services.usage_extractor import OpenAIUsageExtractor
-
 if TYPE_CHECKING:
+    from fnllm.base.services.cache_interactor import Cached, CacheInteractor
+    from fnllm.base.services.rate_limiter import RateLimiter
+    from fnllm.base.services.retryer import Retryer
+    from fnllm.base.services.variable_injector import VariableInjector
     from fnllm.events.base import LLMEvents
     from fnllm.openai.types.client import OpenAIClient
-    from fnllm.services.cache_interactor import Cached, CacheInteractor
-    from fnllm.services.rate_limiter import RateLimiter
-    from fnllm.services.retryer import Retryer
-    from fnllm.services.variable_injector import VariableInjector
     from fnllm.types.io import LLMInput
 
 

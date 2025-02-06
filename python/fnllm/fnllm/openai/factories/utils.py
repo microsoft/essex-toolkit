@@ -12,15 +12,15 @@ from fnllm.limiting.composite import CompositeLimiter
 from fnllm.limiting.concurrency import ConcurrencyLimiter
 from fnllm.limiting.rpm import RPMLimiter
 from fnllm.limiting.tpm import TPMLimiter
-from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
-from fnllm.openai.llm.services.retryer import OpenAIRetryer
+from fnllm.openai.services.openai_rate_limiter import OpenAIRateLimiter
+from fnllm.openai.services.openai_retryer import OpenAIRetryer
 
 if TYPE_CHECKING:
+    from fnllm.base.services.rate_limiter import RateLimiter
+    from fnllm.base.services.retryer import Retryer
     from fnllm.events.base import LLMEvents
     from fnllm.limiting.base import Limiter
     from fnllm.openai.config import OpenAIConfig
-    from fnllm.services.rate_limiter import RateLimiter
-    from fnllm.services.retryer import Retryer
 
 
 def _get_encoding(encoding_name: str) -> tiktoken.Encoding:

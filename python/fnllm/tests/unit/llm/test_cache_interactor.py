@@ -4,8 +4,9 @@
 
 from unittest.mock import AsyncMock
 
+from fnllm.base.services.cache_interactor import CacheInteractor
 from fnllm.caching.file import FileCache
-from fnllm.services.cache_interactor import CacheInteractor
+from fnllm.events import LLMEvents
 from pydantic import BaseModel
 
 
@@ -15,7 +16,7 @@ class CustomModel(BaseModel):
 
 
 async def test_cache_interactor(file_cache: FileCache):
-    llm = CacheInteractor(events=None, cache=file_cache)
+    llm = CacheInteractor(events=LLMEvents(), cache=file_cache)
     expected = CustomModel(attr1="test", attr2=10)
     func = AsyncMock(return_value=expected)
 
@@ -89,6 +90,6 @@ async def test_cache_interactor(file_cache: FileCache):
 
 
 def test_cache_interactor_child_empty():
-    llm = CacheInteractor(events=None, cache=None)
+    llm = CacheInteractor(events=LLMEvents(), cache=None)
     child = llm.child("test")
     assert child is llm

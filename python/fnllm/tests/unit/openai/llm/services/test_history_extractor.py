@@ -2,8 +2,10 @@
 
 """Tests for openai.llm.features.history_tracking."""
 
-from fnllm.openai.llm.services.history_extractor import OpenAIHistoryExtractor
 from fnllm.openai.roles import OpenAIChatRole
+from fnllm.openai.services.openai_history_extractor import (
+    OpenAIHistoryExtractor,
+)
 from fnllm.openai.types.aliases import OpenAIChatCompletionMessageModel
 from fnllm.openai.types.chat.io import OpenAIChatOutput
 

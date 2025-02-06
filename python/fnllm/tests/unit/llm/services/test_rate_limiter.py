@@ -6,13 +6,13 @@ from asyncio import Semaphore
 from unittest.mock import AsyncMock, Mock, call
 
 from aiolimiter import AsyncLimiter
+from fnllm.base.services.rate_limiter import RateLimiter
 from fnllm.events.base import LLMEvents
 from fnllm.limiting.base import Manifest
 from fnllm.limiting.composite import CompositeLimiter
 from fnllm.limiting.concurrency import ConcurrencyLimiter
 from fnllm.limiting.rpm import RPMLimiter
 from fnllm.limiting.tpm import TPMLimiter
-from fnllm.services.rate_limiter import RateLimiter
 from fnllm.types.generics import THistoryEntry, TJsonModel, TModelParameters
 from fnllm.types.io import LLMInput, LLMOutput
 from fnllm.types.metrics import LLMMetrics, LLMUsageMetrics

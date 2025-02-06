@@ -7,7 +7,7 @@ from typing import Annotated, Literal
 
 from pydantic import Field
 
-from fnllm.config import Config
+from fnllm.base.config import Config
 from fnllm.openai.types.chat.parameters import OpenAIChatParameters
 from fnllm.openai.types.embeddings.parameters import OpenAIEmbeddingsParameters
 

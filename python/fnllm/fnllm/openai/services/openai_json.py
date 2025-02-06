@@ -5,20 +5,20 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from fnllm.config.json_strategy import JsonStrategy
-from fnllm.openai.types.chat.io import (
-    OpenAIChatCompletionInput,
-    OpenAIChatHistoryEntry,
-    OpenAIChatOutput,
-)
-from fnllm.openai.types.chat.parameters import OpenAIChatParameters
-from fnllm.services.json import (
+from fnllm.base.config.json_strategy import JsonStrategy
+from fnllm.base.services.json import (
     JsonHandler,
     JsonMarshaler,
     JsonReceiver,
     JsonRequester,
     LooseModeJsonReceiver,
 )
+from fnllm.openai.types.chat.io import (
+    OpenAIChatCompletionInput,
+    OpenAIChatHistoryEntry,
+    OpenAIChatOutput,
+)
+from fnllm.openai.types.chat.parameters import OpenAIChatParameters
 
 if TYPE_CHECKING:
     from fnllm.types.generics import TJsonModel

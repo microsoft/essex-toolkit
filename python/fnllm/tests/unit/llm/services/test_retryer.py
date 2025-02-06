@@ -5,10 +5,10 @@
 from unittest.mock import ANY, AsyncMock, Mock, call
 
 import pytest
-from fnllm.config import RetryStrategy
+from fnllm.base.config import RetryStrategy
+from fnllm.base.services.errors import RetriesExhaustedError
+from fnllm.base.services.retryer import Retryer
 from fnllm.events.base import LLMEvents
-from fnllm.services.errors import RetriesExhaustedError
-from fnllm.services.retryer import Retryer
 from fnllm.types.io import LLMOutput
 
 
@@ -93,6 +93,7 @@ async def test_retrying_llm_raises_retries_exhausted():
         retryable_errors=[ValueError],
         max_retry_wait=0.1,
         max_retries=5,
+        events=LLMEvents(),
         retry_strategy=RetryStrategy.TENACITY,
     )
     llm = retryer.decorate(delegate)
@@ -112,6 +113,7 @@ async def test_retrying_llm_emits_error_if_not_retryable():
         retryable_errors=[],
         max_retry_wait=0.1,
         max_retries=5,
+        events=LLMEvents(),
         retry_strategy=RetryStrategy.TENACITY,
     )
     llm = retryer.decorate(delegate)

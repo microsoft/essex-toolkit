@@ -5,9 +5,12 @@
 from unittest.mock import ANY, AsyncMock, call, patch
 
 import pytest
-from fnllm.config import RetryStrategy
-from fnllm.openai.llm.services.retryer import InternalServerError, OpenAIRetryer
-from fnllm.services.errors import RetriesExhaustedError
+from fnllm.base.config import RetryStrategy
+from fnllm.base.services.errors import RetriesExhaustedError
+from fnllm.openai.services.openai_retryer import (
+    InternalServerError,
+    OpenAIRetryer,
+)
 from fnllm.types.io import LLMOutput
 from httpx import Request, Response
 from openai import RateLimitError

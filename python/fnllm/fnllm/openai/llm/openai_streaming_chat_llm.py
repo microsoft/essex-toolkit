@@ -13,24 +13,23 @@ from openai.types.chat import ChatCompletionChunk
 from openai.types.chat.chat_completion_message_param import ChatCompletionMessageParam
 from typing_extensions import Unpack
 
-from fnllm.base.base import BaseLLM
+from fnllm.base.base_llm import BaseLLM
 from fnllm.openai.types.chat.io import (
     OpenAIChatCompletionInput,
     OpenAIChatHistoryEntry,
     OpenAIStreamingChatOutput,
 )
 from fnllm.openai.types.chat.parameters import OpenAIChatParameters
+from fnllm.openai.utils import build_chat_messages
 from fnllm.types import LLMMetrics, LLMUsageMetrics
 
-from .utils import build_chat_messages
-
 if TYPE_CHECKING:
+    from fnllm.base.services.rate_limiter import RateLimiter
+    from fnllm.base.services.retryer import Retryer
+    from fnllm.base.services.variable_injector import VariableInjector
     from fnllm.events.base import LLMEvents
     from fnllm.openai.types.aliases import OpenAIChatModel
     from fnllm.openai.types.client import OpenAIClient
-    from fnllm.services.rate_limiter import RateLimiter
-    from fnllm.services.retryer import Retryer
-    from fnllm.services.variable_injector import VariableInjector
     from fnllm.types.generics import TJsonModel
     from fnllm.types.io import LLMInput
 

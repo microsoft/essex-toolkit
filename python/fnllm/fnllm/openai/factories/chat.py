@@ -6,22 +6,26 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from fnllm.openai.llm.chat import OpenAIChatLLMImpl
-from fnllm.openai.llm.chat_streaming import OpenAIStreamingChatLLMImpl
-from fnllm.openai.llm.chat_text import OpenAITextChatLLMImpl
-from fnllm.openai.llm.features.tools_parsing import OpenAIParseToolsLLM
-from fnllm.openai.llm.services.history_extractor import OpenAIHistoryExtractor
-from fnllm.openai.llm.services.json import create_json_handler
-from fnllm.openai.llm.services.usage_extractor import OpenAIUsageExtractor
-from fnllm.services.cache_interactor import CacheInteractor
-from fnllm.services.variable_injector import VariableInjector
+from fnllm.base.services.cache_interactor import CacheInteractor
+from fnllm.base.services.variable_injector import VariableInjector
+from fnllm.events.base import LLMEvents
+from fnllm.openai.llm.openai_chat_llm import OpenAIChatLLMImpl
+from fnllm.openai.llm.openai_streaming_chat_llm import OpenAIStreamingChatLLMImpl
+from fnllm.openai.llm.openai_text_chat_llm import OpenAITextChatLLMImpl
+from fnllm.openai.services.openai_history_extractor import (
+    OpenAIHistoryExtractor,
+)
+from fnllm.openai.services.openai_json import create_json_handler
+from fnllm.openai.services.openai_tools_parsing import OpenAIParseToolsLLM
+from fnllm.openai.services.openai_usage_extractor import (
+    OpenAIUsageExtractor,
+)
 
 from .client import create_openai_client
 from .utils import create_limiter, create_rate_limiter, create_retryer
 
 if TYPE_CHECKING:
     from fnllm.caching.base import Cache
-    from fnllm.events.base import LLMEvents
     from fnllm.limiting.base import Limiter
     from fnllm.openai.config import OpenAIConfig
     from fnllm.openai.types.client import (
@@ -41,8 +45,8 @@ def create_openai_chat_llm(
     events: LLMEvents | None = None,
 ) -> OpenAIChatLLM:
     """Create an OpenAI chat LLM."""
-    if client is None:
-        client = create_openai_client(config)
+    client = client or create_openai_client(config)
+    events = events or LLMEvents()
 
     limiter = create_limiter(config)
 
@@ -76,11 +80,13 @@ def _create_openai_text_chat_llm(
     events: LLMEvents | None,
 ) -> OpenAITextChatLLM:
     operation = "chat"
+    events = events or LLMEvents()
+    cache_interactor = cache_interactor or CacheInteractor(events, cache)
     result = OpenAITextChatLLMImpl(
         client,
         model=config.model,
         model_parameters=config.chat_parameters,
-        cache=cache_interactor or CacheInteractor(events, cache),
+        cache=cache_interactor,
         events=events,
         json_handler=create_json_handler(config.json_strategy, config.max_json_retries),
         usage_extractor=OpenAIUsageExtractor(),

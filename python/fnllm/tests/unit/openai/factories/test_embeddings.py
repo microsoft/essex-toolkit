@@ -5,16 +5,18 @@
 from typing import TYPE_CHECKING
 from unittest.mock import ANY, create_autospec, patch
 
+from fnllm.base.services.cache_interactor import CacheInteractor
+from fnllm.base.services.variable_injector import VariableInjector
 from fnllm.caching.base import Cache
 from fnllm.events.base import LLMEvents
 from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.factories.embeddings import create_openai_embeddings_llm
-from fnllm.openai.llm.embeddings import OpenAIEmbeddingsLLMImpl
-from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
-from fnllm.openai.llm.services.retryer import OpenAIRetryer
-from fnllm.openai.llm.services.usage_extractor import OpenAIUsageExtractor
-from fnllm.services.cache_interactor import CacheInteractor
-from fnllm.services.variable_injector import VariableInjector
+from fnllm.openai.llm.openai_embeddings_llm import OpenAIEmbeddingsLLMImpl
+from fnllm.openai.services.openai_rate_limiter import OpenAIRateLimiter
+from fnllm.openai.services.openai_retryer import OpenAIRetryer
+from fnllm.openai.services.openai_usage_extractor import (
+    OpenAIUsageExtractor,
+)
 
 if TYPE_CHECKING:
     from fnllm.types import EmbeddingsLLM

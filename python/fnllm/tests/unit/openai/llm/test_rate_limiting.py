@@ -6,8 +6,8 @@ from unittest.mock import AsyncMock
 
 import tiktoken
 from fnllm.limiting.base import Limiter
-from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
 from fnllm.openai.roles import OpenAIChatRole
+from fnllm.openai.services.openai_rate_limiter import OpenAIRateLimiter
 from fnllm.tools import LLMTool
 from pydantic import Field
 

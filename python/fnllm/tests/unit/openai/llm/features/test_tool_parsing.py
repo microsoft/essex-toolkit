@@ -6,7 +6,7 @@ import json
 from unittest.mock import AsyncMock
 
 import pytest
-from fnllm.openai.llm.features.tools_parsing import OpenAIParseToolsLLM
+from fnllm.openai.services.openai_tools_parsing import OpenAIParseToolsLLM
 from fnllm.openai.types.aliases import (
     OpenAIChatCompletionMessageModel,
     OpenAIChatCompletionMessageToolCallModel,

@@ -16,9 +16,8 @@ from tenacity import (
 )
 from typing_extensions import Unpack
 
-from fnllm.config import RetryStrategy
-from fnllm.events.base import LLMEvents
-from fnllm.services.errors import RetriesExhaustedError
+from fnllm.base.config import RetryStrategy
+from fnllm.base.services.errors import RetriesExhaustedError
 from fnllm.types.generics import (
     THistoryEntry,
     TInput,
@@ -33,6 +32,7 @@ from .decorator import LLMDecorator
 if TYPE_CHECKING:
     from collections.abc import Awaitable, Callable, Sequence
 
+    from fnllm.events import LLMEvents
     from fnllm.types.io import LLMInput, LLMOutput
 
 
@@ -49,7 +49,7 @@ class Retryer(
         tag: str = "RetryingLLM",
         max_retries: int = 10,
         max_retry_wait: float = 10,
-        events: LLMEvents | None = None,
+        events: LLMEvents,
         retry_strategy: RetryStrategy,
     ):
         """Create a new RetryingLLM."""
@@ -58,7 +58,7 @@ class Retryer(
         self._max_retries = max_retries
         self._max_retry_wait = max_retry_wait
         self._retry_strategy = retry_strategy
-        self._events = events or LLMEvents()
+        self._events = events
 
     @abstractmethod
     async def _on_retryable_error(self, error: BaseException) -> None:

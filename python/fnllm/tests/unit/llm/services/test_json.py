@@ -7,9 +7,9 @@ from typing import Any, cast
 from unittest.mock import AsyncMock
 
 import pytest
-from fnllm.base.base import BaseLLM
-from fnllm.services.errors import FailedToGenerateValidJsonError
-from fnllm.services.json import (
+from fnllm.base.base_llm import BaseLLM
+from fnllm.base.services.errors import FailedToGenerateValidJsonError
+from fnllm.base.services.json import (
     JsonHandler,
     JsonMarshaler,
     JsonReceiver,

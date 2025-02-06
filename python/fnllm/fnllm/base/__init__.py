@@ -2,6 +2,6 @@
 
 """LLM base package."""
 
-from .base import BaseLLM
+from .base_llm import BaseLLM
 
 __all__ = ["BaseLLM"]
