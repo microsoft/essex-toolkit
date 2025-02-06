@@ -6,8 +6,8 @@ import json
 from unittest.mock import AsyncMock
 
 import pytest
-from fnllm.config.json_strategy import JsonStrategy
-from fnllm.openai.llm.services.json import create_json_handler
+from fnllm.base.config.json_strategy import JsonStrategy
+from fnllm.openai.services.json import create_json_handler
 from fnllm.openai.types.chat.io import OpenAIChatOutput
 from fnllm.types.io import LLMOutput
 from openai.types.chat import ChatCompletionMessage

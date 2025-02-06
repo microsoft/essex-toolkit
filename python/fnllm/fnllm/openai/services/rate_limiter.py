@@ -9,8 +9,9 @@ from typing import TYPE_CHECKING, Final, Generic
 
 from openai import APIConnectionError, InternalServerError, RateLimitError
 
-from fnllm.openai.llm.utils import llm_tools_to_param
-from fnllm.services.rate_limiter import RateLimiter
+from fnllm.base.services.rate_limiter import RateLimiter
+from fnllm.events.base import LLMEvents
+from fnllm.openai.utils import llm_tools_to_param
 from fnllm.types.generics import (
     THistoryEntry,
     TInput,
@@ -22,7 +23,6 @@ from fnllm.types.generics import (
 if TYPE_CHECKING:
     from tiktoken import Encoding
 
-    from fnllm.events.base import LLMEvents
     from fnllm.limiting import Limiter
     from fnllm.types.io import LLMInput
 
@@ -49,7 +49,7 @@ class OpenAIRateLimiter(
         """Create a new BaseRateLimitLLM."""
         super().__init__(
             limiter,
-            events=events,
+            events=events or LLMEvents(),
         )
         self._encoding = encoder
 

@@ -2,7 +2,7 @@
 
 """Tests for openai.llm.features.chat_usage_metrics_parsing."""
 
-from fnllm.openai.llm.services.usage_extractor import OpenAIUsageExtractor
+from fnllm.openai.services.usage_extractor import OpenAIUsageExtractor
 from fnllm.openai.types.aliases import OpenAIChatCompletionMessageModel
 from fnllm.openai.types.chat.io import OpenAIChatOutput
 from fnllm.types.metrics import LLMUsageMetrics

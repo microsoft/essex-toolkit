@@ -9,12 +9,12 @@ from typing import TYPE_CHECKING, Final, Generic
 
 from openai import APIConnectionError, InternalServerError, RateLimitError
 
-from fnllm.services.retryer import Retryer
+from fnllm.base.services.retryer import Retryer
+from fnllm.events.base import LLMEvents
 from fnllm.types.generics import THistoryEntry, TInput, TModelParameters, TOutput
 
 if TYPE_CHECKING:
-    from fnllm.config import RetryStrategy
-    from fnllm.events.base import LLMEvents
+    from fnllm.base.config import RetryStrategy
 
 OPENAI_RETRYABLE_ERRORS: Final[list[type[Exception]]] = [
     RateLimitError,
@@ -45,7 +45,7 @@ class OpenAIRetryer(
             tag=tag,
             max_retries=max_retries,
             max_retry_wait=max_retry_wait,
-            events=events,
+            events=events or LLMEvents(),
             retry_strategy=retry_strategy,
         )
         self._sleep_on_rate_limit_recommendation = sleep_on_rate_limit_recommendation

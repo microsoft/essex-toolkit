@@ -12,7 +12,7 @@ import pydantic
 from json_repair import repair_json
 from typing_extensions import Unpack
 
-from fnllm.services.errors import FailedToGenerateValidJsonError
+from fnllm.base.services.errors import FailedToGenerateValidJsonError
 from fnllm.types.generics import (
     JSON,
     THistoryEntry,
@@ -35,8 +35,8 @@ class JsonHandler(Generic[TOutput, THistoryEntry]):
 
     def __init__(
         self,
-        requester: LLMDecorator[TOutput, THistoryEntry] | None = None,
-        receiver: LLMDecorator[TOutput, THistoryEntry] | None = None,
+        requester: LLMDecorator[TOutput, THistoryEntry] | None,
+        receiver: LLMDecorator[TOutput, THistoryEntry] | None,
     ):
         """Create a new JsonHandler."""
         self._requester = requester

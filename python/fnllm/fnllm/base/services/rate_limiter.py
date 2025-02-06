@@ -9,7 +9,6 @@ from typing import TYPE_CHECKING, Any, Generic
 
 from typing_extensions import Unpack
 
-from fnllm.events.base import LLMEvents
 from fnllm.limiting import Limiter, Manifest
 from fnllm.types.generics import TInput, TJsonModel, TModelParameters
 
@@ -18,6 +17,7 @@ from .decorator import LLMDecorator, THistoryEntry, TOutput
 if TYPE_CHECKING:
     from collections.abc import Awaitable, Callable
 
+    from fnllm.events.base import LLMEvents
     from fnllm.types.io import LLMInput, LLMOutput
 
 
@@ -31,11 +31,11 @@ class RateLimiter(
         self,
         limiter: Limiter,
         *,
-        events: LLMEvents | None = None,
+        events: LLMEvents,
     ):
         """Create a new BaseRateLimitLLM."""
         self._limiter = limiter
-        self._events = events or LLMEvents()
+        self._events = events
 
     @abstractmethod
     def _estimate_request_tokens(

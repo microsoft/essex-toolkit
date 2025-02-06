@@ -6,7 +6,7 @@ from typing import Any
 from unittest.mock import Mock
 
 import pytest
-from fnllm.base.base import BaseLLM
+from fnllm.base.base_llm import BaseLLM
 from fnllm.events.base import LLMEvents
 from fnllm.types.io import LLMInput
 from pydantic import BaseModel

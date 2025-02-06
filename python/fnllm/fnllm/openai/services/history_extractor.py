@@ -6,9 +6,9 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from fnllm.openai.llm.utils import chat_completion_message_to_param
+from fnllm.base.services.history_extractor import HistoryExtractor
 from fnllm.openai.types.chat.io import OpenAIChatHistoryEntry, OpenAIChatOutput
-from fnllm.services.history_extractor import HistoryExtractor
+from fnllm.openai.utils import chat_completion_message_to_param
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

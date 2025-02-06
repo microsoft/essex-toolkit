@@ -7,12 +7,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Generic, TypeVar
 
-from fnllm.events.base import LLMEvents
-
 if TYPE_CHECKING:
     from collections.abc import Awaitable, Callable
 
     from fnllm.caching.base import Cache
+    from fnllm.events.base import LLMEvents
     from fnllm.types.generics import TJsonModel
 
 
@@ -30,11 +29,9 @@ class Cached(Generic[T]):
 class CacheInteractor:
     """A cache interactor class."""
 
-    def __init__(
-        self, events: LLMEvents | None = None, cache: Cache | None = None
-    ) -> None:
+    def __init__(self, events: LLMEvents, cache: Cache | None) -> None:
         """Base constructor for the BaseLLM."""
-        self._events = events or LLMEvents()
+        self._events = events
         self._cache = cache
 
     def child(self, name: str) -> CacheInteractor:

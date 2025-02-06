@@ -4,19 +4,23 @@
 
 from unittest.mock import ANY, Mock
 
+from fnllm.base.services.cache_interactor import CacheInteractor
 from fnllm.caching.file import FileCache
 from fnllm.events.base import LLMEvents
 from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.factories.embeddings import create_openai_embeddings_llm
-from fnllm.openai.llm.embeddings import OpenAIEmbeddingsLLMImpl
+from fnllm.openai.llm.openai_embeddings_llm import OpenAIEmbeddingsLLMImpl
 from fnllm.openai.types.aliases import OpenAIEmbeddingModel, OpenAIEmbeddingUsageModel
-from fnllm.services.cache_interactor import CacheInteractor
 
 from tests.unit.openai.llm.conftest import OpenAIEmbeddingsClientMock
 
 
 def test_embedding_llm_child_with_cache():
-    llm = OpenAIEmbeddingsLLMImpl(client=Mock(), cache=CacheInteractor(), model="model")
+    llm = OpenAIEmbeddingsLLMImpl(
+        client=Mock(),
+        cache=CacheInteractor(cache=None, events=LLMEvents()),
+        model="model",
+    )
     child = llm.child("test")
     assert llm is not child
 

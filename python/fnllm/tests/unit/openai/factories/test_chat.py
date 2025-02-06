@@ -6,17 +6,17 @@ from typing import TYPE_CHECKING
 from unittest.mock import ANY, create_autospec, patch
 
 import pytest
+from fnllm.base.services.variable_injector import VariableInjector
 from fnllm.caching.base import Cache
 from fnllm.events.base import LLMEvents
 from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.factories.chat import create_openai_chat_llm
-from fnllm.openai.llm.chat_text import OpenAITextChatLLMImpl
-from fnllm.openai.llm.features.tools_parsing import OpenAIParseToolsLLM
-from fnllm.openai.llm.services.history_extractor import OpenAIHistoryExtractor
-from fnllm.openai.llm.services.rate_limiter import OpenAIRateLimiter
-from fnllm.openai.llm.services.retryer import OpenAIRetryer
-from fnllm.openai.llm.services.usage_extractor import OpenAIUsageExtractor
-from fnllm.services.variable_injector import VariableInjector
+from fnllm.openai.llm.openai_text_chat_llm import OpenAITextChatLLMImpl
+from fnllm.openai.services.history_extractor import OpenAIHistoryExtractor
+from fnllm.openai.services.rate_limiter import OpenAIRateLimiter
+from fnllm.openai.services.retryer import OpenAIRetryer
+from fnllm.openai.services.tools_parsing import OpenAIParseToolsLLM
+from fnllm.openai.services.usage_extractor import OpenAIUsageExtractor
 
 if TYPE_CHECKING:
     from fnllm.types import ChatLLM

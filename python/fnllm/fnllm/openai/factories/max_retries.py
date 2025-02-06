@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from fnllm.config import RetryStrategy
+from fnllm.base.config import RetryStrategy
 
 if TYPE_CHECKING:
     from fnllm.openai.config import OpenAIConfig

@@ -2,12 +2,6 @@
 
 """Tests for openai.llm.utils."""
 
-from fnllm.openai.llm.utils import (
-    chat_completion_message_to_param,
-    function_call_to_param,
-    function_to_param,
-    tool_calls_to_params,
-)
 from fnllm.openai.types.aliases import (
     OpenAIChatCompletionAssistantMessageParam,
     OpenAIChatCompletionMessageModel,
@@ -17,6 +11,12 @@ from fnllm.openai.types.aliases import (
     OpenAIFunctionCallParam,
     OpenAIFunctionModel,
     OpenAIFunctionParam,
+)
+from fnllm.openai.utils import (
+    chat_completion_message_to_param,
+    function_call_to_param,
+    function_to_param,
+    tool_calls_to_params,
 )
 
 

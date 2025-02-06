@@ -26,13 +26,14 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
 
     from fnllm.caching.base import Cache
-    from fnllm.services.decorator import LLMDecorator
-    from fnllm.services.history_extractor import HistoryExtractor
-    from fnllm.services.json import JsonHandler
-    from fnllm.services.rate_limiter import RateLimiter
-    from fnllm.services.retryer import Retryer
-    from fnllm.services.usage_extractor import UsageExtractor
-    from fnllm.services.variable_injector import VariableInjector
+
+    from .services.decorator import LLMDecorator
+    from .services.history_extractor import HistoryExtractor
+    from .services.json import JsonHandler
+    from .services.rate_limiter import RateLimiter
+    from .services.retryer import Retryer
+    from .services.usage_extractor import UsageExtractor
+    from .services.variable_injector import VariableInjector
 
 
 class BaseLLM(

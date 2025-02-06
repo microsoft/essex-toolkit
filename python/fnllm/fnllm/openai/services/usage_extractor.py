@@ -6,9 +6,9 @@ from __future__ import annotations
 
 from typing import Generic, TypeVar
 
+from fnllm.base.services.usage_extractor import UsageExtractor
 from fnllm.openai.types.chat.io import OpenAIChatOutput
 from fnllm.openai.types.embeddings.io import OpenAIEmbeddingsOutput
-from fnllm.services.usage_extractor import UsageExtractor
 from fnllm.types.metrics import LLMUsageMetrics
 
 TOutputWithUsageMetrics = TypeVar(
