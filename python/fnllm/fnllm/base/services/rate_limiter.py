@@ -4,21 +4,23 @@
 
 from __future__ import annotations
 
-from abc import abstractmethod
+from collections.abc import Awaitable, Callable
 from typing import TYPE_CHECKING, Any, Generic
 
 from typing_extensions import Unpack
 
 from fnllm.limiting import Limiter, Manifest
 from fnllm.types.generics import TInput, TJsonModel, TModelParameters
+from fnllm.types.io import LLMInput, LLMOutput
 
 from .decorator import LLMDecorator, THistoryEntry, TOutput
 
 if TYPE_CHECKING:
-    from collections.abc import Awaitable, Callable
-
     from fnllm.events.base import LLMEvents
-    from fnllm.types.io import LLMInput, LLMOutput
+
+TokenEstimator = Callable[
+    [TInput, LLMInput[TJsonModel, THistoryEntry, TModelParameters]], int
+]
 
 
 class RateLimiter(
@@ -32,18 +34,16 @@ class RateLimiter(
         limiter: Limiter,
         *,
         events: LLMEvents,
+        estimator: TokenEstimator[TInput, TJsonModel, THistoryEntry, TModelParameters],
     ):
         """Create a new BaseRateLimitLLM."""
         self._limiter = limiter
         self._events = events
+        self._estimator = estimator
 
-    @abstractmethod
-    def _estimate_request_tokens(
-        self,
-        prompt: TInput,
-        kwargs: LLMInput[TJsonModel, THistoryEntry, TModelParameters],
-    ) -> int:
-        """Estimate how many tokens are on the request input."""
+    def _estimate_request_tokens(self, prompt: TInput, kwargs: LLMInput) -> int:
+        """Estimate the number of tokens needed for an OpenAI request."""
+        return self._estimator(prompt, kwargs)
 
     async def _handle_post_request_limiting(
         self,

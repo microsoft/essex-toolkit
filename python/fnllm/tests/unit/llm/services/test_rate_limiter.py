@@ -52,7 +52,9 @@ async def test_rate_limit_based_on_estimated_request_tokens():
     delegate = AsyncMock(spec=LLM, return_value=expected_output)
     events = Mock(spec=LLMEvents)
 
-    limiter = CustomRateLimiter(limiter=limiter, events=events)
+    limiter = CustomRateLimiter(
+        limiter=limiter, events=events, estimator=lambda _, __: 30
+    )
     llm = limiter.decorate(delegate)
 
     # with an estimate of 10 we should call all limiters
@@ -109,7 +111,9 @@ async def test_rate_limit_with_post_limit():
     delegate = AsyncMock(spec=LLM, return_value=expected_output)
     events = Mock(spec=LLMEvents)
 
-    rate_limiter = CustomRateLimiter(limiter=limiter, events=events)
+    rate_limiter = CustomRateLimiter(
+        limiter=limiter, events=events, estimator=lambda _, __: 30
+    )
     llm = rate_limiter.decorate(delegate)
 
     # with an estimate of 10 we should call all limiters

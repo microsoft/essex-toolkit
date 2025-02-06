@@ -6,13 +6,13 @@ from typing import TYPE_CHECKING
 from unittest.mock import ANY, create_autospec, patch
 
 from fnllm.base.services.cache_interactor import CacheInteractor
+from fnllm.base.services.rate_limiter import RateLimiter
 from fnllm.base.services.variable_injector import VariableInjector
 from fnllm.caching.base import Cache
 from fnllm.events.base import LLMEvents
 from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.factories.embeddings import create_openai_embeddings_llm
 from fnllm.openai.llm.openai_embeddings_llm import OpenAIEmbeddingsLLMImpl
-from fnllm.openai.services.openai_rate_limiter import OpenAIRateLimiter
 from fnllm.openai.services.openai_retryer import OpenAIRetryer
 from fnllm.openai.services.openai_usage_extractor import (
     OpenAIUsageExtractor,
@@ -63,9 +63,7 @@ def test_create_openai_embeddings_llm():
         patch.object(
             OpenAIUsageExtractor, "__init__", return_value=None
         ) as new_usage_extractor,
-        patch.object(
-            OpenAIRateLimiter, "__init__", return_value=None
-        ) as new_rate_limit_llm,
+        patch.object(RateLimiter, "__init__", return_value=None) as new_rate_limit_llm,
         patch.object(OpenAIRetryer, "__init__", return_value=None) as new_retrying_llm,
     ):
         client = create_openai_embeddings_llm(

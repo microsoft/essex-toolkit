@@ -8,15 +8,15 @@ from typing import TYPE_CHECKING, Any
 
 import tiktoken
 
+from fnllm.base.services.rate_limiter import RateLimiter
 from fnllm.limiting.composite import CompositeLimiter
 from fnllm.limiting.concurrency import ConcurrencyLimiter
 from fnllm.limiting.rpm import RPMLimiter
 from fnllm.limiting.tpm import TPMLimiter
-from fnllm.openai.services.openai_rate_limiter import OpenAIRateLimiter
 from fnllm.openai.services.openai_retryer import OpenAIRetryer
+from fnllm.openai.services.openai_token_estimator import OpenAITokenEstimator
 
 if TYPE_CHECKING:
-    from fnllm.base.services.rate_limiter import RateLimiter
     from fnllm.base.services.retryer import Retryer
     from fnllm.events.base import LLMEvents
     from fnllm.limiting.base import Limiter
@@ -51,11 +51,13 @@ def create_rate_limiter(
     *,
     limiter: Limiter,
     config: OpenAIConfig,
-    events: LLMEvents | None,
+    events: LLMEvents,
 ) -> RateLimiter[Any, Any, Any, Any]:
     """Wraps the LLM to be rate limited."""
-    return OpenAIRateLimiter(
-        encoder=_get_encoding(config.encoding),
+    encoding = _get_encoding(config.encoding)
+    token_estimator = OpenAITokenEstimator(encoding=encoding)
+    return RateLimiter(
+        estimator=token_estimator,
         limiter=limiter,
         events=events,
     )
@@ -65,7 +67,7 @@ def create_retryer(
     *,
     config: OpenAIConfig,
     operation: str,
-    events: LLMEvents | None,
+    events: LLMEvents,
 ) -> Retryer[Any, Any, Any, Any]:
     """Wraps the LLM with retry logic."""
     return OpenAIRetryer(
