@@ -55,7 +55,7 @@ class BaseLLM(
         | None = None,
         retryer: Retryer[TInput, TOutput, THistoryEntry, TModelParameters]
         | None = None,
-        json_handler: JsonReceiver[TInput, TOutput, THistoryEntry, TModelParameters]
+        json_receiver: JsonReceiver[TInput, TOutput, THistoryEntry, TModelParameters]
         | None = None,
     ) -> None:
         """Base constructor for the BaseLLM."""
@@ -66,7 +66,7 @@ class BaseLLM(
         self._variable_injector = variable_injector
         self._rate_limiter = rate_limiter
         self._retryer = retryer
-        self._json_handler = json_handler
+        self._json_receiver = json_receiver
 
         decorated = self._decorator_target
         for decorator in self.decorators:
@@ -87,7 +87,7 @@ class BaseLLM(
             variable_injector=self._variable_injector,
             rate_limiter=self._rate_limiter,
             retryer=self._retryer,
-            json_handler=self._json_handler,
+            json_receiver=self._json_receiver,
         )
 
     @property
@@ -103,8 +103,8 @@ class BaseLLM(
             decorators.append(self._rate_limiter)
         if self._retryer:
             decorators.append(self._retryer)
-        if self._json_handler:
-            decorators.append(self._json_handler)
+        if self._json_receiver:
+            decorators.append(self._json_receiver)
         return decorators
 
     async def __call__(

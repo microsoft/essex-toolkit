@@ -31,7 +31,7 @@ class TestLLM(BaseLLM):
         json_handler: JsonReceiver | None = None,
         on_execute: AsyncMock | None = None,
     ):
-        super().__init__(json_handler=json_handler)
+        super().__init__(json_receiver=json_handler)
         self._output = output
         self._on_execute = on_execute or AsyncMock()
 

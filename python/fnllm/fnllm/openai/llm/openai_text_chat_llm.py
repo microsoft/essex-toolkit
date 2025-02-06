@@ -75,7 +75,7 @@ class OpenAITextChatLLMImpl(
         | None = None,
         model_parameters: OpenAIChatParameters | None = None,
         events: LLMEvents | None = None,
-        json_handler: JsonReceiver[
+        json_receiver: JsonReceiver[
             OpenAIChatCompletionInput,
             OpenAIChatOutput,
             OpenAIChatHistoryEntry,
@@ -91,7 +91,7 @@ class OpenAITextChatLLMImpl(
             history_extractor=history_extractor,
             variable_injector=variable_injector,
             retryer=retryer,
-            json_handler=json_handler,
+            json_receiver=json_receiver,
             rate_limiter=rate_limiter,
         )
 
@@ -100,6 +100,7 @@ class OpenAITextChatLLMImpl(
         self._global_model_parameters = model_parameters or {}
         self._cache = cache
         self._json_strategy = json_strategy
+        self._json_receiver = json_receiver
 
     def child(self, name: str) -> Any:
         """Create a child LLM."""
@@ -107,7 +108,7 @@ class OpenAITextChatLLMImpl(
             self._client,
             self._model,
             self._cache.child(name),
-            json_handler=self._json_handler,
+            json_receiver=self._json_receiver,
             events=self.events,
             usage_extractor=cast(
                 OpenAIUsageExtractor[OpenAIChatOutput], self._usage_extractor
