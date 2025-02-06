@@ -22,15 +22,15 @@
     "editor.defaultFormatter": "biomejs.biome"
   },
   "[python]": {
-		"editor.formatOnSave": true,
-		"editor.codeActionsOnSave": {
-			"source.organizeImports": "explicit",
-			"source.fixAll": "explicit"
-		},
-		"editor.defaultFormatter": "charliermarsh.ruff"
-	},
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit",
+      "source.fixAll": "explicit"
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
   "notebook.formatOnSave.enabled": true,
-	"notebook.codeActionsOnSave": {
+  "notebook.codeActionsOnSave": {
     "notebook.source.fixAll": "explicit",
     "notebook.source.organizeImports": "explicit"
   },
@@ -43,7 +43,7 @@
     "package.json": ".npmignore, turbo.json, biome.json, tsconfig.json, tsconfig.*.json, jest.config.js, rome.json, .yarnrc.yml, yarn.lock, .pnp.cjs, .pnp.loader.mjs",
     "pyproject.toml": "uv.lock, ruff.toml, mkdocs.yml",
     ".gitignore": ".gitattributes",
-    "README.md": "SECURITY.md, SUPPORT.md, CODE_OF_CONDUCT.md, LICENSE"
+    "README.md": "SECURITY.md, SUPPORT.md, CODE_OF_CONDUCT.md, CHANGELOG.md, LICENSE"
   },
-	"ruff.configuration": "./ruff.toml"
+  "ruff.configuration": "./ruff.toml"
 }

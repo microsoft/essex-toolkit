@@ -11,7 +11,7 @@ on:
       - "**/*.js"
       - "**/*.mjs"
       - "**/*.cjs"
-      - "**/*.json"
+      - "*.json"
       - "yarn.lock"
       - .github/workflows/javascript-ci.yml
 
@@ -46,17 +46,7 @@ jobs:
 
       - run: yarn install
 
-      - name: TurboRepo local server
-        uses: felixmosh/turborepo-gh-artifacts@v2
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          server-token: ${{ secrets.TURBO_SERVER_TOKEN }}
-
       - run: yarn ci
         name: Verify
-        env:
-          TURBO_API: 'http://127.0.0.1:9080'
-          TURBO_TOKEN: ${{ secrets.TURBO_SERVER_TOKEN }}
-          TURBO_TEAM: 'essex'
 
       - run: yarn is_clean

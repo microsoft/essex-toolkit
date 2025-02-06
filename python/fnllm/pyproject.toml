@@ -1,6 +1,6 @@
 [project]
 name = "fnllm"
-version = "0.0.15"
+version = "0.1.0"
 description = "A function-based LLM protocol and wrapper."
 authors = [
     {name="Chris Trevino", email="chtrevin@microsoft.com"},
