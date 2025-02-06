@@ -35,6 +35,8 @@ if TYPE_CHECKING:
     from .services.usage_extractor import UsageExtractor
     from .services.variable_injector import VariableInjector
 
+from contextlib import contextmanager
+
 
 class BaseLLM(
     ABC,
@@ -100,8 +102,6 @@ class BaseLLM(
         decorators: list[LLMDecorator] = []
         if self._json_handler and self._json_handler.requester:
             decorators.append(self._json_handler.requester)
-        if self._rate_limiter:
-            decorators.append(self._rate_limiter)
         if self._retryer:
             decorators.append(self._retryer)
         if self._json_handler and self._json_handler.receiver:
@@ -147,13 +147,34 @@ class BaseLLM(
         Leave signature alone as prompt, **kwargs.
         """
         await self._events.on_execute_llm()
-        output = await self._execute_llm(prompt, **kwargs)
-        result: LLMOutput[TOutput, TJsonModel, THistoryEntry] = LLMOutput(output=output)
+        async with self.rate_limit(prompt, **kwargs):
+            self._execute_llm(prompt, **kwargs)
 
+        # self._rate_limiter.update_response(output, estimated_input_tokens)
+
+        result = LLMOutput(output=output)
         await self._inject_usage(result)
         self._inject_history(result, kwargs.get("history"))
 
         return result
+
+    @contextmanager
+    async def rate_limit(
+        self,
+        prompt: TInput,
+        **kwargs: Unpack[LLMInput[TJsonModel, THistoryEntry, TModelParameters]],
+    ):
+        """Limit the LLM."""
+        if self._rate_limiter is None:
+            yield
+            return
+
+        estimated_input_tokens = self._rate_limiter.estimate_request_tokens(
+            prompt, kwargs
+        )
+        async with self._rate_limiter.limit(estimated_input_tokens, prompt, **kwargs):
+            result = yield
+            self._rate_limiter.update_response(output, estimated_input_tokens)
 
     async def _inject_usage(
         self, result: LLMOutput[TOutput, TJsonModel, THistoryEntry]
