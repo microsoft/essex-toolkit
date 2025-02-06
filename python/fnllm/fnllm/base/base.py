@@ -72,7 +72,6 @@ class BaseLLM(
         self, name: str
     ) -> BaseLLM[TInput, TOutput, THistoryEntry, TModelParameters]:
         """Create a child LLM."""
-        # TODO(chtrevin): Remove this function?
         return self
 
     @property
