@@ -110,7 +110,7 @@ class BaseLLM(
     async def _decorator_target(
         self,
         prompt: TInput,
-        kwargs: LLMInput[TJsonModel, THistoryEntry, TModelParameters],
+        **kwargs: Unpack[LLMInput[TJsonModel, THistoryEntry, TModelParameters]],
     ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
         """Target for the decorator chain.
 
@@ -132,10 +132,11 @@ class BaseLLM(
         """
         try:
             prompt, kwargs = self._rewrite_input(prompt, kwargs)
-            result = await self._try_execute_cached(prompt, kwargs)
-            if result is not None:
-                return await self._handle_output(result, kwargs, cached=True)
-            return await self._decorated_target(prompt, kwargs)
+            if not kwargs.get("bypass_cache"):
+                result = await self._try_execute_cached(prompt, kwargs)
+                if result is not None:
+                    return await self._handle_output(result, kwargs, cached=True)
+            return await self._decorated_target(prompt, **kwargs)
         except BaseException as e:
             stack_trace = traceback.format_exc()
             if self._events:
