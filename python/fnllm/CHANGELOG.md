@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 ### Removed
 ### Fixed
+- Resolved a performance issue where cache reads were being performed inside of the throttling layers, resulting in slow cache reads.
 ### Security
 
 ## [0.1.0] - 2025-02-05
@@ -20,8 +21,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 * Rename `cognitive_services_endpoint` configuration key to `audience`.
-
-### Removed
 
 ## [0.0.18] - 2025-01-27
 ## Added

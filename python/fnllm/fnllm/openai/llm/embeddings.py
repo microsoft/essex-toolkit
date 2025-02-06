@@ -143,10 +143,10 @@ class OpenAIEmbeddingsLLMImpl(
         result = await self._cache.get(cache_key)
         if result is not None:
             result = OpenAICreateEmbeddingResponseModel.model_validate(result)
-            self._events.on_cache_hit(cache_key, name)
+            await self._events.on_cache_hit(cache_key, name)
             return self._create_response(result, prompt)
 
-        self._events.on_cache_miss(cache_key, name)
+        await self._events.on_cache_miss(cache_key, name)
         return None
 
     def _create_response(
