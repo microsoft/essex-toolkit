@@ -17,13 +17,19 @@ dependencies = [
     "json-repair>=0.30.0",
 ]
 [project.optional-dependencies]
+# OpenAI is our primary provider, but it's defined as an optional dependency  for future provider expansion.
 openai=[
     "openai>=1.35.12",
     "tiktoken>=0.7.0"
 ]
+# Azure is required if using Azure OpenAI
 azure=[
     "azure-identity>=1.17.1",
     "azure-storage-blob>=12.20.0"
+]
+# numpy is used  if clients choose to use the OpenAIEmbeddingsBatcher
+numpy = [
+    "numpy>=1.26.4",   
 ]
 
 [tool.uv]
