@@ -6,7 +6,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from fnllm.base.services.cache_interactor import CacheInteractor
 from fnllm.base.services.variable_injector import VariableInjector
 from fnllm.events.base import LLMEvents
 from fnllm.openai.llm.openai_embeddings_llm import OpenAIEmbeddingsLLMImpl
@@ -28,20 +27,18 @@ def create_openai_embeddings_llm(
     *,
     client: OpenAIClient | None = None,
     cache: Cache | None = None,
-    cache_interactor: CacheInteractor | None = None,
     events: LLMEvents | None = None,
 ) -> OpenAIEmbeddingsLLM:
     """Create an OpenAI embeddings LLM."""
     operation = "embedding"
     client = client or create_openai_client(config)
     events = events or LLMEvents()
-    cache_interactor = cache_interactor or CacheInteractor(events, cache)
     limiter = create_limiter(config)
     return OpenAIEmbeddingsLLMImpl(
         client,
         model=config.model,
         model_parameters=config.embeddings_parameters,
-        cache=cache_interactor,
+        cache=cache,
         events=events,
         usage_extractor=OpenAIUsageExtractor(),
         variable_injector=VariableInjector(),

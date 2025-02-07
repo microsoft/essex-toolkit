@@ -6,7 +6,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from fnllm.base.services.cache_interactor import CacheInteractor
 from fnllm.base.services.variable_injector import VariableInjector
 from fnllm.events.base import LLMEvents
 from fnllm.openai.llm.openai_chat_llm import OpenAIChatLLMImpl
@@ -41,7 +40,6 @@ def create_openai_chat_llm(
     *,
     client: OpenAIClient | None = None,
     cache: Cache | None = None,
-    cache_interactor: CacheInteractor | None = None,
     events: LLMEvents | None = None,
 ) -> OpenAIChatLLM:
     """Create an OpenAI chat LLM."""
@@ -54,7 +52,6 @@ def create_openai_chat_llm(
         client=client,
         config=config,
         cache=cache,
-        cache_interactor=cache_interactor,
         events=events,
         limiter=limiter,
     )
@@ -76,17 +73,15 @@ def _create_openai_text_chat_llm(
     config: OpenAIConfig,
     limiter: Limiter,
     cache: Cache | None,
-    cache_interactor: CacheInteractor | None,
     events: LLMEvents,
 ) -> OpenAITextChatLLM:
     operation = "chat"
     events = events or LLMEvents()
-    cache_interactor = cache_interactor or CacheInteractor(events, cache)
     result = OpenAITextChatLLMImpl(
         client,
         model=config.model,
         model_parameters=config.chat_parameters,
-        cache=cache_interactor,
+        cache=cache,
         events=events,
         json_strategy=config.json_strategy,
         json_receiver=create_json_handler(
