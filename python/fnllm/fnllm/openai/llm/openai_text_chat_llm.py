@@ -82,7 +82,7 @@ class OpenAITextChatLLMImpl(
             OpenAIChatParameters,
         ]
         | None,
-        json_strategy: JsonStrategy = JsonStrategy.VALID,
+        json_strategy: JsonStrategy,
     ):
         """Create a new OpenAIChatLLM."""
         super().__init__(
@@ -202,9 +202,8 @@ class OpenAITextChatLLMImpl(
     ]:
         prompt, kwargs = super()._rewrite_input(prompt, kwargs)
         if self.is_json_mode(kwargs) and self._json_strategy == JsonStrategy.VALID:
-            kwargs["model_parameters"] = self._enable_oai_json_mode(
-                kwargs.get("model_parameters", {})
-            )
+            model_paramaters = kwargs.get("model_parameters", {})
+            kwargs["model_parameters"] = self._enable_oai_json_mode(model_paramaters)
         return prompt, kwargs
 
     def _enable_oai_json_mode(
