@@ -43,7 +43,7 @@ class CallBatch(Generic[CallInput, CallOutput]):
     """A batch of calls to a remote service."""
 
     calls: list[Call[CallInput, CallOutput]] = field(default_factory=list)
-    future: Future = field(default_factory=Future)
+    future: Future[None] = field(default_factory=Future)
 
     @property
     def cost(self) -> int:
