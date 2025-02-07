@@ -83,7 +83,6 @@ def _create_openai_text_chat_llm(
         model_parameters=config.chat_parameters,
         cache=cache,
         events=events,
-        json_strategy=config.json_strategy,
         json_receiver=create_json_handler(
             config.json_strategy, config.max_json_retries
         ),

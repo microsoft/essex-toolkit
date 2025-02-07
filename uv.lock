@@ -532,6 +532,9 @@ azure = [
     { name = "azure-identity" },
     { name = "azure-storage-blob" },
 ]
+numpy = [
+    { name = "numpy" },
+]
 openai = [
     { name = "openai" },
     { name = "tiktoken" },
@@ -544,6 +547,7 @@ dev = [
     { name = "coverage" },
     { name = "hatchling" },
     { name = "ipykernel" },
+    { name = "numpy" },
     { name = "openai" },
     { name = "poethepoet" },
     { name = "pyright" },
@@ -560,6 +564,7 @@ requires-dist = [
     { name = "azure-storage-blob", marker = "extra == 'azure'", specifier = ">=12.20.0" },
     { name = "httpx", specifier = ">=0.27.0" },
     { name = "json-repair", specifier = ">=0.30.0" },
+    { name = "numpy", marker = "extra == 'numpy'", specifier = ">=1.26.4" },
     { name = "openai", marker = "extra == 'openai'", specifier = ">=1.35.12" },
     { name = "pydantic", specifier = ">=2.8.2" },
     { name = "tenacity", specifier = ">=8.5.0" },
@@ -573,6 +578,7 @@ dev = [
     { name = "coverage", specifier = ">=7.5.4" },
     { name = "hatchling", specifier = ">=1.25.0" },
     { name = "ipykernel", specifier = ">=6.29.5" },
+    { name = "numpy", specifier = ">=1.26.4" },
     { name = "openai", specifier = ">=1.53.0" },
     { name = "poethepoet", specifier = ">=0.27.0" },
     { name = "pyright", specifier = ">=1.1.379" },
