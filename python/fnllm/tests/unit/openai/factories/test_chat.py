@@ -10,7 +10,6 @@ from fnllm.base.services.rate_limiter import RateLimiter
 from fnllm.base.services.retryer import Retryer
 from fnllm.base.services.variable_injector import VariableInjector
 from fnllm.caching.base import Cache
-from fnllm.enums import JsonStrategy
 from fnllm.events.base import LLMEvents
 from fnllm.openai.config import AzureOpenAIConfig
 from fnllm.openai.factories.chat import create_openai_chat_llm
@@ -85,7 +84,6 @@ def test_create_openai_chat_llm():
             ANY,
             model=config.model,
             model_parameters=config.chat_parameters,
-            json_strategy=JsonStrategy.VALID,
             cache=ANY,
             events=mocked_events,
             usage_extractor=ANY,
