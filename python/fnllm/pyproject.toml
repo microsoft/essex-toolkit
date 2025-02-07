@@ -17,13 +17,19 @@ dependencies = [
     "json-repair>=0.30.0",
 ]
 [project.optional-dependencies]
+# OpenAI is our default provider, but we have it as an optional extra in order to account for future providers.
 openai=[
     "openai>=1.35.12",
     "tiktoken>=0.7.0"
 ]
+# Azure is optional, you should add it if you want to use Azure OpenAI or Azure Blob Storage caching.
 azure=[
     "azure-identity>=1.17.1",
     "azure-storage-blob>=12.20.0"
+]
+# Numpy used by the OpenAI Embeddings Batcher.
+numpy=[
+    "numpy>=1.26.4",
 ]
 
 [tool.uv]
@@ -41,7 +47,9 @@ dev-dependencies = [
     "tiktoken>=0.8.0",
     # Azure Optional
     "azure-identity>=1.17.1",
-    "azure-storage-blob>=12.20.0"
+    "azure-storage-blob>=12.20.0",
+    # Numpy Optional
+    "numpy>=1.26.4",
 ]
 
 [build-system]
