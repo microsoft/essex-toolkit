@@ -4,7 +4,7 @@
 from typing import Any
 from unittest.mock import AsyncMock, Mock
 
-from fnllm.openai.llm.openai_embeddings_batcher import EmbeddingBatcher
+from fnllm.openai.llm.openai_embeddings_batcher import OpenAIEmbeddingBatcher
 
 
 def embeddings_response(embeddings: list[list[float]]) -> Any:
@@ -19,7 +19,7 @@ async def test_embeddings_batcher_init():
     text_service = Mock()
     text_service.count_tokens = Mock()
     text_service.count_tokens.return_value = 5
-    batcher = EmbeddingBatcher(
+    batcher = OpenAIEmbeddingBatcher(
         llm=llm,
         text_service=text_service,
         max_batch_size=2,
@@ -39,7 +39,7 @@ async def test_batcher_single_call():
     text_service = Mock()
     text_service.count_tokens = Mock()
     text_service.count_tokens.return_value = 5
-    batcher = EmbeddingBatcher(
+    batcher = OpenAIEmbeddingBatcher(
         llm=llm,
         text_service=text_service,
         max_batch_size=1,
@@ -63,7 +63,7 @@ async def test_batcher_single_call_under_batch_size():
     text_service = Mock()
     text_service.count_tokens = Mock()
     text_service.count_tokens.return_value = 5
-    batcher = EmbeddingBatcher(
+    batcher = OpenAIEmbeddingBatcher(
         llm=llm,
         text_service=text_service,
         max_batch_size=2,
@@ -88,7 +88,7 @@ async def test_batcher_two_calls_under_batch_size():
     text_service = Mock()
     text_service.count_tokens = Mock()
     text_service.count_tokens.return_value = 1
-    batcher = EmbeddingBatcher(
+    batcher = OpenAIEmbeddingBatcher(
         llm=llm,
         text_service=text_service,
         max_batch_size=3,
@@ -116,7 +116,7 @@ async def test_batcher_two_calls_over_batch_size():
     text_service = Mock()
     text_service.count_tokens = Mock()
     text_service.count_tokens.return_value = 1
-    batcher = EmbeddingBatcher(
+    batcher = OpenAIEmbeddingBatcher(
         llm=llm,
         text_service=text_service,
         max_batch_size=1,
