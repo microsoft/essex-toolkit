@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [0.1.1] - 2025-02-07
+### Added
 * Add `fnllm.utils.batch` to support generalized batch processing.
 * Add `fnllm.openai.llm.openai_embeddings_batcher`, which allows for singular embeddings calls to be called in batches.
 * Add `fnllm.openai.services.openai_text_service`, which is a general utility for splitting, counting, encoding and decoding text.
@@ -16,10 +24,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Move `fnllm.openai.llm.services` to `fnllm.openai.services`
 * Add `fnllm.enums` to re-export common enumerations.
 * Streamline JSON Mode object model.
-### Deprecated
-### Removed
-### Fixed
-### Security
 
 ## [0.1.0] - 2025-02-05
 
