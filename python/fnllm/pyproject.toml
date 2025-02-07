@@ -47,7 +47,9 @@ dev-dependencies = [
     "tiktoken>=0.8.0",
     # Azure Optional
     "azure-identity>=1.17.1",
-    "azure-storage-blob>=12.20.0"
+    "azure-storage-blob>=12.20.0",
+    # Numpy Optional
+    "numpy>=1.26.4", 
 ]
 
 [build-system]
