@@ -36,7 +36,7 @@ async def test_rate_limit_based_on_estimated_request_tokens():
     rpm_base_limiter = AsyncMock(spec=AsyncLimiter)
     rpm_limiter = RPMLimiter(rpm_base_limiter)
     tpm_base_limiter = AsyncMock(spec=AsyncLimiter)
-    tpm_limiter = TPMLimiter(tpm_base_limiter)
+    tpm_limiter = TPMLimiter(tpm_base_limiter, 10_000)
     limiter = CompositeLimiter([concurrency_limiter, rpm_limiter, tpm_limiter])
 
     # mocking delegate itself and events
@@ -92,7 +92,7 @@ async def test_rate_limit_with_post_limit():
     rpm_base_limiter = AsyncMock(spec=AsyncLimiter)
     rpm_limiter = RPMLimiter(rpm_base_limiter)
     tpm_base_limiter = AsyncMock(spec=AsyncLimiter)
-    tpm_limiter = TPMLimiter(tpm_base_limiter)
+    tpm_limiter = TPMLimiter(tpm_base_limiter, 10_000)
     limiter = CompositeLimiter([concurrency_limiter, rpm_limiter, tpm_limiter])
 
     # mocking delegate itself and events
