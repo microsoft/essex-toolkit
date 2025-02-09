@@ -23,13 +23,7 @@ class TPMLimiter(Limiter):
         if total_tokens <= 0:
             return
 
-        if total_tokens < self._tokens_per_minute:
-            await self._limiter.acquire(total_tokens)
-        else:
-            tokens_remaining = total_tokens
-            while tokens_remaining > 0:
-                await self._limiter.acquire(self._tokens_per_minute)
-                tokens_remaining -= self._tokens_per_minute
+        await self._limiter.acquire(max(total_tokens, self._tokens_per_minute))
 
     async def release(self, manifest: Manifest) -> None:
         """Do nothing."""
