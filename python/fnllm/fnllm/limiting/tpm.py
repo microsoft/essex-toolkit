@@ -20,10 +20,8 @@ class TPMLimiter(Limiter):
     async def acquire(self, manifest: Manifest) -> None:
         """Acquire limiter permission."""
         total_tokens = manifest.request_tokens + manifest.post_request_tokens
-        if total_tokens <= 0:
-            return
-
-        await self._limiter.acquire(min(total_tokens, self._tokens_per_minute))
+        if total_tokens > 0:
+            await self._limiter.acquire(min(total_tokens, self._tokens_per_minute))
 
     async def release(self, manifest: Manifest) -> None:
         """Do nothing."""
