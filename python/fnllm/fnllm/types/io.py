@@ -70,6 +70,9 @@ class LLMOutput(BaseModel, Generic[TOutput, TJsonModel, THistoryEntry]):
     metrics: LLMMetrics = Field(default_factory=LLMMetrics)
     """Request/response metrics."""
 
+    cache_hit: bool | None = None
+    """Whether the response was a cache hit."""
+
     @field_serializer("tool_calls")
     def serialize_tool_calls(
         self, tool_calls: list[LLMTool]
