@@ -164,7 +164,9 @@ class BaseLLM(
         *,
         cached: bool,
     ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
-        result: LLMOutput[TOutput, TJsonModel, THistoryEntry] = LLMOutput(output=output)
+        result: LLMOutput[TOutput, TJsonModel, THistoryEntry] = LLMOutput(
+            output=output, cache_hit=cached
+        )
         await self._inject_usage(result, cached=cached)
         self._inject_history(result, kwargs.get("history"))
         return result
