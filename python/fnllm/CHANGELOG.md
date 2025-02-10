@@ -5,19 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+### Unreleased Template
+```md
 ## [Unreleased]
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+```
+## [Unreleased]
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [0.1.2] - 2025-02-10
 ### Added
 - Add new RetryStrategy enum values:
 	* `RetryStrategy.EXPONENTIAL_BACKOFF` (default strategy) - for exponential backoff wait times 
 	* `RetryStrategy.RANDOM_WAIT` - for random wait times between `[0, config.max_wait]`.
 	* `RetryStrategy.INCREMENTAL_WAIT` - for linear incremental wait times between `[0, config.max_wait]`.
-### Changed
+
 ### Deprecated
 - Deprecate `RetryStrategy.TENACITY` in favor of `RetryStrategy.EXPONENTIAL_BACKOFF`.
-### Removed
+
 ### Fixed
 * Fix issue with TPM Limiter where requests with tokens > tokens_per_minute limit would automatically fail.
-### Security
 
 ## [0.1.1] - 2025-02-07
 ### Added
