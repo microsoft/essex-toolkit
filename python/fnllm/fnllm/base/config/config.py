@@ -51,6 +51,6 @@ class Config(BaseModel, frozen=True, extra="allow"):
     )
 
     retry_strategy: RetryStrategy = Field(
-        default=RetryStrategy.TENACITY,
+        default=RetryStrategy.EXPONENTIAL_BACKOFF,
         description="The retry strategy to use for the LLM service.",
     )

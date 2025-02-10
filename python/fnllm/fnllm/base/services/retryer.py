@@ -144,13 +144,13 @@ class Retryer(
 
     def _get_wait_strategy(self) -> Any:
         match self._retry_strategy:
-            case RetryStrategy.TENACITY:
+            case RetryStrategy.EXPONENTIAL_BACKOFF | RetryStrategy.TENACITY:
                 return wait_exponential_jitter(max=self._max_retry_wait)
-            case RetryStrategy.TENACITY_INCREMENTAL:
+            case RetryStrategy.INCREMENTAL_WAIT:
                 return wait_incrementing(
                     max=self._max_retry_wait, increment=self._max_retry_wait / 10
                 )
-            case RetryStrategy.TENACITY_RANDOM:
+            case RetryStrategy.RANDOM_WAIT:
                 return wait_random(max=self._max_retry_wait)
             case _:
                 msg = f"Invalid retry strategy: {self._retry_strategy}"
