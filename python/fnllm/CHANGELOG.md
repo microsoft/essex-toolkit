@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Add new RetryStrategy enum values:
-  * `RetryStrategy.EXPONENTIAL_BACKOFF` - for exponential backoff wait times.
+  * `RetryStrategy.EXPONENTIAL_BACKOFF` (default strategy) - for exponential backoff wait times 
 	* `RetryStrategy.RANDOM_WAIT` - for random wait times between `[0, config.max_wait]`.
 	* `RetryStrategy.INCREMENTAL_WAIT` - for linear incremental wait times between `[0, config.max_wait]`.
 ### Changed
