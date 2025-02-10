@@ -13,6 +13,8 @@ from tenacity import (
     retry_if_exception_type,
     stop_after_attempt,
     wait_exponential_jitter,
+    wait_incrementing,
+    wait_random,
 )
 from typing_extensions import Unpack
 
@@ -75,12 +77,12 @@ class Retryer(
             call_times = []
             start = asyncio.get_event_loop().time()
 
-            if self._retry_strategy == RetryStrategy.TENACITY:
+            if self._retry_strategy == RetryStrategy.NATIVE:
+                result = await delegate(prompt, **kwargs)
+            else:
                 result, call_times, num_retries = await self._execute_with_retry(
                     delegate, prompt, kwargs
                 )
-            else:
-                result = await delegate(prompt, **kwargs)
 
             end = asyncio.get_event_loop().time()
             result.metrics.retry = LLMRetryMetrics(
@@ -126,7 +128,7 @@ class Retryer(
         try:
             async for a in AsyncRetrying(
                 stop=stop_after_attempt(self._max_retries),
-                wait=wait_exponential_jitter(max=self._max_retry_wait),
+                wait=self._get_wait_strategy(),
                 reraise=True,
                 retry=retry_if_exception_type(tuple(self._retryable_errors)),
             ):
@@ -139,3 +141,17 @@ class Retryer(
                 raise
 
         raise RetriesExhaustedError(name, self._max_retries)
+
+    def _get_wait_strategy(self) -> Any:
+        match self._retry_strategy:
+            case RetryStrategy.TENACITY:
+                return wait_exponential_jitter(max=self._max_retry_wait)
+            case RetryStrategy.TENACITY_INCREMENTAL:
+                return wait_incrementing(
+                    max=self._max_retry_wait, increment=self._max_retry_wait / 10
+                )
+            case RetryStrategy.TENACITY_RANDOM:
+                return wait_random(max=self._max_retry_wait)
+            case _:
+                msg = f"Invalid retry strategy: {self._retry_strategy}"
+                raise ValueError(msg)
