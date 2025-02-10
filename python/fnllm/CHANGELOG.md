@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Add new RetryStrategy enum values:
+  * `RetryStrategy.TENACITY_RANDOM` - for random wait times between `[0, config.max_wait]`.
+	* `RetryStrategy.TENACITY_INCREMENTAL` - for linear incremental wait times between `[0, config.max_wait]`.
 ### Changed
 ### Deprecated
 ### Removed
