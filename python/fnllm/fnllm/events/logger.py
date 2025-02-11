@@ -108,3 +108,9 @@ class LLMEventsLogger(LLMEvents):
         self._logger.warning(
             "retryable error happened on attempt #%d: %s", attempt_number, str(error)
         )
+
+    async def on_recover_from_error(self, attempt_number: int) -> None:
+        """Called when the LLM recovers from an error."""
+        self._logger.warning(
+            "recovered from retryable error on attempt #%d", attempt_number
+        )

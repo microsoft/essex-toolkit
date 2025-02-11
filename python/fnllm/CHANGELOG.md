@@ -17,10 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ```
 ## [Unreleased]
 ### Added
+- Add event, `LLMEvents.on_recover_from_error`
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
+- Unwind nested callable structure in `retryer`.
 ### Security
 
 ## [0.1.2] - 2025-02-10
