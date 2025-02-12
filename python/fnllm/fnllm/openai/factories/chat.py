@@ -71,7 +71,7 @@ def _create_openai_text_chat_llm(
     *,
     client: OpenAIClient,
     config: OpenAIConfig,
-    limiter: Limiter,
+    limiter: Limiter | None,
     cache: Cache | None,
     events: LLMEvents,
 ) -> OpenAITextChatLLM:
