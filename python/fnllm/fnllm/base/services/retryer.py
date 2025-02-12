@@ -32,6 +32,8 @@ from fnllm.types.metrics import LLMRetryMetrics
 from .decorator import LLMDecorator
 
 if TYPE_CHECKING:
+    from tenacity.wait import wait_base
+
     from fnllm.events import LLMEvents
     from fnllm.types.io import LLMInput, LLMOutput
 
@@ -59,10 +61,28 @@ class Retryer(
         self._retryable_errors = retryable_errors
         self._tag = tag
         self._max_retries = max_retries
-        self._max_retry_wait = max_retry_wait
-        self._retry_strategy = retry_strategy
         self._events = events
         self._retryable_error_handler = retryable_error_handler
+
+        self._retry_stop = stop_after_attempt(max_retries)
+        self._retry_if = retry_if_exception_type(tuple(self._retryable_errors))
+        self._wait_strategy = self._create_wait_strategy(retry_strategy, max_retry_wait)
+
+    def _create_wait_strategy(
+        self, retry_strategy: RetryStrategy, max_retry_wait: float
+    ) -> wait_base:
+        match retry_strategy:
+            case RetryStrategy.EXPONENTIAL_BACKOFF | RetryStrategy.TENACITY:
+                return wait_exponential_jitter(max=max_retry_wait)
+            case RetryStrategy.INCREMENTAL_WAIT:
+                return wait_incrementing(
+                    max=max_retry_wait, increment=max_retry_wait / 10
+                )
+            case RetryStrategy.RANDOM_WAIT:
+                return wait_random(max=max_retry_wait)
+            case _:
+                msg = f"Invalid retry strategy: {retry_strategy}"
+                raise ValueError(msg)
 
     def decorate(
         self,
@@ -101,14 +121,15 @@ class Retryer(
         call_times: list[float] = []
         attempt_number = 0
 
+        retry_manager = AsyncRetrying(
+            stop=self._retry_stop,
+            wait=self._wait_strategy,
+            retry=self._retry_if,
+            reraise=True,
+        )
         try:
-            async for a in AsyncRetrying(
-                stop=stop_after_attempt(self._max_retries),
-                wait=self._get_wait_strategy(),
-                reraise=True,
-                retry=retry_if_exception_type(tuple(self._retryable_errors)),
-            ):
-                with a:
+            async for attempt in retry_manager:
+                with attempt:
                     attempt_number += 1
                     call_start = asyncio.get_event_loop().time()
                     try:
@@ -116,10 +137,17 @@ class Retryer(
                         result = await delegate(prompt, **kwargs)
                     except BaseException as error:
                         call_times.append(asyncio.get_event_loop().time() - call_start)
+                        #
+                        # Try Send a notification about a retryable error occurring.
+                        #
                         if isinstance(error, tuple(self._retryable_errors)):
                             await self._events.on_retryable_error(error, attempt_number)
                             if self._retryable_error_handler is not None:
                                 await self._retryable_error_handler(error)
+                        else:
+                            await self._events.on_non_retryable_error(
+                                error, attempt_number
+                            )
                         raise
                     else:
                         call_times.append(asyncio.get_event_loop().time() - call_start)
@@ -132,17 +160,3 @@ class Retryer(
                 raise RetriesExhaustedError(name, self._max_retries) from error
             raise
         raise RetriesExhaustedError(name, self._max_retries)
-
-    def _get_wait_strategy(self) -> Any:
-        match self._retry_strategy:
-            case RetryStrategy.EXPONENTIAL_BACKOFF | RetryStrategy.TENACITY:
-                return wait_exponential_jitter(max=self._max_retry_wait)
-            case RetryStrategy.INCREMENTAL_WAIT:
-                return wait_incrementing(
-                    max=self._max_retry_wait, increment=self._max_retry_wait / 10
-                )
-            case RetryStrategy.RANDOM_WAIT:
-                return wait_random(max=self._max_retry_wait)
-            case _:
-                msg = f"Invalid retry strategy: {self._retry_strategy}"
-                raise ValueError(msg)

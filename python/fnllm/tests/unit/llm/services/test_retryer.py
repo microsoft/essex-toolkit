@@ -49,18 +49,14 @@ async def test_retrying_llm_passthrough():
 
 
 async def test_retrying_native_strategy():
-    delegate = AsyncMock(return_value=LLMOutput(output="result"))
     events = Mock(spec=LLMEvents)
-    retryer = TestRetryer(
-        retryable_errors=[TestError],
-        events=events,
-        retry_strategy=RetryStrategy.NATIVE,
-        retryable_error_handler=None,
-    )
-    llm = retryer.decorate(delegate)
-
     with pytest.raises(ValueError):  # noqa PT011
-        await llm("prompt")
+        TestRetryer(
+            retryable_errors=[TestError],
+            events=events,
+            retry_strategy=RetryStrategy.NATIVE,
+            retryable_error_handler=None,
+        )
 
 
 async def test_retrying_llm_recovers():

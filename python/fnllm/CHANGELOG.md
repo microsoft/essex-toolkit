@@ -17,13 +17,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ```
 ## [Unreleased]
 ### Added
-- Add event, `LLMEvents.on_recover_from_error`
+- Add LLM Events:
+	- `on_recover_from_error`
+	- `on_non_retryable_error`
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
-- Unwind nested callable structure in `retryer`.
-- Don't decorate LLMs with a `retryer` with `RetryStrategy.NATIVE`.
+- Clean up internal `Retryer` logic.
+- Bypass `Retryer` decorator when `retry_strategy` is set to `None`.
 ### Security
 
 ## [0.1.2] - 2025-02-10
