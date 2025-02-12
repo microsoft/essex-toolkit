@@ -48,7 +48,7 @@ async def test_retrying_llm_passthrough():
     events.on_success.assert_called_once()
 
 
-async def test_retrying_native_strategy():
+def test_retrying_native_strategy():
     events = Mock(spec=LLMEvents)
     with pytest.raises(ValueError):  # noqa PT011
         TestRetryer(
