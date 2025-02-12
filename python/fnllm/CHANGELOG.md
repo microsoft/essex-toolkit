@@ -17,19 +17,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ```
 ## [Unreleased]
 ### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [0.2.0] - 2025-02-12
+### Added
 - Add LLM Events:
 	- `on_recover_from_error`
 	- `on_non_retryable_error`
 - Add `JsonMode.None` to disable JSON Mode, and avoid adding the JsonReceiver decorator.
 ### Changed
 - Don't decorate with RateLimiter if no throttles defined.
-### Deprecated
 ### Removed
+- Remove deprecate strategy RetryStrategy.TENACITY, use RetryStrategy.EXPONENTIAL_BACKOFF instead.
 ### Fixed
 - Clean up internal `Retryer` logic.
 - Bypass `Retryer` decorator when `retry_strategy` is set to `None`.
 * Make timeout required, and set to 180s by default to avoid network timeouts from hanging processes.
-### Security
 
 ## [0.1.2] - 2025-02-10
 ### Added
