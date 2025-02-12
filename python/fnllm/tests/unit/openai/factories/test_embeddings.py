@@ -43,6 +43,7 @@ def test_create_openai_embeddings_llm():
         deployment="deployment",
         model="my_models",
         embeddings_parameters={"user": "some_user"},
+        tokens_per_minute=1000,
     )
     mocked_cache = create_autospec(Cache, instance=True)
     mocked_events = create_autospec(LLMEvents, instance=True)
