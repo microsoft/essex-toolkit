@@ -76,20 +76,15 @@ class Retryer(
             num_retries = 0
             call_times = []
             start = asyncio.get_event_loop().time()
-
-            if self._retry_strategy == RetryStrategy.NATIVE:
-                result = await delegate(prompt, **kwargs)
-            else:
-                result, call_times, num_retries = await self._execute_with_retry(
-                    delegate, prompt, kwargs
-                )
+            result, call_times, num_retries = await self._execute_with_retry(
+                delegate, prompt, kwargs
+            )
             result.metrics.retry = LLMRetryMetrics(
                 total_time=asyncio.get_event_loop().time() - start,
                 num_retries=num_retries,
                 call_times=call_times,
             )
             await self._events.on_success(result.metrics)
-
             return result
 
         return invoke
