@@ -50,6 +50,7 @@ def test_create_openai_chat_llm():
         deployment="deployment",
         model="my_models",
         chat_parameters={"temperature": 0.5},
+        tokens_per_minute=1000,
     )
     mocked_cache = create_autospec(Cache, instance=True)
     mocked_events = create_autospec(LLMEvents, instance=True)
@@ -117,6 +118,7 @@ def test_invalid_encoding_should_raise():
         encoding="invalid",
         max_retries=2,
         max_retry_wait=15,
+        max_concurrency=2,
     )
 
     with pytest.raises(ValueError):  # noqa: PT011

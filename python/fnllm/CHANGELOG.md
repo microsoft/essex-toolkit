@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add `JsonMode.None` to disable JSON Mode, and avoid adding the JsonReceiver decorator.
 ### Changed
+- Don't decorate with RateLimiter if no throttles defined.
 ### Deprecated
 ### Removed
 ### Fixed

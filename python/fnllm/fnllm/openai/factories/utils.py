@@ -30,7 +30,7 @@ def _get_encoding(encoding_name: str) -> tiktoken.Encoding:
     return tiktoken.get_encoding(encoding_name)
 
 
-def create_limiter(config: OpenAIConfig) -> Limiter:
+def create_limiter(config: OpenAIConfig) -> Limiter | None:
     """Create an LLM limiter based on the incoming configuration."""
     limiters = []
 
@@ -47,16 +47,22 @@ def create_limiter(config: OpenAIConfig) -> Limiter:
     if config.tokens_per_minute:
         limiters.append(TPMLimiter.from_tpm(config.tokens_per_minute))
 
+    if len(limiters) == 0:
+        return None
+    if len(limiters) == 1:
+        return limiters[0]
     return CompositeLimiter(limiters)
 
 
 def create_rate_limiter(
     *,
-    limiter: Limiter,
+    limiter: Limiter | None,
     config: OpenAIConfig,
     events: LLMEvents,
-) -> RateLimiter[Any, Any, Any, Any]:
+) -> RateLimiter[Any, Any, Any, Any] | None:
     """Wraps the LLM to be rate limited."""
+    if limiter is None:
+        return None
     encoding = _get_encoding(config.encoding)
     token_estimator = OpenAITokenEstimator(encoding=encoding)
     return RateLimiter(
