@@ -128,9 +128,9 @@ class Retryer(
                         return result, call_times, attempt_number - 1
 
         except BaseException as error:
-            if not isinstance(error, tuple(self._retryable_errors)):
-                raise
-            raise RetriesExhaustedError(name, self._max_retries) from error
+            if isinstance(error, tuple(self._retryable_errors)):
+                raise RetriesExhaustedError(name, self._max_retries) from error
+            raise
         raise RetriesExhaustedError(name, self._max_retries)
 
     def _get_wait_strategy(self) -> Any:
