@@ -17,11 +17,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ```
 ## [Unreleased]
 ### Added
+- Add event, `LLMEvents.on_recover_from_error`
 ### Changed
 - Don't decorate with RateLimiter if no throttles defined.
 ### Deprecated
 ### Removed
 ### Fixed
+- Unwind nested callable structure in `retryer`.
+- Don't decorate LLMs with a `retryer` with `RetryStrategy.NATIVE`.
 ### Security
 
 ## [0.1.2] - 2025-02-10

@@ -12,6 +12,9 @@ from fnllm.events.base import LLMEvents
 from fnllm.types.io import LLMOutput
 
 
+class TestError(BaseException): ...
+
+
 class TestRetryer(Retryer):
     __test__ = False  # this is not a pytest class
 
@@ -49,31 +52,24 @@ async def test_retrying_native_strategy():
     delegate = AsyncMock(return_value=LLMOutput(output="result"))
     events = Mock(spec=LLMEvents)
     retryer = TestRetryer(
-        retryable_errors=[ValueError],
+        retryable_errors=[TestError],
         events=events,
         retry_strategy=RetryStrategy.NATIVE,
         retryable_error_handler=None,
     )
     llm = retryer.decorate(delegate)
 
-    response = await llm("prompt")
-
-    assert response.output == "result"
-    assert response.metrics.retry.num_retries == 0
-    assert len(response.metrics.retry.call_times) == 0
-    assert response.metrics.retry.total_time >= 0
-
-    events.on_try.assert_not_called()
-    events.on_success.assert_called_once()
+    with pytest.raises(ValueError):  # noqa PT011
+        await llm("prompt")
 
 
 async def test_retrying_llm_recovers():
     delegate = AsyncMock()
-    delegate.side_effect = [ValueError, LLMOutput(output="result")]
+    delegate.side_effect = [TestError, LLMOutput(output="result")]
 
     events = Mock(spec=LLMEvents)
     retryer = TestRetryer(
-        retryable_errors=[ValueError],
+        retryable_errors=[TestError],
         events=events,
         retry_strategy=RetryStrategy.EXPONENTIAL_BACKOFF,
         retryable_error_handler=None,
@@ -97,10 +93,10 @@ async def test_retrying_llm_raises_retries_exhausted():
     def delegate(*args, **kwargs):
         nonlocal num_calls
         num_calls += 1
-        raise ValueError
+        raise TestError
 
     retryer = TestRetryer(
-        retryable_errors=[ValueError],
+        retryable_errors=[TestError],
         max_retry_wait=0.1,
         max_retries=5,
         events=LLMEvents(),
@@ -116,8 +112,6 @@ async def test_retrying_llm_raises_retries_exhausted():
 
 
 async def test_retrying_llm_emits_error_if_not_retryable():
-    class TestError(BaseException): ...
-
     delegate = AsyncMock(side_effect=TestError)
     retryer = TestRetryer(
         retryable_errors=[],

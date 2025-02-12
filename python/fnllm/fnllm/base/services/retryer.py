@@ -76,22 +76,15 @@ class Retryer(
             num_retries = 0
             call_times = []
             start = asyncio.get_event_loop().time()
-
-            if self._retry_strategy == RetryStrategy.NATIVE:
-                result = await delegate(prompt, **kwargs)
-            else:
-                result, call_times, num_retries = await self._execute_with_retry(
-                    delegate, prompt, kwargs
-                )
-
-            end = asyncio.get_event_loop().time()
+            result, call_times, num_retries = await self._execute_with_retry(
+                delegate, prompt, kwargs
+            )
             result.metrics.retry = LLMRetryMetrics(
-                total_time=end - start,
+                total_time=asyncio.get_event_loop().time() - start,
                 num_retries=num_retries,
                 call_times=call_times,
             )
             await self._events.on_success(result.metrics)
-
             return result
 
         return invoke
@@ -108,23 +101,6 @@ class Retryer(
         call_times: list[float] = []
         attempt_number = 0
 
-        async def attempt() -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
-            nonlocal call_times
-            call_start = asyncio.get_event_loop().time()
-
-            try:
-                await self._events.on_try(attempt_number)
-                return await delegate(prompt, **kwargs)
-            except BaseException as error:
-                if isinstance(error, tuple(self._retryable_errors)):
-                    await self._events.on_retryable_error(error, attempt_number)
-                    if self._retryable_error_handler is not None:
-                        await self._retryable_error_handler(error)
-                raise
-            finally:
-                call_end = asyncio.get_event_loop().time()
-                call_times.append(call_end - call_start)
-
         try:
             async for a in AsyncRetrying(
                 stop=stop_after_attempt(self._max_retries),
@@ -134,12 +110,27 @@ class Retryer(
             ):
                 with a:
                     attempt_number += 1
-                    result = await attempt()
-                    return result, call_times, attempt_number - 1
-        except BaseException as error:
-            if not isinstance(error, tuple(self._retryable_errors)):
-                raise
+                    call_start = asyncio.get_event_loop().time()
+                    try:
+                        await self._events.on_try(attempt_number)
+                        result = await delegate(prompt, **kwargs)
+                    except BaseException as error:
+                        call_times.append(asyncio.get_event_loop().time() - call_start)
+                        if isinstance(error, tuple(self._retryable_errors)):
+                            await self._events.on_retryable_error(error, attempt_number)
+                            if self._retryable_error_handler is not None:
+                                await self._retryable_error_handler(error)
+                        raise
+                    else:
+                        call_times.append(asyncio.get_event_loop().time() - call_start)
+                        if attempt_number > 1:
+                            await self._events.on_recover_from_error(attempt_number)
+                        return result, call_times, attempt_number - 1
 
+        except BaseException as error:
+            if isinstance(error, tuple(self._retryable_errors)):
+                raise RetriesExhaustedError(name, self._max_retries) from error
+            raise
         raise RetriesExhaustedError(name, self._max_retries)
 
     def _get_wait_strategy(self) -> Any:
