@@ -11,12 +11,6 @@ from enum import Enum
 class RetryStrategy(str, Enum):
     """The retry strategy to use for the LLM service."""
 
-    TENACITY = "tenacity"
-    """Use the tenacity library for retries.
-    
-    @deprecated - Use RetryStrategy.EXPONENTIAL_BACKOFF instead.
-    """
-
     EXPONENTIAL_BACKOFF = "exponential_backoff"
     """Use exponential backoff for retries (e.g. exponential factor + randomized max_wait)."""
 
