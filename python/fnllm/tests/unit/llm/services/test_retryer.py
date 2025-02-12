@@ -59,7 +59,7 @@ async def test_retrying_native_strategy():
     )
     llm = retryer.decorate(delegate)
 
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError):  # noqa PT011
         await llm("prompt")
 
 
