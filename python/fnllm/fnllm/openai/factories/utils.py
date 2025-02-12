@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING, Any
 
 import tiktoken
 
+from fnllm.base.config.retry_strategy import RetryStrategy
 from fnllm.base.services.rate_limiter import RateLimiter
 from fnllm.base.services.retryer import Retryer
 from fnllm.limiting.composite import CompositeLimiter
@@ -77,8 +78,10 @@ def create_retryer(
     config: OpenAIConfig,
     operation: str,
     events: LLMEvents,
-) -> Retryer[Any, Any, Any, Any]:
+) -> Retryer[Any, Any, Any, Any] | None:
     """Wraps the LLM with retry logic."""
+    if config.retry_strategy is RetryStrategy.NATIVE:
+        return None
     handler = None
     if config.sleep_on_rate_limit_recommendation:
         handler = OpenAIRetryableErrorHandler()

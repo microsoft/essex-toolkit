@@ -17,12 +17,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ```
 ## [Unreleased]
 ### Added
+- Add LLM Events:
+	- `on_recover_from_error`
+	- `on_non_retryable_error`
 - Add `JsonMode.None` to disable JSON Mode, and avoid adding the JsonReceiver decorator.
 ### Changed
 - Don't decorate with RateLimiter if no throttles defined.
 ### Deprecated
 ### Removed
 ### Fixed
+- Clean up internal `Retryer` logic.
+- Bypass `Retryer` decorator when `retry_strategy` is set to `None`.
+* Make timeout required, and set to 180s by default to avoid network timeouts from hanging processes.
 ### Security
 
 ## [0.1.2] - 2025-02-10
@@ -37,7 +43,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 * Fix issue with TPM Limiter where requests with tokens > tokens_per_minute limit would automatically fail.
-* Make timeout required, and set to 180s by default to avoid network timeouts from hanging processes.
 
 ## [0.1.1] - 2025-02-07
 ### Added
