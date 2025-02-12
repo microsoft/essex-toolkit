@@ -239,6 +239,7 @@ async def test_chat_on_post_limit_event(
         api_version="api_version",
         endpoint="endpoint",
         model="my_model",
+        tokens_per_minute=100,
     )
     mocked_events = Mock(LLMEvents)
 

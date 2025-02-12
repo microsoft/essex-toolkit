@@ -87,7 +87,7 @@ def test_create_retrying_llm():
     assert llm._max_retries == config.max_retries
 
 
-def _assert_concurrency_tpm_rpm(limiter: Limiter, config: OpenAIConfig) -> None:
+def _assert_concurrency_tpm_rpm(limiter: Limiter | None, config: OpenAIConfig) -> None:
     assert isinstance(limiter, CompositeLimiter)
 
     # ConcurrencyLimiter

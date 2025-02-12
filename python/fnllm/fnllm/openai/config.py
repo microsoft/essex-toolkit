@@ -27,7 +27,7 @@ class CommonOpenAIConfig(Config, frozen=True, extra="allow", protected_namespace
         default=None, description="The OpenAI organization."
     )
 
-    timeout: float | None = Field(default=None, description="The request timeout.")
+    timeout: float = Field(default=180.0, description="The request timeout (s).")
 
     model: str = Field(default="", description="The OpenAI model to use.")
 
