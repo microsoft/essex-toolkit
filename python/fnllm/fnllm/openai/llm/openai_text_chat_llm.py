@@ -160,10 +160,8 @@ class OpenAITextChatLLMImpl(
 
         if not bypass_cache and self._cache is not None:
             key = self._get_cache_key(prompt, kwargs)
-            await self._cache.set(
-                key,
-                completion.model_dump(),
-                {"input": {"messages": messages, "parameters": parameters}},
+            await self._cache_write(
+                key, completion, {"input": messages, "parameters": parameters}
             )
         return OpenAIChatOutput(
             raw_input=prompt_message,
@@ -185,20 +183,47 @@ class OpenAITextChatLLMImpl(
         history = kwargs.get("history", [])
         _, prompt_message = build_chat_messages(prompt, history)
         key = self._get_cache_key(prompt, kwargs)
-
-        cached_value = await self._cache.get(key)
-        if cached_value is None:
-            await self._events.on_cache_miss(key, name)
+        try:
+            entry = await self._cache_read(key, name)
+            if entry is None:
+                return None
+            return OpenAIChatOutput(
+                raw_input=prompt_message,
+                raw_output=entry.choices[0].message,
+                content=entry.choices[0].message.content,
+                usage=LLMUsageMetrics(),
+            )
+        except BaseException as e:  # noqa BLE001
+            await self._events.on_cache_read_error(key, kwargs.get("name"), e)
             return None
 
-        entry = OpenAIChatCompletionModel.model_validate(cached_value)
-        await self._events.on_cache_hit(key, name)
-        return OpenAIChatOutput(
-            raw_input=prompt_message,
-            raw_output=entry.choices[0].message,
-            content=entry.choices[0].message.content,
-            usage=LLMUsageMetrics(),
-        )
+    async def _cache_read(
+        self, key: str, name: str | None
+    ) -> OpenAIChatCompletionModel | None:
+        if self._cache is None:
+            return None
+        try:
+            cached_value = await self._cache.get(key)
+            if cached_value is None:
+                await self._events.on_cache_miss(key, name)
+                return None
+            entry = OpenAIChatCompletionModel.model_validate(cached_value)
+        except BaseException as e:  # noqa BLE001
+            await self._events.on_cache_read_error(key, name, e)
+            return None
+        else:
+            await self._events.on_cache_hit(key, name)
+            return entry
+
+    async def _cache_write(
+        self, key: str, entry: OpenAIChatCompletionModel, data: dict[str, Any]
+    ) -> None:
+        if self._cache is None:
+            return
+        try:
+            await self._cache.set(key, entry, data)
+        except BaseException as e:  # noqa BLE001
+            await self._events.on_cache_write_error(key, entry, e)
 
     def _get_cache_key(
         self,

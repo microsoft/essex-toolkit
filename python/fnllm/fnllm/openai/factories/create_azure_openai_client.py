@@ -3,7 +3,7 @@
 """Create OpenAI client instance."""
 
 from azure.core.credentials import TokenProvider
-from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+from azure.identity import DefaultAzureCredential
 from openai import AsyncAzureOpenAI
 from openai.lib.azure import AsyncAzureADTokenProvider
 
@@ -38,4 +38,4 @@ def _get_azure_ad_token_provider(
         return None
 
     credential = credential or DefaultAzureCredential()
-    return get_bearer_token_provider(credential, config.audience)
+    return get_bearer_ttoken_provider(credential, config.audience)

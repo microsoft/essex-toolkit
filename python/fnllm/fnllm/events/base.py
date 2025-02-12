@@ -62,3 +62,13 @@ class LLMEvents:
 
     async def on_recover_from_error(self, attempt_number: int) -> None:
         """Called when the LLM recovers from an error."""
+
+    async def on_cache_read_error(
+        self, cache_key: str, name: str | None, error: BaseException
+    ) -> None:
+        """Called when there is an error reading from the cache."""
+
+    async def on_cache_write_error(
+        self, cache_key: str, entry: Any, error: BaseException
+    ) -> None:
+        """Called when there is an error writing to the cache."""

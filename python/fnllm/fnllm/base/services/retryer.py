@@ -120,6 +120,10 @@ class Retryer(
                             await self._events.on_retryable_error(error, attempt_number)
                             if self._retryable_error_handler is not None:
                                 await self._retryable_error_handler(error)
+                        else:
+                            await self._events.on_non_retryable_error(
+                                error, attempt_number
+                            )
                         raise
                     else:
                         call_times.append(asyncio.get_event_loop().time() - call_start)

@@ -109,8 +109,32 @@ class LLMEventsLogger(LLMEvents):
             "retryable error happened on attempt #%d: %s", attempt_number, str(error)
         )
 
+    async def on_non_retryable_error(
+        self, error: BaseException, attempt_number: int
+    ) -> None:
+        """Called when retryable errors happen."""
+        self._logger.warning(
+            "non-retryable error happened on attempt #%d: %s",
+            attempt_number,
+            str(error),
+        )
+
     async def on_recover_from_error(self, attempt_number: int) -> None:
         """Called when the LLM recovers from an error."""
         self._logger.warning(
             "recovered from retryable error on attempt #%d", attempt_number
+        )
+
+    async def on_cache_read_error(
+        self, cache_key: str, name: str | None, error: BaseException
+    ) -> None:
+        """Called when there is an error reading from the cache."""
+        self._logger.warning("cache read error %s, %s", cache_key, error)
+
+    async def on_cache_write_error(
+        self, cache_key: str, entry: Any, error: BaseException
+    ) -> None:
+        """Called when there is an error writing to the cache."""
+        self._logger.warning(
+            "cache write error %s on entry %s; %s", cache_key, entry, error
         )
