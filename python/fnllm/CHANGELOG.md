@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ```
 ## [Unreleased]
 ### Added
+- Add `JsonMode.None` to disable JSON Mode, and avoid adding the JsonReceiver decorator.
 ### Changed
 ### Deprecated
 ### Removed
