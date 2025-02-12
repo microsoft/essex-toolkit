@@ -47,7 +47,7 @@ def create_limiter(config: OpenAIConfig) -> Limiter | None:
     if config.tokens_per_minute:
         limiters.append(TPMLimiter.from_tpm(config.tokens_per_minute))
 
-    if len(limiters == 0):
+    if len(limiters) == 0:
         return None
     if len(limiters) == 1:
         return limiters[0]
