@@ -26,15 +26,20 @@ if TYPE_CHECKING:
 def create_json_handler(
     strategy: JsonStrategy,
     max_retries: int,
-) -> JsonReceiver[
-    OpenAIChatCompletionInput,
-    OpenAIChatOutput,
-    OpenAIChatHistoryEntry,
-    OpenAIChatParameters,
-]:
+) -> (
+    JsonReceiver[
+        OpenAIChatCompletionInput,
+        OpenAIChatOutput,
+        OpenAIChatHistoryEntry,
+        OpenAIChatParameters,
+    ]
+    | None
+):
     """Create a JSON handler for OpenAI."""
     marshaler = OpenAIJsonMarshaler()
     match strategy:
+        case JsonStrategy.NONE:
+            return None
         case JsonStrategy.LOOSE:
             return LooseModeJsonReceiver(marshaler, max_retries)
         case JsonStrategy.VALID:
