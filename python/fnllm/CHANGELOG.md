@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 * Fix issue with TPM Limiter where requests with tokens > tokens_per_minute limit would automatically fail.
+* Make timeout required, and set to 180s by default to avoid network timeouts from hanging processes.
 
 ## [0.1.1] - 2025-02-07
 ### Added
