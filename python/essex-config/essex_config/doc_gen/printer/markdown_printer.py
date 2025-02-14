@@ -1,7 +1,8 @@
 """Printer to print the configuration using rich."""
 
 from pathlib import Path
-from typing import cast
+from types import UnionType
+from typing import Union, cast, get_args, get_origin
 
 from pydantic import BaseModel
 from pydantic_core import PydanticUndefined
@@ -36,6 +37,7 @@ class MarkdownConfigurationPrinter(ConfigurationPrinter):
 
         for name, info in config_class.model_fields.items():
             default = info.default if info.default is not PydanticUndefined else ""
+            default = str(default).replace("\n", "<br>")
             field_type = cast(type, info.annotation)
             source_alias: str = "<br>".join([
                 f"{metadata.source.__name__}: {metadata.alias}"
@@ -74,7 +76,14 @@ class MarkdownConfigurationPrinter(ConfigurationPrinter):
                 params += subclass_line
                 continue
 
-            params += f"|{name}: {info.annotation.__name__ if info.annotation is not None else 'Any'}|{info.description if info.description is not None else ''}|{source_alias}|{prefix}|{info.is_required()!s}|{default!s}|\n"
+            origin = get_origin(field_type)
+            if origin is Union or origin is UnionType:
+                types = [field_type.__name__ for field_type in get_args(field_type)]
+            else:
+                types = [
+                    info.annotation.__name__ if info.annotation is not None else "Any"
+                ]
+            params += f"|{name}: {','.join(types)}|{info.description if info.description is not None else ''}|{source_alias}|{prefix}|{info.is_required()!s}|{default!s}|\n"
 
         title = config_class.__name__ if override_name == "" else override_name
 

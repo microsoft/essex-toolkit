@@ -8,6 +8,7 @@ from pydantic import BaseModel
 def test_basic_config():
     class BasicConfiguration(BaseModel):
         hello: str
+        world: str | int
 
     printer = MarkdownConfigurationPrinter(Path("test.md"))
 
@@ -19,7 +20,8 @@ def test_basic_config():
             "## Parameters:\n\n"
             "|Name|Description|Alias|Prefix|Required?|Default|\n"
             "|---|---|---|---|---|---|\n"
-            "|hello: str||||True||\n\n"
+            "|hello: str||||True||\n"
+            "|world: str,int||||True||\n\n"
         )
 
 
