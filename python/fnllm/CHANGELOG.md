@@ -23,6 +23,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [0.2.1] - 2025-02-14
+### Fixed
+- Fixed token estimation.
+### Added
+- Added support to `is_reasoning_model` to the base `LLM`, supporting o1, o1-mini and o3-mini.
+
 ## [0.2.0] - 2025-02-12
 ### Added
 - Add LLM Events:

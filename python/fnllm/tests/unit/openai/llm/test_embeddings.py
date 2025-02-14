@@ -169,3 +169,23 @@ async def test_embeddings_llm_with_cache(
     )
     expected_output = embeddings_client_mock.expected_output_for_prompt("Other prompt")
     mocked_events.on_cache_miss.assert_called_once_with(ANY, name)
+
+
+def test_is_reasoning_model():
+    llm = OpenAIEmbeddingsLLMImpl(
+        client=Mock(),
+        cache=None,
+        model="O3-MINI",
+    )
+
+    assert llm.is_reasoning_model()
+
+
+def test_is_not_reasoning_model():
+    llm = OpenAIEmbeddingsLLMImpl(
+        client=Mock(),
+        cache=None,
+        model="other-model",
+    )
+
+    assert not llm.is_reasoning_model()

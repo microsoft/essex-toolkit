@@ -29,3 +29,7 @@ class LLM(Protocol, Generic[TInput, TOutput, THistoryEntry, TModelParameters]):
     def child(self, name: str) -> Any:
         """Create a child LLM (with child cache)."""
         ...
+
+    def is_reasoning_model(self) -> bool:
+        """Return whether the LLM uses a reasoning model."""
+        ...

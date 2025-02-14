@@ -24,7 +24,7 @@ from fnllm.openai.types.chat.io import (
     OpenAIChatOutput,
 )
 from fnllm.openai.types.chat.parameters import OpenAIChatParameters
-from fnllm.openai.utils import build_chat_messages
+from fnllm.openai.utils import build_chat_messages, is_reasoning_model
 from fnllm.types.metrics import LLMUsageMetrics
 
 if TYPE_CHECKING:
@@ -122,6 +122,10 @@ class OpenAITextChatLLMImpl(
             model_parameters=self._global_model_parameters,
             json_strategy=self._json_strategy,
         )
+
+    def is_reasoning_model(self) -> bool:
+        """Return whether the LLM uses a reasoning model."""
+        return is_reasoning_model(self._model)
 
     def _build_completion_parameters(
         self, local_parameters: OpenAIChatParameters | None

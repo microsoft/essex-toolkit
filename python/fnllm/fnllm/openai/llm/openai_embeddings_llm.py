@@ -16,6 +16,7 @@ from fnllm.openai.types.embeddings.io import (
     OpenAIEmbeddingsOutput,
 )
 from fnllm.openai.types.embeddings.parameters import OpenAIEmbeddingsParameters
+from fnllm.openai.utils import is_reasoning_model
 from fnllm.types.metrics import LLMUsageMetrics
 
 if TYPE_CHECKING:
@@ -91,6 +92,10 @@ class OpenAIEmbeddingsLLMImpl(
             model_parameters=self._global_model_parameters,
             events=self._events,
         )
+
+    def is_reasoning_model(self) -> bool:
+        """Return whether the LLM uses a reasoning model."""
+        return is_reasoning_model(self._model)
 
     def _build_embeddings_parameters(
         self, local_parameters: OpenAIEmbeddingsParameters | None
