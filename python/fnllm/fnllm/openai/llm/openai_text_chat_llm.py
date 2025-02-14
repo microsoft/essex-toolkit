@@ -123,7 +123,7 @@ class OpenAITextChatLLMImpl(
             json_strategy=self._json_strategy,
         )
 
-    def has_reasoning_model(self) -> bool:
+    def is_reasoning_model(self) -> bool:
         """Return whether the LLM uses a reasoning model."""
         return is_reasoning_model(self._model)
 

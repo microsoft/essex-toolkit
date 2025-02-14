@@ -90,6 +90,11 @@ class BaseLLM(
             json_receiver=self._json_receiver,
         )
 
+    @abstractmethod
+    def is_reasoning_model(self) -> bool:
+        """Return whether the LLM uses a reasoning model."""
+        ...
+
     @property
     def events(self) -> LLMEvents:
         """Registered LLM events handler."""

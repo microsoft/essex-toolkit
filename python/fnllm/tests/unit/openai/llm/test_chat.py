@@ -300,7 +300,7 @@ async def test_chat_on_success_event(
     mocked_events.on_success.assert_called_once()
 
 
-def test_has_reasoning_model(
+def test_is_reasoning_model(
     chat_completion_client_mock: OpenAIChatCompletionClientMock,
 ):
     config = AzureOpenAIConfig(
@@ -324,10 +324,10 @@ def test_has_reasoning_model(
         ),
     )
 
-    assert llm.has_reasoning_model()
+    assert llm.is_reasoning_model()
 
 
-def test_has_not_reasoning_model(
+def test_is_not_reasoning_model(
     chat_completion_client_mock: OpenAIChatCompletionClientMock,
 ):
     config = AzureOpenAIConfig(
@@ -351,4 +351,4 @@ def test_has_not_reasoning_model(
         ),
     )
 
-    assert not llm.has_reasoning_model()
+    assert not llm.is_reasoning_model()

@@ -45,11 +45,11 @@ class OpenAIChatLLMImpl(OpenAIChatLLM):
             streaming_chat_llm=self._streaming_chat_llm.child(name),
         )
 
-    def has_reasoning_model(self) -> bool:
+    def is_reasoning_model(self) -> bool:
         """Return whether the LLM uses a reasoning model."""
         return (
-            self._text_chat_llm.has_reasoning_model()
-            and self._streaming_chat_llm.has_reasoning_model()
+            self._text_chat_llm.is_reasoning_model()
+            and self._streaming_chat_llm.is_reasoning_model()
         )
 
     @overload

@@ -45,6 +45,9 @@ class TestLLM(BaseLLM):
     def _execute_llm(self, prompt: Any, kwargs: Any) -> Any:
         self._on_execute(prompt, **kwargs)
 
+    def is_reasoning_model(self) -> bool:
+        return False
+
 
 class TestMarshaler(JsonMarshaler):
     def inject_json_string(

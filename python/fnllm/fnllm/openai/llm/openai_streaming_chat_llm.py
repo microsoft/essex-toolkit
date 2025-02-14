@@ -86,7 +86,7 @@ class OpenAIStreamingChatLLMImpl(
         """Create a child LLM."""
         return self
 
-    def has_reasoning_model(self) -> bool:
+    def is_reasoning_model(self) -> bool:
         """Return whether the LLM uses a reasoning model."""
         return is_reasoning_model(self._model)
 
