@@ -31,4 +31,7 @@ class OpenAITokenEstimator(Generic[TInput]):
         history = kwargs.get("history", [])
         tools = llm_tools_to_param(kwargs.get("tools", []))
 
-        return sum(len(json.dumps(entry)) for entry in (*history, *tools, prompt))
+        return sum(
+            len(self._encoding.encode(json.dumps(entry)))
+            for entry in (*history, *tools, prompt)
+        )

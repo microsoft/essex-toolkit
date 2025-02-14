@@ -18,7 +18,8 @@ class TestTool(LLMTool):
 
 
 def test_estimate_request_tokens():
-    rl = OpenAITokenEstimator(encoding=tiktoken.get_encoding("cl100k_base"))
+    encoding = tiktoken.get_encoding("cl100k_base")
+    rl = OpenAITokenEstimator(encoding=encoding)
     prompt = "test"
 
     estimate = rl(prompt, {})
@@ -33,3 +34,6 @@ def test_estimate_request_tokens():
         prompt, {"history": [OpenAIChatRole.System.message("system message")]}
     )
     assert estimate_with_history > estimate
+
+    big_prompt = "token " * 1000
+    assert abs(rl(big_prompt, {}) - len(encoding.encode(big_prompt))) < 10
