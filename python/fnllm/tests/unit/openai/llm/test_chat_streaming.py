@@ -153,7 +153,7 @@ async def test_streaming_chat_llm_close(
     assert streamed == ["Hello", "there"]
 
 
-def test_his_reasoning_model(
+def test_is_reasoning_model(
     chat_completion_streaming_client_mock: OpenAIChatCompletionStreamingClientMock,
 ):
     config = AzureOpenAIConfig(
@@ -176,7 +176,7 @@ def test_his_reasoning_model(
     )
 
     # check reasoning model
-    assert llm.his_reasoning_model()
+    assert llm.is_reasoning_model()
 
 
 def test_is_not_reasoning_model(
@@ -202,4 +202,4 @@ def test_is_not_reasoning_model(
     )
 
     # check reasoning model
-    assert not llm.his_reasoning_model()
+    assert not llm.is_reasoning_model()
