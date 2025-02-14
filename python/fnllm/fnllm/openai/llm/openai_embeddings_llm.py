@@ -39,7 +39,13 @@ class OpenAIEmbeddingsLLMImpl(
         client: OpenAIClient,
         model: str,
         *,
-        cached: Cached | None = None,
+        cached: Cached[
+            OpenAIEmbeddingsInput,
+            OpenAIEmbeddingsOutput,
+            None,
+            OpenAIEmbeddingsParameters,
+        ]
+        | None = None,
         usage_extractor: OpenAIUsageExtractor[OpenAIEmbeddingsOutput] | None = None,
         variable_injector: VariableInjector | None = None,
         rate_limiter: RateLimiter[
