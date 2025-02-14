@@ -173,7 +173,6 @@ async def test_embeddings_llm_with_cache(
 def test_is_reasoning_model():
     llm = OpenAIEmbeddingsLLMImpl(
         client=Mock(),
-        cache=None,
         model="O3-MINI",
     )
 
@@ -183,7 +182,6 @@ def test_is_reasoning_model():
 def test_is_not_reasoning_model():
     llm = OpenAIEmbeddingsLLMImpl(
         client=Mock(),
-        cache=None,
         model="other-model",
     )
 
