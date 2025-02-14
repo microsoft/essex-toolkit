@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ```md
 ## [Unreleased]
 ### Added
+- Adding `max_completion_tokens` to `OpenAIChatParameters`.
 ### Changed
 ### Deprecated
 ### Removed

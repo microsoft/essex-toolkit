@@ -38,6 +38,8 @@ class OpenAIChatParameters(TypedDict):
 
     max_tokens: NotRequired[int | None]
 
+    max_completion_tokens: NotRequired[int | None]
+
     n: NotRequired[int | None]
 
     parallel_tool_calls: NotRequired[bool]
