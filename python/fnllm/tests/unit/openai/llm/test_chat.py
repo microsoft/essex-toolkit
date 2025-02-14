@@ -29,6 +29,7 @@ def test_open_ai_chat_output_str():
             content="some content",
             role="assistant",
         ),
+        raw_model=Mock(),
         content="some content",
         usage=None,
     )

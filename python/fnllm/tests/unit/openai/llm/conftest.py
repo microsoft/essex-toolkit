@@ -3,12 +3,12 @@
 """Utility to mock chat completion client responses."""
 
 from collections.abc import AsyncIterator
-from unittest.mock import AsyncMock
+from unittest.mock import AsyncMock, Mock
 
 import pytest
+from fnllm.openai.types import OpenAIChatCompletionModel
 from fnllm.openai.types.aliases import (
     OpenAIChatCompletionMessageModel,
-    OpenAIChatCompletionModel,
     OpenAIChatCompletionUserMessageParam,
     OpenAIChoiceModel,
     OpenAICompletionUsageModel,
@@ -113,6 +113,7 @@ class OpenAIChatCompletionClientMock:
             raw_input=OpenAIChatCompletionUserMessageParam(content=prompt, role="user")
             if prompt is not None
             else None,
+            raw_model=Mock(),
             raw_output=self.expected_message,
             content=self.expected_message.content,
             usage=self.expected_usage,
@@ -263,6 +264,7 @@ class OpenAIEmbeddingsClientMock:
         return OpenAIEmbeddingsOutput(
             raw_input=prompt,
             raw_output=self.expected_data,
+            raw_model=Mock(),
             embeddings=[d.embedding for d in self.expected_data],
             usage=self.expected_usage,
         )

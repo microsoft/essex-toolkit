@@ -3,7 +3,7 @@
 """Tests for openai.llm.features.json_parsing."""
 
 import json
-from unittest.mock import AsyncMock
+from unittest.mock import AsyncMock, Mock
 
 import pytest
 from fnllm.base.config.json_strategy import JsonStrategy
@@ -23,6 +23,7 @@ def mock_output(response: str) -> OpenAIChatOutput:
     return OpenAIChatOutput(
         content=response,
         raw_input=None,
+        raw_model=Mock(),
         raw_output=ChatCompletionMessage(content=response, role="assistant"),
         usage=None,
     )

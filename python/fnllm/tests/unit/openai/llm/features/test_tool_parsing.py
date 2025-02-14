@@ -3,7 +3,7 @@
 """Tests for openai.llm.features.tool_parsing."""
 
 import json
-from unittest.mock import AsyncMock
+from unittest.mock import AsyncMock, Mock
 
 import pytest
 from fnllm.openai.services.openai_tools_parsing import OpenAIParseToolsLLM
@@ -54,6 +54,7 @@ async def test_tools_are_parsed():
     tools = [ToolA, ToolB]
     expected_output = OpenAIChatOutput(
         raw_input=None,
+        raw_model=Mock(),
         raw_output=OpenAIChatCompletionMessageModel(
             content="content",
             role="assistant",
@@ -154,6 +155,7 @@ async def test_tools_are_parsed():
 async def test_no_tools_given():
     expected_output = OpenAIChatOutput(
         raw_input=None,
+        raw_model=Mock(),
         raw_output=OpenAIChatCompletionMessageModel(
             content="content",
             role="assistant",
@@ -184,6 +186,7 @@ async def test_invalid_tool_arguments_should_raise():
     tools = [ToolA, ToolB]
     expected_output = OpenAIChatOutput(
         raw_input=None,
+        raw_model=Mock(),
         raw_output=OpenAIChatCompletionMessageModel(
             content="content",
             role="assistant",
@@ -223,6 +226,7 @@ async def test_invalid_tool_arguments_should_raise():
 async def test_tool_not_found_should_raise():
     expected_output = OpenAIChatOutput(
         raw_input=None,
+        raw_model=Mock(),
         raw_output=OpenAIChatCompletionMessageModel(
             content="content",
             role="assistant",

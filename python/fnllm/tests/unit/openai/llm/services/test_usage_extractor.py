@@ -2,6 +2,8 @@
 
 """Tests for openai.llm.features.chat_usage_metrics_parsing."""
 
+from unittest.mock import Mock
+
 from fnllm.openai.services.openai_usage_extractor import (
     OpenAIUsageExtractor,
 )
@@ -13,6 +15,7 @@ from fnllm.types.metrics import LLMUsageMetrics
 def test_metrics_are_included():
     response = OpenAIChatOutput(
         raw_input=None,
+        raw_model=Mock(),
         raw_output=OpenAIChatCompletionMessageModel(
             content="content", role="assistant"
         ),
@@ -31,6 +34,7 @@ def test_metrics_are_included():
 def test_metrics_are_not_included():
     response = OpenAIChatOutput(
         raw_input=None,
+        raw_model=Mock(),
         raw_output=OpenAIChatCompletionMessageModel(
             content="content", role="assistant"
         ),
