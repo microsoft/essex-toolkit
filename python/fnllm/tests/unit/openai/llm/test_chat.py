@@ -298,3 +298,57 @@ async def test_chat_on_success_event(
 
     # should be called once at the end
     mocked_events.on_success.assert_called_once()
+
+
+def test_has_reasoning_model(
+    chat_completion_client_mock: OpenAIChatCompletionClientMock,
+):
+    config = AzureOpenAIConfig(
+        api_version="api_version",
+        endpoint="endpoint",
+        model="o3-mini",
+        chat_parameters={"temperature": 0.5, "seed": 321},
+    )
+
+    # create llm instance with mocked client
+    llm = create_openai_chat_llm(
+        config=config,
+        client=chat_completion_client_mock.mock_response(
+            message=OpenAIChatCompletionMessageModel(
+                content="Hello! How can I help?", role="assistant"
+            ),
+            usage=OpenAICompletionUsageModel(
+                completion_tokens=10, prompt_tokens=20, total_tokens=30
+            ),
+            model=config.model,
+        ),
+    )
+
+    assert llm.has_reasoning_model()
+
+
+def test_has_not_reasoning_model(
+    chat_completion_client_mock: OpenAIChatCompletionClientMock,
+):
+    config = AzureOpenAIConfig(
+        api_version="api_version",
+        endpoint="endpoint",
+        model="model",
+        chat_parameters={"temperature": 0.5, "seed": 321},
+    )
+
+    # create llm instance with mocked client
+    llm = create_openai_chat_llm(
+        config=config,
+        client=chat_completion_client_mock.mock_response(
+            message=OpenAIChatCompletionMessageModel(
+                content="Hello! How can I help?", role="assistant"
+            ),
+            usage=OpenAICompletionUsageModel(
+                completion_tokens=10, prompt_tokens=20, total_tokens=30
+            ),
+            model=config.model,
+        ),
+    )
+
+    assert not llm.has_reasoning_model()

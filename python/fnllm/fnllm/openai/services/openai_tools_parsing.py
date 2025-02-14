@@ -57,6 +57,10 @@ class OpenAIParseToolsLLM(
         """Create a child LLM (with child cache)."""
         return OpenAIParseToolsLLM(self._delegate.child(name))
 
+    def has_reasoning_model(self) -> bool:
+        """Return whether the LLM uses a reasoning model."""
+        return self._delegate.has_reasoning_model()
+
     def _add_tools_to_parameters(
         self,
         parameters: LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters],

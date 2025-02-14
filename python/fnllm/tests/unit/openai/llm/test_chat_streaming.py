@@ -151,3 +151,55 @@ async def test_streaming_chat_llm_close(
         streamed.append(chunk)
 
     assert streamed == ["Hello", "there"]
+
+
+def test_has_reasoning_model(
+    chat_completion_streaming_client_mock: OpenAIChatCompletionStreamingClientMock,
+):
+    config = AzureOpenAIConfig(
+        api_version="api_version",
+        endpoint="endpoint",
+        model="o1",
+        chat_parameters={"temperature": 0.5, "seed": 321},
+    )
+
+    # create llm instance with mocked client
+    llm = create_openai_chat_llm(
+        config=config,
+        client=chat_completion_streaming_client_mock.mock_response(
+            message=["Hello", ", how can I help?"],
+            usage=OpenAICompletionUsageModel(
+                completion_tokens=10, prompt_tokens=20, total_tokens=30
+            ),
+            model=config.model,
+        ),
+    )
+
+    # check reasoning model
+    assert llm.has_reasoning_model()
+
+
+def test_has_not_reasoning_model(
+    chat_completion_streaming_client_mock: OpenAIChatCompletionStreamingClientMock,
+):
+    config = AzureOpenAIConfig(
+        api_version="api_version",
+        endpoint="endpoint",
+        model="other-model",
+        chat_parameters={"temperature": 0.5, "seed": 321},
+    )
+
+    # create llm instance with mocked client
+    llm = create_openai_chat_llm(
+        config=config,
+        client=chat_completion_streaming_client_mock.mock_response(
+            message=["Hello", ", how can I help?"],
+            usage=OpenAICompletionUsageModel(
+                completion_tokens=10, prompt_tokens=20, total_tokens=30
+            ),
+            model=config.model,
+        ),
+    )
+
+    # check reasoning model
+    assert not llm.has_reasoning_model()

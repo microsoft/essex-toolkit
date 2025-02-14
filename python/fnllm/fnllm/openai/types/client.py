@@ -87,3 +87,7 @@ class OpenAIChatLLM(Protocol):
     def child(self, name: str) -> OpenAIChatLLM:
         """Create a child LLM."""
         ...
+
+    def has_reasoning_model(self) -> bool:
+        """Return whether the LLM uses a reasoning model."""
+        ...
