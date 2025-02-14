@@ -5,11 +5,11 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-from fnllm.base.services.cached import CacheKeyBuilder
-from fnllm.openai.types.chat.io import (
-    OpenAIChatCompletionInput,
-)
+from fnllm.base.services.cached import CacheAdapter
+from fnllm.openai.types import OpenAIChatCompletionModel
+from fnllm.openai.types.chat.io import OpenAIChatCompletionInput, OpenAIChatOutput
 from fnllm.openai.utils import build_chat_messages
+from fnllm.types.metrics import LLMUsageMetrics
 
 if TYPE_CHECKING:
     from fnllm.caching import Cache
@@ -17,7 +17,9 @@ if TYPE_CHECKING:
     from fnllm.types.io import LLMInput
 
 
-class OpenAITextChatCacheKeyBuilder(CacheKeyBuilder[OpenAIChatCompletionInput]):
+class OpenAITextChatCacheAdapter(
+    CacheAdapter[OpenAIChatCompletionInput, OpenAIChatOutput]
+):
     """Cache key builder for OpenAI text chat LLM."""
 
     def __init__(
@@ -61,3 +63,25 @@ class OpenAITextChatCacheKeyBuilder(CacheKeyBuilder[OpenAIChatCompletionInput]):
         }
 
         return params
+
+    def wrap_output(
+        self,
+        prompt: OpenAIChatCompletionInput,
+        kwargs: LLMInput[Any, Any, Any],
+        cached_result: dict[str, Any],
+    ) -> OpenAIChatOutput:
+        """Get the model to validate the cached result."""
+        history = kwargs.get("history", [])
+        _, prompt_message = build_chat_messages(prompt, history)
+        entry = OpenAIChatCompletionModel.model_validate(cached_result)
+        return OpenAIChatOutput(
+            raw_input=prompt_message,
+            raw_output=entry.choices[0].message,
+            content=entry.choices[0].message.content,
+            raw_model=entry,
+            usage=LLMUsageMetrics(),
+        )
+
+    def dump_raw_model(self, output: OpenAIChatOutput) -> dict[str, Any]:
+        """Get the model to validate the cached result."""
+        return OpenAIChatCompletionModel.model_dump(output.raw_model)

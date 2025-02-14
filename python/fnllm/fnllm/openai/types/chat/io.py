@@ -7,6 +7,7 @@ from typing import ClassVar, TypeAlias
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from fnllm.openai.types import OpenAIChatCompletionModel
 from fnllm.openai.types.aliases import (
     OpenAIChatCompletionMessageModel,
     OpenAIChatCompletionMessageParam,
@@ -35,6 +36,8 @@ class OpenAIChatOutput(ChatLLMOutput):
 
     usage: LLMUsageMetrics | None
     """Usage statistics for the completion request."""
+
+    raw_model: OpenAIChatCompletionModel
 
 
 class OpenAIStreamingChatOutput(BaseModel, arbitrary_types_allowed=True):

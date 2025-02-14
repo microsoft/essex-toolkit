@@ -10,8 +10,8 @@ from fnllm.base.services.cached import Cached
 from fnllm.base.services.variable_injector import VariableInjector
 from fnllm.events.base import LLMEvents
 from fnllm.openai.llm.openai_embeddings_llm import OpenAIEmbeddingsLLMImpl
-from fnllm.openai.services.openai_embeddings_cache_key_builder import (
-    OpenAIEmbeddingsCacheKeyBuilder,
+from fnllm.openai.services.openai_embeddings_cache_adapter import (
+    OpenAIEmbeddingsCacheAdapter,
 )
 from fnllm.openai.services.openai_usage_extractor import (
     OpenAIUsageExtractor,
@@ -62,7 +62,7 @@ def _create_cached_embeddings_handler(
     return Cached(
         cache=cache,
         events=events,
-        cache_key_builder=OpenAIEmbeddingsCacheKeyBuilder(
+        cache_adapter=OpenAIEmbeddingsCacheAdapter(
             cache,
             model=config.model,
             global_parameters=config.embeddings_parameters,

@@ -5,10 +5,13 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-from fnllm.base.services.cached import CacheKeyBuilder
+from fnllm.base.services.cached import CacheAdapter
+from fnllm.openai.types.aliases import OpenAICreateEmbeddingResponseModel
 from fnllm.openai.types.embeddings.io import (
     OpenAIEmbeddingsInput,
+    OpenAIEmbeddingsOutput,
 )
+from fnllm.types.metrics import LLMUsageMetrics
 
 if TYPE_CHECKING:
     from fnllm.caching import Cache
@@ -16,7 +19,9 @@ if TYPE_CHECKING:
     from fnllm.types.io import LLMInput
 
 
-class OpenAIEmbeddingsCacheKeyBuilder(CacheKeyBuilder[OpenAIEmbeddingsInput]):
+class OpenAIEmbeddingsCacheAdapter(
+    CacheAdapter[OpenAIEmbeddingsInput, OpenAIEmbeddingsOutput]
+):
     """Cache key builder for OpenAI text chat LLM."""
 
     def __init__(
@@ -58,3 +63,23 @@ class OpenAIEmbeddingsCacheKeyBuilder(CacheKeyBuilder[OpenAIEmbeddingsInput]):
         }
 
         return params
+
+    def wrap_output(
+        self,
+        prompt: OpenAIEmbeddingsInput,
+        kwargs: LLMInput[Any, Any, Any],
+        cached_result: dict[str, Any],
+    ) -> OpenAIEmbeddingsOutput:
+        """Get the model to validate the cached result."""
+        entry = OpenAICreateEmbeddingResponseModel.model_validate(cached_result)
+        return OpenAIEmbeddingsOutput(
+            raw_input=prompt,
+            raw_output=entry.data,
+            raw_model=entry,
+            embeddings=[d.embedding for d in entry.data],
+            usage=LLMUsageMetrics(),
+        )
+
+    def dump_raw_model(self, output: OpenAIEmbeddingsOutput) -> dict[str, Any]:
+        """Get the model to validate the cached result."""
+        return OpenAICreateEmbeddingResponseModel.model_dump(output.raw_model)

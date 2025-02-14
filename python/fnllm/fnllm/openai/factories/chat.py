@@ -16,8 +16,8 @@ from fnllm.openai.services.openai_history_extractor import (
     OpenAIHistoryExtractor,
 )
 from fnllm.openai.services.openai_json import create_json_handler
-from fnllm.openai.services.openai_text_chat_cache_key_builder import (
-    OpenAITextChatCacheKeyBuilder,
+from fnllm.openai.services.openai_text_chat_cache_adapter import (
+    OpenAITextChatCacheAdapter,
 )
 from fnllm.openai.services.openai_tools_parsing import OpenAIParseToolsLLM
 from fnllm.openai.services.openai_usage_extractor import (
@@ -130,7 +130,7 @@ def _create_cached_chat_handler(
     return Cached(
         cache=cache,
         events=events,
-        cache_key_builder=OpenAITextChatCacheKeyBuilder(
+        cache_adapter=OpenAITextChatCacheAdapter(
             cache,
             model=config.model,
             global_parameters=config.chat_parameters,

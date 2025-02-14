@@ -171,6 +171,7 @@ class OpenAITextChatLLMImpl(
             raw_input=prompt_message,
             raw_output=result,
             content=result.content,
+            raw_model=completion,
             usage=usage or LLMUsageMetrics(),
         )
 
