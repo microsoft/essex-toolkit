@@ -17,7 +17,6 @@ from fnllm.openai.services.openai_history_extractor import (
 from fnllm.openai.services.openai_usage_extractor import (
     OpenAIUsageExtractor,
 )
-from fnllm.openai.types.aliases import OpenAIChatCompletionModel, OpenAIChatModel
 from fnllm.openai.types.chat.io import (
     OpenAIChatCompletionInput,
     OpenAIChatHistoryEntry,
@@ -28,12 +27,13 @@ from fnllm.openai.utils import build_chat_messages, is_reasoning_model
 from fnllm.types.metrics import LLMUsageMetrics
 
 if TYPE_CHECKING:
+    from fnllm.base.services.cached import Cached
     from fnllm.base.services.json import JsonReceiver
     from fnllm.base.services.rate_limiter import RateLimiter
     from fnllm.base.services.retryer import Retryer
     from fnllm.base.services.variable_injector import VariableInjector
-    from fnllm.caching import Cache
     from fnllm.events.base import LLMEvents
+    from fnllm.openai.types.aliases import OpenAIChatModel
     from fnllm.openai.types.client import OpenAIClient
     from fnllm.types.generics import TJsonModel
     from fnllm.types.io import LLMInput
@@ -53,7 +53,6 @@ class OpenAITextChatLLMImpl(
         self,
         client: OpenAIClient,
         model: str | OpenAIChatModel,
-        cache: Cache | None = None,
         *,
         usage_extractor: OpenAIUsageExtractor[OpenAIChatOutput] | None = None,
         history_extractor: OpenAIHistoryExtractor | None = None,
@@ -65,6 +64,7 @@ class OpenAITextChatLLMImpl(
             OpenAIChatParameters,
         ]
         | None = None,
+        cached: Cached | None = None,
         retryer: Retryer[
             OpenAIChatCompletionInput,
             OpenAIChatOutput,
@@ -86,30 +86,30 @@ class OpenAITextChatLLMImpl(
         """Create a new OpenAIChatLLM."""
         super().__init__(
             events=events,
-            cache=cache,
             usage_extractor=usage_extractor,
             history_extractor=history_extractor,
             variable_injector=variable_injector,
             retryer=retryer,
             json_receiver=json_receiver,
             rate_limiter=rate_limiter,
+            cached=cached,
         )
 
         self._client = client
         self._model = model
         self._global_model_parameters = model_parameters or {}
-        self._cache = cache
+        self._cached = cached
         self._json_strategy = json_strategy
         self._json_receiver = json_receiver
 
     def child(self, name: str) -> Any:
         """Create a child LLM."""
-        if self._cache is None:
+        if self._cached is None:
             return self
         return OpenAITextChatLLMImpl(
             self._client,
             self._model,
-            cache=self._cache.child(name),
+            cached=self._cached.child(name),
             json_receiver=self._json_receiver,
             events=self.events,
             usage_extractor=cast(
@@ -144,7 +144,6 @@ class OpenAITextChatLLMImpl(
         kwargs: LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters],
     ) -> OpenAIChatOutput:
         history = kwargs.get("history", [])
-        bypass_cache = kwargs.get("bypass_cache", False)
         messages, prompt_message = build_chat_messages(prompt, history)
         local_model_parameters = kwargs.get("model_parameters")
         parameters = self._build_completion_parameters(local_model_parameters)
@@ -162,65 +161,11 @@ class OpenAITextChatLLMImpl(
                 output_tokens=completion.usage.completion_tokens,
             )
 
-        if not bypass_cache and self._cache is not None:
-            key = self._get_cache_key(prompt, kwargs)
-            await self._cache.set(
-                key,
-                completion.model_dump(),
-                {"input": {"messages": messages, "parameters": parameters}},
-            )
         return OpenAIChatOutput(
             raw_input=prompt_message,
             raw_output=result,
             content=result.content,
             usage=usage or LLMUsageMetrics(),
-        )
-
-    async def _try_execute_cached(
-        self,
-        prompt: OpenAIChatCompletionInput,
-        kwargs: LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters],
-    ) -> OpenAIChatOutput | None:
-        """Attempt to execute the LLM using a cached result."""
-        if self._cache is None:
-            return None
-
-        name = kwargs.get("name")
-        history = kwargs.get("history", [])
-        _, prompt_message = build_chat_messages(prompt, history)
-        key = self._get_cache_key(prompt, kwargs)
-
-        cached_value = await self._cache.get(key)
-        if cached_value is None:
-            await self._events.on_cache_miss(key, name)
-            return None
-
-        entry = OpenAIChatCompletionModel.model_validate(cached_value)
-        await self._events.on_cache_hit(key, name)
-        return OpenAIChatOutput(
-            raw_input=prompt_message,
-            raw_output=entry.choices[0].message,
-            content=entry.choices[0].message.content,
-            usage=LLMUsageMetrics(),
-        )
-
-    def _get_cache_key(
-        self,
-        prompt: OpenAIChatCompletionInput,
-        kwargs: LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters],
-    ) -> str:
-        if self._cache is None:
-            msg = "Cache is not enabled."
-            raise ValueError(msg)
-        name = kwargs.get("name")
-        history = kwargs.get("history", [])
-        local_model_parameters = kwargs.get("model_parameters")
-
-        messages, _ = build_chat_messages(prompt, history)
-        parameters = self._build_completion_parameters(local_model_parameters)
-        return self._cache.create_key(
-            {"messages": messages, "parameters": parameters},
-            prefix=f"chat_{name}" if name else "chat",
         )
 
     def _rewrite_input(
