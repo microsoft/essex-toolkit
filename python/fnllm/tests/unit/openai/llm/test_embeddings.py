@@ -17,7 +17,6 @@ from tests.unit.openai.llm.conftest import OpenAIEmbeddingsClientMock
 def test_embedding_llm_child_with_cache():
     llm = OpenAIEmbeddingsLLMImpl(
         client=Mock(),
-        cache=None,
         model="model",
     )
     child = llm.child("test")
@@ -25,7 +24,7 @@ def test_embedding_llm_child_with_cache():
 
     llm = OpenAIEmbeddingsLLMImpl(
         client=Mock(),
-        cache=Mock(),
+        cached=Mock(),
         model="model",
     )
     child = llm.child("test")

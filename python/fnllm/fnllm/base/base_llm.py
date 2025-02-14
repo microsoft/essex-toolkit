@@ -46,7 +46,7 @@ class BaseLLM(
         self,
         *,
         events: LLMEvents | None = None,
-        cached: Cached | None = None,
+        cached: Cached[TInput, TOutput, THistoryEntry, TModelParameters] | None = None,
         usage_extractor: UsageExtractor[TOutput] | None = None,
         history_extractor: HistoryExtractor[TOutput, THistoryEntry] | None = None,
         variable_injector: VariableInjector | None = None,
@@ -167,7 +167,7 @@ class BaseLLM(
         result: LLMOutput[TOutput, TJsonModel, THistoryEntry],
     ):
         usage = LLMUsageMetrics()
-        if self._usage_extractor and not result.cached:
+        if self._usage_extractor and not result.cache_hit:
             usage = self._usage_extractor.extract_usage(result.output)
             await self._events.on_usage(usage)
         result.metrics.usage = usage

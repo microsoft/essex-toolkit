@@ -7,7 +7,6 @@ from fnllm.openai.llm.openai_text_chat_llm import OpenAITextChatLLMImpl
 def test_child_with_cache():
     llm = OpenAITextChatLLMImpl(
         client=Mock(),
-        cache=None,
         model="model",
         json_receiver=None,
         json_strategy=JsonStrategy.VALID,
@@ -17,7 +16,7 @@ def test_child_with_cache():
 
     llm = OpenAITextChatLLMImpl(
         client=Mock(),
-        cache=Mock(),
+        cached=Mock(),
         model="model",
         json_receiver=None,
         json_strategy=JsonStrategy.LOOSE,

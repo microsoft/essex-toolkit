@@ -64,7 +64,13 @@ class OpenAITextChatLLMImpl(
             OpenAIChatParameters,
         ]
         | None = None,
-        cached: Cached | None = None,
+        cached: Cached[
+            OpenAIChatCompletionInput,
+            OpenAIChatOutput,
+            OpenAIChatHistoryEntry,
+            OpenAIChatParameters,
+        ]
+        | None = None,
         retryer: Retryer[
             OpenAIChatCompletionInput,
             OpenAIChatOutput,

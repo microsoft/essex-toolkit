@@ -6,6 +6,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from fnllm.base.services.cached import Cached
 from fnllm.base.services.variable_injector import VariableInjector
 from fnllm.events.base import LLMEvents
 from fnllm.openai.llm.openai_chat_llm import OpenAIChatLLMImpl
@@ -15,6 +16,9 @@ from fnllm.openai.services.openai_history_extractor import (
     OpenAIHistoryExtractor,
 )
 from fnllm.openai.services.openai_json import create_json_handler
+from fnllm.openai.services.openai_text_chat_cache_key_builder import (
+    OpenAITextChatCacheKeyBuilder,
+)
 from fnllm.openai.services.openai_tools_parsing import OpenAIParseToolsLLM
 from fnllm.openai.services.openai_usage_extractor import (
     OpenAIUsageExtractor,
@@ -81,7 +85,7 @@ def _create_openai_text_chat_llm(
         client,
         model=config.model,
         model_parameters=config.chat_parameters,
-        cache=cache,
+        cached=_create_cached_chat_handler(config, cache, events),
         events=events,
         json_receiver=create_json_handler(
             config.json_strategy, config.max_json_retries
@@ -112,4 +116,23 @@ def _create_openai_streaming_chat_llm(
         emit_usage=config.track_stream_usage,
         variable_injector=VariableInjector(),
         rate_limiter=create_rate_limiter(limiter=limiter, config=config, events=events),
+    )
+
+
+def _create_cached_chat_handler(
+    config: OpenAIConfig,
+    cache: Cache | None,
+    events: LLMEvents,
+) -> Cached | None:
+    """Create a cache handler."""
+    if not cache:
+        return None
+    return Cached(
+        cache=cache,
+        events=events,
+        cache_key_builder=OpenAITextChatCacheKeyBuilder(
+            cache,
+            model=config.model,
+            global_parameters=config.chat_parameters,
+        ),
     )

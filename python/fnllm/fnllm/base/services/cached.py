@@ -28,7 +28,7 @@ if TYPE_CHECKING:
 RetryableErrorHandler = Callable[[BaseException], Awaitable[None]]
 
 
-class CacheKeyBuilder(ABC):
+class CacheKeyBuilder(ABC, Generic[TInput]):
     """A cache key builder."""
 
     @abstractmethod
@@ -53,7 +53,7 @@ class Cached(
         *,
         cache: Cache,
         events: LLMEvents,
-        cache_key_builder: CacheKeyBuilder,
+        cache_key_builder: CacheKeyBuilder[TInput],
     ):
         """Create a new CachingLLM."""
         self._events = events
