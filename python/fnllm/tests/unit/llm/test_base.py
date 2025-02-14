@@ -25,6 +25,9 @@ class ErrorLLM(BaseLLM[str, str, Any, Any]):
         msg = "Test error."
         raise CustomError(msg)
 
+    def is_reasoning_model(self) -> bool:
+        return False
+
 
 class CustomLLM(BaseLLM[str, str, Any, Any]):
     async def _execute_llm(
@@ -33,6 +36,9 @@ class CustomLLM(BaseLLM[str, str, Any, Any]):
         kwargs: LLMInput[Any, Any, Any],
     ) -> str:
         return "Some result."
+
+    def is_reasoning_model(self) -> bool:
+        return False
 
 
 class CustomModel(BaseModel):

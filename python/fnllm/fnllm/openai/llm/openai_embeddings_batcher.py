@@ -50,6 +50,10 @@ class OpenAIEmbeddingBatcher(Batcher[EmbeddingInput, EmbeddingOutput]):
             max_batch_tokens=self.max_batch_cost,
         )
 
+    def is_reasoning_model(self) -> bool:
+        """Return whether the LLM uses a reasoning model."""
+        return self._llm.is_reasoning_model()
+
     async def _invoke(
         self, batch: CallBatch[EmbeddingInput, EmbeddingOutput]
     ) -> list[EmbeddingOutput]:

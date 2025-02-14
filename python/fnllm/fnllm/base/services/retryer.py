@@ -72,7 +72,7 @@ class Retryer(
         self, retry_strategy: RetryStrategy, max_retry_wait: float
     ) -> wait_base:
         match retry_strategy:
-            case RetryStrategy.EXPONENTIAL_BACKOFF | RetryStrategy.TENACITY:
+            case RetryStrategy.EXPONENTIAL_BACKOFF:
                 return wait_exponential_jitter(max=max_retry_wait)
             case RetryStrategy.INCREMENTAL_WAIT:
                 return wait_incrementing(

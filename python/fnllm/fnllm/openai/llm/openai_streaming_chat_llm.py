@@ -19,7 +19,7 @@ from fnllm.openai.types.chat.io import (
     OpenAIStreamingChatOutput,
 )
 from fnllm.openai.types.chat.parameters import OpenAIChatParameters
-from fnllm.openai.utils import build_chat_messages
+from fnllm.openai.utils import build_chat_messages, is_reasoning_model
 from fnllm.types import LLMMetrics, LLMUsageMetrics
 
 if TYPE_CHECKING:
@@ -85,6 +85,10 @@ class OpenAIStreamingChatLLMImpl(
     def child(self, name: str) -> OpenAIStreamingChatLLMImpl:
         """Create a child LLM."""
         return self
+
+    def is_reasoning_model(self) -> bool:
+        """Return whether the LLM uses a reasoning model."""
+        return is_reasoning_model(self._model)
 
     def _build_completion_parameters(
         self, local_parameters: OpenAIChatParameters | None

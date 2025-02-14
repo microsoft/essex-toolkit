@@ -26,6 +26,8 @@ if TYPE_CHECKING:
 
     from fnllm.tools.base import LLMTool
 
+_reasoning_models: set[str] = {"o1", "o1-mini", "o3-mini"}
+
 
 def function_call_to_param(
     func: OpenAIFunctionCallModel | None,
@@ -117,3 +119,8 @@ def build_chat_messages(
     if prompt is not None:
         messages.append(prompt)
     return messages, cast(OpenAIChatHistoryEntry, prompt)
+
+
+def is_reasoning_model(model: str) -> bool:
+    """Return whether the model uses a reasoning model."""
+    return model.lower() in _reasoning_models
