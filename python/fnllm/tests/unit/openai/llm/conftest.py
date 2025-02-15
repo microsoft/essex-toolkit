@@ -3,12 +3,13 @@
 """Utility to mock chat completion client responses."""
 
 from collections.abc import AsyncIterator
-from unittest.mock import AsyncMock, Mock
+from unittest.mock import AsyncMock
 
 import pytest
-from fnllm.openai.types import OpenAIChatCompletionModel
 from fnllm.openai.types.aliases import (
+    EmbeddingUsageModel,
     OpenAIChatCompletionMessageModel,
+    OpenAIChatCompletionModel,
     OpenAIChatCompletionUserMessageParam,
     OpenAIChoiceModel,
     OpenAICompletionUsageModel,
@@ -109,11 +110,14 @@ class OpenAIChatCompletionClientMock:
         )
 
     def expected_output_for_prompt(self, prompt: str | None) -> OpenAIChatOutput:
+        model = OpenAIChatCompletionModel(
+            choices=[], id="1", created=0, model="abc", object="chat.completion"
+        )
         return OpenAIChatOutput(
             raw_input=OpenAIChatCompletionUserMessageParam(content=prompt, role="user")
             if prompt is not None
             else None,
-            raw_model=Mock(),
+            raw_model=model,
             raw_output=self.expected_message,
             content=self.expected_message.content,
             usage=self.expected_usage,
@@ -261,10 +265,16 @@ class OpenAIEmbeddingsClientMock:
     def expected_output_for_prompt(
         self, prompt: OpenAIEmbeddingsInput | None
     ) -> OpenAIEmbeddingsOutput:
+        model = OpenAICreateEmbeddingResponseModel(
+            data=[],
+            model="abc",
+            object="list",
+            usage=EmbeddingUsageModel(prompt_tokens=0, total_tokens=0),
+        )
         return OpenAIEmbeddingsOutput(
             raw_input=prompt,
             raw_output=self.expected_data,
-            raw_model=Mock(),
+            raw_model=model,
             embeddings=[d.embedding for d in self.expected_data],
             usage=self.expected_usage,
         )

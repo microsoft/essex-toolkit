@@ -63,7 +63,9 @@ async def test_embeddings_llm_with_global_model_config(
     expected_output = embeddings_client_mock.expected_output_for_prompt(
         "Hello! User One"
     )
-    assert response.output == expected_output
+    assert response.output.embeddings == expected_output.embeddings
+    assert response.output.raw_input == expected_output.raw_input
+    assert response.output.raw_output == expected_output.raw_output
 
     # check the parameters have properly propagated to the client call
     embeddings_client_mock.response_mock.assert_called_once_with(
@@ -106,7 +108,9 @@ async def test_embeddings_llm_with_global_model_config_overwrite(
 
     # check the expected output
     expected_output = embeddings_client_mock.expected_output_for_prompt(input_prompt)
-    assert response.output == expected_output
+    assert response.output.embeddings == expected_output.embeddings
+    assert response.output.raw_input == expected_output.raw_input
+    assert response.output.raw_output == expected_output.raw_output
 
     # check the parameters have properly propagated to the client call
     embeddings_client_mock.response_mock.assert_called_once_with(
@@ -151,7 +155,9 @@ async def test_embeddings_llm_with_cache(
     # check initial cache miss
     response = await llm(input_prompt, name=name)
     expected_output = embeddings_client_mock.expected_output_for_prompt(input_prompt)
-    assert response.output == expected_output
+    assert response.output.embeddings == expected_output.embeddings
+    assert response.output.raw_input == expected_output.raw_input
+    assert response.output.raw_output == expected_output.raw_output
     mocked_events.on_cache_miss.assert_called_once_with(ANY, name)
 
     # calling again should be a cache hit

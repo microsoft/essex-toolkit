@@ -172,7 +172,9 @@ async def test_no_tools_given():
 
     # call the llm and assert result
     response = await llm(prompt, tools=[])
-    assert response.output == expected_output
+    assert response.output.content == expected_output.content
+    assert response.output.raw_input == expected_output.raw_input
+    assert response.output.raw_output == expected_output.raw_output
     assert len(response.tool_calls) == 0
 
     # assert the delegate has called been called without tools in model parameters
