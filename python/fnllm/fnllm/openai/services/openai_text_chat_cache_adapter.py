@@ -13,6 +13,7 @@ from fnllm.types.metrics import LLMUsageMetrics
 
 if TYPE_CHECKING:
     from fnllm.caching import Cache
+    from fnllm.openai.types.aliases import OpenAIChatModelName
     from fnllm.openai.types.chat.parameters import OpenAIChatParameters
     from fnllm.types.io import LLMInput
 
@@ -25,7 +26,7 @@ class OpenAITextChatCacheAdapter(
     def __init__(
         self,
         cache: Cache,
-        model: str,
+        model: str | OpenAIChatModelName,
         global_parameters: OpenAIChatParameters | None = None,
     ) -> None:
         """Create a new OpenAITextChatCacheKeyBuilder."""

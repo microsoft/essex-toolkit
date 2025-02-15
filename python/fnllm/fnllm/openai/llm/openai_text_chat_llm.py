@@ -33,7 +33,7 @@ if TYPE_CHECKING:
     from fnllm.base.services.retryer import Retryer
     from fnllm.base.services.variable_injector import VariableInjector
     from fnllm.events.base import LLMEvents
-    from fnllm.openai.types.aliases import OpenAIChatModel
+    from fnllm.openai.types.aliases import OpenAIChatModelName
     from fnllm.openai.types.client import OpenAIClient
     from fnllm.types.generics import TJsonModel
     from fnllm.types.io import LLMInput
@@ -52,7 +52,7 @@ class OpenAITextChatLLMImpl(
     def __init__(
         self,
         client: OpenAIClient,
-        model: str | OpenAIChatModel,
+        model: str | OpenAIChatModelName,
         *,
         usage_extractor: OpenAIUsageExtractor[OpenAIChatOutput] | None = None,
         history_extractor: OpenAIHistoryExtractor | None = None,
