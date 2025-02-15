@@ -56,19 +56,23 @@ from openai.types.chat.completion_create_params import (
 from openai.types.chat.completion_create_params import (
     ResponseFormat as ResponseFormatCreateParam,
 )
-from openai.types.chat_model import ChatModel
+from openai.types.chat_model import ChatModel as ChatModelName
 from openai.types.completion_usage import CompletionUsage as CompletionUsageModel
 from openai.types.create_embedding_response import (
     CreateEmbeddingResponse as CreateEmbeddingResponseModel,
 )
 from openai.types.create_embedding_response import Usage as EmbeddingUsageModel
 from openai.types.embedding import Embedding as EmbeddingModel
+from openai.types.embedding_model import EmbeddingModel as EmbeddingModelName
 from openai.types.shared_params.function_definition import (
     FunctionDefinition as FunctionDefinitionParam,
 )
 from typing_extensions import Required, TypedDict
 
-OpenAIChatModel: TypeAlias = ChatModel
+OpenAIEmbeddingModelName: TypeAlias = EmbeddingModelName
+"""Alias for the EmbeddingModel (available model types)."""
+
+OpenAIChatModelName: TypeAlias = ChatModelName
 """Alias for the ChatModel (available model types)."""
 
 OpenAICompletionUsageModel: TypeAlias = CompletionUsageModel

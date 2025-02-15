@@ -4,7 +4,10 @@
 
 from typing import TypeAlias
 
-from fnllm.openai.types.aliases import OpenAIEmbeddingModel
+from fnllm.openai.types.aliases import (
+    OpenAICreateEmbeddingResponseModel,
+    OpenAIEmbeddingModel,
+)
 from fnllm.types.generalized import EmbeddingsLLMInput, EmbeddingsLLMOutput
 from fnllm.types.metrics import LLMUsageMetrics
 
@@ -23,3 +26,5 @@ class OpenAIEmbeddingsOutput(EmbeddingsLLMOutput):
 
     usage: LLMUsageMetrics | None
     """Usage statistics for the embeddings request."""
+
+    raw_model: OpenAICreateEmbeddingResponseModel

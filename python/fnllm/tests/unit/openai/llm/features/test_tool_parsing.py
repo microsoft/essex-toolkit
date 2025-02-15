@@ -18,6 +18,8 @@ from fnllm.tools.errors import ToolInvalidArgumentsError, ToolNotFoundError
 from fnllm.types.io import LLMOutput
 from pydantic import Field
 
+from tests.unit.openai.llm.conftest import mock_chat_completion_model
+
 
 class ToolA(LLMTool):
     """Tool A description."""
@@ -54,6 +56,7 @@ async def test_tools_are_parsed():
     tools = [ToolA, ToolB]
     expected_output = OpenAIChatOutput(
         raw_input=None,
+        raw_model=mock_chat_completion_model(),
         raw_output=OpenAIChatCompletionMessageModel(
             content="content",
             role="assistant",
@@ -154,6 +157,7 @@ async def test_tools_are_parsed():
 async def test_no_tools_given():
     expected_output = OpenAIChatOutput(
         raw_input=None,
+        raw_model=mock_chat_completion_model(),
         raw_output=OpenAIChatCompletionMessageModel(
             content="content",
             role="assistant",
@@ -184,6 +188,7 @@ async def test_invalid_tool_arguments_should_raise():
     tools = [ToolA, ToolB]
     expected_output = OpenAIChatOutput(
         raw_input=None,
+        raw_model=mock_chat_completion_model(),
         raw_output=OpenAIChatCompletionMessageModel(
             content="content",
             role="assistant",
@@ -223,6 +228,7 @@ async def test_invalid_tool_arguments_should_raise():
 async def test_tool_not_found_should_raise():
     expected_output = OpenAIChatOutput(
         raw_input=None,
+        raw_model=mock_chat_completion_model(),
         raw_output=OpenAIChatCompletionMessageModel(
             content="content",
             role="assistant",

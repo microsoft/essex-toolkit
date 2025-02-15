@@ -6,8 +6,12 @@ from fnllm.openai.roles import OpenAIChatRole
 from fnllm.openai.services.openai_history_extractor import (
     OpenAIHistoryExtractor,
 )
-from fnllm.openai.types.aliases import OpenAIChatCompletionMessageModel
+from fnllm.openai.types.aliases import (
+    OpenAIChatCompletionMessageModel,
+)
 from fnllm.openai.types.chat.io import OpenAIChatOutput
+
+from tests.unit.openai.llm.conftest import mock_chat_completion_model
 
 
 def test_history_is_appended():
@@ -17,6 +21,7 @@ def test_history_is_appended():
         OpenAIChatRole.Assistant.message("assistant message 1"),
     ]
     response = OpenAIChatOutput(
+        raw_model=mock_chat_completion_model(),
         raw_input=OpenAIChatRole.User.message("user message 2"),
         raw_output=OpenAIChatCompletionMessageModel(
             content="assistant message 2",

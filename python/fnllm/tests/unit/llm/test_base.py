@@ -49,7 +49,7 @@ class CustomModel(BaseModel):
 async def test_on_error():
     mocked_events = Mock(LLMEvents)
 
-    llm = ErrorLLM(events=mocked_events, cache=None)
+    llm = ErrorLLM(events=mocked_events)
 
     assert llm.events == mocked_events
 
@@ -68,7 +68,7 @@ def test_clone_empty():
 
 
 def test_clone_valid():
-    llm = CustomLLM(cache=Mock())
+    llm = CustomLLM(cached=Mock())
     child = llm.child("test")
     # Cache, child is not llm
     assert child is not llm

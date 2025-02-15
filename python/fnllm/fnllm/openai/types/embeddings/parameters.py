@@ -2,17 +2,17 @@
 
 """OpenAI embeddings parameters types."""
 
-from __future__ import annotations
-
 from typing import Literal
 
 from typing_extensions import NotRequired, TypedDict
+
+from fnllm.openai.types.aliases import OpenAIEmbeddingModelName
 
 
 class OpenAIEmbeddingsParameters(TypedDict):
     """OpenAI allowed embeddings parameters."""
 
-    model: NotRequired[str]
+    model: NotRequired[str | OpenAIEmbeddingModelName]
 
     dimensions: NotRequired[int]
 

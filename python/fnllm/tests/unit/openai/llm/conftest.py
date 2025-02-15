@@ -28,6 +28,12 @@ from openai.types.chat.chat_completion_chunk import Choice as ChunkChoice
 from openai.types.chat.chat_completion_chunk import ChoiceDelta as ChunkChoiceDelta
 
 
+def mock_chat_completion_model():
+    return OpenAIChatCompletionModel(
+        choices=[], id="1", created=0, model="abc", object="chat.completion"
+    )
+
+
 class MockAsyncStream(AsyncStream):
     """A streaming llm response iterator."""
 
@@ -109,10 +115,16 @@ class OpenAIChatCompletionClientMock:
         )
 
     def expected_output_for_prompt(self, prompt: str | None) -> OpenAIChatOutput:
+        if self._raw_response is None:
+            raise ValueError
+        message = (
+            OpenAIChatCompletionUserMessageParam(content=prompt, role="user")
+            if prompt
+            else None
+        )
         return OpenAIChatOutput(
-            raw_input=OpenAIChatCompletionUserMessageParam(content=prompt, role="user")
-            if prompt is not None
-            else None,
+            raw_input=message,
+            raw_model=self._raw_response,
             raw_output=self.expected_message,
             content=self.expected_message.content,
             usage=self.expected_usage,
@@ -260,9 +272,12 @@ class OpenAIEmbeddingsClientMock:
     def expected_output_for_prompt(
         self, prompt: OpenAIEmbeddingsInput | None
     ) -> OpenAIEmbeddingsOutput:
+        if self._raw_response is None:
+            raise ValueError
         return OpenAIEmbeddingsOutput(
             raw_input=prompt,
             raw_output=self.expected_data,
+            raw_model=self._raw_response,
             embeddings=[d.embedding for d in self.expected_data],
             usage=self.expected_usage,
         )

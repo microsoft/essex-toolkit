@@ -13,6 +13,8 @@ from fnllm.types.io import LLMOutput
 from openai.types.chat import ChatCompletionMessage
 from pydantic import BaseModel
 
+from tests.unit.openai.llm.conftest import mock_chat_completion_model
+
 
 class CustomModel(BaseModel):
     integer: int
@@ -23,6 +25,7 @@ def mock_output(response: str) -> OpenAIChatOutput:
     return OpenAIChatOutput(
         content=response,
         raw_input=None,
+        raw_model=mock_chat_completion_model(),
         raw_output=ChatCompletionMessage(content=response, role="assistant"),
         usage=None,
     )
