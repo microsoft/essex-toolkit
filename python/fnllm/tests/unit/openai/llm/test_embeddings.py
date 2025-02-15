@@ -63,9 +63,7 @@ async def test_embeddings_llm_with_global_model_config(
     expected_output = embeddings_client_mock.expected_output_for_prompt(
         "Hello! User One"
     )
-    assert response.output.embeddings == expected_output.embeddings
-    assert response.output.raw_input == expected_output.raw_input
-    assert response.output.raw_output == expected_output.raw_output
+    assert response.output == expected_output
 
     # check the parameters have properly propagated to the client call
     embeddings_client_mock.response_mock.assert_called_once_with(

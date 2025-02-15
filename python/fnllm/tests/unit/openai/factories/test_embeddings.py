@@ -72,7 +72,7 @@ def test_create_openai_embeddings_llm():
             ANY,
             model=config.model,
             model_parameters=config.embeddings_parameters,
-            cache=mocked_cache,
+            cached=ANY,
             events=mocked_events,
             usage_extractor=ANY,
             variable_injector=ANY,
