@@ -3,7 +3,7 @@
 """Tests for openai.llm.features.json_parsing."""
 
 import json
-from unittest.mock import AsyncMock, Mock
+from unittest.mock import AsyncMock
 
 import pytest
 from fnllm.base.config.json_strategy import JsonStrategy
@@ -12,6 +12,8 @@ from fnllm.openai.types.chat.io import OpenAIChatOutput
 from fnllm.types.io import LLMOutput
 from openai.types.chat import ChatCompletionMessage
 from pydantic import BaseModel
+
+from tests.unit.openai.llm.conftest import mock_chat_completion_model
 
 
 class CustomModel(BaseModel):
@@ -23,7 +25,7 @@ def mock_output(response: str) -> OpenAIChatOutput:
     return OpenAIChatOutput(
         content=response,
         raw_input=None,
-        raw_model=Mock(),
+        raw_model=mock_chat_completion_model(),
         raw_output=ChatCompletionMessage(content=response, role="assistant"),
         usage=None,
     )
