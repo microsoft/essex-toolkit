@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 ### Changed
+- Log out all LLM events to either DEBUG, WARN, or ERROR to reduce default log volume.
 ### Deprecated
 ### Removed
 ### Fixed

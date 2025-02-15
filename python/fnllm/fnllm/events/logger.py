@@ -39,7 +39,7 @@ class LLMEventsLogger(LLMEvents):
 
     async def on_usage(self, usage: LLMUsageMetrics) -> None:
         """Called when there is any LLM usage."""
-        self._logger.info(
+        self._logger.debug(
             "LLM usage with %d total tokens (input=%d, output=%d)",
             usage.total_tokens,
             usage.input_tokens,
@@ -48,7 +48,7 @@ class LLMEventsLogger(LLMEvents):
 
     async def on_limit_acquired(self, manifest: Manifest) -> None:
         """Called when limit is acquired for a request (does not include post limiting)."""
-        self._logger.info(
+        self._logger.debug(
             "limit acquired for request, request_tokens=%d, post_request_tokens=%d",
             manifest.request_tokens,
             manifest.post_request_tokens,
@@ -56,7 +56,7 @@ class LLMEventsLogger(LLMEvents):
 
     async def on_limit_released(self, manifest: Manifest) -> None:
         """Called when limit is released for a request (does not include post limiting)."""
-        self._logger.info(
+        self._logger.debug(
             "limit released for request, request_tokens=%d, post_request_tokens=%d",
             manifest.request_tokens,
             manifest.post_request_tokens,
@@ -64,7 +64,7 @@ class LLMEventsLogger(LLMEvents):
 
     async def on_post_limit(self, manifest: Manifest) -> None:
         """Called when post request limiting is triggered (called by the rate limiting LLM)."""
-        self._logger.info(
+        self._logger.debug(
             "post request limiting triggered, acquired extra %d tokens",
             manifest.post_request_tokens,
         )
@@ -74,7 +74,7 @@ class LLMEventsLogger(LLMEvents):
         metrics: LLMMetrics,
     ) -> None:
         """Called when a request goes through (called by the retrying LLM)."""
-        self._logger.info(
+        self._logger.debug(
             "request succeed with %d retries in %.2fs and used %d tokens",
             metrics.retry.num_retries,
             metrics.retry.total_time,
@@ -83,7 +83,7 @@ class LLMEventsLogger(LLMEvents):
 
     async def on_cache_hit(self, cache_key: str, name: str | None) -> None:
         """Called when there is a cache hit."""
-        self._logger.info(
+        self._logger.debug(
             "cache hit for key=%s and name=%s",
             cache_key,
             name,
@@ -91,7 +91,7 @@ class LLMEventsLogger(LLMEvents):
 
     async def on_cache_miss(self, cache_key: str, name: str | None) -> None:
         """Called when there is a cache miss."""
-        self._logger.info(
+        self._logger.debug(
             "cache miss for key=%s and name=%s",
             cache_key,
             name,
