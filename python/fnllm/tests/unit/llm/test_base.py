@@ -68,7 +68,7 @@ def test_clone_empty():
 
 
 def test_clone_valid():
-    llm = CustomLLM()
+    llm = CustomLLM(cached=Mock())
     child = llm.child("test")
     # Cache, child is not llm
     assert child is not llm
