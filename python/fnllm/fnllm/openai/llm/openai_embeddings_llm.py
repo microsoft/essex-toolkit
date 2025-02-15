@@ -24,6 +24,7 @@ if TYPE_CHECKING:
     from fnllm.base.services.retryer import Retryer
     from fnllm.base.services.variable_injector import VariableInjector
     from fnllm.events.base import LLMEvents
+    from fnllm.openai.types.aliases import OpenAIEmbeddingModelName
     from fnllm.openai.types.client import OpenAIClient
     from fnllm.types.io import LLMInput
 
@@ -38,7 +39,7 @@ class OpenAIEmbeddingsLLMImpl(
     def __init__(
         self,
         client: OpenAIClient,
-        model: str,
+        model: str | OpenAIEmbeddingModelName,
         *,
         cached: Cached[
             OpenAIEmbeddingsInput,

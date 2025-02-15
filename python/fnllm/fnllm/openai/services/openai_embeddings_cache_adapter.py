@@ -6,7 +6,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any
 
 from fnllm.base.services.cached import CacheAdapter
-from fnllm.openai.types.aliases import OpenAICreateEmbeddingResponseModel
+from fnllm.openai.types.aliases import (
+    OpenAICreateEmbeddingResponseModel,
+    OpenAIEmbeddingModelName,
+)
 from fnllm.openai.types.embeddings.io import (
     OpenAIEmbeddingsInput,
     OpenAIEmbeddingsOutput,
@@ -27,7 +30,7 @@ class OpenAIEmbeddingsCacheAdapter(
     def __init__(
         self,
         cache: Cache,
-        model: str,
+        model: str | OpenAIEmbeddingModelName,
         global_parameters: OpenAIEmbeddingsParameters | None = None,
     ) -> None:
         """Create a new OpenAIEmbeddingsCacheKeyBuilder."""
