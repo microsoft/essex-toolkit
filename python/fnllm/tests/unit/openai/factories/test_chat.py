@@ -85,7 +85,7 @@ def test_create_openai_chat_llm():
             ANY,
             model=config.model,
             model_parameters=config.chat_parameters,
-            cache=ANY,
+            cached=ANY,
             events=mocked_events,
             usage_extractor=ANY,
             history_extractor=ANY,

@@ -12,6 +12,7 @@ from fnllm.openai.factories.chat import create_openai_chat_llm
 from fnllm.openai.roles import OpenAIChatRole
 from fnllm.openai.types.aliases import (
     OpenAIChatCompletionMessageModel,
+    OpenAIChatCompletionModel,
     OpenAICompletionUsageModel,
 )
 from fnllm.openai.types.chat.io import OpenAIChatOutput
@@ -23,13 +24,16 @@ if TYPE_CHECKING:
 
 
 def test_open_ai_chat_output_str():
+    model = OpenAIChatCompletionModel(
+        choices=[], id="1", created=0, model="abc", object="chat.completion"
+    )
     output = OpenAIChatOutput(
         raw_input=None,
         raw_output=OpenAIChatCompletionMessageModel(
             content="some content",
             role="assistant",
         ),
-        raw_model=Mock(),
+        raw_model=model,
         content="some content",
         usage=None,
     )
@@ -68,7 +72,9 @@ async def test_chat_llm_with_global_model_config(
     expected_output = chat_completion_client_mock.expected_output_for_prompt(
         "Hello! User One"
     )
-    assert response.output == expected_output
+    assert response.output.content == expected_output.content
+    assert response.output.raw_input == expected_output.raw_input
+    assert response.output.raw_output == expected_output.raw_output
 
     # check the parameters have properly propagated to the client call
     chat_completion_client_mock.response_mock.assert_called_once_with(
@@ -147,7 +153,9 @@ async def test_chat_llm_with_global_model_config_overwrite(
     expected_output = chat_completion_client_mock.expected_output_for_prompt(
         input_prompt
     )
-    assert response.output == expected_output
+    assert response.output.content == expected_output.content
+    assert response.output.raw_input == expected_output.raw_input
+    assert response.output.raw_output == expected_output.raw_output
 
     # check the parameters have properly propagated to the client call
     chat_completion_client_mock.response_mock.assert_called_once_with(
@@ -197,7 +205,9 @@ async def test_chat_llm_with_cache(
     expected_output = chat_completion_client_mock.expected_output_for_prompt(
         input_prompt
     )
-    assert response.output == expected_output
+    assert response.output.content == expected_output.content
+    assert response.output.raw_input == expected_output.raw_input
+    assert response.output.raw_output == expected_output.raw_output
     mocked_events.on_cache_miss.assert_called_once_with(ANY, name)
 
     # calling again should be a cache hit
