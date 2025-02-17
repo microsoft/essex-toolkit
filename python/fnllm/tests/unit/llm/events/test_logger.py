@@ -21,31 +21,31 @@ async def test_logger_is_called():
 
     logger.reset_mock()
     await events.on_usage(LLMUsageMetrics())
-    logger.info.assert_called_once()
+    logger.debug.assert_called_once()
 
     logger.reset_mock()
     await events.on_limit_acquired(Manifest())
-    logger.info.assert_called_once()
+    logger.debug.assert_called_once()
 
     logger.reset_mock()
     await events.on_limit_released(Manifest())
-    logger.info.assert_called_once()
+    logger.debug.assert_called_once()
 
     logger.reset_mock()
     await events.on_post_limit(Manifest())
-    logger.info.assert_called_once()
+    logger.debug.assert_called_once()
 
     logger.reset_mock()
     await events.on_success(LLMMetrics())
-    logger.info.assert_called_once()
+    logger.debug.assert_called_once()
 
     logger.reset_mock()
     await events.on_cache_hit("", "")
-    logger.info.assert_called_once()
+    logger.debug.assert_called_once()
 
     logger.reset_mock()
     await events.on_cache_miss("", "")
-    logger.info.assert_called_once()
+    logger.debug.assert_called_once()
 
     logger.reset_mock()
     await events.on_try(1)

@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add `Cached` decorator to handle LLM caching.
 ### Changed
+- Log out all LLM events to either DEBUG, WARN, or ERROR to reduce default log volume.
 ### Deprecated
 ### Removed
 ### Fixed
