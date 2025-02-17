@@ -5,6 +5,7 @@
 from logging import DEBUG, ERROR, WARNING
 
 import pytest
+
 from fnllm.events.logger import LLMEventsLogger
 from fnllm.limiting.base import Manifest
 from fnllm.types.metrics import LLMMetrics, LLMUsageMetrics
@@ -28,8 +29,6 @@ def check_records_and_reset(
 async def test_logger_is_called(caplog: pytest.LogCaptureFixture):
     events = LLMEventsLogger()
     caplog.set_level(DEBUG)
-
-    caplog.clear()
 
     await events.on_error(None, None, {})
     check_records_and_reset(caplog, ERROR, "unexpected error occurred for arguments")
