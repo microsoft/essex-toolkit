@@ -5,7 +5,6 @@
 from logging import DEBUG, ERROR, WARNING
 
 import pytest
-
 from fnllm.events.logger import LLMEventsLogger
 from fnllm.limiting.base import Manifest
 from fnllm.types.metrics import LLMMetrics, LLMUsageMetrics
@@ -16,13 +15,13 @@ def check_records_and_reset(
 ) -> None:
     assert isinstance(caplog.record_tuples, list)
     assert len(caplog.records) == 1
-    assert (
-        caplog.record_tuples[0][1] == level
-    ), f"expected {level} but got {caplog.record_tuples[0][1]}"
+    assert caplog.record_tuples[0][1] == level, (
+        f"expected {level} but got {caplog.record_tuples[0][1]}"
+    )
     assert caplog.record_tuples[0][0] == "fnllm.events.logger", "unexpected logger name"
-    assert caplog.record_tuples[0][2].startswith(
-        prefix
-    ), f"unexpected message: {caplog.record_tuples[0][2]}"
+    assert caplog.record_tuples[0][2].startswith(prefix), (
+        f"unexpected message: {caplog.record_tuples[0][2]}"
+    )
     caplog.clear()
 
 
