@@ -58,14 +58,14 @@ class Retryer(
         retryable_error_handler: RetryableErrorHandler | None,
     ):
         """Create a new RetryingLLM."""
-        self._retryable_errors = retryable_errors
+        self._retryable_errors = tuple(retryable_errors)
         self._tag = tag
         self._max_retries = max_retries
         self._events = events
         self._retryable_error_handler = retryable_error_handler
 
         self._retry_stop = stop_after_attempt(max_retries)
-        self._retry_if = retry_if_exception_type(tuple(self._retryable_errors))
+        self._retry_if = retry_if_exception_type(self._retryable_errors)
         self._wait_strategy = self._create_wait_strategy(retry_strategy, max_retry_wait)
 
     def _create_wait_strategy(
@@ -140,7 +140,7 @@ class Retryer(
                         #
                         # Try Send a notification about a retryable error occurring.
                         #
-                        if isinstance(error, tuple(self._retryable_errors)):
+                        if isinstance(error, self._retryable_errors):
                             await self._events.on_retryable_error(error, attempt_number)
                             if self._retryable_error_handler is not None:
                                 await self._retryable_error_handler(error)
@@ -156,7 +156,7 @@ class Retryer(
                         return result, call_times, attempt_number - 1
 
         except BaseException as error:
-            if isinstance(error, tuple(self._retryable_errors)):
+            if isinstance(error, self._retryable_errors):
                 raise RetriesExhaustedError(name, self._max_retries) from error
             raise
         raise RetriesExhaustedError(name, self._max_retries)
