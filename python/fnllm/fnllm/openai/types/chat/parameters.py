@@ -10,7 +10,7 @@ from typing_extensions import NotRequired, TypedDict
 from fnllm.openai.types.aliases import (
     OpenAIChatCompletionToolChoiceOptionParam,
     OpenAIChatCompletionToolParam,
-    OpenAIChatModel,
+    OpenAIChatModelName,
     OpenAIFunctionCallCreateParam,
     OpenAIFunctionCreateParam,
     OpenAIResponseFormatCreateParam,
@@ -24,7 +24,7 @@ from fnllm.openai.types.aliases import (
 class OpenAIChatParameters(TypedDict):
     """OpenAI allowed chat parameters."""
 
-    model: NotRequired[str | OpenAIChatModel]
+    model: NotRequired[str | OpenAIChatModelName]
 
     frequency_penalty: NotRequired[float | None]
 

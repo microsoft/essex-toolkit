@@ -18,10 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ```
 ## [Unreleased]
 ### Added
+- Add `Cached` decorator to handle LLM caching.
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
+- Fix issue where cached JSON responses were not parsed by JsonReceiver.
 ### Security
 
 ## [0.2.1] - 2025-02-14

@@ -16,7 +16,10 @@ from fnllm.openai.types.aliases import (
 )
 from fnllm.openai.types.chat.io import OpenAIChatOutput
 
-from tests.unit.openai.llm.conftest import OpenAIChatCompletionClientMock
+from tests.unit.openai.llm.conftest import (
+    OpenAIChatCompletionClientMock,
+    mock_chat_completion_model,
+)
 
 if TYPE_CHECKING:
     from fnllm.openai.types import OpenAIChatLLM
@@ -29,6 +32,7 @@ def test_open_ai_chat_output_str():
             content="some content",
             role="assistant",
         ),
+        raw_model=mock_chat_completion_model(),
         content="some content",
         usage=None,
     )

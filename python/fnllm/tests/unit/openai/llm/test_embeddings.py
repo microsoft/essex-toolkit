@@ -17,7 +17,6 @@ from tests.unit.openai.llm.conftest import OpenAIEmbeddingsClientMock
 def test_embedding_llm_child_with_cache():
     llm = OpenAIEmbeddingsLLMImpl(
         client=Mock(),
-        cache=None,
         model="model",
     )
     child = llm.child("test")
@@ -25,7 +24,7 @@ def test_embedding_llm_child_with_cache():
 
     llm = OpenAIEmbeddingsLLMImpl(
         client=Mock(),
-        cache=Mock(),
+        cached=Mock(),
         model="model",
     )
     child = llm.child("test")
@@ -107,7 +106,9 @@ async def test_embeddings_llm_with_global_model_config_overwrite(
 
     # check the expected output
     expected_output = embeddings_client_mock.expected_output_for_prompt(input_prompt)
-    assert response.output == expected_output
+    assert response.output.embeddings == expected_output.embeddings
+    assert response.output.raw_input == expected_output.raw_input
+    assert response.output.raw_output == expected_output.raw_output
 
     # check the parameters have properly propagated to the client call
     embeddings_client_mock.response_mock.assert_called_once_with(
@@ -152,7 +153,9 @@ async def test_embeddings_llm_with_cache(
     # check initial cache miss
     response = await llm(input_prompt, name=name)
     expected_output = embeddings_client_mock.expected_output_for_prompt(input_prompt)
-    assert response.output == expected_output
+    assert response.output.embeddings == expected_output.embeddings
+    assert response.output.raw_input == expected_output.raw_input
+    assert response.output.raw_output == expected_output.raw_output
     mocked_events.on_cache_miss.assert_called_once_with(ANY, name)
 
     # calling again should be a cache hit
@@ -174,7 +177,6 @@ async def test_embeddings_llm_with_cache(
 def test_is_reasoning_model():
     llm = OpenAIEmbeddingsLLMImpl(
         client=Mock(),
-        cache=None,
         model="O3-MINI",
     )
 
@@ -184,7 +186,6 @@ def test_is_reasoning_model():
 def test_is_not_reasoning_model():
     llm = OpenAIEmbeddingsLLMImpl(
         client=Mock(),
-        cache=None,
         model="other-model",
     )
 
