@@ -9,23 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ```md
 ## [Unreleased]
 ### Added
-- Adding `max_completion_tokens` to `OpenAIChatParameters`.
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
 ```
-## [Unreleased]
+
+## [0.2.2] - 2025-02-17
 ### Added
+- Adding `max_completion_tokens` to `OpenAIChatParameters`.
 - Add `Cached` decorator to handle LLM caching.
 ### Changed
 - Log out all LLM events to either DEBUG, WARN, or ERROR to reduce default log volume.
-### Deprecated
-### Removed
 ### Fixed
 - Fix issue where cached JSON responses were not parsed by JsonReceiver.
-### Security
 
 ## [0.2.1] - 2025-02-14
 ### Fixed
