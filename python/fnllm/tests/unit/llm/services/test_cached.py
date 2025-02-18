@@ -5,6 +5,7 @@
 from unittest.mock import AsyncMock, Mock
 
 from fnllm.base.services.cached import Cached
+from fnllm.types.io import LLMOutput
 
 
 def test_cached() -> None:
@@ -81,3 +82,25 @@ async def test_cache_bypass() -> None:
 
     result = await decorated("test", name="test", bypass_cache=True)
     assert result is not None
+
+
+async def test_cache_bust() -> None:
+    """Test the Cached Decorator normal call."""
+    delegate = AsyncMock(return_value=LLMOutput(output="abcdef"))
+
+    # Empty cache
+    cache = Mock()
+    cache.set = AsyncMock(return_value=None)
+
+    # Mock Events
+    events = Mock()
+
+    # Mock Adapter
+    adapter = Mock()
+    adapter.wrap_output = lambda _, __, x: x
+
+    decorator = Cached(cache=cache, events=events, cache_adapter=adapter)
+    decorated = decorator.decorate(delegate)
+
+    result = await decorated("test", name="test", bust_cache=True)
+    assert result.output == "abcdef"

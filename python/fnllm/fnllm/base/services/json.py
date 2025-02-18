@@ -89,11 +89,10 @@ class JsonReceiver(
     ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
         """Invoke the JSON decorator."""
         error: FailedToGenerateValidJsonError | None = None
-        name = kwargs.get("name", "")
         for attempt in range(self._max_retries + 1):
             try:
                 if attempt > 0:
-                    kwargs["name"] = f"{name}-(retry {attempt})"
+                    kwargs["bust_cache"] = True
                 return await self.try_receive_json(delegate, prompt, kwargs)
             except FailedToGenerateValidJsonError as e:
                 error = e
