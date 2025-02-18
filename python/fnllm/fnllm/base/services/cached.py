@@ -94,8 +94,14 @@ class Cached(
         async def invoke(prompt: TInput, **kwargs: Unpack[LLMInput[Any, Any, Any]]):
             key = self._cache_adapter.build_cache_key(prompt, kwargs)
             name = kwargs.get("name")
+            bypass_cache = kwargs.get("bypass_cache", False)
             bust_cache = kwargs.get("bust_cache", False)
 
+            # If we're bypassing, invoke the delegate directly
+            if bypass_cache:
+                return await delegate(prompt, **kwargs)
+
+            # If we're busting the cache, skip the cache read
             if not bust_cache:
                 cached = await self._cache.get(key)
                 if cached is not None:
