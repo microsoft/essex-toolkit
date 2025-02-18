@@ -9,14 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ```md
 ## [Unreleased]
 ### Added
-- Add `cache_bust` flag to LLMInput.
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
-- Handle `bypass_cache` flag in Cached decorator.
 ### Security
 ```
+## [Unreleased]
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [0.2.3] - 2025-02-17
+### Added
+- Add `cache_bust` flag to LLMInput.
+### Fixed
+- Handle `bypass_cache` flag in Cached decorator.
 
 ## [0.2.2] - 2025-02-17
 ### Added
