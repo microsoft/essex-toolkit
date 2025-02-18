@@ -94,6 +94,10 @@ class Cached(
         async def invoke(prompt: TInput, **kwargs: Unpack[LLMInput[Any, Any, Any]]):
             key = self._cache_adapter.build_cache_key(prompt, kwargs)
             name = kwargs.get("name")
+            bypass_cache = kwargs.get("bypass_cache", False)
+            if bypass_cache:
+                return await delegate(prompt, **kwargs)
+
             cached = await self._cache.get(key)
             if cached is not None:
                 await self._events.on_cache_hit(key, name)
