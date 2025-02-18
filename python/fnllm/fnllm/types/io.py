@@ -48,6 +48,9 @@ class LLMInput(TypedDict, Generic[TJsonModel, THistoryEntry, TModelParameters]):
     bypass_cache: NotRequired[bool]
     """Bypass the cache (if any) for this LLM invocation."""
 
+    bust_cache: NotRequired[bool]
+    """Bust the cache (if any) for this LLM invocation. (e.g. ignore existing cache entries during read, but write cache results)"""
+
 
 class LLMOutput(BaseModel, Generic[TOutput, TJsonModel, THistoryEntry]):
     """The output of an LLM invocation."""

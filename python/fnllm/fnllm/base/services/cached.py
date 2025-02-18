@@ -94,11 +94,14 @@ class Cached(
         async def invoke(prompt: TInput, **kwargs: Unpack[LLMInput[Any, Any, Any]]):
             key = self._cache_adapter.build_cache_key(prompt, kwargs)
             name = kwargs.get("name")
-            cached = await self._cache.get(key)
-            if cached is not None:
-                await self._events.on_cache_hit(key, name)
-                output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
-                return LLMOutput(output=output, cache_hit=True)
+            bust_cache = kwargs.get("bust_cache", False)
+
+            if not bust_cache:
+                cached = await self._cache.get(key)
+                if cached is not None:
+                    await self._events.on_cache_hit(key, name)
+                    output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
+                    return LLMOutput(output=output, cache_hit=True)
 
             await self._events.on_cache_miss(key, name)
             result = await delegate(prompt, **kwargs)
