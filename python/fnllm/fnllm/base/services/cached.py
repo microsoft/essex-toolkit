@@ -25,6 +25,7 @@ if TYPE_CHECKING:
     from fnllm.caching import Cache
     from fnllm.events import LLMEvents
     from fnllm.types.io import LLMInput
+
 RetryableErrorHandler = Callable[[BaseException], Awaitable[None]]
 
 
