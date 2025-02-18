@@ -103,7 +103,8 @@ class Cached(
                     output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
                     return LLMOutput(output=output, cache_hit=True)
 
-            await self._events.on_cache_miss(key, name)
+                await self._events.on_cache_miss(key, name)
+
             result = await delegate(prompt, **kwargs)
             input_data = self._cache_adapter.get_cache_input_data(prompt, kwargs)
             await self._cache.set(
