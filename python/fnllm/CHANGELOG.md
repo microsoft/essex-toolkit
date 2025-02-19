@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 ### Changed
+- Use module-level logger in LLMEventsLogger (#374)
+- Only create a single-instance of retryable error tuple (#373)
 ### Deprecated
 ### Removed
 ### Fixed
@@ -25,9 +27,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.3] - 2025-02-17
 ### Added
-- Add `cache_bust` flag to LLMInput.
+- Add `cache_bust` flag to LLMInput (#373).
 ### Fixed
-- Handle `bypass_cache` flag in Cached decorator.
+- Handle `bypass_cache` flag in Cached decorator (#372).
 
 ## [0.2.2] - 2025-02-17
 ### Added
