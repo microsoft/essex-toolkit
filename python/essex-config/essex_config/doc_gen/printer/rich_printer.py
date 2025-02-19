@@ -1,6 +1,7 @@
 """Printer to print the configuration using rich."""
 
-from typing import cast
+from types import UnionType
+from typing import Union, cast, get_args, get_origin
 
 from pydantic import BaseModel
 from pydantic_core import PydanticUndefined
@@ -77,9 +78,16 @@ class RichConfigurationPrinter(ConfigurationPrinter):
                     "",
                 )
                 continue
+            origin = get_origin(field_type)
+            if origin is Union or origin is UnionType:
+                types = [str(field_type) for field_type in get_args(field_type)]
+            else:
+                types = [
+                    info.annotation.__name__ if info.annotation is not None else "Any"
+                ]
 
             params.add_row(
-                f"{name}: {info.annotation.__name__ if info.annotation is not None else 'Any'}",
+                f"{name}: {'|'.join(types)}",
                 info.description if info.description is not None else "",
                 source_alias,
                 prefix,
