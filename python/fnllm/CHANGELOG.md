@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 ### Changed
+- Use module-level logger in LLMEventsLogger.
+- Only create a single-instance of retryable error tuple.
 ### Deprecated
 ### Removed
 ### Fixed
