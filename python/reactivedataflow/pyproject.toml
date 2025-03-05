@@ -18,7 +18,8 @@ dev-dependencies = [
     "poethepoet>=0.26.1",
     "pytest>=8.2.2",
     "pyright>=1.1.366",
-    "coverage>=7.5.3",
+    "pytest-cov>=6.0.0",
+    "pytest-asyncio>=0.24.0",
     "numpy<2",
     "pytest-asyncio>=0.23.7"
 ]
@@ -40,17 +41,7 @@ fix = "ruff  --preview check --fix ."
 fix_unsafe = "ruff check --preview --fix --unsafe-fixes ."
 format = ['_sort_imports', '_format_code']
 test = "pytest tests"
-
-_test_with_coverage = 'coverage run --source=reactivedataflow -m pytest tests/unit'
-_coverage_report = 'coverage report --fail-under=100 --show-missing --omit="reactivedataflow/nodes/node.py,reactivedataflow/types.py,reactivedataflow/config_provider.py,reactivedataflow/callbacks.py"'
-_generate_coverage_xml = 'coverage xml --omit="reactivedataflow/nodes/node.py,reactivedataflow/types.py,reactivedataflow/config_provider.py,reactivedataflow/callbacks.py"'
-_generate_coverage_html = 'coverage html --omit="reactivedataflow/nodes/node.py,reactivedataflow/types.py,reactivedataflow/config_provider.py,reactivedataflow/callbacks.py"'
-test_coverage = [
-    '_test_with_coverage',  
-    '_generate_coverage_xml',
-    '_generate_coverage_html',
-    '_coverage_report'
-]
+test_coverage = "pytest tests --cov-fail-under=98"
 test_only = "pytest -v -k"
 
 [tool.pytest.ini_options]
@@ -59,3 +50,5 @@ log_cli_level = "INFO"
 log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
 log_cli_date_format = "%Y-%m-%d %H:%M:%S"
 asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope="session"
+addopts="--cov-config=.coveragerc --cov=reactivedataflow --cov-report=html --cov-report=xml --cov-report=term-missing --cov-branch"

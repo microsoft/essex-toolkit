@@ -41,9 +41,17 @@
     "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
     "*.jsx": "${capture}.js",
     "package.json": ".npmignore, turbo.json, biome.json, tsconfig.json, tsconfig.*.json, jest.config.js, rome.json, .yarnrc.yml, yarn.lock, .pnp.cjs, .pnp.loader.mjs",
-    "pyproject.toml": "uv.lock, ruff.toml, mkdocs.yml",
+    "pyproject.toml": "uv.lock, poetry.lock, ruff.toml, .python-version, mkdocs.yml, nuget.config, .vsts-ci.yml",
+		"cspell.json": "custom-words.txt",
+		"README.md": "ARCHITECTURE.md, DEVELOPING.md, SECURITY.md, SUPPORT.md, CODE_OF_CONDUCT.md, CHANGELOG.md, LICENSE",
+		"graphragcode.sample.yaml": "graphragcode.*.yaml, graphragcode.yaml, graphragcode.log, .env",
+		".coveragerc": "coverage.xml, .coverage",
     ".gitignore": ".gitattributes",
-    "README.md": "SECURITY.md, SUPPORT.md, CODE_OF_CONDUCT.md, CHANGELOG.md, LICENSE"
   },
-  "ruff.configuration": "./ruff.toml"
+  "ruff.configuration": "./ruff.toml",
+  "python.testing.pytestArgs": [
+    "python"
+  ],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true
 }
