@@ -1,3 +1,6 @@
+[run]
+omit = python/*/*_tests/*
+
 [report]
 exclude_lines = 
     pragma: no cover
