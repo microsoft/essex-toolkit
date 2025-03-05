@@ -109,7 +109,7 @@ class Batcher(ABC, Generic[CallInput, CallOutput]):
     def _can_add_to_batch(self, call: Call) -> bool:
         new_cost = self._current_batch.cost + call.cost
         return (
-            self._current_batch.num_calls < self._max_batch_size
+            self._current_batch.num_calls < self.max_batch_size
             and new_cost <= self._max_batch_cost
         )
 
