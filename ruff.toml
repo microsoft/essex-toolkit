@@ -76,7 +76,7 @@ ignore = [
 order-by-type = true
 
 [lint.per-file-ignores]
-"**/tests/*" = ["S", "D", "ANN", "T201", "ASYNC", "ARG", "PTH", "TRY", "SLF001"]
+"**/*_tests/*" = ["S", "D", "ANN", "T201", "ASYNC", "ARG", "PTH", "TRY", "SLF001"]
 "rich_printer.py" = ["A004"]
 "*.ipynb" = ["T201"]
 

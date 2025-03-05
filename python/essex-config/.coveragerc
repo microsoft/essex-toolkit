@@ -1,5 +1,5 @@
 [run]
-omit = tests/*
+omit = essex_config_tests/*
 
 [report]
 exclude_lines = 
