@@ -6,7 +6,7 @@ from typing import Generic, Protocol, TypeVar
 T = TypeVar("T", covariant=True)
 
 
-class ConfigProvider(Protocol, Generic[T]):
+class ConfigProvider(Protocol, Generic[T]):  # pragma: no cover
     """A protocol for providing configuration values.
 
     ConfigProviders are evaluated lazily, as they have no way of triggering an ExecutionNode update.

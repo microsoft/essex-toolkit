@@ -5,7 +5,7 @@ from typing import Protocol, runtime_checkable
 
 
 @runtime_checkable
-class Callbacks(Protocol):
+class Callbacks(Protocol):  # pragma: no cover
     """The callbacks for the execution graph."""
 
     def on_verb_start(self, node_id: str, verb: str) -> None:

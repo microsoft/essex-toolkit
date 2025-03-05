@@ -9,7 +9,7 @@ from reactivedataflow.callbacks import Callbacks
 from reactivedataflow.constants import default_output
 
 
-class Node(Protocol):
+class Node(Protocol):  # pragma: no cover
     """The Node protocol for dynamic processing graphs."""
 
     @property

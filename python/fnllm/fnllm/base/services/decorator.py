@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
 
 @runtime_checkable
-class LLMDecorator(Protocol, Generic[TOutput, THistoryEntry]):
+class LLMDecorator(Protocol, Generic[TOutput, THistoryEntry]):  # pragma: no cover
     """A decorator for LLM calls."""
 
     def decorate(

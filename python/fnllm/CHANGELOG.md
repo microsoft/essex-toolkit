@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ```
 ## [Unreleased]
 ### Added
+- Add `InvalidLLMResultError` and ``OpenAINoChoicesAvailableError`, which are raised when the LLM returns an invalid result or no choices are available; these are included in the retry logic.
 ### Changed
 - Use module-level logger in LLMEventsLogger.
 - Only create a single-instance of retryable error tuple.
