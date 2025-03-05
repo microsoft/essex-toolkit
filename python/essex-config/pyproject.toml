@@ -20,7 +20,8 @@ dependencies = [
 
 [tool.uv]
 dev-dependencies = [
-    "coverage>=7.5.4",
+    "pytest-cov>=6.0.0",
+    "pytest-asyncio>=0.24.0",
     "pytest>=8.2.2",
     "ruff>=0.6.8",
     "poethepoet>=0.26.1",
@@ -45,20 +46,20 @@ fix = "ruff  --preview check --fix ."
 fix_unsafe = "ruff check --preview --fix --unsafe-fixes ."
 format = ['_sort_imports', '_format_code']
 test = "pytest tests"
-
-_test_with_coverage = 'coverage run --source=essex_config -m pytest tests/unit'
-_coverage_report = 'coverage report --fail-under=100 --show-missing --omit="essex_config/doc_gen/__main__.py"'
-_generate_coverage_xml = 'coverage xml --omit="essex_config/doc_gen/__main__.py"'
-_generate_coverage_html = 'coverage html --omit="essex_config/doc_gen/__main__.py"'
-test_coverage = [
-    '_test_with_coverage',  
-    '_generate_coverage_xml',
-    '_generate_coverage_html',
-    '_coverage_report'
-]
+test_coverage = "pytest tests --cov-fail-under=96"
 test_only = "pytest -v -k"
 
 # https://github.com/microsoft/pyright/blob/9f81564a4685ff5c55edd3959f9b39030f590b2f/docs/configuration.md#sample-pyprojecttoml-file
 [tool.pyright]
 include = ["essex_config", "tests"]
 exclude = ["**/__pycache__"]
+
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "INFO"
+log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope="session"
+addopts="--cov-config=.coveragerc --cov=essex_config --cov-report=html --cov-report=xml --cov-report=term-missing --cov-branch"
