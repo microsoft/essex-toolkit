@@ -9,10 +9,15 @@ from typing import Final
 
 from openai import APIConnectionError, InternalServerError, RateLimitError
 
+from fnllm.base.services.errors import InvalidLLMResultError
+from fnllm.errors import OpenAINoChoicesAvailableError
+
 OPENAI_RETRYABLE_ERRORS: Final[list[type[Exception]]] = [
     RateLimitError,
     APIConnectionError,
     InternalServerError,
+    OpenAINoChoicesAvailableError,
+    InvalidLLMResultError,
 ]
 
 

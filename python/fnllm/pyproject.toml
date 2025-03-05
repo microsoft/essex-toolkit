@@ -50,6 +50,7 @@ dev-dependencies = [
     "azure-storage-blob>=12.20.0",
     # Numpy Optional
     "numpy>=1.26.4",
+    "polyfactory>=2.19.0",
 ]
 
 [build-system]
