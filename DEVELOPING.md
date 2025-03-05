@@ -1,7 +1,19 @@
 # Development Instructions
 
+
 ## JavaScript
-TODO
+
+### Prerequisites
+* Node LTS (20+)
+* Yarn (npm i -g yarn)
+
+### Setup
+To install the dependencies across the project, run this command at the top level. This will ensure that all dependencies are loaded, and that tests can be run across all JavaScript projects.
+```sh
+yarn
+```
+
+Available tasks are listed in `package.json` under the `scripts` section. You can run them using `yarn <task>`.
 
 ## Python
 
