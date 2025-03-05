@@ -45,13 +45,13 @@ check = ['_format_check', '_ruff_check', 'typecheck', 'check_package_types']
 fix = "ruff  --preview check --fix ."
 fix_unsafe = "ruff check --preview --fix --unsafe-fixes ."
 format = ['_sort_imports', '_format_code']
-test = "pytest tests"
-test_coverage = "pytest tests --cov-fail-under=96"
+test = "pytest essex_config_tests"
+test_coverage = "pytest essex_config_tests --cov-fail-under=96"
 test_only = "pytest -v -k"
 
 # https://github.com/microsoft/pyright/blob/9f81564a4685ff5c55edd3959f9b39030f590b2f/docs/configuration.md#sample-pyprojecttoml-file
 [tool.pyright]
-include = ["essex_config", "tests"]
+include = ["essex_config", "essex_config_tests"]
 exclude = ["**/__pycache__"]
 
 

@@ -30,7 +30,7 @@ build-backend = "hatchling.build"
 
 # https://github.com/microsoft/pyright/blob/9f81564a4685ff5c55edd3959f9b39030f590b2f/docs/configuration.md#sample-pyprojecttoml-file
 [tool.pyright]
-include = ["reactivedataflow", "tests"]
+include = ["reactivedataflow", "reactivedataflow_tests"]
 exclude = ["**/__pycache__"]
 
 [tool.poe.tasks]
@@ -45,8 +45,8 @@ check = ['_format_check', '_ruff_check', 'typecheck', 'check_package_types']
 fix = "ruff  --preview check --fix ."
 fix_unsafe = "ruff check --preview --fix --unsafe-fixes ."
 format = ['_sort_imports', '_format_code']
-test = "pytest tests"
-test_coverage = "pytest tests --cov-fail-under=98"
+test = "pytest reactivedataflow_tests"
+test_coverage = "pytest reactivedataflow_tests --cov-fail-under=98"
 test_only = "pytest -v -k"
 
 [tool.pytest.ini_options]

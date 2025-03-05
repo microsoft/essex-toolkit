@@ -1,5 +1,5 @@
 [run]
-omit = tests/*
+omit = reactivedataflow_tests/*
 
 [report]
 exclude_lines = 
