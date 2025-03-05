@@ -28,6 +28,11 @@ dev-dependencies = [
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+# https://github.com/microsoft/pyright/blob/9f81564a4685ff5c55edd3959f9b39030f590b2f/docs/configuration.md#sample-pyprojecttoml-file
+[tool.pyright]
+include = ["reactivedataflow", "tests"]
+exclude = ["**/__pycache__"]
+
 [tool.poe.tasks]
 _sort_imports = "ruff check --select I --fix . --preview"
 _ruff_check = 'ruff check . --preview'
