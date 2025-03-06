@@ -17,15 +17,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ```
 ## [Unreleased]
 ### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [0.2.4] - 2025-03-06
+### Added
 - Add `InvalidLLMResultError` and ``OpenAINoChoicesAvailableError`, which are raised when the LLM returns an invalid result or no choices are available; these are included in the retry logic.
 - Add reasoning effort to chat model parameters.
 ### Changed
 - Use module-level logger in LLMEventsLogger.
 - Only create a single-instance of retryable error tuple.
-### Deprecated
-### Removed
-### Fixed
-### Security
 
 ## [0.2.3] - 2025-02-17
 ### Added

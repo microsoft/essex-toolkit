@@ -58,6 +58,7 @@ jobs:
         run: uv sync --locked
       
       - name: Install Azurite
+        if: matrix.project == 'fnllm'
         id: azuright
         uses: potatoqualitee/azuright@v1.1
 
