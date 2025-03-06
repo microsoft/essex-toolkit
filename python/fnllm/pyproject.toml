@@ -75,15 +75,20 @@ check = ['_format_check', '_ruff_check', 'typecheck', 'check_package_types']
 fix = "ruff check --preview --fix ."
 fix_unsafe = "ruff check --preview --fix --unsafe-fixes ."
 format = ['_sort_imports', '_format_code']
+
 test = "pytest fnllm_tests"
 test_coverage = "pytest fnllm_tests --cov-fail-under=95"
+test_integration = "python fnllm_tests -m azurite"
 test_only = "pytest -v -k"
 
 [tool.pytest.ini_options]
+markers = [
+	"azurite: mark test as requiring azurite"
+]
 log_cli = true
 log_cli_level = "INFO"
 log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
 log_cli_date_format = "%Y-%m-%d %H:%M:%S"
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope="session"
-addopts="--cov-config=.coveragerc --cov=fnllm --cov-report=html --cov-report=xml --cov-report=term-missing --cov-branch"
+addopts="--cov-config=.coveragerc --cov=fnllm --cov-report=html --cov-report=xml --cov-report=term-missing --cov-branch -m 'not azurite'"

@@ -48,6 +48,7 @@ def test_can_build_with_storage_account_blob_url():
         (("object key", {"a": 1, "b": 2})),
     ],
 )
+@pytest.mark.azurite
 async def test_default_operations(blob_cache: BlobCache, key_value: tuple[str, Any]):
     key, value = key_value
 
@@ -67,6 +68,7 @@ async def test_default_operations(blob_cache: BlobCache, key_value: tuple[str, A
     assert await blob_cache.get(key) is None
 
 
+@pytest.mark.azurite
 async def test_replace_value(blob_cache: BlobCache):
     key, value = ("key", "value")
     other_value = "other value"
@@ -82,6 +84,7 @@ async def test_replace_value(blob_cache: BlobCache):
     assert await blob_cache.get(key) == other_value
 
 
+@pytest.mark.azurite
 async def test_clear(blob_cache: BlobCache):
     # should start empty
     assert _is_container_empty(blob_cache) is True
@@ -110,6 +113,7 @@ async def test_clear(blob_cache: BlobCache):
     assert _is_container_empty(blob_cache) is True
 
 
+@pytest.mark.azurite
 async def test_children(blob_cache: BlobCache):
     # settings some values
     await blob_cache.set("test", "value")
@@ -131,6 +135,7 @@ async def test_children(blob_cache: BlobCache):
     assert await blob_cache.get("child/test") == "child_value"
 
 
+@pytest.mark.azurite
 def _is_container_empty(cache: BlobCache) -> bool:
     blobs = list(cache.container_client.list_blobs())
     return len(blobs) == 0
@@ -168,6 +173,7 @@ def test_container_name_validation():
     assert validate_blob_container_name("123validname")
 
 
+@pytest.mark.azurite
 async def test_handles_common_errors(blob_cache: BlobCache):
     # Json Errors
     blob_cache.blob_client("json_error").upload_blob("""{ "data""")
