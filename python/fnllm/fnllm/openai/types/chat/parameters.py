@@ -8,6 +8,7 @@ from typing import Literal
 from typing_extensions import NotRequired, TypedDict
 
 from fnllm.openai.types.aliases import (
+    OpenAIChatCompletionReasoningEffortParam,
     OpenAIChatCompletionToolChoiceOptionParam,
     OpenAIChatCompletionToolParam,
     OpenAIChatModelName,
@@ -67,3 +68,5 @@ class OpenAIChatParameters(TypedDict):
     user: NotRequired[str]
 
     timeout: NotRequired[float | None]
+
+    reasoning_effort: NotRequired[OpenAIChatCompletionReasoningEffortParam]

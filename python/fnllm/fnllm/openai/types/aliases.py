@@ -11,6 +11,7 @@ from openai.types.chat import (
 from openai.types.chat import (
     ChatCompletionMessage as ChatCompletionMessageModel,
 )
+from openai.types.chat import ChatCompletionReasoningEffort
 from openai.types.chat.chat_completion import Choice as ChoiceModel
 from openai.types.chat.chat_completion_assistant_message_param import (
     FunctionCall as FunctionCallParam,
@@ -197,3 +198,6 @@ OpenAIEmbeddingModel: TypeAlias = EmbeddingModel
 
 OpenAIEmbeddingUsageModel: TypeAlias = EmbeddingUsageModel
 """Alias for the EmbeddingUsage (base model)."""
+
+OpenAIChatCompletionReasoningEffortParam: TypeAlias = ChatCompletionReasoningEffort
+"""Alias for the ChatCompletionReasoningEffort (param)."""
