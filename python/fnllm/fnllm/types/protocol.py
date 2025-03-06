@@ -15,7 +15,9 @@ if TYPE_CHECKING:
 
 
 @runtime_checkable
-class LLM(Protocol, Generic[TInput, TOutput, THistoryEntry, TModelParameters]):
+class LLM(
+    Protocol, Generic[TInput, TOutput, THistoryEntry, TModelParameters]
+):  # pragma: no cover
     """LLM protocol definition."""
 
     async def __call__(

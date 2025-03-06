@@ -59,7 +59,7 @@ OpenAIEmbeddingsLLM: TypeAlias = LLM[
 
 
 @runtime_checkable
-class OpenAIChatLLM(Protocol):
+class OpenAIChatLLM(Protocol):  # pragma: no cover
     """Protocol for the OpenAI chat LLM."""
 
     @overload
