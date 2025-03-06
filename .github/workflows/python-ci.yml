@@ -56,11 +56,6 @@ jobs:
 
       - name: Install Dependencies
         run: uv sync --locked
-      
-      - name: Install Azurite
-        if: matrix.project == 'fnllm'
-        id: azuright
-        uses: potatoqualitee/azuright@v1.1
 
       - name: ${{ matrix.project }} - Check
         working-directory: ./python/${{ matrix.project }}
