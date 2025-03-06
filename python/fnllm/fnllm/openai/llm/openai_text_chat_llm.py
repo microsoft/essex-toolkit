@@ -11,6 +11,7 @@ from openai.types.chat.chat_completion_message_param import ChatCompletionMessag
 
 from fnllm.base.base_llm import BaseLLM
 from fnllm.base.config import JsonStrategy
+from fnllm.base.services.errors import InvalidLLMResultError
 from fnllm.openai.services.openai_history_extractor import (
     OpenAIHistoryExtractor,
 )
@@ -37,6 +38,14 @@ if TYPE_CHECKING:
     from fnllm.openai.types.client import OpenAIClient
     from fnllm.types.generics import TJsonModel
     from fnllm.types.io import LLMInput
+
+
+class OpenAINoChoicesAvailableError(InvalidLLMResultError):
+    """No choices returned from OpenAI chat completion."""
+
+    def __init__(self) -> None:
+        """Init method definition."""
+        super().__init__("No choices returned from OpenAI chat completion.")
 
 
 class OpenAITextChatLLMImpl(
@@ -158,6 +167,9 @@ class OpenAITextChatLLMImpl(
             messages=cast(Iterator[ChatCompletionMessageParam], messages),
             **parameters,
         )
+
+        if not completion.choices or len(completion.choices) == 0:
+            raise OpenAINoChoicesAvailableError
 
         result = completion.choices[0].message
         usage: LLMUsageMetrics | None = None

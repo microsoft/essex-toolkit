@@ -5,6 +5,14 @@
 from __future__ import annotations
 
 
+class InvalidLLMResultError(RuntimeError):
+    """Invalid LLM result error."""
+
+    def __init__(self, message: str) -> None:
+        """Init method definition."""
+        super().__init__(message)
+
+
 class RetriesExhaustedError(RuntimeError):
     """Retries exhausted error."""
 

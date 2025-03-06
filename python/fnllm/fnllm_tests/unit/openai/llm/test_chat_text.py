@@ -1,7 +1,14 @@
-from unittest.mock import Mock
+from unittest.mock import AsyncMock, Mock
 
+import pytest
+from fnllm.base.services.errors import InvalidLLMResultError
 from fnllm.enums import JsonStrategy
-from fnllm.openai.llm.openai_text_chat_llm import OpenAITextChatLLMImpl
+from fnllm.openai.llm.openai_text_chat_llm import (
+    OpenAINoChoicesAvailableError,
+    OpenAITextChatLLMImpl,
+)
+from fnllm.openai.types.aliases import ChatCompletionModel
+from polyfactory.factories.pydantic_factory import ModelFactory
 
 
 def test_child_with_cache():
@@ -47,3 +54,30 @@ def test_is_not_reasoning_model():
 
     # check reasoning model
     assert not llm.is_reasoning_model()
+
+
+class ChatCompletionModelFactory(ModelFactory[ChatCompletionModel]):
+    __model__ = ChatCompletionModel
+
+
+async def test_raises_no_choices_available():
+    client = Mock()
+    client.chat = Mock()
+    client.chat.completions = Mock()
+    client.chat.completions.create = AsyncMock()
+    response = ChatCompletionModelFactory.build(choices=[])
+    client.chat.completions.create.return_value = response
+
+    llm = OpenAITextChatLLMImpl(
+        client=client,
+        model="model",
+        json_receiver=None,
+        json_strategy=JsonStrategy.VALID,
+    )
+
+    # check reasoning model
+    with pytest.raises(OpenAINoChoicesAvailableError):
+        await llm("test")
+
+    with pytest.raises(InvalidLLMResultError):
+        await llm("test")
