@@ -114,14 +114,18 @@ class Cached(
 
             result = await delegate(prompt, **kwargs)
             input_data = self._cache_adapter.get_cache_input_data(prompt, kwargs)
+            metadata = {
+                "input": input_data,
+                "key": key,
+            }
+            input_metadata = kwargs.get("cache_metadata")
+            if input_metadata:
+                metadata["custom"] = input_metadata
+
             await self._cache.set(
                 key,
                 self._cache_adapter.dump_raw_model(result.output),
-                {
-                    **kwargs.get("cache_metadata", {}),
-                    "input": input_data,
-                    "key": key,
-                },
+                metadata,
             )
             return result
 
