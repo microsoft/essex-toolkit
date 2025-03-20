@@ -34,6 +34,10 @@ class Cache(ABC):
         """Clear the cache."""
 
     @abstractmethod
+    async def sweep(self, age: int, *, remove_unreadable: bool = False) -> None:
+        """Sweep the cache for entries older than `age` seconds."""
+
+    @abstractmethod
     async def set(
         self, key: str, value: Any, metadata: dict[str, Any] | None = None
     ) -> None:
