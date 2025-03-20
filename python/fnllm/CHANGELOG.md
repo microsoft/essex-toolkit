@@ -16,18 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
-## [Unreleased]
+## [0.2.6] - 2025-03-20
 ### Added
 - Add `cache.sweep` function to remove expired cache entries.
 - Allow user-defined cache entry metadata.
 - Add cache key to entry metadata.
-### Changed
-### Deprecated
-### Removed
-### Fixed
-### Security
 
-## [0.2.5] - 2025-03-7
+## [0.2.5] - 2025-03-07
 ### Fixed
 - Resolve circular import, remove `OpenAINoChoicesAvailableError` from top-level errors.
 ## [0.2.4] - 2025-03-06
