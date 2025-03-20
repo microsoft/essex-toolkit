@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Add `cache.sweep` function to remove expired cache entries.
+- Allow user-defined cache entry metadata.
+- Add cache key to entry metadata.
 ### Changed
 ### Deprecated
 ### Removed

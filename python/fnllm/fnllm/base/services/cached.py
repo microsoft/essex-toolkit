@@ -117,7 +117,11 @@ class Cached(
             await self._cache.set(
                 key,
                 self._cache_adapter.dump_raw_model(result.output),
-                {"input": input_data},
+                {
+                    **kwargs.get("cache_metadata", {}),
+                    "input": input_data,
+                    "key": key,
+                },
             )
             return result
 
