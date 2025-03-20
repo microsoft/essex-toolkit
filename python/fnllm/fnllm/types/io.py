@@ -51,6 +51,9 @@ class LLMInput(TypedDict, Generic[TJsonModel, THistoryEntry, TModelParameters]):
     bust_cache: NotRequired[bool]
     """Bust the cache (if any) for this LLM invocation. (e.g. ignore existing cache entries during read, but write cache results)"""
 
+    cache_metadata: NotRequired[dict[str, Any]]
+    """Metadata to use when writing to the cache. This is for diagnostic/debugging purposes."""
+
 
 class LLMOutput(BaseModel, Generic[TOutput, TJsonModel, THistoryEntry]):
     """The output of an LLM invocation."""

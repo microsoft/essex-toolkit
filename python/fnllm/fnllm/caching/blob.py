@@ -165,6 +165,10 @@ class BlobCache(Cache):
         for blob in [*self.container_client.list_blob_names()]:
             self.blob_client(blob).delete_blob()
 
+    async def sweep(self, age: int, *, remove_unreadable: bool = False) -> None:
+        """Sweep the cache for entries older than `age` seconds."""
+        raise NotImplementedError
+
     def child(self, key: str) -> "BlobCache":
         """Create a child storage instance."""
         path = str(Path(self._path_prefix) / key)
