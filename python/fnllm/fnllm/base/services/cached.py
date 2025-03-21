@@ -83,6 +83,10 @@ class Cached(
             cache_adapter=self._cache_adapter,
         )
 
+    def _dump_output(self, output: TOutput) -> dict[str, Any]:
+        """Dump the raw model output."""
+        return self._cache_adapter.dump_raw_model(output)
+
     def decorate(
         self,
         delegate: Callable[
@@ -96,41 +100,57 @@ class Cached(
             name = kwargs.get("name")
             bypass_cache = kwargs.get("bypass_cache", False)
             bust_cache = kwargs.get("bust_cache", False)
+            cache_metadata = kwargs.get("cache_metadata")
 
+            #
             # If we're bypassing, invoke the delegate directly
+            #
             if bypass_cache:
                 return await delegate(prompt, **kwargs)
 
-            # If we're busting the cache, skip the cache read
-            if not bust_cache:
-                cached = await self._cache.get(key)
-                if cached is not None:
-                    await self._events.on_cache_hit(key, name)
-                    output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
-                    return LLMOutput(output=output, cache_hit=True)
-
-            result = await delegate(prompt, **kwargs)
-            input_data = self._cache_adapter.get_cache_input_data(prompt, kwargs)
             metadata = self._get_metadata(
-                key=key, data=input_data, metadata=kwargs.get("cache_metadata")
+                key=key,
+                data=self._cache_adapter.get_cache_input_data(prompt, kwargs),
+                metadata=cache_metadata,
             )
 
-            # Last-minute cache check to prevent inflight collisions.
-            if not bust_cache:
-                cached = await self._cache.get(key)
-                if cached is not None:
-                    await self._events.on_cache_hit(key, name)
-                    output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
-                    return LLMOutput(output=output, cache_hit=True)
+            #
+            # If we're busting the cache, invoke the LLM, write the result,  and don't bother checking for collisions
+            #
+            if bust_cache:
+                result = await delegate(prompt, **kwargs)
+                await self._cache.set(key, self._dump_output(result.output), metadata)
+                return result
 
-            await self._cache.set(
-                key,
-                self._cache_adapter.dump_raw_model(result.output),
-                metadata,
-            )
+            #
+            # Check the cache before invoking the LLM
+            #
+            cached = await self._cache.get(key)
+            if cached is not None:
+                await self._events.on_cache_hit(key, name)
+                output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
+                return LLMOutput(output=output, cache_hit=True)
 
-            if not bust_cache:
-                await self._events.on_cache_miss(key, name)
+            #
+            # If we don't have a cache hit, invoke the LLM
+            #
+            result = await delegate(prompt, **kwargs)
+
+            #
+            # Check for inflight collisions
+            #
+            cached = await self._cache.get(key)
+            if cached is not None:
+                await self._events.on_cache_hit(key, name)
+                output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
+                return LLMOutput(output=output, cache_hit=True)
+
+            #
+            # Write out to the cache
+            #
+            await self._events.on_cache_miss(key, name)
+            await self._cache.set(key, self._dump_output(result.output), metadata)
+
             return result
 
         return cast(Any, invoke)
