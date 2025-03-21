@@ -33,8 +33,7 @@ class Cache(ABC):
     async def clear(self) -> None:
         """Clear the cache."""
 
-    @abstractmethod
-    async def sweep(self, age: int, *, remove_unreadable: bool = False) -> None:
+    async def sweep(self, age: int, *, remove_unreadable: bool = False) -> None:  # noqa: B027
         """Sweep the cache for entries older than `age` seconds."""
 
     @abstractmethod
