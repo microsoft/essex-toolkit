@@ -50,13 +50,9 @@ class OpenAITextChatCacheAdapter(
         """Get the cache metadata from the prompt and kwargs."""
         history = kwargs.get("history", [])
         local_model_parameters = kwargs.get("model_parameters")
-        custom_key_data = kwargs.get("cache_key_data")
         messages, _ = build_chat_messages(prompt, history)
         parameters = self._build_completion_parameters(local_model_parameters)
-        result = {"messages": messages, "parameters": parameters}
-        if custom_key_data:
-            result["custom_key_data"] = custom_key_data
-        return result
+        return {"messages": messages, "parameters": parameters}
 
     def _build_completion_parameters(
         self, local_parameters: OpenAIChatParameters | None

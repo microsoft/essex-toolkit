@@ -7,7 +7,6 @@ All custom errors for fnllm are re-exported from here.
 """
 
 from .base.services.errors import (
-    CacheKeyAlreadyExistsError,
     FailedToGenerateValidJsonError,
     RetriesExhaustedError,
 )
@@ -17,7 +16,6 @@ from .utils.batch import BatchResponseInvalidError
 
 __all__ = [
     "BatchResponseInvalidError",
-    "CacheKeyAlreadyExistsError",
     "FailedToGenerateValidJsonError",
     "InvalidBlobCacheArgumentsError",
     "InvalidBlobContainerNameError",

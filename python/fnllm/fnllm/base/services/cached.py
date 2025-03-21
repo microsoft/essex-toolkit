@@ -19,7 +19,6 @@ from fnllm.types.generics import (
 from fnllm.types.io import LLMOutput
 
 from .decorator import LLMDecorator
-from .errors import CacheKeyAlreadyExistsError
 
 if TYPE_CHECKING:
     from collections.abc import Awaitable, Callable
@@ -118,10 +117,12 @@ class Cached(
                 key=key, data=input_data, metadata=kwargs.get("cache_metadata")
             )
 
-            # Last-minute cache check (etag-like check)
-            has_key = await self._cache.has(key)
-            if has_key:
-                raise CacheKeyAlreadyExistsError(key)
+            # Last-minute cache check to prevent inflight collisions.
+            cached = await self._cache.get(key)
+            if cached is not None:
+                await self._events.on_cache_hit(key, name)
+                output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
+                return LLMOutput(output=output, cache_hit=True)
 
             await self._cache.set(
                 key,

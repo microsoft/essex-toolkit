@@ -18,11 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-- Add `key_data` field to LLMInput for cache key augmentation.
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
+- Add inflight cache collision prevention.
 ### Security
 
 ## [0.2.6] - 2025-03-20
