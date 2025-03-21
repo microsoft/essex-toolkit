@@ -24,7 +24,7 @@ def test_cached_child() -> None:
 
 async def test_cache_miss() -> None:
     """Test the Cached Decorator normal call."""
-    delegate = AsyncMock()
+    delegate = AsyncMock(return_value=LLMOutput(output="abcdef"))
 
     # Empty cache
     cache = Mock()

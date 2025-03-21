@@ -117,6 +117,17 @@ class Cached(
             bust_cache = kwargs.get("bust_cache", False)
             cache_metadata = kwargs.get("cache_metadata")
 
+            async def _cache_read() -> (
+                LLMOutput[TOutput, TJsonModel, THistoryEntry] | None
+            ):
+                cached = await self._cache.get(key)
+                if cached is None:
+                    return None
+
+                await self._events.on_cache_hit(key, name)
+                output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
+                return LLMOutput(output=output, cache_hit=True)
+
             #
             # If we're bypassing, invoke the delegate directly
             #
@@ -138,18 +149,23 @@ class Cached(
                 return result
 
             #
+            # Check the cache before acquiring a lock
+            #
+            cached = await _cache_read()
+            if cached is not None:
+                return cached
+
+            #
             # Acquire a lock for the cache key to handle inflight collisions
             #
             await self._acquire_lock(key)
             try:
                 #
-                # Check the cache before invoking the LLM
+                # Check the cache after acquiring the lock
                 #
-                cached = await self._cache.get(key)
+                cached = await _cache_read()
                 if cached is not None:
-                    await self._events.on_cache_hit(key, name)
-                    output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
-                    return LLMOutput(output=output, cache_hit=True)
+                    return cached
 
                 #
                 # If we don't have a cache hit, invoke the LLM
@@ -159,11 +175,10 @@ class Cached(
                 #
                 # Check for inflight collisions with other processes.
                 #
-                cached = await self._cache.get(key)
+                #
+                cached = await _cache_read()
                 if cached is not None:
-                    await self._events.on_cache_hit(key, name)
-                    output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
-                    return LLMOutput(output=output, cache_hit=True)
+                    return cached
 
                 #
                 # Write out to the cache
