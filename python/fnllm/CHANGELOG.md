@@ -13,9 +13,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 ### Removed
 ### Fixed
-- Add default base implementation for `cache.sweep` to avoid breaking changes.
 ### Security
 ```
+## [Unreleased]
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [0.2.8] - 2025-03-21
+### Fixed
+- Add default base implementation for `cache.sweep` to avoid breaking changes.
 
 ## [0.2.7] - 2025-03-21
 ### Fixed
