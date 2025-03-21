@@ -5,7 +5,6 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from collections.abc import Awaitable, Callable
 from typing import TYPE_CHECKING, Any, Generic, cast
 
 from typing_extensions import Unpack
@@ -20,13 +19,14 @@ from fnllm.types.generics import (
 from fnllm.types.io import LLMOutput
 
 from .decorator import LLMDecorator
+from .errors import CacheKeyAlreadyExistsError
 
 if TYPE_CHECKING:
+    from collections.abc import Awaitable, Callable
+
     from fnllm.caching import Cache
     from fnllm.events import LLMEvents
     from fnllm.types.io import LLMInput
-
-RetryableErrorHandler = Callable[[BaseException], Awaitable[None]]
 
 
 class CacheAdapter(ABC, Generic[TInput, TOutput]):
@@ -114,13 +114,14 @@ class Cached(
 
             result = await delegate(prompt, **kwargs)
             input_data = self._cache_adapter.get_cache_input_data(prompt, kwargs)
-            metadata = {
-                "input": input_data,
-                "key": key,
-            }
-            input_metadata = kwargs.get("cache_metadata")
-            if input_metadata:
-                metadata["custom"] = input_metadata
+            metadata = self._get_metadata(
+                key=key, data=input_data, metadata=kwargs.get("cache_metadata")
+            )
+
+            # Last-minute cache check (etag-like check)
+            has_key = await self._cache.has(key)
+            if has_key:
+                raise CacheKeyAlreadyExistsError(key)
 
             await self._cache.set(
                 key,
@@ -130,3 +131,16 @@ class Cached(
             return result
 
         return cast(Any, invoke)
+
+    def _get_metadata(
+        self,
+        *,
+        key: str,
+        data: dict[str, Any],
+        metadata: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        """Get the metadata for the cache."""
+        result = {"input": data, "key": key}
+        if metadata:
+            result["custom"] = metadata
+        return result
