@@ -16,6 +16,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
+## [Unreleased]
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+- Add inflight cache collision prevention.
+### Security
+
 ## [0.2.6] - 2025-03-20
 ### Added
 - Add `cache.sweep` function to remove expired cache entries.

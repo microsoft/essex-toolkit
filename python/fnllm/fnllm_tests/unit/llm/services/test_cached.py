@@ -30,6 +30,7 @@ async def test_cache_miss() -> None:
     cache = Mock()
     cache.get = AsyncMock(return_value=None)
     cache.set = AsyncMock(return_value=None)
+    cache.has = AsyncMock(return_value=False)
 
     # Mock Events
     events = Mock()
@@ -50,6 +51,7 @@ async def test_cache_hit() -> None:
     cache = Mock()
     cache.get = AsyncMock(return_value="abcdef")
     cache.set = AsyncMock(return_value=None)
+    cache.has = AsyncMock(return_value=False)
 
     # Mock Events
     events = Mock()
@@ -91,6 +93,7 @@ async def test_cache_bust() -> None:
     # Empty cache
     cache = Mock()
     cache.set = AsyncMock(return_value=None)
+    cache.has = AsyncMock(return_value=False)
 
     # Mock Events
     events = Mock()
