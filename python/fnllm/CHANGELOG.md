@@ -16,14 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
-## [Unreleased]
-### Added
-### Changed
-### Deprecated
-### Removed
+## [0.2.7] - 2025-03-21
 ### Fixed
 - Add inflight cache collision prevention.
-### Security
 
 ## [0.2.6] - 2025-03-20
 ### Added
