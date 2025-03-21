@@ -97,13 +97,6 @@ class Cached(
             bypass_cache = kwargs.get("bypass_cache", False)
             bust_cache = kwargs.get("bust_cache", False)
 
-            async def wrap_cache_hit_result(
-                cached: Any,
-            ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
-                await self._events.on_cache_hit(key, name)
-                output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
-                return LLMOutput(output=output, cache_hit=True)
-
             # If we're bypassing, invoke the delegate directly
             if bypass_cache:
                 return await delegate(prompt, **kwargs)
@@ -112,7 +105,9 @@ class Cached(
             if not bust_cache:
                 cached = await self._cache.get(key)
                 if cached is not None:
-                    return wrap_cache_hit_result(cached)
+                    await self._events.on_cache_hit(key, name)
+                    output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
+                    return LLMOutput(output=output, cache_hit=True)
 
             result = await delegate(prompt, **kwargs)
             input_data = self._cache_adapter.get_cache_input_data(prompt, kwargs)
@@ -124,7 +119,9 @@ class Cached(
             if not bust_cache:
                 cached = await self._cache.get(key)
                 if cached is not None:
-                    return wrap_cache_hit_result(cached)
+                    await self._events.on_cache_hit(key, name)
+                    output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
+                    return LLMOutput(output=output, cache_hit=True)
 
             await self._cache.set(
                 key,
