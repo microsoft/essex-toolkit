@@ -4,7 +4,9 @@
 
 from __future__ import annotations
 
+import asyncio
 from abc import ABC, abstractmethod
+from collections import defaultdict
 from typing import TYPE_CHECKING, Any, Generic, cast
 
 from typing_extensions import Unpack
@@ -61,6 +63,8 @@ class Cached(
 ):
     """A base class for a cache-interacting LLM."""
 
+    _locks: defaultdict[str, asyncio.Lock]
+
     def __init__(
         self,
         *,
@@ -72,6 +76,17 @@ class Cached(
         self._events = events
         self._cache = cache
         self._cache_adapter = cache_adapter
+        self._locks = defaultdict(asyncio.Lock)
+
+    async def _acquire_lock(self, key: str):
+        """Acquire a lock for the given cache key."""
+        lock = self._locks[key]
+        await lock.acquire()
+
+    def _release_lock(self, key: str):
+        """Release the lock for the given cache key."""
+        lock = self._locks[key]
+        lock.release()
 
     def child(
         self, name: str
@@ -123,35 +138,42 @@ class Cached(
                 return result
 
             #
-            # Check the cache before invoking the LLM
+            # Acquire a lock for the cache key to handle inflight collisions
             #
-            cached = await self._cache.get(key)
-            if cached is not None:
-                await self._events.on_cache_hit(key, name)
-                output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
-                return LLMOutput(output=output, cache_hit=True)
+            await self._acquire_lock(key)
+            try:
+                #
+                # Check the cache before invoking the LLM
+                #
+                cached = await self._cache.get(key)
+                if cached is not None:
+                    await self._events.on_cache_hit(key, name)
+                    output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
+                    return LLMOutput(output=output, cache_hit=True)
 
-            #
-            # If we don't have a cache hit, invoke the LLM
-            #
-            result = await delegate(prompt, **kwargs)
+                #
+                # If we don't have a cache hit, invoke the LLM
+                #
+                result = await delegate(prompt, **kwargs)
 
-            #
-            # Check for inflight collisions
-            #
-            cached = await self._cache.get(key)
-            if cached is not None:
-                await self._events.on_cache_hit(key, name)
-                output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
-                return LLMOutput(output=output, cache_hit=True)
+                #
+                # Check for inflight collisions with other processes.
+                #
+                cached = await self._cache.get(key)
+                if cached is not None:
+                    await self._events.on_cache_hit(key, name)
+                    output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
+                    return LLMOutput(output=output, cache_hit=True)
 
-            #
-            # Write out to the cache
-            #
-            await self._events.on_cache_miss(key, name)
-            await self._cache.set(key, self._dump_output(result.output), metadata)
+                #
+                # Write out to the cache
+                #
+                await self._events.on_cache_miss(key, name)
+                await self._cache.set(key, self._dump_output(result.output), metadata)
 
-            return result
+                return result
+            finally:
+                self._release_lock(key)
 
         return cast(Any, invoke)
 
