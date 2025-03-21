@@ -94,7 +94,6 @@ async def test_cache_bust() -> None:
     cache = Mock()
     cache.set = AsyncMock(return_value=None)
     cache.has = AsyncMock(return_value=False)
-    cache.get = AsyncMock(return_value=None)
 
     # Mock Events
     events = Mock()
