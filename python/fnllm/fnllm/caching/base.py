@@ -33,8 +33,9 @@ class Cache(ABC):
     async def clear(self) -> None:
         """Clear the cache."""
 
-    async def sweep(self, age: int, *, remove_unreadable: bool = False) -> None:  # noqa: B027
+    async def sweep(self, age: int, *, remove_unreadable: bool = False) -> None:
         """Sweep the cache for entries older than `age` seconds."""
+        raise NotImplementedError
 
     @abstractmethod
     async def set(
