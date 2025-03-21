@@ -9,7 +9,7 @@ from typing import Final
 
 from openai import APIConnectionError, InternalServerError, RateLimitError
 
-from fnllm.base.services.errors import InvalidLLMResultError
+from fnllm.base.services.errors import CacheKeyAlreadyExistsError, InvalidLLMResultError
 from fnllm.openai.errors import OpenAINoChoicesAvailableError
 
 OPENAI_RETRYABLE_ERRORS: Final[list[type[Exception]]] = [
@@ -18,6 +18,7 @@ OPENAI_RETRYABLE_ERRORS: Final[list[type[Exception]]] = [
     InternalServerError,
     OpenAINoChoicesAvailableError,
     InvalidLLMResultError,
+    CacheKeyAlreadyExistsError,
 ]
 
 
