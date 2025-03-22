@@ -27,6 +27,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Add default base implementation for `cache.sweep` to avoid breaking changes.
 
+## [Unreleased]
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+- Use `asyncio.Lock` instances for multithreaded inflight collision detection.
+### Security
+
 ## [0.2.7] - 2025-03-21
 ### Fixed
 - Add inflight cache collision prevention.
