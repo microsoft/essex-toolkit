@@ -64,7 +64,8 @@ source = "uv-dynamic-versioning"
 [tool.uv-dynamic-versioning]
 vcs = "git"
 style = "pep440"
-pattern-prefix = "fnllm_"
+# This allows us to match project-specific release tags (e.g.. 'fnllm-v0.3.0')
+pattern-prefix = "fnllm-"
 
 # https://github.com/microsoft/pyright/blob/9f81564a4685ff5c55edd3959f9b39030f590b2f/docs/configuration.md#sample-pyprojecttoml-file
 [tool.pyright]
