@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 ### Removed
 ### Fixed
-- Use `asyncio.Lock` instances for multithreaded inflight collision detection.
+- Use `lockfiles` for multi-threaded and multi-process cache entry locking.
 ### Security
 
 ## [0.2.7] - 2025-03-21
