@@ -4,13 +4,6 @@ on:
     types: [created]
   push:
     branches: [main]
-  # TODO REmove this when we are ready to publish
-  pull_request:
-    paths:
-      - 'python/**/*'
-      - '**/*.py'
-      - '**/*.toml'
-      - .github/workflows/python-ci.yml
 
 env:
   UV_VERSION: "0.4.17"
@@ -19,7 +12,7 @@ env:
 jobs:
   publish:
     name: Upload python projects to PyPI
-    # if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     strategy:
       matrix:
