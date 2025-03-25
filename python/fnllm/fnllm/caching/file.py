@@ -25,7 +25,8 @@ class FileCache(Cache):
         self,
         cache_path: Path | str,
         encoding: str | None = None,
-        lock_timeout: int | None = None,
+        use_lock_files: bool | None = None,
+        lock_timeout: int = DEFAULT_LOCK_TIMEOUT,
     ):
         """Initialize the cache."""
         if isinstance(cache_path, str):
@@ -33,8 +34,9 @@ class FileCache(Cache):
 
         self._cache_path = cache_path
         self._cache_path.mkdir(exist_ok=True, parents=True)
+        self._use_lock_files = use_lock_files
+        self._lock_timeout = lock_timeout
         self._encoding = encoding or "utf-8"
-        self._lock_timeout = lock_timeout or DEFAULT_LOCK_TIMEOUT
 
     @property
     def root_path(self) -> Path:
@@ -113,13 +115,15 @@ class FileCache(Cache):
         self._write(self._cache_path / key, content)
 
     def _write(self, entry: Path, content: dict[str, Any]) -> None:
-        with FileLock(
-            f"{entry!s}.lock", timeout=self._lock_timeout, thread_local=False
-        ):
-            entry.write_text(
-                _content_text(content),
-                encoding=self._encoding,
-            )
+        text = _content_text(content)
+        enc = self._encoding
+        if self._use_lock_files:
+            with FileLock(
+                f"{entry!s}.lock", timeout=self._lock_timeout, thread_local=False
+            ):
+                entry.write_text(text, encoding=enc)
+        else:
+            entry.write_text(text, encoding=enc)
 
     def child(self, key: str) -> FileCache:
         """Create a child cache."""
