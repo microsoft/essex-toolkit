@@ -12,6 +12,10 @@ pip install fnllm
 
 `fnllm` is an LLM wrapper that provides function-based protocols for accessing LLM functionality (e.g. `fnllm.types.ChatLLM`, `fnllm.types.EmbeddingsLLM`). It's designed to be provider-agnostic, but it currently uses OpenAI as the default provider. 
 
+## Maintenance Expectations
+
+`fnllm` is a research grade library used by Microsoft Research. It changes rapidly, and although we try to adhere to Semantic Versioning, there may be occasional unintended breaking changes. If you use `fnllm`, we recommend pinning your client version and validating new versions.
+
 ## Chain of Responsibility
 A key feature of `fnllm` is that it hides several key concerns behind a _chain of responsibility_ abstraction in order to ensure fast and durable data-processing jobs. These concerns include _retrying_, _throttling_, _caching_ and _json recovery_. 
 
