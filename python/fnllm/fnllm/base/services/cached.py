@@ -6,7 +6,6 @@ from __future__ import annotations
 
 import asyncio
 from abc import ABC, abstractmethod
-from collections import defaultdict
 from typing import TYPE_CHECKING, Any, Generic, cast
 
 from typing_extensions import Unpack
@@ -19,6 +18,7 @@ from fnllm.types.generics import (
     TOutput,
 )
 from fnllm.types.io import LLMOutput
+from fnllm.utils.age_based_evicting_dict import AgeBasedEvictionDict
 
 from .decorator import LLMDecorator
 
@@ -63,7 +63,7 @@ class Cached(
 ):
     """A base class for a cache-interacting LLM."""
 
-    _locks: defaultdict[str, asyncio.Lock]
+    _locks: AgeBasedEvictionDict[str, asyncio.Lock]
 
     def __init__(
         self,
@@ -76,7 +76,7 @@ class Cached(
         self._events = events
         self._cache = cache
         self._cache_adapter = cache_adapter
-        self._locks = defaultdict(asyncio.Lock)
+        self._locks = AgeBasedEvictionDict(max_age_seconds=60, factory=asyncio.Lock)
 
     async def _acquire_lock(self, key: str):
         """Acquire a lock for the given cache key."""
