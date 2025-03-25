@@ -15,6 +15,7 @@ from filelock import FileLock
 from fnllm.caching.base import Cache
 
 _log = logging.getLogger(__name__)
+
 DEFAULT_LOCK_TIMEOUT = 5
 
 
@@ -25,16 +26,27 @@ class FileCache(Cache):
         self,
         cache_path: Path | str,
         encoding: str | None = None,
-        use_lock_files: bool | None = None,
+        use_lock_files: bool = False,
+        use_thread_local_lock_files: bool = True,
         lock_timeout: int = DEFAULT_LOCK_TIMEOUT,
     ):
-        """Initialize the cache."""
+        """
+        Initialize the cache.
+
+        Args:
+            cache_path: Path to the cache directory.
+            encoding: Encoding to use for reading/writing files (default=utf-8).
+            use_lock_files: Whether to use lock files. (default=False)
+            use_thread_local_lock_files: If lock files are enabled, whether the acquired locks should be thread-local. If False, locks are re-entrant across threads. (default=True)
+            lock_timeout: Timeout for acquiring locks. (default=5 seconds)
+        """
         if isinstance(cache_path, str):
             cache_path = Path(cache_path)
 
         self._cache_path = cache_path
         self._cache_path.mkdir(exist_ok=True, parents=True)
         self._use_lock_files = use_lock_files
+        self._use_thread_local_lock_files = use_thread_local_lock_files
         self._lock_timeout = lock_timeout
         self._encoding = encoding or "utf-8"
 
@@ -119,7 +131,9 @@ class FileCache(Cache):
         enc = self._encoding
         if self._use_lock_files:
             with FileLock(
-                f"{entry!s}.lock", timeout=self._lock_timeout, thread_local=False
+                f"{entry!s}.lock",
+                timeout=self._lock_timeout,
+                thread_local=self._use_thread_local_lock_files,
             ):
                 entry.write_text(text, encoding=enc)
         else:
