@@ -4,6 +4,13 @@ on:
     types: [created]
   push:
     branches: [main]
+  # TODO REMOVE
+  pull_request:
+    paths:
+      - 'python/**/*'
+      - '**/*.py'
+      - '**/*.toml'
+      - .github/workflows/python-ci.yml
 
 env:
   UV_VERSION: "0.4.17"
