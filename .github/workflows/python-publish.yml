@@ -19,7 +19,7 @@ env:
 jobs:
   publish:
     name: Upload python projects to PyPI
-    if: github.ref == 'refs/heads/main'
+    #if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     strategy:
       matrix:
