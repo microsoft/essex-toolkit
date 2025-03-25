@@ -113,7 +113,9 @@ class FileCache(Cache):
         self._write(self._cache_path / key, content)
 
     def _write(self, entry: Path, content: dict[str, Any]) -> None:
-        with FileLock(f"{entry!s}.lock", timeout=self._lock_timeout):
+        with FileLock(
+            f"{entry!s}.lock", timeout=self._lock_timeout, thread_local=False
+        ):
             entry.write_text(
                 _content_text(content),
                 encoding=self._encoding,

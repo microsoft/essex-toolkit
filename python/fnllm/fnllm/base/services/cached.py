@@ -4,7 +4,6 @@
 
 from __future__ import annotations
 
-import asyncio
 from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING, Any, Generic, cast
 
@@ -18,7 +17,6 @@ from fnllm.types.generics import (
     TOutput,
 )
 from fnllm.types.io import LLMOutput
-from fnllm.utils.age_based_evicting_dict import AgeBasedEvictionDict
 
 from .decorator import LLMDecorator
 
@@ -63,33 +61,17 @@ class Cached(
 ):
     """A base class for a cache-interacting LLM."""
 
-    _locks: AgeBasedEvictionDict[str, asyncio.Lock]
-
     def __init__(
         self,
         *,
         cache: Cache,
         events: LLMEvents,
         cache_adapter: CacheAdapter[TInput, TOutput],
-        max_lock_age_seconds: int = 60,
     ):
         """Create a new CachingLLM."""
         self._events = events
         self._cache = cache
         self._cache_adapter = cache_adapter
-        self._locks = AgeBasedEvictionDict(
-            max_age_seconds=max_lock_age_seconds, value_factory=asyncio.Lock
-        )
-
-    async def _acquire_lock(self, key: str):
-        """Acquire a lock for the given cache key."""
-        lock = self._locks[key]
-        await lock.acquire()
-
-    def _release_lock(self, key: str):
-        """Release the lock for the given cache key."""
-        lock = self._locks[key]
-        lock.release()
 
     def child(
         self, name: str
@@ -152,39 +134,32 @@ class Cached(
                 return result
 
             #
-            # Acquire a lock for the cache key to handle inflight collisions
+            # Check the cache before invoking the LLM.
             #
-            await self._acquire_lock(key)
-            try:
-                #
-                # Check the cache after acquiring the lock
-                #
-                cached = await _cache_read()
-                if cached is not None:
-                    return cached
+            cached = await _cache_read()
+            if cached is not None:
+                return cached
 
-                #
-                # If we don't have a cache hit, invoke the LLM
-                #
-                result = await delegate(prompt, **kwargs)
+            #
+            # If we don't have a cache hit, invoke the LLM
+            #
+            result = await delegate(prompt, **kwargs)
 
-                #
-                # Check for inflight collisions with other processes.
-                #
-                #
-                cached = await _cache_read()
-                if cached is not None:
-                    return cached
+            #
+            # Check for inflight collisions with other processes.
+            #
+            #
+            cached = await _cache_read()
+            if cached is not None:
+                return cached
 
-                #
-                # Write out to the cache
-                #
-                await self._events.on_cache_miss(key, name)
-                await self._cache.set(key, self._dump_output(result.output), metadata)
+            #
+            # Write out to the cache
+            #
+            await self._events.on_cache_miss(key, name)
+            await self._cache.set(key, self._dump_output(result.output), metadata)
 
-                return result
-            finally:
-                self._release_lock(key)
+            return result
 
         return cast(Any, invoke)
 
