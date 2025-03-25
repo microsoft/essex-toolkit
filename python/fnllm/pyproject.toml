@@ -66,7 +66,7 @@ vcs = "git"
 style = "pep440"
 # This allows us to match project-specific release tags (e.g.. 'fnllm-v0.3.0')
 pattern-prefix = "fnllm-"
-format = "{base}.dev{distance}"
+metadata = false
 
 # https://github.com/microsoft/pyright/blob/9f81564a4685ff5c55edd3959f9b39030f590b2f/docs/configuration.md#sample-pyprojecttoml-file
 [tool.pyright]
