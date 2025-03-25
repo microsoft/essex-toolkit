@@ -10,15 +10,23 @@ import time
 from pathlib import Path
 from typing import Any
 
+from filelock import FileLock
+
 from fnllm.caching.base import Cache
 
 _log = logging.getLogger(__name__)
+DEFAULT_LOCK_TIMEOUT = 5
 
 
 class FileCache(Cache):
     """The FileCache class."""
 
-    def __init__(self, cache_path: Path | str, encoding: str | None = None):
+    def __init__(
+        self,
+        cache_path: Path | str,
+        encoding: str | None = None,
+        lock_timeout: int | None = None,
+    ):
         """Initialize the cache."""
         if isinstance(cache_path, str):
             cache_path = Path(cache_path)
@@ -26,6 +34,7 @@ class FileCache(Cache):
         self._cache_path = cache_path
         self._cache_path.mkdir(exist_ok=True, parents=True)
         self._encoding = encoding or "utf-8"
+        self._lock_timeout = lock_timeout or DEFAULT_LOCK_TIMEOUT
 
     @property
     def root_path(self) -> Path:
@@ -79,11 +88,7 @@ class FileCache(Cache):
 
         # Mark the cache entry as updated to keep it alive
         cache_entry["accessed"] = time.time()
-        (self._cache_path / key).write_text(
-            _content_text(cache_entry),
-            encoding=self._encoding,
-        )
-
+        self._write(self._cache_path / key, cache_entry)
         return cache_entry["result"]
 
     async def remove(self, key: str) -> None:
@@ -105,10 +110,16 @@ class FileCache(Cache):
             "created": create_time,
             "accessed": create_time,
         }
-        (self._cache_path / key).write_text(
-            _content_text(content),
-            encoding=self._encoding,
-        )
+        self._write(self._cache_path / key, content)
+
+    def _write(self, entry: Path, content: dict[str, Any]) -> None:
+        with FileLock(
+            f"{entry!s}.lock", timeout=self._lock_timeout, thread_local=False
+        ):
+            entry.write_text(
+                _content_text(content),
+                encoding=self._encoding,
+            )
 
     def child(self, key: str) -> FileCache:
         """Create a child cache."""

@@ -15,6 +15,7 @@ dependencies = [
     "pydantic>=2.8.2",
     "httpx>=0.27.0",
     "json-repair>=0.30.0",
+    "filelock>=3.18.0",
 ]
 [project.optional-dependencies]
 # OpenAI is our default provider, but we have it as an optional extra in order to account for future providers.
