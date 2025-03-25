@@ -71,12 +71,15 @@ class Cached(
         cache: Cache,
         events: LLMEvents,
         cache_adapter: CacheAdapter[TInput, TOutput],
+        max_lock_age_seconds: int = 60,
     ):
         """Create a new CachingLLM."""
         self._events = events
         self._cache = cache
         self._cache_adapter = cache_adapter
-        self._locks = AgeBasedEvictionDict(max_age_seconds=60, factory=asyncio.Lock)
+        self._locks = AgeBasedEvictionDict(
+            max_age_seconds=max_lock_age_seconds, value_factory=asyncio.Lock
+        )
 
     async def _acquire_lock(self, key: str):
         """Acquire a lock for the given cache key."""

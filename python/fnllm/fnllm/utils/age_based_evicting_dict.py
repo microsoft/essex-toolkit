@@ -17,34 +17,37 @@ V = TypeVar("V")
 class AgeBasedEvictionDict(Generic[K, V]):
     """A dictionary that evicts items based on their age."""
 
-    def __init__(self, max_age_seconds: int, factory: Callable[..., V]):
-        self.data = defaultdict(factory)
-        self.timestamps = defaultdict(lambda: None)
-        self.max_age_seconds = max_age_seconds
-        self.eviction_queue = deque()
+    _data: dict[K, V]
+    _timestamps: dict[K, float]
 
-    def __setitem__(self, key, value):
+    def __init__(self, max_age_seconds: int, value_factory: Callable[..., V]):
+        self._data = defaultdict(value_factory)
+        self._timestamps = {}
+        self._eviction_queue = deque()
+        self.max_age_seconds = max_age_seconds
+
+    def __setitem__(self, key: K, value: V) -> None:
         """Set an item in the dictionary and update its timestamp."""
         current_time = time.time()
-        self.data[key] = value
-        self.timestamps[key] = current_time
-        self.eviction_queue.append((key, current_time))
-        self.evict_old_items()
+        self._data[key] = value
+        self._timestamps[key] = current_time
+        self._eviction_queue.append((key, current_time))
+        self._evict_old_items()
 
-    def __getitem__(self, key):
+    def __getitem__(self, key: K) -> V:
         """Get an item from the dictionary and update its timestamp."""
-        self.evict_old_items()
-        return self.data[key]
+        self._evict_old_items()
+        return self._data[key]
 
-    def evict_old_items(self):
+    def _evict_old_items(self):
         """Evict items that are older than the max age."""
         current_time = time.time()
-        while self.eviction_queue:
-            key, timestamp = self.eviction_queue[0]
+        while self._eviction_queue:
+            key, timestamp = self._eviction_queue[0]
             if current_time - timestamp > self.max_age_seconds:
-                self.eviction_queue.popleft()
-                if self.timestamps[key] == timestamp:
-                    del self.data[key]
-                    del self.timestamps[key]
+                self._eviction_queue.popleft()
+                if self._timestamps[key] == timestamp:
+                    del self._data[key]
+                    del self._timestamps[key]
             else:
                 break
