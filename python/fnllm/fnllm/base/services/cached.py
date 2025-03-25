@@ -149,13 +149,6 @@ class Cached(
                 return result
 
             #
-            # Check the cache before acquiring a lock
-            #
-            cached = await _cache_read()
-            if cached is not None:
-                return cached
-
-            #
             # Acquire a lock for the cache key to handle inflight collisions
             #
             await self._acquire_lock(key)

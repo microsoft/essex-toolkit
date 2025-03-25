@@ -8,6 +8,7 @@ authors = [
     { name = "Chris Trevino", email = "chtrevin@microsoft.com" }, 
     { name = "Rodrigo Racanicci", email = "rracanicci@microsoft.com" }
 ]
+dependencies = []
 
 [tool.uv.workspace]
 members = ["python/*"]

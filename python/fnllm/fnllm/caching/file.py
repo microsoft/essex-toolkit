@@ -10,6 +10,8 @@ import time
 from pathlib import Path
 from typing import Any
 
+from filelock import FileLock
+
 from fnllm.caching.base import Cache
 
 _log = logging.getLogger(__name__)
@@ -78,11 +80,13 @@ class FileCache(Cache):
             return None
 
         # Mark the cache entry as updated to keep it alive
-        cache_entry["accessed"] = time.time()
-        (self._cache_path / key).write_text(
-            _content_text(cache_entry),
-            encoding=self._encoding,
-        )
+        entry = self._cache_path / key
+        with FileLock(f"{entry!s}.lock"):
+            cache_entry["accessed"] = time.time()
+            entry.write_text(
+                _content_text(cache_entry),
+                encoding=self._encoding,
+            )
 
         return cache_entry["result"]
 
@@ -105,10 +109,12 @@ class FileCache(Cache):
             "created": create_time,
             "accessed": create_time,
         }
-        (self._cache_path / key).write_text(
-            _content_text(content),
-            encoding=self._encoding,
-        )
+        entry = self._cache_path / key
+        with FileLock(f"{entry!s}.lock"):
+            entry.write_text(
+                _content_text(content),
+                encoding=self._encoding,
+            )
 
     def child(self, key: str) -> FileCache:
         """Create a child cache."""
