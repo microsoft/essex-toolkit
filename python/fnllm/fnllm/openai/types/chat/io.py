@@ -5,6 +5,7 @@
 from collections.abc import AsyncIterable, Awaitable, Callable
 from typing import ClassVar, TypeAlias
 
+from httpx import Headers
 from pydantic import BaseModel, ConfigDict, Field
 
 from fnllm.openai.types import OpenAIChatCompletionModel
@@ -34,10 +35,14 @@ class OpenAIChatOutput(ChatLLMOutput):
     raw_output: OpenAIChatCompletionMessageModel
     """Raw output message from OpenAI."""
 
+    raw_model: OpenAIChatCompletionModel
+    """Raw model configuration used for the completion request."""
+
     usage: LLMUsageMetrics | None
     """Usage statistics for the completion request."""
 
-    raw_model: OpenAIChatCompletionModel
+    headers: Headers | None = None
+    """HTTP headers from the completion request. This will be None if the response was cached."""
 
 
 class OpenAIStreamingChatOutput(BaseModel, arbitrary_types_allowed=True):
