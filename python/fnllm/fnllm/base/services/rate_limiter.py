@@ -41,22 +41,6 @@ class RateLimiter(
         self._events = events
         self._estimator = estimator
 
-    def _estimate_request_tokens(self, prompt: TInput, kwargs: LLMInput) -> int:
-        """Estimate the number of tokens needed for an OpenAI request."""
-        return self._estimator(prompt, kwargs)
-
-    async def _handle_post_request_limiting(
-        self,
-        result: LLMOutput[TOutput, TJsonModel, THistoryEntry],
-    ) -> None:
-        diff = result.metrics.tokens_diff
-
-        if diff > 0:
-            manifest = Manifest(post_request_tokens=diff)
-            # consume the token difference
-            async with self._limiter.use(manifest):
-                await self._events.on_post_limit(manifest)
-
     def decorate(
         self,
         delegate: Callable[
@@ -66,18 +50,25 @@ class RateLimiter(
         """Execute the LLM with the configured rate limits."""
 
         async def invoke(prompt: TInput, **args: Unpack[LLMInput[Any, Any, Any]]):
-            estimated_input_tokens = self._estimate_request_tokens(prompt, args)
+            estimated_input_tokens = self._estimator(prompt, args)
 
             manifest = Manifest(request_tokens=estimated_input_tokens)
             try:
-                async with self._limiter.use(manifest):
+                async with self._limiter.use_before(manifest):
                     await self._events.on_limit_acquired(manifest)
                     result = await delegate(prompt, **args)
             finally:
                 await self._events.on_limit_released(manifest)
 
+            # Set the estimated input tokens
             result.metrics.estimated_input_tokens = estimated_input_tokens
-            await self._handle_post_request_limiting(result)
+
+            # Post-Request limiting
+            if result.metrics.tokens_diff > 0:
+                manifest = Manifest(post_request_tokens=result.metrics.tokens_diff)
+                # consume the token difference
+                async with self._limiter.use_after(manifest, output=result):
+                    await self._events.on_post_limit(manifest)
 
             return result
 

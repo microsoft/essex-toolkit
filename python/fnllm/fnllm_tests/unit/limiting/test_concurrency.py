@@ -13,7 +13,7 @@ async def test_concurrency_only_acquired_released_with_request_tokens():
     semaphore = Mock(spec=Semaphore)
     concurrency_limiter = ConcurrencyLimiter(semaphore)
 
-    async with concurrency_limiter.use(Manifest(request_tokens=10)):
+    async with concurrency_limiter.use_before(Manifest(request_tokens=10)):
         semaphore.acquire.assert_called_once_with()
 
     semaphore.release.assert_called_once_with()
@@ -23,7 +23,7 @@ async def test_concurrency_not_acquired_released_without_request_tokens():
     semaphore = Mock(spec=Semaphore)
     concurrency_limiter = ConcurrencyLimiter(semaphore)
 
-    async with concurrency_limiter.use(
+    async with concurrency_limiter.use_before(
         Manifest(request_tokens=0, post_request_tokens=10)
     ):
         semaphore.acquire.assert_not_called()

@@ -6,10 +6,12 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from types import TracebackType
+
+    from fnllm.types.io import LLMOutput
 
 
 @dataclass
@@ -57,6 +59,12 @@ class Limiter(ABC):
     async def release(self, manifest: Manifest) -> None:
         """Release a pass through the limiter."""
 
-    def use(self, manifest: Manifest) -> LimitContext:
+    def use_before(self, manifest: Manifest) -> LimitContext:
+        """Limit for a given amount (default = 1)."""
+        return LimitContext(self, manifest)
+
+    def use_after(
+        self, manifest: Manifest, *, output: LLMOutput[Any, Any, Any]
+    ) -> LimitContext:
         """Limit for a given amount (default = 1)."""
         return LimitContext(self, manifest)
