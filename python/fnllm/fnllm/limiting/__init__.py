@@ -7,7 +7,7 @@ from .composite import CompositeLimiter
 from .concurrency import ConcurrencyLimiter
 from .noop_llm import NoopLimiter
 from .rpm import RPMLimiter
-from .tpm import TpmLevelReconciler, TPMLimiter
+from .tpm import TPMLimiter, TpmReconciler
 
 __all__ = [
     "CompositeLimiter",
@@ -17,5 +17,5 @@ __all__ = [
     "NoopLimiter",
     "RPMLimiter",
     "TPMLimiter",
-    "TpmLevelReconciler",
+    "TpmReconciler",
 ]

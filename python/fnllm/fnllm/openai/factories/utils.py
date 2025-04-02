@@ -14,7 +14,7 @@ from fnllm.base.services.retryer import Retryer
 from fnllm.limiting.composite import CompositeLimiter
 from fnllm.limiting.concurrency import ConcurrencyLimiter
 from fnllm.limiting.rpm import RPMLimiter
-from fnllm.limiting.tpm import TPMLimiter
+from fnllm.limiting.tpm import TPMLimiter, TpmReconciler
 from fnllm.openai.services.openai_retryable_error_handler import (
     OPENAI_RETRYABLE_ERRORS,
     OpenAIRetryableErrorHandler,
@@ -22,13 +22,25 @@ from fnllm.openai.services.openai_retryable_error_handler import (
 from fnllm.openai.services.openai_token_estimator import OpenAITokenEstimator
 
 if TYPE_CHECKING:
+    from httpx import Headers
+
     from fnllm.events.base import LLMEvents
-    from fnllm.limiting.base import Limiter
+    from fnllm.limiting.base import Limiter, Manifest
     from fnllm.openai.config import OpenAIConfig
+    from fnllm.types.io import LLMOutput
 
 
 def _get_encoding(encoding_name: str) -> tiktoken.Encoding:
     return tiktoken.get_encoding(encoding_name)
+
+
+def _azure_tpm_reconciler(
+    _manifest: Manifest, output: LLMOutput[Any, Any, Any]
+) -> int | None:
+    if hasattr(output.output, "headers"):
+        headers: Headers = output.output.headers
+        return headers.get("X-Ratelimit-Remaining-Tokens", None)
+    return None
 
 
 def create_limiter(config: OpenAIConfig) -> Limiter | None:
@@ -46,7 +58,12 @@ def create_limiter(config: OpenAIConfig) -> Limiter | None:
         )
 
     if config.tokens_per_minute:
-        limiters.append(TPMLimiter.from_tpm(config.tokens_per_minute))
+        reconciler: TpmReconciler | None = None
+        if config.azure:
+            reconciler = _azure_tpm_reconciler
+        limiters.append(
+            TPMLimiter.from_tpm(config.tokens_per_minute, reconciler=reconciler)
+        )
 
     if len(limiters) == 0:
         return None
