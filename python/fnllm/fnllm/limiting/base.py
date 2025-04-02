@@ -59,11 +59,11 @@ class Limiter(ABC):
     async def release(self, manifest: Manifest) -> None:
         """Release a pass through the limiter."""
 
-    def use_before(self, manifest: Manifest) -> LimitContext:
+    def use(self, manifest: Manifest) -> LimitContext:
         """Limit for a given amount (default = 1)."""
         return LimitContext(self, manifest)
 
-    def use_after(
+    def reconcile(
         self, manifest: Manifest, *, output: LLMOutput[Any, Any, Any]
     ) -> LimitContext:
         """Limit for a given amount (default = 1)."""

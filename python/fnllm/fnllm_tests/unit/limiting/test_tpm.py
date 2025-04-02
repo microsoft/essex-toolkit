@@ -13,9 +13,7 @@ async def test_tpm_acquired_with_sum_of_request_and_post_request_tokens():
     async_limiter = Mock(spec=AsyncLimiter)
     tpm_limiter = TPMLimiter(async_limiter, 100)
 
-    async with tpm_limiter.use_before(
-        Manifest(request_tokens=10, post_request_tokens=20)
-    ):
+    async with tpm_limiter.use(Manifest(request_tokens=10, post_request_tokens=20)):
         async_limiter.acquire.assert_called_once_with(30)
 
 
@@ -23,5 +21,5 @@ async def test_tpm_only_acquired_with_non_zero_tokens_sum():
     async_limiter = Mock(spec=AsyncLimiter)
     tpm_limiter = TPMLimiter(async_limiter, 100)
 
-    async with tpm_limiter.use_before(Manifest()):
+    async with tpm_limiter.use(Manifest()):
         async_limiter.acquire.assert_not_called()
