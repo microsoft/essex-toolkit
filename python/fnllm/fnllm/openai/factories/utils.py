@@ -14,7 +14,7 @@ from fnllm.base.services.retryer import Retryer
 from fnllm.limiting.composite import CompositeLimiter
 from fnllm.limiting.concurrency import ConcurrencyLimiter
 from fnllm.limiting.rpm import RPMLimiter
-from fnllm.limiting.tpm import TPMLimiter, TpmReconciler
+from fnllm.limiting.tpm import TPMLimiter
 from fnllm.openai.services.openai_retryable_error_handler import (
     OPENAI_RETRYABLE_ERRORS,
     OpenAIRetryableErrorHandler,
@@ -34,12 +34,23 @@ def _get_encoding(encoding_name: str) -> tiktoken.Encoding:
     return tiktoken.get_encoding(encoding_name)
 
 
-def _azure_tpm_reconciler(
+def _tpm_reconciler(
     _manifest: Manifest, output: LLMOutput[Any, Any, Any]
 ) -> int | None:
     if hasattr(output.output, "headers"):
         headers: Headers = output.output.headers
-        return headers.get("X-Ratelimit-Remaining-Tokens", None)
+        result = headers.get("x-ratelimit-remaining-tokens", None)
+        return int(result) if result is not None else None
+    return None
+
+
+def _rpm_reconciler(
+    _manifest: Manifest, output: LLMOutput[Any, Any, Any]
+) -> int | None:
+    if hasattr(output.output, "headers"):
+        headers: Headers = output.output.headers
+        result = headers.get("x-ratelimit-remaining-requests", None)
+        return int(result) if result is not None else None
     return None
 
 
@@ -53,16 +64,15 @@ def create_limiter(config: OpenAIConfig) -> Limiter | None:
     if config.requests_per_minute:
         limiters.append(
             RPMLimiter.from_rpm(
-                config.requests_per_minute, burst_mode=config.requests_burst_mode
+                config.requests_per_minute,
+                burst_mode=config.requests_burst_mode,
+                reconciler=_rpm_reconciler,
             )
         )
 
     if config.tokens_per_minute:
-        reconciler: TpmReconciler | None = None
-        if config.azure:
-            reconciler = _azure_tpm_reconciler
         limiters.append(
-            TPMLimiter.from_tpm(config.tokens_per_minute, reconciler=reconciler)
+            TPMLimiter.from_tpm(config.tokens_per_minute, reconciler=_tpm_reconciler)
         )
 
     if len(limiters) == 0:

@@ -9,7 +9,7 @@ from typing import Any
 
 from aiolimiter import AsyncLimiter
 
-from fnllm.limiting.base import LimitContext, Limiter, Manifest
+from fnllm.limiting.base import Limiter, Manifest, Reconciliation
 from fnllm.types.io import LLMOutput
 
 TpmReconciler = Callable[[Manifest, LLMOutput[Any, Any, Any]], int | None]
@@ -39,15 +39,18 @@ class TPMLimiter(Limiter):
     async def release(self, manifest: Manifest) -> None:
         """Do nothing."""
 
-    def reconcile(
+    async def reconcile(
         self, manifest: Manifest, *, output: LLMOutput[Any, Any, Any]
-    ) -> LimitContext:
+    ) -> Reconciliation | None:
         """Limit for a given amount (default = 1)."""
         if self._reconciler is not None:
-            remaining_tokens = self._reconciler(manifest, output)
-            if remaining_tokens is not None:
-                self._limiter._level = remaining_tokens  # noqa
-        return super().reconcile(manifest, output=output)
+            remaining = self._reconciler(manifest, output)
+            if remaining is not None:
+                old = self._limiter._level  # noqa
+                self._limiter._level = remaining  # noqa
+                return Reconciliation(old_value=old, new_value=remaining)
+
+        return None
 
     @classmethod
     def from_tpm(

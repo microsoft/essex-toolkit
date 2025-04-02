@@ -48,6 +48,17 @@ class LimitContext:
         await self._limiter.release(self._manifest)
 
 
+@dataclass
+class Reconciliation:
+    """A limit reconciliation."""
+
+    old_value: float
+    """The old limit value."""
+
+    new_value: float
+    """The new limit value."""
+
+
 class Limiter(ABC):
     """Limiter interface."""
 
@@ -63,8 +74,7 @@ class Limiter(ABC):
         """Limit for a given amount (default = 1)."""
         return LimitContext(self, manifest)
 
-    def reconcile(
+    async def reconcile(  # noqa B027
         self, manifest: Manifest, *, output: LLMOutput[Any, Any, Any]
-    ) -> LimitContext:
+    ) -> Reconciliation | None:
         """Limit for a given amount (default = 1)."""
-        return LimitContext(self, manifest)

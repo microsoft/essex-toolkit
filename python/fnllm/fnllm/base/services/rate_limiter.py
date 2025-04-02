@@ -63,12 +63,11 @@ class RateLimiter(
             # Set the estimated input tokens
             result.metrics.estimated_input_tokens = estimated_input_tokens
 
-            # Post-Request limiting
-            if result.metrics.tokens_diff > 0:
-                manifest = Manifest(post_request_tokens=result.metrics.tokens_diff)
-                # consume the token difference
-                async with self._limiter.reconcile(manifest, output=result):
-                    await self._events.on_post_limit(manifest)
+            # Perform any Reconciliation
+            manifest = Manifest(post_request_tokens=result.metrics.tokens_diff)
+            reconciliation = await self._limiter.reconcile(manifest, output=result)
+            if result.metrics.tokens_diff > 0 or reconciliation is not None:
+                await self._events.on_limit_reconcile(manifest, reconciliation)
 
             return result
 
