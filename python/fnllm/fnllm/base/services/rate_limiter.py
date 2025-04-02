@@ -66,7 +66,7 @@ class RateLimiter(
             # Perform any Reconciliation
             manifest = Manifest(post_request_tokens=result.metrics.tokens_diff)
             reconciliation = await self._limiter.reconcile(manifest, output=result)
-            if result.metrics.tokens_diff > 0 or reconciliation is not None:
+            if reconciliation or result.metrics.tokens_diff > 0:
                 await self._events.on_limit_reconcile(manifest, reconciliation)
 
             return result
