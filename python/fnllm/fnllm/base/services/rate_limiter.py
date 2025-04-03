@@ -76,9 +76,9 @@ class RateLimiter(
             finally:
                 await self._events.on_limit_released(manifest)
 
-            # Set the estimated input tokens
             result.metrics.estimated_input_tokens = estimated_input_tokens
             await self._handle_post_request_limiting(result)
+
             return result
 
         return invoke
