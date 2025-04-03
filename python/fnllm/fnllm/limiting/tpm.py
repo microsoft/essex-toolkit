@@ -12,6 +12,8 @@ from aiolimiter import AsyncLimiter
 from fnllm.limiting.base import Limiter, Manifest, Reconciliation
 from fnllm.types.io import LLMOutput
 
+from .update_limiter import update_limiter
+
 TpmReconciler = Callable[[Manifest, LLMOutput[Any, Any, Any]], int | None]
 """A callable that will determine the actual number of tokens left in the limiter."""
 
@@ -46,8 +48,7 @@ class TPMLimiter(Limiter):
         if self._reconciler is not None:
             remaining = self._reconciler(manifest, output)
             if remaining is not None:
-                old = self._limiter._level  # noqa
-                self._limiter._level = remaining  # noqa
+                old = update_limiter(self._limiter, remaining)
                 return Reconciliation(old_value=old, new_value=remaining)
 
         return None
