@@ -8,14 +8,15 @@ from typing import TYPE_CHECKING, Any
 
 from aiolimiter import AsyncLimiter
 
-from fnllm.limiting.base import Limiter, Manifest, Reconciliation
+from fnllm.limiting.base import Limiter
 
+from .types import Reconciliation
 from .update_limiter import update_limiter
 
 if TYPE_CHECKING:
     from fnllm.types.io import LLMOutput
 
-    from .types import LimitReconciler
+    from .types import LimitReconciler, Manifest
 
 
 class TPMLimiter(Limiter):

@@ -6,7 +6,6 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from asyncio import Semaphore
-from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, ClassVar
 
 if TYPE_CHECKING:
@@ -14,16 +13,7 @@ if TYPE_CHECKING:
 
     from fnllm.types.io import LLMOutput
 
-
-@dataclass
-class Manifest:
-    """Parameters for limiting."""
-
-    request_tokens: int = 0
-    """The number of tokens to acquire or release."""
-
-    post_request_tokens: int = 0
-    """The number of tokens to acquire or release after the request is complete."""
+    from .types import Manifest, Reconciliation
 
 
 class LimitContext:
@@ -50,17 +40,6 @@ class LimitContext:
     ) -> None:
         """Exit the context."""
         await self._limiter.release(self._manifest)
-
-
-@dataclass
-class Reconciliation:
-    """A limit reconciliation."""
-
-    old_value: float
-    """The old limit value."""
-
-    new_value: float
-    """The new limit value."""
 
 
 class Limiter(ABC):
