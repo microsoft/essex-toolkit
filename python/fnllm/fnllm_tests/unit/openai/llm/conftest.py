@@ -3,7 +3,7 @@
 """Utility to mock chat completion client responses."""
 
 from collections.abc import AsyncIterator
-from unittest.mock import AsyncMock
+from unittest.mock import AsyncMock, Mock
 
 import pytest
 from fnllm.openai.types.aliases import (
@@ -22,6 +22,7 @@ from fnllm.openai.types.embeddings.io import (
     OpenAIEmbeddingsOutput,
 )
 from fnllm.types.metrics import LLMUsageMetrics
+from httpx import Headers
 from openai import AsyncStream
 from openai.types.chat import ChatCompletionChunk
 from openai.types.chat.chat_completion_chunk import Choice as ChunkChoice
@@ -296,9 +297,12 @@ class OpenAIEmbeddingsClientMock:
             usage=usage,
         )
 
-        self._raw_mock.embeddings.create = self._response_mock = AsyncMock(
-            return_value=self._raw_response
-        )
+        raw_response = Mock()
+        raw_response.parse = Mock(return_value=self._raw_response)
+        raw_response.headers = Headers()
+        self._response_mock = AsyncMock(return_value=raw_response)
+
+        self._raw_mock.embeddings.with_raw_response.create = self._response_mock
 
         return self._raw_mock
 
