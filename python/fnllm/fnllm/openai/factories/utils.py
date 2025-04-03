@@ -57,23 +57,35 @@ def _rpm_reconciler(
 def create_limiter(config: OpenAIConfig) -> Limiter | None:
     """Create an LLM limiter based on the incoming configuration."""
     limiters = []
+    rpm = config.requests_per_minute
+    tpm = config.tokens_per_minute
 
     if config.max_concurrency:
         limiters.append(ConcurrencyLimiter.from_max_concurrency(config.max_concurrency))
 
-    if config.requests_per_minute:
+    if rpm is not None:
+        # If RPM is set to 0, enable dynamic RPM
+        reconciler = None
+        if rpm == 0:
+            rpm = 1
+            reconciler = _rpm_reconciler
+
         limiters.append(
             RPMLimiter.from_rpm(
-                config.requests_per_minute,
+                rpm,
                 burst_mode=config.requests_burst_mode,
-                reconciler=_rpm_reconciler,
+                reconciler=reconciler,
             )
         )
 
-    if config.tokens_per_minute:
-        limiters.append(
-            TPMLimiter.from_tpm(config.tokens_per_minute, reconciler=_tpm_reconciler)
-        )
+    if tpm is not None:
+        # If RPM is set to 0, enable dynamic RPM
+        reconciler = None
+        if tpm == 0:
+            tpm = 1
+            reconciler = _tpm_reconciler
+
+        limiters.append(TPMLimiter.from_tpm(tpm, reconciler=_tpm_reconciler))
 
     if len(limiters) == 0:
         return None
