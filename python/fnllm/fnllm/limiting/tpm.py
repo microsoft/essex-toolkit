@@ -4,18 +4,18 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from aiolimiter import AsyncLimiter
 
 from fnllm.limiting.base import Limiter, Manifest, Reconciliation
-from fnllm.types.io import LLMOutput
 
 from .update_limiter import update_limiter
 
-TpmReconciler = Callable[[LLMOutput[Any, Any, Any]], int | None]
-"""A callable that will determine the actual number of tokens left in the limiter."""
+if TYPE_CHECKING:
+    from fnllm.types.io import LLMOutput
+
+    from .types import LimitReconciler
 
 
 class TPMLimiter(Limiter):
@@ -25,7 +25,7 @@ class TPMLimiter(Limiter):
         self,
         limiter: AsyncLimiter,
         tokens_per_minute: int,
-        reconciler: TpmReconciler | None = None,
+        reconciler: LimitReconciler | None = None,
     ) -> None:
         """Create a new RpmLimiter."""
         self._limiter = limiter
@@ -55,7 +55,7 @@ class TPMLimiter(Limiter):
 
     @classmethod
     def from_tpm(
-        cls, tokens_per_minute: int, *, reconciler: TpmReconciler | None = None
+        cls, tokens_per_minute: int, *, reconciler: LimitReconciler | None = None
     ) -> TPMLimiter:
         """Create a new RpmLimiter."""
         return cls(

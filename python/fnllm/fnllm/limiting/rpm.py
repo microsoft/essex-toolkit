@@ -4,18 +4,18 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from aiolimiter import AsyncLimiter
 
 from fnllm.limiting.base import Limiter, Manifest, Reconciliation
-from fnllm.types.io import LLMOutput
 
 from .update_limiter import update_limiter
 
-RpmReconciler = Callable[[LLMOutput[Any, Any, Any]], int | None]
-"""A callable that will determine the actual number of requests left in the limiter."""
+if TYPE_CHECKING:
+    from fnllm.types.io import LLMOutput
+
+    from .types import LimitReconciler
 
 
 class RPMLimiter(Limiter):
@@ -24,7 +24,7 @@ class RPMLimiter(Limiter):
     def __init__(
         self,
         limiter: AsyncLimiter,
-        reconciler: RpmReconciler | None = None,
+        reconciler: LimitReconciler | None = None,
         *,
         rps: bool,
     ) -> None:
@@ -61,7 +61,7 @@ class RPMLimiter(Limiter):
         cls,
         requests_per_minute: int,
         burst_mode: bool = True,
-        reconciler: RpmReconciler | None = None,
+        reconciler: LimitReconciler | None = None,
     ) -> RPMLimiter:
         """Create a new RPMLimiter."""
         if burst_mode:
