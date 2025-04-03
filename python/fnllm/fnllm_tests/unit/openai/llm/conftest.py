@@ -155,9 +155,11 @@ class OpenAIChatCompletionClientMock:
             usage=usage,
         )
 
-        self._raw_mock.chat.completions.create = self._response_mock = AsyncMock(
-            return_value=self._raw_response
-        )
+        response = Mock()
+        response.parse = Mock(return_value=self._raw_response)
+        response.headers = Headers()
+        self._response_mock = AsyncMock(return_value=response)
+        self._raw_mock.chat.completions.with_raw_response.create = self._response_mock
 
         return self._raw_mock
 
@@ -297,11 +299,10 @@ class OpenAIEmbeddingsClientMock:
             usage=usage,
         )
 
-        raw_response = Mock()
-        raw_response.parse = Mock(return_value=self._raw_response)
-        raw_response.headers = Headers()
-        self._response_mock = AsyncMock(return_value=raw_response)
-
+        response = Mock()
+        response.parse = Mock(return_value=self._raw_response)
+        response.headers = Headers()
+        self._response_mock = AsyncMock(return_value=response)
         self._raw_mock.embeddings.with_raw_response.create = self._response_mock
 
         return self._raw_mock
