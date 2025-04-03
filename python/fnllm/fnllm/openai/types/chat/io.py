@@ -43,7 +43,7 @@ class OpenAIChatOutput(ChatLLMOutput):
     usage: LLMUsageMetrics | None
     """Usage statistics for the completion request."""
 
-    headers: Headers | None = None
+    headers: Headers | None = Field(default=None)
     """HTTP headers from the completion request. This will be None if the response was cached."""
 
 
