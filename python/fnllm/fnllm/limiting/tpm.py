@@ -14,7 +14,7 @@ from fnllm.types.io import LLMOutput
 
 from .update_limiter import update_limiter
 
-TpmReconciler = Callable[[Manifest, LLMOutput[Any, Any, Any]], int | None]
+TpmReconciler = Callable[[LLMOutput[Any, Any, Any]], int | None]
 """A callable that will determine the actual number of tokens left in the limiter."""
 
 
@@ -42,11 +42,11 @@ class TPMLimiter(Limiter):
         """Do nothing."""
 
     async def reconcile(
-        self, manifest: Manifest, *, output: LLMOutput[Any, Any, Any]
+        self, output: LLMOutput[Any, Any, Any]
     ) -> Reconciliation | None:
         """Limit for a given amount (default = 1)."""
         if self._reconciler is not None:
-            remaining = self._reconciler(manifest, output)
+            remaining = self._reconciler(output)
             if remaining is not None:
                 old = update_limiter(self._limiter, remaining)
                 return Reconciliation(old_value=old, new_value=remaining)

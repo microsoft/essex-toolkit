@@ -236,7 +236,7 @@ async def test_chat_llm_with_cache(
     mocked_events.on_cache_miss.assert_called_once_with(ANY, name)
 
 
-async def test_chat_on_limit_reconcile_event(
+async def test_chat_on_post_limit_event(
     chat_completion_client_mock: OpenAIChatCompletionClientMock,
 ):
     config = AzureOpenAIConfig(
@@ -266,7 +266,7 @@ async def test_chat_on_limit_reconcile_event(
     await llm("Hello!")
 
     # check event is triggered
-    mocked_events.on_limit_reconcile.assert_called_once()
+    mocked_events.on_post_limit.assert_called_once()
 
 
 async def test_chat_on_success_event(

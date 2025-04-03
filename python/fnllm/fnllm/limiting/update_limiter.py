@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 
 def update_limiter(
     limiter: AsyncLimiter,
-    available: int,
+    available: float,
 ) -> float:
     """Update the limiter with the available capacity."""
     if available > limiter.max_rate:

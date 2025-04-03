@@ -41,6 +41,22 @@ class RateLimiter(
         self._events = events
         self._estimator = estimator
 
+    async def _handle_post_request_limiting(
+        self,
+        result: LLMOutput[TOutput, TJsonModel, THistoryEntry],
+    ) -> None:
+        reconciliation = await self._limiter.reconcile(output=result)
+        if reconciliation is not None:
+            await self._events.on_limit_reconcile(reconciliation)
+        else:
+            # If we didn't get an explicit reconciliation, try to adjust the usage based on the actual output tokens
+            diff = result.metrics.tokens_diff
+            if diff > 0:
+                manifest = Manifest(post_request_tokens=diff)
+                # consume the token difference
+                async with self._limiter.use(manifest):
+                    await self._events.on_post_limit(manifest)
+
     def decorate(
         self,
         delegate: Callable[
@@ -62,13 +78,7 @@ class RateLimiter(
 
             # Set the estimated input tokens
             result.metrics.estimated_input_tokens = estimated_input_tokens
-
-            # Perform any Reconciliation
-            manifest = Manifest(post_request_tokens=result.metrics.tokens_diff)
-            reconciliation = await self._limiter.reconcile(manifest, output=result)
-            if reconciliation or result.metrics.tokens_diff > 0:
-                await self._events.on_limit_reconcile(manifest, reconciliation)
-
+            await self._handle_post_request_limiting(result)
             return result
 
         return invoke

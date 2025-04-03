@@ -37,9 +37,7 @@ class CompositeLimiter(Limiter):
         for limiter in self._release_order:
             await limiter.release(manifest)
 
-    async def reconcile(
-        self, manifest: Manifest, *, output: LLMOutput[Any, Any, Any]
-    ) -> None:
+    async def reconcile(self, output: LLMOutput[Any, Any, Any]) -> None:
         """Reconcile all limiters."""
         for limiter in self._limiters:
-            await limiter.reconcile(manifest, output=output)
+            await limiter.reconcile(output)

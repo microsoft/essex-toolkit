@@ -12,7 +12,7 @@ from fnllm.types.metrics import LLMUsageMetrics
 from fnllm.utils.sliding_window import SlidingWindow
 
 if TYPE_CHECKING:
-    from fnllm.limiting.base import Manifest, Reconciliation
+    from fnllm.limiting.base import Manifest
 
 
 class LLMUsageTracker(LLMEvents):
@@ -85,12 +85,9 @@ class LLMUsageTracker(LLMEvents):
         """Called when limit is released for a request (does not include post limiting)."""
         self._current_concurrency = max(0, self._current_concurrency - 1)
 
-    async def on_limit_reconcile(
-        self, manifest: Manifest, value: Reconciliation | None
-    ) -> None:
+    async def on_post_limit(self, manifest: Manifest) -> None:
         """Called when post request limiting is triggered (called by the rate limiting LLM)."""
-        if manifest.post_request_tokens > 0:
-            await self._tpm_sliding_window.insert(manifest.post_request_tokens)
+        await self._tpm_sliding_window.insert(manifest.post_request_tokens)
 
     @classmethod
     def create(cls) -> LLMUsageTracker:

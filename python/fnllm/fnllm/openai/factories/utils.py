@@ -25,7 +25,7 @@ if TYPE_CHECKING:
     from httpx import Headers
 
     from fnllm.events.base import LLMEvents
-    from fnllm.limiting.base import Limiter, Manifest
+    from fnllm.limiting.base import Limiter
     from fnllm.openai.config import OpenAIConfig
     from fnllm.types.io import LLMOutput
 
@@ -34,9 +34,7 @@ def _get_encoding(encoding_name: str) -> tiktoken.Encoding:
     return tiktoken.get_encoding(encoding_name)
 
 
-def _tpm_reconciler(
-    _manifest: Manifest, output: LLMOutput[Any, Any, Any]
-) -> int | None:
+def _tpm_reconciler(output: LLMOutput[Any, Any, Any]) -> int | None:
     if hasattr(output.output, "headers"):
         headers: Headers = output.output.headers
         result = headers.get("x-ratelimit-remaining-tokens", None)
@@ -44,9 +42,7 @@ def _tpm_reconciler(
     return None
 
 
-def _rpm_reconciler(
-    _manifest: Manifest, output: LLMOutput[Any, Any, Any]
-) -> int | None:
+def _rpm_reconciler(output: LLMOutput[Any, Any, Any]) -> int | None:
     if hasattr(output.output, "headers"):
         headers: Headers = output.output.headers
         result = headers.get("x-ratelimit-remaining-requests", None)

@@ -25,7 +25,11 @@ async def test_composite_events():
     delegate_a.on_error.assert_called_once()
     delegate_b.on_error.assert_called_once()
 
-    await events.on_limit_reconcile(Mock(), Mock())
+    await events.on_post_limit(Mock())
+    delegate_a.on_post_limit.assert_called_once()
+    delegate_b.on_post_limit.assert_called_once()
+
+    await events.on_limit_reconcile(Mock())
     delegate_a.on_limit_reconcile.assert_called_once()
     delegate_b.on_limit_reconcile.assert_called_once()
 

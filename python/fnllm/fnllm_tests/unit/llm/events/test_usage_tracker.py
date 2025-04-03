@@ -5,7 +5,7 @@
 from unittest.mock import AsyncMock
 
 from fnllm.events.usage_tracker import LLMUsageTracker
-from fnllm.limiting.base import Manifest, Reconciliation
+from fnllm.limiting.base import Manifest
 from fnllm.types.metrics import LLMUsageMetrics
 from fnllm.utils.sliding_window import SlidingWindow
 
@@ -30,9 +30,7 @@ async def test_usage_tracker():
     rpm_sliding_window.reset_mock()
     tpm_sliding_window.reset_mock()
 
-    await tracker.on_limit_reconcile(
-        output_manifest, Reconciliation(old_value=0.0, new_value=0.0)
-    )
+    await tracker.on_post_limit(output_manifest)
 
     rpm_sliding_window.insert.assert_not_called()
     tpm_sliding_window.insert.assert_called_once_with(

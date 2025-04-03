@@ -79,6 +79,6 @@ class Limiter(ABC):
         return LimitContext(self, manifest)
 
     async def reconcile(  # noqa B027
-        self, manifest: Manifest, *, output: LLMOutput[Any, Any, Any]
+        self, output: LLMOutput[Any, Any, Any]
     ) -> Reconciliation | None:
         """Limit for a given amount (default = 1)."""
