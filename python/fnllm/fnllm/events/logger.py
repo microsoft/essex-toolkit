@@ -73,7 +73,7 @@ class LLMEventsLogger(LLMEvents):
             )
 
         if value is not None:
-            LOGGER.info(
+            LOGGER.debug(
                 "limit reconciled from %s to %s",
                 value.old_value,
                 value.new_value,

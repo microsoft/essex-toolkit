@@ -44,7 +44,7 @@ async def test_logger_is_called(caplog: pytest.LogCaptureFixture):
     await events.on_limit_reconcile(
         Manifest(), Reconciliation(old_value=1, new_value=2)
     )
-    check_records_and_reset(caplog, DEBUG, "post request limiting triggered")
+    check_records_and_reset(caplog, DEBUG, "limit reconciled from 1 to 2")
 
     await events.on_success(LLMMetrics())
     check_records_and_reset(caplog, DEBUG, "request succeed with")

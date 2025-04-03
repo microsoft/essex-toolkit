@@ -29,6 +29,10 @@ jobs:
         uses: astral-sh/setup-uv@v2
         with:
           version: ${{ env.UV_VERSION }}
+
+      - name: Setup uv
+        run: |
+          uv tool install uv-dynamic-versioning
           
       - name: Essex-Toolkit - Build Docs
         shell: bash
@@ -53,6 +57,10 @@ jobs:
         uses: astral-sh/setup-uv@v2
         with:
           version: ${{ env.UV_VERSION }}
+
+      - name: Setup uv
+        run: |
+          uv tool install uv-dynamic-versioning
 
       - name: Install Dependencies
         run: uv sync --locked
