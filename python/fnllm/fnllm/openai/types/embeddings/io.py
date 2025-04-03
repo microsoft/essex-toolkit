@@ -2,7 +2,7 @@
 
 """OpenAI embeddings input/output types."""
 
-from typing import TypeAlias
+from typing import ClassVar, TypeAlias
 
 from httpx import Headers
 from pydantic import ConfigDict, Field
@@ -21,7 +21,7 @@ OpenAIEmbeddingsInput: TypeAlias = EmbeddingsLLMInput
 class OpenAIEmbeddingsOutput(EmbeddingsLLMOutput):
     """OpenAI embeddings completion output."""
 
-    model_config = ConfigDict(arbitrary_types_allowed=True)
+    model_config: ClassVar[ConfigDict] = ConfigDict(arbitrary_types_allowed=True)
 
     raw_input: OpenAIEmbeddingsInput | None
     """Raw input that resulted in this output."""

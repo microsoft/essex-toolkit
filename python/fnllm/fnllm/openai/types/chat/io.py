@@ -29,7 +29,7 @@ OpenAIChatCompletionInput: TypeAlias = str | OpenAIChatMessageInput | None
 class OpenAIChatOutput(ChatLLMOutput):
     """OpenAI chat completion output."""
 
-    model_config = ConfigDict(arbitrary_types_allowed=True)
+    model_config: ClassVar[ConfigDict] = ConfigDict(arbitrary_types_allowed=True)
 
     raw_input: OpenAIChatMessageInput | None
     """Raw input that resulted in this output."""
