@@ -22,11 +22,16 @@ class RPMLimiter(Limiter):
     """RPM limiter class definition."""
 
     def __init__(
-        self, limiter: AsyncLimiter, reconciler: RpmReconciler | None = None
+        self,
+        limiter: AsyncLimiter,
+        reconciler: RpmReconciler | None = None,
+        *,
+        rps: bool,
     ) -> None:
         """Create a new RPMLimiter."""
         self._limiter = limiter
         self._reconciler = reconciler
+        self._rps = rps
 
     async def acquire(self, manifest: Manifest) -> None:
         """Acquire a new request."""
@@ -43,6 +48,10 @@ class RPMLimiter(Limiter):
         if self._reconciler is not None:
             remaining = self._reconciler(manifest, output)
             if remaining is not None:
+                if self._rps:
+                    # If the limiter is in RPS mode, we need to convert the
+                    # remaining requests to a rate.
+                    remaining = _rpm_to_rps(remaining)
                 old = update_limiter(self._limiter, remaining)
                 return Reconciliation(old_value=old, new_value=remaining)
         return None
@@ -56,6 +65,14 @@ class RPMLimiter(Limiter):
     ) -> RPMLimiter:
         """Create a new RPMLimiter."""
         if burst_mode:
-            return cls(AsyncLimiter(requests_per_minute, time_period=60), reconciler)
+            return cls(
+                AsyncLimiter(requests_per_minute, time_period=60), reconciler, rps=False
+            )
 
-        return cls(AsyncLimiter(1, time_period=60 / requests_per_minute), reconciler)
+        rps = _rpm_to_rps(requests_per_minute)
+        return cls(AsyncLimiter(rps, 1), reconciler, rps=True)
+
+
+def _rpm_to_rps(rpm: int) -> float:
+    """Convert minutes to seconds."""
+    return max(rpm / 60, 1)
