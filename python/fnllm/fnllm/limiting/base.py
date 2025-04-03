@@ -5,8 +5,9 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
+from asyncio import Semaphore
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, ClassVar
 
 if TYPE_CHECKING:
     from types import TracebackType
@@ -28,6 +29,8 @@ class Manifest:
 class LimitContext:
     """A context manager for limiting."""
 
+    acquire_semaphore: ClassVar[Semaphore] = Semaphore()
+
     def __init__(self, limiter: Limiter, manifest: Manifest):
         """Create a new LimitContext."""
         self._limiter = limiter
@@ -35,7 +38,8 @@ class LimitContext:
 
     async def __aenter__(self) -> LimitContext:  # noqa: PYI034 - Self requires python 3.11+
         """Enter the context."""
-        await self._limiter.acquire(self._manifest)
+        async with LimitContext.acquire_semaphore:
+            await self._limiter.acquire(self._manifest)
         return self
 
     async def __aexit__(
