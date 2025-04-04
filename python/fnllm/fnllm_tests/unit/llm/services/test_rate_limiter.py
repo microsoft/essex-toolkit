@@ -8,11 +8,11 @@ from unittest.mock import AsyncMock, Mock, call
 from aiolimiter import AsyncLimiter
 from fnllm.base.services.rate_limiter import RateLimiter
 from fnllm.events.base import LLMEvents
-from fnllm.limiting.base import Manifest
 from fnllm.limiting.composite import CompositeLimiter
 from fnllm.limiting.concurrency import ConcurrencyLimiter
 from fnllm.limiting.rpm import RPMLimiter
 from fnllm.limiting.tpm import TPMLimiter
+from fnllm.limiting.types import Manifest
 from fnllm.types.generics import THistoryEntry, TJsonModel, TModelParameters
 from fnllm.types.io import LLMInput, LLMOutput
 from fnllm.types.metrics import LLMMetrics, LLMUsageMetrics
@@ -127,10 +127,12 @@ async def test_rate_limit_with_post_limit():
     rpm_base_limiter.acquire.assert_called_once_with()
 
     # tpm has only acquire with parameters (there should be a second call with the tokens diff)
-    tpm_base_limiter.acquire.assert_has_calls([
-        call(estimated_input_tokens),
-        call(tokens_diff),
-    ])
+    tpm_base_limiter.acquire.assert_has_calls(
+        [
+            call(estimated_input_tokens),
+            call(tokens_diff),
+        ]
+    )
 
     # check post request limiting triggered
     events.on_post_limit.assert_called_once()

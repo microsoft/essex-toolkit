@@ -6,7 +6,7 @@ from logging import DEBUG, ERROR, WARNING
 
 import pytest
 from fnllm.events.logger import LLMEventsLogger
-from fnllm.limiting.base import Manifest, Reconciliation
+from fnllm.limiting.types import Manifest, Reconciliation
 from fnllm.types.metrics import LLMMetrics, LLMUsageMetrics
 
 

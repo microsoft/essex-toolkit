@@ -5,8 +5,8 @@
 from unittest.mock import Mock
 
 from aiolimiter import AsyncLimiter
-from fnllm.limiting.base import Manifest
 from fnllm.limiting.tpm import TPMLimiter
+from fnllm.limiting.types import Manifest
 
 
 async def test_tpm_acquired_with_sum_of_request_and_post_request_tokens():

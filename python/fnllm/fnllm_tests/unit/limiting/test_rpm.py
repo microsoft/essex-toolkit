@@ -5,8 +5,8 @@
 from unittest.mock import Mock
 
 from aiolimiter import AsyncLimiter
-from fnllm.limiting.base import Manifest
 from fnllm.limiting.rpm import RPMLimiter
+from fnllm.limiting.types import Manifest
 
 
 async def test_rpm_only_acquired_with_request_tokens():
