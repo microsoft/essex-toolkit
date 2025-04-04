@@ -6,12 +6,14 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-from .base import Limiter, Manifest
+from .base import Limiter
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
     from fnllm.types.io import LLMOutput
+
+    from .types import Manifest
 
 
 class CompositeLimiter(Limiter):
