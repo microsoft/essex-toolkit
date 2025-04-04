@@ -22,6 +22,7 @@ def update_limiter(
     new_level = limiter.max_rate - available
     if new_level < 0:
         new_level = 0
-    limiter._level = new_level  # noqa
-    limiter._wake_next()  # noqa
+
+    limiter._level = new_level  # noqa SLF001
+    limiter._loop.call_soon(limiter._wake_next)  # noqa SLF001
     return old
