@@ -31,7 +31,16 @@ OPENAI_RETRYABLE_ERRORS: Final[list[type[Exception]]] = [
 
 
 class OpenAIBackoffLimiter(Limiter):
-    """A base class to rate limit the LLM."""
+    """
+    OpenAI Backoff Limiter.
+
+    This limiter is used in tandem with the OpenAI Reetryable Error Handler to ensure that when
+    429 errors are encountered, the running loop will pause for the amount of time specified in the
+    retry-after header before allowing requests to clear the limiters.
+
+    Any in-flight requests will be allowed to complete, but no new requests will be allowed to start
+    until the delay has passed.
+    """
 
     def __init__(self) -> None:
         """Create a new OpenAIBackoffLimiter."""
