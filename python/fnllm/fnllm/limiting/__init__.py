@@ -8,16 +8,17 @@ from .concurrency import ConcurrencyLimiter
 from .noop_llm import NoopLimiter
 from .rpm import RPMLimiter
 from .tpm import TPMLimiter
-from .types import LimitReconciler, Manifest, Reconciliation
+from .types import LimitReconciler, LimitReconciliation, LimitUpdate, Manifest
 
 __all__ = [
     "CompositeLimiter",
     "ConcurrencyLimiter",
     "LimitReconciler",
+    "LimitReconciliation",
+    "LimitUpdate",
     "Limiter",
     "Manifest",
     "NoopLimiter",
     "RPMLimiter",
-    "Reconciliation",
     "TPMLimiter",
 ]

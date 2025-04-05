@@ -10,7 +10,19 @@ from typing import Any
 
 from fnllm.types.io import LLMOutput
 
-LimitReconciler = Callable[[LLMOutput[Any, Any, Any]], int | None]
+
+@dataclass
+class LimitReconciliation:
+    """A limit reconciliation."""
+
+    limit: float | None
+    """The new limit value."""
+
+    remaining: float | None
+    """The new remaining value."""
+
+
+LimitReconciler = Callable[[LLMOutput[Any, Any, Any]], LimitReconciliation]
 """A callable that will determine the actual number of items left in the limiter."""
 
 
@@ -26,7 +38,7 @@ class Manifest:
 
 
 @dataclass
-class Reconciliation:
+class LimitUpdate:
     """A limit reconciliation."""
 
     old_value: float

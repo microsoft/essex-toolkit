@@ -10,7 +10,7 @@ from aiolimiter import AsyncLimiter
 
 from fnllm.limiting.base import Limiter
 
-from .types import Reconciliation
+from .types import LimitReconciler, LimitUpdate
 from .update_limiter import update_limiter
 
 if TYPE_CHECKING:
@@ -42,23 +42,25 @@ class TPMLimiter(Limiter):
     async def release(self, manifest: Manifest) -> None:
         """Do nothing."""
 
-    async def reconcile(
-        self, output: LLMOutput[Any, Any, Any]
-    ) -> Reconciliation | None:
+    async def reconcile(self, output: LLMOutput[Any, Any, Any]) -> LimitUpdate | None:
         """Limit for a given amount (default = 1)."""
         if self._reconciler is not None:
-            remaining = self._reconciler(output)
-            if remaining is not None:
-                old = update_limiter(self._limiter, remaining)
-                return Reconciliation(old_value=old, new_value=remaining)
+            reconciliation = self._reconciler(output)
+            old = update_limiter(self._limiter, reconciliation)
+            return LimitUpdate(old_value=old, new_value=reconciliation.remaining or 0)
 
         return None
 
     @classmethod
     def from_tpm(
-        cls, tokens_per_minute: int, *, reconciler: LimitReconciler | None = None
+        cls,
+        tokens_per_minute: int,
+        *,
+        reconciler: LimitReconciler | None = None,
     ) -> TPMLimiter:
         """Create a new RpmLimiter."""
         return cls(
-            AsyncLimiter(tokens_per_minute), tokens_per_minute, reconciler=reconciler
+            AsyncLimiter(tokens_per_minute),
+            tokens_per_minute,
+            reconciler=reconciler,
         )

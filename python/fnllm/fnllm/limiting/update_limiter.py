@@ -9,20 +9,23 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from aiolimiter import AsyncLimiter
 
+    from .types import LimitReconciliation
+
 
 def update_limiter(
     limiter: AsyncLimiter,
-    available: float,
+    reconciliation: LimitReconciliation,
 ) -> float:
     """Update the limiter with the available capacity."""
-    if available > limiter.max_rate:
-        limiter.max_rate = available
+    if reconciliation.limit is not None and reconciliation.limit > limiter.max_rate:
+        limiter.max_rate = reconciliation.limit
 
     old = limiter.max_rate - limiter._level  # noqa
-    new_level = limiter.max_rate - available
-    if new_level < 0:
-        new_level = 0
 
-    limiter._level = new_level  # noqa SLF001
-    limiter._loop.call_soon(limiter._wake_next)  # noqa SLF001
+    if reconciliation.remaining is not None:
+        new_level = max(0, limiter.max_rate - reconciliation.remaining)
+
+        limiter._level = new_level  # noqa SLF001
+        limiter._loop.call_soon(limiter._wake_next)  # noqa SLF001
+
     return old

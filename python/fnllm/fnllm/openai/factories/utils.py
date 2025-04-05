@@ -15,8 +15,10 @@ from fnllm.limiting.composite import CompositeLimiter
 from fnllm.limiting.concurrency import ConcurrencyLimiter
 from fnllm.limiting.rpm import RPMLimiter
 from fnllm.limiting.tpm import TPMLimiter
+from fnllm.limiting.types import LimitReconciliation
 from fnllm.openai.services.openai_retryable_error_handler import (
     OPENAI_RETRYABLE_ERRORS,
+    OpenAIBackoffLimiter,
     OpenAIRetryableErrorHandler,
 )
 from fnllm.openai.services.openai_token_estimator import OpenAITokenEstimator
@@ -34,25 +36,45 @@ def _get_encoding(encoding_name: str) -> tiktoken.Encoding:
     return tiktoken.get_encoding(encoding_name)
 
 
-def _tpm_reconciler(output: LLMOutput[Any, Any, Any]) -> int | None:
+def _get_header_value(output: LLMOutput[Any, Any, Any], header_name: str) -> Any:
     if hasattr(output.output, "headers"):
         headers: Headers = output.output.headers
-        result = headers.get("x-ratelimit-remaining-tokens", None)
+        result = headers.get(header_name, None)
         return int(result) if result is not None else None
     return None
 
 
-def _rpm_reconciler(output: LLMOutput[Any, Any, Any]) -> int | None:
-    if hasattr(output.output, "headers"):
-        headers: Headers = output.output.headers
-        result = headers.get("x-ratelimit-remaining-requests", None)
-        return int(result) if result is not None else None
-    return None
+def _tpm_reconciler(output: LLMOutput[Any, Any, Any]) -> LimitReconciliation:
+    return LimitReconciliation(
+        limit=_get_header_value(output, "x-ratelimit-limit-tokens"),
+        remaining=_get_header_value(output, "x-ratelimit-remaining-tokens"),
+    )
 
 
-def create_limiter(config: OpenAIConfig) -> Limiter | None:
+def _rpm_reconciler(output: LLMOutput[Any, Any, Any]) -> LimitReconciliation:
+    return LimitReconciliation(
+        limit=_get_header_value(output, "x-ratelimit-limit-requests"),
+        remaining=_get_header_value(output, "x-ratelimit-remaining-requests"),
+    )
+
+
+def create_backoff_limiter(
+    config: OpenAIConfig,
+) -> OpenAIBackoffLimiter | None:
+    """Create an LLM limiter based on the incoming configuration."""
+    return OpenAIBackoffLimiter() if config.sleep_on_rate_limit_recommendation else None
+
+
+def create_limiter(
+    config: OpenAIConfig,
+    backoff_limiter: OpenAIBackoffLimiter | None,
+) -> Limiter | None:
     """Create an LLM limiter based on the incoming configuration."""
     limiters = []
+
+    if backoff_limiter is not None:
+        limiters.append(backoff_limiter)
+
     rpm = config.requests_per_minute
     tpm = config.tokens_per_minute
 
@@ -81,7 +103,12 @@ def create_limiter(config: OpenAIConfig) -> Limiter | None:
             tpm = 1
             reconciler = _tpm_reconciler
 
-        limiters.append(TPMLimiter.from_tpm(tpm, reconciler=_tpm_reconciler))
+        limiters.append(
+            TPMLimiter.from_tpm(
+                tpm,
+                reconciler=reconciler,
+            )
+        )
 
     if len(limiters) == 0:
         return None
@@ -113,13 +140,14 @@ def create_retryer(
     config: OpenAIConfig,
     operation: str,
     events: LLMEvents,
+    limiter: OpenAIBackoffLimiter | None,
 ) -> Retryer[Any, Any, Any, Any] | None:
     """Wraps the LLM with retry logic."""
     if config.retry_strategy is RetryStrategy.NATIVE:
         return None
     handler = None
-    if config.sleep_on_rate_limit_recommendation:
-        handler = OpenAIRetryableErrorHandler()
+    if limiter is not None:
+        handler = OpenAIRetryableErrorHandler(limiter)
     return Retryer(
         tag=operation,
         max_retries=config.max_retries,

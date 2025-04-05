@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 
     from fnllm.types.io import LLMOutput
 
-    from .types import Manifest, Reconciliation
+    from .types import LimitUpdate, Manifest
 
 
 class LimitContext:
@@ -59,5 +59,5 @@ class Limiter(ABC):
 
     async def reconcile(  # noqa B027
         self, output: LLMOutput[Any, Any, Any]
-    ) -> Reconciliation | None:
+    ) -> LimitUpdate | None:
         """Limit for a given amount (default = 1)."""

@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING, Any
 from aiolimiter import AsyncLimiter
 
 from .base import Limiter
-from .types import Reconciliation
+from .types import LimitUpdate
 from .update_limiter import update_limiter
 
 if TYPE_CHECKING:
@@ -41,19 +41,23 @@ class RPMLimiter(Limiter):
     async def release(self, manifest: Manifest) -> None:
         """Do nothing."""
 
-    async def reconcile(
-        self, output: LLMOutput[Any, Any, Any]
-    ) -> Reconciliation | None:
+    async def reconcile(self, output: LLMOutput[Any, Any, Any]) -> LimitUpdate | None:
         """Limit for a given amount (default = 1)."""
         if self._reconciler is not None:
-            remaining = self._reconciler(output)
-            if remaining is not None:
+            reconciliation = self._reconciler(output)
+            if (
+                reconciliation.limit is not None
+                and reconciliation.remaining is not None
+            ):
                 if self._rps:
                     # If the limiter is in RPS mode, we need to convert the
                     # remaining requests to a rate.
-                    remaining = _rpm_to_rps(remaining)
-                old = update_limiter(self._limiter, remaining)
-                return Reconciliation(old_value=old, new_value=remaining)
+                    reconciliation.remaining = _rpm_to_rps(reconciliation.remaining)
+                    reconciliation.limit = _rpm_to_rps(reconciliation.limit)
+                old = update_limiter(self._limiter, reconciliation)
+                return LimitUpdate(
+                    old_value=old, new_value=reconciliation.remaining or 0
+                )
         return None
 
     @classmethod
@@ -66,13 +70,19 @@ class RPMLimiter(Limiter):
         """Create a new RPMLimiter."""
         if burst_mode:
             return cls(
-                AsyncLimiter(requests_per_minute, time_period=60), reconciler, rps=False
+                AsyncLimiter(requests_per_minute, time_period=60),
+                reconciler=reconciler,
+                rps=False,
             )
 
         rps = _rpm_to_rps(requests_per_minute)
-        return cls(AsyncLimiter(rps, 1), reconciler, rps=True)
+        return cls(
+            AsyncLimiter(rps, 1),
+            reconciler=reconciler,
+            rps=True,
+        )
 
 
-def _rpm_to_rps(rpm: int) -> float:
+def _rpm_to_rps(rpm: float) -> float:
     """Convert minutes to seconds."""
     return rpm / 60.0
