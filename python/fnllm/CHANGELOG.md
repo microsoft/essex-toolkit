@@ -17,7 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ```
 ## [Unreleased]
 ### Added
+- Add HTTP header reactive updates to TPM/RPM throttles. By setting tpm=0 or rpm=0, the throttles will be started in dynamic mode.
+- Add events method for limit reconciliation.
 ### Changed
+- Update OpenAIRetryableErrorHandle to inspect error headers instead of the error message.
 ### Deprecated
 ### Removed
 ### Fixed

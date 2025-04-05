@@ -5,26 +5,21 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from asyncio import Semaphore
+from typing import TYPE_CHECKING, Any, ClassVar
 
 if TYPE_CHECKING:
     from types import TracebackType
 
+    from fnllm.types.io import LLMOutput
 
-@dataclass
-class Manifest:
-    """Parameters for limiting."""
-
-    request_tokens: int = 0
-    """The number of tokens to acquire or release."""
-
-    post_request_tokens: int = 0
-    """The number of tokens to acquire or release after the request is complete."""
+    from .types import LimitUpdate, Manifest
 
 
 class LimitContext:
     """A context manager for limiting."""
+
+    acquire_semaphore: ClassVar[Semaphore] = Semaphore()
 
     def __init__(self, limiter: Limiter, manifest: Manifest):
         """Create a new LimitContext."""
@@ -33,7 +28,8 @@ class LimitContext:
 
     async def __aenter__(self) -> LimitContext:  # noqa: PYI034 - Self requires python 3.11+
         """Enter the context."""
-        await self._limiter.acquire(self._manifest)
+        async with LimitContext.acquire_semaphore:
+            await self._limiter.acquire(self._manifest)
         return self
 
     async def __aexit__(
@@ -60,3 +56,8 @@ class Limiter(ABC):
     def use(self, manifest: Manifest) -> LimitContext:
         """Limit for a given amount (default = 1)."""
         return LimitContext(self, manifest)
+
+    async def reconcile(  # noqa B027
+        self, output: LLMOutput[Any, Any, Any]
+    ) -> LimitUpdate | None:
+        """Limit for a given amount (default = 1)."""

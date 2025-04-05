@@ -5,7 +5,7 @@
 from unittest.mock import AsyncMock
 
 from fnllm.events.usage_tracker import LLMUsageTracker
-from fnllm.limiting.base import Manifest
+from fnllm.limiting.types import Manifest
 from fnllm.types.metrics import LLMUsageMetrics
 from fnllm.utils.sliding_window import SlidingWindow
 

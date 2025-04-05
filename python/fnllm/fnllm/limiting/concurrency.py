@@ -5,8 +5,12 @@
 from __future__ import annotations
 
 from asyncio import Semaphore
+from typing import TYPE_CHECKING
 
-from fnllm.limiting.base import Limiter, Manifest
+from .base import Limiter
+
+if TYPE_CHECKING:
+    from .types import Manifest
 
 
 class ConcurrencyLimiter(Limiter):

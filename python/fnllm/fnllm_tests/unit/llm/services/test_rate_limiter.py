@@ -8,11 +8,11 @@ from unittest.mock import AsyncMock, Mock, call
 from aiolimiter import AsyncLimiter
 from fnllm.base.services.rate_limiter import RateLimiter
 from fnllm.events.base import LLMEvents
-from fnllm.limiting.base import Manifest
 from fnllm.limiting.composite import CompositeLimiter
 from fnllm.limiting.concurrency import ConcurrencyLimiter
 from fnllm.limiting.rpm import RPMLimiter
 from fnllm.limiting.tpm import TPMLimiter
+from fnllm.limiting.types import Manifest
 from fnllm.types.generics import THistoryEntry, TJsonModel, TModelParameters
 from fnllm.types.io import LLMInput, LLMOutput
 from fnllm.types.metrics import LLMMetrics, LLMUsageMetrics
@@ -34,7 +34,7 @@ async def test_rate_limit_based_on_estimated_request_tokens():
     concurrency_base_limiter = AsyncMock(spec=Semaphore)
     concurrency_limiter = ConcurrencyLimiter(concurrency_base_limiter)
     rpm_base_limiter = AsyncMock(spec=AsyncLimiter)
-    rpm_limiter = RPMLimiter(rpm_base_limiter)
+    rpm_limiter = RPMLimiter(rpm_base_limiter, rps=False)
     tpm_base_limiter = AsyncMock(spec=AsyncLimiter)
     tpm_limiter = TPMLimiter(tpm_base_limiter, 10_000)
     limiter = CompositeLimiter([concurrency_limiter, rpm_limiter, tpm_limiter])
@@ -53,7 +53,7 @@ async def test_rate_limit_based_on_estimated_request_tokens():
     events = Mock(spec=LLMEvents)
 
     limiter = CustomRateLimiter(
-        limiter=limiter, events=events, estimator=lambda _, __: 30
+        limiter=limiter, events=events, estimator=lambda _, __: estimated_input_tokens
     )
     llm = limiter.decorate(delegate)
 
@@ -90,7 +90,7 @@ async def test_rate_limit_with_post_limit():
     concurrency_base_limiter = AsyncMock(spec=Semaphore)
     concurrency_limiter = ConcurrencyLimiter(concurrency_base_limiter)
     rpm_base_limiter = AsyncMock(spec=AsyncLimiter)
-    rpm_limiter = RPMLimiter(rpm_base_limiter)
+    rpm_limiter = RPMLimiter(rpm_base_limiter, rps=False)
     tpm_base_limiter = AsyncMock(spec=AsyncLimiter)
     tpm_limiter = TPMLimiter(tpm_base_limiter, 10_000)
     limiter = CompositeLimiter([concurrency_limiter, rpm_limiter, tpm_limiter])
@@ -112,7 +112,7 @@ async def test_rate_limit_with_post_limit():
     events = Mock(spec=LLMEvents)
 
     rate_limiter = CustomRateLimiter(
-        limiter=limiter, events=events, estimator=lambda _, __: 30
+        limiter=limiter, events=events, estimator=lambda _, __: estimated_input_tokens
     )
     llm = rate_limiter.decorate(delegate)
 

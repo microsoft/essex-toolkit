@@ -163,10 +163,12 @@ class OpenAITextChatLLMImpl(
         local_model_parameters = kwargs.get("model_parameters")
         parameters = self._build_completion_parameters(local_model_parameters)
 
-        completion = await self._client.chat.completions.create(
+        raw_response = await self._client.chat.completions.with_raw_response.create(
             messages=cast(Iterator[ChatCompletionMessageParam], messages),
             **parameters,
         )
+        completion = raw_response.parse()
+        headers = raw_response.headers
 
         if not completion.choices or len(completion.choices) == 0:
             raise OpenAINoChoicesAvailableError
@@ -185,6 +187,7 @@ class OpenAITextChatLLMImpl(
             content=result.content,
             raw_model=completion,
             usage=usage or LLMUsageMetrics(),
+            headers=headers,
         )
 
     def _rewrite_input(

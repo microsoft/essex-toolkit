@@ -298,7 +298,7 @@ async def test_chat_on_success_event(
     await llm("Hello!")
 
     # should not be triggered since there are no usage tokens
-    mocked_events.on_post_limit.assert_not_called()
+    mocked_events.on_limit_reconcile.assert_not_called()
 
     # should be called once at the end
     mocked_events.on_success.assert_called_once()

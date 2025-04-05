@@ -4,7 +4,12 @@
 
 from __future__ import annotations
 
-from fnllm.limiting.base import Limiter, Manifest
+from typing import TYPE_CHECKING
+
+from fnllm.limiting.base import Limiter
+
+if TYPE_CHECKING:
+    from fnllm.limiting.types import Manifest
 
 
 class NoopLimiter(Limiter):

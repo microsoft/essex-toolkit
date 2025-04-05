@@ -8,7 +8,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
-    from fnllm.limiting.base import Manifest
+    from fnllm.limiting.types import LimitUpdate, Manifest
     from fnllm.types.metrics import LLMMetrics, LLMUsageMetrics
 
 
@@ -39,6 +39,9 @@ class LLMEvents:
 
     async def on_post_limit(self, manifest: Manifest) -> None:
         """Called when post request limiting is triggered (called by the rate limiting LLM)."""
+
+    async def on_limit_reconcile(self, value: LimitUpdate) -> None:
+        """Called when a limit reconciliation occurs."""
 
     async def on_success(
         self,

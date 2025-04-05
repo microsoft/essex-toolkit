@@ -64,9 +64,12 @@ async def test_raises_no_choices_available():
     client = Mock()
     client.chat = Mock()
     client.chat.completions = Mock()
-    client.chat.completions.create = AsyncMock()
-    response = ChatCompletionModelFactory.build(choices=[])
-    client.chat.completions.create.return_value = response
+    client.chat.completions.with_raw_response = Mock()
+    client.chat.completions.with_raw_response.create = AsyncMock()
+    response = Mock()
+    response.parse = Mock(return_value=ChatCompletionModelFactory.build(choices=[]))
+    response.headers = Mock()
+    client.chat.completions.with_raw_response.create.return_value = response
 
     llm = OpenAITextChatLLMImpl(
         client=client,

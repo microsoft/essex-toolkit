@@ -5,8 +5,8 @@
 from asyncio import Semaphore
 from unittest.mock import Mock
 
-from fnllm.limiting.base import Manifest
 from fnllm.limiting.concurrency import ConcurrencyLimiter
+from fnllm.limiting.types import Manifest
 
 
 async def test_concurrency_only_acquired_released_with_request_tokens():

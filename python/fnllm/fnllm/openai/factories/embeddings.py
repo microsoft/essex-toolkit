@@ -18,7 +18,12 @@ from fnllm.openai.services.openai_usage_extractor import (
 )
 
 from .client import create_openai_client
-from .utils import create_limiter, create_rate_limiter, create_retryer
+from .utils import (
+    create_backoff_limiter,
+    create_limiter,
+    create_rate_limiter,
+    create_retryer,
+)
 
 if TYPE_CHECKING:
     from fnllm.caching.base import Cache
@@ -37,7 +42,8 @@ def create_openai_embeddings_llm(
     operation = "embedding"
     client = client or create_openai_client(config)
     events = events or LLMEvents()
-    limiter = create_limiter(config)
+    backoff_limiter = create_backoff_limiter(config)
+    limiter = create_limiter(config, backoff_limiter)
     return OpenAIEmbeddingsLLMImpl(
         client,
         model=config.model,
@@ -47,7 +53,9 @@ def create_openai_embeddings_llm(
         usage_extractor=OpenAIUsageExtractor(),
         variable_injector=VariableInjector(),
         rate_limiter=create_rate_limiter(config=config, events=events, limiter=limiter),
-        retryer=create_retryer(config=config, operation=operation, events=events),
+        retryer=create_retryer(
+            config=config, operation=operation, events=events, limiter=backoff_limiter
+        ),
     )
 
 
