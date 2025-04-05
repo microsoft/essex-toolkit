@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 import asyncio
-from typing import TYPE_CHECKING, Final, cast
+from typing import TYPE_CHECKING, Final
 
 from openai import (
     APIConnectionError,
@@ -35,20 +35,24 @@ class OpenAIBackoffLimiter(Limiter):
 
     def __init__(self) -> None:
         """Create a new OpenAIBackoffLimiter."""
-        self._delay: asyncio.Future[None] | None = None
+        self._delay_event = asyncio.Event()  # Event to control access
+        self._delay_event.set()  # Initially allow acquire() calls
 
     async def acquire(self, manifest: Manifest) -> None:
         """Acquire a pass through the limiter."""
-        if self._delay is not None:
-            await self._delay
-            self._delay = None
+        await self._delay_event.wait()  # Wait until the event is set
 
     async def release(self, manifest: Manifest) -> None:
         """Release a pass through the limiter."""
+        # No-op in this implementation, but can be extended if needed.
 
-    def sleep_for(self, time: int) -> None:
+    async def sleep_for(self, time: int) -> None:
         """Sleep for the given amount of time."""
-        self._delay = cast(asyncio.Future[None], asyncio.sleep(time))
+        self._delay_event.clear()  # Block acquire() calls
+        try:
+            await asyncio.sleep(time)
+        finally:
+            self._delay_event.set()
 
 
 class OpenAIRetryableErrorHandler:
@@ -63,4 +67,4 @@ class OpenAIRetryableErrorHandler:
         if isinstance(error, APIStatusError):
             retry_after = error.response.headers.get("retry-after", None)
             if retry_after is not None:
-                self._limiter.sleep_for(int(retry_after))
+                await self._limiter.sleep_for(int(retry_after))
