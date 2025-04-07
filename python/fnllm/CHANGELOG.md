@@ -15,14 +15,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 ```
+
 ## [Unreleased]
 ### Added
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
-- Update EmbeddingBatcher to emit a None-Future when embedding input is empty.
 ### Security
+
+## [0.2.9] - 2025-04-07
+### Fixed
+- Update EmbeddingBatcher to emit a None-Future when embedding input is empty.
 
 ## [0.2.8] - 2025-03-21
 ### Fixed
