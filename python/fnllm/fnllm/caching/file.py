@@ -32,6 +32,28 @@ class FileCache(Cache):
         """Cache path in the filesystem."""
         return self._cache_path
 
+    async def sweep(self, age: int, *, remove_unreadable: bool = False) -> None:
+        """Sweep the cache for entries older than `age` seconds."""
+        _log.debug("sweeping cache %s", self._cache_path)
+        now = time.time()
+
+        for f in self._cache_path.iterdir():
+            if f.is_dir():
+                continue
+
+            try:
+                cache_entry = json.loads(f.read_text(encoding=self._encoding))
+            except json.JSONDecodeError:
+                _log.warning("Cache entry %s is corrupted", f)
+                if remove_unreadable:
+                    _log.debug("removing file %s", f)
+                    f.unlink()
+                continue
+
+            if now - cache_entry["accessed"] > age:
+                _log.debug("removing file %s", f)
+                f.unlink()
+
     async def has(self, key: str) -> bool:
         """Check if the cache has a value."""
         return (self._cache_path / key).exists()

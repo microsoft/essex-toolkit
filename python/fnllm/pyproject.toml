@@ -1,6 +1,6 @@
 [project]
 name = "fnllm"
-version = "0.2.5"
+dynamic = ["version"]
 description = "A function-based LLM protocol and wrapper."
 authors = [
     {name="Chris Trevino", email="chtrevin@microsoft.com"},
@@ -51,11 +51,22 @@ dev-dependencies = [
     # Numpy Optional
     "numpy>=1.26.4",
     "polyfactory>=2.19.0",
+    "uv-dynamic-versioning>=0.6.0",
 ]
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "uv-dynamic-versioning"]
 build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
+
+[tool.uv-dynamic-versioning]
+vcs = "git"
+style = "pep440"
+# This allows us to match project-specific release tags (e.g.. 'fnllm-v0.3.0')
+pattern-prefix = "fnllm-"
+metadata = false
 
 # https://github.com/microsoft/pyright/blob/9f81564a4685ff5c55edd3959f9b39030f590b2f/docs/configuration.md#sample-pyprojecttoml-file
 [tool.pyright]

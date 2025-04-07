@@ -5,7 +5,6 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from collections.abc import Awaitable, Callable
 from typing import TYPE_CHECKING, Any, Generic, cast
 
 from typing_extensions import Unpack
@@ -22,11 +21,11 @@ from fnllm.types.io import LLMOutput
 from .decorator import LLMDecorator
 
 if TYPE_CHECKING:
+    from collections.abc import Awaitable, Callable
+
     from fnllm.caching import Cache
     from fnllm.events import LLMEvents
     from fnllm.types.io import LLMInput
-
-RetryableErrorHandler = Callable[[BaseException], Awaitable[None]]
 
 
 class CacheAdapter(ABC, Generic[TInput, TOutput]):
@@ -84,6 +83,10 @@ class Cached(
             cache_adapter=self._cache_adapter,
         )
 
+    def _dump_output(self, output: TOutput) -> dict[str, Any]:
+        """Dump the raw model output."""
+        return self._cache_adapter.dump_raw_model(output)
+
     def decorate(
         self,
         delegate: Callable[
@@ -97,28 +100,70 @@ class Cached(
             name = kwargs.get("name")
             bypass_cache = kwargs.get("bypass_cache", False)
             bust_cache = kwargs.get("bust_cache", False)
+            cache_metadata = kwargs.get("cache_metadata")
 
+            #
             # If we're bypassing, invoke the delegate directly
+            #
             if bypass_cache:
                 return await delegate(prompt, **kwargs)
 
-            # If we're busting the cache, skip the cache read
-            if not bust_cache:
-                cached = await self._cache.get(key)
-                if cached is not None:
-                    await self._events.on_cache_hit(key, name)
-                    output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
-                    return LLMOutput(output=output, cache_hit=True)
-
-                await self._events.on_cache_miss(key, name)
-
-            result = await delegate(prompt, **kwargs)
-            input_data = self._cache_adapter.get_cache_input_data(prompt, kwargs)
-            await self._cache.set(
-                key,
-                self._cache_adapter.dump_raw_model(result.output),
-                {"input": input_data},
+            metadata = self._get_metadata(
+                key=key,
+                data=self._cache_adapter.get_cache_input_data(prompt, kwargs),
+                metadata=cache_metadata,
             )
+
+            #
+            # If we're busting the cache, invoke the LLM, write the result,  and don't bother checking for collisions
+            #
+            if bust_cache:
+                result = await delegate(prompt, **kwargs)
+                await self._cache.set(key, self._dump_output(result.output), metadata)
+                return result
+
+            #
+            # Check the cache before invoking the LLM
+            #
+            cached = await self._cache.get(key)
+            if cached is not None:
+                await self._events.on_cache_hit(key, name)
+                output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
+                return LLMOutput(output=output, cache_hit=True)
+
+            #
+            # If we don't have a cache hit, invoke the LLM
+            #
+            result = await delegate(prompt, **kwargs)
+
+            #
+            # Check for inflight collisions
+            #
+            cached = await self._cache.get(key)
+            if cached is not None:
+                await self._events.on_cache_hit(key, name)
+                output = self._cache_adapter.wrap_output(prompt, kwargs, cached)
+                return LLMOutput(output=output, cache_hit=True)
+
+            #
+            # Write out to the cache
+            #
+            await self._events.on_cache_miss(key, name)
+            await self._cache.set(key, self._dump_output(result.output), metadata)
+
             return result
 
         return cast(Any, invoke)
+
+    def _get_metadata(
+        self,
+        *,
+        key: str,
+        data: dict[str, Any],
+        metadata: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        """Get the metadata for the cache."""
+        result = {"input": data, "key": key}
+        if metadata:
+            result["custom"] = metadata
+        return result
