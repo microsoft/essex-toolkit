@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        project: ["reactivedataflow", "fnllm"]
+        project: ["fnllm"]
 
     environment:
       name: pypi

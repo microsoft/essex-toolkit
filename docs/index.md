@@ -9,9 +9,6 @@ See individual package README for specific information.
 ### fnllm
 An LLM wrapper library that provides rate limiting, retry logic, caching, JSON model parsing, and more.
 
-### [reactivedataflow](reactivedataflow/index.md)
-A library for creating reactive data flows in Python.
-
 ## JavaScript
 ### [essex-toolkit Storybook](storybook/)
 A Storybook for the essex-toolkit packages.
