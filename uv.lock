@@ -575,7 +575,6 @@ wheels = [
 
 [[package]]
 name = "fnllm"
-version = "0.2.8.dev1"
 source = { editable = "python/fnllm" }
 dependencies = [
     { name = "aiolimiter" },
@@ -630,7 +629,7 @@ requires-dist = [
     { name = "tenacity", specifier = ">=8.5.0" },
     { name = "tiktoken", marker = "extra == 'openai'", specifier = ">=0.7.0" },
 ]
-provides-extras = ["openai", "azure", "numpy"]
+provides-extras = ["azure", "numpy", "openai"]
 
 [package.metadata.requires-dev]
 dev = [
