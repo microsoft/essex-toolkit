@@ -9,7 +9,7 @@ theme:
 
 nav:
   - Intro: index.md  
-  - reactivedataflow: '!include ./python/fnllm/mkdocs.yml'
+  - fnllm: '!include ./python/fnllm/mkdocs.yml'
 
 plugins:
   - search
