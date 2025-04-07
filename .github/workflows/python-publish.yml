@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        project: ["reactivedataflow", "essex-config", "fnllm"]
+        project: ["reactivedataflow", "fnllm"]
 
     environment:
       name: pypi
