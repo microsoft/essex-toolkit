@@ -12,7 +12,6 @@ env:
 jobs:
   publish:
     name: Upload python projects to PyPI
-    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -25,7 +24,9 @@ jobs:
         id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
     
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python ${{ env.PYTHON_VERSION }}
         uses: actions/setup-python@v2
