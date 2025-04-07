@@ -5,6 +5,10 @@ on:
   push:
     branches: [main]
 
+  # TODO: remove after test
+  pull_request:
+    # Nothing
+
 env:
   UV_VERSION: "0.4.17"
   PYTHON_VERSION: "3.11"
@@ -26,7 +30,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-tags: true
           fetch-depth: 0
 
       - name: Set up Python ${{ env.PYTHON_VERSION }}
