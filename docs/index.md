@@ -6,9 +6,6 @@ See individual package README for specific information.
 
 ## Python
 
-### [essex-config](essex-config/index.md)
-A configuration library that allows for easy configuration of Python applications using environment variables, files, and Azure Key Vault.
-
 ### fnllm
 An LLM wrapper library that provides rate limiting, retry logic, caching, JSON model parsing, and more.
 

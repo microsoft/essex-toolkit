@@ -1,7 +1,9 @@
 name: Python-Publish-CI
 on:
+  release:
+    types: [created]
   push:
-      branches: [main]
+    branches: [main]
 
 env:
   UV_VERSION: "0.4.17"
@@ -14,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        project: [ "essex-config", "fnllm"]
+        project: ["fnllm"]
 
     environment:
       name: pypi

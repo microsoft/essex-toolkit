@@ -9,7 +9,7 @@ on:
       - '**/*.toml'
       - .github/workflows/python-ci.yml
 env:
-  UV_VERSION: "0.4.20"  
+  UV_VERSION: "0.6.11"  
 
 jobs:
   docs_build:
@@ -29,6 +29,9 @@ jobs:
         uses: astral-sh/setup-uv@v2
         with:
           version: ${{ env.UV_VERSION }}
+
+      - name: Install Dependencies
+        run: uv sync --locked --all-packages
           
       - name: Essex-Toolkit - Build Docs
         shell: bash
@@ -39,7 +42,7 @@ jobs:
     strategy:
       matrix:
         python-version: ['3.10', '3.11', '3.12']
-        project: ["essex-config", "fnllm"]
+        project: ["fnllm"]
 
     steps:
       - uses: actions/checkout@v2
@@ -55,7 +58,7 @@ jobs:
           version: ${{ env.UV_VERSION }}
 
       - name: Install Dependencies
-        run: uv sync --locked
+        run: uv sync --locked --all-packages
       
       - name: Install Azurite
         if: matrix.project == 'fnllm'

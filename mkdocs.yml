@@ -8,8 +8,8 @@ theme:
     - navigation.footer
 
 nav:
-  - Intro: index.md
-  - essex-config: '!include ./python/essex-config/mkdocs.yml'
+  - Intro: index.md  
+  - reactivedataflow: '!include ./python/fnllm/mkdocs.yml'
 
 plugins:
   - search

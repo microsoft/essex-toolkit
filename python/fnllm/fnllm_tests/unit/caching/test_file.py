@@ -2,6 +2,7 @@
 
 """Tests for the caching.file."""
 
+import asyncio
 import json
 import os
 import pathlib
@@ -126,6 +127,20 @@ async def test_common_errors(file_cache: FileCache):
     result = await file_cache.get("permission_error")
     assert result is None
     file.chmod(0o777)
+
+
+async def test_sweep(file_cache: FileCache):
+    # should start empty
+    assert _is_dir_empty(file_cache.root_path) is True
+
+    # adding key, value
+    await file_cache.set("key", "value")
+    assert await file_cache.has("key") is True
+
+    await asyncio.sleep(2)
+
+    await file_cache.sweep(1)
+    assert await file_cache.has("key") is False
 
 
 def _is_dir_empty(path: pathlib.Path) -> bool:
