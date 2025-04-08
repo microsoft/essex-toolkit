@@ -16,7 +16,15 @@ def update_limiter(
     limiter: AsyncLimiter,
     reconciliation: LimitReconciliation,
 ) -> float:
-    """Update the limiter with the available capacity."""
+    """
+    Update the limiter with the available capacity.
+
+    This function is used to update the limiter with the available capacity.
+    This method mucks with the internals of aiolimiter, which could result in instability over time if their API changes.
+    There may also be concurrency scenarios and edge-cases where this will not work. Hence it should probably not be used in multithreaded environments.
+
+    TODO(chtrevin): Implement a version of AsyncLimiter with an updateable leaky-bucket mechanism.
+    """
     if reconciliation.limit is not None and reconciliation.limit > limiter.max_rate:
         limiter.max_rate = reconciliation.limit
 
