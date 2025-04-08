@@ -89,6 +89,11 @@ class Batcher(ABC, Generic[CallInput, CallOutput]):
 
     def __call__(self, content: CallInput) -> Future[CallOutput]:
         """Generate embeddings some content, batching internally to maximize throughput."""
+        if not content:
+            result = Future()
+            result.set_result(None)
+            return result
+
         cost = self._compute_cost(content)
         call = Call(input=content, cost=cost)
 
