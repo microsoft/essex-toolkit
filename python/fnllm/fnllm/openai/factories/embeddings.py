@@ -54,7 +54,10 @@ def create_openai_embeddings_llm(
         variable_injector=VariableInjector(),
         rate_limiter=create_rate_limiter(config=config, events=events, limiter=limiter),
         retryer=create_retryer(
-            config=config, operation=operation, events=events, limiter=backoff_limiter
+            config=config,
+            operation=operation,
+            events=events,
+            backoff_limiter=backoff_limiter,
         ),
     )
 

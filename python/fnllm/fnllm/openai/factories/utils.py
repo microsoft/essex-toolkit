@@ -84,7 +84,7 @@ def create_limiter(
     if rpm is not None:
         # If RPM is set to 0, enable dynamic RPM
         reconciler = None
-        if rpm == 0:
+        if rpm == "auto":
             rpm = 1
             reconciler = _rpm_reconciler
 
@@ -99,7 +99,7 @@ def create_limiter(
     if tpm is not None:
         # If RPM is set to 0, enable dynamic RPM
         reconciler = None
-        if tpm == 0:
+        if tpm == "auto":
             tpm = 1
             reconciler = _tpm_reconciler
 
@@ -140,14 +140,14 @@ def create_retryer(
     config: OpenAIConfig,
     operation: str,
     events: LLMEvents,
-    limiter: OpenAIBackoffLimiter | None,
+    backoff_limiter: OpenAIBackoffLimiter | None,
 ) -> Retryer[Any, Any, Any, Any] | None:
     """Wraps the LLM with retry logic."""
     if config.retry_strategy is RetryStrategy.NATIVE:
         return None
     handler = None
-    if limiter is not None:
-        handler = OpenAIRetryableErrorHandler(limiter)
+    if backoff_limiter is not None:
+        handler = OpenAIRetryableErrorHandler(backoff_limiter)
     return Retryer(
         tag=operation,
         max_retries=config.max_retries,

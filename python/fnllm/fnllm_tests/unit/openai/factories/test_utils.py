@@ -39,7 +39,7 @@ def test_create_rate_limited_llm(requests_burst_mode: bool):
         requests_burst_mode=requests_burst_mode,
     )
     mocked_events = create_autospec(LLMEvents, instance=True)
-    limiter = create_limiter(config)
+    limiter = create_limiter(config, backoff_limiter=None)
 
     llm = cast(
         RateLimiter,
@@ -78,6 +78,7 @@ def test_create_retrying_llm():
             config=config,
             operation=tag,
             events=mocked_events,
+            backoff_limiter=None,
         ),
     )
 

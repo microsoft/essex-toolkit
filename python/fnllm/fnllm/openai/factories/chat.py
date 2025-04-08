@@ -105,7 +105,10 @@ def _create_openai_text_chat_llm(
         history_extractor=OpenAIHistoryExtractor(),
         variable_injector=VariableInjector(),
         retryer=create_retryer(
-            config=config, operation=operation, events=events, limiter=backoff_limiter
+            config=config,
+            operation=operation,
+            events=events,
+            backoff_limiter=backoff_limiter,
         ),
         rate_limiter=create_rate_limiter(config=config, limiter=limiter, events=events),
     )

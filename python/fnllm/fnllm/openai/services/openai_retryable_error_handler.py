@@ -73,7 +73,10 @@ class OpenAIRetryableErrorHandler:
 
     async def __call__(self, error: BaseException) -> None:
         """Handle the rate limit error."""
-        if isinstance(error, APIStatusError):
-            retry_after = error.response.headers.get("retry-after", None)
-            if retry_after is not None:
-                await self._limiter.sleep_for(int(retry_after))
+        match error:
+            case APIStatusError():
+                retry_after = error.response.headers.get("retry-after", None)
+                if retry_after is not None:
+                    await self._limiter.sleep_for(int(retry_after))
+            case _:
+                pass
