@@ -12,7 +12,7 @@ from fnllm.events.base import LLMEvents
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from fnllm.limiting.base import Manifest
+    from fnllm.limiting.types import LimitUpdate, Manifest
     from fnllm.types.metrics import LLMMetrics, LLMUsageMetrics
 
 
@@ -60,6 +60,12 @@ class LLMCompositeEvents(LLMEvents):
         """Called when post request limiting is triggered (called by the rate limiting LLM)."""
         await asyncio.gather(*[
             handler.on_post_limit(manifest) for handler in self._handlers
+        ])
+
+    async def on_limit_reconcile(self, value: LimitUpdate) -> None:
+        """Called when an llm limit is reconciled."""
+        await asyncio.gather(*[
+            handler.on_limit_reconcile(value) for handler in self._handlers
         ])
 
     async def on_success(

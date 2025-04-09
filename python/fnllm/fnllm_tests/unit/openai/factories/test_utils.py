@@ -39,7 +39,7 @@ def test_create_rate_limited_llm(requests_burst_mode: bool):
         requests_burst_mode=requests_burst_mode,
     )
     mocked_events = create_autospec(LLMEvents, instance=True)
-    limiter = create_limiter(config)
+    limiter = create_limiter(config, backoff_limiter=None)
 
     llm = cast(
         RateLimiter,
@@ -78,6 +78,7 @@ def test_create_retrying_llm():
             config=config,
             operation=tag,
             events=mocked_events,
+            backoff_limiter=None,
         ),
     )
 
@@ -102,12 +103,9 @@ def _assert_concurrency_tpm_rpm(limiter: Limiter | None, config: OpenAIConfig) -
         assert limiter._limiters[1]._limiter.max_rate == config.requests_per_minute
         assert limiter._limiters[1]._limiter.time_period == 60
     else:
-        assert limiter._limiters[1]._limiter.max_rate == 1
+        assert limiter._limiters[1]._limiter.max_rate == (100 / 60)
         if config.requests_per_minute:
-            assert (
-                limiter._limiters[1]._limiter.time_period
-                == 60 / config.requests_per_minute
-            )
+            assert limiter._limiters[1]._limiter.time_period == 1
 
     # TPMLimiter
     assert isinstance(limiter._limiters[2], TPMLimiter)

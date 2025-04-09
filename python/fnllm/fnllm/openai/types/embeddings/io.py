@@ -2,7 +2,10 @@
 
 """OpenAI embeddings input/output types."""
 
-from typing import TypeAlias
+from typing import ClassVar, TypeAlias
+
+from httpx import Headers
+from pydantic import ConfigDict, Field
 
 from fnllm.openai.types.aliases import (
     OpenAICreateEmbeddingResponseModel,
@@ -18,6 +21,8 @@ OpenAIEmbeddingsInput: TypeAlias = EmbeddingsLLMInput
 class OpenAIEmbeddingsOutput(EmbeddingsLLMOutput):
     """OpenAI embeddings completion output."""
 
+    model_config: ClassVar[ConfigDict] = ConfigDict(arbitrary_types_allowed=True)
+
     raw_input: OpenAIEmbeddingsInput | None
     """Raw input that resulted in this output."""
 
@@ -28,3 +33,6 @@ class OpenAIEmbeddingsOutput(EmbeddingsLLMOutput):
     """Usage statistics for the embeddings request."""
 
     raw_model: OpenAICreateEmbeddingResponseModel
+
+    headers: Headers | None = Field(default=None)
+    """Headers returned by the OpenAI API."""

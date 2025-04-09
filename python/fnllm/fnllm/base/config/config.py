@@ -5,6 +5,8 @@
 
 from __future__ import annotations
 
+from typing import Literal
+
 from pydantic import BaseModel, Field
 
 from .json_strategy import JsonStrategy
@@ -32,13 +34,14 @@ class Config(BaseModel, frozen=True, extra="allow"):
         description="The maximum concurrency. This is the number of concurrent requests that can be made at once.",
     )
 
-    tokens_per_minute: int | None = Field(
-        default=None, description="The max number of tokens per minute."
+    tokens_per_minute: int | Literal["auto"] | None = Field(
+        default=None,
+        description="The max number of tokens per minute. (None=no limit; 'auto'=reactive tpm)",
     )
 
-    requests_per_minute: int | None = Field(
+    requests_per_minute: int | Literal["auto"] | None = Field(
         default=None,
-        description="The max number of requests per minute.",
+        description="The max number of requests per minute. (None=no limit; 'auto'=reactive rpm)",
     )
 
     requests_burst_mode: bool = Field(

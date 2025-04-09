@@ -25,12 +25,20 @@ from fnllm.openai.services.openai_usage_extractor import (
 )
 
 from .client import create_openai_client
-from .utils import create_limiter, create_rate_limiter, create_retryer
+from .utils import (
+    create_backoff_limiter,
+    create_limiter,
+    create_rate_limiter,
+    create_retryer,
+)
 
 if TYPE_CHECKING:
     from fnllm.caching.base import Cache
     from fnllm.limiting.base import Limiter
     from fnllm.openai.config import OpenAIConfig
+    from fnllm.openai.services.openai_retryable_error_handler import (
+        OpenAIBackoffLimiter,
+    )
     from fnllm.openai.types.client import (
         OpenAIChatLLM,
         OpenAIClient,
@@ -50,7 +58,8 @@ def create_openai_chat_llm(
     client = client or create_openai_client(config)
     events = events or LLMEvents()
 
-    limiter = create_limiter(config)
+    backoff_limiter = create_backoff_limiter(config)
+    limiter = create_limiter(config, backoff_limiter)
 
     text_chat_llm = _create_openai_text_chat_llm(
         client=client,
@@ -58,6 +67,7 @@ def create_openai_chat_llm(
         cache=cache,
         events=events,
         limiter=limiter,
+        backoff_limiter=backoff_limiter,
     )
     streaming_chat_llm = _create_openai_streaming_chat_llm(
         client=client,
@@ -76,6 +86,7 @@ def _create_openai_text_chat_llm(
     client: OpenAIClient,
     config: OpenAIConfig,
     limiter: Limiter | None,
+    backoff_limiter: OpenAIBackoffLimiter | None,
     cache: Cache | None,
     events: LLMEvents,
 ) -> OpenAITextChatLLM:
@@ -93,7 +104,12 @@ def _create_openai_text_chat_llm(
         usage_extractor=OpenAIUsageExtractor(),
         history_extractor=OpenAIHistoryExtractor(),
         variable_injector=VariableInjector(),
-        retryer=create_retryer(config=config, operation=operation, events=events),
+        retryer=create_retryer(
+            config=config,
+            operation=operation,
+            events=events,
+            backoff_limiter=backoff_limiter,
+        ),
         rate_limiter=create_rate_limiter(config=config, limiter=limiter, events=events),
     )
 

@@ -12,7 +12,7 @@ from fnllm.types.metrics import LLMUsageMetrics
 from fnllm.utils.sliding_window import SlidingWindow
 
 if TYPE_CHECKING:
-    from fnllm.limiting.base import Manifest
+    from fnllm.limiting.types import Manifest
 
 
 class LLMUsageTracker(LLMEvents):

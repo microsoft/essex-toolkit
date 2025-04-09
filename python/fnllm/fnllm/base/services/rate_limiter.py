@@ -41,21 +41,21 @@ class RateLimiter(
         self._events = events
         self._estimator = estimator
 
-    def _estimate_request_tokens(self, prompt: TInput, kwargs: LLMInput) -> int:
-        """Estimate the number of tokens needed for an OpenAI request."""
-        return self._estimator(prompt, kwargs)
-
     async def _handle_post_request_limiting(
         self,
         result: LLMOutput[TOutput, TJsonModel, THistoryEntry],
     ) -> None:
-        diff = result.metrics.tokens_diff
-
-        if diff > 0:
-            manifest = Manifest(post_request_tokens=diff)
-            # consume the token difference
-            async with self._limiter.use(manifest):
-                await self._events.on_post_limit(manifest)
+        reconciliation = await self._limiter.reconcile(output=result)
+        if reconciliation is not None:
+            await self._events.on_limit_reconcile(reconciliation)
+        else:
+            # If we didn't get an explicit reconciliation, try to adjust the usage based on the actual output tokens
+            diff = result.metrics.tokens_diff
+            if diff > 0:
+                manifest = Manifest(post_request_tokens=diff)
+                # consume the token difference
+                async with self._limiter.use(manifest):
+                    await self._events.on_post_limit(manifest)
 
     def decorate(
         self,
@@ -66,7 +66,7 @@ class RateLimiter(
         """Execute the LLM with the configured rate limits."""
 
         async def invoke(prompt: TInput, **args: Unpack[LLMInput[Any, Any, Any]]):
-            estimated_input_tokens = self._estimate_request_tokens(prompt, args)
+            estimated_input_tokens = self._estimator(prompt, args)
 
             manifest = Manifest(request_tokens=estimated_input_tokens)
             try:

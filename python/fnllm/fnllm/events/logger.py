@@ -11,7 +11,7 @@ from typing import TYPE_CHECKING, Any
 from fnllm.events.base import LLMEvents
 
 if TYPE_CHECKING:
-    from fnllm.limiting.base import Manifest
+    from fnllm.limiting.types import LimitUpdate, Manifest
     from fnllm.types.metrics import LLMMetrics, LLMUsageMetrics
 
 LOGGER = getLogger(__name__)
@@ -67,6 +67,14 @@ class LLMEventsLogger(LLMEvents):
         LOGGER.debug(
             "post request limiting triggered, acquired extra %d tokens",
             manifest.post_request_tokens,
+        )
+
+    async def on_limit_reconcile(self, value: LimitUpdate) -> None:
+        """Called when limit is reconciled."""
+        LOGGER.debug(
+            "limit reconciled from %s to %s",
+            value.old_value,
+            value.new_value,
         )
 
     async def on_success(

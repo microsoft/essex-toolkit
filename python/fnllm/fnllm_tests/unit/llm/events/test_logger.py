@@ -6,7 +6,7 @@ from logging import DEBUG, ERROR, WARNING
 
 import pytest
 from fnllm.events.logger import LLMEventsLogger
-from fnllm.limiting.base import Manifest
+from fnllm.limiting.types import LimitUpdate, Manifest
 from fnllm.types.metrics import LLMMetrics, LLMUsageMetrics
 
 
@@ -43,6 +43,9 @@ async def test_logger_is_called(caplog: pytest.LogCaptureFixture):
 
     await events.on_post_limit(Manifest())
     check_records_and_reset(caplog, DEBUG, "post request limiting triggered")
+
+    await events.on_limit_reconcile(LimitUpdate(old_value=1, new_value=2))
+    check_records_and_reset(caplog, DEBUG, "limit reconciled from 1 to 2")
 
     await events.on_success(LLMMetrics())
     check_records_and_reset(caplog, DEBUG, "request succeed with")

@@ -123,10 +123,13 @@ class OpenAIEmbeddingsLLMImpl(
             local_model_parameters
         )
 
-        result = await self._client.embeddings.create(
+        result_raw = await self._client.embeddings.with_raw_response.create(
             input=prompt,
             **embeddings_parameters,
         )
+        result = result_raw.parse()
+        headers = result_raw.headers
+
         usage: LLMUsageMetrics | None = None
         if result.usage:
             usage = LLMUsageMetrics(
@@ -139,4 +142,5 @@ class OpenAIEmbeddingsLLMImpl(
             embeddings=[d.embedding for d in result.data],
             usage=usage or LLMUsageMetrics(),
             raw_model=result,
+            headers=headers,
         )
