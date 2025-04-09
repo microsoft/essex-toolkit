@@ -42,7 +42,7 @@ def create_openai_embeddings_llm(
     operation = "embedding"
     client = client or create_openai_client(config)
     events = events or LLMEvents()
-    backoff_limiter = create_backoff_limiter(config)
+    backoff_limiter = create_backoff_limiter()
     limiter = create_limiter(config, backoff_limiter)
     return OpenAIEmbeddingsLLMImpl(
         client,

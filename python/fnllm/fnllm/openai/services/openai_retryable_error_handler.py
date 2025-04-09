@@ -16,6 +16,7 @@ from openai import (
 
 from fnllm.base.services.errors import InvalidLLMResultError
 from fnllm.limiting.base import Limiter
+from fnllm.openai.config import OpenAIRateLimitBehavior
 from fnllm.openai.errors import OpenAINoChoicesAvailableError
 
 if TYPE_CHECKING:
@@ -67,9 +68,12 @@ class OpenAIBackoffLimiter(Limiter):
 class OpenAIRetryableErrorHandler:
     """A base class to rate limit the LLM."""
 
-    def __init__(self, limiter: OpenAIBackoffLimiter) -> None:
+    def __init__(
+        self, limiter: OpenAIBackoffLimiter, strategy: OpenAIRateLimitBehavior
+    ) -> None:
         """Create a new OpenAIRetryableErrorHandler."""
         self._limiter = limiter
+        self._strategy = strategy
 
     async def __call__(self, error: BaseException) -> None:
         """Handle the rate limit error."""
@@ -77,6 +81,17 @@ class OpenAIRetryableErrorHandler:
             case APIStatusError():
                 retry_after = error.response.headers.get("retry-after", None)
                 if retry_after is not None:
-                    await self._limiter.sleep_for(int(retry_after))
+                    await self._handle_retry_after(int(retry_after))
             case _:
                 pass
+
+    async def _handle_retry_after(self, retry_after: int) -> None:
+        """Handle the retry after header."""
+        match self._strategy:
+            case OpenAIRateLimitBehavior.SLEEP:
+                await self._limiter.sleep_for(retry_after)
+            case OpenAIRateLimitBehavior.SLEEP_LOCAL:
+                await asyncio.sleep(retry_after)
+            case OpenAIRateLimitBehavior.NONE:
+                pass
+        return

@@ -58,11 +58,9 @@ def _rpm_reconciler(output: LLMOutput[Any, Any, Any]) -> LimitReconciliation:
     )
 
 
-def create_backoff_limiter(
-    config: OpenAIConfig,
-) -> OpenAIBackoffLimiter | None:
+def create_backoff_limiter() -> OpenAIBackoffLimiter:
     """Create an LLM limiter based on the incoming configuration."""
-    return OpenAIBackoffLimiter() if config.sleep_on_rate_limit_recommendation else None
+    return OpenAIBackoffLimiter()
 
 
 def create_limiter(
@@ -147,7 +145,9 @@ def create_retryer(
         return None
     handler = None
     if backoff_limiter is not None:
-        handler = OpenAIRetryableErrorHandler(backoff_limiter)
+        handler = OpenAIRetryableErrorHandler(
+            backoff_limiter, config.rate_limit_behavior
+        )
     return Retryer(
         tag=operation,
         max_retries=config.max_retries,
