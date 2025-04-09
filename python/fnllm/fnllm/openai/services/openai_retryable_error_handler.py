@@ -94,4 +94,3 @@ class OpenAIRetryableErrorHandler:
                 await asyncio.sleep(retry_after)
             case OpenAIRateLimitBehavior.NONE:
                 pass
-        return
