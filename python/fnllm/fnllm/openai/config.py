@@ -19,11 +19,11 @@ class OpenAIRateLimitBehavior(str, Enum):
     NONE = "none"
     """Do nothing when a rate limit is encountered"""
 
-    SLEEP = "sleep"
-    """Block all requests until the ratelimit time has elapsed"""
+    LIMIT = "limit"
+    """Use the limiter stack to block requests until the ratelimit time has elapsed."""
 
-    SLEEP_LOCAL = "sleep_local"
-    """Block the current request from resolving the ratelimit time has elapsed"""
+    SLEEP = "sleep"
+    """Perform a task-local sleep until the ratelimit time has elapsed."""
 
 
 class CommonOpenAIConfig(Config, frozen=True, extra="allow", protected_namespaces=()):
@@ -58,7 +58,7 @@ class CommonOpenAIConfig(Config, frozen=True, extra="allow", protected_namespace
     )
 
     rate_limit_behavior: OpenAIRateLimitBehavior = Field(
-        default=OpenAIRateLimitBehavior.SLEEP,
+        default=OpenAIRateLimitBehavior.LIMIT,
         description="The rate-limiting behavior to employ when a RateLimitError is encountered.",
     )
 

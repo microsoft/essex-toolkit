@@ -88,9 +88,9 @@ class OpenAIRetryableErrorHandler:
     async def _handle_retry_after(self, retry_after: float) -> None:
         """Handle the retry after header."""
         match self._strategy:
-            case OpenAIRateLimitBehavior.SLEEP:
+            case OpenAIRateLimitBehavior.LIMIT:
                 await self._limiter.sleep_for(retry_after)
-            case OpenAIRateLimitBehavior.SLEEP_LOCAL:
+            case OpenAIRateLimitBehavior.SLEEP:
                 await asyncio.sleep(retry_after)
             case OpenAIRateLimitBehavior.NONE:
                 pass
