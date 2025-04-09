@@ -56,7 +56,7 @@ class OpenAIBackoffLimiter(Limiter):
         """Release a pass through the limiter."""
         # No-op in this implementation, but can be extended if needed.
 
-    async def sleep_for(self, time: int) -> None:
+    async def sleep_for(self, time: float) -> None:
         """Sleep for the given amount of time."""
         self._delay_event.clear()  # Block acquire() calls
         try:
@@ -81,11 +81,11 @@ class OpenAIRetryableErrorHandler:
             case APIStatusError():
                 retry_after = error.response.headers.get("retry-after", None)
                 if retry_after is not None:
-                    await self._handle_retry_after(int(retry_after))
+                    await self._handle_retry_after(float(retry_after))
             case _:
                 pass
 
-    async def _handle_retry_after(self, retry_after: int) -> None:
+    async def _handle_retry_after(self, retry_after: float) -> None:
         """Handle the retry after header."""
         match self._strategy:
             case OpenAIRateLimitBehavior.SLEEP:
