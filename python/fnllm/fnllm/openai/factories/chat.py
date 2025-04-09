@@ -58,7 +58,7 @@ def create_openai_chat_llm(
     client = client or create_openai_client(config)
     events = events or LLMEvents()
 
-    backoff_limiter = create_backoff_limiter(config)
+    backoff_limiter = create_backoff_limiter()
     limiter = create_limiter(config, backoff_limiter)
 
     text_chat_llm = _create_openai_text_chat_llm(

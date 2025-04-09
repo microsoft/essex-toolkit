@@ -3,7 +3,12 @@
 
 """OpenAI LLM implementations."""
 
-from .config import AzureOpenAIConfig, OpenAIConfig, PublicOpenAIConfig
+from .config import (
+    AzureOpenAIConfig,
+    OpenAIConfig,
+    OpenAIRateLimitBehavior,
+    PublicOpenAIConfig,
+)
 from .factories import (
     create_openai_chat_llm,
     create_openai_client,
@@ -25,6 +30,7 @@ __all__ = [
     "OpenAIConfig",
     "OpenAIConfig",
     "OpenAIEmbeddingsLLM",
+    "OpenAIRateLimitBehavior",
     "OpenAIStreamingChatLLM",
     "OpenAITextChatLLM",
     "PublicOpenAIConfig",

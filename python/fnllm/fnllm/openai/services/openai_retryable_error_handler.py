@@ -16,6 +16,7 @@ from openai import (
 
 from fnllm.base.services.errors import InvalidLLMResultError
 from fnllm.limiting.base import Limiter
+from fnllm.openai.config import OpenAIRateLimitBehavior
 from fnllm.openai.errors import OpenAINoChoicesAvailableError
 
 if TYPE_CHECKING:
@@ -55,7 +56,7 @@ class OpenAIBackoffLimiter(Limiter):
         """Release a pass through the limiter."""
         # No-op in this implementation, but can be extended if needed.
 
-    async def sleep_for(self, time: int) -> None:
+    async def sleep_for(self, time: float) -> None:
         """Sleep for the given amount of time."""
         self._delay_event.clear()  # Block acquire() calls
         try:
@@ -67,9 +68,12 @@ class OpenAIBackoffLimiter(Limiter):
 class OpenAIRetryableErrorHandler:
     """A base class to rate limit the LLM."""
 
-    def __init__(self, limiter: OpenAIBackoffLimiter) -> None:
+    def __init__(
+        self, limiter: OpenAIBackoffLimiter, strategy: OpenAIRateLimitBehavior
+    ) -> None:
         """Create a new OpenAIRetryableErrorHandler."""
         self._limiter = limiter
+        self._strategy = strategy
 
     async def __call__(self, error: BaseException) -> None:
         """Handle the rate limit error."""
@@ -77,6 +81,16 @@ class OpenAIRetryableErrorHandler:
             case APIStatusError():
                 retry_after = error.response.headers.get("retry-after", None)
                 if retry_after is not None:
-                    await self._limiter.sleep_for(int(retry_after))
+                    await self._handle_retry_after(float(retry_after))
             case _:
+                pass
+
+    async def _handle_retry_after(self, retry_after: float) -> None:
+        """Handle the retry after header."""
+        match self._strategy:
+            case OpenAIRateLimitBehavior.LIMIT:
+                await self._limiter.sleep_for(retry_after)
+            case OpenAIRateLimitBehavior.SLEEP:
+                await asyncio.sleep(retry_after)
+            case OpenAIRateLimitBehavior.NONE:
                 pass

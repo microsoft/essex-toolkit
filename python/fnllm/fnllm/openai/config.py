@@ -3,6 +3,7 @@
 
 """OpenAI Configuration class definition."""
 
+from enum import Enum
 from typing import Annotated, Literal
 
 from pydantic import Field
@@ -10,6 +11,19 @@ from pydantic import Field
 from fnllm.base.config import Config
 from fnllm.openai.types.chat.parameters import OpenAIChatParameters
 from fnllm.openai.types.embeddings.parameters import OpenAIEmbeddingsParameters
+
+
+class OpenAIRateLimitBehavior(str, Enum):
+    """The behavior to use when a RateLimitError is encountered."""
+
+    NONE = "none"
+    """Do nothing when a rate limit is encountered"""
+
+    LIMIT = "limit"
+    """Use the limiter stack to block requests until the ratelimit time has elapsed."""
+
+    SLEEP = "sleep"
+    """Perform a task-local sleep until the ratelimit time has elapsed."""
 
 
 class CommonOpenAIConfig(Config, frozen=True, extra="allow", protected_namespaces=()):
@@ -43,9 +57,9 @@ class CommonOpenAIConfig(Config, frozen=True, extra="allow", protected_namespace
         description="Global embeddings parameters to be used across calls.",
     )
 
-    sleep_on_rate_limit_recommendation: bool = Field(
-        default=False,
-        description="Whether to sleep on rate limit recommendation.",
+    rate_limit_behavior: OpenAIRateLimitBehavior = Field(
+        default=OpenAIRateLimitBehavior.LIMIT,
+        description="The rate-limiting behavior to employ when a RateLimitError is encountered.",
     )
 
 
