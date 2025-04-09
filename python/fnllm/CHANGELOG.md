@@ -15,19 +15,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 ```
-
 ## [Unreleased]
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [0.3.0] - 2025-04-09
 ### Added
 - Add HTTP header reactive updates to TPM/RPM throttles. By setting tpm or rpm to 'auto', the throttle will be started in dynamic mode.
 - Add events method for limit reconciliation.
 - Add `config.rate_limit_behavior` to control how we react to OpenAI rate limiting errors.
 ### Changed
 - Update OpenAIRetryableErrorHandle to inspect error headers instead of the error message.
-### Deprecated
 ### Removed
 - Remove `config.sleep_on_rate_limit_recommendation`.
-### Fixed
-### Security
 
 ## [0.2.9] - 2025-04-07
 ### Fixed
