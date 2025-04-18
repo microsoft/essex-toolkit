@@ -168,7 +168,7 @@ class StreamingChatIterator:
                         self._on_usage(usage)
                     await self._events.on_usage(usage)
 
-                if chunk.choices and len(chunk.choices) > 0:
+                if chunk.choices and len(chunk.choices) > 0 and chunk.choices[0].delta:
                     yield chunk.choices[0].delta.content
         except BaseException as e:
             stack_trace = traceback.format_exc()
