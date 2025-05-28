@@ -59,19 +59,15 @@ class OpenAIJsonMarshaler(JsonMarshaler[OpenAIChatOutput, OpenAIChatHistoryEntry
     def inject_json_string(
         self,
         json_string: str | None,
-        output: LLMOutput[
-            OpenAIChatOutput[TJsonModel], TJsonModel, OpenAIChatHistoryEntry
-        ],
-    ) -> LLMOutput[OpenAIChatOutput[TJsonModel], TJsonModel, OpenAIChatHistoryEntry]:
+        output: LLMOutput[OpenAIChatOutput, TJsonModel, OpenAIChatHistoryEntry],
+    ) -> LLMOutput[OpenAIChatOutput, TJsonModel, OpenAIChatHistoryEntry]:
         """Inject the JSON string into the output."""
         output.output.content = json_string
         return output
 
     def extract_json_string(
         self,
-        output: LLMOutput[
-            OpenAIChatOutput[TJsonModel], TJsonModel, OpenAIChatHistoryEntry
-        ],
+        output: LLMOutput[OpenAIChatOutput, TJsonModel, OpenAIChatHistoryEntry],
     ) -> str | None:
         """Extract the JSON string from the output."""
         return output.output.content
@@ -91,15 +87,11 @@ class OpenAIStructuredJsonReceiver(
         self,
         delegate: Callable[
             ...,
-            Awaitable[
-                LLMOutput[
-                    OpenAIChatOutput[TJsonModel], TJsonModel, OpenAIChatHistoryEntry
-                ]
-            ],
+            Awaitable[LLMOutput[OpenAIChatOutput, TJsonModel, OpenAIChatHistoryEntry]],
         ],
         prompt: OpenAIChatCompletionInput,
         kwargs: LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters],
-    ) -> LLMOutput[OpenAIChatOutput[TJsonModel], TJsonModel, OpenAIChatHistoryEntry]:
+    ) -> LLMOutput[OpenAIChatOutput, TJsonModel, OpenAIChatHistoryEntry]:
         """Invoke the JSON decorator."""
         result = await delegate(prompt, **kwargs)
         model = result.output.parsed_json_model
