@@ -11,6 +11,7 @@ from openai._legacy_response import LegacyAPIResponse
 from openai.types.chat import (
     ChatCompletion,
     ParsedChatCompletion,
+    ParsedChatCompletionMessage,
 )
 from openai.types.chat.chat_completion_message_param import ChatCompletionMessageParam
 
@@ -193,7 +194,11 @@ class OpenAITextChatLLMImpl(
                 output_tokens=completion.usage.completion_tokens,
             )
 
-        parsed_model = result.parsed if hasattr(result, "parsed") else None
+        parsed_model = (
+            cast(ParsedChatCompletionMessage, result).parsed
+            if hasattr(result, "parsed")
+            else None
+        )
 
         return OpenAIChatOutput(
             raw_input=prompt_message,
