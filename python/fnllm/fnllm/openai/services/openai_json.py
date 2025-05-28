@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 from fnllm.base.config.json_strategy import JsonStrategy
 from fnllm.base.services.json import (
@@ -16,11 +16,15 @@ from fnllm.openai.types.chat.io import (
     OpenAIChatHistoryEntry,
     OpenAIChatOutput,
 )
+from fnllm.openai.types.chat.parameters import OpenAIChatParameters
+from fnllm.types.generics import (
+    TJsonModel,
+)
 
 if TYPE_CHECKING:
-    from fnllm.openai.types.chat.parameters import OpenAIChatParameters
-    from fnllm.types.generics import TJsonModel
-    from fnllm.types.io import LLMOutput
+    from collections.abc import Awaitable, Callable
+
+    from fnllm.types.io import LLMInput, LLMOutput
 
 
 def create_json_handler(
@@ -45,7 +49,7 @@ def create_json_handler(
         case JsonStrategy.VALID:
             return JsonReceiver(marshaler, max_retries)
         case JsonStrategy.STRUCTURED:
-            raise NotImplementedError
+            return OpenAIStructuredJsonReceiver(marshaler, max_retries)
 
 
 class OpenAIJsonMarshaler(JsonMarshaler[OpenAIChatOutput, OpenAIChatHistoryEntry]):
@@ -61,7 +65,34 @@ class OpenAIJsonMarshaler(JsonMarshaler[OpenAIChatOutput, OpenAIChatHistoryEntry
         return output
 
     def extract_json_string(
-        self, output: LLMOutput[OpenAIChatOutput, TJsonModel, OpenAIChatHistoryEntry]
+        self,
+        output: LLMOutput[OpenAIChatOutput, TJsonModel, OpenAIChatHistoryEntry],
     ) -> str | None:
         """Extract the JSON string from the output."""
         return output.output.content
+
+
+class OpenAIStructuredJsonReceiver(
+    JsonReceiver[
+        OpenAIChatCompletionInput,
+        OpenAIChatOutput,
+        OpenAIChatHistoryEntry,
+        OpenAIChatParameters,
+    ]
+):
+    """A decorator for handling JSON output in structured mode."""
+
+    async def invoke_json(
+        self,
+        delegate: Callable[
+            ...,
+            Awaitable[LLMOutput[OpenAIChatOutput, TJsonModel, OpenAIChatHistoryEntry]],
+        ],
+        prompt: OpenAIChatCompletionInput,
+        kwargs: LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters],
+    ) -> LLMOutput[OpenAIChatOutput, TJsonModel, OpenAIChatHistoryEntry]:
+        """Invoke the JSON decorator."""
+        result = await delegate(prompt, **kwargs)
+        model = cast(TJsonModel, result.output.parsed_json_model)
+        result.parsed_json = model
+        return result

@@ -7,6 +7,12 @@ from __future__ import annotations
 from collections.abc import Iterator
 from typing import TYPE_CHECKING, Any, cast
 
+from openai._legacy_response import LegacyAPIResponse
+from openai.types.chat import (
+    ChatCompletion,
+    ParsedChatCompletion,
+    ParsedChatCompletionMessage,
+)
 from openai.types.chat.chat_completion_message_param import ChatCompletionMessageParam
 
 from fnllm.base.base_llm import BaseLLM
@@ -25,6 +31,7 @@ from fnllm.openai.types.chat.io import (
 )
 from fnllm.openai.types.chat.parameters import OpenAIChatParameters
 from fnllm.openai.utils import build_chat_messages, is_reasoning_model
+from fnllm.types.generics import TJsonModel
 from fnllm.types.metrics import LLMUsageMetrics
 
 if TYPE_CHECKING:
@@ -36,7 +43,6 @@ if TYPE_CHECKING:
     from fnllm.events.base import LLMEvents
     from fnllm.openai.types.aliases import OpenAIChatModelName
     from fnllm.openai.types.client import OpenAIClient
-    from fnllm.types.generics import TJsonModel
     from fnllm.types.io import LLMInput
 
 
@@ -46,6 +52,16 @@ class OpenAINoChoicesAvailableError(InvalidLLMResultError):
     def __init__(self) -> None:
         """Init method definition."""
         super().__init__("No choices returned from OpenAI chat completion.")
+
+
+class JsonModelMissingError(ValueError):
+    """JSON model is required in structured JSON mode."""
+
+    def __init__(self) -> None:
+        """Init method definition."""
+        super().__init__(
+            "When using structured JSON mode, a json_model must be provided in the LLM input."
+        )
 
 
 class OpenAITextChatLLMImpl(
@@ -163,10 +179,7 @@ class OpenAITextChatLLMImpl(
         local_model_parameters = kwargs.get("model_parameters")
         parameters = self._build_completion_parameters(local_model_parameters)
 
-        raw_response = await self._client.chat.completions.with_raw_response.create(
-            messages=cast(Iterator[ChatCompletionMessageParam], messages),
-            **parameters,
-        )
+        raw_response = await self.__invoke_oai(parameters, messages, kwargs)
         completion = raw_response.parse()
         headers = raw_response.headers
 
@@ -181,6 +194,12 @@ class OpenAITextChatLLMImpl(
                 output_tokens=completion.usage.completion_tokens,
             )
 
+        parsed_model = (
+            cast(ParsedChatCompletionMessage, result).parsed
+            if hasattr(result, "parsed")
+            else None
+        )
+
         return OpenAIChatOutput(
             raw_input=prompt_message,
             raw_output=result,
@@ -188,6 +207,33 @@ class OpenAITextChatLLMImpl(
             raw_model=completion,
             usage=usage or LLMUsageMetrics(),
             headers=headers,
+            parsed_json_model=parsed_model,
+        )
+
+    async def __invoke_oai(
+        self,
+        parameters: OpenAIChatParameters,
+        messages: list[OpenAIChatHistoryEntry],
+        kwargs: LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters],
+    ) -> LegacyAPIResponse[ChatCompletion | ParsedChatCompletion[TJsonModel]]:
+        if self.is_json_mode(kwargs) and self._json_strategy == JsonStrategy.STRUCTURED:
+            model = kwargs.get("json_model", None)
+            if model is None:
+                raise JsonModelMissingError
+
+            parameters["response_format"] = model
+            response = await self._client.beta.chat.completions.with_raw_response.parse(
+                messages=cast(Iterator[ChatCompletionMessageParam], messages),
+                **cast(Any, parameters),
+            )
+            return cast(
+                LegacyAPIResponse[ChatCompletion | ParsedChatCompletion[TJsonModel]],
+                response,
+            )
+
+        return await self._client.chat.completions.with_raw_response.create(
+            messages=cast(Iterator[ChatCompletionMessageParam], messages),
+            **cast(Any, parameters),
         )
 
     def _rewrite_input(

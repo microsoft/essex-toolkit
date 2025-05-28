@@ -46,6 +46,11 @@ class OpenAIChatOutput(ChatLLMOutput):
     headers: Headers | None = Field(default=None)
     """HTTP headers from the completion request. This will be None if the response was cached."""
 
+    parsed_json_model: BaseModel | None = Field(
+        default=None,
+        description="Parsed JSON model from the completion response. This will be None if the response was cached.",
+    )
+
 
 class OpenAIStreamingChatOutput(BaseModel, arbitrary_types_allowed=True):
     """Async iterable chat content."""

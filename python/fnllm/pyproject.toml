@@ -52,6 +52,7 @@ dev-dependencies = [
     "numpy>=1.26.4",
     "polyfactory>=2.19.0",
     "uv-dynamic-versioning>=0.6.0",
+    "pytest-dotenv>=0.5.2",
 ]
 
 [build-system]
@@ -87,7 +88,9 @@ fix = "ruff check --preview --fix ."
 fix_unsafe = "ruff check --preview --fix --unsafe-fixes ."
 format = ['_sort_imports', '_format_code']
 test = "pytest fnllm_tests"
-test_coverage = "pytest fnllm_tests --cov-fail-under=95"
+test_unit = "pytest fnllm_tests/unit"
+test_integration = "pytest fnllm_tests/integration"
+test_coverage = "pytest fnllm_tests/unit --cov-fail-under=95"
 test_only = "pytest -v -k"
 
 [tool.pytest.ini_options]
@@ -98,3 +101,4 @@ log_cli_date_format = "%Y-%m-%d %H:%M:%S"
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope="session"
 addopts="--cov-config=.coveragerc --cov=fnllm --cov-report=html --cov-report=xml --cov-report=term-missing --cov-branch"
+env_files = [".env"]

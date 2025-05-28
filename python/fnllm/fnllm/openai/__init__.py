@@ -10,6 +10,7 @@ from .config import (
     PublicOpenAIConfig,
 )
 from .factories import (
+    create_azure_openai_client,
     create_openai_chat_llm,
     create_openai_client,
     create_openai_embeddings_llm,
@@ -34,6 +35,7 @@ __all__ = [
     "OpenAIStreamingChatLLM",
     "OpenAITextChatLLM",
     "PublicOpenAIConfig",
+    "create_azure_openai_client",
     "create_openai_chat_llm",
     "create_openai_client",
     "create_openai_embeddings_llm",
