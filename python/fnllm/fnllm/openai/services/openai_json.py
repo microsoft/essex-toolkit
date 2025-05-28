@@ -3,7 +3,9 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Generic
+
+from typing_extensions import Unpack
 
 from fnllm.base.config.json_strategy import JsonStrategy
 from fnllm.base.services.json import (
@@ -16,6 +18,19 @@ from fnllm.openai.types.chat.io import (
     OpenAIChatHistoryEntry,
     OpenAIChatOutput,
 )
+from fnllm.types.generics import (
+    THistoryEntry,
+    TInput,
+    TJsonModel,
+    TModelParameters,
+    TOutput,
+)
+
+if TYPE_CHECKING:
+    from collections.abc import Awaitable, Callable
+
+    from fnllm.types.io import LLMInput, LLMOutput
+
 
 if TYPE_CHECKING:
     from fnllm.openai.types.chat.parameters import OpenAIChatParameters
@@ -45,7 +60,7 @@ def create_json_handler(
         case JsonStrategy.VALID:
             return JsonReceiver(marshaler, max_retries)
         case JsonStrategy.STRUCTURED:
-            raise NotImplementedError
+            return OpenAIStructuredJsonReceiver()
 
 
 class OpenAIJsonMarshaler(JsonMarshaler[OpenAIChatOutput, OpenAIChatHistoryEntry]):
@@ -65,3 +80,30 @@ class OpenAIJsonMarshaler(JsonMarshaler[OpenAIChatOutput, OpenAIChatHistoryEntry
     ) -> str | None:
         """Extract the JSON string from the output."""
         return output.output.content
+
+
+class OpenAIStructuredJsonReceiver(
+    Generic[TInput, TOutput, THistoryEntry, TModelParameters],
+):
+    """A decorator for handling JSON output in structured mode."""
+
+    def decorate(
+        self,
+        delegate: Callable[
+            ..., Awaitable[LLMOutput[TOutput, TJsonModel, THistoryEntry]]
+        ],
+    ) -> Callable[..., Awaitable[LLMOutput[TOutput, TJsonModel, THistoryEntry]]]:
+        """Decorate the delegate with the JSON functionality."""
+
+        async def invoke(
+            prompt: TInput,
+            **kwargs: Unpack[LLMInput[TJsonModel, THistoryEntry, TModelParameters]],
+        ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
+            if kwargs.get("json_model") is not None or kwargs.get("json"):
+                result = await delegate(prompt, **kwargs)
+                model = result.output.parsed_json_model
+                result.parsed_json = model
+                return result
+            return await delegate(prompt, **kwargs)
+
+        return invoke

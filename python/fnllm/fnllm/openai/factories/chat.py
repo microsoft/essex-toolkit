@@ -101,6 +101,7 @@ def _create_openai_text_chat_llm(
         json_receiver=create_json_handler(
             config.json_strategy, config.max_json_retries
         ),
+        json_strategy=config.json_strategy,
         usage_extractor=OpenAIUsageExtractor(),
         history_extractor=OpenAIHistoryExtractor(),
         variable_injector=VariableInjector(),
