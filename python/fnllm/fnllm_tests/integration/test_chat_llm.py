@@ -26,6 +26,8 @@ def _create_config(json_strategy: JsonStrategy) -> AzureOpenAIConfig:
     api_version = os.getenv("AZURE_OPENAI_API_VERSION", "2024-12-01-preview")
     model = os.getenv("AZURE_OPENAI_MODEL", "gpt-4.1-mini")
     deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT", "gpt-4.1-mini")
+    if not endpoint:
+        raise ValueError
     return AzureOpenAIConfig(
         endpoint=endpoint,
         api_version=api_version,
