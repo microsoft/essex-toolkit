@@ -5,7 +5,6 @@
 import json
 from unittest.mock import AsyncMock
 
-import pytest
 from fnllm.base.config.json_strategy import JsonStrategy
 from fnllm.openai.services.openai_json import create_json_handler
 from fnllm.openai.types.chat.io import OpenAIChatOutput
@@ -29,11 +28,6 @@ def mock_output(response: str) -> OpenAIChatOutput:
         raw_output=ChatCompletionMessage(content=response, role="assistant"),
         usage=None,
     )
-
-
-def test_schematic_mode_handlers():
-    with pytest.raises(NotImplementedError):
-        create_json_handler(JsonStrategy.STRUCTURED, 0)
 
 
 async def test_loose_mode_handlers():
