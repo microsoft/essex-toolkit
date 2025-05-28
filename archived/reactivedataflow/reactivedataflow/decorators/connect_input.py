@@ -1,4 +1,4 @@
-# Copyright (c) 2024 Microsoft Corporation.
+# Copyright (c) 2025 Microsoft Corporation.
 """reactivedataflow Inputs Decorator."""
 
 from collections.abc import Callable
@@ -40,17 +40,23 @@ def connect_input(
                 fn_kwargs[array_port.parameter] = inputs.array_inputs
 
             # Inject named parameters
-            fn_kwargs.update({
-                p.parameter or cast(str, p.name): inputs.named_inputs.get(
-                    cast(str, p.name)
-                )
-                for p in ports.input
-            })
+            fn_kwargs.update(
+                {
+                    p.parameter or cast(str, p.name): inputs.named_inputs.get(
+                        cast(str, p.name)
+                    )
+                    for p in ports.input
+                }
+            )
             # Inject configuration values
-            fn_kwargs.update({
-                p.parameter or cast(str, p.name): inputs.config.get(cast(str, p.name))
-                for p in ports.config
-            })
+            fn_kwargs.update(
+                {
+                    p.parameter or cast(str, p.name): inputs.config.get(
+                        cast(str, p.name)
+                    )
+                    for p in ports.config
+                }
+            )
 
             return cast(Any, fn)(*args, **fn_kwargs)
 

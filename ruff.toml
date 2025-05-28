@@ -53,6 +53,7 @@ select = [
     "EM",
     "TRY",
     "PERF",
+    "CPY",
     # "FBT", # use named arguments for boolean flags
     # "TD", # todos
     # "FIX", # fixme
@@ -88,3 +89,7 @@ builtins-ignorelist = ["input", "id", "bytes"]
 
 [lint.pydocstyle]
 convention = "numpy"
+
+[lint.flake8-copyright]
+notice-rgx = "(?i)Copyright \\(c\\) 2025 Microsoft Corporation."
+

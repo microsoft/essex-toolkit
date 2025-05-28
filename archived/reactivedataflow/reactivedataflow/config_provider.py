@@ -1,4 +1,4 @@
-# Copyright (c) 2024 Microsoft Corporation.
+# Copyright (c) 2025 Microsoft Corporation.
 """reactivedataflow ConfigProvider Protocol."""
 
 from typing import Generic, Protocol, TypeVar

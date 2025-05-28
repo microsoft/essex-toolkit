@@ -1,4 +1,4 @@
-# Copyright 2024 Microsoft Corporation.
+# Copyright (c) 2025 Microsoft Corporation.
 
 """Utility to mock chat completion client responses."""
 
