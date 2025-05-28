@@ -15,12 +15,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 ```
+
 ## [Unreleased]
 ### Added
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
+- Fix issue with OpenAIStreamingChatLLM when `delta` is not present in the response.
 ### Security
 
 ## [0.3.0] - 2025-04-09
