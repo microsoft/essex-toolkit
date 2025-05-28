@@ -3,9 +3,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Generic
-
-from typing_extensions import Unpack
+from typing import TYPE_CHECKING
 
 from fnllm.base.config.json_strategy import JsonStrategy
 from fnllm.base.services.json import (
@@ -18,24 +16,16 @@ from fnllm.openai.types.chat.io import (
     OpenAIChatHistoryEntry,
     OpenAIChatOutput,
 )
+from fnllm.openai.types.chat.parameters import OpenAIChatParameters
 from fnllm.types.generics import (
-    THistoryEntry,
-    TInput,
     TJsonModel,
-    TModelParameters,
-    TOutput,
 )
 
 if TYPE_CHECKING:
     from collections.abc import Awaitable, Callable
 
-    from fnllm.types.io import LLMInput, LLMOutput
-
-
-if TYPE_CHECKING:
-    from fnllm.openai.types.chat.parameters import OpenAIChatParameters
     from fnllm.types.generics import TJsonModel
-    from fnllm.types.io import LLMOutput
+    from fnllm.types.io import LLMInput, LLMOutput
 
 
 def create_json_handler(
@@ -60,7 +50,7 @@ def create_json_handler(
         case JsonStrategy.VALID:
             return JsonReceiver(marshaler, max_retries)
         case JsonStrategy.STRUCTURED:
-            return OpenAIStructuredJsonReceiver()
+            return OpenAIStructuredJsonReceiver(marshaler, max_retries)
 
 
 class OpenAIJsonMarshaler(JsonMarshaler[OpenAIChatOutput, OpenAIChatHistoryEntry]):
@@ -69,41 +59,49 @@ class OpenAIJsonMarshaler(JsonMarshaler[OpenAIChatOutput, OpenAIChatHistoryEntry
     def inject_json_string(
         self,
         json_string: str | None,
-        output: LLMOutput[OpenAIChatOutput, TJsonModel, OpenAIChatHistoryEntry],
-    ) -> LLMOutput[OpenAIChatOutput, TJsonModel, OpenAIChatHistoryEntry]:
+        output: LLMOutput[
+            OpenAIChatOutput[TJsonModel], TJsonModel, OpenAIChatHistoryEntry
+        ],
+    ) -> LLMOutput[OpenAIChatOutput[TJsonModel], TJsonModel, OpenAIChatHistoryEntry]:
         """Inject the JSON string into the output."""
         output.output.content = json_string
         return output
 
     def extract_json_string(
-        self, output: LLMOutput[OpenAIChatOutput, TJsonModel, OpenAIChatHistoryEntry]
+        self,
+        output: LLMOutput[
+            OpenAIChatOutput[TJsonModel], TJsonModel, OpenAIChatHistoryEntry
+        ],
     ) -> str | None:
         """Extract the JSON string from the output."""
         return output.output.content
 
 
 class OpenAIStructuredJsonReceiver(
-    Generic[TInput, TOutput, THistoryEntry, TModelParameters],
+    JsonReceiver[
+        OpenAIChatCompletionInput,
+        OpenAIChatOutput,
+        OpenAIChatHistoryEntry,
+        OpenAIChatParameters,
+    ]
 ):
     """A decorator for handling JSON output in structured mode."""
 
-    def decorate(
+    async def invoke_json(
         self,
         delegate: Callable[
-            ..., Awaitable[LLMOutput[TOutput, TJsonModel, THistoryEntry]]
+            ...,
+            Awaitable[
+                LLMOutput[
+                    OpenAIChatOutput[TJsonModel], TJsonModel, OpenAIChatHistoryEntry
+                ]
+            ],
         ],
-    ) -> Callable[..., Awaitable[LLMOutput[TOutput, TJsonModel, THistoryEntry]]]:
-        """Decorate the delegate with the JSON functionality."""
-
-        async def invoke(
-            prompt: TInput,
-            **kwargs: Unpack[LLMInput[TJsonModel, THistoryEntry, TModelParameters]],
-        ) -> LLMOutput[TOutput, TJsonModel, THistoryEntry]:
-            if kwargs.get("json_model") is not None or kwargs.get("json"):
-                result = await delegate(prompt, **kwargs)
-                model = result.output.parsed_json_model
-                result.parsed_json = model
-                return result
-            return await delegate(prompt, **kwargs)
-
-        return invoke
+        prompt: OpenAIChatCompletionInput,
+        kwargs: LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters],
+    ) -> LLMOutput[OpenAIChatOutput[TJsonModel], TJsonModel, OpenAIChatHistoryEntry]:
+        """Invoke the JSON decorator."""
+        result = await delegate(prompt, **kwargs)
+        model = result.output.parsed_json_model
+        result.parsed_json = model
+        return result
