@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 ### Fixed
 - Handle race conditions via error suppression in Azure Blob-Storage cache.
+- Dynamically import from `numpy` in `OpenAIEmbeddingBatcher` so that it can remain an optional dependency.
 ### Security
 ```
 

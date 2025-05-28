@@ -6,8 +6,6 @@ from __future__ import annotations
 import asyncio
 from typing import TYPE_CHECKING, TypeAlias
 
-from numpy import average
-
 from fnllm.utils.batch import Batcher, CallBatch
 
 if TYPE_CHECKING:
@@ -57,6 +55,8 @@ class OpenAIEmbeddingBatcher(Batcher[EmbeddingInput, EmbeddingOutput]):
     async def _invoke(
         self, batch: CallBatch[EmbeddingInput, EmbeddingOutput]
     ) -> list[EmbeddingOutput]:
+        from numpy import average
+
         # Submit the batch
         if batch.cost <= self.max_batch_cost:
             response = await self._llm([c.input for c in batch.calls])
