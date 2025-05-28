@@ -7,7 +7,12 @@ from __future__ import annotations
 from collections.abc import Iterator
 from typing import TYPE_CHECKING, Any, cast
 
-from openai.types.chat import ParsedChatCompletionMessage
+from openai._legacy_response import LegacyAPIResponse
+from openai.types.chat import (
+    ChatCompletion,
+    ParsedChatCompletion,
+    ParsedChatCompletionMessage,
+)
 from openai.types.chat.chat_completion_message_param import ChatCompletionMessageParam
 
 from fnllm.base.base_llm import BaseLLM
@@ -26,12 +31,10 @@ from fnllm.openai.types.chat.io import (
 )
 from fnllm.openai.types.chat.parameters import OpenAIChatParameters
 from fnllm.openai.utils import build_chat_messages, is_reasoning_model
+from fnllm.types.generics import TJsonModel
 from fnllm.types.metrics import LLMUsageMetrics
 
 if TYPE_CHECKING:
-    from openai._legacy_response import LegacyAPIResponse
-    from openai.types.chat import ChatCompletion, ParsedChatCompletion
-
     from fnllm.base.services.cached import Cached
     from fnllm.base.services.json import JsonReceiver
     from fnllm.base.services.rate_limiter import RateLimiter
@@ -40,7 +43,6 @@ if TYPE_CHECKING:
     from fnllm.events.base import LLMEvents
     from fnllm.openai.types.aliases import OpenAIChatModelName
     from fnllm.openai.types.client import OpenAIClient
-    from fnllm.types.generics import TJsonModel
     from fnllm.types.io import LLMInput
 
 
@@ -206,24 +208,28 @@ class OpenAITextChatLLMImpl(
 
     async def __invoke_oai(
         self,
-        parameters: OpenAIChatParameters,
+        parameters: OpenAIChatParameters[TJsonModel],
         messages: list[OpenAIChatHistoryEntry],
         kwargs: LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters],
-    ) -> LegacyAPIResponse[ChatCompletion | ParsedChatCompletion[Any]]:
+    ) -> LegacyAPIResponse[ChatCompletion | ParsedChatCompletion[TJsonModel]]:
         if self.is_json_mode(kwargs) and self._json_strategy == JsonStrategy.STRUCTURED:
             model = kwargs.get("json_model", None)
             if model is None:
                 raise JsonModelMissingError
 
             parameters["response_format"] = model
-            return await self._client.beta.chat.completions.with_raw_response.parse(
-                messages=messages,
-                **parameters,
+            response = await self._client.beta.chat.completions.with_raw_response.parse(
+                messages=cast(Iterator[ChatCompletionMessageParam], messages),
+                **cast(Any, parameters),
+            )
+            return cast(
+                LegacyAPIResponse[ChatCompletion | ParsedChatCompletion[TJsonModel]],
+                response,
             )
 
         return await self._client.chat.completions.with_raw_response.create(
             messages=cast(Iterator[ChatCompletionMessageParam], messages),
-            **parameters,
+            **cast(Any, parameters),
         )
 
     def _rewrite_input(
