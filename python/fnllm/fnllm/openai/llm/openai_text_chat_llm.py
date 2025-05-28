@@ -212,7 +212,7 @@ class OpenAITextChatLLMImpl(
 
     async def __invoke_oai(
         self,
-        parameters: OpenAIChatParameters[TJsonModel],
+        parameters: OpenAIChatParameters,
         messages: list[OpenAIChatHistoryEntry],
         kwargs: LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters],
     ) -> LegacyAPIResponse[ChatCompletion | ParsedChatCompletion[TJsonModel]]:

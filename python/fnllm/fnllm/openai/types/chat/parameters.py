@@ -3,8 +3,9 @@
 """OpenAI chat parameters types."""
 
 from collections.abc import Iterable
-from typing import Generic, Literal
+from typing import Literal
 
+from pydantic import BaseModel
 from typing_extensions import NotRequired, TypedDict
 
 from fnllm.openai.types.aliases import (
@@ -16,14 +17,13 @@ from fnllm.openai.types.aliases import (
     OpenAIFunctionCreateParam,
     OpenAIResponseFormatCreateParam,
 )
-from fnllm.types.generics import TJsonModel
 
 
 #
 # Note: streaming options have been removed from this class to avoid downstream tying issues.
 # OpenAI streaming should be handled with a StreamingLLM, not additional client-side parameters.
 #
-class OpenAIChatParameters(TypedDict, Generic[TJsonModel]):
+class OpenAIChatParameters(TypedDict):
     """OpenAI allowed chat parameters."""
 
     model: NotRequired[str | OpenAIChatModelName]
@@ -48,7 +48,7 @@ class OpenAIChatParameters(TypedDict, Generic[TJsonModel]):
 
     presence_penalty: NotRequired[float | None]
 
-    response_format: NotRequired[OpenAIResponseFormatCreateParam | type[TJsonModel]]
+    response_format: NotRequired[OpenAIResponseFormatCreateParam | type[BaseModel]]
 
     seed: NotRequired[int | None]
 

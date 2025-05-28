@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 from fnllm.base.config.json_strategy import JsonStrategy
 from fnllm.base.services.json import (
@@ -24,7 +24,6 @@ from fnllm.types.generics import (
 if TYPE_CHECKING:
     from collections.abc import Awaitable, Callable
 
-    from fnllm.types.generics import TJsonModel
     from fnllm.types.io import LLMInput, LLMOutput
 
 
@@ -94,6 +93,6 @@ class OpenAIStructuredJsonReceiver(
     ) -> LLMOutput[OpenAIChatOutput, TJsonModel, OpenAIChatHistoryEntry]:
         """Invoke the JSON decorator."""
         result = await delegate(prompt, **kwargs)
-        model = result.output.parsed_json_model
+        model = cast(TJsonModel, result.output.parsed_json_model)
         result.parsed_json = model
         return result
