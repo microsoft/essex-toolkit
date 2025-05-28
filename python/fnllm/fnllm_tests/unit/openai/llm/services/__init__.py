@@ -1,3 +1,3 @@
-# Copyright 2024 Microsoft Corporation.
+# Copyright (c) 2025 Microsoft Corporation.
 
 """Tests for openai.llm.services."""

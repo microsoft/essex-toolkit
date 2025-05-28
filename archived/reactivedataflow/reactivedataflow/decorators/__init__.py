@@ -1,4 +1,4 @@
-# Copyright (c) 2024 Microsoft Corporation.
+# Copyright (c) 2025 Microsoft Corporation.
 """reactivedataflow Decorators."""
 
 from .apply_decorators import AnyFn, Decorator, apply_decorators

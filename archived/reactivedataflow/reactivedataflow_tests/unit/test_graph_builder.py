@@ -1,4 +1,4 @@
-# Copyright (c) 2024 Microsoft Corporation.
+# Copyright (c) 2025 Microsoft Corporation.
 """reactivedataflow Graph Builder Tests."""
 
 import asyncio
@@ -608,9 +608,9 @@ async def test_strict_mode():
 
     # Global Config values aren't strictly checked
     builder = GraphBuilder()
-    builder.add_node("c1", "constant_strict", config={"value": 1}).add_raw_config({
-        "hey": "there"
-    })
+    builder.add_node("c1", "constant_strict", config={"value": 1}).add_raw_config(
+        {"hey": "there"}
+    )
     graph = builder.build(registry=registry)
     await graph.dispose()
 

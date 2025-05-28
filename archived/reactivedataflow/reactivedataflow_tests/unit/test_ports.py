@@ -1,4 +1,4 @@
-# Copyright (c) 2024 Microsoft Corporation.
+# Copyright (c) 2025 Microsoft Corporation.
 """reactivedataflow PortMap tests."""
 
 import pytest
@@ -13,12 +13,14 @@ from reactivedataflow.ports import (
 
 
 def test_port_map_can_separate_port_types() -> None:
-    ports = Ports([
-        Input(name="value", type="str"),
-        Config(name="value", type="str"),
-        Output(name="output", type="str"),
-        ArrayInput(type="str"),
-    ])
+    ports = Ports(
+        [
+            Input(name="value", type="str"),
+            Config(name="value", type="str"),
+            Output(name="output", type="str"),
+            ArrayInput(type="str"),
+        ]
+    )
     assert len(ports.input) == 1
     assert len(ports.config) == 1
     assert len(ports.outputs) == 1
@@ -27,26 +29,34 @@ def test_port_map_can_separate_port_types() -> None:
 
 def test_missing_port_name_raises_error() -> None:
     with pytest.raises(PortMissingNameError):
-        Ports([
-            Input(type="str"),
-        ])
+        Ports(
+            [
+                Input(type="str"),
+            ]
+        )
     with pytest.raises(PortMissingNameError):
-        Ports([
-            Config(type="str"),
-        ])
+        Ports(
+            [
+                Config(type="str"),
+            ]
+        )
 
 
 def test_port_map_throws_on_duplicate_input_ports() -> None:
     with pytest.raises(PortNamesMustBeUniqueError):
-        Ports([
-            Input(name="input", type="str"),
-            Input(name="input", type="str"),
-        ])
+        Ports(
+            [
+                Input(name="input", type="str"),
+                Input(name="input", type="str"),
+            ]
+        )
 
 
 def test_port_map_throws_on_duplicate_config_ports() -> None:
     with pytest.raises(PortNamesMustBeUniqueError):
-        Ports([
-            Config(name="input", type="str"),
-            Config(name="input", type="str"),
-        ])
+        Ports(
+            [
+                Config(name="input", type="str"),
+                Config(name="input", type="str"),
+            ]
+        )
