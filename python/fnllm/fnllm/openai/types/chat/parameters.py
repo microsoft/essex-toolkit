@@ -5,6 +5,7 @@
 from collections.abc import Iterable
 from typing import Literal
 
+from pydantic import BaseModel
 from typing_extensions import NotRequired, TypedDict
 
 from fnllm.openai.types.aliases import (
@@ -47,7 +48,7 @@ class OpenAIChatParameters(TypedDict):
 
     presence_penalty: NotRequired[float | None]
 
-    response_format: NotRequired[OpenAIResponseFormatCreateParam]
+    response_format: NotRequired[OpenAIResponseFormatCreateParam | BaseModel]
 
     seed: NotRequired[int | None]
 

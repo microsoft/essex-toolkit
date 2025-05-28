@@ -3,7 +3,7 @@
 """OpenAI input/output types."""
 
 from collections.abc import AsyncIterable, Awaitable, Callable
-from typing import ClassVar, TypeAlias
+from typing import ClassVar, Generic, TypeAlias
 
 from httpx import Headers
 from pydantic import BaseModel, ConfigDict, Field
@@ -14,6 +14,7 @@ from fnllm.openai.types.aliases import (
     OpenAIChatCompletionMessageParam,
 )
 from fnllm.types.generalized import ChatLLMOutput
+from fnllm.types.generics import TJsonModel
 from fnllm.types.metrics import LLMUsageMetrics
 
 OpenAIChatMessageInput: TypeAlias = OpenAIChatCompletionMessageParam
@@ -26,7 +27,7 @@ OpenAIChatCompletionInput: TypeAlias = str | OpenAIChatMessageInput | None
 """Main input type for OpenAI completions."""
 
 
-class OpenAIChatOutput(ChatLLMOutput):
+class OpenAIChatOutput(ChatLLMOutput, Generic[TJsonModel]):
     """OpenAI chat completion output."""
 
     model_config: ClassVar[ConfigDict] = ConfigDict(arbitrary_types_allowed=True)
@@ -45,6 +46,11 @@ class OpenAIChatOutput(ChatLLMOutput):
 
     headers: Headers | None = Field(default=None)
     """HTTP headers from the completion request. This will be None if the response was cached."""
+
+    parsed_json_model: TJsonModel | None = Field(
+        default=None,
+        description="Parsed JSON model from the completion response. This will be None if the response was cached.",
+    )
 
 
 class OpenAIStreamingChatOutput(BaseModel, arbitrary_types_allowed=True):
