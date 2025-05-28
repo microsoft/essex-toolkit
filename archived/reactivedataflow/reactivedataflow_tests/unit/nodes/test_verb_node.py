@@ -1,4 +1,4 @@
-# Copyright (c) 2024 Microsoft Corporation.
+# Copyright (c) 2025 Microsoft Corporation.
 """Tests for the ExecutionNode class."""
 
 from typing import Any
@@ -58,10 +58,12 @@ async def test_execution_node_with_raw_input():
         output = o
 
     node.output().subscribe(on_output)
-    node.attach({
-        "input_1": rx.of("Hello"),
-        "input_2": rx.of("World"),
-    })
+    node.attach(
+        {
+            "input_1": rx.of("Hello"),
+            "input_2": rx.of("World"),
+        }
+    )
     await node.drain()
     assert output == "Hello World"
 
@@ -89,10 +91,12 @@ async def test_execution_node_with_named_inputs():
 
     node.output().subscribe(on_output)
     assert output == " "
-    node.attach({
-        "input_1": rx.of("Hello"),
-        "input_2": rx.of("World"),
-    })
+    node.attach(
+        {
+            "input_1": rx.of("Hello"),
+            "input_2": rx.of("World"),
+        }
+    )
     await node.drain()
     assert output == "Hello World"
 
@@ -119,10 +123,12 @@ async def test_execution_node_with_named_required_inputs():
 
     node.output().subscribe(on_output)
     assert output is None
-    node.attach({
-        "input_1": rx.of("Hello"),
-        "input_2": rx.of("World"),
-    })
+    node.attach(
+        {
+            "input_1": rx.of("Hello"),
+            "input_2": rx.of("World"),
+        }
+    )
     await node.drain()
     assert output == "Hello World"
 
@@ -152,10 +158,12 @@ async def test_execution_node_with_required_inputs():
         output = o
 
     node.output().subscribe(on_output)
-    node.attach({
-        "input_1": rx.of("Hello"),
-        "input_2": rx.of("World"),
-    })
+    node.attach(
+        {
+            "input_1": rx.of("Hello"),
+            "input_2": rx.of("World"),
+        }
+    )
     await node.drain()
     assert output == "Hello World"
 
@@ -207,11 +215,13 @@ async def test_execution_node_with_required_config_and_inputs():
         registry=registry,
     )
     def execute_with_required_inputs(inputs: VerbInput) -> str:
-        return " ".join([
-            inputs.named_inputs["input_1"],
-            inputs.config["conf_1"],
-            inputs.config["conf_2"],
-        ])
+        return " ".join(
+            [
+                inputs.named_inputs["input_1"],
+                inputs.config["conf_1"],
+                inputs.config["conf_2"],
+            ]
+        )
 
     output: str | None = None
     fn = registry.get_verb_function("execute_with_required_config")
@@ -229,9 +239,11 @@ async def test_execution_node_with_required_config_and_inputs():
     }
     await node.drain()
     assert output is None
-    node.attach({
-        "input_1": rx.of("Hi"),
-    })
+    node.attach(
+        {
+            "input_1": rx.of("Hi"),
+        }
+    )
     await node.drain()
     assert output == "Hi Hello World"
 
@@ -306,10 +318,12 @@ async def test_execution_node_with_multiple_outputs():
 
     node.output("output_1").subscribe(on_output_1)
     node.output("output_2").subscribe(on_output_2)
-    node.attach({
-        "input_1": rx.of("Hello"),
-        "input_2": rx.of("World"),
-    })
+    node.attach(
+        {
+            "input_1": rx.of("Hello"),
+            "input_2": rx.of("World"),
+        }
+    )
     await node.drain()
     assert output_1 == "Hello World"
     assert output_2 == "World Hello"

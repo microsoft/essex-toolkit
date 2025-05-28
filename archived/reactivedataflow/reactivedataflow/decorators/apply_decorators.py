@@ -1,4 +1,4 @@
-# Copyright (c) 2024 Microsoft Corporation.
+# Copyright (c) 2025 Microsoft Corporation.
 """A utility function for applying a series of decorators to a function reference."""
 
 from collections.abc import Callable

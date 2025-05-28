@@ -1,4 +1,4 @@
-# Copyright (c) 2024 Microsoft Corporation.
+# Copyright (c) 2025 Microsoft Corporation.
 """OpenAI text chat cache key builder."""
 
 from __future__ import annotations

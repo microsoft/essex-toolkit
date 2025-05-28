@@ -1,8 +1,8 @@
-# Copyright (c) 2024 Microsoft Corporation.
+# Copyright (c) 2025 Microsoft Corporation.
 
 """Implementation of a sliding window based on time to calculate a moving average."""
 
-# Copyright (c) 2024 Microsoft Corporation.
+# Copyright (c) 2025 Microsoft Corporation.
 
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-# Copyright (c) 2024 Microsoft Corporation.
+# Copyright (c) 2025 Microsoft Corporation.
 """reactivedataflow Inputs Decorator Tests."""
 
 from reactivedataflow import (
@@ -14,10 +14,12 @@ from reactivedataflow import (
 
 def test_named_input_mapping():
     @connect_input(
-        ports=Ports([
-            Input(name="input_1", parameter="a"),
-            Input(name="input_2", parameter="b"),
-        ])
+        ports=Ports(
+            [
+                Input(name="input_1", parameter="a"),
+                Input(name="input_2", parameter="b"),
+            ]
+        )
     )
     def stub(a: int, b: int) -> int:
         return a + b
@@ -28,10 +30,12 @@ def test_named_input_mapping():
 
 def test_input_with_default_parameter_names():
     @connect_input(
-        ports=Ports([
-            Input(name="a"),
-            Input(name="b"),
-        ])
+        ports=Ports(
+            [
+                Input(name="a"),
+                Input(name="b"),
+            ]
+        )
     )
     def stub(a: int, b: int) -> int:
         return a + b
@@ -51,10 +55,12 @@ def test_input_dict_mapping():
 
 def test_config_parameters_mapping():
     @connect_input(
-        ports=Ports([
-            Config(name="in_1", parameter="a"),
-            Config(name="in_2", parameter="b"),
-        ])
+        ports=Ports(
+            [
+                Config(name="in_1", parameter="a"),
+                Config(name="in_2", parameter="b"),
+            ]
+        )
     )
     def stub(a: str, b: str) -> str:
         return f"{a} {b}"
