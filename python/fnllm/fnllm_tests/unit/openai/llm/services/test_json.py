@@ -3,6 +3,7 @@
 """Tests for openai.llm.features.json_parsing."""
 
 import json
+from typing import Any
 from unittest.mock import AsyncMock
 
 from fnllm.base.config.json_strategy import JsonStrategy
@@ -20,14 +21,32 @@ class CustomModel(BaseModel):
     string: str
 
 
-def mock_output(response: str) -> OpenAIChatOutput:
+def mock_output(response: str, parsed_output: Any = None) -> OpenAIChatOutput:
     return OpenAIChatOutput(
         content=response,
         raw_input=None,
         raw_model=mock_chat_completion_model(),
         raw_output=ChatCompletionMessage(content=response, role="assistant"),
         usage=None,
+        parsed_json_model=parsed_output,
     )
+
+
+async def test_structured_mode_handlers():
+    handler = create_json_handler(JsonStrategy.STRUCTURED, 0)
+    assert handler is not None
+
+    expected = CustomModel(integer=1, string="value")
+    expected_str = expected.model_dump_json(exclude_none=True)
+    delegate = AsyncMock(
+        return_value=LLMOutput(output=mock_output(expected_str, expected))
+    )
+    llm = handler.decorate(delegate)
+    assert llm is not None
+
+    # call the llm and assert result
+    response = await llm("prompt", json=CustomModel)
+    assert response.parsed_json == expected
 
 
 async def test_loose_mode_handlers():
