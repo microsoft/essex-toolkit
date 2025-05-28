@@ -4,10 +4,11 @@
 
 import json
 import re
+from contextlib import suppress
 from pathlib import Path
 from typing import Any
 
-from azure.core.exceptions import ResourceNotFoundError
+from azure.core.exceptions import ResourceExistsError, ResourceNotFoundError
 from azure.storage.blob import BlobClient, BlobServiceClient, ContainerClient
 
 from .base import Cache
@@ -100,22 +101,14 @@ class BlobCache(Cache):
         """Get a blob client."""
         return self.container_client.get_blob_client(name)
 
-    def container_exists(self) -> bool:
-        """Check if the container exists."""
-        container_name = self.container_name
-        container_names = [
-            container.name for container in self.blob_service_client.list_containers()
-        ]
-        return container_name in container_names
-
     def create_container(self) -> None:
         """Create the container if it does not exist."""
-        if not self.container_exists():
+        with suppress(ResourceExistsError):
             self.blob_service_client.create_container(self.container_name)
 
     def delete_container(self) -> None:
         """Delete the container."""
-        if self.container_exists():
+        with suppress(ResourceNotFoundError):
             self.blob_service_client.delete_container(self.container_name)
 
     async def has(self, key: str) -> bool:
