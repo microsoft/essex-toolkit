@@ -1,3 +1,8 @@
+# Copyright (c) 2025 Microsoft Corporation.
+# Licensed under the MIT License
+
+"""Primary LLM I/O types."""
+
 from collections.abc import AsyncIterator, Sequence
 from enum import StrEnum
 from typing import Any, Generic, Protocol
