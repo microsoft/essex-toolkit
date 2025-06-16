@@ -35,7 +35,7 @@ class CacheInstruction(StrEnum):
 
 
 class BaseModelOptions(TypedDict, Generic[TModelParameters]):
-    """Base class for model options."""
+    """Base class for model options across all LLMs (chat and embedding)."""
 
     name: NotRequired[str]
     """The name of the invocation for debug."""
@@ -65,7 +65,7 @@ class EmbeddingOptions(BaseModelOptions[TModelParameters], Generic[TModelParamet
 
 
 class BaseModelResponse(BaseModel, Generic[TRawResponse]):
-    """Base class for model responses."""
+    """Base class for model responses across all LLMs (chat and embedding)."""
 
     model_config: ClassVar[ConfigDict] = ConfigDict(arbitrary_types_allowed=True)
 
