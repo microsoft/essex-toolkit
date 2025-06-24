@@ -21,6 +21,14 @@ def test_count_tokens():
     assert text_service.count_tokens("a b c d") == 4
     assert text_service.count_tokens("hello world") == 2
 
+def test_count_tokens_with_special_chars():
+    text_service = OpenAITextService(tiktoken.get_encoding("cl100k_base"))
+    value = "<|endoftext|>"
+    assert text_service.count_tokens(value) > 1
+    
+    decoded = text_service.decode(text_service.encode(value))
+    assert decoded == value
+    
 
 def test_trim_to_max_tokens():
     text_service = OpenAITextService(tiktoken.get_encoding("cl100k_base"))
