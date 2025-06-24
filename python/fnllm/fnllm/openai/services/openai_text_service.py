@@ -48,7 +48,7 @@ class OpenAITextService:
 
     def encode(self, text: str) -> list[int]:
         """Encode the text into tokens."""
-        return self.encoding.encode(text)
+        return self.encoding.encode_ordinary(text)
 
     def decode(self, tokens: list[int]) -> str:
         """Decode the tokens into text."""
