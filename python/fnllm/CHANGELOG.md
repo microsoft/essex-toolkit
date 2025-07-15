@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Handle race conditions via error suppression in Azure Blob-Storage cache.
 - Use `tiktoken.Encoding.encode_ordinary` for encoding text to avoid issues with special tokens such as `<|endoftext|>`.
+- Add configuration for `special_token_behavior` to control how special tokens are handled in prompts.
 ### Security
 ```
 

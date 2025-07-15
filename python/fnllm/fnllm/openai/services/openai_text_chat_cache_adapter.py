@@ -6,6 +6,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any
 
 from fnllm.base.services.cached import CacheAdapter
+from fnllm.openai.config import OpenAISpecialTokenBehavior
 from fnllm.openai.types import OpenAIChatCompletionModel
 from fnllm.openai.types.chat.io import OpenAIChatCompletionInput, OpenAIChatOutput
 from fnllm.openai.utils import build_chat_messages
@@ -28,11 +29,15 @@ class OpenAITextChatCacheAdapter(
         cache: Cache,
         model: str | OpenAIChatModelName,
         global_parameters: OpenAIChatParameters | None = None,
+        special_token_behavior: OpenAISpecialTokenBehavior | None = None,
     ) -> None:
         """Create a new OpenAITextChatCacheKeyBuilder."""
         self._cache = cache
         self._model = model
         self._global_model_parameters = global_parameters or {}
+        self._special_token_behavior = (
+            special_token_behavior or OpenAISpecialTokenBehavior.KEEP
+        )
 
     def build_cache_key(
         self, prompt: OpenAIChatCompletionInput, kwargs: LLMInput[Any, Any, Any]
@@ -50,7 +55,7 @@ class OpenAITextChatCacheAdapter(
         """Get the cache metadata from the prompt and kwargs."""
         history = kwargs.get("history", [])
         local_model_parameters = kwargs.get("model_parameters")
-        messages, _ = build_chat_messages(prompt, history)
+        messages, _ = build_chat_messages(prompt, history, self._special_token_behavior)
         parameters = self._build_completion_parameters(local_model_parameters)
         return {"messages": messages, "parameters": parameters}
 
@@ -73,7 +78,9 @@ class OpenAITextChatCacheAdapter(
     ) -> OpenAIChatOutput:
         """Get the model to validate the cached result."""
         history = kwargs.get("history", [])
-        _, prompt_message = build_chat_messages(prompt, history)
+        _, prompt_message = build_chat_messages(
+            prompt, history, self._special_token_behavior
+        )
         entry = OpenAIChatCompletionModel.model_validate(cached_result)
         return OpenAIChatOutput(
             raw_input=prompt_message,

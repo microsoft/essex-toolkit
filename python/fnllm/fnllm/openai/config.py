@@ -26,6 +26,19 @@ class OpenAIRateLimitBehavior(str, Enum):
     """Perform a task-local sleep until the ratelimit time has elapsed."""
 
 
+class OpenAISpecialTokenBehavior(str, Enum):
+    """The behavior to use when special tokens are encountered."""
+
+    KEEP = "keep"
+    """Keep the special tokens in the input and output."""
+
+    REMOVE = "remove"
+    """Remove the special tokens from the input and output."""
+
+    REPLACE = "replace"
+    """Replace the special tokens with a placeholder in the input and output."""
+
+
 class CommonOpenAIConfig(Config, frozen=True, extra="allow", protected_namespaces=()):
     """Common configuration parameters between Azure OpenAI and Public OpenAI."""
 
@@ -60,6 +73,11 @@ class CommonOpenAIConfig(Config, frozen=True, extra="allow", protected_namespace
     rate_limit_behavior: OpenAIRateLimitBehavior = Field(
         default=OpenAIRateLimitBehavior.LIMIT,
         description="The rate-limiting behavior to employ when a RateLimitError is encountered.",
+    )
+
+    special_token_behavior: OpenAISpecialTokenBehavior = Field(
+        default=OpenAISpecialTokenBehavior.KEEP,
+        description="The behavior to use when special tokens are encountered.",
     )
 
 

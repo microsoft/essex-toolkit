@@ -111,6 +111,7 @@ def _create_openai_text_chat_llm(
             backoff_limiter=backoff_limiter,
         ),
         rate_limiter=create_rate_limiter(config=config, limiter=limiter, events=events),
+        special_token_behavior=config.special_token_behavior,
     )
 
     return OpenAIParseToolsLLM(result)
@@ -132,6 +133,7 @@ def _create_openai_streaming_chat_llm(
         emit_usage=config.track_stream_usage,
         variable_injector=VariableInjector(),
         rate_limiter=create_rate_limiter(limiter=limiter, config=config, events=events),
+        special_token_behavior=config.special_token_behavior,
     )
 
 
@@ -150,5 +152,6 @@ def _create_cached_chat_handler(
             cache,
             model=config.model,
             global_parameters=config.chat_parameters,
+            special_token_behavior=config.special_token_behavior,
         ),
     )

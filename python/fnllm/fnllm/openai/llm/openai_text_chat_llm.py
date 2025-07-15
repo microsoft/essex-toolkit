@@ -12,6 +12,7 @@ from openai.types.chat.chat_completion_message_param import ChatCompletionMessag
 from fnllm.base.base_llm import BaseLLM
 from fnllm.base.config import JsonStrategy
 from fnllm.base.services.errors import InvalidLLMResultError
+from fnllm.openai.config import OpenAISpecialTokenBehavior
 from fnllm.openai.services.openai_history_extractor import (
     OpenAIHistoryExtractor,
 )
@@ -97,6 +98,7 @@ class OpenAITextChatLLMImpl(
         ]
         | None,
         json_strategy: JsonStrategy = JsonStrategy.VALID,
+        special_token_behavior: OpenAISpecialTokenBehavior | None = None,
     ):
         """Create a new OpenAIChatLLM."""
         super().__init__(
@@ -116,6 +118,9 @@ class OpenAITextChatLLMImpl(
         self._cached = cached
         self._json_strategy = json_strategy
         self._json_receiver = json_receiver
+        self._special_token_behavior = (
+            special_token_behavior or OpenAISpecialTokenBehavior.KEEP
+        )
 
     def child(self, name: str) -> Any:
         """Create a child LLM."""
@@ -159,7 +164,9 @@ class OpenAITextChatLLMImpl(
         kwargs: LLMInput[TJsonModel, OpenAIChatHistoryEntry, OpenAIChatParameters],
     ) -> OpenAIChatOutput:
         history = kwargs.get("history", [])
-        messages, prompt_message = build_chat_messages(prompt, history)
+        messages, prompt_message = build_chat_messages(
+            prompt, history, self._special_token_behavior
+        )
         local_model_parameters = kwargs.get("model_parameters")
         parameters = self._build_completion_parameters(local_model_parameters)
 
