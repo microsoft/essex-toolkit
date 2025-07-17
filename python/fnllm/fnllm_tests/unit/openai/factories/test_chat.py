@@ -93,6 +93,7 @@ def test_create_openai_chat_llm():
             retryer=ANY,
             rate_limiter=ANY,
             json_receiver=ANY,
+            special_token_behavior=config.special_token_behavior,
         )
 
         # check delegates have been called

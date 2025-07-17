@@ -144,18 +144,20 @@ def _rewrite_prompt(
 ) -> OpenAIChatCompletionInput:
     """Rewrite the prompt based on the special token behavior."""
     prompt_content: str = ""
-    if prompt is not None:
-        if isinstance(prompt, str):
-            prompt_content = prompt
-        else:
-            prompt_content = cast(str, prompt.get("content", ""))
+    if prompt is None:
+        return prompt
 
-        if special_token_behavior == OpenAISpecialTokenBehavior.REMOVE:
-            for token in _special_tokens:
-                prompt_content = prompt_content.replace(token, "").strip()
-        elif special_token_behavior == OpenAISpecialTokenBehavior.REPLACE:
-            for token, replacement in _special_token_replacements.items():
-                prompt_content = prompt_content.replace(token, replacement)
+    if isinstance(prompt, str):
+        prompt_content = prompt
+    else:
+        prompt_content = cast(str, prompt.get("content", ""))
+
+    if special_token_behavior == OpenAISpecialTokenBehavior.REMOVE:
+        for token in _special_tokens:
+            prompt_content = prompt_content.replace(token, "").strip()
+    elif special_token_behavior == OpenAISpecialTokenBehavior.REPLACE:
+        for token, replacement in _special_token_replacements.items():
+            prompt_content = prompt_content.replace(token, replacement)
 
     return OpenAIChatCompletionUserMessageParam(content=prompt_content, role="user")
 
