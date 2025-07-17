@@ -96,7 +96,7 @@ class OpenAITextChatLLMImpl(
             OpenAIChatHistoryEntry,
             OpenAIChatParameters,
         ]
-        | None,
+        | None = None,
         json_strategy: JsonStrategy = JsonStrategy.VALID,
         special_token_behavior: OpenAISpecialTokenBehavior | None = None,
     ):
