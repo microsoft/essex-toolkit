@@ -81,7 +81,7 @@ def test_is_reasoning_model():
     assert llm.is_reasoning_model()
 
 
-async def test_is_not_reasoning_model():
+def test_is_not_reasoning_model():
     llm = OpenAITextChatLLMImpl(
         client=Mock(),
         model="model",
