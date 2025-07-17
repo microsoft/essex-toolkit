@@ -148,7 +148,7 @@ async def test_chat_llm_with_global_model_config_overwrite(
 
     # check the expected output
     expected_output = chat_completion_client_mock.expected_output_for_prompt(
-        input_prompt
+        input_prompt if input_prompt is not None else ""
     )
     assert response.output == expected_output
 

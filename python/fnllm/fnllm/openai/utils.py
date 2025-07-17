@@ -6,6 +6,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, cast
 
+from fnllm.openai.config import OpenAISpecialTokenBehavior
 from fnllm.openai.types.aliases import (
     OpenAIChatCompletionAssistantMessageParam,
     OpenAIChatCompletionMessageModel,
@@ -27,6 +28,20 @@ if TYPE_CHECKING:
     from fnllm.tools.base import LLMTool
 
 _reasoning_models: set[str] = {"o1", "o1-mini", "o3-mini"}
+_special_tokens: set[str] = {
+    "<|endoftext|>",
+    "<|fim_prefix|>",
+    "<|fim_middle|>",
+    "<|fim_suffix|>",
+    "<|endofprompt|>",
+}
+_special_token_replacements: dict[str, str] = {
+    "<|endoftext|>": "[END_OF_TEXT]",
+    "<|fim_prefix|>": "[FIM_PREFIX]",
+    "<|fim_middle|>": "[FIM_MIDDLE]",
+    "<|fim_suffix|>": "[FIM_SUFFIX]",
+    "<|endofprompt|>": "[END_OF_PROMPT]",
+}
 
 
 def function_call_to_param(
@@ -108,8 +123,10 @@ def chat_completion_message_to_param(
 def build_chat_messages(
     prompt: OpenAIChatCompletionInput,
     history: Sequence[OpenAIChatHistoryEntry],
+    special_token_behavior: OpenAISpecialTokenBehavior,
 ) -> tuple[list[OpenAIChatHistoryEntry], OpenAIChatHistoryEntry]:
     """Builds a chat history list from the prompt and existing history, along with the prompt message."""
+    prompt = _rewrite_prompt(prompt, special_token_behavior)
     if isinstance(prompt, str):
         prompt = OpenAIChatCompletionUserMessageParam(
             content=prompt,
@@ -119,6 +136,30 @@ def build_chat_messages(
     if prompt is not None:
         messages.append(prompt)
     return messages, cast(OpenAIChatHistoryEntry, prompt)
+
+
+def _rewrite_prompt(
+    prompt: OpenAIChatCompletionInput,
+    special_token_behavior: OpenAISpecialTokenBehavior,
+) -> OpenAIChatCompletionInput:
+    """Rewrite the prompt based on the special token behavior."""
+    prompt_content: str = ""
+    if prompt is None:
+        return prompt
+
+    if isinstance(prompt, str):
+        prompt_content = prompt
+    else:
+        prompt_content = cast(str, prompt.get("content", ""))
+
+    if special_token_behavior == OpenAISpecialTokenBehavior.REMOVE:
+        for token in _special_tokens:
+            prompt_content = prompt_content.replace(token, "").strip()
+    elif special_token_behavior == OpenAISpecialTokenBehavior.REPLACE:
+        for token, replacement in _special_token_replacements.items():
+            prompt_content = prompt_content.replace(token, replacement)
+
+    return OpenAIChatCompletionUserMessageParam(content=prompt_content, role="user")
 
 
 def is_reasoning_model(model: str) -> bool:

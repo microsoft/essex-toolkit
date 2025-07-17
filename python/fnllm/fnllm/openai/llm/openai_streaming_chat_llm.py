@@ -13,6 +13,7 @@ from openai.types.chat import ChatCompletionChunk
 from openai.types.chat.chat_completion_message_param import ChatCompletionMessageParam
 
 from fnllm.base.base_llm import BaseLLM
+from fnllm.openai.config import OpenAISpecialTokenBehavior
 from fnllm.openai.types.chat.io import (
     OpenAIChatCompletionInput,
     OpenAIChatHistoryEntry,
@@ -68,6 +69,7 @@ class OpenAIStreamingChatLLMImpl(
         emit_usage: bool = False,
         model_parameters: OpenAIChatParameters | None = None,
         events: LLMEvents | None = None,
+        special_token_behavior: OpenAISpecialTokenBehavior | None = None,
     ):
         """Create a new OpenAIChatLLM."""
         super().__init__(
@@ -81,6 +83,9 @@ class OpenAIStreamingChatLLMImpl(
         self._model = model
         self._emit_usage = emit_usage
         self._global_model_parameters = model_parameters or {}
+        self._special_token_behavior = (
+            special_token_behavior or OpenAISpecialTokenBehavior.KEEP
+        )
 
     def child(self, name: str) -> OpenAIStreamingChatLLMImpl:
         """Create a child LLM."""
@@ -108,7 +113,9 @@ class OpenAIStreamingChatLLMImpl(
     ) -> OpenAIStreamingChatOutput:
         history = kwargs.get("history", [])
         local_model_parameters = kwargs.get("model_parameters")
-        messages, prompt_message = build_chat_messages(prompt, history)
+        messages, prompt_message = build_chat_messages(
+            prompt, history, self._special_token_behavior
+        )
         completion_parameters = self._build_completion_parameters(
             local_model_parameters
         )
