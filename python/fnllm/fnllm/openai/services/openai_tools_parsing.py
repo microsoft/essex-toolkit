@@ -7,6 +7,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 import pydantic
+from openai.types.chat import ChatCompletionMessageFunctionToolCall
 from typing_extensions import Unpack
 
 from fnllm.openai.types.chat.io import (
@@ -81,7 +82,11 @@ class OpenAIParseToolsLLM(
         raw_output: OpenAIChatCompletionMessageModel,
     ) -> LLMTool:
         try:
-            return json_model.model_validate_json(tool_call.function.arguments)
+            if isinstance(tool_call, ChatCompletionMessageFunctionToolCall):
+                return json_model.model_validate_json(tool_call.function.arguments)
+
+            # isinstance(tool_call, ChatCompletionMessageCustomToolCall):
+            return json_model.model_validate_json(tool_call.custom.input)
         except pydantic.ValidationError as err:
             raise ToolInvalidArgumentsError(
                 raw_output,
@@ -100,7 +105,13 @@ class OpenAIParseToolsLLM(
         tool_calls = raw_output.tool_calls or []
 
         for call in tool_calls:
-            tool = LLMTool.find_tool(tools, call.function.name)
+            if isinstance(call, ChatCompletionMessageFunctionToolCall):
+                tool = LLMTool.find_tool(tools, call.function.name)
+                arguments = call.function.arguments
+            else:
+                # isinstance(tool_call, ChatCompletionMessageCustomToolCall):
+                tool = LLMTool.find_tool(tools, call.custom.name)
+                arguments = call.custom.input
 
             if not tool:
                 raise ToolNotFoundError(raw_output, tool_call=call)
@@ -109,7 +120,7 @@ class OpenAIParseToolsLLM(
                 call, json_model=tool, raw_output=raw_output
             )
 
-            parsed_json.__raw_arguments_json__ = call.function.arguments
+            parsed_json.__raw_arguments_json__ = arguments
             parsed_json.call_id = call.id
 
             result.append(parsed_json)

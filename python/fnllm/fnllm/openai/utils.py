@@ -9,11 +9,16 @@ from typing import TYPE_CHECKING, cast
 from fnllm.openai.config import OpenAISpecialTokenBehavior
 from fnllm.openai.types.aliases import (
     OpenAIChatCompletionAssistantMessageParam,
+    OpenAIChatCompletionMessageCustomToolCallParam,
+    OpenAIChatCompletionMessageFunctionToolCall,
+    OpenAIChatCompletionMessageFunctionToolCallParam,
     OpenAIChatCompletionMessageModel,
     OpenAIChatCompletionMessageToolCallModel,
     OpenAIChatCompletionMessageToolCallParam,
     OpenAIChatCompletionToolParam,
     OpenAIChatCompletionUserMessageParam,
+    OpenAICustomModel,
+    OpenAICustomParam,
     OpenAIFunctionCallModel,
     OpenAIFunctionCallParam,
     OpenAIFunctionDefinitionParam,
@@ -57,6 +62,11 @@ def function_call_to_param(
     )
 
 
+def custom_to_param(func: OpenAICustomModel) -> OpenAICustomParam:
+    """Parses Function base model to the equivalent typed dict."""
+    return OpenAICustomParam(input=func.input, name=func.name)
+
+
 def function_to_param(func: OpenAIFunctionModel) -> OpenAIFunctionParam:
     """Parses Function base model to the equivalent typed dict."""
     return OpenAIFunctionParam(arguments=func.arguments, name=func.name)
@@ -69,12 +79,18 @@ def tool_calls_to_params(
     if not tools:
         return None
 
-    return [
-        OpenAIChatCompletionMessageToolCallParam(
-            id=tool.id, function=function_to_param(tool.function), type=tool.type
+    def _build_call_param(
+        tool: OpenAIChatCompletionMessageToolCallModel,
+    ) -> OpenAIChatCompletionMessageToolCallParam:
+        if isinstance(tool, OpenAIChatCompletionMessageFunctionToolCall):
+            return OpenAIChatCompletionMessageFunctionToolCallParam(
+                id=tool.id, function=function_to_param(tool.function), type=tool.type
+            )
+        return OpenAIChatCompletionMessageCustomToolCallParam(
+            id=tool.id, custom=custom_to_param(tool.custom), type=tool.type
         )
-        for tool in tools
-    ]
+
+    return [_build_call_param(tool) for tool in tools]
 
 
 def llm_tool_to_param(tool: type[LLMTool]) -> OpenAIFunctionDefinitionParam:

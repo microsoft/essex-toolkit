@@ -6,6 +6,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from fnllm.openai.types.aliases import OpenAIChatCompletionMessageFunctionToolCall
+
 if TYPE_CHECKING:
     from pydantic import ValidationError
 
@@ -52,6 +54,11 @@ class ToolNotFoundError(RuntimeError):
         self.raw_output = raw_output
         self.tool_call = tool_call
 
-        super().__init__(
-            f"Requested tool '{tool_call.function.name}' by the LLM does not exist"
-        )
+        if isinstance(tool_call, OpenAIChatCompletionMessageFunctionToolCall):
+            super().__init__(
+                f"Requested function tool '{tool_call.function.name}' by the LLM does not exist"
+            )
+        else:
+            super().__init__(
+                f"Requested custom tool '{tool_call.custom.name}' by the LLM does not exist"
+            )
