@@ -9,16 +9,14 @@ import pytest
 from fnllm.openai.services.openai_tools_parsing import OpenAIParseToolsLLM
 from fnllm.openai.types.aliases import (
     OpenAIChatCompletionMessageModel,
-    OpenAIChatCompletionMessageToolCallModel,
     OpenAIFunctionModel,
 )
 from fnllm.openai.types.chat.io import OpenAIChatOutput
 from fnllm.tools.base import LLMTool
 from fnllm.tools.errors import ToolInvalidArgumentsError, ToolNotFoundError
 from fnllm.types.io import LLMOutput
-from pydantic import Field
-
 from openai.types.chat import ChatCompletionMessageFunctionToolCall
+from pydantic import Field
 
 from fnllm_tests.unit.openai.llm.conftest import mock_chat_completion_model
 

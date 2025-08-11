@@ -5,7 +5,6 @@
 from fnllm.openai.types.aliases import (
     OpenAIChatCompletionAssistantMessageParam,
     OpenAIChatCompletionMessageModel,
-    OpenAIChatCompletionMessageToolCallModel,
     OpenAIChatCompletionMessageToolCallParam,
     OpenAIFunctionCallModel,
     OpenAIFunctionCallParam,
@@ -18,8 +17,8 @@ from fnllm.openai.utils import (
     function_to_param,
     tool_calls_to_params,
 )
-
 from openai.types.chat import ChatCompletionMessageFunctionToolCall
+
 
 def test_function_call_to_param():
     data = OpenAIFunctionCallModel(arguments="arguments", name="name")
