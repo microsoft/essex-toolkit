@@ -38,3 +38,6 @@ output/
 python/*/dist/
 
 tests/integration
+
+# JetBrains
+.idea
