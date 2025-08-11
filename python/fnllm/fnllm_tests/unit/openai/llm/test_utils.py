@@ -4,8 +4,10 @@
 
 from fnllm.openai.types.aliases import (
     OpenAIChatCompletionAssistantMessageParam,
+    OpenAIChatCompletionMessageFunctionToolCall,
+    OpenAIChatCompletionMessageFunctionToolCallParam,
     OpenAIChatCompletionMessageModel,
-    OpenAIChatCompletionMessageToolCallParam,
+    OpenAIChatCompletionMessageToolCallModel,
     OpenAIFunctionCallModel,
     OpenAIFunctionCallParam,
     OpenAIFunctionModel,
@@ -38,8 +40,8 @@ def test_function_to_param():
 
 
 def test_tool_calls_to_params():
-    data = [
-        ChatCompletionMessageFunctionToolCall(
+    data: list[OpenAIChatCompletionMessageToolCallModel] = [
+        OpenAIChatCompletionMessageFunctionToolCall(
             id="id",
             function=OpenAIFunctionModel(arguments="arguments", name="name"),
             type="function",
@@ -47,7 +49,7 @@ def test_tool_calls_to_params():
     ]
 
     assert tool_calls_to_params(data) == [
-        OpenAIChatCompletionMessageToolCallParam(
+        OpenAIChatCompletionMessageFunctionToolCallParam(
             id="id",
             function=OpenAIFunctionParam(arguments="arguments", name="name"),
             type="function",
@@ -81,7 +83,7 @@ def test_chat_completion_message_to_param():
         role="assistant",
         function_call=OpenAIFunctionCallParam(arguments="arguments", name="name"),
         tool_calls=[
-            OpenAIChatCompletionMessageToolCallParam(
+            OpenAIChatCompletionMessageFunctionToolCallParam(
                 id="tool_id",
                 function=OpenAIFunctionParam(arguments="arguments2", name="name2"),
                 type="function",

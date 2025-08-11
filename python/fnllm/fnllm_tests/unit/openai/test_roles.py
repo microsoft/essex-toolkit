@@ -7,7 +7,7 @@ from string import Template
 import pytest
 from fnllm.openai.roles import OpenAIChatRole
 from fnllm.openai.types.aliases import (
-    OpenAIChatCompletionMessageToolCallParam,
+    OpenAIChatCompletionMessageFunctionToolCallParam,
     OpenAIFunctionCallParam,
     OpenAIFunctionParam,
 )
@@ -36,7 +36,7 @@ def test_role_messages():
         content="content $some_var",
         name="name",
         tool_calls=[
-            OpenAIChatCompletionMessageToolCallParam(
+            OpenAIChatCompletionMessageFunctionToolCallParam(
                 id="id",
                 function=OpenAIFunctionParam(arguments="arguments", name="func_name"),
                 type="function",
