@@ -19,6 +19,7 @@ from fnllm.openai.utils import (
     tool_calls_to_params,
 )
 
+from openai.types.chat import ChatCompletionMessageFunctionToolCall
 
 def test_function_call_to_param():
     data = OpenAIFunctionCallModel(arguments="arguments", name="name")
@@ -39,7 +40,7 @@ def test_function_to_param():
 
 def test_tool_calls_to_params():
     data = [
-        OpenAIChatCompletionMessageToolCallModel(
+        ChatCompletionMessageFunctionToolCall(
             id="id",
             function=OpenAIFunctionModel(arguments="arguments", name="name"),
             type="function",
@@ -62,7 +63,7 @@ def test_chat_completion_message_to_param():
         role="assistant",
         function_call=OpenAIFunctionCallModel(arguments="arguments", name="name"),
         tool_calls=[
-            OpenAIChatCompletionMessageToolCallModel(
+            ChatCompletionMessageFunctionToolCall(
                 id="tool_id",
                 function=OpenAIFunctionModel(arguments="arguments2", name="name2"),
                 type="function",

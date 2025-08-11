@@ -12,7 +12,8 @@ from fnllm.events.base import LLMEvents
 from fnllm.types.io import LLMOutput
 
 
-class TestError(BaseException): ...
+class TestError(BaseException):
+    __test__ = False  # this is not a pytest class
 
 
 class TestRetryer(Retryer):

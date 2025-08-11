@@ -18,6 +18,8 @@ from fnllm.tools.errors import ToolInvalidArgumentsError, ToolNotFoundError
 from fnllm.types.io import LLMOutput
 from pydantic import Field
 
+from openai.types.chat import ChatCompletionMessageFunctionToolCall
+
 from fnllm_tests.unit.openai.llm.conftest import mock_chat_completion_model
 
 
@@ -61,14 +63,14 @@ async def test_tools_are_parsed():
             content="content",
             role="assistant",
             tool_calls=[
-                OpenAIChatCompletionMessageToolCallModel(
+                ChatCompletionMessageFunctionToolCall(
                     id="call_1",
                     function=OpenAIFunctionModel(
                         arguments=json.dumps({"a": "value_a"}), name=ToolA.get_name()
                     ),
                     type="function",
                 ),
-                OpenAIChatCompletionMessageToolCallModel(
+                ChatCompletionMessageFunctionToolCall(
                     id="call_2",
                     function=OpenAIFunctionModel(
                         arguments=json.dumps({"b": "value_b"}), name=ToolB.get_name()
@@ -193,14 +195,14 @@ async def test_invalid_tool_arguments_should_raise():
             content="content",
             role="assistant",
             tool_calls=[
-                OpenAIChatCompletionMessageToolCallModel(
+                ChatCompletionMessageFunctionToolCall(
                     id="call_1",
                     function=OpenAIFunctionModel(
                         arguments=json.dumps({"a": "value_a"}), name=ToolA.get_name()
                     ),
                     type="function",
                 ),
-                OpenAIChatCompletionMessageToolCallModel(
+                ChatCompletionMessageFunctionToolCall(
                     id="call_2",
                     function=OpenAIFunctionModel(
                         # missing arguments
@@ -233,14 +235,14 @@ async def test_tool_not_found_should_raise():
             content="content",
             role="assistant",
             tool_calls=[
-                OpenAIChatCompletionMessageToolCallModel(
+                ChatCompletionMessageFunctionToolCall(
                     id="call_1",
                     function=OpenAIFunctionModel(
                         arguments=json.dumps({"a": "value_a"}), name=ToolA.get_name()
                     ),
                     type="function",
                 ),
-                OpenAIChatCompletionMessageToolCallModel(
+                ChatCompletionMessageFunctionToolCall(
                     id="call_2",
                     function=OpenAIFunctionModel(
                         arguments=json.dumps({}),
