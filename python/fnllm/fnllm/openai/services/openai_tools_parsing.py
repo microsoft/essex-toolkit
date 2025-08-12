@@ -85,7 +85,7 @@ class OpenAIParseToolsLLM(
             if isinstance(tool_call, ChatCompletionMessageFunctionToolCall):
                 return json_model.model_validate_json(tool_call.function.arguments)
 
-            # isinstance(tool_call, ChatCompletionMessageCustomToolCall):
+            # NOTE: isinstance(tool_call, ChatCompletionMessageCustomToolCall):
             return json_model.model_validate_json(tool_call.custom.input)
         except pydantic.ValidationError as err:
             raise ToolInvalidArgumentsError(
@@ -109,7 +109,7 @@ class OpenAIParseToolsLLM(
                 tool = LLMTool.find_tool(tools, call.function.name)
                 arguments = call.function.arguments
             else:
-                # isinstance(tool_call, ChatCompletionMessageCustomToolCall):
+                # NOTE: isinstance(tool_call, ChatCompletionMessageCustomToolCall):
                 tool = LLMTool.find_tool(tools, call.custom.name)
                 arguments = call.custom.input
 
