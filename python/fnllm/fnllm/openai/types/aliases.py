@@ -11,7 +11,10 @@ from openai.types.chat import (
 from openai.types.chat import (
     ChatCompletionMessage as ChatCompletionMessageModel,
 )
-from openai.types.chat import ChatCompletionReasoningEffort
+from openai.types.chat import (
+    ChatCompletionMessageToolCallUnion,
+    ChatCompletionReasoningEffort,
+)
 from openai.types.chat.chat_completion import Choice as ChoiceModel
 from openai.types.chat.chat_completion_assistant_message_param import (
     FunctionCall as FunctionCallParam,
@@ -43,9 +46,6 @@ from openai.types.chat.chat_completion_message_function_tool_call_param import (
 )
 from openai.types.chat.chat_completion_message_function_tool_call_param import (
     Function as FunctionParam,
-)
-from openai.types.chat.chat_completion_message_tool_call import (
-    ChatCompletionMessageToolCall as ChatCompletionMessageToolCallModel,
 )
 from openai.types.chat.chat_completion_message_tool_call_union_param import (
     ChatCompletionMessageToolCallUnionParam,
@@ -139,7 +139,7 @@ OpenAIFunctionDefinitionParam: TypeAlias = FunctionDefinitionParam
 OpenAIResponseFormatCreateParam: TypeAlias = ResponseFormatCreateParam
 """Alias for the ResponseFormatCreateParam (create param)."""
 
-OpenAIChatCompletionMessageToolCallModel: TypeAlias = ChatCompletionMessageToolCallModel
+OpenAIChatCompletionMessageToolCallModel: TypeAlias = ChatCompletionMessageToolCallUnion
 """Alias for the ChatCompletionMessageToolCall (base model)."""
 
 OpenAIChatCompletionToolParam: TypeAlias = ChatCompletionToolParam

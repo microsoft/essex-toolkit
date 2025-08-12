@@ -19,7 +19,7 @@ dependencies = [
 [project.optional-dependencies]
 # OpenAI is our default provider, but we have it as an optional extra in order to account for future providers.
 openai=[
-    "openai>=1.99.8",
+    "openai>=1.99.9",
     "tiktoken>=0.11.0"
 ]
 # Azure is optional, you should add it if you want to use Azure OpenAI or Azure Blob Storage caching.
@@ -43,7 +43,7 @@ dev-dependencies = [
     "ipykernel>=6.29.5",
     "hatchling>=1.25.0",
     # OpenAI Optional
-    "openai>=1.99.8",
+    "openai>=1.99.9",
     "tiktoken>=0.11.0",
     # Azure Optional
     "azure-identity>=1.17.1",
