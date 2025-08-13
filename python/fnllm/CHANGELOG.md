@@ -22,6 +22,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 ### Removed
 ### Fixed
+### Security
+
+## [0.4.0] - 2025-08-13
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
 - Works with latest OpenAI SDK 1.99.9.  Fixed issues introduced by OpenAI SDK type changes when GPT-5 was released.
 ### Security
 
