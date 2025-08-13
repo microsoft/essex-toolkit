@@ -19,12 +19,16 @@ from pydantic import BaseModel
 
 
 class TestOutput(BaseModel):
+    __test__ = False  # this is not a pytest class
+
     """OpenAI chat completion output."""
 
     content: str | None
 
 
 class TestLLM(BaseLLM):
+    __test__ = False  # this is not a pytest class
+
     def __init__(
         self,
         output: Any,

@@ -11,7 +11,10 @@ from openai.types.chat import (
 from openai.types.chat import (
     ChatCompletionMessage as ChatCompletionMessageModel,
 )
-from openai.types.chat import ChatCompletionReasoningEffort
+from openai.types.chat import (
+    ChatCompletionMessageToolCallUnion,
+    ChatCompletionReasoningEffort,
+)
 from openai.types.chat.chat_completion import Choice as ChoiceModel
 from openai.types.chat.chat_completion_assistant_message_param import (
     FunctionCall as FunctionCallParam,
@@ -20,17 +23,32 @@ from openai.types.chat.chat_completion_function_message_param import (
     ChatCompletionFunctionMessageParam,
 )
 from openai.types.chat.chat_completion_message import FunctionCall as FunctionCallModel
-from openai.types.chat.chat_completion_message_tool_call import (
-    ChatCompletionMessageToolCall as ChatCompletionMessageToolCallModel,
+from openai.types.chat.chat_completion_message_custom_tool_call import (
+    ChatCompletionMessageCustomToolCall,
 )
-from openai.types.chat.chat_completion_message_tool_call import (
+from openai.types.chat.chat_completion_message_custom_tool_call import (
+    Custom as CustomModel,
+)
+from openai.types.chat.chat_completion_message_custom_tool_call_param import (
+    ChatCompletionMessageCustomToolCallParam,
+)
+from openai.types.chat.chat_completion_message_custom_tool_call_param import (
+    Custom as CustomParam,
+)
+from openai.types.chat.chat_completion_message_function_tool_call import (
+    ChatCompletionMessageFunctionToolCall,
+)
+from openai.types.chat.chat_completion_message_function_tool_call import (
     Function as FunctionModel,
 )
-from openai.types.chat.chat_completion_message_tool_call_param import (
-    ChatCompletionMessageToolCallParam,
+from openai.types.chat.chat_completion_message_function_tool_call_param import (
+    ChatCompletionMessageFunctionToolCallParam,
 )
-from openai.types.chat.chat_completion_message_tool_call_param import (
+from openai.types.chat.chat_completion_message_function_tool_call_param import (
     Function as FunctionParam,
+)
+from openai.types.chat.chat_completion_message_tool_call_union_param import (
+    ChatCompletionMessageToolCallUnionParam,
 )
 from openai.types.chat.chat_completion_stream_options_param import (
     ChatCompletionStreamOptionsParam,
@@ -91,6 +109,12 @@ OpenAIChatCompletionMessageModel: TypeAlias = ChatCompletionMessageModel
 OpenAIChoiceModel: TypeAlias = ChoiceModel
 """Alias for the Choice (base model)."""
 
+OpenAICustomParam: TypeAlias = CustomParam
+"""Alias for the Custom (param)."""
+
+OpenAICustomModel: TypeAlias = CustomModel
+"""Alias for the Custom (base model)."""
+
 OpenAIFunctionModel: TypeAlias = FunctionModel
 """Alias for the Function (base model)."""
 
@@ -115,14 +139,36 @@ OpenAIFunctionDefinitionParam: TypeAlias = FunctionDefinitionParam
 OpenAIResponseFormatCreateParam: TypeAlias = ResponseFormatCreateParam
 """Alias for the ResponseFormatCreateParam (create param)."""
 
-OpenAIChatCompletionMessageToolCallModel: TypeAlias = ChatCompletionMessageToolCallModel
+OpenAIChatCompletionMessageToolCallModel: TypeAlias = ChatCompletionMessageToolCallUnion
 """Alias for the ChatCompletionMessageToolCall (base model)."""
 
 OpenAIChatCompletionToolParam: TypeAlias = ChatCompletionToolParam
 """Alias for the ChatCompletionToolParam (param)."""
 
-OpenAIChatCompletionMessageToolCallParam: TypeAlias = ChatCompletionMessageToolCallParam
-"""Alias for the ChatCompletionMessageToolCallParam (param)."""
+OpenAIChatCompletionMessageCustomToolCall: TypeAlias = (
+    ChatCompletionMessageCustomToolCall
+)
+"""Alias for the ChatCompletionMessageCustomToolCall"""
+
+OpenAIChatCompletionMessageFunctionToolCall: TypeAlias = (
+    ChatCompletionMessageFunctionToolCall
+)
+"""Alias for the ChatCompletionMessageFunctionToolCall"""
+
+OpenAIChatCompletionMessageToolCallParam: TypeAlias = (
+    ChatCompletionMessageToolCallUnionParam
+)
+"""Alias for the ChatCompletionMessageToolCallUnionParam (param)."""
+
+OpenAIChatCompletionMessageCustomToolCallParam: TypeAlias = (
+    ChatCompletionMessageCustomToolCallParam
+)
+"""Alias for the ChatCompletionMessageCustomToolCallParam (param)."""
+
+OpenAIChatCompletionMessageFunctionToolCallParam: TypeAlias = (
+    ChatCompletionMessageFunctionToolCallParam
+)
+"""Alias for the ChatCompletionMessageFunctionToolCallParam (param)."""
 
 OpenAIChatCompletionToolChoiceOptionParam: TypeAlias = (
     ChatCompletionToolChoiceOptionParam
