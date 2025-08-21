@@ -16,15 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
-## [Unreleased]
-### Added
+## [0.4.1] - 2025-08-21
 ### Changed
 - Added HTTP 409 to the list of retryable errors.
-### Deprecated
-### Removed
-### Fixed
-### Security
-
 
 ## [0.4.0] - 2025-08-13
 ### Fixed
