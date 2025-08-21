@@ -10,6 +10,7 @@ from typing import TYPE_CHECKING, Final
 from openai import (
     APIConnectionError,
     APIStatusError,
+    ConflictError,
     InternalServerError,
     RateLimitError,
 )
@@ -28,6 +29,7 @@ OPENAI_RETRYABLE_ERRORS: Final[list[type[Exception]]] = [
     InternalServerError,
     OpenAINoChoicesAvailableError,
     InvalidLLMResultError,
+    ConflictError,
 ]
 
 
@@ -35,7 +37,7 @@ class OpenAIBackoffLimiter(Limiter):
     """
     OpenAI Backoff Limiter.
 
-    This limiter is used in tandem with the OpenAI Reetryable Error Handler to ensure that when
+    This limiter is used in tandem with the OpenAI Retryable Error Handler to ensure that when
     429 errors are encountered, the running loop will pause for the amount of time specified in the
     retry-after header before allowing requests to clear the limiters.
 
