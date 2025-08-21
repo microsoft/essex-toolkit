@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 ### Changed
-- Added HTTP 409 to the list of retriable errors.
+- Added HTTP 409 to the list of retryable errors.
 ### Deprecated
 ### Removed
 ### Fixed
