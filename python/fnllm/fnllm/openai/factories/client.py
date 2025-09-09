@@ -22,12 +22,12 @@ def create_openai_client(
     """Create a new OpenAI client instance."""
     if config.azure:
         from .create_azure_openai_client import (
-            TokenProvider,
+            TokenCredential,
             create_azure_openai_client,
         )
 
         config = cast(AzureOpenAIConfig, config)
-        credential = cast(TokenProvider | None, credential)
+        credential = cast(TokenCredential | None, credential)
         return create_azure_openai_client(config, credential=credential)
 
     return create_public_openai_client(cast(PublicOpenAIConfig, config))

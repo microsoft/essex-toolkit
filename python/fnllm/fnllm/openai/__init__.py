@@ -13,6 +13,7 @@ from .factories import (
     create_openai_chat_llm,
     create_openai_client,
     create_openai_embeddings_llm,
+    create_openai_embeddings_rest_llm,
 )
 from .roles import OpenAIChatRole
 from .types.client import (
@@ -37,4 +38,5 @@ __all__ = [
     "create_openai_chat_llm",
     "create_openai_client",
     "create_openai_embeddings_llm",
+    "create_openai_embeddings_rest_llm",
 ]

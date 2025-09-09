@@ -11,8 +11,13 @@ from numpy import average
 from fnllm.utils.batch import Batcher, CallBatch
 
 if TYPE_CHECKING:
+    from fnllm.openai.llm.openai_embeddings_llm import OpenAIEmbeddingsLLMImpl
+    from fnllm.openai.llm.openai_embeddings_rest_llm import OpenAIEmbeddingsRestLLMImpl
     from fnllm.openai.services.openai_text_service import OpenAITextService
     from fnllm.openai.types import OpenAIEmbeddingsLLM
+
+    # Type alias for any compatible OpenAI embeddings LLM implementation
+    OpenAIEmbeddingsLLMType = OpenAIEmbeddingsLLMImpl | OpenAIEmbeddingsRestLLMImpl
 
 EmbeddingInput: TypeAlias = str
 EmbeddingOutput: TypeAlias = list[float]
@@ -24,12 +29,18 @@ class CannotSplitBatchError(ValueError):
 
 
 class OpenAIEmbeddingBatcher(Batcher[EmbeddingInput, EmbeddingOutput]):
-    """A utility class to batch embeddings."""
+    """
+    A utility class to batch embeddings using OpenAI's API.
+
+    This batcher works with both OpenAI SDK-based and REST API-based embeddings LLMs:
+    - OpenAIEmbeddingsLLMImpl (uses OpenAI Python SDK)
+    - OpenAIEmbeddingsRestLLMImpl (uses direct HTTP calls via httpx)
+    """
 
     def __init__(
         self,
         *,
-        llm: OpenAIEmbeddingsLLM,
+        llm: OpenAIEmbeddingsLLM,  # Works with both SDK and REST implementations
         text_service: OpenAITextService,
         max_batch_size: int,
         max_batch_tokens: int,
