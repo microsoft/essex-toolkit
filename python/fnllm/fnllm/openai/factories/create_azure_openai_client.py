@@ -2,7 +2,7 @@
 
 """Create OpenAI client instance."""
 
-from azure.core.credentials import TokenProvider
+from azure.core.credentials import TokenCredential
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 from openai import AsyncAzureOpenAI
 from openai.lib.azure import AsyncAzureADTokenProvider
@@ -14,7 +14,7 @@ from .max_retries import get_max_retries
 
 
 def create_azure_openai_client(
-    config: AzureOpenAIConfig, *, credential: TokenProvider | None = None
+    config: AzureOpenAIConfig, *, credential: TokenCredential | None = None
 ) -> OpenAIClient:
     """Create a new OpenAI client instance."""
     return AsyncAzureOpenAI(
@@ -31,11 +31,13 @@ def create_azure_openai_client(
 
 
 def _get_azure_ad_token_provider(
-    config: AzureOpenAIConfig, credential: TokenProvider | None = None
+    config: AzureOpenAIConfig, credential: TokenCredential | None = None
 ) -> AsyncAzureADTokenProvider | None:
     """Get Azure AD token provider."""
     if config.api_key is not None:
         return None
 
-    credential = credential or DefaultAzureCredential()
+    credential = credential or DefaultAzureCredential(
+        exclude_environment_credential=True, exclude_shared_token_cache_credential=True
+    )
     return get_bearer_token_provider(credential, config.audience)

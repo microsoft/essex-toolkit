@@ -120,9 +120,9 @@ class LLMEventsLogger(LLMEvents):
     async def on_non_retryable_error(
         self, error: BaseException, attempt_number: int
     ) -> None:
-        """Called when retryable errors happen."""
+        """Called when non retryable errors happen."""
         LOGGER.warning(
-            "retryable error happened on attempt #%d: %s", attempt_number, str(error)
+            "non retryable error happened on attempt #%d: %s", attempt_number, str(error)
         )
 
     async def on_recover_from_error(self, attempt_number: int) -> None:
