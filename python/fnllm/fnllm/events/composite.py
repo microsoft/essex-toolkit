@@ -103,3 +103,18 @@ class LLMCompositeEvents(LLMEvents):
             handler.on_retryable_error(error, attempt_number)
             for handler in self._handlers
         ])
+
+    async def on_non_retryable_error(
+        self, error: BaseException, attempt_number: int
+    ) -> None:
+        """Called when non-retryable errors happen."""
+        await asyncio.gather(*[
+            handler.on_non_retryable_error(error, attempt_number)
+            for handler in self._handlers
+        ])
+
+    async def on_recover_from_error(self, attempt_number: int) -> None:
+        """Called when the LLM recovers from an error."""
+        await asyncio.gather(*[
+            handler.on_recover_from_error(attempt_number) for handler in self._handlers
+        ])
