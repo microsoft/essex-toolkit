@@ -56,7 +56,7 @@
 		"react-is": "^18.3.1",
 		"require-from-string": "^2.0.2",
 		"scheduler": "^0.23.2",
-		"storybook": "7.3.2",
+		"storybook": "7.6.21",
 		"typescript": "^5.5.2",
 		"webpack": "^5.94.0"
 	}
