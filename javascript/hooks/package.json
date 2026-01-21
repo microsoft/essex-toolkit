@@ -21,7 +21,7 @@
 	},
 	"dependencies": {
 		"@essex/toolbox": "workspace:^",
-		"lodash-es": "^4.17.21"
+		"lodash-es": "^4.17.23"
 	},
 	"devDependencies": {
 		"@essex/jest-config": "^22.1.1",
