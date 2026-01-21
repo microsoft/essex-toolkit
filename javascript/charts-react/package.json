@@ -36,7 +36,7 @@
 		"d3-scale": "^4.0.2",
 		"d3-selection": "^3.0.0",
 		"d3-shape": "^3.1.0",
-		"lodash-es": "^4.17.21"
+		"lodash-es": "^4.17.23"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^27.0.0",
