@@ -13,6 +13,7 @@ from fnllm.base.services.json import (
     JsonMarshaler,
     JsonReceiver,
     LooseModeJsonReceiver,
+    _strip_markdown_json_fence,
 )
 from fnllm.types.io import LLMInput, LLMOutput
 from pydantic import BaseModel
@@ -297,3 +298,66 @@ async def test_json_receiver_retry_loop():
         delegate=delegate, prompt="prompt", kwargs=LLMInput()
     )
     assert result.raw_json == {"x": 3}
+
+
+# Tests for _strip_markdown_json_fence()
+def test_strip_fence_with_json_language_tag():
+    raw = '```json\n{"x": 1}\n```'
+    assert _strip_markdown_json_fence(raw) == '{"x": 1}'
+
+
+def test_strip_fence_without_language_tag():
+    raw = '```\n{"x": 1}\n```'
+    assert _strip_markdown_json_fence(raw) == '{"x": 1}'
+
+
+def test_strip_fence_no_fence_unchanged():
+    raw = '{"x": 1}'
+    assert _strip_markdown_json_fence(raw) == '{"x": 1}'
+
+
+def test_strip_fence_handles_surrounding_whitespace():
+    raw = '   ```json\n{"x": 1}\n```   '
+    assert _strip_markdown_json_fence(raw) == '{"x": 1}'
+
+
+def test_strip_fence_whitespace_only_unchanged():
+    raw = "   "
+    assert _strip_markdown_json_fence(raw) == "   "
+
+
+# Tests for JsonReceiver (standard mode) with markdown fences
+async def test_standard_mode_strips_json_fence_with_language_tag():
+    """Standard mode should handle ```json ... ``` fences without triggering recovery."""
+    fenced_json = '```json\n{"integer": 1, "string": "value"}\n```'
+    llm = TestLLM(
+        json_handler=JsonReceiver(TestMarshaler(), 0),
+        output=LLMOutput(output=TestOutput(content=fenced_json)),
+    )
+
+    result = await llm("prompt", json=True)
+    assert result.raw_json == {"integer": 1, "string": "value"}
+
+
+async def test_standard_mode_strips_json_fence_without_language_tag():
+    """Standard mode should handle ``` ... ``` fences too."""
+    fenced_json = '```\n{"integer": 1, "string": "value"}\n```'
+    llm = TestLLM(
+        json_handler=JsonReceiver(TestMarshaler(), 0),
+        output=LLMOutput(output=TestOutput(content=fenced_json)),
+    )
+
+    result = await llm("prompt", json=True)
+    assert result.raw_json == {"integer": 1, "string": "value"}
+
+
+async def test_loose_mode_strips_json_fence_without_language_tag():
+    """LooseModeJsonReceiver should also handle ``` ... ``` fences."""
+    fenced_json = '```\n{"x": 1}\n```'
+    llm = TestLLM(
+        json_handler=TestReceiver(),
+        output=LLMOutput(output=TestOutput(content=fenced_json)),
+    )
+
+    result = await llm("prompt", json=True)
+    assert result.raw_json == {"x": 1}
