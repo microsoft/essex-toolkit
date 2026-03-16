@@ -5,6 +5,7 @@
 from __future__ import annotations
 
 import json
+import re
 from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING, Generic, cast
 
@@ -26,6 +27,15 @@ if TYPE_CHECKING:
     from collections.abc import Awaitable, Callable
 
     from fnllm.types.io import LLMInput, LLMOutput
+
+
+def _strip_markdown_json_fence(value: str) -> str:
+    """Strip ```json ... ``` or ``` ... ``` fences that some models wrap around JSON responses."""
+    value = value.strip()
+    match = re.fullmatch(r"```(?:json)?\s*([\s\S]*?)\s*```", value)
+    if match:
+        return match.group(1).strip()
+    return value
 
 
 class JsonMarshaler(ABC, Generic[TOutput, THistoryEntry]):
@@ -123,6 +133,8 @@ class JsonReceiver(
         value: str | None,
     ) -> JSON | None:
         try:
+            if value:
+                value = _strip_markdown_json_fence(value)
             return json.loads(value) if value else None
         except json.JSONDecodeError as err:
             msg = f"JSON response is not a valid JSON, response={value}."
@@ -191,29 +203,6 @@ class LooseModeJsonReceiver(
             result.raw_json = raw_json
             result.parsed_json = model
             return result
-
-    def _parse_json_string(
-        self,
-        value: str | None,
-    ) -> JSON | None:
-        try:
-            return json.loads(value) if value else None
-        except json.JSONDecodeError as err:
-            msg = f"JSON response is not a valid JSON, response={value}."
-            raise FailedToGenerateValidJsonError(msg) from err
-
-    def _read_model_from_json(
-        self,
-        value: JSON | None,
-        json_model: type[TJsonModel] | None,
-    ) -> TJsonModel | None:
-        if value is None or json_model is None:
-            return None
-        try:
-            return json_model.model_validate(value)
-        except pydantic.ValidationError as err:
-            msg = f"JSON response does not match the expected model, response={value}."
-            raise FailedToGenerateValidJsonError(msg) from err
 
     async def _try_recovering_malformed_json(
         self,
