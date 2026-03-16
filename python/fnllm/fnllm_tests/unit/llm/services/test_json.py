@@ -13,7 +13,7 @@ from fnllm.base.services.json import (
     JsonMarshaler,
     JsonReceiver,
     LooseModeJsonReceiver,
-    _strip_markdown_json_fence
+    _strip_markdown_json_fence,
 )
 from fnllm.types.io import LLMInput, LLMOutput
 from pydantic import BaseModel
@@ -321,13 +321,18 @@ def test_strip_fence_handles_surrounding_whitespace():
     assert _strip_markdown_json_fence(raw) == '{"x": 1}'
 
 
+def test_strip_fence_whitespace_only_unchanged():
+    raw = "   "
+    assert _strip_markdown_json_fence(raw) == "   "
+
+
 # Tests for JsonReceiver (standard mode) with markdown fences
 async def test_standard_mode_strips_json_fence_with_language_tag():
     """Standard mode should handle ```json ... ``` fences without triggering recovery."""
     fenced_json = '```json\n{"integer": 1, "string": "value"}\n```'
     llm = TestLLM(
         json_handler=JsonReceiver(TestMarshaler(), 0),
-        output=LLMOutput(output=TestOutput(content=fenced_json))
+        output=LLMOutput(output=TestOutput(content=fenced_json)),
     )
 
     result = await llm("prompt", json=True)
@@ -339,7 +344,7 @@ async def test_standard_mode_strips_json_fence_without_language_tag():
     fenced_json = '```\n{"integer": 1, "string": "value"}\n```'
     llm = TestLLM(
         json_handler=JsonReceiver(TestMarshaler(), 0),
-        output=LLMOutput(output=TestOutput(content=fenced_json))
+        output=LLMOutput(output=TestOutput(content=fenced_json)),
     )
 
     result = await llm("prompt", json=True)

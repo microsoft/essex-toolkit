@@ -31,8 +31,7 @@ if TYPE_CHECKING:
 
 def _strip_markdown_json_fence(value: str) -> str:
     """Strip ```json ... ``` or ``` ... ``` fences that some models wrap around JSON responses."""
-    value = value.strip()
-    match = re.fullmatch(r"```(?:json)?\s*([\s\S]*?)\s*```", value)
+    match = re.fullmatch(r"\s*```(?:json)?\s*([\s\S]*?)\s*```\s*", value)
     if match:
         return match.group(1).strip()
     return value
